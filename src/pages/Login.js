@@ -1,5 +1,7 @@
 import { connect } from 'react-redux';
 import React from 'react';
+import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import * as Actions from '../actions';
 
 class Login extends React.Component {
@@ -9,6 +11,7 @@ class Login extends React.Component {
       email: '',
       password: '',
       isDisabled: true,
+      shouldRedirect: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
@@ -19,18 +22,21 @@ class Login extends React.Component {
     const {
       target: { name, value },
     } = event;
-    this.setState({
-      [name]: value,
-    });
-    this.checkEmailAndPassword();
+    this.setState(
+      {
+        [name]: value,
+        isDisabled: true,
+      },
+      () => this.checkEmailAndPassword(),
+    );
   }
 
   checkEmailAndPassword() {
     const minimumPasswordSize = 5;
     const { email, password } = this.state;
-    const re = /\S+@\S+\.\S+/;
+    const re = /.+@[A-z]+[.]com/;
     const isValidEmail = re.test(email);
-    const isValidPassword = password.length >= minimumPasswordSize;
+    const isValidPassword = password.length > minimumPasswordSize;
     if (isValidPassword && isValidEmail) {
       this.setState({
         isDisabled: false,
@@ -42,11 +48,16 @@ class Login extends React.Component {
     const { email } = this.state;
     const { loggin } = this.props;
     loggin(email);
+    this.setState({
+      shouldRedirect: true,
+    });
   }
 
   render() {
-    const { isDisabled } = this.state;
-    return (
+    const { isDisabled, shouldRedirect } = this.state;
+    return shouldRedirect ? (
+      <Redirect to="/carteira" />
+    ) : (
       <div>
         <form>
           <label htmlFor="email">
@@ -87,3 +98,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(null, mapDispatchToProps)(Login);
+
+Login.propTypes = {
+  loggin: PropTypes.func.isRequired,
+};
