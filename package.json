@@ -6,6 +6,7 @@
     "@testing-library/jest-dom": "4.2.4",
     "@testing-library/react": "10.0.4",
     "@testing-library/user-event": "7.2.1",
+    "axios": "^0.21.1",
     "bootstrap": "4.5.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",
@@ -15,6 +16,7 @@
     "react-scripts": "3.4.3",
     "redux": "4.0.5",
     "redux-devtools-extension": "^2.13.8",
+    "redux-promise": "^0.6.0",
     "redux-thunk": "2.3.0",
     "stylelint-order": "4.1.0"
   },
