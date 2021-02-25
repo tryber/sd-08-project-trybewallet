@@ -58,8 +58,8 @@
 
 .login-page button:disabled {
   background-color: #f0f0f0;
-  color: #ddd;
   border-color: #ddd;
+  color: #ddd;
 }
 
 .login-page button:hover {
