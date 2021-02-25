@@ -23,7 +23,7 @@ class Login extends React.Component {
     const minPassLength = 6;
     const { inputEmail, passLength } = this.state;
     const emailBool = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(inputEmail);
-    if(passLength >= minPassLength && emailBool) {
+    if (passLength >= minPassLength && emailBool) {
       return true;
     }
     return false;
@@ -42,7 +42,7 @@ class Login extends React.Component {
               id="userEmail"
               data-testid="email-input"
               value={ inputEmail }
-              onChange={ ({ target: { value } }) => this.handleInput('inputEmail', value) }
+              onChange={ ({ target }) => this.handleInput('inputEmail', target.value) }
             />
           </label>
           <label htmlFor="userPassword">
@@ -52,7 +52,9 @@ class Login extends React.Component {
               name="userPassword"
               id="userPassword"
               data-testid="password-input"
-              onChange={ ({ target: { value } }) => this.handleInput('passLength', value.length) }
+              onChange={
+                ({ target }) => this.handleInput('passLength', target.value.length)
+              }
             />
           </label>
           <button
