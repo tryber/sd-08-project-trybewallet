@@ -5,6 +5,7 @@ class Login extends React.Component {
     super();
 
     this.inputChange = this.inputChange.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
 
     this.state = {
       email: '',
@@ -15,6 +16,12 @@ class Login extends React.Component {
   // entrada de dados dos input do name e value do input
   inputChange({ target: { name, value } }) {
     this.setState({ [name]: value });
+  }
+
+  handleLogin() {
+    const { setEmail, history } = this.props;
+    const { email } = this.state;
+    history.push('/carteira');
   }
 
   render() {
@@ -38,7 +45,13 @@ class Login extends React.Component {
             onChange={ this.inputChange }
           />
           <br />
-          <button type="button">Entrar</button>
+          <button
+            type="button"
+            onClick={ this.handleLogin }
+          >
+            Entrar
+
+          </button>
         </form>
       </section>
     );
