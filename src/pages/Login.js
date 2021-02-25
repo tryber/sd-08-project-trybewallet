@@ -16,6 +16,8 @@ class Login extends React.Component {
     this.validateEmail = this.validateEmail.bind(this);
     this.validatePassword = this.validatePassword.bind(this);
     this.emailRender = this.emailRender.bind(this);
+    this.passwordError = this.passwordError.bind(this);
+    this.emailError = this.emailError.bind(this);
   }
 
   validateEmail(values) {
@@ -42,8 +44,29 @@ class Login extends React.Component {
     }
   }
 
-  emailRender() {
+  emailError() {
     const { errors } = this.state;
+    if (errors.userEmail) {
+      return (
+        <span className="formField__error">
+          { errors.userEmail }
+        </span>
+      );
+    }
+  }
+
+  passwordError() {
+    const { errors } = this.state;
+    if (errors.userPassword) {
+      return (
+        <span className="formField__error">
+          { errors.userPassword }
+        </span>
+      );
+    }
+  }
+
+  emailRender() {
     return (
       <div>
         <div className="formField">
@@ -57,15 +80,13 @@ class Login extends React.Component {
             data-testid="email-input"
           />
         </div>
-        {errors.userEmail && <span className="formField__error">
-          { errors.userEmail }
-        </span>}
+        { this.emailError() }
       </div>
     );
   }
 
   render() {
-    const { email, password, errors, habilitaBotao } = this.state;
+    const { email, password, habilitaBotao } = this.state;
     const { login, history } = this.props;
     return (
       <div className="Login">
@@ -83,9 +104,7 @@ class Login extends React.Component {
               data-testid="password-input"
             />
           </div>
-          {errors.userPassword && <span className="formField__error">
-            { errors.userPassword }
-          </span>}
+          { this.passwordError() }
         </section>
         <div className="button">
           <button
