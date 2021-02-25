@@ -8,7 +8,7 @@ import { renderWithRouterAndStore } from './testConfig'
 
 afterEach(() => jest.clearAllMocks());
 
-describe.skip('7 - Crie um botão para editar uma despesa da tabela contendo as seguintes características:', () => {
+describe('7 - Crie um botão para editar uma despesa da tabela contendo as seguintes características:', () => {
     const initial = initialStateWithExpenses;
   
     test('O botão deve estar dentro do último item da linha da tabela e deve possuir `data-testid="edit-btn"`', () => {
