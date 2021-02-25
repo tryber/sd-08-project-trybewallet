@@ -1,5 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import logo from '../svg/045-wallet.svg';
+import { storeEmail } from '../actions';
 import './Login.css';
 
 class Login extends React.Component {
@@ -30,6 +33,7 @@ class Login extends React.Component {
   }
 
   render() {
+    const { propsStoreEmail } = this.props;
     const { inputEmail } = this.state;
     return (
       <div className="login-page">
@@ -60,6 +64,7 @@ class Login extends React.Component {
           <button
             type="button"
             disabled={ !this.checkInputs() }
+            onClick={ () => propsStoreEmail(inputEmail) }
           >
             Entrar
           </button>
@@ -69,15 +74,15 @@ class Login extends React.Component {
             <img src={ logo } alt="" />
           </div>
         </section>
-        <div className="link-freepik-best-icons">
-          Icons made by&nbsp;
-          <a href="https://www.freepik.com" title="Freepik">Freepik</a>
-          &nbsp;from&nbsp;
-          <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
-        </div>
       </div>
     );
   }
 }
 
-export default Login;
+function mapDispatchToProps(dispatch) {
+  return {
+    propsStoreEmail: (email) => dispatch(storeEmail(email)),
+  };
+}
+
+export default connect(null, mapDispatchToProps)(Login);
