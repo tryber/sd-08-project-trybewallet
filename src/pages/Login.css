@@ -1,0 +1,107 @@
+.login-page {
+  background-color: #ececec;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  height: 100vmax;
+}
+
+.login-page section {
+  background-color: #f0f0f0;
+  border-radius: 5%;
+  border: 4px solid black;
+  border-style: double;
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  padding: calc(5vmin);
+  width: fit-content;
+}
+
+.login-page label {
+  color: #B0B0B0 ;
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.login-page input {
+  padding: 5px 5px;
+  font-size: 1rem;
+  border-style: solid;
+  border-radius: 10px;
+}
+
+.login-page input:focus {
+  border-color: #7532D9;
+  outline: none;
+}
+
+.login-page button {
+  background-color: white;
+  border-color: #0FA36B;
+  border-style: outset;
+  border-width: 2px;
+  border-radius: 5px;
+  color: #0FA36B;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 25px;
+  padding: 10px;
+}
+
+.login-page button:focus {
+  outline: none;
+}
+
+.login-page button:disabled {
+  background-color: #F0F0F0;
+  color: #DDDDDD;
+  border-color: #DDDDDD;
+}
+
+.login-page button:hover {
+  border-color: #00FF9D;
+  color: #00FF9D;
+}
+
+.login-page button:active {
+  background-color: #0FA36B;
+  color: white;
+  border-color: #0FA36B;
+  border-style: inset;
+}
+
+.login-page .login-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-page .login-title h1 {
+  color: #0FA36B;
+  text-transform: uppercase;
+}
+
+.login-page .login-title p {
+  color: #7532D9;
+  font-size: 18px;
+  margin: 0;
+  padding: 6px;
+  width: fit-content;
+}
+
+.login-page .login-title img {
+  max-width: 40px;
+}
+
+.login-page .link-freepik-best-icons {
+  margin-top: 10px;
+}
+
+.login-page .link-freepik-best-icons a {
+  color: #0FA36B;
+  text-decoration: none;
+}
