@@ -62,6 +62,10 @@
   color: #ddd;
 }
 
+.login-page button:hover {
+  background-color: #f5f5f5;
+}
+
 .login-page button:active {
   background-color: #0fa36b;
   border-color: #0fa36b;
