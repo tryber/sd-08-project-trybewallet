@@ -4,17 +4,21 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { login as loginAction } from '../actions';
 
+const passwordMinNumber = 6;
+
 class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       email: '',
       password: '',
+      emailValidation: /^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/i,
     };
   }
+  // fonte do regex: https://regexr.com/3e48o
 
   render() {
-    const { email, password } = this.state;
+    const { email, password, emailValidation } = this.state;
     const { login } = this.props;
     return (
       <div className="Login">
@@ -32,17 +36,19 @@ class Login extends React.Component {
             data-testid="password-input"
           />
         </section>
-        <div className="link">
-          <Link to="/carteira">
-            <button
-              type="button"
-              onClick={ () => login({ email, password }) }
-              data-testid="btn-login"
-            >
-              Entrar
-            </button>
-          </Link>
-        </div>
+        <Link to="/carteira">
+          <button
+            disabled={
+              !emailValidation.test(email)
+              || password.length < passwordMinNumber
+            }
+            type="submit"
+            onClick={ () => login({ email, password }) }
+            data-testid="btn-login"
+          >
+            Entrar
+          </button>
+        </Link>
       </div>
     );
   }
