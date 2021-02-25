@@ -1,6 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import './Login.css';
 import { PropTypes } from 'prop-types';
+import saveEmail from '../actions/index';
 
 class Login extends React.Component {
   constructor() {
@@ -33,12 +35,13 @@ class Login extends React.Component {
     }, () => {
       console.log(validatePassword);
     });
-    // this.ativateButton(button);
   }
 
   login() {
-    const { history } = this.props;
+    const { email } = this.state;
+    const { history, saveEmail } = this.props;
     history.push('/carteira');
+    saveEmail(email);
   }
 
   render() {
@@ -77,4 +80,8 @@ Login.propTypes = {
   history: PropTypes.string.isRequired,
 };
 
-export default Login;
+const mapDispatchToProps = (dispatch) => ({
+  saveEmail: (value) => dispatch(saveEmail(value)),
+});
+
+export default connect(null, mapDispatchToProps)(Login);
