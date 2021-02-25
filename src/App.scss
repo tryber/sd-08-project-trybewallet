@@ -1,0 +1,53 @@
+$text-color: black;
+$nav-link-selected: blue;
+
+/* reset css */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.d-flex {
+  display: flex;
+}
+
+body {
+  header{
+    display: flex;
+    align-items: center;
+    nav {
+      a{
+        color: $text-color;
+        text-decoration: none;
+      }
+      .selected{
+        color: $nav-link-selected;
+      }
+    }
+    img{
+      height: 32px;
+      border-radius: 50%;
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+}
+
+@media screen and (max-width: 768px) {
+}
+
+@media screen and (max-width: 1024px) {
+}
+
+@media screen and (max-width: 1200px) {
+}
+
+@media screen and (min-width: 1201px) {
+}
