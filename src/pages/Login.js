@@ -1,6 +1,9 @@
 import React from 'react';
-// import Input from '../components/Input';
-const SIX = 6;
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { addEmail } from '../actions';
+
+const FIVE = 5;
 function validarEmail(email) { const re = /\S+@\S+\.\S+/; return re.test(email); }
 class Login extends React.Component {
   constructor() {
@@ -27,7 +30,7 @@ class Login extends React.Component {
       disabledButton: true,
     });
     const { email, password } = this.state;
-    if (password.length >= SIX && validarEmail(email)) {
+    if (password.length >= FIVE && validarEmail(email)) {
       this.setState({
         disabledButton: false,
       });
@@ -36,6 +39,7 @@ class Login extends React.Component {
 
   render() {
     const { email, password, disabledButton } = this.state;
+    const { sendEmail, history } = this.props;
     return (
       <fieldset>
         <label htmlFor="email">
@@ -58,10 +62,30 @@ class Login extends React.Component {
             data-testid="password-input"
           />
         </label>
-        <button type="button" disabled={ disabledButton }>Entrar</button>
+        <button
+          type="button"
+          onClick={ () => {
+            sendEmail(email);
+            history.push('/carteira');
+          } }
+          disabled={ disabledButton }
+        >
+          Entrar
+        </button>
       </fieldset>
     );
   }
 }
 
-export default Login;
+const mapDispatchToProps = (dispatch) => ({
+  sendEmail: (value) => dispatch(addEmail(value)),
+});
+
+Login.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+  sendEmail: PropTypes.func.isRequired,
+};
+
+export default connect(null, mapDispatchToProps)(Login);
