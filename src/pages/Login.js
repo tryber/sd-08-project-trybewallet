@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import actionEmail from '../actions';
 
 class Login extends React.Component {
   constructor() {
@@ -21,6 +23,7 @@ class Login extends React.Component {
   handleLogin() {
     const { setEmail, history } = this.props;
     const { email } = this.state;
+    setEmail(email);
     history.push('/carteira');
   }
 
@@ -71,5 +74,7 @@ class Login extends React.Component {
     );
   }
 }
-
-export default Login;
+const mapDispatchToProps = (dispatch) => ({
+  setEmail: (email) => dispatch(actionEmail(email)),
+});
+export default connect(null, mapDispatchToProps)(Login);
