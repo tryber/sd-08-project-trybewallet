@@ -4,4 +4,29 @@ const loginAction = (email) => ({
   email,
 });
 
-export default loginAction;
+const requestAPI = () => ({
+  type: 'REQUEST_API',
+});
+
+const getAPI = (data) => ({
+  type: 'GET_API',
+  payload: data,
+});
+
+const fetchAPI = () => (
+  async (dispatch) => {
+    dispatch(requestAPI());
+    const response = await fetch('https://economia.awesomeapi.com.br/json/all');
+    const data = await response.json();
+    const arrayData = Object.values(data);
+    const arrayDataFiltered = arrayData.filter((currency) => currency.codein !== 'BRLT');
+    dispatch(getAPI(arrayDataFiltered));
+  }
+);
+
+const addExpense = (expense) => ({
+  type: 'ADD_EXPENSE',
+  expense,
+});
+
+export { loginAction, fetchAPI, addExpense };
