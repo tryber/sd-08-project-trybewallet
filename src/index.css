@@ -1,4 +1,8 @@
 body {
+  background-color: rgba(189, 184, 33, 0.481);
+  background-image: url(https://tokstok.vteximg.com.br/arquivos/ids/2158164-670-670/painel-de-parede-adesivo-2-m-x-290-m-azul-claro-amarelo-degrad-_st4.jpg?v=637177124206000000) ;
+  background-size: cover;
+  color:rgb(33, 184, 189);
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -11,3 +15,184 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.main {
+  align-items: center;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  width: 100vw;
+}
+
+
+.form {
+  align-items: center;
+  background-image: url('https://brancopapeldeparede.fbitsstatic.net/img/p/papel-de-parede-degrade-amarelo-099-71219/241063-1.jpg?w=542&h=730&v=202010301756');
+  background-size: cover;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px black;
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+  justify-content: center;
+  margin-left: -59px;
+  width: 450px;
+}
+
+
+.button {
+  border-radius: 5px;
+  margin: 10px;
+  text-align: center;
+  box-shadow: 2px 2px 2px black;
+  background-color: rgba(33, 184, 189, 0.2);
+
+}
+
+.text {
+  width: 85%;
+}
+
+.settings {
+  font-size: 3em;
+  margin: 0 50px 30px 0;
+  text-decoration: none;
+}
+
+.footer {
+  align-items: flex-end;
+  display: flex;
+  flex-direction: row-reverse;
+  height: 0;
+  width: 100vw;
+}
+.notFound{
+  background-image: url('https://zlionbrasil.com.br/img/icons/404.png');
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
+  text-align: center;
+  font-size: 50px
+}
+
+.center{
+width: 100vw;
+height: 100vh;
+background: #246ebd91;
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center
+}
+
+.loginst{
+  color: whitesmoke;
+}
+
+a {
+   color: inherit;
+   text-decoration:none; 
+ } 
+
+ .flex-container{
+  height: 650px;
+  background-image: url('./madeira.jpg');
+  background-size:cover;
+  border-style: solid;
+  border-color: #00f;
+  color: blanchedalmond;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: flex-start;
+  -webkit-align-content: space-between;
+  -ms-flex-line-pack: justify;
+  align-content: space-between;
+  -webkit-align-items: flex-start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  }
+
+  .child1 {
+  font-size: 30px;
+  /* border-width: medium;
+  border-style: solid;
+  border-color: rgb(186, 186, 190); */
+  -webkit-order: 0;
+  -ms-flex-order: 0;
+  order: 0;
+  -webkit-flex: 0 1 auto;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  -webkit-align-self: flex-start;
+  -ms-flex-item-align: start;
+  align-self: flex-start;
+  }
+
+.child2 {
+  /* border-width: medium;
+  border-style: solid;
+  border-color: rgb(0, 255, 42); */
+  font-size: 30px;
+  -webkit-order: 0;
+  -ms-flex-order: 0;
+  order: 0;
+  -webkit-flex: 0 1 auto;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  -webkit-align-self: flex-start;
+  -ms-flex-item-align: start;
+  align-self: flex-start;
+  }
+
+  .child3 {
+  font-size: 25px;
+  /* border-width: medium;
+  border-style: solid;
+  border-color: rgb(255, 0, 34); */
+  -webkit-order: 0;
+  -ms-flex-order: 0;
+  order: 0;
+  -webkit-flex: 0 1 auto;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  }
+
+  .child4{
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    /* border-width: medium;
+    border-style: solid;
+    border-color: rgb(255, 0, 34); */
+    -webkit-order: 0;
+    -ms-flex-order: 0;
+    order: 0;
+    -webkit-flex: 0 1 auto;
+    -ms-flex: 0 1 auto;
+    flex: 0 1 auto;
+    -webkit-align-self: center;
+    -ms-flex-item-align: center;
+    align-self: center;
+    }
+
+    .textarea1 {
+      width: 290px;
+      height: 40px;
+    }    
+.textarea2 {
+  width: 290px;
+  height: 90px;
+}
+/* poscionamento das divs realizado com auxilio da ferramenta: https://the-echoplex.net/flexyboxes */
