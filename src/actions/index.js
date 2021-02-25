@@ -1,1 +1,5 @@
-// Coloque aqui suas actions
+import storeEmail from './user';
+
+export default {
+  storeEmail,
+};
