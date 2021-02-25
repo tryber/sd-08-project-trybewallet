@@ -1,47 +1,64 @@
 import React from 'react';
-import Input from '../components/Input';
-
+// import Input from '../components/Input';
+const SIX = 6;
+function validarEmail(email) { const re = /\S+@\S+\.\S+/; return re.test(email); }
 class Login extends React.Component {
   constructor() {
     super();
     this.state = {
       email: '',
-      senha: '',
-      validationEmail: true,
+      password: '',
+      disabledButton: true,
     };
-    this.onChange = this.onChange.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.validation = this.validation.bind(this);
   }
 
-  onChange({ target }) {
-    console.log(target.value);
-    const { value } = target;
-    this.setState = ({
-      email: value,
-      validationEmail: false,
+  handleChange(e) {
+    const { name, value } = e.target;
+    this.validation();
+    this.setState({
+      [name]: value,
     });
   }
 
-  // validation() {
-  //   const validEmail = 'alguem@alguem.com';
-  // }
+  validation() {
+    this.setState({
+      disabledButton: true,
+    });
+    const { email, password } = this.state;
+    if (password.length >= SIX && validarEmail(email)) {
+      this.setState({
+        disabledButton: false,
+      });
+    }
+  }
 
   render() {
-    const { email, senha } = this.state;
-    console.log(email);
+    const { email, password, disabledButton } = this.state;
     return (
       <fieldset>
-        <Input
-          value={ email }
-          name="email"
-          type="text"
-          onChange={ (e) => this.setState({ email: e.target.value }) }
-        >
-          Email:
-        </Input>
-        <Input value={ senha } name="password" type="password" minLength="6">Senha: </Input>
-        {' '}
-        //rejects
-        <button type="submit">Enviar</button>
+        <label htmlFor="email">
+          E-mail:
+          <input
+            type="text"
+            name="email"
+            value={ email }
+            onChange={ this.handleChange }
+            data-testid="email-input"
+          />
+        </label>
+        <label htmlFor="password">
+          Senha:
+          <input
+            type="password"
+            name="password"
+            value={ password }
+            onChange={ this.handleChange }
+            data-testid="password-input"
+          />
+        </label>
+        <button type="button" disabled={ disabledButton }>Entrar</button>
       </fieldset>
     );
   }
