@@ -31,7 +31,7 @@ class LoginForm extends Component {
   }
 
   render() {
-    const { disabled, redirect } = this.state;
+    const { disabled, redirect, email } = this.state;
     if (redirect) return <Redirect to="/carteira" />;
     return (
       <div className={ styles.loginFormContainer }>
@@ -45,6 +45,7 @@ class LoginForm extends Component {
           <input
             ref={ (emailInput) => { this.emailInput = emailInput; } }
             type="email"
+            value={ email }
             data-testid="email-input"
             placeholder="Email"
             required
