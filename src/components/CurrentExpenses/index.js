@@ -11,22 +11,22 @@ class CurrentExpenses extends React.Component {
       <table>
         <thead>
           <tr>
-            <td>Descrição</td>
-            <td>Tag</td>
-            <td>Método de Pagamento</td>
-            <td>Valor</td>
-            <td>Moeda</td>
-            <td>Câmbio utilizado</td>
-            <td>Valor convertido</td>
-            <td>Moeda de conversão</td>
+            <th>Descrição</th>
+            <th>Tag</th>
+            <th>Método de pagamento</th>
+            <th>Valor</th>
+            <th>Moeda</th>
+            <th>Câmbio utilizado</th>
+            <th>Valor convertido</th>
+            <th>Moeda de conversão</th>
+            <th>Editar/Excluir</th>
           </tr>
         </thead>
         <tbody>
           {expenses.map((expense) => {
             const exchange = parseFloat(
               expense.exchangeRates[expense.currency].ask,
-            ).toFixed(2);
-
+            );
             return (
               <tr key={ expense.id }>
                 <td>{expense.description}</td>
@@ -34,9 +34,9 @@ class CurrentExpenses extends React.Component {
                 <td>{expense.method}</td>
                 <td>{expense.value}</td>
                 <td>{expense.exchangeRates[expense.currency].name}</td>
-                <td>{exchange}</td>
+                <td>{exchange.toFixed(2)}</td>
                 <td>
-                  {parseInt(expense.value, 10) * exchange}
+                  {(parseInt(expense.value, 10) * exchange).toFixed(2)}
                 </td>
                 <td>Real</td>
                 <td>

@@ -61,9 +61,9 @@ class ExpenseForm extends React.Component {
         value={ currencyState }
         onChange={ this.onFieldChange }
       >
-        {availableCurrencies.map((currency) => (
+        {availableCurrencies.map((currency, index) => (
           <option
-            key={ currency }
+            key={ index }
             data-testid={ currency }
             value={ currency }
           >
