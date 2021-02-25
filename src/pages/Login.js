@@ -24,6 +24,19 @@ class Login extends React.Component {
     history.push('/carteira');
   }
 
+  // https://github.com/tryber/sd-07-project-trybewallet/pull/17
+  // foi pegado a logica para validar o campo do email e password
+  // aluno Felipe Nascimento
+  validate() {
+    const { email, password } = this.state;
+    const emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+    const minChars = 5;
+    if (emailRegex.test(email) && password.length > minChars) {
+      return false;
+    }
+    return true;
+  }
+
   render() {
     return (
       <section>
@@ -47,6 +60,7 @@ class Login extends React.Component {
           <br />
           <button
             type="button"
+            disabled={ this.validate() }
             onClick={ this.handleLogin }
           >
             Entrar
