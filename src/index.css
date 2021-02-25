@@ -1,13 +1,38 @@
 body {
-  margin: 0;
+  align-items: center;
+  display: flex;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  height: 100vh;
+  justify-content: center;
+  margin: 0;
+  background-color: rgb(151, 157, 172);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 250px;
+  width: 250px;
+}
+
+.login-container input {
+  border: 1px rgb(39, 38, 64) solid;
+  border-radius: 6px;
+  margin: 10px;
+  padding: 10px;
+}
+
+.login-container h3 {
+  font-size: x-large;
+  font-weight: 400;
+  color: rgb(3, 4, 94)
+}
+
+.login-container button {
+  border-radius: 6px;
+  margin: 10px;
+  padding: 10px;
 }
