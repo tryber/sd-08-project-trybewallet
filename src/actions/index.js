@@ -5,6 +5,7 @@ export const GET_CURRENCIES = 'GET_CURRENCIES';
 export const FAILED_REQUEST = 'FAILED_REQUEST';
 
 export const CREATE_EXPENSE = 'CREATE_EXPENSE';
+export const DELETE_EXPENSE = 'DELETE_EXPENSE';
 
 export const userLoginAction = (email) => ({
   type: USER_LOGIN,
@@ -48,4 +49,9 @@ export const fetchCurrencies = () => async (dispatch) => {
 export const addExpense = (expense) => ({
   type: CREATE_EXPENSE,
   payload: expense,
+});
+
+export const removeExpense = (expenseId) => ({
+  type: DELETE_EXPENSE,
+  payload: expenseId,
 });
