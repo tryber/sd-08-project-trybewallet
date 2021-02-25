@@ -1,40 +1,14 @@
 import React from 'react';
 import Header from '../components/Header';
+import FormWallet from '../components/FormWallet';
 
 export default class Wallet extends React.Component {
   render() {
-    // const { email } = this.props;
     return (
       <div>
         <Header />
+        <FormWallet />
         <table>
-          <tr>
-            <td>Valor:</td>
-            <td>
-              <input />
-            </td>
-            <td>Moeda:</td>
-            <td>
-              <input />
-            </td>
-            <td>Método de Pagamento:</td>
-            <td>
-              <input />
-            </td>
-            <td>Tag:</td>
-            <td>
-              <input />
-            </td>
-            <td>Descrição:</td>
-            <td>
-              <input />
-            </td>
-            <td>
-              <button type="submit">
-                Adicionar Despesas
-              </button>
-            </td>
-          </tr>
           <tr>
             <th>Método de Pagamento</th>
             <th>Valor</th>
