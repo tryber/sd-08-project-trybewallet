@@ -4,12 +4,16 @@ import {
   FAILED_REQUEST,
   CREATE_EXPENSE,
   DELETE_EXPENSE,
+  EDIT_EXPENSE,
+  EDIT_SUBMIT,
 } from '../actions';
 
 const INITIAL_STATE = {
   currencies: [],
   expenses: [],
   isLoading: true,
+  isEditing: false,
+  editingId: 0,
 };
 
 const walletReducer = (state = INITIAL_STATE, action) => {
@@ -30,6 +34,23 @@ const walletReducer = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       expenses: state.expenses.filter((expense) => expense.id !== action.payload),
+    };
+
+  case EDIT_EXPENSE:
+    return {
+      ...state,
+      isEditing: true,
+      editingId: action.payload,
+    };
+
+  case EDIT_SUBMIT:
+    return {
+      ...state,
+      isEditing: false,
+      expenses: state.expenses.map(
+        (expense) => (expense.id === state.editingId
+          ? { ...expense, ...action.payload } : expense),
+      ),
     };
 
   default:

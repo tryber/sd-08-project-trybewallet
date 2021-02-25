@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { addExpense } from '../../actions';
+import { addExpense, submitEdit } from '../../actions';
 
 const INITIAL_CLASS_STATE = {
   value: '0',
@@ -21,6 +21,7 @@ class ExpenseForm extends React.Component {
     this.addNewExpense = this.addNewExpense.bind(this);
     this.onFieldChange = this.onFieldChange.bind(this);
     this.createCurrencySelectionField = this.createCurrencySelectionField.bind(this);
+    this.editExistingExpense = this.editExistingExpense.bind(this);
   }
 
   onFieldChange({ target }) {
@@ -50,6 +51,23 @@ class ExpenseForm extends React.Component {
     this.setState({ ...INITIAL_CLASS_STATE, availableId: availableId + 1 });
   }
 
+  editExistingExpense() {
+    const { editExpense } = this.props;
+    const { currency, description, payMethod, tag, value, availableId } = this.state;
+
+    const expense = {
+      value,
+      description,
+      currency,
+      method: payMethod,
+      tag,
+    };
+
+    editExpense(expense);
+
+    this.setState({ ...INITIAL_CLASS_STATE, availableId: availableId + 1 });
+  }
+
   createCurrencySelectionField() {
     const { availableCurrencies } = this.props;
     const { currency: currencyState } = this.state;
@@ -74,8 +92,31 @@ class ExpenseForm extends React.Component {
     );
   }
 
+  createTags() {
+    return (
+      <>
+        <option value="Alimentação">Alimentação</option>
+        <option value="Lazer">Lazer</option>
+        <option value="Trabalho">Trabalho</option>
+        <option value="Transporte">Transporte</option>
+        <option value="Saúde">Saúde</option>
+      </>
+    );
+  }
+
+  createPaymentMethods() {
+    return (
+      <>
+        <option value="Dinheiro">Dinheiro</option>
+        <option value="Cartão de crédito">Cartão de crédito</option>
+        <option value="Cartão de débito">Cartão de débito</option>
+      </>
+    );
+  }
+
   render() {
     const { description, payMethod, tag, value } = this.state;
+    const { isEditing } = this.props;
 
     return (
       <form>
@@ -102,9 +143,7 @@ class ExpenseForm extends React.Component {
           value={ payMethod }
           onChange={ this.onFieldChange }
         >
-          <option value="Dinheiro">Dinheiro</option>
-          <option value="Cartão de crédito">Cartão de crédito</option>
-          <option value="Cartão de débito">Cartão de débito</option>
+          {this.createPaymentMethods()}
         </select>
         <select
           data-testid="tag-input"
@@ -112,25 +151,34 @@ class ExpenseForm extends React.Component {
           value={ tag }
           onChange={ this.onFieldChange }
         >
-          <option value="Alimentação">Alimentação</option>
-          <option value="Lazer">Lazer</option>
-          <option value="Trabalho">Trabalho</option>
-          <option value="Transporte">Transporte</option>
-          <option value="Saúde">Saúde</option>
+          {this.createTags()}
         </select>
-        <button type="button" onClick={ this.addNewExpense }>Adicionar despesa</button>
+        <button
+          type="button"
+          onClick={ isEditing ? this.editExistingExpense : this.addNewExpense }
+        >
+          {isEditing ? 'Editar despesa' : 'Adicionar despesa'}
+        </button>
       </form>
     );
   }
 }
 
+const mapStateToProps = (state) => ({
+  editingId: state.wallet.editingId,
+  isEditing: state.wallet.isEditing,
+});
+
 const mapDispatchToProps = (dispatch) => ({
   createExpense: (expense) => dispatch(addExpense(expense)),
+  editExpense: (expense) => dispatch(submitEdit(expense)),
 });
 
 ExpenseForm.propTypes = {
   availableCurrencies: PropTypes.arrayOf(PropTypes.string).isRequired,
   createExpense: PropTypes.func.isRequired,
+  editExpense: PropTypes.func.isRequired,
+  isEditing: PropTypes.bool.isRequired,
 };
 
-export default connect(null, mapDispatchToProps)(ExpenseForm);
+export default connect(mapStateToProps, mapDispatchToProps)(ExpenseForm);

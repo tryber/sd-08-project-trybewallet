@@ -6,6 +6,8 @@ export const FAILED_REQUEST = 'FAILED_REQUEST';
 
 export const CREATE_EXPENSE = 'CREATE_EXPENSE';
 export const DELETE_EXPENSE = 'DELETE_EXPENSE';
+export const EDIT_EXPENSE = 'EDIT_EXPENSE';
+export const EDIT_SUBMIT = 'EDIT_SUBMIT';
 
 export const userLoginAction = (email) => ({
   type: USER_LOGIN,
@@ -54,4 +56,14 @@ export const addExpense = (expense) => ({
 export const removeExpense = (expenseId) => ({
   type: DELETE_EXPENSE,
   payload: expenseId,
+});
+
+export const setEditting = (expenseId) => ({
+  type: EDIT_EXPENSE,
+  payload: expenseId,
+});
+
+export const submitEdit = (newData) => ({
+  type: EDIT_SUBMIT,
+  payload: newData,
 });
