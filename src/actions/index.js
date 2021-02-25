@@ -5,4 +5,4 @@ const saveEmail = (value) => ({
   value,
 });
 
-export default saveEmail
+export default saveEmail;

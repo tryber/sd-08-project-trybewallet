@@ -39,9 +39,9 @@ class Login extends React.Component {
 
   login() {
     const { email } = this.state;
-    const { history, saveEmail } = this.props;
+    const { history, saveEmailReducer } = this.props;
     history.push('/carteira');
-    saveEmail(email);
+    saveEmailReducer(email);
   }
 
   render() {
@@ -78,10 +78,11 @@ class Login extends React.Component {
 
 Login.propTypes = {
   history: PropTypes.string.isRequired,
+  saveEmailReducer: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  saveEmail: (value) => dispatch(saveEmail(value)),
+  saveEmailReducer: (value) => dispatch(saveEmail(value)),
 });
 
 export default connect(null, mapDispatchToProps)(Login);
