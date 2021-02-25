@@ -1,5 +1,6 @@
 import React from 'react';
 import './Login.css';
+import { PropTypes } from 'prop-types';
 
 class Login extends React.Component {
   constructor() {
@@ -26,13 +27,11 @@ class Login extends React.Component {
 
   handleChangePassword({ target }) {
     const { validatePassword } = this.state;
-    const button = target.parentNode.parentNode.lastChild;
     const MIN_CHARACTER = 5;
     this.setState({
-      password: target.value,
       validatePassword: target.value.length > MIN_CHARACTER,
     }, () => {
-      console.log(validatePassword, target.value.length);
+      console.log(validatePassword);
     });
     // this.ativateButton(button);
   }
@@ -73,5 +72,9 @@ class Login extends React.Component {
     );
   }
 }
+
+Login.propTypes = {
+  history: PropTypes.string.isRequired,
+};
 
 export default Login;
