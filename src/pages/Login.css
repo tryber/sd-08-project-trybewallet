@@ -30,7 +30,7 @@
 .login-page input {
   border-radius: 10px;
   border-style: solid;
-  font-size: 1rem;
+  font-size: 1.2rem;
   padding: 5px;
 }
 
@@ -60,11 +60,6 @@
   background-color: #f0f0f0;
   border-color: #ddd;
   color: #ddd;
-}
-
-.login-page button:hover {
-  border-color: #00ff9d;
-  color: #00ff9d;
 }
 
 .login-page button:active {
