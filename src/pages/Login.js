@@ -1,4 +1,3 @@
-/* eslint-disable no-useless-escape */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -29,7 +28,7 @@ class Login extends React.Component {
   checkValid() {
     const { email, password } = this.state;
     const SIX = 6;
-    if (/[a-zA-Z0-9\.]+\@[a-zA-Z0-9]+\.[a-zA-Z0-9]+$/gm.test(email)
+    if (/[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z0-9]+$/gm.test(email)
     && password.length >= SIX) {
       this.setState(() => ({
         isInValid: false,
