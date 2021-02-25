@@ -3,6 +3,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import * as Actions from '../actions';
+import Header from './Header';
 
 class Login extends React.Component {
   constructor() {
@@ -55,40 +56,45 @@ class Login extends React.Component {
 
   render() {
     const { isDisabled, shouldRedirect } = this.state;
-    return shouldRedirect ? (
-      <Redirect to="/carteira" />
-    ) : (
-      <div>
-        <form>
-          <label htmlFor="email">
-            Email:
-            <input
-              type="email"
-              name="email"
-              placeholder="digite seu email"
-              data-testid="email-input"
-              onChange={ this.handleChange }
-            />
-          </label>
-          <label htmlFor="password">
-            Senha:
-            <input
-              type="password"
-              name="password"
-              placeholder="digite sua senha"
-              data-testid="password-input"
-              onChange={ this.handleChange }
-            />
-            <button
-              type="button"
-              disabled={ isDisabled }
-              onClick={ this.handleClick }
-            >
-              Entrar
-            </button>
-          </label>
-        </form>
-      </div>
+    return (
+      <>
+        <Header />
+        {shouldRedirect ? (
+          <Redirect to="/carteira" />
+        ) : (
+          <div>
+            <form>
+              <label htmlFor="email">
+                Email:
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="digite seu email"
+                  data-testid="email-input"
+                  onChange={ this.handleChange }
+                />
+              </label>
+              <label htmlFor="password">
+                Senha:
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="digite sua senha"
+                  data-testid="password-input"
+                  onChange={ this.handleChange }
+                />
+                <button
+                  type="button"
+                  disabled={ isDisabled }
+                  onClick={ this.handleClick }
+                >
+                  Entrar
+                </button>
+              </label>
+            </form>
+          </div>
+        )}
+      </>
     );
   }
 }
