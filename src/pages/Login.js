@@ -1,5 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+
+import { storeEmail } from '../actions';
 
 class Login extends React.Component {
   constructor(props) {
@@ -31,6 +35,10 @@ class Login extends React.Component {
 
   handleLogIn(event) {
     event.preventDefault();
+    const { email } = this.state;
+    const { storeEmail: storeEmailAction } = this.props;
+
+    storeEmailAction(email);
     this.setState({
       loggedIn: true,
     });
@@ -73,4 +81,12 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+const mapDispatchToProps = {
+  storeEmail,
+};
+
+Login.propTypes = {
+  storeEmail: PropTypes.func.isRequired,
+};
+
+export default connect(null, mapDispatchToProps)(Login);

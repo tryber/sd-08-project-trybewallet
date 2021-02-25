@@ -1,5 +1,1 @@
-import storeEmail from './user';
-
-export default {
-  storeEmail,
-};
+export { default as storeEmail } from './user';
