@@ -1,3 +1,12 @@
 body {
   margin: 0;
 }
+
+.link-freepik-best-icons {
+  margin-top: 10px;
+}
+
+.link-freepik-best-icons a {
+  color: #0fa36b;
+  text-decoration: none;
+}
