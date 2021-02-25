@@ -1,0 +1,8 @@
+.loginDiv {
+  align-items: center;
+  display: flex;
+  flex-flow: column;
+  gap: 15px;
+  margin: 50px auto;
+  max-width: 500px;
+}
