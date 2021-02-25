@@ -1,11 +1,11 @@
 .login-page {
+  align-items: center;
   background-color: #ececec;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  min-height: 100vh;
   height: 100vmax;
+  min-height: 100vh;
 }
 
 .login-page section {
@@ -21,33 +21,33 @@
 }
 
 .login-page label {
-  color: #B0B0B0 ;
+  color: #b0b0b0;
   display: flex;
   flex-direction: column;
   margin-top: 20px;
 }
 
 .login-page input {
-  padding: 5px 5px;
-  font-size: 1rem;
   border-style: solid;
   border-radius: 10px;
+  font-size: 1rem;
+  padding: 5px;
 }
 
 .login-page input:focus {
-  border-color: #7532D9;
+  border-color: #7532d9;
   outline: none;
 }
 
 .login-page button {
   background-color: white;
-  border-color: #0FA36B;
+  border-color: #0fa36b;
   border-style: outset;
   border-width: 2px;
   border-radius: 5px;
-  color: #0FA36B;
+  color: #0fa36b;
   font-size: 1rem;
-  font-weight: bold;
+  font-weight: 900;
   margin-top: 25px;
   padding: 10px;
 }
@@ -57,20 +57,20 @@
 }
 
 .login-page button:disabled {
-  background-color: #F0F0F0;
-  color: #DDDDDD;
-  border-color: #DDDDDD;
+  background-color: #f0f0f0;
+  color: #DDD;
+  border-color: #DDD;
 }
 
 .login-page button:hover {
-  border-color: #00FF9D;
-  color: #00FF9D;
+  border-color: #00ff9d;
+  color: #00ff9d;
 }
 
 .login-page button:active {
-  background-color: #0FA36B;
+  background-color: #0fa36b;
   color: white;
-  border-color: #0FA36B;
+  border-color: #0fa36b;
   border-style: inset;
 }
 
@@ -81,12 +81,12 @@
 }
 
 .login-page .login-title h1 {
-  color: #0FA36B;
+  color: #0fa36b;
   text-transform: uppercase;
 }
 
 .login-page .login-title p {
-  color: #7532D9;
+  color: #7532d9;
   font-size: 18px;
   margin: 0;
   padding: 6px;
@@ -102,6 +102,6 @@
 }
 
 .login-page .link-freepik-best-icons a {
-  color: #0FA36B;
+  color: #0fa36b;
   text-decoration: none;
 }
