@@ -39,6 +39,10 @@
   outline: none;
 }
 
+.login-page a {
+  background-color: red;
+}
+
 .login-page button {
   background-color: white;
   border-color: #0fa36b;

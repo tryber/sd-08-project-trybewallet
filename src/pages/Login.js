@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import logo from '../svg/045-wallet.svg';
 import { storeEmail } from '../actions';
 import './Login.css';
@@ -71,7 +71,7 @@ class Login extends React.Component {
           <div className="login-title">
             <h1>Deori</h1>
             <p>Wallet</p>
-            <img src={ logo } alt="" />
+            <img src={ logo } alt="Wallet Logo" />
           </div>
         </section>
       </div>
@@ -86,3 +86,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(null, mapDispatchToProps)(Login);
+
+Login.propTypes = {
+  propsStoreEmail: PropTypes.func.isRequired,
+};
