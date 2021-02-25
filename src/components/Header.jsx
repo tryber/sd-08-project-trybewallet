@@ -11,7 +11,7 @@ class Header extends React.Component {
         <input value={ email } data-testid="email-field" />
         depesa total
         <input value="0" data-testid="total-field" />
-        <input value="BRT" data-testid="header-currency-field" />
+        <input value="BRT" data-testid="header-currency-field" readOnly />
       </div>
     );
   }
