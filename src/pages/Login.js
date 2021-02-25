@@ -65,7 +65,6 @@ class Login extends Component {
     } = this.state;
     const { logStatus } = this.props;
     if (logStatus) {
-      console.log(logStatus);
       return (<Redirect to="/carteira" />);
     }
 
