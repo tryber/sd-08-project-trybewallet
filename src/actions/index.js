@@ -4,4 +4,4 @@ const loginAction = (email) => ({
   email,
 });
 
-export { loginAction };
+export default loginAction;
