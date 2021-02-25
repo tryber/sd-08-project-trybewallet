@@ -15,6 +15,7 @@ class Login extends React.Component {
       userEmail: '',
       password: '',
       validEmail: /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i,
+      isLoggedIn: false,
     };
   }
 
@@ -30,7 +31,7 @@ class Login extends React.Component {
     const { userEmail } = this.state;
     const { executeLogin } = this.props;
     executeLogin(userEmail);
-    return <Redirect to="/carteira" />;
+    this.setState({ isLoggedIn: true });
   }
 
   renderPasswordInput() {
@@ -78,8 +79,9 @@ class Login extends React.Component {
   }
 
   render() {
-    const { userEmail, password, validEmail } = this.state;
+    const { userEmail, password, validEmail, isLoggedIn } = this.state;
     const SIX = 6;
+    if(isLoggedIn) return (<Redirect to="/carteira" />);
     return (
       <div className="login-form-container">
         <h1>Trybe Wallet</h1>
@@ -97,7 +99,7 @@ class Login extends React.Component {
           </div>
         </form>
       </div>
-    );
+    );    
   }
 }
 
