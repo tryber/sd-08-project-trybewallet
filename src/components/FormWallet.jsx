@@ -11,7 +11,6 @@ export default class FormWallet extends React.Component {
         <label htmlFor="value-input">
           Valor:
           <input
-            value="xx"
             type="number"
             data-testid="value-input"
           />
@@ -19,7 +18,6 @@ export default class FormWallet extends React.Component {
         <label htmlFor="description-input">
           Descrição:
           <input
-            value="xx"
             type="text"
             data-testid="description-input"
           />
@@ -27,14 +25,12 @@ export default class FormWallet extends React.Component {
         <label htmlFor="currency-input">
           Moeda:
           <input
-            value="xx "
             data-testid="currency-input"
           />
         </label>
         <label htmlFor="method-input">
           Método de Pagamento:
           <select
-            value="xx"
             data-testid="method-input"
           >
             <option value="Cartão de crédito">Cartão de crédito</option>
@@ -45,7 +41,6 @@ export default class FormWallet extends React.Component {
         <label htmlFor="tag-input">
           Categoria:
           <select
-            value="xx"
             data-testid="tag-input"
           >
             <option value="Alimentação">Alimentação</option>
