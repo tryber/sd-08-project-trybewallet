@@ -55,7 +55,7 @@ class Login extends React.Component {
 }
 
 Login.propTypes = {
-  login: PropTypes.shape({}).isRequired,
+  login: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
