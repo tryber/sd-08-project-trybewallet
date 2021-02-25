@@ -1,0 +1,10 @@
+.formulario {
+  align-items: center;
+  color: white;
+  display: flex;
+  justify-content: center;
+}
+
+.formulario label input {
+  margin: 10px 10px 10px 5px;
+}

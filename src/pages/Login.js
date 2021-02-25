@@ -18,22 +18,18 @@ class Login extends React.Component {
   }
 
   handleChangeEmail({ target }) {
-    const { validateEmail, email } = this.state;
     this.setState({
       validateEmail: /^[\w+.]+@\w+\.\w{2,}(?:\.\w{2})?$/.test(target.value),
       email: target.value,
     }, () => {
-      console.log(validateEmail, email);
     });
   }
 
   handleChangePassword({ target }) {
-    const { validatePassword } = this.state;
     const MIN_CHARACTER = 5;
     this.setState({
       validatePassword: target.value.length > MIN_CHARACTER,
     }, () => {
-      console.log(validatePassword);
     });
   }
 
