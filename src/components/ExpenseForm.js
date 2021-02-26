@@ -1,37 +1,26 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { Creators as WalletActions } from '../actions/wallet';
-
 import api from '../services';
+import expenseType from '../types';
 
-import styles from '../styles/components/ExpensesForm.module.css';
+import styles from '../styles/components/ExpenseForm.module.css';
 
-const INITIAL_STATE = {
-  fields: {
-    value: '',
-    description: '',
-    currency: 'USD',
-    method: 'Dinheiro',
-    tag: 'Alimentação',
-  },
-};
-
-class ExpensesForm extends Component {
+class ExpenseForm extends Component {
   constructor(props) {
     super(props);
 
+    const { initialState } = this.props;
+
     this.state = {
-      ...INITIAL_STATE,
+      ...initialState,
       coinTypes: [],
     };
 
     this.paymentMethods = ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'];
-    this.expensesTags = ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
+    this.expenseTags = ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
 
     this.handleChange = this.handleChange.bind(this);
-    this.handleAddExpenses = this.handleAddExpenses.bind(this);
+    this.handleButtonAction = this.handleButtonAction.bind(this);
   }
 
   componentDidMount() {
@@ -50,11 +39,11 @@ class ExpensesForm extends Component {
     }));
   }
 
-  handleAddExpenses() {
+  handleButtonAction() {
     const { fields } = this.state;
-    const { addExpenseWithCoins } = this.props;
-    addExpenseWithCoins(fields);
-    this.setState({ ...INITIAL_STATE });
+    const { initialState, buttonAction } = this.props;
+    buttonAction(fields);
+    this.setState({ ...initialState });
   }
 
   renderValueInput() {
@@ -96,8 +85,8 @@ class ExpensesForm extends Component {
         placeholder="Tipo de moeda"
         onChange={ this.handleChange }
       >
-        { coinTypes.map(({ name, code }) => (
-          <option value={ code } data-testid={ code } key={ code }>{ name }</option>)) }
+        { coinTypes.map(({ code }) => (
+          <option value={ code } data-testid={ code } key={ code }>{ code }</option>)) }
       </select>
     );
   }
@@ -119,7 +108,7 @@ class ExpensesForm extends Component {
     );
   }
 
-  renderExpensesTagsSelect() {
+  renderExpenseTagsSelect() {
     const { fields: { tag } } = this.state;
     return (
       <select
@@ -130,30 +119,31 @@ class ExpensesForm extends Component {
         placeholder="Categoria do gasto"
         onChange={ this.handleChange }
       >
-        { this.expensesTags.map((currentTag, index) => (
+        { this.expenseTags.map((currentTag, index) => (
           <option key={ index }>{ currentTag }</option>)) }
       </select>
     );
   }
 
   render() {
+    const { buttonText } = this.props;
     return (
-      <div className={ styles.expensesFormContainer }>
+      <div className={ styles.expenseFormContainer }>
         <form
-          className={ styles.expensesForm }
+          className={ styles.expenseForm }
           onSubmit={ (event) => event.preventDefault() }
         >
           { this.renderValueInput() }
           { this.renderDescriptionInput() }
           { this.renderCurrencySelect() }
           { this.renderPaymentMethodsSelect() }
-          { this.renderExpensesTagsSelect() }
+          { this.renderExpenseTagsSelect() }
 
           <button
             type="button"
-            onClick={ this.handleAddExpenses }
+            onClick={ this.handleButtonAction }
           >
-            Adicionar despesa
+            { buttonText }
           </button>
         </form>
       </div>
@@ -161,10 +151,10 @@ class ExpensesForm extends Component {
   }
 }
 
-ExpensesForm.propTypes = {
-  addExpenseWithCoins: PropTypes.func.isRequired,
+ExpenseForm.propTypes = {
+  buttonAction: PropTypes.func.isRequired,
+  initialState: expenseType.isRequired,
+  buttonText: PropTypes.string.isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => bindActionCreators(WalletActions, dispatch);
-
-export default connect(null, mapDispatchToProps)(ExpensesForm);
+export default ExpenseForm;

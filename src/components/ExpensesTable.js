@@ -8,7 +8,7 @@ import styles from '../styles/components/ExpensesTable.module.css';
 
 class ExpensesTable extends Component {
   renderExpense(expense) {
-    const { removeExpense } = this.props;
+    const { removeExpense, editExpense } = this.props;
     const { value, description, currency,
       method, tag, exchangeRates, id } = expense;
     const currencyData = exchangeRates[currency];
@@ -34,7 +34,7 @@ class ExpensesTable extends Component {
           <button
             data-testid="edit-btn"
             type="button"
-            onClick={ () => removeExpense(id) }
+            onClick={ () => editExpense(id) }
           >
             Editar
           </button>
@@ -71,6 +71,7 @@ class ExpensesTable extends Component {
 ExpensesTable.propTypes = {
   expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
   removeExpense: PropTypes.func.isRequired,
+  editExpense: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ wallet }) => ({
