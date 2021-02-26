@@ -1,7 +1,7 @@
 // Coloque aqui suas actions
-const ADCIONAR_EMAIL = 'ADCIONAR_EMAIL';
+export const ADCIONAR_EMAIL = 'ADCIONAR_EMAIL';
 
-export default adcionarEmail = (emailStore) => ({
+export const adcionarEmail = (value) => ({
   type: ADCIONAR_EMAIL,
-  payload: { email: emailStore },
+  value,
 });

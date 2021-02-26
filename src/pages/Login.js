@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import adcionarEmail from '../actions/index';
+import PropTypes from 'prop-types';
+import { adcionarEmail } from '../actions';
 
 class Login extends React.Component {
   constructor() {
@@ -33,6 +34,7 @@ class Login extends React.Component {
 
   render() {
     const { senha, email, validaEmail, validaSenha } = this.state;
+    const { loginDispatch } = this.props;
 
     return (
       <>
@@ -85,4 +87,7 @@ const mapDispatchToProps = (dispatch) => ({
   loginDispatch: (e) => dispatch(adcionarEmail(e)),
 });
 
+Login.propTypes = {
+  loginDispatch: PropTypes.func.isRequired,
+};
 export default connect(null, mapDispatchToProps)(Login);
