@@ -7,8 +7,44 @@ import { Creators as WalletActions } from '../actions/wallet';
 import styles from '../styles/components/ExpensesTable.module.css';
 
 class ExpensesTable extends Component {
+  renderExpense(expense) {
+    const { removeExpense } = this.props;
+    const { value, description, currency,
+      method, tag, exchangeRates, id } = expense;
+    const currencyData = exchangeRates[currency];
+    const convertedValue = +currencyData.ask * +value;
+    return (
+      <tr key={ id }>
+        <td>{ description }</td>
+        <td>{ tag }</td>
+        <td>{ method }</td>
+        <td>{ value }</td>
+        <td>{ currencyData.name }</td>
+        <td>{ Math.round(currencyData.ask * 100) / 100 }</td>
+        <td>{ Math.round(convertedValue * 100) / 100 }</td>
+        <td>Real</td>
+        <td>
+          <button
+            data-testid="delete-btn"
+            type="button"
+            onClick={ () => removeExpense(id) }
+          >
+            Excluir
+          </button>
+          <button
+            data-testid="edit-btn"
+            type="button"
+            onClick={ () => removeExpense(id) }
+          >
+            Editar
+          </button>
+        </td>
+      </tr>
+    );
+  }
+
   render() {
-    const { expenses, removeExpense } = this.props;
+    const { expenses } = this.props;
     return (
       <table className={ styles.expensesTable }>
         <thead>
@@ -25,33 +61,7 @@ class ExpensesTable extends Component {
           </tr>
         </thead>
         <tbody>
-          { expenses.map((expense) => {
-            const { value, description, currency,
-              method, tag, exchangeRates, id } = expense;
-            const currencyData = exchangeRates[currency];
-            const convertedValue = +currencyData.ask * +value;
-            return (
-              <tr key={ id }>
-                <td>{ description }</td>
-                <td>{ tag }</td>
-                <td>{ method }</td>
-                <td>{ value }</td>
-                <td>{ currencyData.name }</td>
-                <td>{ Math.round(currencyData.ask * 100) / 100 }</td>
-                <td>{ Math.round(convertedValue * 100) / 100 }</td>
-                <td>Real</td>
-                <td>
-                  <button
-                    data-testid="delete-btn"
-                    type="button"
-                    onClick={ () => removeExpense(id) }
-                  >
-                    Excluir
-                  </button>
-                </td>
-              </tr>
-            );
-          })}
+          { expenses.map((expense) => this.renderExpense(expense)) }
         </tbody>
       </table>
     );

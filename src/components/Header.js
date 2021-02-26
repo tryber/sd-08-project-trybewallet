@@ -31,7 +31,7 @@ class Header extends Component {
           </div>
           <div className={ styles.headerInfosItem }>
             <dt>Despesa total:</dt>
-            <dd data-testid="total-field">{ total }</dd>
+            <dd data-testid="total-field">{ Math.round(total * 100) / 100 }</dd>
           </div>
           <div className={ styles.headerInfosItem }>
             <dt>Câmbio:</dt>

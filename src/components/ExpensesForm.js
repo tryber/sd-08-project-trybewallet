@@ -61,7 +61,7 @@ class ExpensesForm extends Component {
     const { fields: { value } } = this.state;
     return (
       <input
-        type="text"
+        type="number"
         name="value"
         value={ value }
         data-testid="value-input"
