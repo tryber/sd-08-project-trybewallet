@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import dataLogin from '../actions';
+import './Login.css';
 
 class Login extends React.Component {
   constructor() {
@@ -39,7 +40,7 @@ class Login extends React.Component {
     const { email, password, isValid } = this.state;
     const { login } = this.props;
     return (
-      <div className="Login">
+      <div className="login">
         <section className="login-inputs">
           <input
             data-testid="email-input"
