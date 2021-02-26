@@ -35,6 +35,7 @@ class Expense extends React.Component {
     return (
       <label htmlFor={ name } key={ name }>
         {label}
+        :
         { type !== 'select'
             && (
               <input
