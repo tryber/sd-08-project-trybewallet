@@ -42,6 +42,12 @@ class ExpenseList extends React.Component {
           >
             Delete
           </button>
+          <button
+            type="button"
+            data-testid="edit-btn"
+          >
+            Editar
+          </button>
         </td>
       </tr>
     );

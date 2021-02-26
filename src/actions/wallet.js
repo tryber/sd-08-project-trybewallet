@@ -4,6 +4,8 @@ import {
   CHANGE_EXPENSE_FORM,
   ADD_EXPENSE,
   REMOVE_EXPENSE,
+  IS_EDITING,
+  FINISHES_EDIT,
 } from './constants';
 
 const requestCurrencies = () => ({
@@ -43,6 +45,15 @@ export const addExpense = () => ({
 export const removeExpense = (payload) => ({
   type: REMOVE_EXPENSE,
   payload,
+});
+
+export const isEditing = (payload) => ({
+  type: IS_EDITING,
+  payload,
+});
+
+export const finishesEdit = () => ({
+  type: FINISHES_EDIT,
 });
 
 export default fetchCurrencies;

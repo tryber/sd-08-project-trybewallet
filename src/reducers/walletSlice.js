@@ -3,6 +3,8 @@ import {
   CHANGE_EXPENSE_FORM,
   ADD_EXPENSE,
   REMOVE_EXPENSE,
+  IS_EDITING,
+  FINISHES_EDIT,
 } from '../actions/constants';
 
 const initialState = {
@@ -17,8 +19,22 @@ const initialState = {
     tag: 'Alimentação',
     exchangeRates: {},
   },
-  totalExpenses: 0,
+  editing: false,
 };
+
+function handleEditCase(state) {
+  return {
+    ...state,
+    expenses: [...state.expenses]
+      .map((expense) => ((expense.id === state.currentExpense.id)
+        ? { ...state.currentExpense } : expense)),
+    editing: false,
+    currentExpense: {
+      ...state.currentExpense,
+      id: state.currentExpense.id + 1,
+    },
+  };
+}
 
 export default function walletReducer(state = initialState, action) {
   switch (action.type) {
@@ -53,6 +69,17 @@ export default function walletReducer(state = initialState, action) {
       ...state,
       expenses: [...state.expenses].filter((expense) => expense.id !== action.payload),
     };
+  case IS_EDITING:
+    return {
+      ...state,
+      editing: true,
+      currentExpense: {
+        ...state.currentExpense,
+        id: action.payload,
+      },
+    };
+  case FINISHES_EDIT:
+    return handleEditCase(state);
   default:
     return state;
   }
