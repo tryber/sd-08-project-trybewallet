@@ -5,19 +5,15 @@ import getCurrencyList from '../services/getCurrencyList';
 import * as actions from '../actions';
 
 function CurrencySelect({ onChange, ...rest }) {
-  // const [currList, setCurrList] = useState(null);
   const currList = useSelector((state) => state.wallet.currencies);
   const dispatch = useDispatch();
-
   const fetchCurrList = async () => {
     if (currList.length === 0) {
       const list = await getCurrencyList();
       dispatch(actions.addCurrency(list));
-      // setCurrList(list);
     }
   };
   fetchCurrList();
-
   return (
     <label htmlFor="currency">
       Moeda:

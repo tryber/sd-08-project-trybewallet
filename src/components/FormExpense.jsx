@@ -17,7 +17,6 @@ const INITIAL_VALUE = {
 function FormExpense() {
   const [data, setData] = useState(INITIAL_VALUE);
   const dispatch = useDispatch();
-
   const handleChange = ({ target }) => {
     const { name, value } = target;
     setData({
@@ -28,7 +27,6 @@ function FormExpense() {
   const handleAddExpense = async () => {
     const exchangeRates = await fetch('https://economia.awesomeapi.com.br/json/all')
       .then((response) => response.json());
-
     dispatch(actions.addExpense({ ...data, exchangeRates }));
   };
   const { value, description, currency, tag, method } = data;
