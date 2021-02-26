@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { FormExpenses } from '../components';
 import './HeaderWallet.css';
 import logo from '../svg/045-wallet.svg';
 
@@ -9,19 +10,22 @@ class HeaderWallet extends Component {
     const { userEmail } = this.props;
     return (
       <header className="header-wallet">
-        <div><img src={ logo } alt="Wallet Logo" /></div>
-        <div>
-          <span data-testid="email-field">{userEmail}</span>
-          <span data-testid="total-field" className="header-toral">
-            {999999}
-            <span
-              data-testid="header-currency-field"
-              className="header-currency"
-            >
-              BRL
+        <div className="header-box">
+          <div><img src={ logo } alt="Wallet Logo" /></div>
+          <div>
+            <span data-testid="email-field">{userEmail}</span>
+            <span data-testid="total-field" className="header-toral">
+              {999999}
+              <span
+                data-testid="header-currency-field"
+                className="header-currency"
+              >
+                BRL
+              </span>
             </span>
-          </span>
+          </div>
         </div>
+        <FormExpenses />
       </header>
     );
   }

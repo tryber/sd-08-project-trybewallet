@@ -2,9 +2,17 @@
   align-items: center;
   background-color: whitesmoke;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   font-size: 0.8rem;
+}
+
+.header-wallet .header-box {
+  align-items: baseline;
+  display: flex;
+  flex-direction: row;
   justify-content: space-between;
+  padding: 5px;
+  width: 100%;
 }
 
 .header-wallet div {

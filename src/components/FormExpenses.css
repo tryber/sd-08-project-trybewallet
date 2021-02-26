@@ -1,0 +1,94 @@
+.form-expenses {
+  background-color: #292929;
+  border-bottom: 1px solid black;
+  border-top: 1px solid black;
+  color: whitesmoke;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  padding: 1vmin;
+  width: 100%;
+}
+
+.form-expenses label {
+  align-items:flex-start;
+  display: flex;
+  flex-direction: column;
+  font-size: 0.7rem;
+  margin: 10px;
+}
+
+.form-expenses label span {
+  margin: 4px;
+}
+
+.form-expenses input {
+  border-radius: 10px;
+  border-style: solid;
+  font-size: 1rem;
+  width: 25vmin;
+}
+
+.form-expenses select {
+  background-color: white;
+  border-radius: 10px;
+  border-style: solid;
+  font-size: 1rem;
+  font-size: 0.8rem;
+  width: 25vmin;
+}
+
+.form-expenses textarea {
+  border-style: solid;
+  font-size: 1rem;
+  font-size: 0.8rem;
+  width: 25vmin;
+}
+
+.form-expenses button {
+  background-color: #0fa36b;
+  border-color: #0fa36b;
+  border-radius: 10px;
+  border-style: outset;
+  border-width: 2px;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 900;
+  justify-content: center;
+  margin: 5px;
+  margin-right: 10px;
+  min-height: 50px;
+  padding: 10px;
+  text-decoration: none;
+}
+
+.form-expenses button:active {
+  background-color: white;
+  border-color: #0fa36b;
+  border-style: inset;
+  box-shadow: 2px 3px 2px #838383;
+  color: #0fa36b;
+}
+
+@media screen and (max-width: 502px) {
+  .form-expenses {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+  .form-expenses label {
+    align-items:center;
+    font-size: 1rem;
+  }
+  .form-expenses input {
+    width: 50vmin;
+  }
+  .form-expenses select {
+    font-size: 0.8rem;
+    width: 50vmin;
+  }
+  .form-expenses button {
+    min-height: 40px;
+  }
+}
