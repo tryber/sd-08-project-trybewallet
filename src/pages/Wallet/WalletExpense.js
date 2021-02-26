@@ -27,6 +27,15 @@ class WalletExpense extends Component {
           dataTestid
         />
         <Select
+          title="método de pagamento"
+          data-testid="method-input"
+          type="text"
+          name="currency"
+          id="id-currency"
+          options={ expense.method }
+          dataTestid
+        />
+        <Select
           title="tag"
           data-testid="tag-input"
           type="text"
