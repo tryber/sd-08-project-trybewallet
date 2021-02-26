@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from './Header';
 import * as Actions from '../actions';
+import '../style/wallet.css';
 
 class Wallet extends React.Component {
   constructor() {

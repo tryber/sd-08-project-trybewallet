@@ -11,7 +11,10 @@ class Header extends React.Component {
         <h1>Trybe Wallet</h1>
         <section>
           <span data-testid="email-field">{email}</span>
-          <span data-testid="total-field">{ total.toFixed(2) }</span>
+          <span data-testid="total-field">
+            0
+            {total}
+          </span>
           <span data-testid="header-currency-field">BRL</span>
         </section>
       </header>
