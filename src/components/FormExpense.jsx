@@ -22,7 +22,7 @@ class FormExpense extends Component {
             <input
               type="text"
               id="description"
-              data-testid="value-input"
+              data-testid="description-input"
               value={ null }
               name="description"
               onChange={ null }
