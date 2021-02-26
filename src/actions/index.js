@@ -1,1 +1,8 @@
-// Coloque aqui suas actions
+function login(email) {
+  return ({
+    type: 'LOGIN',
+    email,
+  });
+}
+
+export default login;
