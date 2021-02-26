@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import { login as loginAction } from '../redux/actions';
+import { login as loginAction } from '../actions';
 
 class Login extends React.Component {
   constructor() {
@@ -12,13 +12,14 @@ class Login extends React.Component {
     this.state = {
       email: '',
       password: '',
-      message: '',
+      redirect: false,
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.validateEmail = this.validateEmail.bind(this);
     this.validatePassword = this.validatePassword.bind(this);
+    this.validateLogin = this.validateLogin.bind(this);
   }
 
   handleChange(event) {
@@ -30,16 +31,10 @@ class Login extends React.Component {
   handleClick() {
     const { email } = this.state;
     const { login } = this.props;
-    if (!this.validateEmail() && !this.validatePassword()) {
-      login(email);
-      this.setState({
-        message: 'Ok',
-      });
-    } else {
-      this.setState({
-        message: 'Email ou senha inválida',
-      });
-    }
+    login(email);
+    this.setState({
+      redirect: true,
+    });
   }
 
   validateEmail() {
@@ -54,10 +49,14 @@ class Login extends React.Component {
     return password.length < MINIMUM_PASSWORD_LENGTH;
   }
 
-  render() {
-    const { email, password, message } = this.state;
+  validateLogin() {
+    return !(!this.validateEmail() && !this.validatePassword());
+  }
 
-    if (message === 'Ok') {
+  render() {
+    const { email, password, redirect } = this.state;
+
+    if (redirect) {
       return <Redirect to="/carteira" />;
     }
 
@@ -83,15 +82,20 @@ class Login extends React.Component {
             value={ password }
           />
         </label>
-        <button onClick={ this.handleClick } type="button">Entrar</button>
-        <p className="error-message">{ message }</p>
+        <button
+          disabled={ this.validateLogin() }
+          onClick={ this.handleClick }
+          type="button"
+        >
+          Entrar
+        </button>
       </section>
     );
   }
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  login: (email) => dispatch(loginAction(email)),
+  login: (payload) => dispatch(loginAction(payload)),
 });
 
 Login.propTypes = {
