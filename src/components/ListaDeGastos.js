@@ -22,5 +22,5 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps)(ListaDeGastos);
 
 ListaDeGastos.propTypes = {
-  valor: PropTypes.number.isRequired,
+  valor: PropTypes.shape.isRequired,
 };

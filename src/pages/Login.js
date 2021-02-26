@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 class Login extends Component {
   constructor() {
@@ -36,7 +37,7 @@ class Login extends Component {
   }
 
   render() {
-    const { email, history } = this.props;
+    const { email } = this.props;
     const { Email, senha, buttonDisabled } = this.state;
     return (
       <div className="login">
@@ -61,17 +62,18 @@ class Login extends Component {
               data-testid="password-input"
               onChange={ (event) => this.change(event) }
             />
-            <button
-              className="button"
-              type="button"
-              disabled={ buttonDisabled }
-              onClick={ () => {
-                email(Email);
-                history.push('/carteira');
-              } }
-            >
-              Entrar
-            </button>
+            <Link to="/carteira">
+              <button
+                className="button"
+                type="button"
+                disabled={ buttonDisabled }
+                onClick={ () => {
+                  email(Email);
+                } }
+              >
+                Entrar
+              </button>
+            </Link>
           </div>
         </main>
       </div>
@@ -103,6 +105,5 @@ export default connect(mapStateToProps, mapDispatchToProps)(Login);
 // e essa só uma pequena demonstração de minha enorme gratidão. VQV
 
 Login.propTypes = {
-  history: PropTypes.shape.isRequired,
   email: PropTypes.func.isRequired,
 };
