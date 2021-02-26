@@ -85,7 +85,7 @@ class Login extends React.Component {
     return (
       <div className="login-form-container">
         <h1>Trybe Wallet</h1>
-        <form onSubmit={ (e) => e.preventDefault() }>
+        <form className="login-form" onSubmit={ (e) => e.preventDefault() }>
           { this.renderEmailInput() }
           { this.renderPasswordInput() }
           <div>

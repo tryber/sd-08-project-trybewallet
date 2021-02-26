@@ -8,13 +8,13 @@
   width: 30%;
 }
 
-form {
+.login-form {
   display: flex;
   flex-direction: column;
   padding: 5rem;
 }
 
-form > div {
+.login-form > div {
   align-self: center;
   padding: 0.5rem;
 }
