@@ -24,8 +24,9 @@ class Login extends React.Component {
 
   checkInputs() {
     const minPassLength = 6;
+    const regexExpression = new RegExp(/^[^@\s]+@[^@\s]+\.[^@\s]+$/)
     const { inputEmail, passLength } = this.state;
-    const emailBool = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(inputEmail);
+    const emailBool = regexExpression.test(inputEmail);
     if (passLength >= minPassLength && emailBool) {
       return true;
     }
