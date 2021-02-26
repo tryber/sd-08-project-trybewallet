@@ -29,14 +29,14 @@
 }
 
 .header-wallet div span {
-  margin: 0px 5px;
+  margin: 0 5px;
 }
 
-.header-wallet div span.header-toral {
+.header-wallet.header-toral {
   background-color: whitesmoke;
   font-size: 0.8rem;
 }
 
-.header-wallet div span.header-currency {
+.header-wallet.header-currency {
   font-size: 0.6rem;
 }

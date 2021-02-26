@@ -4,15 +4,14 @@
   border-top: 1px solid black;
   color: whitesmoke;
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-flow: row wrap;
   justify-content: flex-start;
   padding: 1vmin;
   width: 100%;
 }
 
 .form-expenses label {
-  align-items:flex-start;
+  align-items: flex-start;
   display: flex;
   flex-direction: column;
   font-size: 0.7rem;
@@ -34,7 +33,6 @@
   background-color: white;
   border-radius: 10px;
   border-style: solid;
-  font-size: 1rem;
   font-size: 0.8rem;
   width: 25vmin;
 }
@@ -72,23 +70,27 @@
   color: #0fa36b;
 }
 
-@media screen and (max-width: 502px) {
+@media screen and ( max-width: 502px ) {
   .form-expenses {
     align-items: center;
     display: flex;
     flex-direction: column;
   }
+
   .form-expenses label {
-    align-items:center;
+    align-items: center;
     font-size: 1rem;
   }
+
   .form-expenses input {
     width: 50vmin;
   }
+
   .form-expenses select {
     font-size: 0.8rem;
     width: 50vmin;
   }
+  
   .form-expenses button {
     min-height: 40px;
   }
