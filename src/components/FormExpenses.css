@@ -40,7 +40,6 @@
 .form-expenses textarea {
   border-style: solid;
   font-size: 1rem;
-  font-size: 0.8rem;
   width: 25vmin;
 }
 
@@ -70,7 +69,8 @@
   color: #0fa36b;
 }
 
-@media screen and ( max-width: 502px ) {
+@media screen and ( max-width : 502px ) {
+
   .form-expenses {
     align-items: center;
     display: flex;
@@ -90,7 +90,7 @@
     font-size: 0.8rem;
     width: 50vmin;
   }
-  
+
   .form-expenses button {
     min-height: 40px;
   }
