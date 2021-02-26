@@ -1,7 +1,5 @@
 {
-  "plugins": [
-    "stylelint-order"
-  ],
+  "plugins": ["stylelint-order"],
   "rules": {
     "at-rule-empty-line-before": "always",
     "at-rule-name-case": "lower",
@@ -91,9 +89,7 @@
     "rule-empty-line-before": [
       "always",
       {
-        "except": [
-          "after-single-line-comment"
-        ]
+        "except": ["after-single-line-comment"]
       }
     ],
     "selector-attribute-brackets-space-inside": "always",
