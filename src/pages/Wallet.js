@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { fetchCurrencies as getCurrencies } from '../actions';
-import { ExpensesTable, Header, NewExpenseForm } from '../components';
+import { ExpensesTable, Header, NewExpenseForm, EditExpenseForm } from '../components';
 
 class Wallet extends React.Component {
   componentDidMount() {
@@ -12,22 +12,32 @@ class Wallet extends React.Component {
   }
 
   render() {
+    const { isEditing } = this.props;
     return (
       <div>
         <Header />
-        <NewExpenseForm />
+        { isEditing ? <EditExpenseForm /> : <NewExpenseForm />}
         <ExpensesTable />
       </div>
     );
   }
 }
 
+const mapStateToProps = (state) => ({
+  isEditing: state.wallet.isEditing,
+});
+
 const mapDispatchToProps = (dispatch) => ({
   fetchCurrencies: () => dispatch(getCurrencies()),
 });
 
-export default connect(null, mapDispatchToProps)(Wallet);
+export default connect(mapStateToProps, mapDispatchToProps)(Wallet);
 
 Wallet.propTypes = {
+  isEditing: PropTypes.bool,
   fetchCurrencies: PropTypes.func.isRequired,
+};
+
+Wallet.defaultProps = {
+  isEditing: false,
 };
