@@ -9,7 +9,9 @@ const initialState = {
 const updateTotal = (state, action) => {
   const expenses = state.expenses.concat(action.expense);
   const total = expenses.reduce((acc, expense) => (
-    acc + expense.value * expense.exchangeRates[expense.currency].ask
+    parseFloat(
+      (acc + expense.value * expense.exchangeRates[expense.currency].ask).toFixed(2),
+    )
   ), 0);
   return total;
 };
