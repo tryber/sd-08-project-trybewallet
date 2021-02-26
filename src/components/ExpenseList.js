@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { removeExpense } from '../actions';
+import { removeExpense, isEditing } from '../actions';
 
 class ExpenseList extends React.Component {
   constructor(props) {
@@ -14,6 +14,11 @@ class ExpenseList extends React.Component {
   handleDeleteItem(id) {
     const { removeExpense: removeExpenseAction } = this.props;
     removeExpenseAction(id);
+  }
+
+  handleEditItem(id) {
+    const { isEditing: isEditingAction } = this.props;
+    isEditingAction(id);
   }
 
   rowGenerator(expense) {
@@ -45,6 +50,7 @@ class ExpenseList extends React.Component {
           <button
             type="button"
             data-testid="edit-btn"
+            onClick={ () => this.handleEditItem(expense.id) }
           >
             Editar
           </button>
@@ -91,6 +97,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   removeExpense,
+  isEditing,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExpenseList);
