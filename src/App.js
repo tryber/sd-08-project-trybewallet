@@ -1,15 +1,21 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { handleLogin } from './actions/index';
 import Login from './pages/Login';
+import Wallet from './pages/Wallet';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route exact path="/" component={Login} />
-      </Switch>
-    </BrowserRouter>
+    <Switch>
+      <Route path="/carteira" component={ Wallet } />
+      <Route exact path="/" handleLogin component={ Login } />
+    </Switch>
   );
 }
 
-export default App;
+const mapDispatchToProps = (dispatch) => ({
+  handleLogin: (userEmail) => dispatch(handleLogin(userEmail)),
+});
+
+export default connect(mapDispatchToProps)(App);

@@ -7,7 +7,7 @@ export const handleInput = (position, input) => ({
   [position]: input,
 });
 
-export const login = (userEmail) => ({
+export const handleLogin = (userEmail) => ({
   type: LOGIN_IN,
   user: { email: userEmail },
 });
