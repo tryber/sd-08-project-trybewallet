@@ -6,7 +6,7 @@ function WalletHeader() {
   const wallet = useSelector((state) => state.wallet);
 
   function calcExp() {
-    return wallet.expenses.reduce((acc, cur) => acc + Number(cur.value), 0);
+    return wallet.expenses.reduce((acc, cur) => acc + Number(cur.value), 0).toFixed(2);
   }
 
   return (
