@@ -42,7 +42,7 @@ class Form extends React.Component {
 
   render() {
     const { id, exp, des, cur, met, tag } = this.state;
-    const { expenses } = this.props;
+    const { addExp } = this.props;
     return (
       <form>
         <input
@@ -55,30 +55,32 @@ class Form extends React.Component {
           type="text"
           value={ des }
           onChange={ (e) => this.setState({ des: e.target.value }) }
-          data-testid="value-input"
+          data-testid="description-input"
         />
         <select
           value={ cur }
           onChange={ (e) => this.setState({ cur: e.target.value }) }
-          data-testid="value-input"
+          data-testid="currency-input"
         >
-          {currencyList.map((item, index) => <option key={ index }>{item}</option>)}
+          {currencyList.map(
+            (item, index) => <option key={ index } data-testid={ item }>{item}</option>,
+          )}
         </select>
         <select
           value={ met }
           onChange={ (e) => this.setState({ met: e.target.value }) }
-          data-testid="value-input"
+          data-testid="method-input"
         >
           {methodList.map((item, index) => <option key={ index }>{item}</option>)}
         </select>
         <select
           value={ tag }
           onChange={ (e) => this.setState({ tag: e.target.value }) }
-          data-testid="value-input"
+          data-testid="tag-input"
         >
           {tagList.map((item, index) => <option key={ index }>{item}</option>)}
         </select>
-        <button type="button" onClick={ () => expenses({ id, exp, des, cur, met, tag }) }>
+        <button type="button" onClick={ () => addExp({ id, exp, des, cur, met, tag }) }>
           Adicionar despesa
         </button>
       </form>
@@ -87,16 +89,16 @@ class Form extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  expenses: (info) => dispatch(addExpense(info)),
+  addExp: (info) => dispatch(addExpense(info)),
 });
 
 const mapStateToProps = (state) => ({
-  expensesInfo: state.wallet,
+  expensesInfo: state.wallet.expenses,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Form);
 
 Form.propTypes = {
-  expenses: PropTypes.func.isRequired,
+  addExp: PropTypes.func.isRequired,
   expensesInfo: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
