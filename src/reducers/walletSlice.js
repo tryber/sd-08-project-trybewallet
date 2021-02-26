@@ -2,12 +2,15 @@
 const initialState = {
   currencies: [],
   expenses: [],
+  totalExpenses: 0,
 };
 
 export default function walletReducer(state = initialState, action) {
   switch (action.type) {
   case 'something':
-    return 'something';
+    return {
+      ...state,
+    };
   default:
     return state;
   }

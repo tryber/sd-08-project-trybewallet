@@ -1,7 +1,7 @@
 import { STORE_EMAIL } from '../actions/constants';
 
 const initialState = {
-  email: '',
+  email: 'scarige@gmail.com',
 };
 
 export default function userReducer(state = initialState, action) {
