@@ -12,9 +12,9 @@ const INITIAL_STATE = {
   fields: {
     value: '',
     description: '',
-    currency: '',
-    method: '',
-    tag: '',
+    currency: 'USD',
+    method: 'Dinheiro',
+    tag: 'Alimentação',
   },
 };
 

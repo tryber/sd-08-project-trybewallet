@@ -1,0 +1,7 @@
+.expensesTable {
+  text-align: center;
+}
+
+.expensesTable th , .expensesTable td {
+  padding: 20px;
+}
