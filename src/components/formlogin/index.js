@@ -39,15 +39,17 @@ class FormLogin extends React.Component {
     const { email } = this.state;
     return (
       <div>
-        <label htmlFor="email">Email</label>
-        <input
-          placeholder="Digite seu email"
-          name="email"
-          data-testid="email-input"
-          type="email"
-          value={ email }
-          onChange={ (event) => this.handleEvent(event) }
-        />
+        <label htmlFor="email">
+          Email
+          <input
+            placeholder="Digite seu email"
+            name="email"
+            data-testid="email-input"
+            type="email"
+            value={ email }
+            onChange={ (event) => this.handleEvent(event) }
+          />
+        </label>
       </div>
     );
   }
@@ -56,16 +58,18 @@ class FormLogin extends React.Component {
     const { password } = this.state;
     return (
       <div>
-        <label htmlFor="password">Senha</label>
-        <input
-          placeholder="Digite sua senha"
-          name="password"
-          data-testid="password-input"
-          type="password"
-          value={ password }
-          minLength="6"
-          onChange={ (event) => this.handleEvent(event) }
-        />
+        <label htmlFor="password">
+          Senha
+          <input
+            placeholder="Digite sua senha"
+            name="password"
+            data-testid="password-input"
+            type="password"
+            value={ password }
+            minLength="6"
+            onChange={ (event) => this.handleEvent(event) }
+          />
+        </label>
       </div>
     );
   }

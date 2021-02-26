@@ -4,6 +4,13 @@ const INITIAL_STATE = {
   expenses: [],
 };
 
-const wallet = (state = INITIAL_STATE, action) => true;
+const wallet = (state = INITIAL_STATE, action) => {
+  switch (action.type) {
+  case 'ADD_CURRENCIE':
+    return state;
+  default:
+    return state;
+  }
+};
 
 export default wallet;
