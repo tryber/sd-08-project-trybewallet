@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import getApi from '../services/requestAPI';
+import getAPI from '../services/requestAPI';
 
 class FormExpense extends Component {
   render() {
     return (
+
       <div>
+        { console.log(getAPI()) }
         <form>
           <label htmlFor="value">
             Despensa:
