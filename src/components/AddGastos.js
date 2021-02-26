@@ -17,6 +17,13 @@ class AddGastos extends Component {
     this.tipoDeMoeda = this.tipoDeMoeda.bind(this);
     this.metodoPagamento = this.metodoPagamento.bind(this);
     this.change = this.change.bind(this);
+    this.getAPI = this.getAPI.bind(this);
+  }
+
+  async getAPI() {
+    const teste = await fetch('https://economia.awesomeapi.com.br/json/all');
+    const teste2 = teste.json();
+    return teste2.results;
   }
 
   metodoPagamento() {
@@ -114,6 +121,9 @@ class AddGastos extends Component {
 
   render() {
     const { expenses } = this.props;
+    const api = this.getAPI();
+    console.log(api);
+
     return (
       <div>
         {this.inputsGastos()}
