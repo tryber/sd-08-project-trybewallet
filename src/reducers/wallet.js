@@ -3,6 +3,15 @@ const initialState = {
   currencies: [],
   expenses: [],
   isFetching: false,
+  totalValue: 0,
+};
+
+const updateTotal = (state, action) => {
+  const expenses = state.expenses.concat(action.expense);
+  const total = expenses.reduce((acc, expense) => (
+    acc + expense.value * expense.exchangeRates[expense.currency].ask
+  ), 0);
+  return total;
 };
 
 const wallet = (state = initialState, action) => {
@@ -19,9 +28,11 @@ const wallet = (state = initialState, action) => {
       currencies: action.payload,
     };
   case 'ADD_EXPENSE':
+    updateTotal(state, action);
     return {
       ...state,
       expenses: [...state.expenses, action.expense],
+      totalValue: updateTotal(state, action),
     };
   default: return {
     ...state,
