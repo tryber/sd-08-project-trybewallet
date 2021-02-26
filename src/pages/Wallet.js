@@ -1,9 +1,35 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 
 class Wallet extends React.Component {
   render() {
-    return <div>TrybeWallet</div>;
+    const { email } = this.props;
+    return (
+      <div className="wallet-main">
+        {email === '' && <Redirect to="/" />}
+        <header>
+          <h2>Wallet</h2>
+          <p data-testid="email-field">{email}</p>
+        </header>
+
+        <section>
+          <h3>Lista de Gastos</h3>
+          <p data-testid="total-field">0</p>
+          <h3 data-testid="header-currency-field">BRL</h3>
+        </section>
+      </div>
+    );
   }
 }
 
-export default Wallet;
+const mapStateToProps = ({ user: { email } }) => ({
+  email,
+});
+
+Wallet.propTypes = {
+  email: PropTypes.string.isRequired,
+};
+
+export default connect(mapStateToProps)(Wallet);
