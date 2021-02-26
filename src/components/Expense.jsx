@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchCurrencies, getExchangeAndAddToExpense } from '../actions';
+import { editExpense, fetchCurrencies, getExchangeAndAddToExpense } from '../actions';
 
 class Expense extends React.Component {
   constructor() {
@@ -21,6 +21,18 @@ class Expense extends React.Component {
   componentDidMount() {
     const { getCurrencyAction } = this.props;
     getCurrencyAction();
+  }
+
+  componentDidUpdate(prevProps) {
+    const { isEditing } = this.props;
+    const { isEditing: prevIsEditing } = prevProps;
+    if (prevIsEditing < isEditing) this.updateEditInputs();
+  }
+
+  updateEditInputs() {
+    const { expenses, isEditing } = this.props;
+    const expense = expenses.find((exp) => exp.id === isEditing);
+    this.setState(expense);
   }
 
   handleChange({ target }) {
@@ -65,9 +77,10 @@ class Expense extends React.Component {
 
   submit(e) {
     e.preventDefault();
-    const { addExpense, expenses } = this.props;
+    const { addExpense, isEditing, edit, lastId } = this.props;
     const expense = this.state;
-    addExpense(expenses.length, expense);
+    if (isEditing >= 0) edit(expense);
+    else addExpense(lastId + 1, expense);
     this.setState({
       value: 0,
       currency: 'USD',
@@ -78,7 +91,7 @@ class Expense extends React.Component {
   }
 
   render() {
-    const { currencies } = this.props;
+    const { currencies, isEditing } = this.props;
     const optionsCurrency = currencies;
     const optionsMethod = ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'];
     const optionsTag = ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
@@ -90,7 +103,9 @@ class Expense extends React.Component {
     return (
       <form onSubmit={ this.submit }>
         {inputs.map((input) => this.input(...input))}
-        <button type="submit">Adicionar despesa</button>
+        <button type="submit">
+          { isEditing >= 0 ? 'Editar despesa' : 'Adicionar despesa' }
+        </button>
       </form>
     );
   }
@@ -102,17 +117,23 @@ Expense.propTypes = {
     PropTypes.string,
   ).isRequired,
   addExpense: PropTypes.func.isRequired,
+  isEditing: PropTypes.number.isRequired,
+  edit: PropTypes.func.isRequired,
   expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
+  lastId: PropTypes.number.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
   getCurrencyAction: () => dispatch(fetchCurrencies()),
   addExpense: (id, expense) => dispatch(getExchangeAndAddToExpense(id, expense)),
+  edit: (data) => dispatch(editExpense(data)),
 });
 
 const mapStateToProps = (state) => ({
   currencies: state.wallet.currencies,
   expenses: state.wallet.expenses,
+  isEditing: state.wallet.editingExpenseId,
+  lastId: state.wallet.lastId,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Expense);
