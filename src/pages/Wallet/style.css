@@ -1,0 +1,43 @@
+.walletContainer {
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 992px;
+}
+
+.walletContainer > header {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+}
+
+.walletContainer > header > div {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  width: 30%;
+}
+
+.walletContainer > main {
+  display: grid;
+  grid-gap: 0.5rem;
+  grid-template-columns: repeat(5, auto);
+  max-height: 100vh;
+  overflow-x: scroll;
+}
+
+.walletContainer > main::-webkit-scrollbar {
+  display: none;
+}
+
+.walletContainer > main > label {
+  align-items: center;
+  display: flex;
+}
+
+.walletContainer > main > label > input , .walletContainer > main > label > select {
+  margin-left: 0.5rem;
+}
+
