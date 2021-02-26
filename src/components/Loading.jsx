@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
-import Spinner from "../assets/spinner.gif";
+import Spinner from '../assets/spinner.gif';
 
 const Loading = () => (
   <div>
-    <img src={Spinner} alt="loading" />
+    <img src={ Spinner } alt="loading" />
   </div>
 );
 
