@@ -1,5 +1,5 @@
 // Coloque aqui suas actions
-import * as ActionTypes from '../common/ActionTypes';
+import * as ActionTypes from "../common/ActionTypes";
 
 export function login(payload) {
   return {

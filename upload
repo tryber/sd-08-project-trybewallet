@@ -2,7 +2,7 @@
 
 clear
 npx eslint --fix .
-sleep 1
+npx prettier --write .
 #git push --set-upstream origin dev
 #git push --set-upstream origin feature/login
 git push --set-upstream origin viviane-florido-project-trybewallet

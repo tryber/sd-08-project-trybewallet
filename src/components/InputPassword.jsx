@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 export default function InputPassword({ ...props }) {
   return (
@@ -9,7 +9,7 @@ export default function InputPassword({ ...props }) {
           type="password"
           data-testid="password-input"
           name="password"
-          { ...props }
+          {...props}
         />
       </label>
       <br />

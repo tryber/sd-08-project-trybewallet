@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import * as actions from '../actions';
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import * as actions from "../actions";
 
-import InputEmail from '../components/InputEmail';
-import InputPassword from '../components/InputPassword';
+import InputEmail from "../components/InputEmail";
+import InputPassword from "../components/InputPassword";
 
 function Login() {
-  const [data, setData] = useState({ email: '', password: '' });
+  const [data, setData] = useState({ email: "", password: "" });
   const [disable, setDisable] = useState(true);
   const history = useHistory();
   const dispatch = useDispatch();
@@ -34,19 +34,19 @@ function Login() {
   const handleJoin = () => {
     const { email } = data;
     dispatch(actions.login(email));
-    return history.push('/carteira');
+    return history.push("/carteira");
   };
   const { email, password } = data;
 
   return (
     <main>
-      <InputEmail value={ email } onChange={ handleChange } />
-      <InputPassword value={ password } onChange={ handleChange } />
+      <InputEmail value={email} onChange={handleChange} />
+      <InputPassword value={password} onChange={handleChange} />
       <button
         type="button"
         name="login"
-        disabled={ disable }
-        onClick={ handleJoin }
+        disabled={disable}
+        onClick={handleJoin}
       >
         Entrar
       </button>
