@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchData, resolveNewExpense } from '../actions';
 import CurrencySelector from '../components/CurrencySelector';
+import ExpensesTable from '../components/ExpensesTable';
 import PaymentMethod from '../components/PaymentMethod';
 import SelectExpenseType from '../components/SelectExpenseType';
 import WalletHeader from '../components/WalletHeader';
@@ -51,6 +52,7 @@ export default function Wallet() {
         <SelectExpenseType setTag={ setTag } />
         <button type="submit" onClick={ addExpense }>Adicionar despesa</button>
       </form>
+      <ExpensesTable />
     </div>
   );
 }
