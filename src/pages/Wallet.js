@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import walletLogo from '../images/wallet-with-cash-and-coins_150x116.png';
 import nameLogo from '../images/MyWallet_logo_01.png';
 import Form from '../components/Form';
+import ExpensesList from '../components/ExpensesList';
 
 class Wallet extends React.Component {
   constructor() {
@@ -61,6 +62,7 @@ class Wallet extends React.Component {
           </div>
         </header>
         <Form />
+        <ExpensesList />
       </section>
     );
   }

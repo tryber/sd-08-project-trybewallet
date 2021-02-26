@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addExpense } from '../actions';
 
-import { currencyList, methodList, tagList } from './Lists';
+import { currencyList as curList, methodList, tagList } from './Lists';
 
 class Form extends React.Component {
   constructor() {
@@ -45,27 +45,29 @@ class Form extends React.Component {
     const { addExp } = this.props;
     return (
       <form>
+        <p>Valor:</p>
         <input
           type="number"
           value={ exp }
           onChange={ (e) => this.setState({ exp: e.target.value }) }
           data-testid="value-input"
         />
+        <p>Descrição:</p>
         <input
           type="text"
           value={ des }
           onChange={ (e) => this.setState({ des: e.target.value }) }
           data-testid="description-input"
         />
+        <p>Moeda:</p>
         <select
           value={ cur }
           onChange={ (e) => this.setState({ cur: e.target.value }) }
           data-testid="currency-input"
         >
-          {currencyList.map(
-            (item, index) => <option key={ index } data-testid={ item }>{item}</option>,
-          )}
+          {curList.map((it, idx) => <option key={ idx } data-testid={ it }>{it}</option>)}
         </select>
+        <p>Forma de pagamento:</p>
         <select
           value={ met }
           onChange={ (e) => this.setState({ met: e.target.value }) }
@@ -73,6 +75,7 @@ class Form extends React.Component {
         >
           {methodList.map((item, index) => <option key={ index }>{item}</option>)}
         </select>
+        <p>Tag:</p>
         <select
           value={ tag }
           onChange={ (e) => this.setState({ tag: e.target.value }) }
