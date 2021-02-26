@@ -28,7 +28,7 @@ class TableData extends React.Component {
                    * +expense.value) * 100) / 100
               }
             </td>
-            <td>BRL</td>
+            <td>REAL</td>
             <td>
               <button type="button">Edit</button>
               <button
