@@ -34,7 +34,7 @@ function FormExpense() {
       <label htmlFor="value">
         Valor:
         <input
-          type="text"
+          type="number"
           value={ value }
           name="value"
           data-testid="value-input"
