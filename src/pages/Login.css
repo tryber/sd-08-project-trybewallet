@@ -89,14 +89,14 @@
 }
 
 .login-page .login-title h1 {
-  text-shadow: 2px 2px 10px #686868;
   color: #0fa36b;
+  text-shadow: 2px 2px 10px #686868;
   text-transform: uppercase;
 }
 
 .login-page .login-title p {
-  text-shadow: 2px 2px 10px #686868;
   color: #7532d9;
+  text-shadow: 2px 2px 10px #686868;
   font-size: 18px;
   margin: 0;
   padding: 6px;
