@@ -6,9 +6,6 @@ import { HANDLE_INPUT, LOGIN_IN } from '../actions/index';
 
 const initialState = {
   user: { email: '' },
-  // email: '',
-  // password: '',
-  // logged: false,
 };
 
 export default function reducer(state = initialState, action) {
