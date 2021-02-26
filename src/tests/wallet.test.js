@@ -62,7 +62,6 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
     test('Um campo para adicionar o valor da despesa', async () => {
       renderWithRouterAndStore(<Wallet />, '/carteira');
       const valueInput = await screen.findByTestId('value-input');
-  
       expect(valueInput).toBeInTheDocument();
     });
   
