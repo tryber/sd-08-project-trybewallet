@@ -14,87 +14,83 @@ class ExpenseForm extends React.Component {
     this.state = {
       id: 0,
       value: '',
-      currency: '',
-      method: '',
-      tag: '',
+      currency: 'USD',
+      method: 'Dinheiro',
+      tag: 'Alimentação',
       description: '',
     };
   }
 
-  handleClick() {
+  async handleClick() {
     const { id, value, currency, method, tag, description } = this.state;
-    const { currencies, addExpenseToArray } = this.props;
+    const { addExpenseToArray } = this.props;
+    const exchangeRates = await (await fetch('https://economia.awesomeapi.com.br/json/all')).json();
     const expense = {
-      id, value, currency, method, tag, description, exchangeRates: currencies,
+      id, value, currency, method, tag, description, exchangeRates,
     };
-    console.log(expense);
     addExpenseToArray(expense);
     this.setState({
       id: id + 1,
       value: '',
       currency: 'USD',
-      method: '',
-      tag: '',
+      method: 'Dinheiro',
+      tag: 'Alimentação',
       description: '',
     });
   }
 
   renderCurrencies() {
     const { currencies } = this.props;
+    const { currency } = this.state;
     return (
-      <label htmlFor="currency-input">
-        Moeda
-        <select
-          data-testid="currency-input"
-          defaultValue=""
-          onChange={ (e) => this.setState({ currency: e.target.value }) }
-        >
-          <option value="" disabled hidden> </option>
-          {currencies.map((currency) => (
-            <option
-              key={ currency.code }
-              data-testid={ currency.code }
-              value={ currency.code }
-            >
-              {currency.code}
-            </option>
-          ))}
-        </select>
-      </label>
+      <select
+        data-testid="currency-input"
+        value={ currency }
+        onChange={ (e) => this.setState({ currency: e.target.value }) }
+      >
+        <option value="" disabled hidden> </option>
+        {currencies.map((element, index) => (
+          <option
+            key={ index }
+            data-testid={ element.code }
+            value={ element.code }
+          >
+            {element.code}
+          </option>
+        ))}
+      </select>
     );
   }
 
   renderPaymentMethod() {
+    const { method } = this.state;
     return (
-      <label htmlFor="method-input">
-        Método de Pagamento
-        <select
-          data-testid="method-input"
-          onChange={ (e) => this.setState({ method: e.target.value }) }
-        >
-          <option value="cash">Dinheiro</option>
-          <option value="credit">Cartão de crédito</option>
-          <option value="debit">Cartão de débito</option>
-        </select>
-      </label>
+      <select
+        data-testid="method-input"
+        value={ method }
+        onChange={ (e) => this.setState({ method: e.target.value }) }
+      >
+        <option value="Dinheiro">Dinheiro</option>
+        <option value="Cartão de crédito">Cartão de crédito</option>
+        <option value="Cartão de débito">Cartão de débito</option>
+      </select>
     );
   }
 
   renderTag() {
+    const { tag } = this.state;
     return (
-      <label htmlFor="tag-input">
-        Tag
-        <select
-          data-testid="tag-input"
-          onChange={ (e) => this.setState({ tag: e.target.value }) }
-        >
-          <option value="food">Alimentação</option>
-          <option value="recreation">Lazer</option>
-          <option value="work">Trabalho</option>
-          <option value="transportation">Transporte</option>
-          <option value="health">Saúde</option>
-        </select>
-      </label>
+      <select
+        data-testid="tag-input"
+        value={ tag }
+        onChange={ (e) => this.setState({ tag: e.target.value }) }
+      >
+        <option value="Alimentação">Alimentação</option>
+        <option value="Lazer">Lazer</option>
+        <option value="Trabalho">Trabalho</option>
+        <option value="Transporte">Transporte</option>
+        <option value="Saúde">Saúde</option>
+      </select>
     );
   }
 
