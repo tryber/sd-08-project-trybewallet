@@ -8,17 +8,21 @@ class Wallet extends React.Component {
     const { email } = this.props;
     return (
       <div className="wallet-main">
-        {email === '' && <Redirect to="/" />}
-        <header>
-          <h2>Wallet</h2>
-          <p data-testid="email-field">{email}</p>
-        </header>
+        {email !== ''
+          && (
+            <>
+              <header>
+                <h2>Wallet</h2>
+                <p data-testid="email-field">{email}</p>
+              </header>
 
-        <section>
-          <h3>Lista de Gastos</h3>
-          <p data-testid="total-field">0</p>
-          <h3 data-testid="header-currency-field">BRL</h3>
-        </section>
+              <section>
+                <h3>Lista de Gastos</h3>
+                <p data-testid="total-field">0</p>
+                <h3 data-testid="header-currency-field">BRL</h3>
+              </section>
+            </>
+          )}
       </div>
     );
   }
