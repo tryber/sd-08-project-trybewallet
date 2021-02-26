@@ -24,6 +24,7 @@ class WalletExpense extends Component {
           name="currency"
           id="id-currency"
           options={ expense.cambio }
+          dataTestid
         />
         <Select
           title="tag"
