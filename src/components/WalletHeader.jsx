@@ -16,7 +16,9 @@ export default function WalletHeader() {
   return (
     <header>
       <div data-testid="email-field">{user.email}</div>
-      <div data-testid="total-field">{(firstExpense && expenses && calcExpenses()) || 0}</div>
+      <div data-testid="total-field">
+        {(firstExpense && expenses && calcExpenses()) || 0}
+      </div>
       <div data-testid="header-currency-field">BRL</div>
     </header>
   );
