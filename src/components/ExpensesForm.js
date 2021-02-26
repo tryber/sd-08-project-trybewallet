@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import './ExpensesForm.css';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { fetchExpense } from '../actions';
 
 class ExpensesForm extends Component {
   constructor() {
@@ -144,6 +147,8 @@ class ExpensesForm extends Component {
   }
 
   render() {
+    const { addExpense } = this.props;
+    const { currentExpense } = this.state;
     return (
       <div>
         <form className="expense-form">
@@ -152,11 +157,24 @@ class ExpensesForm extends Component {
           {this.renderExpenseCoinsSelect()}
           {this.renderPaymentSelect()}
           {this.renderExpenseCategorySelect()}
-          <button type="button">Adicionar Despesa</button>
+          <button
+            onClick={ () => addExpense(currentExpense) }
+            type="button"
+          >
+            Adicionar Despesa
+          </button>
         </form>
       </div>
     );
   }
 }
 
-export default ExpensesForm;
+ExpensesForm.propTypes = {
+  addExpense: PropTypes.func.isRequired,
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  addExpense: (currentExpense) => dispatch(fetchExpense(currentExpense)),
+});
+
+export default connect(null, mapDispatchToProps)(ExpensesForm);

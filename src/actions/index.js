@@ -19,3 +19,17 @@ export function addExpense(expense) {
     },
   };
 }
+
+export function fetchExpense() {
+  return async (dispatch) => {
+    const coinsInfo = await fetch('https://economia.awesomeapi.com.br/json/all');
+    const coinsJson = await coinsInfo.json();
+    const coinsArray = Object.values(coinsJson);
+    const coinsList = coinsArray
+      .filter((coin) => coin.codein !== 'BRLT');
+    const expense = {
+      exchangeRates: coinsList,
+    };
+    dispatch(addExpense(expense));
+  };
+}
