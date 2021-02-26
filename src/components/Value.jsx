@@ -3,13 +3,15 @@ import PropTypes from 'prop-types';
 
 class Value extends React.Component {
   render() {
-    const { func } = this.props;
+    const { func, value } = this.props;
     return (
       <label htmlFor="value">
         Valor:
         <input
           type="number"
           data-testid="value-input"
+          id="value"
+          value={ value }
           onChange={ func }
         />
       </label>
@@ -19,6 +21,7 @@ class Value extends React.Component {
 
 Value.propTypes = {
   func: PropTypes.func.isRequired,
+  value: PropTypes.number.isRequired,
 };
 
 export default Value;
