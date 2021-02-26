@@ -6,14 +6,13 @@ async function fetchCurrencyExchange() {
   return currencyExchange;
 }
 
-export const requestCurrencyExchange = (currency) => (
-  { type: 'REQUEST_CURRENCY', currency });
+export const requestCurrencyEx = (currency) => ({ type: 'REQUEST_CURRENCY', currency });
 
-export const failedRequest = (error) => ({ type: 'FAILE_REQUEST', error });
+export const failedRequest = (error) => ({ type: 'FAILED_REQUEST', error });
 
 export const saveCurrencyExchange = () => async (dispatch) => {
   const currencies = await fetchCurrencyExchange();
-  dispatch(requestCurrencyExchange(currencies));
+  dispatch(requestCurrencyEx(currencies));
 };
 
 export const addExpense = (expense) => async (dispatch) => {
@@ -22,7 +21,11 @@ export const addExpense = (expense) => async (dispatch) => {
     type: 'ADD_EXPENSE',
     expense: {
       ...expense,
-      exchangeRate: currencies,
+      exchangeRates: currencies,
     },
   });
 };
+
+export const deleteExpense = (expense) => ({ type: 'DELETE_EXPENSE', expense });
+
+export const editExpense = (expense) => ({ type: 'EDIT_EXPENSE', expense });

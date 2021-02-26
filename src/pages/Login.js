@@ -56,7 +56,7 @@ class Login extends React.Component {
             name="email"
             data-testid="email-input"
             className="input-login"
-            placeholder="insira aqui o seu e-mail"
+            placeholder="email@email.com"
             onChange={ (e) => this.handlerInputChange(e) }
           />
           <input
@@ -64,7 +64,7 @@ class Login extends React.Component {
             name="password"
             data-testid="password-input"
             className="input-login"
-            placeholder="insira aqui a sua senha"
+            placeholder="*******"
             onChange={ (e) => this.handlerInputChange(e) }
           />
           <button

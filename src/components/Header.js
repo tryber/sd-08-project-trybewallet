@@ -7,8 +7,8 @@ export default function Header({ email, total }) {
       <h1>TRYBE WALLET</h1>
       <div className="infos-header">
         <p data-testid="total-field">
-          {total}
-          <span data-testid="header-currency-field">BRL</span>
+          <span data-testid="header-currency-field">R$</span>
+          {total > 0 ? total.toFixed(2) : ''}
         </p>
         <p data-testid="email-field">{email}</p>
       </div>
