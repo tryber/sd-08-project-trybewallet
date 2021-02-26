@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import adcionarEmail from '../actions/index';
 
 class Login extends React.Component {
   constructor() {
@@ -13,22 +15,19 @@ class Login extends React.Component {
   }
 
   handelEmail(e) {
-    const { value } = e.target;
     const regex = /^\w+@[a-zA-Z_]+?\.[a-zA-Z_]{2,3}$/;
     // https://forum.blip.ai/t/resolvido-regex-para-validacao-de-email/1635
-    this.setState = ({
-      email: value,
-      validaEmail: RegExp(regex).test(value),
+    this.setState({
+      email: e.target.value,
+      validaEmail: RegExp(regex).test(e.target.value),
     });
   }
 
   handelSenha(e) {
-    const { value } = e.target;
-    const senha = value;
     const six = 6;
-    this.setState = ({
-      senha: value,
-      validaSenha: senha.length > six,
+    this.setState({
+      senha: e.target.value,
+      validaSenha: e.target.value.length >= six,
     });
   }
 
@@ -46,7 +45,7 @@ class Login extends React.Component {
             placeholder="email@email.com"
             data-testid="email-input"
             value={ email }
-            onChange={ (e) => console.log(e.target.value) }
+            onChange={ (e) => this.handelEmail(e) }
             required
           />
         </label>
@@ -58,20 +57,32 @@ class Login extends React.Component {
           <input
             id="senha"
             name="senha"
+            type="password"
             placeholder="**********"
             value={ senha }
+            data-testid="password-input"
             onChange={ (e) => this.handelSenha(e) }
             required
           />
         </label>
         <br />
         <br />
-        <Link to="/wallet">
-          <button type="button" disabled={ !(validaEmail && validaSenha) }>Entar</button>
+        <Link to="/carteira">
+          <button
+            type="button"
+            disabled={ !(validaEmail && validaSenha) }
+            onClick={ () => loginDispatch(email) }
+          >
+            Entrar
+          </button>
         </Link>
       </>
     );
   }
 }
 
-export default Login;
+const mapDispatchToProps = (dispatch) => ({
+  loginDispatch: (e) => dispatch(adcionarEmail(e)),
+});
+
+export default connect(null, mapDispatchToProps)(Login);
