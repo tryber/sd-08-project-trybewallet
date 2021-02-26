@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import getApi from '../services/requestAPI';
 
 class FormExpense extends Component {
   render() {
@@ -28,6 +29,16 @@ class FormExpense extends Component {
               onChange={ null }
             />
           </label>
+
+          <span>Moeda:</span>
+          <select
+            data-testid="currency-input"
+            value={ null }
+            name="currency"
+            onChange={ null }
+          >
+            <option>USD</option>
+          </select>
 
         </form>
       </div>
