@@ -1,0 +1,13 @@
+#!/bin/sh
+
+clear
+
+#git push --set-upstream origin dev
+#git push --set-upstream origin feature/login
+git push --set-upstream origin viviane-florido-project-trybewallet
+
+git add .
+git commit -am "update"
+git push
+
+exit 0
