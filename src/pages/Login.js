@@ -103,6 +103,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(Login);
 // e essa só uma pequena demonstração de minha enorme gratidão. VQV
 
 Login.propTypes = {
-  history: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
+  history: PropTypes.shape.isRequired,
+  email: PropTypes.func.isRequired,
 };

@@ -149,5 +149,5 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(mapStateToProps, mapDispatchToProps)(AddGastos);
 
 AddGastos.propTypes = {
-  expenses: PropTypes.string.isRequired,
+  expenses: PropTypes.func.isRequired,
 };
