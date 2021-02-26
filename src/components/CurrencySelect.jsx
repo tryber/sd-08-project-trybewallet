@@ -14,8 +14,20 @@ function CurrencySelect({ onChange, ...rest }) {
   return (
     <label htmlFor="currency">
       Moeda:
-      <select name="currency" data-testid="currency-input" onChange={ onChange } { ...rest }>
-        {currList && currList.map((curr) => <option key={ curr } data-testid={ curr } value={ curr }>{curr}</option>)}
+      <select
+        name="currency"
+        data-testid="currency-input"
+        onChange={ onChange }
+        { ...rest }
+      >
+        {currList && currList.map((curr) => (
+          <option
+            key={ curr }
+            data-testid={ curr }
+            value={ curr }
+          >
+            {curr}
+          </option>))}
       </select>
     </label>
   );
