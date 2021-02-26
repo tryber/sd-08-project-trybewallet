@@ -1,3 +1,7 @@
-const addUser = (payload) => ({ type: 'ADD_USER', payload });
+const addUser = (payload) => ({
+  type: 'LOGIN',
+  email: payload.email,
+  password: payload.password,
+});
 
 export default addUser;
