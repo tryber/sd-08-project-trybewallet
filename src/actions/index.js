@@ -37,9 +37,8 @@ export const statusToFalse = () => ({
   type: EDITING,
 });
 
-export const editComplete = (arr) => ({
+export const editComplete = () => ({
   type: EDIT_COMPLETE,
-  payload: arr,
 });
 
 export const fetchCurrencies = () => async (dispatch) => {
