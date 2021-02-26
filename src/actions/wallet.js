@@ -3,6 +3,7 @@ import api from '../services';
 export const Types = {
   ADD_EXPENSE: 'ADD_EXPENSE',
   ADD_EXPENSE_WITH_COINS: 'ADD_EXPENSE_WITH_COINS',
+  REMOVE_EXPENSE: 'REMOVE_EXPENSE',
 };
 
 export const Creators = {
@@ -14,4 +15,8 @@ export const Creators = {
     const coins = await api.getCoins();
     dispatch(Creators.addExpense({ ...expense, exchangeRates: coins }));
   },
+  removeExpense: (id) => ({
+    type: Types.REMOVE_EXPENSE,
+    id,
+  }),
 };

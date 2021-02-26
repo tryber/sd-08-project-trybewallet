@@ -16,6 +16,12 @@ export default function wallet(state = INITIAL_STATE, action) {
       idCounter: state.idCounter + 1,
     };
   }
+  case Types.REMOVE_EXPENSE: {
+    return {
+      ...state,
+      expenses: state.expenses.filter((expense) => expense.id !== action.id),
+    };
+  }
   default: return state;
   }
 }

@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { Creators as WalletActions } from '../actions/wallet';
 
 import styles from '../styles/components/ExpensesTable.module.css';
 
 class ExpensesTable extends Component {
   render() {
-    const { expenses } = this.props;
+    const { expenses, removeExpense } = this.props;
     return (
       <table className={ styles.expensesTable }>
         <thead>
@@ -38,6 +40,15 @@ class ExpensesTable extends Component {
                 <td>{ Math.round(currencyData.ask * 100) / 100 }</td>
                 <td>{ Math.round(convertedValue * 100) / 100 }</td>
                 <td>Real</td>
+                <td>
+                  <button
+                    data-testid="delete-btn"
+                    type="button"
+                    onClick={ () => removeExpense(id) }
+                  >
+                    Excluir
+                  </button>
+                </td>
               </tr>
             );
           })}
@@ -49,10 +60,13 @@ class ExpensesTable extends Component {
 
 ExpensesTable.propTypes = {
   expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
+  removeExpense: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ wallet }) => ({
   expenses: wallet.expenses,
 });
 
-export default connect(mapStateToProps)(ExpensesTable);
+const mapDispatchToProps = (dispatch) => bindActionCreators(WalletActions, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(ExpensesTable);
