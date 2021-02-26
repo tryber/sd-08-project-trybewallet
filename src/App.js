@@ -4,9 +4,11 @@ import Login from './pages/Login';
 
 function App() {
   return (
-    <Route path="/">
-      <Login />
-    </Route>
+    <Switch>
+      <Route path="/">
+        <Login />
+      </Route>
+    </Switch>
   );
 }
 

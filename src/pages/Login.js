@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import loginAction from '../actions';
 
 class Login extends React.Component {
@@ -27,9 +28,15 @@ class Login extends React.Component {
     }, this.enableSubmit);
   }
 
-  // Following regex found at: https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
+  // Following RegEx found at: https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
+  // I had to split the RegEx to fix the linter issues. I've found how to solve it here:
+  // https://stackoverflow.com/questions/12317049/how-to-split-a-long-regular-expression-into-multiple-lines-in-javascript
   validEmail(email) {
-    const emailRegex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+    const emailRegex = new RegExp([
+      '^(([^<>()[\\]\\.,;:\\s@\\"]+(\\.[^<>()',
+      '[\\]\\.,;:\\s@\\"]+)*)|(\\".+\\"))@(([^<>()',
+      '[\\]\\.,;:\\s@\\"]+\\.)+[^<>()[\\]\\.,;:\\s@\\"]{2,})$',
+    ].join(''));
     return emailRegex.test(email);
   }
 
@@ -91,5 +98,9 @@ class Login extends React.Component {
 const mapDispatchToProps = (dispatch) => ({
   loginWithEmail: (email) => dispatch(loginAction(email)),
 });
+
+Login.propTypes = {
+  loginWithEmail: PropTypes.func.isRequired,
+};
 
 export default connect(null, mapDispatchToProps)(Login);
