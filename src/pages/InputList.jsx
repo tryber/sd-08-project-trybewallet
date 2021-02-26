@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addExpenses,
-  fetchCurrencies, statusToFalse, editComplete, deleteExpense } from '../actions';
+import getApiCurrency from '../api';
+import { addExpenses, statusToFalse, editComplete, deleteExpense } from '../actions';
 
 class InputList extends React.Component {
   constructor() {
@@ -48,9 +48,8 @@ class InputList extends React.Component {
   }
 
   async handleClick() {
-    const { apiFetch, addExpense } = this.props;
-    await apiFetch();
-    const { currencies, expenses } = this.props;
+    const { addExpense } = this.props;
+    const { expenses } = this.props;
     const { valor, moeda, metodo, tag, descricao } = this.state;
     const nextId = expenses.length;
     const expense = { id: nextId,
@@ -59,7 +58,7 @@ class InputList extends React.Component {
       currency: moeda,
       method: metodo,
       tag,
-      exchangeRates: { ...currencies } };
+      exchangeRates: { ...await getApiCurrency() } };
     addExpense(expense);
     this.setState(() => (this.defaultState));
   }
@@ -96,7 +95,6 @@ class InputList extends React.Component {
 
   renderMoeda() {
     const { currencies } = this.props;
-    const onlyCurrenciesKeys = Object.keys(currencies);
     const { moeda } = this.state;
     return (
       <li>
@@ -108,7 +106,7 @@ class InputList extends React.Component {
           value={ moeda }
           onChange={ this.handleChange }
         >
-          { onlyCurrenciesKeys.map((curr) => (
+          { currencies.map((curr) => (
             <option
               key={ curr }
               value={ curr }
@@ -213,9 +211,7 @@ class InputList extends React.Component {
         {this.renderMetodo()}
         {this.renderTag()}
         {this.renderDescricao()}
-        {
-          btnStatus ? this.renderEditBtn(item) : this.renderAddBtn()
-        }
+        { btnStatus ? this.renderEditBtn(item) : this.renderAddBtn() }
       </>
     );
   }
@@ -224,7 +220,6 @@ InputList.propTypes = {
   currencies: PropTypes.objectOf(PropTypes.object).isRequired,
   expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
   addExpense: PropTypes.func.isRequired,
-  apiFetch: PropTypes.func.isRequired,
   edit: PropTypes.objectOf(PropTypes.any).isRequired,
   editingDispatch: PropTypes.func.isRequired,
   deleteExpenseAction: PropTypes.func.isRequired,
@@ -239,7 +234,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   addExpense: (obj) => dispatch(addExpenses(obj)),
-  apiFetch: () => dispatch(fetchCurrencies()),
   editingDispatch: () => dispatch(statusToFalse()),
   deleteExpenseAction: (obj) => dispatch(deleteExpense(obj)),
   editCompleted: () => dispatch(editComplete()),

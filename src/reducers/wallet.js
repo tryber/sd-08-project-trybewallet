@@ -2,14 +2,14 @@
 import { SAVE_CURR, ADD_EXP, DEL_EXP } from '../actions';
 
 const initialWalletState = {
-  currencies: {},
+  currencies: [],
   expenses: [],
 };
 
 function wallet(state = initialWalletState, action) {
   switch (action.type) {
   case SAVE_CURR:
-    return { ...state, currencies: action.payload };
+    return { ...state, currencies: Object.keys(action.payload) };
   case ADD_EXP:
     return { ...state, expenses: [...state.expenses, action.payload] };
   case DEL_EXP:

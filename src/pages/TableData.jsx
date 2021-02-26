@@ -32,9 +32,7 @@ class TableData extends React.Component {
             <td>{ expense.value }</td>
             <td>{ expense.exchangeRates[expense.currency].name }</td>
             <td>
-              {
-                this.floorCurrency(expense.exchangeRates[expense.currency].ask, 1)
-              }
+              { parseFloat(expense.exchangeRates[expense.currency].ask).toFixed(2)}
             </td>
             <td>
               { this.floorCurrency(
