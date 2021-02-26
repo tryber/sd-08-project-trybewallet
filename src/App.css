@@ -3,7 +3,7 @@ body {
 }
 
 h3 , h1 {
-  color: rgb(0, 0, 0);
+  color: black;
   font-size: 30px;
   margin-top: 0;
 }
@@ -11,12 +11,12 @@ h3 , h1 {
 .form {
   align-items: center;
   background-color: rgb(177, 177, 177);
-  border: 3px solid rgb(0, 0, 0);
+  border: 3px solid black;
   border-radius: 6px;
   display: flex;
   flex-direction: column;
   height: 350px;
-  justify-content:center;
+  justify-content: center;
   margin: 140px auto;
   width: 350px;
 }
@@ -28,7 +28,7 @@ h3 , h1 {
 }
 
 .button-login {
-  border: 2px solid rgb(0, 0, 0);
+  border: 2px solid black;
   height: 25px;
   margin-top: 20px;
   width: 70%;
@@ -41,7 +41,7 @@ h3 , h1 {
 
 .button-enabled {
   background-color: rgb(106, 85, 199);
-  color: rgb(255, 255, 255);
+  color: white;
 }
 
 .header {
