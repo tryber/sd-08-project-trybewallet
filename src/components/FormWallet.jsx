@@ -1,6 +1,6 @@
-/* eslint-disable jsx-a11y/control-has-associated-label */
-/* eslint-disable max-lines-per-function */
 import React from 'react';
+import SelectCategorias from './SelectCategorias';
+import SelectPagamento from './SelectPagamento';
 // import PropTypes from 'prop-types';
 // import { connect } from 'react-redux';
 
@@ -28,28 +28,8 @@ export default class FormWallet extends React.Component {
             data-testid="currency-input"
           />
         </label>
-        <label htmlFor="method-input">
-          Método de Pagamento:
-          <select
-            data-testid="method-input"
-          >
-            <option value="Cartão de crédito">Cartão de crédito</option>
-            <option value="Cartão de débito">Cartão de débito</option>
-            <option value="Dinheiro">Dinheiro</option>
-          </select>
-        </label>
-        <label htmlFor="tag-input">
-          Categoria:
-          <select
-            data-testid="tag-input"
-          >
-            <option value="Alimentação">Alimentação</option>
-            <option value="Lazer">Lazer</option>
-            <option value="Trabalho">Trabalho</option>
-            <option value="Transporte">Transporte</option>
-            <option value="Saúde">Saúde</option>
-          </select>
-        </label>
+        <div><SelectPagamento /></div>
+        <div><SelectCategorias /></div>
       </div>
     );
   }

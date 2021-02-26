@@ -11,6 +11,7 @@ class Login extends React.Component {
     this.state = {
       inputEmail: '',
       inputPassword: '',
+      bool: false,
     };
   }
 
@@ -34,24 +35,20 @@ class Login extends React.Component {
   }
 
   render() {
-    const { inputEmail, inputPassword } = this.state;
-    const bool = this.validate();
+    const { inputEmail, inputPassword, bool } = this.state;
+    this.bool = this.validate();
     return (
-      <div className="div-login">
+      <div>
         <input
           type="email"
-          name="email"
           placeholder="email"
-          className="input-login"
           data-testid="email-input"
           value={ inputEmail }
           onChange={ (event) => this.setState({ inputEmail: event.target.value }) }
         />
         <input
           type="password"
-          name="password"
           placeholder="password"
-          className="input-login"
           data-testid="password-input"
           maxLength="8"
           value={ inputPassword }
@@ -59,7 +56,6 @@ class Login extends React.Component {
         />
         <button
           type="submit"
-          className="input-button"
           disabled={ bool }
           onClick={ this.handleClick }
         >

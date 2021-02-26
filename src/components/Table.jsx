@@ -7,13 +7,13 @@ export default class Table extends React.Component {
         <table>
           <thead>
             <tr>
-              <th>Método de Pagamento</th>
-              <th>Valor</th>
-              <th>Moeda</th>
-              <th>Câmbio Utilizado</th>
-              <th>Valor Convertido</th>
-              <th>Moeda de Conversão</th>
-              <th>Editar/Excluir</th>
+              <th>Método de Pagamento  </th>
+              <th>Valor  </th>
+              <th>Moeda  </th>
+              <th>Câmbio Utilizado  </th>
+              <th>Valor Convertido  </th>
+              <th>Moeda de Conversão  </th>
+              <th>Editar/Excluir  </th>
             </tr>
           </thead>
         </table>
