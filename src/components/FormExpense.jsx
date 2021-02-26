@@ -41,7 +41,7 @@ function FormExpense() {
           type="text"
           value={ description }
           name="description"
-          data-testid="value-input"
+          data-testid="description-input"
           onChange={ handleChange }
         />
       </label>
