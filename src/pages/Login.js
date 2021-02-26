@@ -25,7 +25,7 @@ class Login extends React.Component {
 
   checkInputs() {
     const minPassLength = 6;
-    const regexExpression = new RegExp(/^[^@\s]+@[^@\s]+\.[^@\s]+$/)
+    const regexExpression = new RegExp(/^[^@\s]+@[^@\s]+\.[^@\s]+$/);
     const { inputEmail, passLength } = this.state;
     const emailBool = regexExpression.test(inputEmail);
     if (passLength >= minPassLength && emailBool) {
@@ -63,7 +63,11 @@ class Login extends React.Component {
               }
             />
           </label>
-          <Link className={ this.checkInputs() } to="/carteira">
+          <Link
+            onClick={ () => propsStoreEmail(inputEmail) }
+            className={ this.checkInputs() }
+            to="/carteira"
+          >
             Entrar
           </Link>
           <div className="login-title">
