@@ -3,6 +3,7 @@ import {
   RECEIVE_CURRENCIES,
   CHANGE_EXPENSE_FORM,
   ADD_EXPENSE,
+  REMOVE_EXPENSE,
 } from './constants';
 
 const requestCurrencies = () => ({
@@ -37,6 +38,11 @@ export const changeExpense = (key, input) => ({
 
 export const addExpense = () => ({
   type: ADD_EXPENSE,
+});
+
+export const removeExpense = (payload) => ({
+  type: REMOVE_EXPENSE,
+  payload,
 });
 
 export default fetchCurrencies;

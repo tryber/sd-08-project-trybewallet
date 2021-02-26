@@ -2,6 +2,7 @@ import {
   RECEIVE_CURRENCIES,
   CHANGE_EXPENSE_FORM,
   ADD_EXPENSE,
+  REMOVE_EXPENSE,
 } from '../actions/constants';
 
 const initialState = {
@@ -46,6 +47,11 @@ export default function walletReducer(state = initialState, action) {
         ...state.currentExpense,
         id: state.currentExpense.id + 1,
       },
+    };
+  case REMOVE_EXPENSE:
+    return {
+      ...state,
+      expenses: [...state.expenses].filter((expense) => expense.id !== action.payload),
     };
   default:
     return state;
