@@ -1,5 +1,5 @@
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
-import { WALLET } from '../actions';
+import { REQUEST_START, REQUEST_SUCCESS, REQUEST_FAIL, SAVE_EXPENSE } from '../actions';
 
 const INITIAL_STATE_WALLET = {
   currencies: [],
@@ -8,9 +8,26 @@ const INITIAL_STATE_WALLET = {
 
 export default function wallet(state = INITIAL_STATE_WALLET, action) {
   switch (action.type) {
-  case WALLET:
+  case REQUEST_START:
     return {
-      ...state, currencies: action.payload,
+      ...state,
+      isFetching: true,
+    };
+  case REQUEST_SUCCESS:
+    return {
+      ...state,
+      isFetching: false,
+      currencies: [action.currencies],
+    };
+  case REQUEST_FAIL:
+    return {
+      ...state,
+      isFetching: false,
+      error: action.error,
+    };
+  case SAVE_EXPENSE:
+    return {
+      ...state, expenses: [...state.expenses, action.expenses],
     };
   default:
     return state;
