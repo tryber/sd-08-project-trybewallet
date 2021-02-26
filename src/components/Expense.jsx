@@ -6,13 +6,7 @@ import { editExpense, fetchCurrencies, getExchangeAndAddToExpense } from '../act
 class Expense extends React.Component {
   constructor() {
     super();
-    this.state = {
-      value: 0,
-      currency: 'USD',
-      description: '',
-      method: 'Dinheiro',
-      tag: 'Alimentação',
-    };
+    this.state = this.initState();
     this.submit = this.submit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.input = this.input.bind(this);
@@ -27,6 +21,16 @@ class Expense extends React.Component {
     const { isEditing } = this.props;
     const { isEditing: prevIsEditing } = prevProps;
     if (prevIsEditing < isEditing) this.updateEditInputs();
+  }
+
+  initState() {
+    return {
+      value: 0,
+      currency: 'USD',
+      description: '',
+      method: 'Dinheiro',
+      tag: 'Alimentação',
+    };
   }
 
   updateEditInputs() {
@@ -81,13 +85,7 @@ class Expense extends React.Component {
     const expense = this.state;
     if (isEditing >= 0) edit(expense);
     else addExpense(lastId + 1, expense);
-    this.setState({
-      value: 0,
-      currency: 'USD',
-      description: '',
-      method: 'Dinheiro',
-      tag: 'Alimentação',
-    });
+    this.setState(this.initState());
   }
 
   render() {
