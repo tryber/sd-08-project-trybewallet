@@ -1,6 +1,6 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import * as actions from '../actions';
+import { useSelector } from 'react-redux';
+// import * as actions from '../actions';
 import WalletTableItem from './WalletTableItem';
 
 const TABLE_HEADERS = [
@@ -17,7 +17,7 @@ const TABLE_HEADERS = [
 
 function WalletTable() {
   const expenses = useSelector((state) => state.wallet.expenses);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const expListBuilder = () => expenses.map((i) => {
     const { ask } = i.exchangeRates[i.currency];
@@ -40,7 +40,8 @@ function WalletTable() {
         <tr>
           {TABLE_HEADERS.map((i) => <th key={ i }>{i}</th>)}
         </tr>
-        {expListBuilder().map((expense) => <WalletTableItem key={ expense.id } data={ expense } />) || null}
+        {expListBuilder().map((expense) => (
+          <WalletTableItem key={ expense.id } data={ expense } />)) || null}
       </tbody>
     </table>
   );

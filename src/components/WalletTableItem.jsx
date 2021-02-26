@@ -14,7 +14,7 @@ import PropTypes from 'prop-types';
 
 function WalletTableItem({ data, ...rest }) {
   return (
-    <tr role="row">
+    <tr role="row" { ...rest }>
       <td role="cell">{ data.description }</td>
       <td role="cell">{ data.tag }</td>
       <td role="cell">{ data.method }</td>
