@@ -5,13 +5,19 @@ class Option extends Component {
   render() {
     const { item, ...restProps } = this.props;
     return (
-      <option value={ item } { ...restProps }>{item}</option>
+      <option
+        data-testid={ item.code || item.name }
+        value={ item.code || item.name }
+        { ...restProps }
+      >
+        { item.name || item.code }
+      </option>
     );
   }
 }
 
 Option.propTypes = {
-  item: PropTypes.string.isRequired,
+  item: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 
 export default Option;
