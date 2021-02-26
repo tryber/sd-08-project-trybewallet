@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { FormExpenses } from '../components';
+import FormExpenses from './FormExpenses';
 import './HeaderWallet.css';
 import logo from '../svg/045-wallet.svg';
 

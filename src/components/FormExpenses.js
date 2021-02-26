@@ -20,9 +20,9 @@ export default class FormExpenses extends Component {
   }
 
   handleInput(type, { value }) {
-    this.setState({
-      formControl: { [type]: value },
-    });
+    this.setState((p) => ({
+      formControl: { ...p.formControl, [type]: value },
+    }));
   }
 
   renderListOptions(arraySelect) {
@@ -43,6 +43,7 @@ export default class FormExpenses extends Component {
             name="currencyInput"
             data-testid="currency-input"
             value={ currency }
+            onChange={ ({ target }) => this.handleInput('currency', target) }
           >
             BRL
           </select>
@@ -54,6 +55,7 @@ export default class FormExpenses extends Component {
             name="methodInput"
             data-testid="method-input"
             value={ payMethod }
+            onChange={ ({ target }) => this.handleInput('payMethod', target) }
           >
             {this.renderListOptions(payMethods)}
           </select>
@@ -65,6 +67,7 @@ export default class FormExpenses extends Component {
             name="tagInput"
             data-testid="tag-input"
             value={ tag }
+            onChange={ ({ target }) => this.handleInput('tag', target) }
           >
             {this.renderListOptions(payTags)}
           </select>
@@ -98,6 +101,7 @@ export default class FormExpenses extends Component {
             rows="2"
             data-testid="description-input"
             value={ description }
+            onChange={ ({ target }) => this.handleInput('description', target) }
           />
         </label>
         <button type="button">Adicionar Despesa</button>
