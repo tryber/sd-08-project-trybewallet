@@ -35,6 +35,6 @@ export const fetchCurrencies = () => (dispatch) => {
 export const addWallet = (object) => ({
   type: 'ADD_TO_WALLET',
   payload: {
-    object,
+    ...object,
   },
 });
