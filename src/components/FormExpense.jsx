@@ -17,6 +17,18 @@ class FormExpense extends Component {
             />
           </label>
 
+          <label htmlFor="description">
+            Description:
+            <input
+              type="text"
+              id="description"
+              data-testid="value-input"
+              value={ null }
+              name="description"
+              onChange={ null }
+            />
+          </label>
+
         </form>
       </div>
     );
