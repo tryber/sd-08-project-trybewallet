@@ -8,6 +8,7 @@ export default class SelectCategorias extends React.Component {
           Categoria:
           <select
             data-testid="tag-input"
+            // onChange={ (event) => handleChange(event) }
           >
             <option value="Alimentação">Alimentação</option>
             <option value="Lazer">Lazer</option>

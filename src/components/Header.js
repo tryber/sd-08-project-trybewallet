@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 class Header extends React.Component {
   render() {
@@ -8,10 +9,10 @@ class Header extends React.Component {
       <div>
         TrybeWallet
         email
-        <input value={ email } data-testid="email-field" />
+        <input value={ email } data-testid="email-field" readOnly />
         depesa total
         <input value="0" data-testid="total-field" />
-        <input value="BRT" data-testid="header-currency-field" readOnly />
+        <input value="BRL" data-testid="header-currency-field" readOnly />
       </div>
     );
   }
@@ -20,4 +21,8 @@ Header.propTypes = {
   email: PropTypes.string.isRequired,
 };
 
-export default Header;
+const mapStateToProps = (state) => ({
+  email: state.user.email,
+});
+
+export default connect(mapStateToProps, null)(Header);

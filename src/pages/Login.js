@@ -11,7 +11,6 @@ class Login extends React.Component {
     this.state = {
       inputEmail: '',
       inputPassword: '',
-      bool: false,
     };
   }
 
@@ -25,7 +24,7 @@ class Login extends React.Component {
   validate() {
     const pattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
     const { inputEmail, inputPassword } = this.state;
-    const passLength = 6;
+    const passLength = 5;
     let email = false;
     let pass = false;
     email = RegExp(pattern).test(inputEmail);
@@ -35,8 +34,8 @@ class Login extends React.Component {
   }
 
   render() {
-    const { inputEmail, inputPassword, bool } = this.state;
-    this.bool = this.validate();
+    const { inputEmail, inputPassword } = this.state;
+    const btBool = this.validate();
     return (
       <div>
         <input
@@ -55,8 +54,8 @@ class Login extends React.Component {
           onChange={ (event) => this.setState({ inputPassword: event.target.value }) }
         />
         <button
-          type="submit"
-          disabled={ bool }
+          type="button"
+          disabled={ btBool }
           onClick={ this.handleClick }
         >
           Entrar

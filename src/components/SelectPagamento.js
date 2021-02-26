@@ -8,6 +8,7 @@ export default class componentName extends Component {
           Método de Pagamento:
           <select
             data-testid="method-input"
+            // onChange={ (event) => handleChange(event) }
           >
             <option value="Dinheiro">Dinheiro</option>
             <option value="Cartão de crédito">Cartão de crédito</option>

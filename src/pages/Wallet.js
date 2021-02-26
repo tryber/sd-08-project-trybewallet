@@ -1,9 +1,12 @@
 import React from 'react';
+import { connect } from 'react-redux';
+// import PropTypes from 'prop-types';
+// import fetchCoins from '../services';
 import Header from '../components/Header';
 import FormWallet from '../components/FormWallet';
 import Table from '../components/Table';
 
-export default class Wallet extends React.Component {
+class Wallet extends React.Component {
   render() {
     return (
       <div>
@@ -14,3 +17,5 @@ export default class Wallet extends React.Component {
     );
   }
 }
+
+export default connect()(Wallet);
