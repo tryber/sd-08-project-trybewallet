@@ -96,10 +96,10 @@
 
 .login-page .login-title p {
   color: #7532d9;
-  text-shadow: 2px 2px 10px #686868;
   font-size: 18px;
   margin: 0;
   padding: 6px;
+  text-shadow: 2px 2px 10px #686868;
   width: fit-content;
 }
 
