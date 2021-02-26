@@ -1,0 +1,31 @@
+.header {
+  align-items: center;
+  background-color: darkgray;
+  box-sizing: border-box;
+  display: flex;
+  height: 100px;
+  justify-content: space-between;
+  padding: 10px;
+  width: 100%;
+}
+
+.infos-container {
+  display: flex;
+  justify-content: space-between;
+  margin-left: -210px;
+  width: 500px;
+}
+
+.logo-img {
+  margin-left: -50px;
+  width: 290px;
+}
+
+.title {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 40px;
+}
+
+.wallet-img {
+  height: 60px;
+}

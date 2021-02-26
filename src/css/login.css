@@ -1,17 +1,17 @@
 .disable {
   background-color: rgba(128, 128, 128, 0.5);
   color: rgba(0, 0, 0, 0.5);
-  height: 20px;
+  height: 30px;
   margin-top: 10px;
   padding: 5px;
-  width: 30px;
+  width: 90px;
 }
 
 .normal {
   background-color: rgba(128, 128, 128);
   color: rgba(0, 0, 0);
-  height: 20px;
+  height: 30px;
   margin-top: 10px;
   padding: 5px;
-  width: 30px;
+  width: 90px;
 }
