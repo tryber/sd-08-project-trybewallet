@@ -1,9 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import * as Actions from '../actions';
 import '../style/tableExpenses.css';
 
 class TableExpenses extends React.Component {
+  constructor() {
+    super();
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(id) {
+    const { deleteExpense } = this.props;
+    deleteExpense(id);
+  }
+
   showTableRow(expense) {
     const {
       id,
@@ -27,6 +38,15 @@ class TableExpenses extends React.Component {
         <td>{parseFloat(ask).toFixed(2)}</td>
         <td>{parseFloat(value * ask).toFixed(2)}</td>
         <td>{convertTo}</td>
+        <td>
+          <button
+            type="button"
+            data-testid="delete-btn"
+            onClick={ () => this.handleClick(id) }
+          >
+            Excluir
+          </button>
+        </td>
       </tr>
     );
   }
@@ -58,16 +78,23 @@ const mapStateToProps = (state) => ({
   expenses: state.wallet.expenses,
 });
 
-export default connect(mapStateToProps)(TableExpenses);
+const mapDispatchToProps = (dispatch) => ({
+  deleteExpense: (id) => dispatch(Actions.deleteExpense(id)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(TableExpenses);
 
 TableExpenses.propTypes = {
-  expenses: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string,
-    currency: PropTypes.number,
-    description: PropTypes.string,
-    tag: PropTypes.string,
-    method: PropTypes.string,
-    value: PropTypes.number,
-    exchangeRates: PropTypes.arrayOf(PropTypes.object),
-  })).isRequired,
+  expenses: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      currency: PropTypes.string,
+      description: PropTypes.string,
+      tag: PropTypes.string,
+      method: PropTypes.string,
+      value: PropTypes.string,
+      exchangeRates: PropTypes.shape(PropTypes.object),
+    }),
+  ).isRequired,
+  deleteExpense: PropTypes.func.isRequired,
 };

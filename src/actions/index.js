@@ -3,6 +3,7 @@ export const LOGGIN = 'LOGGIN';
 export const WALLET = 'WALLET';
 export const ACTION_BEGIN = 'ACTION_BEGIN';
 export const ACTION_SUCCESS = 'ACTION_SUCCESS';
+export const DELETE_EXPENSE = 'DELETE_EXPENSE';
 
 export const logginAction = (email) => ({
   type: LOGGIN,
@@ -44,3 +45,8 @@ export function thunkCambio(information) {
       });
   };
 }
+
+export const deleteExpense = (id) => ({
+  type: DELETE_EXPENSE,
+  id,
+});

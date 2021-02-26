@@ -43,7 +43,11 @@ const wallet = (state = INITIAL_STATE, action) => {
         ...state.expenses,
         expenseObj(action.information, state.expenses.length),
       ],
-      totalExpense: state.totalExpense + action.information.valueInReal,
+    };
+  case Actions.DELETE_EXPENSE:
+    return {
+      ...state,
+      expenses: state.expenses.filter((expense) => expense.id !== action.id),
     };
   default:
     return state;
