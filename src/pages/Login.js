@@ -68,12 +68,7 @@ class Login extends React.Component {
             className={ this.checkInputs() }
             to="/carteira"
           >
-            <button
-              type="button"
-              disabled={ this.checkInputs() === 'disabled-button' }
-            >
-              Entrar
-            </button>
+            Entrar
           </Link>
           <div className="login-title">
             <h1>Deori</h1>
