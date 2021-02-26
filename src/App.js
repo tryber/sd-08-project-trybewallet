@@ -1,7 +1,6 @@
 import React from 'react';
+import Routes from './components/routes';
 
-function App() {
-  return <div>Hello, TrybeWallet!</div>;
-}
+const App = () => <Routes />;
 
 export default App;
