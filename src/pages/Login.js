@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 class Login extends Component {
   constructor() {
@@ -100,3 +101,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(Login);
 // proximo e próspero.
 // Estes são só alguns pequenos exemplos de tudo que conversamos,
 // e essa só uma pequena demonstração de minha enorme gratidão. VQV
+
+Login.propTypes = {
+  history: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+};

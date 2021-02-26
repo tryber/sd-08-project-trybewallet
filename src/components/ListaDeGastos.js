@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 class ListaDeGastos extends Component {
-
   render() {
     const { valor } = this.props;
     return (
@@ -19,6 +18,8 @@ const mapStateToProps = (state) => ({
   valor: state.wallet.expenses.valor,
 });
 
-
-
 export default connect(mapStateToProps)(ListaDeGastos);
+
+ListaDeGastos.propTypes = {
+  valor: PropTypes.string.isRequired,
+};
