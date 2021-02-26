@@ -30,7 +30,7 @@ class Login extends React.Component {
           Senha
           <input
             type="text"
-            data-testid="email-input"
+            data-testid="email-password-input"
             onChange={ ({ target }) => this.setState({ password: target.value }) }
           />
         </label>
