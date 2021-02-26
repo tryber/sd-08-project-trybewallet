@@ -11,6 +11,7 @@ class FormExpense extends Component {
   }
 
   render() {
+    const { apiCurrencies } = this.props;
     return (
       <section>
 
@@ -46,7 +47,11 @@ class FormExpense extends Component {
             name="currency"
             onChange={ null }
           >
-            <option>USD</option>
+            {
+              apiCurrencies.map((value, index) => <option key={ index }>{value}</option>)
+
+            }
+
           </select>
 
         </form>
@@ -54,12 +59,15 @@ class FormExpense extends Component {
     );
   }
 }
-// const mapStateToProps = (state) => ({
-//   test: state.wallet.currencies,
-// });
+const mapStateToProps = (state) => {
+  const { currencies } = state.wallet;
+  return {
+    apiCurrencies: currencies,
+  };
+};
 
 const mapDispactToProps = (dispatch) => ({
   showCurrencies: (value) => dispatch(actionCurruncies(value)),
 });
 
-export default connect(null, mapDispactToProps)(FormExpense);
+export default connect(mapStateToProps, mapDispactToProps)(FormExpense);
