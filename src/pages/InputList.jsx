@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addExpenses, fetchCurrencies } from '../actions';
+import { addExpenses, fetchCurrencies, statusToFalse, editComplete } from '../actions';
 
 class InputList extends React.Component {
   constructor() {
     super();
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.loadEditItem = this.loadEditItem.bind(this);
     this.defaultState = {
       valor: 0,
       moeda: 'USD',
@@ -16,6 +17,29 @@ class InputList extends React.Component {
       descricao: '',
     };
     this.state = this.defaultState;
+  }
+
+  componentDidUpdate() {
+    const { edit: { status } } = this.props;
+    if (status) {
+      this.loadEditItem();
+    }
+  }
+
+  loadEditItem() {
+    const { edit: { item } } = this.props;
+    const { editingDispatch } = this.props;
+    this.setState(() => (
+      {
+        valor: item.value,
+        moeda: item.currency,
+        metodo: item.method,
+        tag: item.tag,
+        descricao: item.description,
+      }
+    ), () => {
+      editingDispatch();
+    });
   }
 
   handleChange({ target }) {
@@ -41,6 +65,19 @@ class InputList extends React.Component {
       exchangeRates: { ...currencies },
     };
     addExpense(expense);
+    this.setState(() => (this.defaultState));
+  }
+
+  handleEditClick(item) {
+    const { valor, moeda, metodo, tag, descricao } = this.state;
+    const { editCompleted, expenses } = this.props;
+    const findItem = expenses.find(({ id }) => id === item.id);
+    findItem.value = valor;
+    findItem.currency = moeda;
+    findItem.method = metodo;
+    findItem.tag = tag;
+    findItem.description = descricao;
+    editCompleted(expenses);
     this.setState(() => (this.defaultState));
   }
 
@@ -147,7 +184,31 @@ class InputList extends React.Component {
     );
   }
 
+  renderAddBtn() {
+    return (
+      <button
+        type="button"
+        onClick={ this.handleClick }
+      >
+        Adicionar Despesa
+      </button>
+    );
+  }
+
+  renderEditBtn(item) {
+    return (
+      <button
+        type="button"
+        onClick={ () => this.handleEditClick(item) }
+      >
+        Editar despesa
+      </button>
+    );
+  }
+
   render() {
+    const { edit } = this.props;
+    const { btnStatus, item } = edit;
     return (
       <>
         {this.renderValor()}
@@ -155,12 +216,9 @@ class InputList extends React.Component {
         {this.renderMetodo()}
         {this.renderTag()}
         {this.renderDescricao()}
-        <button
-          type="button"
-          onClick={ this.handleClick }
-        >
-          Adicionar Despesa
-        </button>
+        {
+          btnStatus ? this.renderEditBtn(item) : this.renderAddBtn()
+        }
       </>
     );
   }
@@ -170,15 +228,22 @@ InputList.propTypes = {
   expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
   addExpense: PropTypes.func.isRequired,
   apiFetch: PropTypes.func.isRequired,
+  edit: PropTypes.objectOf(PropTypes.any).isRequired,
+  editingDispatch: PropTypes.func.isRequired,
+  editCompleted: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   currencies: state.wallet.currencies,
   expenses: state.wallet.expenses,
+  edit: state.wallet.edit,
 });
+
 const mapDispatchToProps = (dispatch) => ({
   addExpense: (obj) => dispatch(addExpenses(obj)),
   apiFetch: () => dispatch(fetchCurrencies()),
+  editingDispatch: () => dispatch(statusToFalse()),
+  editCompleted: (arr) => dispatch(editComplete(arr)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(InputList);

@@ -1,13 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { deleteExpense } from '../actions';
+import { deleteExpense, editExpense } from '../actions';
 
 class TableData extends React.Component {
   handleDelete(itemId) {
     const { expenses, deleteExpenseAction } = this.props;
     const filtered = expenses.filter(({ id }) => id !== itemId);
     deleteExpenseAction(filtered);
+  }
+
+  handleEdit(item) {
+    const { dispatchEdit } = this.props;
+    dispatchEdit(item);
   }
 
   floorCurrency(ask, value) {
@@ -38,7 +43,13 @@ class TableData extends React.Component {
             </td>
             <td>Real</td>
             <td>
-              <button type="button">Edit</button>
+              <button
+                type="button"
+                data-testid="edit-btn"
+                onClick={ () => this.handleEdit(expense) }
+              >
+                Edit
+              </button>
               <button
                 type="button"
                 data-testid="delete-btn"
@@ -56,6 +67,7 @@ class TableData extends React.Component {
 TableData.propTypes = {
   expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
   deleteExpenseAction: PropTypes.func.isRequired,
+  dispatchEdit: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -64,6 +76,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   deleteExpenseAction: (obj) => dispatch(deleteExpense(obj)),
+  dispatchEdit: (item) => dispatch(editExpense(item)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TableData);

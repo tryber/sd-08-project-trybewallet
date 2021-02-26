@@ -4,6 +4,9 @@ export const LOGIN = 'LOGIN';
 export const SAVE_CURR = 'SAVE_CURR';
 export const ADD_EXP = 'ADD_EXP';
 export const DEL_EXP = 'DEL_EXP';
+export const EDIT = 'EDIT';
+export const EDITING = 'EDITING';
+export const EDIT_COMPLETE = 'EDIT_COMPLETE';
 
 export const loginUser = ({ email, password }) => ({
   type: LOGIN,
@@ -23,6 +26,20 @@ export const addExpenses = (obj) => ({
 export const deleteExpense = (obj) => ({
   type: DEL_EXP,
   payload: obj,
+});
+
+export const editExpense = (item) => ({
+  type: EDIT,
+  payload: item,
+});
+
+export const statusToFalse = () => ({
+  type: EDITING,
+});
+
+export const editComplete = (arr) => ({
+  type: EDIT_COMPLETE,
+  payload: arr,
 });
 
 export const fetchCurrencies = () => async (dispatch) => {
