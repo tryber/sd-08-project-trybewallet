@@ -8,7 +8,6 @@ function WalletHeader() {
   function calcExp() {
     return wallet.expenses.reduce((acc, cur) => acc + Number(cur.value), 0).toFixed(2);
   }
-
   return (
     <header className="wallet-header">
       <div className="wallet-header-content">

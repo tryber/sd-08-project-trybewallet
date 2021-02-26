@@ -14,3 +14,10 @@ export function addExpense(payload) {
     payload,
   };
 }
+
+export function addCurrency(payload) {
+  return {
+    type: ActionTypes.WALLET_ADDCURR,
+    payload,
+  };
+}

@@ -1,16 +1,23 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
 import getCurrencyList from '../services/getCurrencyList';
+import * as actions from '../actions';
 
 function CurrencySelect({ onChange, ...rest }) {
-  const [currList, setCurrList] = useState(null);
+  // const [currList, setCurrList] = useState(null);
+  const currList = useSelector((state) => state.wallet.currencies);
+  const dispatch = useDispatch();
+
   const fetchCurrList = async () => {
-    if (!currList) {
+    if (currList.length === 0) {
       const list = await getCurrencyList();
-      setCurrList(list);
+      dispatch(actions.addCurrency(list));
+      // setCurrList(list);
     }
   };
   fetchCurrList();
+
   return (
     <label htmlFor="currency">
       Moeda:

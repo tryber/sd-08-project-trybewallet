@@ -8,6 +8,11 @@ export default function reducer(state = INITIAL_STATE, action) {
   console.log(state);
   const { type, payload } = action;
   switch (type) {
+  case ActionTypes.WALLET_ADDCURR:
+    return {
+      ...state,
+      currencies: [...payload],
+    };
   case ActionTypes.WALLET_ADDEXP:
     return {
       ...state,

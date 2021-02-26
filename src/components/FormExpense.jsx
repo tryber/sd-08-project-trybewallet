@@ -25,8 +25,11 @@ function FormExpense() {
       [name]: value,
     });
   };
-  const handleAddExpense = () => {
-    dispatch(actions.addExpense(data));
+  const handleAddExpense = async () => {
+    const exchangeRates = await fetch('https://economia.awesomeapi.com.br/json/all')
+      .then((response) => response.json());
+
+    dispatch(actions.addExpense({ ...data, exchangeRates }));
   };
   const { value, description, currency, tag, method } = data;
   return (
