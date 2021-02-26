@@ -1,8 +1,8 @@
 #!/bin/sh
 
 clear
-npx prettier --write .
-npx eslint --fix .
+#npx prettier --write .
+#npx eslint --fix .
 #git push --set-upstream origin dev
 #git push --set-upstream origin feature/login
 git push --set-upstream origin viviane-florido-project-trybewallet
