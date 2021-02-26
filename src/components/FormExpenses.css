@@ -59,6 +59,7 @@
   margin: 5px;
   margin-right: 10px;
   min-height: 50px;
+  outline: none;
   padding: 10px;
   text-decoration: none;
 }
