@@ -1,16 +1,27 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Wallet from '../pages/Wallet';
+import './HeaderWallet.css';
+import logo from '../svg/045-wallet.svg';
 
 class HeaderWallet extends Component {
   render() {
     const { userEmail } = this.props;
     return (
-      <header>
-        <span data-testid="email-field">{userEmail}</span>
-        <span data-testid="total-field">{0}</span>
-        <span data-testid="header-currency-field">BRL</span>
+      <header className="header-wallet">
+        <div><img src={ logo } alt="Wallet Logo" /></div>
+        <div>
+          <span data-testid="email-field">{userEmail}</span>
+          <span data-testid="total-field" className="header-toral">
+            {999999}
+            <span
+              data-testid="header-currency-field"
+              className="header-currency"
+            >
+              BRL
+            </span>
+          </span>
+        </div>
       </header>
     );
   }

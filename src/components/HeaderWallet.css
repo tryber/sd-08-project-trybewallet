@@ -1,0 +1,31 @@
+.header-wallet {
+  align-items: center;
+  background-color: whitesmoke;
+  display: flex;
+  flex-direction: row;
+  font-size: 1rem;
+  justify-content: space-between;
+}
+
+.header-wallet div {
+  align-items: baseline;
+  display: flex;
+  padding: 5px;
+}
+
+.header-wallet div img {
+width: 1.5rem;
+}
+
+.header-wallet div span {
+  margin: 0px 5px;
+}
+
+.header-wallet div span.header-toral {
+  background-color: whitesmoke;
+  font-size: 0.8rem;
+}
+
+.header-wallet div span.header-currency {
+  font-size: 0.6rem;
+}

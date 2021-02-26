@@ -1,6 +1,6 @@
 import { STORE_EMAIL } from '../actions';
 
-const INITIAL_STATE = { email: '' };
+const INITIAL_STATE = { email: 'teste@email.com' }; // REMOVER esse email
 
 function user(state = INITIAL_STATE, action) {
   switch (action.type) {
