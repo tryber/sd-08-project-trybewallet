@@ -31,6 +31,9 @@ class Login extends React.Component {
   }
 
   validateBoth() {
+    this.setState({
+      buttonDisabled: true,
+    });
     const { email, password } = this.state;
     if (password.length >= number && validEmail(email)) {
       this.setState({
@@ -41,7 +44,7 @@ class Login extends React.Component {
 
   render() {
     const { buttonDisabled, email, password } = this.state;
-    const { history } = this.props;
+    const { setEmail, history } = this.props;
 
     return (
       <div>
@@ -90,6 +93,7 @@ Login.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
+  setEmail: PropTypes.func.isRequired,
 };
 
 export default connect(null, mapDispatchToProps)(Login);
