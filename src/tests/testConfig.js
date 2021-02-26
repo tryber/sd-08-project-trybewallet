@@ -1,14 +1,14 @@
-import React from "react";
-import { Provider } from "react-redux";
-import thunk from "redux-thunk";
-import { Router } from "react-router-dom";
-import { createMemoryHistory } from "history";
-import { applyMiddleware, createStore } from "redux";
-import { render } from "@testing-library/react";
+import React from 'react';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+import { Router } from 'react-router-dom';
+import { createMemoryHistory } from 'history';
+import { applyMiddleware, createStore } from 'redux';
+import { render } from '@testing-library/react';
 
-import reducer from "../reducers";
+import reducer from '../reducers';
 
-export const getStore = (initialState) => {
+export const getStore = initialState => {
   if (!initialState) return createStore(reducer, applyMiddleware(thunk));
   return createStore(reducer, initialState, applyMiddleware(thunk));
 };
@@ -16,9 +16,9 @@ export const getStore = (initialState) => {
 export const renderWithRouterAndStore = (
   component,
   routeConfigs = {},
-  initialState
+  initialState,
 ) => {
-  const route = routeConfigs.route || "/";
+  const route = routeConfigs.route || '/';
   const store = getStore(initialState);
   const history =
     routeConfigs.history || createMemoryHistory({ initialEntries: [route] });
@@ -27,7 +27,7 @@ export const renderWithRouterAndStore = (
     ...render(
       <Provider store={store}>
         <Router history={history}>{component}</Router>
-      </Provider>
+      </Provider>,
     ),
     history,
     store,
