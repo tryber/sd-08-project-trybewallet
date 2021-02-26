@@ -4,8 +4,15 @@ const actionEmail = (email) => ({
   email,
 });
 
-const actionCurruncies = (value) => ({
-  type: 'UPAPI',
-  value,
-});
+function arrayUPAPI(response) {
+  return {
+    type: 'UPAPI',
+    value: response,
+  };
+}
+
+const actionCurruncies = (value) => (dispatch) => {
+  value.then((response) => dispatch(arrayUPAPI(response)));
+};
+
 export { actionEmail, actionCurruncies };

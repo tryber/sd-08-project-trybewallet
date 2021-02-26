@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import getAPI from '../services/requestAPI';
+import { actionCurruncies } from '../actions';
 
 class FormExpense extends Component {
+  componentDidMount() {
+    const { showCurrencies } = this.props;
+    const api = getAPI();
+    showCurrencies(api);
+  }
+
   render() {
     return (
+      <section>
 
-      <div>
-        { console.log(getAPI()) }
         <form>
           <label htmlFor="value">
             Despensa:
@@ -43,9 +50,16 @@ class FormExpense extends Component {
           </select>
 
         </form>
-      </div>
+      </section>
     );
   }
 }
+// const mapStateToProps = (state) => ({
+//   test: state.wallet.currencies,
+// });
 
-export default FormExpense;
+const mapDispactToProps = (dispatch) => ({
+  showCurrencies: (value) => dispatch(actionCurruncies(value)),
+});
+
+export default connect(null, mapDispactToProps)(FormExpense);
