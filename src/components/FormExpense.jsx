@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import * as actions from '../actions';
 
 import CurrencySelect from './CurrencySelect';
 import PayMethodSelect from './PayMethodSelect';
@@ -14,6 +16,7 @@ const INITIAL_VALUE = {
 
 function FormExpense() {
   const [data, setData] = useState(INITIAL_VALUE);
+  const dispatch = useDispatch();
 
   const handleChange = ({ target }) => {
     const { name, value } = target;
@@ -21,6 +24,9 @@ function FormExpense() {
       ...data,
       [name]: value,
     });
+  };
+  const handleAddExpense = () => {
+    dispatch(actions.addExpense(data));
   };
   const { value, description, currency, tag, method } = data;
   return (
@@ -48,7 +54,7 @@ function FormExpense() {
       <CurrencySelect value={ currency } onChange={ handleChange } />
       <PayMethodSelect value={ method } onChange={ handleChange } />
       <TagSelect value={ tag } onChange={ handleChange } />
-      <button type="button">Adicionar despesa</button>
+      <button type="button" onClick={ handleAddExpense }>Adicionar despesa</button>
     </form>
   );
 }

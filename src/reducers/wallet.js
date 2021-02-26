@@ -1,14 +1,18 @@
-// import * as ActionTypes from '../common/ActionTypes';
+import * as ActionTypes from '../common/ActionTypes';
 
 const INITIAL_STATE = {
   currencies: [],
   expenses: [],
 };
 export default function reducer(state = INITIAL_STATE, action) {
-  const { type } = action;
+  console.log(state);
+  const { type, payload } = action;
   switch (type) {
-  case 'DEBUG':
-    return { ...state };
+  case ActionTypes.WALLET_ADDEXP:
+    return {
+      ...state,
+      expenses: [...state.expenses, { id: state.expenses.length + 1, ...payload }],
+    };
 
   default:
     return state;

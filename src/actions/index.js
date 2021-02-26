@@ -8,8 +8,9 @@ export function login(payload) {
   };
 }
 
-export function logout() {
+export function addExpense(payload) {
   return {
-    type: ActionTypes.USER_LOGOUT,
+    type: ActionTypes.WALLET_ADDEXP,
+    payload,
   };
 }

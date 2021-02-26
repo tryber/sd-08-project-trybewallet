@@ -12,11 +12,7 @@ export default function reducer(state = INITIAL_STATE, action = null) {
       ...state,
       email: payload,
     };
-  case ActionTypes.USER_LOGOUT:
-    return {
-      ...state,
-      email: '',
-    };
+
   default:
     return state;
   }
