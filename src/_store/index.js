@@ -1,9 +1,12 @@
 import { createStore } from 'redux';
-import user from '../reducers/user';
+import thunk from 'redux-thunk';
+import reducer from '../reducers';
 
 const store = createStore(
-  user,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+  reducer,
+  composeWithDevTools(
+    applyMiddleware(thunk),
+  ),
 );
 
 export default store;
