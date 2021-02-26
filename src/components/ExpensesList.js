@@ -6,6 +6,7 @@ import { delExpense as delExpenseAction } from '../actions';
 class ExpensesList extends React.Component {
   render() {
     const { expenses, delExpense } = this.props;
+
     return (
       <section>
         <h2>Lista de Despesas</h2>
