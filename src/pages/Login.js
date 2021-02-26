@@ -29,8 +29,8 @@ class Login extends React.Component {
     const PASSWORD_LENGTH = 5;
     const { password, mail } = this.state;
 
-    const pattern = '^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+).(.[a-z]{2,3})$';
-    const a = new RegExp(pattern);
+    const emailPat = '^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+).(.[a-z]{2,3})$';
+    const a = new RegExp(emailPat);
     if (a.test(mail) && password.length > PASSWORD_LENGTH) {
       this.setState({ buttonEnable: false });
     } else { this.setState({ buttonEnable: true }); }
