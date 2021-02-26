@@ -27,17 +27,16 @@ class ExpensesList extends React.Component {
               <td>{expense.tag}</td>
               <td>{expense.method}</td>
               <td>{expense.value}</td>
-              <td>{expense.currency}</td>
+              <td>{expense.exchangeRates[expense.currency].name}</td>
               <td>
-                {`R$ ${parseFloat(expense.exchangeRates[expense.currency].ask)
-                  .toFixed(2)}`}
+                {parseFloat(expense.exchangeRates[expense.currency].ask)
+                  .toFixed(2)}
               </td>
               <td>
-                {`R$ ${expense.value
-                * parseFloat(expense.exchangeRates[expense.currency].ask)
-                  .toFixed(2)}`}
+                {expense.value
+                * parseFloat(expense.exchangeRates[expense.currency].ask)}
               </td>
-              <td>Real Brasileiro</td>
+              <td>Real</td>
             </tr>
           ))}
         </tbody>
