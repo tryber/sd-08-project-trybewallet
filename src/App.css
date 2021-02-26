@@ -1,10 +1,7 @@
 input {
-  background-color: transparent;
   background-color: #5f5e5e;
   background-image: none;
   border: none;
-  box-shadow: none;
-  box-shadow: none;
   box-shadow: none;
   color: white;
   margin: 10px;
@@ -28,10 +25,8 @@ input {
 }
 
 button {
-  background-color: transparent;
   background-color: rgb(240, 237, 237);
   background-image: none;
-  border: none;
   border: 5px;
   color: rgb(238, 159, 40);
   font-weight: 800;
