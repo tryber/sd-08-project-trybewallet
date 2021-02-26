@@ -26,7 +26,6 @@ class Login extends React.Component {
     const { email, password, validUser } = this.state;
     const isEmail = this.validateEmail(email);
     if (!validUser && isEmail && password.length >= PASSWORD_LENGTH) {
-      console.log('asd');
       this.verifyLogin(true);
     } else
     if (validUser && (!isEmail || password.length < PASSWORD_LENGTH)) {
