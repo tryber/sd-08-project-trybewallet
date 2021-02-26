@@ -3,7 +3,7 @@
   background-color: whitesmoke;
   display: flex;
   flex-direction: row;
-  font-size: 1rem;
+  font-size: 0.8rem;
   justify-content: space-between;
 }
 
@@ -14,7 +14,10 @@
 }
 
 .header-wallet div img {
-width: 1.5rem;
+  border: 2px solid black;
+  border-radius: 8px;
+  padding: 2px;
+  width: 1.5rem;
 }
 
 .header-wallet div span {
