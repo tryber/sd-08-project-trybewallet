@@ -4,4 +4,8 @@ const actionEmail = (email) => ({
   email,
 });
 
-export default actionEmail;
+const actionCurruncies = (value) => ({
+  type: 'UPAPI',
+  value,
+});
+export { actionEmail, actionCurruncies };
