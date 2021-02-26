@@ -1,9 +1,15 @@
 // Coloque aqui suas actions
 const LOGIN = 'LOGIN';
+const ADD_EXPENSE = 'ADD_EXPENSE';
 
-const login = (data) => ({
+const login = ({ email }) => ({
   type: LOGIN,
-  payload: { data },
+  payload: { email },
 });
 
-export { LOGIN, login };
+const addExpense = ({ id, exp, des, cur, met, tag }) => ({
+  type: ADD_EXPENSE,
+  payload: { id, exp, des, cur, met, tag },
+});
+
+export { LOGIN, login, ADD_EXPENSE, addExpense };
