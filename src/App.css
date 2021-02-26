@@ -41,14 +41,19 @@
 }
 
 input {
-  border:none;
-  background-image:none;
-  background-color:transparent;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
   background-color: #404040;
+  background-image:none;
+  border:none;
+  box-shadow: none;
   color: white;
   padding: 10px;
   margin: 10px;
+}
+
+button {
+  background-image:none;
+  border: 5px none;
+  font-weight: 800;
+  margin: 10px;
+  padding: 10px;
 }

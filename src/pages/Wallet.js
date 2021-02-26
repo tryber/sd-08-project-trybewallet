@@ -6,11 +6,11 @@ class Wallet extends React.Component {
   render() {
     return (
       <div>
-        <h1>Escolha um animal</h1>
+        <h1>Hello, my friend</h1>
         <br />
         {/* <Select /> */}
         <br />
-        <Link to="/manchete">
+        <Link to="/carteira">
           {/* <Button /> */}
         </Link>
       </div>

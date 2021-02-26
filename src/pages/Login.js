@@ -1,7 +1,8 @@
 import React from 'react';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-// import { login as loginAction } from '../actions';
+import PropTypes from 'prop-types';
+import { savedUser } from '../actions';
 
 class Login extends React.Component {
   constructor(props) {
@@ -17,11 +18,15 @@ class Login extends React.Component {
 
   buttonAble() {
     const { email, password } = this.state;
-    const validEmail = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.([a-z]+)?$/i;
+    const validEmail = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g;
     const minOfCaracteres = 6;
     if (validEmail.test(email) && password.length >= minOfCaracteres) {
       this.setState({
         buttonAble: true,
+      });
+    } else {
+      this.setState({
+        buttonAble: false,
       });
     }
   }
@@ -30,13 +35,12 @@ class Login extends React.Component {
     const { name, value } = target;
     this.setState({
       [name]: value,
-    });
-    this.buttonAble();
+    }, () => { this.buttonAble(); });
   }
 
   render() {
     const { email, password, buttonAble } = this.state;
-    // const { login } = this.props;
+    const { savedUserData } = this.props;
     return (
       <div className="Login">
         <h1>TRYBE WALLET</h1>
@@ -61,8 +65,7 @@ class Login extends React.Component {
         <div>
           <Link
             to="/carteira"
-            // onClick={ () => login({ email, password }) }
-            data-testid="btn-login"
+            onClick={ () => savedUserData({ email, password }) }
           >
             <button type="button" disabled={ !buttonAble }>ENTRAR</button>
           </Link>
@@ -72,4 +75,12 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+const mapDispatchToProps = (dispatch) => ({
+  savedUserData: (user) => dispatch(savedUser(user)),
+});
+
+export default connect(null, mapDispatchToProps)(Login);
+
+Login.propTypes = {
+  savedUserData: PropTypes.func.isRequired,
+};

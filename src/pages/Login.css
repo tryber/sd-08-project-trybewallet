@@ -1,0 +1,8 @@
+input {
+  display: flex;
+  flex-direction: column;
+}
+
+h1 {
+background-color: blue;
+}
