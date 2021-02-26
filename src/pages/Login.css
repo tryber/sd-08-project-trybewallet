@@ -13,6 +13,7 @@
   border: 4px solid black;
   border-radius: 5%;
   border-style: double;
+  box-shadow: 1px 2px 10px 3px #acacac;
   display: flex;
   flex-direction: column;
   height: fit-content;
@@ -30,6 +31,7 @@
 .login-page input {
   border-radius: 10px;
   border-style: solid;
+  box-shadow: 2px 3px 4px #acacac;
   font-size: 1.2rem;
   padding: 5px;
 }
@@ -44,12 +46,13 @@
 }
 
 .login-page button {
-  background-color: white;
+  background-color: #0fa36b;
   border-color: #0fa36b;
   border-radius: 5px;
   border-style: outset;
   border-width: 2px;
-  color: #0fa36b;
+  box-shadow: 4px 5px 5px #acacac;
+  color: white;
   font-size: 1rem;
   font-weight: 900;
   margin-top: 25px;
@@ -60,21 +63,24 @@
   outline: none;
 }
 
+.login-page button:hover {
+  background-color: #13ce86;
+  border-color: #13ce86;
+  box-shadow: 4px 5px 5px #949494;
+}
+
 .login-page button:disabled {
   background-color: #f0f0f0;
   border-color: #ddd;
   color: #ddd;
 }
 
-.login-page button:hover {
-  background-color: #f5f5f5;
-}
-
 .login-page button:active {
-  background-color: #0fa36b;
+  background-color: white;
   border-color: #0fa36b;
   border-style: inset;
-  color: white;
+  box-shadow: 2px 3px 2px #838383;
+  color: #0fa36b;
 }
 
 .login-page .login-title {
