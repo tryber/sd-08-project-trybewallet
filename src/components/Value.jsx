@@ -10,7 +10,6 @@ class Value extends React.Component {
         <input
           type="number"
           data-testid="value-input"
-          value={ value }
           onChange={ func }
         />
       </label>
