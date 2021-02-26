@@ -5,6 +5,11 @@ class ExpensesForm extends Component {
     super();
     this.renderForm = this.renderForm.bind(this);
     this.renderCoinList = this.renderCoinList.bind(this);
+    this.renderSelect = this.renderSelect.bind(this);
+
+    this.state = {
+      coins: [],
+    };
   }
 
   componentDidMount() {
@@ -19,7 +24,18 @@ class ExpensesForm extends Component {
     const coinsCodeList = coinsList
       .filter((coin) => coin.codein !== 'BRLT')
       .map((coin) => coin.code);
-    console.log(coinsCodeList);
+    this.setState({ coins: coinsCodeList });
+  }
+
+  renderSelect() {
+    const { coins } = this.state;
+    return (
+      <select>
+        {coins === []
+          ? <option>carregando</option>
+          : coins.map((coin) => <option key={ coin }>{ coin }</option>)}
+      </select>
+    );
   }
 
   renderForm() {
@@ -28,6 +44,7 @@ class ExpensesForm extends Component {
         <form>
           <input type="text" data-testid="value-input" />
           <input type="text" data-testid="description-input" />
+          {this.renderSelect()}
         </form>
       </div>
     );
