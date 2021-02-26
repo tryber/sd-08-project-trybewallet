@@ -5,7 +5,7 @@ const INITIAL_STATE = {
   expenses: [],
 };
 export default function reducer(state = INITIAL_STATE, action) {
-  console.log(state);
+  console.log(JSON.stringify(state));
   const { type, payload } = action;
   switch (type) {
   case ActionTypes.WALLET_ADDCURR:
@@ -16,7 +16,7 @@ export default function reducer(state = INITIAL_STATE, action) {
   case ActionTypes.WALLET_ADDEXP:
     return {
       ...state,
-      expenses: [...state.expenses, { id: state.expenses.length + 1, ...payload }],
+      expenses: [...state.expenses, { id: state.expenses.length, ...payload }],
     };
 
   default:

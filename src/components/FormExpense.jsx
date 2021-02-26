@@ -9,7 +9,7 @@ import TagSelect from './TagSelect';
 const INITIAL_VALUE = {
   value: 0,
   description: '',
-  currency: '',
+  currency: 'USD',
   tag: 'Alimentação',
   method: 'Dinheiro',
 };
