@@ -1,13 +1,39 @@
 import React, { Component } from 'react';
+import selectFields from '../Database/selectFields';
 import './FormExpenses.css';
 
 export default class FormExpenses extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      formControl: {
+        value: '0',
+        currency: '',
+        payMethod: 'Dinheiro',
+        tag: 'Alimentação',
+        description: '',
+      },
+    };
     this.renderSelectF = this.renderSelectF.bind(this);
+    this.renderListOptions = this.renderListOptions.bind(this);
+    this.handleInput = this.handleInput.bind(this);
+  }
+
+  handleInput(type, { value }) {
+    this.setState({
+      formControl: { [type]: value },
+    });
+  }
+
+  renderListOptions(arraySelect) {
+    return arraySelect.map((e) => (
+      <option key={ e } value={ e }>{e}</option>
+    ));
   }
 
   renderSelectF() {
+    const { payMethods, payTags } = selectFields;
+    const { formControl: { currency, payMethod, tag } } = this.state;
     return (
       <div>
         <label htmlFor="currencyInput">
@@ -16,8 +42,9 @@ export default class FormExpenses extends Component {
             id="currencyInput"
             name="currencyInput"
             data-testid="currency-input"
+            value={ currency }
           >
-            <option>BRLS</option>
+            BRL
           </select>
         </label>
         <label htmlFor="methodInput">
@@ -26,8 +53,9 @@ export default class FormExpenses extends Component {
             id="methodInput"
             name="methodInput"
             data-testid="method-input"
+            value={ payMethod }
           >
-            <option>asagasgas</option>
+            {this.renderListOptions(payMethods)}
           </select>
         </label>
         <label htmlFor="tagInput">
@@ -36,8 +64,9 @@ export default class FormExpenses extends Component {
             id="tagInput"
             name="tagInput"
             data-testid="tag-input"
+            value={ tag }
           >
-            <option>sagsasgsga</option>
+            {this.renderListOptions(payTags)}
           </select>
         </label>
       </div>
@@ -45,6 +74,7 @@ export default class FormExpenses extends Component {
   }
 
   render() {
+    const { formControl: { value, description } } = this.state;
     return (
       <form className="form-expenses">
         <label htmlFor="valueInput">
@@ -54,6 +84,8 @@ export default class FormExpenses extends Component {
             name="valueInput"
             id="valueInput"
             data-testid="value-input"
+            value={ value }
+            onChange={ ({ target }) => this.handleInput('value', target) }
           />
         </label>
         {this.renderSelectF()}
@@ -65,6 +97,7 @@ export default class FormExpenses extends Component {
             cols="20"
             rows="2"
             data-testid="description-input"
+            value={ description }
           />
         </label>
         <button type="button">Adicionar Despesa</button>
