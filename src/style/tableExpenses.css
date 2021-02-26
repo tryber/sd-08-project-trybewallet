@@ -1,0 +1,23 @@
+table {
+  border: 1px solid #7a7;
+  border-collapse: separate;
+  border-spacing: 0 15px;
+  color: white;
+  margin-top: 15px;
+  width: 100%;
+}
+
+td {
+  color: black;
+  text-align: center; 
+  vertical-align: middle;
+}
+
+thead {
+  background-color: rgba(15, 14, 14, 0.904);
+}
+
+tr:hover {
+  background-color: lightgray;
+  padding: 10px;
+}

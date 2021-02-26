@@ -3,7 +3,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import * as Actions from '../actions';
-import Header from './Header';
+import Header from '../Components/Header';
 
 class Login extends React.Component {
   constructor() {

@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Header from './Header';
+import Header from '../Components/Header';
 import * as Actions from '../actions';
+import TableExpenses from '../Components/TableExpenses';
 import '../style/wallet.css';
 
 class Wallet extends React.Component {
@@ -171,8 +172,8 @@ class Wallet extends React.Component {
             <button type="button" onClick={ this.handleClick }>Adicionar despesa</button>
           </form>
         )}
-      </>
-    );
+        <TableExpenses />
+      </>);
   }
 }
 
