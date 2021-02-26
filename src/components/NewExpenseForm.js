@@ -73,7 +73,6 @@ class NewExpenseForm extends React.Component {
 
   renderSelectCurrencies(value, handleChange) {
     const { currencies } = this.props;
-    const currenciesName = Object.keys(currencies[0] || {});
     return (
       <select
         id="currency-input"
@@ -82,7 +81,7 @@ class NewExpenseForm extends React.Component {
         onChange={ handleChange }
         value={ value }
       >
-        {currenciesName.map((currency) => {
+        {currencies.map((currency) => {
           if (currency === 'USDT') return '';
           return (
             <option key={ currency } data-testid={ currency }>
@@ -147,7 +146,7 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(mapStateToProps, mapDispatchToProps)(NewExpenseForm);
 
 NewExpenseForm.propTypes = {
-  currencies: PropTypes.arrayOf(PropTypes.object),
+  currencies: PropTypes.arrayOf(PropTypes.string),
   saveExpense: PropTypes.func.isRequired,
 };
 

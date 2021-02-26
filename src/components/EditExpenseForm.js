@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import currenciesAPI from '../services';
 import {
   fetchCurrencies as getCurrencies,
   endExpenseEdit as finishExpenseEdit,
@@ -14,7 +13,7 @@ class EditExpenseForm extends React.Component {
 
     const { expenses, expenseId } = this.props;
     const expense = expenses.find((item) => item.id === expenseId);
-    const { value, description, currency, method, tag, id } = expense;
+    const { value, description, currency, method, tag, id, exchangeRates } = expense;
     this.state = {
       value,
       description,
@@ -22,6 +21,7 @@ class EditExpenseForm extends React.Component {
       method,
       tag,
       id,
+      exchangeRates,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -38,9 +38,8 @@ class EditExpenseForm extends React.Component {
 
   async handleClick(e) {
     e.preventDefault();
-    const { value, description, currency, method, tag, id } = this.state;
+    const { value, description, currency, method, tag, id, exchangeRates } = this.state;
     const { endExpenseEdit } = this.props;
-    const exchangeRates = await currenciesAPI();
     const expense = {
       id,
       value,
@@ -71,7 +70,6 @@ class EditExpenseForm extends React.Component {
 
   renderSelectCurrencies(value, handleChange) {
     const { currencies } = this.props;
-    const currenciesName = Object.keys(currencies[0] || {});
     return (
       <select
         id="currency-input"
@@ -80,7 +78,7 @@ class EditExpenseForm extends React.Component {
         onChange={ handleChange }
         value={ value }
       >
-        {currenciesName.map((currency) => {
+        {currencies.map((currency) => {
           if (currency === 'USDT') return '';
           return (
             <option key={ currency } data-testid={ currency }>
@@ -147,7 +145,7 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(mapStateToProps, mapDispatchToProps)(EditExpenseForm);
 
 EditExpenseForm.propTypes = {
-  currencies: PropTypes.arrayOf(PropTypes.object),
+  currencies: PropTypes.arrayOf(PropTypes.string),
   expenses: PropTypes.arrayOf(PropTypes.object),
   expenseId: PropTypes.number.isRequired,
   endExpenseEdit: PropTypes.func.isRequired,

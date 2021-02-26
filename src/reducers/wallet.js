@@ -25,7 +25,7 @@ export default function wallet(state = INITIAL_STATE_WALLET, action) {
     return {
       ...state,
       isFetching: false,
-      currencies: [action.currencies],
+      currencies: [...Object.keys(action.currencies)],
     };
   case REQUEST_FAIL:
     return {
@@ -54,7 +54,10 @@ export default function wallet(state = INITIAL_STATE_WALLET, action) {
   case EDIT_EXPENSE_END:
     return {
       ...state,
-      expenses: state.expenses.map((item) => (item.id === action.expense.id ? action.expense : item)),
+      expenses: state.expenses.map((item) => {
+        if (item.id === action.expense.id) return { ...item, ...action.expense };
+        return item;
+      }),
       isEditing: false,
     };
   default:
