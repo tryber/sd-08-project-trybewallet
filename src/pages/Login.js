@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import login from '../actions';
+import '../Login.css';
 
 function emailIsValid(email) {
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -53,13 +54,14 @@ class Login extends React.Component {
     const { email, password } = this.state;
     const { saveEmail, history } = this.props;
     return (
-      <>
+      <div className="login">
         <label htmlFor="email">
           <h4>Email:</h4>
           <input
             type="text"
             id="email"
             data-testid="email-input"
+            placeholder="Digite seu e-mail"
             value={ email }
             onChange={ this.handleChangeEmail }
           />
@@ -67,9 +69,10 @@ class Login extends React.Component {
         <label htmlFor="password">
           <h4>Password:</h4>
           <input
-            type="text"
+            type="password"
             id="password"
             data-testid="password-input"
+            placeholder="Digite sua senha"
             value={ password }
             onChange={ this.handleChangePassword }
           />
@@ -84,7 +87,7 @@ class Login extends React.Component {
         >
           Entrar
         </button>
-      </>
+      </div>
     );
   }
 }
