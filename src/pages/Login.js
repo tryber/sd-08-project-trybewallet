@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import { addUser as addUserAction } from '../actions';
 
-const PASSWORD_LENGTH = 6;
+const PASSWORD_LENGTH = 5;
 
 class Login extends React.Component {
   constructor() {
@@ -26,6 +26,7 @@ class Login extends React.Component {
     const { email, password, validUser } = this.state;
     const isEmail = this.validateEmail(email);
     if (!validUser && isEmail && password.length >= PASSWORD_LENGTH) {
+      console.log('asd');
       this.verifyLogin(true);
     } else
     if (validUser && (!isEmail || password.length < PASSWORD_LENGTH)) {
@@ -33,12 +34,11 @@ class Login extends React.Component {
     }
   }
 
-  async handleChange({ target }) {
+  handleChange({ target }) {
     const { name, value } = target;
-    await this.setState({
+    this.setState({
       [name]: value,
-    });
-    this.buttonControl();
+    }, this.buttonControl());
   }
 
   verifyLogin(login) {
@@ -48,7 +48,6 @@ class Login extends React.Component {
   }
 
   redirectPage() {
-    console.log('redirec');
     this.setState({
       redirect: true,
     });
@@ -65,7 +64,7 @@ class Login extends React.Component {
     const { email, password, validUser, redirect } = this.state;
     const { addUser } = this.props;
     if (redirect) {
-      return <Redirect push to="/wallet" />;
+      return <Redirect push to="/carteira" />;
     }
 
     return (
