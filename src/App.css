@@ -1,41 +1,72 @@
-.App {
-  text-align: center;
+body {
+  background-color: rgb(6, 185, 117);    
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+h3, h1 {
+  color: rgb(15, 163, 107);
+  font-size: 30px;
+  margin: 10px 0;
 }
 
-@media ( prefers-reduced-motion : no-preference ) {
-
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
+.form {
   align-items: center;
-  background-color: #282c34;
-  color: white;
+  background-color: rgb(64, 25, 127);
+  border: 0.5rem solid rgb(4, 107, 82);
+  border-radius: 2rem;
   display: flex;
   flex-direction: column;
-  font-size: calc(10px + 2vmin);
+  height: 20rem;
   justify-content: center;
-  min-height: 100vh;
+  margin: 9rem auto;
+  width: 20rem;
 }
 
-.App-link {
-  color: #61dafb;
+.input-login {
+  height: 25px;
+  margin: 5px;
+  width: 60%;
 }
 
-@keyframes App-logo-spin {
-
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
+.button-login {
+  border: 2px solid rgb(4, 107, 82);
+  height: 25px;
+  margin-top: 20px;
+  width: 60%;
 }
+
+.button-disabled {
+  background-color: rgb(4, 107, 82);
+  color: gray;
+}
+
+.button-enabled {
+  background-color: rgb(15, 163, 107);
+  color: black;
+}
+
+.header {
+  align-items: center;
+  background-color: rgb(64, 25, 127); 
+  display: flex;
+  flex-direction: row;
+  height: 80px;
+  justify-content: space-between;
+  padding: 0 30px; 
+}
+
+.infos-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 300px;
+}
+
+/* .wallet {
+  align-items: center;
+  position: relative;
+  display: flex;
+  height: 5rem;
+  justify-content: center;
+  margin: 9rem auto;
+  padding: 0;
+} */
