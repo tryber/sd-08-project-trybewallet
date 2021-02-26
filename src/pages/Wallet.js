@@ -5,6 +5,5 @@ class Wallet extends React.Component {
     return <div>TrybeWallet</div>;
   }
 }
-//commit inicial
 
 export default Wallet;
