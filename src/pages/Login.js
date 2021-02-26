@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import logo from '../svg/045-wallet.svg';
 import { storeEmail } from '../actions';
@@ -28,9 +29,9 @@ class Login extends React.Component {
     const { inputEmail, passLength } = this.state;
     const emailBool = regexExpression.test(inputEmail);
     if (passLength >= minPassLength && emailBool) {
-      return true;
+      return '';
     }
-    return false;
+    return 'disabled-button';
   }
 
   render() {
@@ -62,13 +63,9 @@ class Login extends React.Component {
               }
             />
           </label>
-          <button
-            type="button"
-            disabled={ !this.checkInputs() }
-            onClick={ () => propsStoreEmail(inputEmail) }
-          >
+          <Link className={ this.checkInputs() } to="/carteira">
             Entrar
-          </button>
+          </Link>
           <div className="login-title">
             <h1>Deori</h1>
             <p>Wallet</p>

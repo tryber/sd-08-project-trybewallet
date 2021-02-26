@@ -41,10 +41,6 @@
 }
 
 .login-page a {
-  background-color: red;
-}
-
-.login-page button {
   background-color: #0fa36b;
   border-color: #0fa36b;
   border-radius: 5px;
@@ -52,29 +48,33 @@
   border-width: 2px;
   box-shadow: 4px 5px 5px #acacac;
   color: white;
+  display: flex;
   font-size: 1rem;
   font-weight: 900;
+  justify-content: center;
   margin-top: 25px;
   padding: 10px;
+  text-decoration: none;
 }
 
-.login-page button:focus {
+.login-page a:focus {
   outline: none;
 }
 
-.login-page button:hover {
+.login-page a:hover {
   background-color: #13ce86;
   border-color: #13ce86;
   box-shadow: 4px 5px 5px #949494;
 }
 
-.login-page button:disabled {
+.login-page .disabled-button {
   background-color: #f0f0f0;
   border-color: #ddd;
   color: #ddd;
+  pointer-events: none;
 }
 
-.login-page button:active {
+.login-page a:active {
   background-color: white;
   border-color: #0fa36b;
   border-style: inset;
