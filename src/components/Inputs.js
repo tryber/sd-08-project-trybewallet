@@ -2,25 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class Inputs extends React.Component {
-  constructor(props) {
-    super(props);
-    const { name } = this.props;
-    this.state = {
-      [name]: '',
-    };
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleChange({ target }) {
-    const { name, value } = target;
-    this.setState({
-      [name]: value,
-    });
-  }
-
   render() {
-    const { children, name, type, dataTest } = this.props;
-    const { inputValue } = this.state;
+    const { children, name, type, dataTest, onChange, inputValue } = this.props;
     return (
       <label htmlFor="inputText">
         { children }
@@ -29,7 +12,7 @@ class Inputs extends React.Component {
           name={ name }
           data-testid={ dataTest }
           value={ inputValue }
-          onChange={ this.handleChange }
+          onChange={ onChange }
         />
       </label>
     );
@@ -37,10 +20,14 @@ class Inputs extends React.Component {
 }
 
 Inputs.propTypes = {
-  children: PropTypes.string.isRequired,
+  // PropType de children encontrada no link abaixo:
+  // https://qastack.com.br/programming/42122522/reactjs-what-should-the-proptypes-be-for-this-props-children
+  children: PropTypes.node.isRequired,
   name: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   dataTest: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  inputValue: PropTypes.string.isRequired,
 };
 
 export default Inputs;
