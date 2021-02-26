@@ -10,8 +10,13 @@ class TableData extends React.Component {
     deleteExpenseAction(filtered);
   }
 
+  floorCurrency(ask, value) {
+    return +(ask * value).toFixed(2);
+  }
+
   render() {
     const { expenses } = this.props;
+
     return (
       <tbody>
         { expenses.map((expense) => (
@@ -20,15 +25,18 @@ class TableData extends React.Component {
             <td>{ expense.tag }</td>
             <td>{ expense.method }</td>
             <td>{ expense.value }</td>
-            <td>{ expense.currency }</td>
-            <td>{ expense.exchangeRates[expense.currency].ask }</td>
+            <td>{ expense.exchangeRates[expense.currency].name }</td>
             <td>
               {
-                Math.floor((expense.exchangeRates[expense.currency].ask
-                   * +expense.value) * 100) / 100
+                this.floorCurrency(expense.exchangeRates[expense.currency].ask, 1)
               }
             </td>
-            <td>REAL</td>
+            <td>
+              { this.floorCurrency(
+                expense.exchangeRates[expense.currency].ask, +expense.value,
+              ) }
+            </td>
+            <td>Real</td>
             <td>
               <button type="button">Edit</button>
               <button

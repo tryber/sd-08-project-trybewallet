@@ -48,7 +48,7 @@ class InputList extends React.Component {
     const { valor } = this.state;
     return (
       <li>
-        <p>Valor</p>
+        <p>Gasto</p>
         <input
           type="text"
           name="valor"
@@ -66,7 +66,7 @@ class InputList extends React.Component {
     const { moeda } = this.state;
     return (
       <li>
-        <p>Moeda</p>
+        <p>Cambio</p>
         <select
           name="moeda"
           id="moeda"
@@ -75,7 +75,11 @@ class InputList extends React.Component {
           onChange={ this.handleChange }
         >
           { onlyCurrenciesKeys.map((curr) => (
-            <option key={ curr } value={ curr }>
+            <option
+              key={ curr }
+              value={ curr }
+              data-testid={ curr }
+            >
               {curr}
             </option>
           ))}
@@ -96,8 +100,8 @@ class InputList extends React.Component {
           value={ metodo }
           onChange={ this.handleChange }
         >
-          <option value="Cartao Credito">Cartao Credito</option>
-          <option value="Cartao Debito">Cartao Debito</option>
+          <option value="Cartão de crédito">Cartão de crédito</option>
+          <option value="Cartão de débito">Cartão de débito</option>
           <option value="Dinheiro">Dinheiro</option>
         </select>
       </li>
@@ -109,7 +113,7 @@ class InputList extends React.Component {
     const tagOptions = ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
     return (
       <li>
-        <p>Tag</p>
+        <p>Tipo</p>
         <select
           name="tag"
           id="tag"
@@ -131,7 +135,7 @@ class InputList extends React.Component {
     const { descricao } = this.state;
     return (
       <li>
-        <p>Descrição</p>
+        <p>Descricao dos Gastos</p>
         <input
           type="text"
           name="descricao"

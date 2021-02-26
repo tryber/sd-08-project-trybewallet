@@ -6,11 +6,23 @@ import InputList from './InputList';
 import TableTitles from './TableTitles';
 import TableData from './TableData';
 import { fetchCurrencies } from '../actions';
+import './Wallet.css';
 
 class Wallet extends React.Component {
   componentDidMount() {
     const { apiCurrencies } = this.props;
     apiCurrencies();
+  }
+
+  calculateTotal() {
+    const { expenses } = this.props;
+    let sum = expenses.reduce((acc, curr) => {
+      const convertedPrice = curr.value * curr.exchangeRates[curr.currency].ask;
+      acc += convertedPrice;
+      return acc;
+    }, 0);
+    sum = Math.floor(sum * 100) / 100;
+    return sum;
   }
 
   render() {
@@ -21,8 +33,10 @@ class Wallet extends React.Component {
           <ul>
             <li><img src={ logo } alt="Logo" width="50px" /></li>
             <li data-testid="email-field">{`User: ${userEmail}`}</li>
-            <li data-testid="total-field">{'Total Expenses: '}</li>
-            <li data-testid="header-currency-field">Real</li>
+            <li data-testid="total-field">
+              {`Total Expenses: ${this.calculateTotal()}`}
+            </li>
+            <li data-testid="header-currency-field">BRL</li>
           </ul>
         </header>
         <ul className="inputList">
@@ -39,6 +53,7 @@ class Wallet extends React.Component {
 Wallet.propTypes = {
   userEmail: PropTypes.string,
   apiCurrencies: PropTypes.func.isRequired,
+  expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 Wallet.defaultProps = {
@@ -47,6 +62,7 @@ Wallet.defaultProps = {
 
 const mapStateToProps = (state) => ({
   userEmail: state.user.email,
+  expenses: state.wallet.expenses,
 });
 
 const mapDispatchToProps = (dispatch) => ({
