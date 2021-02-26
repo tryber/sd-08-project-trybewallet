@@ -5,8 +5,23 @@ import { connect } from 'react-redux';
 import styles from '../styles/components/Header.module.css';
 
 class Header extends Component {
+  constructor(props) {
+    super(props);
+    this.getTotal = this.getTotal.bind(this);
+  }
+
+  getTotal() {
+    const { expenses } = this.props;
+    return expenses.reduce((total, { currency, exchangeRates, value }) => {
+      const valuesAsNumber = +value;
+      const exchangeRatesAsNumber = +(exchangeRates[currency].ask);
+      return total + (valuesAsNumber * exchangeRatesAsNumber);
+    }, 0);
+  }
+
   render() {
     const { email } = this.props;
+    const total = this.getTotal();
     return (
       <header className={ styles.header }>
         <dl className={ styles.headerInfos }>
@@ -16,7 +31,7 @@ class Header extends Component {
           </div>
           <div className={ styles.headerInfosItem }>
             <dt>Despesa total:</dt>
-            <dd data-testid="total-field">0</dd>
+            <dd data-testid="total-field">{ total }</dd>
           </div>
           <div className={ styles.headerInfosItem }>
             <dt>Câmbio:</dt>
@@ -30,10 +45,12 @@ class Header extends Component {
 
 Header.propTypes = {
   email: PropTypes.string.isRequired,
+  expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-const mapStateToProps = ({ user }) => ({
+const mapStateToProps = ({ user, wallet }) => ({
   email: user.email,
+  expenses: wallet.expenses,
 });
 
 export default connect(mapStateToProps)(Header);

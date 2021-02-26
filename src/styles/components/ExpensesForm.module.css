@@ -1,0 +1,17 @@
+.expensesFormContainer {
+  padding: 20px;
+}
+
+.expensesForm {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.expensesForm > *:not( :last-child ) {
+  margin-right: 10px;
+}
+
+.expensesForm input , .expensesForm select , .expensesForm button {
+  flex: 1;
+  padding: 10px;
+}
