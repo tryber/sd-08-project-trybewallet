@@ -10,9 +10,8 @@
 
 .login-page section {
   background-color: #f0f0f0;
-  border: 4px solid black;
+  border: 3px double #acacac;
   border-radius: 5%;
-  border-style: double;
   box-shadow: 1px 2px 10px 3px #acacac;
   display: flex;
   flex-direction: column;
@@ -90,11 +89,13 @@
 }
 
 .login-page .login-title h1 {
+  text-shadow: 2px 2px 10px #686868;
   color: #0fa36b;
   text-transform: uppercase;
 }
 
 .login-page .login-title p {
+  text-shadow: 2px 2px 10px #686868;
   color: #7532d9;
   font-size: 18px;
   margin: 0;
