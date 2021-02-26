@@ -42,16 +42,16 @@
 
 input {
   background-color: #404040;
-  background-image:none;
-  border:none;
+  background-image: none;
+  border: none;
   box-shadow: none;
   color: white;
-  padding: 10px;
   margin: 10px;
+  padding: 10px;
 }
 
 button {
-  background-image:none;
+  background-image: none;
   border: 5px none;
   font-weight: 800;
   margin: 10px;
