@@ -3,14 +3,15 @@
 }
 
 .App-logo {
-  height: 40vmin;
+  width: 20%;
   pointer-events: none;
+  position: relative;
 }
 
 @media ( prefers-reduced-motion : no-preference ) {
 
   .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+    animation: App-logo-spin infinite 2s linear;
   }
 }
 
@@ -38,4 +39,15 @@
   to {
     transform: rotate(360deg);
   }
+  0% {left: -5%; top: 0; }
+  25% {left: 85%; top: 100px; }
+  50% {left: 85%; top: 0}
+  75% {left: -5%; top: 100px}
+  100% {left: -5%; top: 0}
+}
+
+.navBar {
+  border: 2px solid black;
+  display: flex;
+  justify-content: space-between;
 }
