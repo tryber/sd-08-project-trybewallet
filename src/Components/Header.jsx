@@ -24,8 +24,7 @@ class Header extends React.Component {
         <section>
           <span data-testid="email-field">{email}</span>
           <span data-testid="total-field">
-            0
-            {this.calculateExpenses(expenses)}
+            {parseFloat(this.calculateExpenses(expenses)).toFixed(2)}
           </span>
           <span data-testid="header-currency-field">BRL</span>
         </section>

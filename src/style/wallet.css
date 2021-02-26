@@ -1,8 +1,11 @@
-button {
-  margin-left: 15px;
-  padding: 5px;
+input, select {
+  margin-left: 10px;
 }
 
 label {
+  margin-left: 15px;
+}
+
+span {
   margin-left: 15px;
 }

@@ -68,15 +68,16 @@ class Wallet extends React.Component {
     const { method } = this.state;
     return (
       <label htmlFor="method">
-        Método de pagamento:
         <select
           name="method"
           data-testid="method-input"
           onChange={ this.handleChange }
           value={ method }
           id="method"
+          className="form-control"
+          aria-label="Text input with dropdown button"
         >
-          <option>Escolha</option>
+          <option>Método de pagamento</option>
           <option>Dinheiro</option>
           <option>Cartão de crédito</option>
           <option>Cartão de débito</option>
@@ -89,15 +90,16 @@ class Wallet extends React.Component {
     const { tag } = this.state;
     return (
       <label htmlFor="tag">
-        Despesa:
         <select
           name="tag"
           data-testid="tag-input"
           onChange={ this.handleChange }
           value={ tag }
           id="tag"
+          className="form-control"
+          aria-label="Text input with dropdown button"
         >
-          <option>Escolha</option>
+          <option>Despesa</option>
           <option>Alimentação</option>
           <option>Lazer</option>
           <option>Trabalho</option>
@@ -125,8 +127,46 @@ class Wallet extends React.Component {
     });
   }
 
+  valueField(value) {
+    return (
+      <label htmlFor="value">
+        <input
+          type="number"
+          step="0.010"
+          data-testid="value-input"
+          name="value"
+          onChange={ this.handleChange }
+          value={ value }
+          className="form-control"
+          id="basic-url"
+          aria-describedby="basic-addon3"
+          placeholder="Valor"
+        />
+      </label>
+    );
+  }
+
+  currencyField(currency, currencyTypes) {
+    return (
+      <label htmlFor="currency">
+        <select
+          name="currency"
+          data-testid="currency-input"
+          onChange={ this.handleChange }
+          value={ currency }
+          id="currency"
+          className="form-control"
+          aria-label="Text input with dropdown button"
+        >
+          <option>Moeda</option>
+          {currencyTypes.map((nameCoin) => this.currencyOptionField(nameCoin))}
+        </select>
+      </label>
+    );
+  }
+
   render() {
-    const { currencyTypes, isLoading, currency, value } = this.state;
+    const { currencyTypes, isLoading, currency, value, description } = this.state;
     return (
       <>
         <Header />
@@ -134,46 +174,36 @@ class Wallet extends React.Component {
           this.loadinMessage()
         ) : (
           <form>
-            <label htmlFor="value">
-              Valor:
-              <input
-                type="number"
-                step="0.010"
-                data-testid="value-input"
-                name="value"
-                onChange={ this.handleChange }
-                value={ value }
-              />
-            </label>
+            {this.valueField(value)}
             <label htmlFor="description">
-              Descrição:
               <input
                 type="text"
+                value={ description }
                 name="description"
                 data-testid="description-input"
                 onChange={ this.handleChange }
+                className="form-control"
+                id="basic-url"
+                aria-describedby="basic-addon3"
+                placeholder="Descrição"
               />
             </label>
-            <label htmlFor="currency">
-              Moeda:
-              <select
-                name="currency"
-                data-testid="currency-input"
-                onChange={ this.handleChange }
-                value={ currency }
-                id="currency"
-              >
-                <option>Escolha</option>
-                {currencyTypes.map((nameCoin) => this.currencyOptionField(nameCoin))}
-              </select>
-            </label>
+            {this.currencyField(currency, currencyTypes)}
             {this.methodOptionsFild()}
             {this.tagOptionField()}
-            <button type="button" onClick={ this.handleClick }>Adicionar despesa</button>
+            <span />
+            <button
+              type="button"
+              onClick={ this.handleClick }
+              className="btn btn-primary"
+            >
+              Adicionar despesa
+            </button>
           </form>
         )}
         <TableExpenses />
-      </>);
+      </>
+    );
   }
 }
 
