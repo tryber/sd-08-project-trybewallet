@@ -6,8 +6,19 @@ import logo from '../assets/images/wallet.svg';
 
 class Header extends Component {
   render() {
-    const totalExpenses = 0;
-    const { email } = this.props;
+    let totalExpenses = 0;
+    const { email, expenses } = this.props;
+    const calcExpense = ({ value, currency, exchangeRates }) => {
+      const result = parseInt(value, 10) * exchangeRates[currency].ask;
+      return result;
+    };
+
+    if (expenses.length > 0) {
+      totalExpenses = expenses.reduce(
+        (acc, expense) => calcExpense(expense) + acc,
+        0,
+      );
+    }
     return (
       <header>
         <img src={ logo } alt="Logo Wallet" />
@@ -26,5 +37,6 @@ Header.propTypes = {
 
 const mapStateToProps = (state) => ({
   email: state.user.email,
+  expenses: state.wallet.expenses,
 });
 export default connect(mapStateToProps, null)(Header);
