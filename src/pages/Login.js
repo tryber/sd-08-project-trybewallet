@@ -44,7 +44,7 @@ class Login extends React.Component {
 
   render() {
     const { buttonDisabled, email, password } = this.state;
-    const { setEmail, history } = this.props;
+    const { sendEmail, history } = this.props;
 
     return (
       <div>
@@ -73,7 +73,7 @@ class Login extends React.Component {
             disabled={ buttonDisabled }
             type="button"
             onClick={ () => {
-              setEmail(email);
+              sendEmail(email);
               history.push('/carteira');
             } }
           >
@@ -86,14 +86,14 @@ class Login extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  setEmail: (value) => dispatch(setEmail(value)),
+  sendEmail: (value) => dispatch(setEmail(value)),
 });
 
 Login.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
-  setEmail: PropTypes.func.isRequired,
+  sendEmail: PropTypes.func.isRequired,
 };
 
 export default connect(null, mapDispatchToProps)(Login);
