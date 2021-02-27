@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import '../App.css';
 import { bindActionCreators } from 'redux';
 import getAPI from '../services/index';
-import { wallet } from '../actions';
+import { cambioFetch } from '../actions';
 
 const METODOS_PAGAMENTO = ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'];
 const TIPO_DESPESA = ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
@@ -29,7 +29,7 @@ class Wallet extends Component {
 
   componentDidMount() {
     getAPI().then((data) => {
-      delete data.USDT; // visto no projeto do colega Paulo Simões 26/02/2021
+      delete data.USDT; // Método delete visto no projeto do colega Paulo Simões 26/02/2021
       this.setState({
         moedas: Object.values(data),
       });
@@ -144,7 +144,7 @@ Wallet.propTypes = {
   gastos: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => bindActionCreators(wallet, dispatch);
+const mapDispatchToProps = (dispatch) => bindActionCreators(cambioFetch, dispatch);
 
 const mapStateToProps = (state) => ({
   userEmail: state.user.email,
