@@ -1,24 +1,47 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import fetchCurrencies from '../actions/walletAction';
+import addRegister from '../actions/index';
 
 class Wallet extends React.Component {
   constructor() {
     super();
     this.state = {
+      id: 0,
       expense: '',
       currency: '',
       paymentOption: '',
       tag: '',
       description: '',
+      exchangeRates: '',
     };
     this.handleChange = this.handleChange.bind(this);
+    this.validateRegister = this.validateRegister.bind(this);
   }
+
+  componentDidMount() { 
+    const { fetchCurrencies } = this.props;
+    fetchCurrencies();
+  }
+  
 
   handleChange({ target }) {
     const { name } = target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     this.setState({ [name]: value });
+  }
+
+
+  validateRegister() {
+    const {id, expense, currency, paymentOption, tag, description, exchangeRates } = this.state;
+    const { addRegister } = this.props;
+    addRegister({id, expense, currency, paymentOption, tag, description, exchangeRates })
+    this.setState({
+      id: id +1,
+      exchangeRates: this.props.exchangeValues,
+    })
+    console.log(this.props.exchangeValues);
   }
 
   fillValueLabelHTML(valueNumber, handleChange) {
@@ -37,8 +60,10 @@ class Wallet extends React.Component {
   }
 
   fillSelectedCurrency(currencyValue, onSelectedCurrency) {
+    const listOfCurrencies = this.props.exchangeValues && this.props.exchangeValues.length && this.props.exchangeValues[0];
+    const arrayOfCurrencies = Object.keys(listOfCurrencies);
     return (
-      <label htmlFor="selectList" data-testid="genre-input-label">
+      <label htmlFor="selectList">
         Moeda:
         <select
           name="currency"
@@ -46,40 +71,9 @@ class Wallet extends React.Component {
           onChange={ onSelectedCurrency }
           data-testid="currency-input"
         >
-          <option data-testid="USD" value="USD">
-            USD
-          </option>
-          <option data-testid="CAD" value="CAD">
-            CAD
-          </option>
-          <option data-testid="EUR" value="EUR">
-            EUR
-          </option>
-          <option data-testid="GBP" value="GBP">
-            GBP
-          </option>
-          <option data-testid="ARS" value="ARS">
-            ARS
-          </option>
-          <option data-testid="BTC" value="BTC">
-            BTC
-          </option>
-          <option data-testid="LTC" value="LTC">
-            LTC
-          </option>
-          <option data-testid="JPY" value="JPY">
-            JPY
-          </option>
-          <option data-testid="CHF" value="CHF">
-            CHF
-          </option>
-          <option data-testid="AUD" value="AUD">
-            AUD
-          </option>
-          <option data-testid="CNY" value="CNY">CNY</option>
-          <option data-testid="ILS" value="ILS">ILS</option>
-          <option data-testid="ETH" value="ETH">ETH</option>
-          <option data-testid="XRP" value="XRP">XRP</option>
+          {arrayOfCurrencies.map((element) => (
+            <option key={element} data-testid={element} value={element}>{element}</option>
+          ))}
         </select>
       </label>
     );
@@ -143,8 +137,8 @@ class Wallet extends React.Component {
       userInfos: { email },
     } = this.props;
 
-    const { expense, currency, paymentOption, tag, description } = this.state;
-    console.log(expense, currency, paymentOption, tag, description);
+    const { expense, currency, paymentOption, tag, description, exchangeRates } = this.state;
+    console.log(expense, currency, paymentOption, tag, description, exchangeRates);
 
     return (
       <div>
@@ -161,7 +155,7 @@ class Wallet extends React.Component {
             { this.fillPaymentOption(paymentOption, this.handleChange) }
             { this.fillTagOption(tag, this.handleChange) }
             { this.fillDescriptionLabelHLMT(description, this.handleChange) }
-            <button type="button">Adicionar despesa</button>
+            <button type="button" onClick={ this.validateRegister }>Adicionar despesa</button>
           </form>
         </main>
       </div>
@@ -178,6 +172,13 @@ Wallet.propTypes = {
 
 const mapStateToProps = (state) => ({
   userInfos: state.user,
+  exchangeValues: state.wallet.currencies,
+  isFeching: state.wallet.isFetching,
 });
 
-export default connect(mapStateToProps, null)(Wallet);
+const mapDispatchToProps = (dispatch) => ({
+  fetchCurrencies: () => dispatch(fetchCurrencies()),
+  addRegister: (e) => dispatch(addRegister(e)),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Wallet);

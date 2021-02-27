@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { login as loginAction } from '../actions';
+import { login as loginAction } from '../actions/loginAction';
 
 const passwordMinNumber = 6;
 
