@@ -1,0 +1,8 @@
+.campos_login{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 30%;
+  padding: 5px;
+  }
+  
