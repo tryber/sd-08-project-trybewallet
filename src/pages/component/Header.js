@@ -12,6 +12,22 @@ class Header extends React.Component {
     };
   }
 
+  getTotalValue() {
+    const { expenses } = this.props;
+
+    let total = 0;
+    expenses.map(({
+      exchangeRates,
+      currency,
+      value,
+    }) => {
+      total
+        += exchangeRates[currency].ask * value;
+      return total;
+    });
+    return parseInt(total * 100, 10) * 0.01;
+  }
+
   render() {
     const { email } = this.props;
     const { dispesaTotal, cambio } = this.state;
@@ -27,7 +43,7 @@ class Header extends React.Component {
           </span>
           <span>
             Dispesa Total:
-            <span data-testid="total-field">{dispesaTotal}</span>
+            <span data-testid="total-field">{this.getTotalValue()}</span>
             <span data-testid="header-currency-field">{cambio}</span>
           </span>
         </div>
@@ -42,6 +58,7 @@ Header.propTypes = {
 
 const mapStateToProps = (state) => ({
   email: state.user.email,
+  expenses: state.wallet.expenses,
 });
 
 export default connect(mapStateToProps)(Header);

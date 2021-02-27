@@ -6,11 +6,6 @@ class ExpensesList extends React.Component {
   constructor() {
     super();
     this.getExpensesList = this.getExpensesList.bind(this);
-    this.getTotalValue = this.getTotalValue.bind(this);
-
-    this.state = {
-      totalValue: 0.0,
-    };
   }
 
   getExpensesList() {
@@ -44,9 +39,7 @@ class ExpensesList extends React.Component {
         <td>
           R$
           {
-            (parseInt(
-              exchangeRates[currency].ask * 100, 10,
-            ) * value * UM_POR_CENTO).toFixed(2)
+            parseInt((exchangeRates[currency].ask * value) * 100, 10) * UM_POR_CENTO
           }
         </td>
         <td>Real</td>
@@ -60,24 +53,6 @@ class ExpensesList extends React.Component {
         </td>
       </tr>
     ));
-  }
-
-  getTotalValue() {
-    const { expenses } = this.props;
-
-    let total = 0;
-    expenses.map(({
-      exchangeRates,
-      currency,
-      value,
-    }) => {
-      total
-        += exchangeRates[currency].ask * value;
-      return total;
-    });
-    this.setState({
-      totalValue: total,
-    });
   }
 
   render() {
