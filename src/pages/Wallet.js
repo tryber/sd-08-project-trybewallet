@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchCurrencies as fetchCurrenciesAction,
   fetchToRegister as fetchToRegisterAction } from '../actions';
+import Table from './Table';
 
 const tags = ['', 'Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
 const metPg = ['', 'Dinheiro', 'Cartão de crédito', 'Cartão de débito'];
@@ -161,6 +162,7 @@ class Wallet extends React.Component {
       <body>
         { this.header() }
         { this.forms() }
+        <Table />
       </body>
     );
   }

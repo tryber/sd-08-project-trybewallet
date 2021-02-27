@@ -25,7 +25,7 @@ export function fetchToRegister(state) {
       let stateSemTotal = { ...state };
       delete stateSemTotal.total;
       stateSemTotal = { ...stateSemTotal, exchangeRates: currenciesJason };
-      console.log(stateSemTotal);
+
       return dispatch(addRegister(stateSemTotal));
     } catch (error) {
       console.log(error);

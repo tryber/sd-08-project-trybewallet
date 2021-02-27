@@ -18,7 +18,6 @@ function wallet(state = initialState, action) {
     return { ...state, currencies: currenciesArray, isFetching: false };
   }
   case 'ADD_REGISTER':
-    console.log(state);
     return {
       ...state,
       expenses: [...state.expenses, { id: state.expenses.length, ...action.value }],
