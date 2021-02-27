@@ -1,0 +1,9 @@
+form {
+  align-items: center;
+  background-color: black;
+  color: white;
+  display: flex;
+  flex-wrap: wrap;
+  height: 80px;
+  justify-content: center;
+}
