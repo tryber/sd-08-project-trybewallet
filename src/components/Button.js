@@ -11,6 +11,7 @@ class Button extends Component {
     this.renderButton = this.renderButton.bind(this);
     this.toggleTrue = this.toggleTrue.bind(this);
     this.toggleFalse = this.toggleFalse.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidUpdate() {
@@ -37,20 +38,40 @@ class Button extends Component {
     this.renderButton();
   }
 
+  handleSubmit() {
+    const { emailToSave, passwordToSave } = this.props;
+    this.setState({ saveInformation: [emailToSave, passwordToSave],
+    });
+  }
+
   renderButton() {
     const { undisabled } = this.state;
-    let render;
+
+    let renderBtn;
     if (undisabled === true) {
-      render = <button type="button" disabled={ false }>Entrar</button>;
+      renderBtn = (
+        <button
+          type="button"
+          onClick={ this.handleSubmit }
+          disabled={ false }
+        >
+          Entrar
+        </button>);
     } else {
-      render = <button type="button" disabled>Entrar</button>;
+      renderBtn = <button type="button" disabled>Entrar</button>;
     }
-    return render;
+    return renderBtn;
   }
 
   render() {
+    const { saveInformation } = this.state;
     return (
-      <div>{(this.renderButton())}</div>
+      <div>
+        <h2>
+          {`Seu e-mail é: ${saveInformation[0]}, sua senha é ${saveInformation[1]}`}
+        </h2>
+        {(this.renderButton())}
+      </div>
     );
   }
 }
@@ -58,6 +79,8 @@ class Button extends Component {
 Button.propTypes = {
   verifyEmail: PropTypes.bool.isRequired,
   verifyPassword: PropTypes.bool.isRequired,
+  emailToSave: PropTypes.string.isRequired,
+  passwordToSave: PropTypes.string.isRequired,
 };
 
 export default Button;
