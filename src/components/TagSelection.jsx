@@ -1,30 +1,9 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import handleInputsAction from '../actions/handleInputs';
 
 class TagSelection extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-      value: '',
-    };
-
-    this.changeSelection = this.changeSelection.bind(this);
-  }
-
-  changeSelection(event) {
-    const { target: { value } } = event;
-    const { handlingChange } = this.props;
-    this.setState({
-      value,
-    });
-    handlingChange(event);
-  }
-
   render() {
-    const { value } = this.state;
+    const { value, changeInput } = this.props;
 
     return (
       <label htmlFor="tag">
@@ -33,7 +12,7 @@ class TagSelection extends Component {
           name="tag"
           type="text"
           value={ value }
-          onChange={ this.changeSelection }
+          onChange={ changeInput }
           data-testid="tag-input"
         >
           <option key="choose" value="">Escolha a categoria</option>
@@ -47,13 +26,9 @@ class TagSelection extends Component {
     );
   }
 }
-
-const mapDispatchToProps = (dispatch) => ({
-  handlingChange: (event) => dispatch(handleInputsAction(event)),
-});
-
 TagSelection.propTypes = {
-  handlingChange: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
+  changeInput: PropTypes.func.isRequired,
 };
 
-export default connect(null, mapDispatchToProps)(TagSelection);
+export default TagSelection;

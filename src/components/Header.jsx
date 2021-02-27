@@ -9,24 +9,29 @@ class Header extends Component {
     this.sumExpenses = this.sumExpenses.bind(this);
   }
 
-  componentDidUpdate() {
-    this.sumExpenses();
+  componentDidUpdate(prevProps) {
+    const { expenses } = this.props;
+    if (expenses !== prevProps.expenses) {
+      this.sumExpenses();
+    }
   }
 
   sumExpenses() {
     const { expenses } = this.props;
-    const currency = expenses.forEach((exp) => {
-      const rates = [...exp.exchangeRates];
-
-      return rates;
+    let sum = [];
+    const currency = expenses.map((exp) => {
+      const rates = Object.values(exp.exchangeRates);
+      let conversion;
+      rates.forEach((rate) => {
+        if (rate.codein === 'BRL' && rate.code === exp.currency) {
+          conversion = (rate.ask * exp.value);
+        }
+      });
+      return parseFloat(conversion.toFixed(2));
     });
-    // if (expenses.length > 0) {
-    //   const getCurrencyRate = expenses
-    //     .map((exp) => (exp.currency === exp.exchangeRates.code)
-    //       && exp.exchangeRates.ask);
-    //   console.log(getCurrencyRate);
-    // }
-    console.log(currency);
+    sum = [...currency];
+    const reduceSum = ((acc, num) => acc + num);
+    return sum.reduce(reduceSum, 0);
   }
 
   render() {
@@ -39,7 +44,7 @@ class Header extends Component {
         </h4>
         <h4>
           Despesas gerais:
-          <span data-testid="total-field">0</span>
+          <span data-testid="total-field">{ this.sumExpenses() }</span>
           <span data-testid="header-currency-field">BRL</span>
         </h4>
       </header>

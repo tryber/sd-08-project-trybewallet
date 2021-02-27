@@ -14,11 +14,12 @@ class AddExpensesBtn extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { handlingInputs, addExpenses, clearInputHandler } = this.props;
+    const { handlingInputs, addExpenses, clearInputHandler, resetInputs } = this.props;
     if (handlingInputs[0].exchangeRates !== prevProps.handlingInputs[0].exchangeRates
     && handlingInputs[0].id !== '') {
       addExpenses(handlingInputs);
       clearInputHandler();
+      resetInputs();
     }
   }
 
@@ -60,6 +61,7 @@ AddExpensesBtn.propTypes = {
   expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
   handlingInputs: PropTypes.arrayOf(PropTypes.object).isRequired,
   clearInputHandler: PropTypes.func.isRequired,
+  resetInputs: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddExpensesBtn);

@@ -12,12 +12,10 @@ function failedRequest(error) {
 }
 
 export default function fetchExchangeRatesAction() {
-  return (dispatch) => {
-    return fetch('https://economia.awesomeapi.com.br/json/all')
-      .then((r) => r.json()
-        .then(
-          (json) => dispatch(getExchangeRates(json)),
-          (error) => dispatch(failedRequest(error)),
-        ));
-  };
+  return (dispatch) => fetch('https://economia.awesomeapi.com.br/json/all')
+    .then((r) => r.json()
+      .then(
+        (json) => dispatch(getExchangeRates(json)),
+        (error) => dispatch(failedRequest(error)),
+      ));
 }

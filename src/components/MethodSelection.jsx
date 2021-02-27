@@ -1,30 +1,9 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import handleInputsAction from '../actions/handleInputs';
 
 class MethodSelection extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-      value: '',
-    };
-
-    this.changeSelection = this.changeSelection.bind(this);
-  }
-
-  changeSelection(event) {
-    const { target: { value } } = event;
-    const { handlingChange } = this.props;
-    this.setState({
-      value,
-    });
-    handlingChange(event);
-  }
-
   render() {
-    const { value } = this.state;
+    const { value, changeInput } = this.props;
 
     return (
       <label htmlFor="method">
@@ -33,7 +12,7 @@ class MethodSelection extends Component {
           name="method"
           type="text"
           value={ value }
-          onChange={ this.changeSelection }
+          onChange={ changeInput }
           data-testid="method-input"
         >
           <option key="choose" value="">Forma de pagamento</option>
@@ -46,12 +25,9 @@ class MethodSelection extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  handlingChange: (event) => dispatch(handleInputsAction(event)),
-});
-
 MethodSelection.propTypes = {
-  handlingChange: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
+  changeInput: PropTypes.func.isRequired,
 };
 
-export default connect(null, mapDispatchToProps)(MethodSelection);
+export default MethodSelection;
