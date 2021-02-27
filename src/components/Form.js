@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { fetchCurrency as fetchCurrencyAction,
   addExpense as addExpenseAction } from '../actions';
 
@@ -11,7 +12,7 @@ class Form extends React.Component {
         id: null,
         value: '0',
         description: '',
-        currency: '',
+        currency: 'USD',
         method: '',
         tag: '',
         exchangeRates: {},
@@ -159,7 +160,7 @@ class Form extends React.Component {
               onChange={ this.handleChange }
             />
           </label>
-          {this.renderDescription}
+          {this.renderDescription()}
           <label htmlFor="currency">
             moeda
             {this.renderSelect()}
@@ -176,7 +177,7 @@ class Form extends React.Component {
               <option>Cartão de débito</option>
             </select>
           </label>
-          {this.renderTagInput}
+          {this.renderTagInput()}
           <button type="submit" onClick={ this.saveExpenses }>Adicionar despesa</button>
         </form>
       </div>
