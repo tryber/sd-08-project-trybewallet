@@ -17,6 +17,7 @@ class Wallet extends React.Component {
       method: '',
       tag: '',
       description: '',
+      total: 0,
     };
 
     this.header = this.header.bind(this);
@@ -33,6 +34,7 @@ class Wallet extends React.Component {
 
   header() {
     const { email } = this.props;
+    const { total } = this.state;
     return (
       <header>
         <div>TrybeWallet</div>
@@ -42,7 +44,7 @@ class Wallet extends React.Component {
             { email }
           </span>
         </span>
-        <span data-testid="total-field">0</span>
+        <span data-testid="total-field">{ total }</span>
         <span data-testid="header-currency-field">BRL</span>
       </header>
     );
@@ -94,15 +96,22 @@ class Wallet extends React.Component {
     );
   }
 
-  handleChange() {
+  async handleChange() {
     const { fetchToRegister } = this.props;
-    fetchToRegister(this.state);
+    await fetchToRegister(this.state);
+    const { value, currency, total } = this.state;
+    const { expenses } = this.props;
+
+    const soma = parseFloat(value)
+      * parseFloat(expenses[0].exchangeRates[currency].ask) + total;
+
     this.setState({
       value: '',
       currency: 'USD',
       method: '',
       tag: '',
       description: '',
+      total: soma,
     });
   }
 
@@ -162,6 +171,7 @@ Wallet.propTypes = {
   currencies: PropTypes.func.isRequired,
   isFetching: PropTypes.func.isRequired,
   fetchCurrencies: PropTypes.func.isRequired,
+  expenses: PropTypes.func.isRequired,
   fetchToRegister: PropTypes.func.isRequired,
 };
 
@@ -172,9 +182,9 @@ const mapDispatchToProps = (dispatch) => ({
 
 const mapStateToProps = (state) => ({
   email: state.user.email,
-  total: state.wallet.total,
   currencies: state.wallet.currencies,
   isFetching: state.wallet.isFetching,
+  expenses: state.wallet.expenses,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Wallet);

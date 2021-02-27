@@ -3,7 +3,6 @@ const initialState = {
   currencies: [],
   expenses: [],
   isFetching: true,
-  total: 0,
 };
 
 function wallet(state = initialState, action) {
@@ -19,16 +18,11 @@ function wallet(state = initialState, action) {
     return { ...state, currencies: currenciesArray, isFetching: false };
   }
   case 'ADD_REGISTER':
-  {
-    const { total } = state;
-    const soma = action.value.value * action.value.exchangeRates[action.value.currency]
-      .ask + total;
+    console.log(state);
     return {
       ...state,
       expenses: [...state.expenses, { id: state.expenses.length, ...action.value }],
-      total: soma,
     };
-  }
   default:
     return state;
   }

@@ -24,7 +24,7 @@ export function fetchToRegister(state) {
       const currenciesJason = await currenciesResponse.json();
 
       state = { ...state, exchangeRates: currenciesJason };
-
+      console.log(state);
       return dispatch(addRegister(state));
     } catch (error) {
       console.log(error);
