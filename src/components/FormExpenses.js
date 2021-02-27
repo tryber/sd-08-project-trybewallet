@@ -19,6 +19,7 @@ class FormExpenses extends Component {
     this.renderSelectF = this.renderSelectF.bind(this);
     this.renderListOptions = this.renderListOptions.bind(this);
     this.handleInput = this.handleInput.bind(this);
+    this.renderCurrenciesOptions = this.renderCurrenciesOptions.bind(this);
   }
 
   handleInput(type, { value }) {
@@ -31,6 +32,10 @@ class FormExpenses extends Component {
     return arraySelect.map((e) => (
       <option key={ e } value={ e }>{e}</option>
     ));
+  }
+
+  renderCurrenciesOptions(arraySelect) {
+    console.log(arraySelect);
   }
 
   renderSelectF() {
@@ -48,7 +53,7 @@ class FormExpenses extends Component {
             value={ currency }
             onChange={ ({ target }) => this.handleInput('currency', target) }
           >
-            {this.renderListOptions(currencies)}
+            {this.renderCurrenciesOptions(currencies)}
           </select>
         </label>
         <label htmlFor="methodInput">

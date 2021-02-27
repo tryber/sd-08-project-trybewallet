@@ -21,7 +21,7 @@ class Wallet extends React.Component {
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchCurrencies: () => dispatch(fetchCurrencies()),
+    propFetchCurrencies: () => dispatch(fetchCurrencies()),
   };
 }
 
