@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-class WalletHeader extends React.Component {
+class ExpensesHeader extends React.Component {
   constructor() {
     super();
 
@@ -14,7 +14,7 @@ class WalletHeader extends React.Component {
     return expenses.length < 1 ? 0 : expenses.reduce(
       (acc, { value, exchangeRates, currency }) => acc
         + parseFloat(value) * exchangeRates[currency].ask, 0,
-    );
+    ).toFixed(2);
   }
 
   render() {
@@ -31,7 +31,7 @@ class WalletHeader extends React.Component {
           </thead>
           <tbody>
             <tr>
-              <td data-testid="total-field">{ this.getExpensesTotal().toFixed(2) }</td>
+              <td data-testid="total-field">{ `$ ${this.getExpensesTotal()}` }</td>
               <td data-testid="header-currency-field">BRL</td>
             </tr>
           </tbody>
@@ -46,9 +46,9 @@ const mapStateToProps = (state) => ({
   expenses: state.wallet.expenses,
 });
 
-WalletHeader.propTypes = {
+ExpensesHeader.propTypes = {
   email: PropTypes.string.isRequired,
   expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-export default connect(mapStateToProps)(WalletHeader);
+export default connect(mapStateToProps)(ExpensesHeader);

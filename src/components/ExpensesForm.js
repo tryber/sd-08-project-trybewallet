@@ -2,7 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { addExpense, fetchCurrencies as fetchCurrenciesAction } from '../actions';
+import {
+  addExpense as addExpenseAction,
+  fetchCurrencies as fetchCurrenciesAction,
+} from '../actions';
 
 class ExpensesForm extends React.Component {
   constructor() {
@@ -20,7 +23,6 @@ class ExpensesForm extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
-    this.renderCurrencyOptions = this.renderCurrencyOptions.bind(this);
     this.renderInput = this.renderInput.bind(this);
     this.renderSelect = this.renderSelect.bind(this);
   }
@@ -39,7 +41,7 @@ class ExpensesForm extends React.Component {
 
   async handleClick(event) {
     event.preventDefault();
-    const { expense } = this.props;
+    const { addExpense } = this.props;
     const apiResponse = await fetch('https://economia.awesomeapi.com.br/json/all');
     const apiJson = await apiResponse.json();
     this.setState({ exchangeRates: apiJson }, () => {
@@ -47,13 +49,8 @@ class ExpensesForm extends React.Component {
         id: previousState.id + 1,
         value: 0,
       }));
-      expense(this.state);
+      addExpense(this.state);
     });
-  }
-
-  renderCurrencyOptions() {
-    const { currencies } = this.props;
-    return Object.keys(currencies[0]).filter((currency) => currency !== 'USDT');
   }
 
   renderInput(name, attribute, state) {
@@ -97,7 +94,7 @@ class ExpensesForm extends React.Component {
   }
 
   render() {
-    const { loading } = this.props;
+    const { loading, currencies } = this.props;
     const { value, description, currency, method, tag } = this.state;
     const paymentMethods = ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'];
     const expenseTags = ['Lazer', 'Alimentação', 'Trabalho', 'Transporte', 'Saúde'];
@@ -106,9 +103,7 @@ class ExpensesForm extends React.Component {
       <form>
         { this.renderInput('Valor:', 'value', value) }
         { this.renderInput('Descrição:', 'description', description) }
-        { !loading && this.renderSelect(
-          'Moeda:', 'currency', currency, this.renderCurrencyOptions(),
-        ) }
+        { !loading && this.renderSelect('Moeda:', 'currency', currency, currencies) }
         { this.renderSelect('Método de pagamento:', 'method', method, paymentMethods) }
         { this.renderSelect('Categoria da Despesa:', 'tag', tag, expenseTags) }
         <button onClick={ this.handleClick } type="submit">Adicionar Despesa</button>
@@ -123,15 +118,19 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  expense: (payload) => dispatch(addExpense(payload)),
+  addExpense: (payload) => dispatch(addExpenseAction(payload)),
   fetchCurrencies: () => dispatch(fetchCurrenciesAction()),
 });
 
 ExpensesForm.propTypes = {
-  expense: PropTypes.func.isRequired,
+  addExpense: PropTypes.func.isRequired,
   fetchCurrencies: PropTypes.func.isRequired,
-  loading: PropTypes.bool.isRequired,
-  currencies: PropTypes.arrayOf(PropTypes.object).isRequired,
+  loading: PropTypes.bool,
+  currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
+
+ExpensesForm.defaultProps = {
+  loading: undefined,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExpensesForm);

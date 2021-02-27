@@ -2,13 +2,13 @@ import React from 'react';
 
 import ExpensesForm from '../components/ExpensesForm';
 import ExpensesTable from '../components/ExpensesTable';
-import WalletHeader from '../components/WalletHeader';
+import ExpensesHeader from '../components/ExpensesHeader';
 
 class Wallet extends React.Component {
   render() {
     return (
       <>
-        <WalletHeader />
+        <ExpensesHeader />
         <main>
           <ExpensesTable />
           <ExpensesForm />
