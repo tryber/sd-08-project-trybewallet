@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import selectFields from '../Database/selectFields';
+import { fetchCurrencies } from '../actions';
 import './FormExpenses.css';
 
 class FormExpenses extends Component {
@@ -20,6 +21,12 @@ class FormExpenses extends Component {
     this.renderListOptions = this.renderListOptions.bind(this);
     this.handleInput = this.handleInput.bind(this);
     this.renderCurrenciesOptions = this.renderCurrenciesOptions.bind(this);
+    this.handleAddExpense = this.handleAddExpense.bind(this);
+  }
+
+  handleAddExpense() {
+    const { propFetchCurrencies } = this.props;
+    propFetchCurrencies();
   }
 
   handleInput(type, { value }) {
@@ -113,7 +120,7 @@ class FormExpenses extends Component {
             onChange={ ({ target }) => this.handleInput('description', target) }
           />
         </label>
-        <button type="button">Adicionar Despesa</button>
+        <button type="button" onClick={this.handleAddExpense}>Adicionar Despesa</button>
       </form>
     );
   }
@@ -125,9 +132,16 @@ function mapStateToProps({ wallet }) {
   };
 }
 
-export default connect(mapStateToProps)(FormExpenses);
+function mapDispatchToProps(dispatch) {
+  return {
+    propFetchCurrencies: () => dispatch(fetchCurrencies()),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FormExpenses);
 
 FormExpenses.propTypes = {
+  propFetchCurrencies: PropTypes.func.isRequired,
   currencies: PropTypes.arrayOf(PropTypes.shape({
     ask: PropTypes.string.isRequired,
     bid: PropTypes.string.isRequired,
