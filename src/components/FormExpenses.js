@@ -35,7 +35,8 @@ class FormExpenses extends Component {
   }
 
   renderCurrenciesOptions(arraySelect) {
-    console.log(arraySelect);
+    return arraySelect.map(({ code, codein }) => codein === 'BRL'
+    && <option key={ code } value={ code } data-testid={ code }>{code}</option>);
   }
 
   renderSelectF() {

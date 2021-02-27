@@ -10,7 +10,12 @@ function wallet(state = INITIAL_STATE, action) {
   case REFRESH_CURRENCIES:
     return {
       ...state,
-      currencies: [...action.payload.currencies],
+      currencies: Object.values(action.payload.currencies),
+    };
+  case FAILED_FETCH_CURRENCIES:
+    return {
+      ...state,
+      error: action.payload.error,
     };
   default:
     return state;
