@@ -8,3 +8,7 @@
 .formulario label input {
   margin: 10px 10px 10px 5px;
 }
+
+.formulario label select {
+  margin: 10px 10px 10px 5px;
+}

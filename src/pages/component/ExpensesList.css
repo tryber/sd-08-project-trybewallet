@@ -1,0 +1,20 @@
+.table-body {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  width: 100vw;
+}
+
+.table {
+  background: rgb(199, 191, 191);
+  overflow-y: scroll;
+  width: 95vw;
+}
+
+.table tr {
+  text-align: center;
+}
+
+.table tr td {
+  border: solid 1px;
+}
