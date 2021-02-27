@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 import PropTypes from 'prop-types';
-import { Button, Form } from 'react-bootstrap';
 import loginUser from '../actions';
 
 class Login extends React.Component {
@@ -49,34 +48,34 @@ class Login extends React.Component {
     if (redirect) return <Redirect to="/carteira" />;
     return (
       <div className="d-flex height-100 justify-content-center bg-dark">
-        <Form
+        <form
           className="box-radius border bg-primary w-auto m-auto p-5 shadow"
         >
-          <Form.Group>
-            <Form.Label>
+          <div>
+            <label htmlFor="input">
               Email:
-              <Form.Control
+              <input
                 data-testid="email-input"
                 type="email"
                 name="email"
                 placeholder="digite seu email"
                 onChange={ this.handleChange }
               />
-            </Form.Label>
-          </Form.Group>
-          <Form.Group>
-            <Form.Label>
+            </label>
+          </div>
+          <div>
+            <label htmlFor="input">
               Senha:
-              <Form.Control
+              <input
                 data-testid="password-input"
                 type="password"
                 name="password"
                 placeholder="digite sua senha"
                 onChange={ this.handleChange }
               />
-            </Form.Label>
-          </Form.Group>
-          <Button
+            </label>
+          </div>
+          <button
             variant="success"
             type="button"
             disabled={ !validated }
@@ -86,8 +85,8 @@ class Login extends React.Component {
             } }
           >
             Entrar
-          </Button>
-        </Form>
+          </button>
+        </form>
       </div>
     );
   }
