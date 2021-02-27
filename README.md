@@ -1,3 +1,7 @@
+# Observação
+
+Criei essa branch porque queria experimentar como ficaria o projeto usando o reduxsauce (entre outras coisas), achei interessante e resolvi deixar aqui para o caso de alguém também se interessar.
+
 ### Termos e acordos
 
 Ao iniciar este projeto, você concorda com as diretrizes do Código de Ética e Conduta e do Manual da Pessoa Estudante da Trybe.

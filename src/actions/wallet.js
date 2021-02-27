@@ -1,5 +1,5 @@
 import { createActions } from 'reduxsauce';
-import api from '../services';
+import getCoins from '../services';
 
 export const { Types, Creators } = createActions({
   addExpense: ['expense'],
@@ -10,12 +10,12 @@ export const { Types, Creators } = createActions({
 });
 
 Creators.addExpenseWithCoins = (expense) => async (dispatch) => {
-  const coins = await api.getCoins();
+  const coins = await getCoins();
   dispatch(Creators.addExpense({ ...expense, exchangeRates: coins }));
 };
 
 Creators.fetchCurrencies = () => async (dispatch) => {
-  const currencies = await api.getCoins();
+  const currencies = await getCoins();
   delete currencies.USDT;
   const currenciesCodes = Object.values(currencies).map(({ code }) => code);
   dispatch(Creators.saveCurrencies(currenciesCodes));
