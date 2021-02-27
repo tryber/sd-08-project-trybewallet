@@ -12,9 +12,9 @@ class ExpensesForm extends React.Component {
       id: 0,
       value: 0,
       description: '',
-      currency: 'Selecione',
-      method: 'Selecione',
-      tag: 'Selecione',
+      currency: 'USD',
+      method: 'Dinheiro',
+      tag: 'Lazer',
       exchangeRates: {},
     };
 
@@ -45,6 +45,7 @@ class ExpensesForm extends React.Component {
     this.setState({ exchangeRates: apiJson }, () => {
       this.setState((previousState) => ({
         id: previousState.id + 1,
+        value: 0,
       }));
       expense(this.state);
     });
@@ -81,7 +82,6 @@ class ExpensesForm extends React.Component {
           onChange={ this.handleChange }
           value={ state }
         >
-          <option disabled>Selecione</option>
           { options.map((option) => (
             <option
               data-testid={ option }
