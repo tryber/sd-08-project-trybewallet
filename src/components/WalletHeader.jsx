@@ -39,7 +39,7 @@ WalletHeader.propTypes = {
   walletTotal: PropTypes.number,
 };
 
-WalletHeader.defaulProps = {
+WalletHeader.defaultProps = {
   walletTotal: 0,
 };
 export default connect(mapStateToProps)(WalletHeader);
