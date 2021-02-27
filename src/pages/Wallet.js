@@ -10,9 +10,9 @@ class Wallet extends React.Component {
   render() {
     return (
       <div>
-        <div><Header /></div>
-        <div><FormWallet /></div>
-        <div><Table /></div>
+        <p><Header /></p>
+        <p><FormWallet /></p>
+        <p><Table /></p>
       </div>
     );
   }
