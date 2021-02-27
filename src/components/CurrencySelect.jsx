@@ -15,25 +15,23 @@ function CurrencySelect({ onChange, ...rest }) {
   };
   fetchCurrList();
   return (
-    <label htmlFor="currency">
-      Moeda:
-      <select
-        name="currency"
-        data-testid="currency-input"
-        role="combobox"
-        onChange={ onChange }
-        { ...rest }
-      >
-        {currList && currList.map((curr) => (
-          <option
-            key={ curr }
-            data-testid={ curr }
-            value={ curr }
-          >
-            {curr}
-          </option>))}
-      </select>
-    </label>
+    <select
+      name="currency"
+      data-testid="currency-input"
+      role="combobox"
+      onChange={ onChange }
+      { ...rest }
+    >
+      {currList && currList.map((curr) => (
+        <option
+          key={ curr }
+          data-testid={ curr }
+          value={ curr }
+        >
+          {curr}
+        </option>))}
+    </select>
+
   );
 }
 

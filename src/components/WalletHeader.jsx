@@ -12,7 +12,7 @@ function WalletHeader() {
     }, 0).toFixed(2);
   }
   return (
-    <header className="wallet-header">
+    <header className="wallet-header" role="banner">
       <div className="wallet-header-content">
         <span className="wallet-header-email">E-mail:</span>
         <span data-testid="email-field">{email}</span>

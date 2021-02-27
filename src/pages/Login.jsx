@@ -37,7 +37,7 @@ function Login() {
   };
   const { email, password } = data;
   return (
-    <main>
+    <div>
       <InputEmail value={ email } onChange={ handleChange } />
       <InputPassword value={ password } onChange={ handleChange } />
       <button
@@ -48,7 +48,7 @@ function Login() {
       >
         Entrar
       </button>
-    </main>
+    </div>
   );
 }
 

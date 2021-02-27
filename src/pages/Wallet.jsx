@@ -6,11 +6,11 @@ import WalletTable from '../components/WalletTable';
 
 function Wallet() {
   return (
-    <main>
+    <div>
       <WalletHeader />
       <FormExpense />
       <WalletTable />
-    </main>
+    </div>
   );
 }
 

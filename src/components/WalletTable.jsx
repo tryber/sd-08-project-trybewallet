@@ -35,8 +35,8 @@ function WalletTable() {
   return (
     <table>
       <tbody>
-        <tr>
-          {TABLE_HEADERS.map((i) => <th key={ i }>{i}</th>)}
+        <tr role="row">
+          {TABLE_HEADERS.map((i) => <th role="columnheader" key={ i }>{i}</th>)}
         </tr>
         {expListBuilder().map((expense) => (
           <WalletTableItem key={ expense.id } data={ expense } />)) || null}
