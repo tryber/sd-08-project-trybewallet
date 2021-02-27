@@ -7,13 +7,13 @@ class Header extends React.Component {
   constructor() {
     super();
     this.state = {
-      dispesaTotal: 0,
       cambio: 'BRL',
     };
   }
 
   getTotalValue() {
     const { expenses } = this.props;
+    const UM_POR_CENTO = 0.01;
 
     let total = 0;
     expenses.map(({
@@ -25,12 +25,12 @@ class Header extends React.Component {
         += exchangeRates[currency].ask * value;
       return total;
     });
-    return parseInt(total * 100, 10) * 0.01;
+    return parseInt(total * 100, 10) * UM_POR_CENTO;
   }
 
   render() {
     const { email } = this.props;
-    const { dispesaTotal, cambio } = this.state;
+    const { cambio } = this.state;
     return (
       <header className="header">
         <h1 className="header-items">tryberWallet</h1>
@@ -54,6 +54,7 @@ class Header extends React.Component {
 
 Header.propTypes = {
   email: PropTypes.string.isRequired,
+  expenses: PropTypes.shape.isRequired,
 };
 
 const mapStateToProps = (state) => ({
