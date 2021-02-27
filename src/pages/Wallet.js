@@ -99,6 +99,48 @@ class Wallet extends React.Component {
     );
   }
 
+  renderTable() {
+    const { expenses } = this.props;
+    return (
+      <table>
+        <thead>
+          <th>Descrição</th>
+          <th>Tag</th>
+          <th>Método de pagamento</th>
+          <th>Valor</th>
+          <th>Moeda</th>
+          <th>Câmbio utilizado</th>
+          <th>Valor convertido</th>
+          <th>Moeda de conversão</th>
+          <th>Editar/Excluir</th>
+        </thead>
+        <tbody>
+          {expenses.map((despesa) => {
+            const moedaDeCambio = Object.values(despesa.exchangeRates)
+              .filter((el) => despesa.currency === el.code);
+
+            return (
+              <tr key={ despesa.id }>
+                <td>{despesa.description}</td>
+                <td>{despesa.tag}</td>
+                <td>{despesa.method}</td>
+                <td>{despesa.value}</td>
+                <td>{moedaDeCambio[0].name}</td>
+                <td>{parseFloat(moedaDeCambio[0].ask).toFixed(2)}</td>
+                <td>
+                  {(parseFloat(despesa.value) * parseFloat(moedaDeCambio[0].ask))
+                    .toFixed(2)}
+                </td>
+                <td>Real</td>
+                <td>Editar</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    );
+  }
+
   render() {
     const { email, expenses, expenseFuncAdd } = this.props;
     const { exchangeRates, value, description,
@@ -110,8 +152,9 @@ class Wallet extends React.Component {
     let soma = 0;
     expenses.forEach((element) => {
       const valorMoeda = newMoedas.filter((el) => el.code === element.currency);
-      // console.log(valorMoeda);
-      soma += (parseFloat(element.value) * parseFloat(valorMoeda[0].ask));
+      if (valorMoeda.length >= 1) {
+        soma += (parseFloat(element.value) * parseFloat(valorMoeda[0].ask));
+      }
     });
     const handleFunc = this.handleChangeCampo.bind(this);
     // console.log(newMoedas);
@@ -142,6 +185,7 @@ class Wallet extends React.Component {
         >
           Adicionar despesa
         </button>
+        {this.renderTable()}
       </div>
     );
   }
