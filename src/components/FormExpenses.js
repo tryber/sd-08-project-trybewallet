@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import selectFields from '../Database/selectFields';
-import { fetchCurrencies } from '../actions';
+import { addExpense, fetchCurrencies, newCurrencyID } from '../actions';
 import './FormExpenses.css';
 
 class FormExpenses extends Component {
@@ -12,7 +12,7 @@ class FormExpenses extends Component {
       formControl: {
         value: '0',
         currency: '',
-        payMethod: 'Dinheiro',
+        method: 'Dinheiro',
         tag: 'Alimentação',
         description: '',
       },
@@ -25,8 +25,29 @@ class FormExpenses extends Component {
   }
 
   handleAddExpense() {
-    const { propFetchCurrencies } = this.props;
+    const {
+      propAddExpense, propFetchCurrencies, propNewCurrencyID, UID, currencies,
+    } = this.props;
+    const { formControl: {
+      value,
+      currency,
+      method,
+      tag,
+      description,
+    } } = this.state;
     propFetchCurrencies();
+
+    const expenseObj = {
+      id: UID,
+      value,
+      description,
+      currency,
+      method,
+      tag,
+      exchangeRates: currencies,
+    };
+    propAddExpense(expenseObj);
+    propNewCurrencyID();
   }
 
   handleInput(type, { value }) {
@@ -48,7 +69,7 @@ class FormExpenses extends Component {
 
   renderSelectF() {
     const { payMethods, payTags } = selectFields;
-    const { formControl: { currency, payMethod, tag } } = this.state;
+    const { formControl: { currency, method, tag } } = this.state;
     const { currencies } = this.props;
     return (
       <div>
@@ -70,8 +91,8 @@ class FormExpenses extends Component {
             id="methodInput"
             name="methodInput"
             data-testid="method-input"
-            value={ payMethod }
-            onChange={ ({ target }) => this.handleInput('payMethod', target) }
+            value={ method }
+            onChange={ ({ target }) => this.handleInput('method', target) }
           >
             {this.renderListOptions(payMethods)}
           </select>
@@ -120,7 +141,7 @@ class FormExpenses extends Component {
             onChange={ ({ target }) => this.handleInput('description', target) }
           />
         </label>
-        <button type="button" onClick={this.handleAddExpense}>Adicionar Despesa</button>
+        <button type="button" onClick={ this.handleAddExpense }>Adicionar Despesa</button>
       </form>
     );
   }
@@ -129,12 +150,15 @@ class FormExpenses extends Component {
 function mapStateToProps({ wallet }) {
   return {
     currencies: wallet.currencies,
+    UID: wallet.expenseUID,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     propFetchCurrencies: () => dispatch(fetchCurrencies()),
+    propNewCurrencyID: () => dispatch(newCurrencyID()),
+    propAddExpense: (expenseObj) => dispatch(addExpense(expenseObj)),
   };
 }
 
@@ -142,6 +166,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(FormExpenses);
 
 FormExpenses.propTypes = {
   propFetchCurrencies: PropTypes.func.isRequired,
+  propNewCurrencyID: PropTypes.func.isRequired,
+  propAddExpense: PropTypes.func.isRequired,
   currencies: PropTypes.arrayOf(PropTypes.shape({
     ask: PropTypes.string.isRequired,
     bid: PropTypes.string.isRequired,
@@ -155,4 +181,5 @@ FormExpenses.propTypes = {
     timestamp: PropTypes.string.isRequired,
     varBid: PropTypes.string.isRequired,
   }).isRequired).isRequired,
+  UID: PropTypes.number.isRequired,
 };

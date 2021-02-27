@@ -1,6 +1,8 @@
 export const STORE_EMAIL = 'STORE_EMAIL';
 export const REFRESH_CURRENCIES = 'REFRESH_CURRENCIES';
 export const FAILED_FETCH_CURRENCIES = 'FAILED_FETCH_CURRENCIES';
+export const NEW_CURRENCY_UID = 'NEW_CURRENCY_UID';
+export const ADD_EXPENSE = 'ADD_EXPENSE';
 
 export function storeEmail(email) {
   return {
@@ -38,5 +40,20 @@ export function fetchCurrencies() {
     } catch (error) {
       return dispatch(failedFetchCurrencies(error));
     }
+  };
+}
+
+export function newCurrencyID() {
+  return {
+    type: NEW_CURRENCY_UID,
+  };
+}
+
+export function addExpense(expenseObj) {
+  return {
+    type: ADD_EXPENSE,
+    payload: {
+      expenseObj,
+    },
   };
 }
