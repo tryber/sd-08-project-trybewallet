@@ -5,7 +5,7 @@ class Select extends React.Component {
   render() {
     const { name, value, dataTest, options, onChange, children } = this.props;
     return (
-      <label htmlFor="select">
+      <label htmlFor={ name }>
         { children }
         <select
           name={ name }

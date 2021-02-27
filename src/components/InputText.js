@@ -5,7 +5,7 @@ class InputText extends React.Component {
   render() {
     const { children, name, dataTest, onChange, value } = this.props;
     return (
-      <label htmlFor="inputText">
+      <label htmlFor={ name }>
         { children }
         <input
           type="text"
