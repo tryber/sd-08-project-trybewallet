@@ -23,6 +23,11 @@
   border-radius: 10px;
 }
 
+.image-header {
+  width: 7%;
+  height: 7%;
+}
+
 .App-header {
   align-items: center;
   background-color: #282c34;
