@@ -20,7 +20,7 @@ class ExpensesTable extends Component {
         <td>{ method }</td>
         <td>{ value }</td>
         <td>{ currencyData.name }</td>
-        <td>{ Math.round(currencyData.ask * 100) / 100 }</td>
+        <td>{ (Math.round(currencyData.ask * 100) / 100).toFixed(2) }</td>
         <td>{ Math.round(convertedValue * 100) / 100 }</td>
         <td>Real</td>
         <td>

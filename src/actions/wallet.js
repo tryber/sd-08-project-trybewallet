@@ -6,6 +6,8 @@ export const Types = {
   REMOVE_EXPENSE: 'REMOVE_EXPENSE',
   EDIT_EXPENSE: 'EDIT_EXPENSE',
   SAVE_EXPENSE: 'SAVE_EXPENSE',
+  SAVE_CURRENCIES: 'SAVE_CURRENCIES',
+  FETCH_CURRENCIES: 'FETCH_CURRENCIES',
 };
 
 export const Creators = {
@@ -29,4 +31,14 @@ export const Creators = {
     type: Types.SAVE_EXPENSE,
     payload: expense,
   }),
+  saveCurrencies: (currencies) => ({
+    type: Types.SAVE_CURRENCIES,
+    payload: currencies,
+  }),
+  fetchCurrencies: () => async (dispatch) => {
+    const currencies = await api.getCoins();
+    delete currencies.USDT;
+    const currenciesCodes = Object.values(currencies).map(({ code }) => code);
+    dispatch(Creators.saveCurrencies(currenciesCodes));
+  },
 };

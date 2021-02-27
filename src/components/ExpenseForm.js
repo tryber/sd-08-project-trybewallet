@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import api from '../services';
+import { connect } from 'react-redux';
+
 import expenseType from '../types';
 
 import styles from '../styles/components/ExpenseForm.module.css';
@@ -13,7 +14,6 @@ class ExpenseForm extends Component {
 
     this.state = {
       ...initialState,
-      coinTypes: [],
     };
 
     this.paymentMethods = ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'];
@@ -21,13 +21,6 @@ class ExpenseForm extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleButtonAction = this.handleButtonAction.bind(this);
-  }
-
-  componentDidMount() {
-    api.getCoins().then((coins) => {
-      delete coins.USDT;
-      this.setState({ coinTypes: Object.values(coins) });
-    });
   }
 
   handleChange({ target: { name, value } }) {
@@ -75,7 +68,8 @@ class ExpenseForm extends Component {
   }
 
   renderCurrencySelect() {
-    const { fields: { currency }, coinTypes } = this.state;
+    const { fields: { currency } } = this.state;
+    const { currencies } = this.props;
     return (
       <select
         type="text"
@@ -85,7 +79,7 @@ class ExpenseForm extends Component {
         placeholder="Tipo de moeda"
         onChange={ this.handleChange }
       >
-        { coinTypes.map(({ code }) => (
+        { currencies.map((code) => (
           <option value={ code } data-testid={ code } key={ code }>{ code }</option>)) }
       </select>
     );
@@ -155,6 +149,11 @@ ExpenseForm.propTypes = {
   buttonAction: PropTypes.func.isRequired,
   initialState: expenseType.isRequired,
   buttonText: PropTypes.string.isRequired,
+  currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
-export default ExpenseForm;
+const mapStateToProps = ({ wallet }) => ({
+  currencies: wallet.currencies,
+});
+
+export default connect(mapStateToProps)(ExpenseForm);

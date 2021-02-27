@@ -23,8 +23,6 @@ class EditExpenseForm extends Component {
       },
     };
 
-    console.log(INITIAL_STATE);
-
     return (
       <ExpenseForm
         initialState={ INITIAL_STATE }
