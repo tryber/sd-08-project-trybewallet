@@ -13,7 +13,6 @@ class Header extends React.Component {
 
   getTotalValue() {
     const { expenses } = this.props;
-    const UM_POR_CENTO = 0.01;
 
     let total = 0;
     expenses.map(({
@@ -25,7 +24,7 @@ class Header extends React.Component {
         += exchangeRates[currency].ask * value;
       return total;
     });
-    return parseInt(total * 100, 10) * UM_POR_CENTO;
+    return parseInt(total * 100, 10) / 100;
   }
 
   render() {
@@ -39,6 +38,7 @@ class Header extends React.Component {
             className="header-items"
             data-testid="email-field"
           >
+            User:
             {email}
           </span>
           <span>

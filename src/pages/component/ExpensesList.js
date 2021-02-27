@@ -11,7 +11,6 @@ class ExpensesList extends React.Component {
 
   getExpensesList() {
     const { expenses } = this.props;
-    const UM_POR_CENTO = 0.01;
     return expenses.map(({
       description,
       currency,
@@ -41,7 +40,7 @@ class ExpensesList extends React.Component {
           <td>
             R$
             {
-              parseInt((exchangeRates[currency].ask * value) * 100, 10) * UM_POR_CENTO
+              parseInt((exchangeRates[currency].ask * value) * 100, 10) / 100
             }
           </td>
           <td>Real</td>
@@ -77,7 +76,6 @@ class ExpensesList extends React.Component {
               <th>Moeda de conversão</th>
               <th>Editar/Excluir</th>
             </tr>
-
           </tbody>
           {this.getExpensesList()}
         </table>

@@ -77,10 +77,10 @@ class Form extends React.Component {
       <label htmlFor="cambio">
         Câmbio:
         <select
+          data-testid="currency-input"
           id="currency"
           value={ currency }
           onChange={ this.handleChange }
-          data-testid="currency-input"
         >
           {cambio.map((e) => (
             <option
