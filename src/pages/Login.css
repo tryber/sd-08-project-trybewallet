@@ -1,0 +1,37 @@
+.loginDiv {
+  align-items: center;
+  border: 1px solid lightsalmon;
+  border-radius: 8px;
+  box-shadow: 2px 2px 3px salmon;
+  display: flex;
+  flex-flow: column;
+  gap: 15px;
+  height: 400px;
+  justify-content: center;
+  margin: 50px auto;
+  max-width: 300px;
+}
+
+.loginDiv img {
+  animation: rotateLogo 6s linear infinite;
+}
+
+@keyframes rotateLogo {
+
+  0% {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(180deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+.loginDiv button , .loginDiv input {
+  width: 65%;
+}
