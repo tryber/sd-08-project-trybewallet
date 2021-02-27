@@ -55,7 +55,7 @@ button:active {
   outline: 2px solid rgb(3, 17, 77);
 }
 
-button:disabled{  
+button:disabled {
   background: rgb(70, 172, 255, 0.1);
   color: rgb(3, 17, 77);
   cursor: not-allowed;
