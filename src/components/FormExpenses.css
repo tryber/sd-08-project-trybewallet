@@ -69,29 +69,39 @@
   color: #0fa36b;
 }
 
-@media screen and ( max-width : 502px ) {
-
+@media screen and ( max-width: 502px) {
   .form-expenses {
     align-items: center;
     display: flex;
     flex-direction: column;
   }
 
+  .form-expenses input {
+    padding: 5px 5px;
+    width: 25vmin;
+  }
+
+  .form-expenses .selects-column label {
+    width: 100%;
+  }
+
+  .form-expenses .selects-column select {
+    width: 100%;
+  }
+
+  .form-expenses .selects-column {
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+  }
+
   .form-expenses label {
     align-items: center;
-    font-size: 1rem;
-  }
-
-  .form-expenses input {
-    width: 50vmin;
-  }
-
-  .form-expenses select {
-    font-size: 0.8rem;
-    width: 50vmin;
-  }
-
-  .form-expenses button {
-    min-height: 40px;
+    align-content: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
   }
 }

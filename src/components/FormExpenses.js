@@ -72,7 +72,7 @@ class FormExpenses extends Component {
     const { formControl: { currency, method, tag } } = this.state;
     const { currencies } = this.props;
     return (
-      <div>
+      <div className="selects-column">
         <label htmlFor="currencyInput">
           <span>Moeda:</span>
           <select
