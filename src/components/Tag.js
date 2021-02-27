@@ -15,6 +15,7 @@ class Tag extends Component {
           id="tag"
           value={ tag }
         >
+          <option>Selecione</option>
           <option>Alimentação</option>
           <option>Lazer</option>
           <option>Trabalho</option>

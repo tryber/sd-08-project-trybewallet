@@ -15,6 +15,7 @@ class Payment extends Component {
           id="payment"
           value={ method }
         >
+          <option>Selecione</option>
           <option>Dinheiro</option>
           <option>Cartão de crédito</option>
           <option>Cartão de débito</option>

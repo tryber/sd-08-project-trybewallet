@@ -15,6 +15,7 @@ class Currency extends Component {
           type="text"
           id="currency"
         >
+          <option>Selecione</option>
           {currencys.map((currencyItem) => (
             <option data-testid={ currencyItem } key={ currencyItem }>
               {currencyItem}
