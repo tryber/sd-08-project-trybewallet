@@ -1,10 +1,11 @@
 // Esse reducer será responsável por tratar as informações da pessoa usuária
-import { USER_EMAIL, INITIAL_STATE } from '../components/Allconsts';
+import { SAVE_USER_EMAIL, INITIAL_STATE } from '../components/Allconsts';
+import addUserEmail from '../actions/user';
 
 const user = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-  case USER_EMAIL:
-    return { ...state, userEmail: action.email, userPassword: action.password };
+  case SAVE_USER_EMAIL:
+    return { ...state, email: action.email };
   default:
     return state;
   }

@@ -3,9 +3,9 @@
 }
 
 .App-logo {
-  width: 20%;
   pointer-events: none;
   position: relative;
+  width: 20%;
 }
 
 @media ( prefers-reduced-motion : no-preference ) {
@@ -39,11 +39,30 @@
   to {
     transform: rotate(360deg);
   }
-  0% {left: -5%; top: 0; }
-  25% {left: 85%; top: 100px; }
-  50% {left: 85%; top: 0}
-  75% {left: -5%; top: 100px}
-  100% {left: -5%; top: 0}
+  
+  0% {
+    left: -5%;
+    top: 0;
+   }
+
+  25% {
+    left: 85%; 
+    top: 100px;
+   }
+
+  50% {
+    left: 85%;
+    top: 0
+  }
+
+  75% {
+    left: -5%;
+    top: 100px
+  }
+
+  100% {
+    left: -5%;
+    top: 0}
 }
 
 .navBar {
