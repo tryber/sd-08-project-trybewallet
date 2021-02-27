@@ -7,6 +7,8 @@ import Select from '../components/Select';
 
 const metodos = ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'];
 const categorias = ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
+const ROUND_UP = 4;
+const DECIMAL = 10;
 
 const ObjectToArray = (object) => {
   const array = Object.keys(object);
@@ -30,6 +32,7 @@ class Wallet extends React.Component {
     this.renderSelects = this.renderSelects.bind(this);
     this.addExpenseToWallet = this.addExpenseToWallet.bind(this);
     this.resetFields = this.resetFields.bind(this);
+    this.roundUp = this.roundUp.bind(this);
   }
 
   componentDidMount() {
@@ -54,6 +57,11 @@ class Wallet extends React.Component {
     });
   }
 
+  roundUp(num, decimal) {
+    const n = parseFloat(num);
+    return parseFloat((n + (ROUND_UP / ((DECIMAL ** (decimal + 1))))).toFixed(decimal));
+  }
+
   async addExpenseToWallet() {
     const { value, description, currency, method, tag, totalValue } = this.state;
     const { addToWallet, fetchCurrency } = this.props;
@@ -67,6 +75,24 @@ class Wallet extends React.Component {
       totalValue: totalValue + total,
     });
     this.resetFields();
+  }
+
+  walletTable() {
+    const { expenses } = this.props;
+    return expenses.map((expense) => (
+      <tr key={ expense.id }>
+        <td>{expense.description}</td>
+        <td>{expense.tag}</td>
+        <td>{expense.method}</td>
+        <td>{`${expense.currency} ${this.roundUp(expense.value, 2)}`}</td>
+        <td>{expense.exchangeRates[expense.currency].name}</td>
+        <td>{this.roundUp(expense.exchangeRates[expense.currency].ask, 2)}</td>
+        <td>
+          {this.roundUp(parseFloat(expense.exchangeRates[expense.currency].ask)
+          * parseFloat(expense.value), 2)}
+        </td>
+        <td>Real</td>
+      </tr>));
   }
 
   renderInputs() {
@@ -152,6 +178,20 @@ class Wallet extends React.Component {
               Adicionar despesa
             </button>
           </form>
+          <table>
+            <tr>
+              <th>Descrição</th>
+              <th>Tag</th>
+              <th>Método de pagamento</th>
+              <th>Valor</th>
+              <th>Moeda</th>
+              <th>Câmbio utilizado</th>
+              <th>Valor convertido</th>
+              <th>Moeda de conversão</th>
+              <th>Editar/Excluir</th>
+            </tr>
+            {this.walletTable()}
+          </table>
         </section>
       </main>
     );
@@ -165,6 +205,7 @@ Wallet.propTypes = {
   currencies: PropTypes.shape(
     PropTypes.object.isRequired,
   ).isRequired,
+  expenses: PropTypes.shape().isRequired,
 };
 
 const mapStateToProps = (state) => ({
