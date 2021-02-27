@@ -21,10 +21,10 @@ class Wallet extends Component {
       moeda: '',
       metodoPG: '',
       despesa: '',
-      total: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.gastosTotais = this.gastosTotais.bind(this);
   }
 
   componentDidMount() {
@@ -36,20 +36,13 @@ class Wallet extends Component {
     });
   }
 
-  componentDidUpdate() {
-    this.gastosTotais();
-  }
-
   gastosTotais() {
     const { gastos } = this.props;
-    const { total } = this.state;
     const despesasTotais = gastos.reduce((acc, value) => {
       const { valor, moeda, cambio } = value;
-      return acc + valor * cambio[moeda].ask;
+      return acc + parseFloat(valor) * parseFloat(cambio[moeda].ask);
     }, 0);
-    if (total !== despesasTotais) {
-      this.setState({ total: despesasTotais });
-    }
+    return despesasTotais;
   }
 
   handleClick() {
@@ -107,12 +100,12 @@ class Wallet extends Component {
 
   render() {
     const { userEmail } = this.props;
-    const { descricao, valor, total } = this.state;
+    const { descricao, valor } = this.state;
     return (
       <>
         <header className="Wallet-header">
           <span data-testid="email-field">{userEmail}</span>
-          <span data-testid="total-field">{parseFloat(total).toFixed(2)}</span>
+          <span data-testid="total-field">{this.gastosTotais()}</span>
           <span data-testid="header-currency-field">BRL</span>
         </header>
         <main>
