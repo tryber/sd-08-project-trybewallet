@@ -8,8 +8,8 @@ export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
   case 'CURRENCIES_ADD':
     return { ...state, wallet: { ...state.wallet, currencies: action.payload } };
-  case 'EXPENSES_ADD':
-    return { ...state, wallet: { ...state.wallet, expenses: action.payload } };
+  case 'EXPENSE_ADD':
+    return { ...state, expenses: [...state.expenses, action.payload] };
   default:
     return state;
   }
