@@ -9,23 +9,12 @@ import ExpenseForm from './ExpenseForm';
 class EditExpenseForm extends Component {
   render() {
     const { saveExpense, expenses, idToEdit } = this.props;
-    const expenseBeingEdited = expenses.find((expense) => expense.id === idToEdit);
-    const { id, value, description, currency, method, tag } = expenseBeingEdited;
-
-    const INITIAL_STATE = {
-      fields: {
-        id,
-        value,
-        description,
-        currency,
-        method,
-        tag,
-      },
-    };
+    const expenseBeingEdited = { ...expenses.find((expense) => expense.id === idToEdit) };
+    delete expenseBeingEdited.exchangeRates;
 
     return (
       <ExpenseForm
-        initialState={ INITIAL_STATE }
+        initialState={ { fields: expenseBeingEdited } }
         buttonAction={ saveExpense }
         buttonText="Editar Despesa"
       />

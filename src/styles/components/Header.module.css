@@ -1,10 +1,14 @@
 .header {
-  background-color: rgba(0, 0, 0, 0.3);
-  padding: 10px;
+  align-items: center;
+  background-color: rgba(44, 88, 43, 0.397);
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 15px;
 }
 
 .headerInfos {
   display: flex;
+  margin-left: 20px;
 }
 
 .headerInfos > * {
@@ -16,5 +20,34 @@
 }
 
 .headerInfosItem dt {
+  font-weight: 700;
   margin-right: 10px;
+}
+
+.icon {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 80px;
+}
+
+@media ( max-width : 550px ) {
+
+  .header {
+    padding: 20px;
+  }
+
+  .headerInfos {
+    flex-direction: column;
+    margin-left: 0;
+  }
+
+  .headerInfosItem:not( :last-child ) {
+    margin-bottom: 5px;
+    margin-right: 0;
+  }
+
+  .icon {
+    display: none;
+  }
 }

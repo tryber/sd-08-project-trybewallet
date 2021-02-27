@@ -9,8 +9,6 @@ import AddExpenseForm from '../components/AddExpenseForm';
 import ExpensesTable from '../components/ExpensesTable';
 import EditExpenseForm from '../components/EditExpenseForm';
 
-// import api from '../services';
-
 class Wallet extends React.Component {
   componentDidMount() {
     const { fetchCurrencies } = this.props;

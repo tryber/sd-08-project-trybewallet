@@ -25,8 +25,8 @@ class LoginForm extends Component {
 
     this.state = {
       fields: {
-        email: 'email',
-        password: 'senha',
+        email: '',
+        password: '',
       },
       redirect: false,
     };

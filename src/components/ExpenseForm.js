@@ -57,6 +57,7 @@ class ExpenseForm extends Component {
     const { fields: { description } } = this.state;
     return (
       <input
+        className={ styles.flexGrow }
         type="text"
         name="description"
         value={ description }
@@ -128,10 +129,10 @@ class ExpenseForm extends Component {
           onSubmit={ (event) => event.preventDefault() }
         >
           { this.renderValueInput() }
-          { this.renderDescriptionInput() }
           { this.renderCurrencySelect() }
           { this.renderPaymentMethodsSelect() }
           { this.renderExpenseTagsSelect() }
+          { this.renderDescriptionInput() }
 
           <button
             type="button"

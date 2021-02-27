@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import walletGif from '../assets/wallet.gif';
+
 import styles from '../styles/components/Header.module.css';
 
 class Header extends Component {
@@ -19,25 +21,32 @@ class Header extends Component {
     }, 0);
   }
 
-  render() {
+  renderInfos() {
     const { email } = this.props;
     const total = this.getTotal();
     return (
+      <dl className={ styles.headerInfos }>
+        <div className={ styles.headerInfosItem }>
+          <dt>Email:</dt>
+          <dd data-testid="email-field">{ email }</dd>
+        </div>
+        <div className={ styles.headerInfosItem }>
+          <dt>Despesa total:</dt>
+          <dd data-testid="total-field">{ Math.round(total * 100) / 100 }</dd>
+        </div>
+        <div className={ styles.headerInfosItem }>
+          <dt>Câmbio:</dt>
+          <dd data-testid="header-currency-field">BRL</dd>
+        </div>
+      </dl>
+    );
+  }
+
+  render() {
+    return (
       <header className={ styles.header }>
-        <dl className={ styles.headerInfos }>
-          <div className={ styles.headerInfosItem }>
-            <dt>Email:</dt>
-            <dd data-testid="email-field">{ email }</dd>
-          </div>
-          <div className={ styles.headerInfosItem }>
-            <dt>Despesa total:</dt>
-            <dd data-testid="total-field">{ Math.round(total * 100) / 100 }</dd>
-          </div>
-          <div className={ styles.headerInfosItem }>
-            <dt>Câmbio:</dt>
-            <dd data-testid="header-currency-field">BRL</dd>
-          </div>
-        </dl>
+        <img className={ styles.icon } src={ walletGif } alt="Wallet Gif" />
+        { this.renderInfos() }
       </header>
     );
   }

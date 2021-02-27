@@ -1,4 +1,4 @@
-import api from '../services';
+import getCoins from '../services';
 
 export const Types = {
   ADD_EXPENSE: 'ADD_EXPENSE',
@@ -16,7 +16,7 @@ export const Creators = {
     payload: expense,
   }),
   addExpenseWithCoins: (expense) => async (dispatch) => {
-    const coins = await api.getCoins();
+    const coins = await getCoins();
     dispatch(Creators.addExpense({ ...expense, exchangeRates: coins }));
   },
   removeExpense: (id) => ({
@@ -36,7 +36,7 @@ export const Creators = {
     payload: currencies,
   }),
   fetchCurrencies: () => async (dispatch) => {
-    const currencies = await api.getCoins();
+    const currencies = await getCoins();
     delete currencies.USDT;
     const currenciesCodes = Object.values(currencies).map(({ code }) => code);
     dispatch(Creators.saveCurrencies(currenciesCodes));
