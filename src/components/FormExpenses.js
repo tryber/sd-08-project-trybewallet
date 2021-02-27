@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import selectFields from '../Database/selectFields';
 import './FormExpenses.css';
 
-export default class FormExpenses extends Component {
+class FormExpenses extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -34,6 +36,7 @@ export default class FormExpenses extends Component {
   renderSelectF() {
     const { payMethods, payTags } = selectFields;
     const { formControl: { currency, payMethod, tag } } = this.state;
+    const { currencies } = this.props;
     return (
       <div>
         <label htmlFor="currencyInput">
@@ -45,7 +48,7 @@ export default class FormExpenses extends Component {
             value={ currency }
             onChange={ ({ target }) => this.handleInput('currency', target) }
           >
-            BRL
+            {this.renderListOptions(currencies)}
           </select>
         </label>
         <label htmlFor="methodInput">
@@ -109,3 +112,27 @@ export default class FormExpenses extends Component {
     );
   }
 }
+
+function mapStateToProps({ wallet }) {
+  return {
+    currencies: wallet.currencies,
+  };
+}
+
+export default connect(mapStateToProps)(FormExpenses);
+
+FormExpenses.propTypes = {
+  currencies: PropTypes.arrayOf(PropTypes.shape({
+    ask: PropTypes.string.isRequired,
+    bid: PropTypes.string.isRequired,
+    code: PropTypes.string.isRequired,
+    codein: PropTypes.string.isRequired,
+    create_date: PropTypes.string.isRequired,
+    high: PropTypes.string.isRequired,
+    low: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    pctChange: PropTypes.string.isRequired,
+    timestamp: PropTypes.string.isRequired,
+    varBid: PropTypes.string.isRequired,
+  }).isRequired).isRequired,
+};
