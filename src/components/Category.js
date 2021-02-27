@@ -24,6 +24,7 @@ class Category extends Component {
 Category.propTypes = {
   datatestid: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
 };
 
