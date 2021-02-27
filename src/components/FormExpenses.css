@@ -92,16 +92,16 @@
   .form-expenses .selects-column {
     align-items: center;
     align-content: center;
-    justify-content: center;
     display: flex;
     flex-direction: column;
+    justify-content: center;
   }
 
   .form-expenses label {
     align-items: center;
     align-content: center;
-    justify-content: center;
     display: flex;
     flex-direction: column;
+    justify-content: center;
   }
 }
