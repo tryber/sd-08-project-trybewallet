@@ -19,12 +19,14 @@ function WalletTable() {
   const expListBuilder = () => expenses.map((i) => {
     const { ask } = i.exchangeRates[i.currency];
     const calc = Number(ask * i.value).toFixed(2) || null;
+    const { name } = i.exchangeRates[i.currency];
     return {
       id: i.id,
       value: i.value,
       description: i.description,
       currency: i.currency,
       tag: i.tag,
+      name,
       method: i.method,
       converted: calc,
     };
