@@ -2,10 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import '../styles/App.css';
+import '../styles/Global.css';
 
 import { userEmailAction, userPasswordAction } from '../actions';
-import Button from './Button';
+
+import ValidateComponent from './ValidateComponent';
 
 class LoginForm extends React.Component {
   render() {
@@ -38,8 +39,8 @@ class LoginForm extends React.Component {
                 placeholder="Digite aqui sua senha"
                 onChange={ (value) => userPassword(value) }
               />
-              <Button />
             </label>
+            <ValidateComponent />
           </form>
         </fieldset>
       </ruani>
