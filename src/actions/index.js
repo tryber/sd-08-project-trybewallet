@@ -1,3 +1,4 @@
+export const ADD_EXPENSE = 'ADD_EXPENSE';
 export const LOGIN = 'LOGIN';
 export const WALLET = 'WALLET';
 export const GET_CURRENCIES = 'GET_CURRENCIES';
@@ -5,6 +6,11 @@ export const FAILED_REQUEST = 'FAILED_REQUEST';
 
 export const login = (payload) => ({
   type: LOGIN,
+  payload,
+});
+
+export const addExpense = (payload) => ({
+  type: ADD_EXPENSE,
   payload,
 });
 
