@@ -43,9 +43,9 @@ class Wallet extends React.Component {
           </span>
         </span>
         {
-          isFetching ? <span data-testid="total-field">0</span>
+          isFetching ? <div data-testid="total-field">0</div>
             : (
-              <span data-testid="total-field">{ total }</span>
+              <div data-testid="total-field">{ total }</div>
             )
         }
         <span data-testid="header-currency-field">BRL</span>
