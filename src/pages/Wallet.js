@@ -33,6 +33,7 @@ class Wallet extends React.Component {
     this.addExpenseToWallet = this.addExpenseToWallet.bind(this);
     this.resetFields = this.resetFields.bind(this);
     this.roundUp = this.roundUp.bind(this);
+    this.walletTableHeader = this.walletTableHeader.bind(this);
   }
 
   componentDidMount() {
@@ -77,22 +78,41 @@ class Wallet extends React.Component {
     this.resetFields();
   }
 
+  walletTableHeader() {
+    return (
+      <thead>
+        <tr>
+          <th>Descrição</th>
+          <th>Tag</th>
+          <th>Método de pagamento</th>
+          <th>Valor</th>
+          <th>Moeda</th>
+          <th>Câmbio utilizado</th>
+          <th>Valor convertido</th>
+          <th>Moeda de conversão</th>
+          <th>Editar/Excluir</th>
+        </tr>
+      </thead>);
+  }
+
   walletTable() {
     const { expenses } = this.props;
     return expenses.map((expense) => (
-      <tr key={ expense.id }>
-        <td>{expense.description}</td>
-        <td>{expense.tag}</td>
-        <td>{expense.method}</td>
-        <td>{`${expense.currency} ${this.roundUp(expense.value, 2)}`}</td>
-        <td>{expense.exchangeRates[expense.currency].name}</td>
-        <td>{this.roundUp(expense.exchangeRates[expense.currency].ask, 2)}</td>
-        <td>
-          {this.roundUp(parseFloat(expense.exchangeRates[expense.currency].ask)
-          * parseFloat(expense.value), 2)}
-        </td>
-        <td>Real</td>
-      </tr>));
+      <tbody key={ expense.id }>
+        <tr>
+          <td>{expense.description}</td>
+          <td>{expense.tag}</td>
+          <td>{expense.method}</td>
+          <td>{`${this.roundUp(expense.value, 2)}`}</td>
+          <td>{expense.exchangeRates[expense.currency].name}</td>
+          <td>{this.roundUp(expense.exchangeRates[expense.currency].ask, 2)}</td>
+          <td>
+            {this.roundUp(parseFloat(expense.exchangeRates[expense.currency].ask)
+            * parseFloat(expense.value), 2)}
+          </td>
+          <td>Real</td>
+        </tr>
+      </tbody>));
   }
 
   renderInputs() {
@@ -179,17 +199,7 @@ class Wallet extends React.Component {
             </button>
           </form>
           <table>
-            <tr>
-              <th>Descrição</th>
-              <th>Tag</th>
-              <th>Método de pagamento</th>
-              <th>Valor</th>
-              <th>Moeda</th>
-              <th>Câmbio utilizado</th>
-              <th>Valor convertido</th>
-              <th>Moeda de conversão</th>
-              <th>Editar/Excluir</th>
-            </tr>
+            {this.walletTableHeader()}
             {this.walletTable()}
           </table>
         </section>
