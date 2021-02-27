@@ -22,10 +22,11 @@ export function fetchToRegister(state) {
     try {
       const currenciesResponse = await fetch('https://economia.awesomeapi.com.br/json/all');
       const currenciesJason = await currenciesResponse.json();
-
-      state = { ...state, exchangeRates: currenciesJason };
-      console.log(state);
-      return dispatch(addRegister(state));
+      let stateSemTotal = { ...state };
+      delete stateSemTotal.total;
+      stateSemTotal = { ...stateSemTotal, exchangeRates: currenciesJason };
+      console.log(stateSemTotal);
+      return dispatch(addRegister(stateSemTotal));
     } catch (error) {
       console.log(error);
     }
