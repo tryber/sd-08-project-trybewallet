@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 class Wallet extends React.Component {
   render() {
     const { receivedEmail } = this.props;
-    return(
+    return (
       <div>
         <header>
           <div data-testid="email-field">
