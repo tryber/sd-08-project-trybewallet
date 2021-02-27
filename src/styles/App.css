@@ -1,4 +1,4 @@
-*{
+* {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -12,7 +12,7 @@ body {
   justify-content: center;
 }
 
-h1{
+h1 {
   text-align: center;
   color: rgb(3, 17, 77);
 }
@@ -27,9 +27,9 @@ form {
 
 input {
   border: 2px solid rgb(0, 119, 255);
-  margin: 10px 10px;  
+  margin: 10px 10px;
   background: rgb(192, 226, 255);
-  box-shadow: 0 0 7px #3C2F76;
+  box-shadow: 0 0 7px #3c2f76;
   padding: 0 5px;
 }
 
@@ -42,16 +42,16 @@ button {
   letter-spacing: 1px;
 }
 
-button:hover{
+button:hover {
   background: rgb(3, 17, 77);
   color: rgb(192, 226, 255);
 }
 
-button:focus{
+button:focus {
   outline: 2px solid rgb(3, 17, 77);
 }
 
-button:active{
+button:active {
   outline: 2px solid rgb(3, 17, 77);
 }
 
@@ -59,16 +59,14 @@ input:active {
   outline: 2px solid rgb(0, 119, 255);
 }
 
-input:focus{
+input:focus {
   outline: 2px solid rgb(0, 119, 255);
 }
 
-input::placeholder{
+input::placeholder {
   color: rgb(3, 17, 77);
 }
 
 label {
   color: rgb(3, 17, 77);
 }
-
-
