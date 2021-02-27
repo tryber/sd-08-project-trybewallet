@@ -32,8 +32,7 @@ class Wallet extends React.Component {
   }
 
   header() {
-    const { total } = this.props;
-    const { email } = this.props;
+    const { email, total, isFetching } = this.props;
     return (
       <header>
         <div>TrybeWallet</div>
@@ -43,7 +42,9 @@ class Wallet extends React.Component {
             { email }
           </span>
         </span>
-        <span data-testid="total-field">{ total }</span>
+        <span data-testid="total-field">
+          { isFetching ? 0 : total }
+        </span>
         <span data-testid="header-currency-field">BRL</span>
       </header>
     );
@@ -84,6 +85,7 @@ class Wallet extends React.Component {
         <select
           value={ moeda }
           onChange={ (e) => this.setState({ moeda: e.target.value }) }
+          data-testid="currency-input"
         >
           { currencies.map((currency, index) => (
             <option key={ index } value={ currency } data-testid={ currency }>
