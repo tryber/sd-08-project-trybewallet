@@ -105,7 +105,7 @@ class ExpensesForm extends React.Component {
     return (
       <form>
         { this.renderInput('Valor', 'value', value) }
-        { this.renderInput('Descrição', 'description', description) }
+        { this.renderInput('Descreva', 'description', description) }
         { !loading && this.renderSelect(
           'Moeda', 'currency', currency, this.renderCurrencyOptions(),
         ) }
