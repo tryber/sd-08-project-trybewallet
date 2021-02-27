@@ -6,12 +6,16 @@ class ExpensesList extends React.Component {
   constructor() {
     super();
     this.getExpensesList = this.getExpensesList.bind(this);
+    this.getTotalValue = this.getTotalValue.bind(this);
+
+    this.state = {
+      totalValue: 0.0,
+    };
   }
 
   getExpensesList() {
     const { expenses } = this.props;
     const UM_POR_CENTO = 0.01;
-
     return expenses.map(({
       description,
       currency,
@@ -37,9 +41,7 @@ class ExpensesList extends React.Component {
             parseInt(exchangeRates[currency].ask * 100, 10) / 100
           }
         </td>
-        <td 
-        id = {id}
-        >
+        <td>
           R$
           {
             (parseInt(
@@ -48,22 +50,41 @@ class ExpensesList extends React.Component {
           }
         </td>
         <td>Real</td>
-        <td><button type="button"> apagar </button></td>
+        <td>
+          <button
+            type="button"
+          >
+            {' '}
+            apagar
+          </button>
+        </td>
       </tr>
     ));
   }
 
-//   getTotalValue({ target }) {
-//     this.setState({
-//       totalValue: {
-//         [target.id]:
-//       },
-//     });
-//   }
+  getTotalValue() {
+    const { expenses } = this.props;
+
+    let total = 0;
+    expenses.map(({
+      exchangeRates,
+      currency,
+      value,
+    }) => {
+      total
+        += exchangeRates[currency].ask * value;
+      return total;
+    });
+    this.setState({
+      totalValue: total,
+    });
+  }
 
   render() {
     return (
-      <main className="table-body">
+      <main
+        className="table-body"
+      >
         <table className="table">
           <tr>
             <th>Descrição</th>
