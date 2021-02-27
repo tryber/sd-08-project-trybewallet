@@ -104,13 +104,13 @@ class ExpensesForm extends React.Component {
 
     return (
       <form>
-        { this.renderInput('Valor', 'value', value) }
-        { this.renderInput('Descreva', 'description', description) }
+        { this.renderInput('Valor:', 'value', value) }
+        { this.renderInput('Descrição:', 'description', description) }
         { !loading && this.renderSelect(
-          'Moeda', 'currency', currency, this.renderCurrencyOptions(),
+          'Moeda:', 'currency', currency, this.renderCurrencyOptions(),
         ) }
-        { this.renderSelect('Método de pagamento', 'method', method, paymentMethods) }
-        { this.renderSelect('Categoria da Despesa', 'tag', tag, expenseTags) }
+        { this.renderSelect('Método de pagamento:', 'method', method, paymentMethods) }
+        { this.renderSelect('Categoria da Despesa:', 'tag', tag, expenseTags) }
         <button onClick={ this.handleClick } type="submit">Adicionar Despesa</button>
       </form>
     );
