@@ -4,7 +4,7 @@ const initialState = {
   email: '',
 };
 
-const userReducer = (state = initialState, action) => {
+const user = (state = initialState, action) => {
   switch (action.type) {
   case GET_EMAIL:
     return ({
@@ -16,4 +16,4 @@ const userReducer = (state = initialState, action) => {
   }
 };
 
-export default userReducer;
+export default user;
