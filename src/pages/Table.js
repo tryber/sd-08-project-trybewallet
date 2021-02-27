@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 class Table extends React.Component {
   render() {
     const { expenses } = this.props;
+    console.log(expenses);
     return (
       <table>
         <tr>
@@ -24,7 +25,7 @@ class Table extends React.Component {
             <td>{ expense.tag }</td>
             <td>{ expense.method }</td>
             <td>{ parseFloat(expense.value).toFixed(2) }</td>
-            <td>{ expense.currency }</td>
+            <td>{ expense.exchangeRates[expense.currency].name }</td>
             <td>
               {
                 parseFloat(expense.exchangeRates[expense.currency].ask)

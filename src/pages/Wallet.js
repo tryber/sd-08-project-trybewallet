@@ -112,7 +112,7 @@ class Wallet extends React.Component {
       method: '',
       tag: '',
       description: '',
-      total: soma,
+      total: soma.toFixed(2),
     });
   }
 
