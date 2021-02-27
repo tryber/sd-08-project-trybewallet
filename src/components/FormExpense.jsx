@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../actions';
 
 import CurrencySelect from './CurrencySelect';
@@ -14,8 +14,16 @@ const INITIAL_VALUE = {
   method: 'Dinheiro',
 };
 
+const getId = (arr) => {
+  if (arr.length > 0) {
+    return arr[arr.length - 1].id + 1;
+  }
+  return 0;
+};
+
 function FormExpense() {
   const [data, setData] = useState(INITIAL_VALUE);
+  const expenses = useSelector((state) => state.wallet.expenses);
   const dispatch = useDispatch();
   const handleChange = ({ target }) => {
     const { name, value } = target;
@@ -27,7 +35,7 @@ function FormExpense() {
   const handleAddExpense = async () => {
     const exchangeRates = await fetch('https://economia.awesomeapi.com.br/json/all')
       .then((response) => response.json());
-    dispatch(actions.addExpense({ ...data, exchangeRates }));
+    dispatch(actions.addExpense({ ...data, id: getId(expenses), exchangeRates }));
   };
   const { value, description, currency, tag, method } = data;
   return (

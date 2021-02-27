@@ -5,7 +5,11 @@ function WalletHeader() {
   const email = useSelector((state) => state.user.email);
   const wallet = useSelector((state) => state.wallet);
   function calcExp() {
-    return wallet.expenses.reduce((acc, cur) => acc + Number(cur.value), 0).toFixed(2);
+    return wallet.expenses.reduce((acc, cur) => {
+      const { ask } = cur.exchangeRates[cur.currency];
+      const calc = Number(ask * cur.value) || null;
+      return acc + Number(calc);
+    }, 0).toFixed(2);
   }
   return (
     <header className="wallet-header">

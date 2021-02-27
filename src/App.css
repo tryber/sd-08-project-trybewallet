@@ -17,3 +17,20 @@ body {
 .wallet-header-content span {
   margin: 8px;
 }
+
+
+.wallet-table {
+  border: 1px solid black;
+  margin-top: 20px;
+  padding: 6px;
+  text-align: center;
+  width: 100%;
+}
+
+.wth-header {
+  color: rgb(31, 31, 31);
+}
+
+.wth-row {
+  color: rgb(71, 71, 71);
+}

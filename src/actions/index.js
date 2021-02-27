@@ -8,16 +8,21 @@ export function login(payload) {
   };
 }
 
+export function addCurrency(payload) {
+  return {
+    type: ActionTypes.WALLET_ADDCURR,
+    payload,
+  };
+}
 export function addExpense(payload) {
   return {
     type: ActionTypes.WALLET_ADDEXP,
     payload,
   };
 }
-
-export function addCurrency(payload) {
+export function delExpense(id) {
   return {
-    type: ActionTypes.WALLET_ADDCURR,
-    payload,
+    type: ActionTypes.WALLET_DELEXP,
+    payload: id,
   };
 }

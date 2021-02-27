@@ -1,4 +1,5 @@
 // USER
 export const USER_LOGIN = 'USER_LOGIN';
 export const WALLET_ADDEXP = 'WALLET_ADDEXP';
+export const WALLET_DELEXP = 'WALLET_DELEXP';
 export const WALLET_ADDCURR = 'WALLET_ADDCURR';
