@@ -27,6 +27,7 @@ function WalletTable() {
       currency: i.currency,
       tag: i.tag,
       name,
+      ask,
       method: i.method,
       converted: calc,
     };

@@ -24,7 +24,7 @@ function WalletTableItem({ data, ...rest }) {
       <td role="cell">{ data.tag }</td>
       <td role="cell">{ data.method }</td>
       <td role="cell">{ data.value }</td>
-      <td role="cell">{ data.currency }</td>
+      <td role="cell">{ Number(data.ask).toFixed(2) }</td>
       <td role="cell">{ data.name }</td>
       <td role="cell">{ data.converted }</td>
       <td role="cell"> Real </td>
@@ -58,6 +58,7 @@ WalletTableItem.propTypes = {
     tag: PropTypes.string.isRequired,
     method: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
+    ask: PropTypes.string.isRequired,
     converted: PropTypes.string.isRequired,
   }).isRequired,
 };
