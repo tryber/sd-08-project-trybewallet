@@ -82,8 +82,6 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
       const GBP = screen.getByTestId('GBP');
       const ARS = screen.getByTestId('ARS');
       const BTC = screen.getByTestId('BTC');
-      const LTC = screen.getByTestId('LTC');
-      const JPY = screen.getByTestId('JPY');
       const CHF = screen.getByTestId('CHF');
       const AUD = screen.getByTestId('AUD');
       const CNY = screen.getByTestId('CNY');
