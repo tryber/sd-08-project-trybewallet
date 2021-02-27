@@ -1,9 +1,36 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import Form from '../components/Form';
 
 class Wallet extends React.Component {
   render() {
-    return <div>TrybeWallet</div>;
+    const { user } = this.props;
+    return (
+      <main>
+        <header>
+          <div>TrybeWallet</div>
+          ;
+          <p data-testid="email-field">{user.email}</p>
+
+          <p data-testid="header-currency-field">Câmbio: BRL</p>
+        </header>
+        <Form />
+      </main>
+
+    );
   }
 }
 
-export default Wallet;
+const mapStateToProps = (state) => ({
+  user: state.user,
+  isFetching: state.wallet.isFetching,
+  expenses: state.wallet.expenses,
+});
+
+Wallet.propTypes = {
+  user: PropTypes.shape({
+    email: PropTypes.string.isRequired,
+  }).isRequired,
+};
+
+export default connect(mapStateToProps)(Wallet);
