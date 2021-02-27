@@ -1,4 +1,4 @@
-// Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
+import { createReducer } from 'reduxsauce';
 import { Types } from '../actions/wallet';
 
 const INITIAL_STATE = {
@@ -11,7 +11,7 @@ const INITIAL_STATE = {
 
 const addExpense = (state = INITIAL_STATE, action) => {
   const newExpense = {
-    ...action.payload,
+    ...action.expense,
     id: state.idCounter,
   };
   return {
@@ -26,17 +26,11 @@ const removeExpense = (state = INITIAL_STATE, action) => ({
   expenses: state.expenses.filter((expense) => expense.id !== action.id),
 });
 
-const editExpense = (state = INITIAL_STATE, action) => ({
-  ...state,
-  editor: true,
-  idToEdit: action.id,
-});
-
 const saveExpense = (state = INITIAL_STATE, action) => ({
   ...state,
   expenses: state.expenses.map((expense) => {
-    if (expense.id === action.payload.id) {
-      return { ...expense, ...action.payload };
+    if (expense.id === action.expense.id) {
+      return { ...expense, ...action.expense };
     }
     return expense;
   }),
@@ -46,16 +40,21 @@ const saveExpense = (state = INITIAL_STATE, action) => ({
 
 const saveCurrencies = (state = INITIAL_STATE, action) => ({
   ...state,
-  currencies: action.payload,
+  currencies: action.currencies,
 });
 
-export default function wallet(state = INITIAL_STATE, action) {
-  switch (action.type) {
-  case Types.ADD_EXPENSE: return addExpense(state, action);
-  case Types.REMOVE_EXPENSE: return removeExpense(state, action);
-  case Types.EDIT_EXPENSE: return editExpense(state, action);
-  case Types.SAVE_EXPENSE: return saveExpense(state, action);
-  case Types.SAVE_CURRENCIES: return saveCurrencies(state, action);
-  default: return state;
-  }
-}
+const editExpense = (state = INITIAL_STATE, action) => ({
+  ...state,
+  editor: true,
+  idToEdit: action.id,
+});
+
+const HANDLERS = {
+  [Types.ADD_EXPENSE]: addExpense,
+  [Types.REMOVE_EXPENSE]: removeExpense,
+  [Types.EDIT_EXPENSE]: editExpense,
+  [Types.SAVE_EXPENSE]: saveExpense,
+  [Types.SAVE_CURRENCIES]: saveCurrencies,
+};
+
+export default createReducer(INITIAL_STATE, HANDLERS);

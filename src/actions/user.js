@@ -1,7 +1,5 @@
-export const Types = {
-  SAVE_EMAIL: 'SAVE_EMAIL',
-};
+import { createActions } from 'reduxsauce';
 
-export const Creators = {
-  saveEmail: (email) => ({ type: Types.SAVE_EMAIL, email }),
-};
+export const { Types, Creators } = createActions({
+  saveEmail: ['email'],
+});
