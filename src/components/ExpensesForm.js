@@ -10,7 +10,7 @@ class ExpensesForm extends React.Component {
 
     this.state = {
       id: 0,
-      value: '',
+      value: 0,
       description: '',
       currency: 'Selecione',
       method: 'Selecione',
