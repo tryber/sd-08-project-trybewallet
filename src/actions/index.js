@@ -7,3 +7,7 @@ export const emailAction = (value) => ({ type: EMAIL, value });
 export const passwordAction = (value) => ({ type: PASS, value });
 
 // export const loginAction = (value) => ({ type: LOGIN, value });
+
+export const EXPENSES = 'EXPENSES';
+
+export const expensesAction = (value) => ({ type: EXPENSES, value });
