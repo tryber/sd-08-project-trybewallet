@@ -69,7 +69,8 @@
   color: #0fa36b;
 }
 
-@media screen and ( max-width: 502px) {
+@media screen and ( max-width : 502px ) {
+
   .form-expenses {
     align-items: center;
     display: flex;
@@ -77,8 +78,16 @@
   }
 
   .form-expenses input {
-    padding: 5px 5px;
+    padding: 5px;
     width: 25vmin;
+  }
+
+  .form-expenses label {
+    align-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   .form-expenses .selects-column label {
@@ -90,16 +99,8 @@
   }
 
   .form-expenses .selects-column {
-    align-items: center;
     align-content: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .form-expenses label {
     align-items: center;
-    align-content: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
