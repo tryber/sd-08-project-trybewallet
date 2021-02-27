@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import './Login.css';
-import { PropTypes } from 'prop-types';
+// import { PropTypes } from 'prop-types';
 import { saveEmail } from '../actions/index';
 
 class Login extends React.Component {
@@ -74,10 +74,10 @@ class Login extends React.Component {
   }
 }
 
-Login.propTypes = {
-  history: PropTypes.string.isRequired,
-  saveEmailReducer: PropTypes.func.isRequired,
-};
+// Login.propTypes = {
+//   history: PropTypes.
+//   saveEmailReducer: PropTypes.func.isRequired,
+// };
 
 const mapDispatchToProps = (dispatch) => ({
   saveEmailReducer: (value) => dispatch(saveEmail(value)),

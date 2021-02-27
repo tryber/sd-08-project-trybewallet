@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import dataCambio from '../../Data';
 import './Form.css';
 import { saveExpenses } from '../../actions/index';
@@ -80,6 +80,7 @@ class Form extends React.Component {
           id="currency"
           value={ currency }
           onChange={ this.handleChange }
+          data-testid="currency-input"
         >
           {cambio.map((e) => (
             <option
@@ -105,8 +106,8 @@ class Form extends React.Component {
           id="method"
         >
           <option>Dinheiro</option>
-          <option>Cartão de Crédito</option>
-          <option>Cartão de Débito</option>
+          <option>Cartão de crédito</option>
+          <option>Cartão de débito</option>
         </select>
       </label>
     );
@@ -156,10 +157,10 @@ class Form extends React.Component {
   }
 }
 
-Form.propTypes = {
-  id: PropTypes.string.isRequired,
-  saveExpensesReducer: PropTypes.func.isRequired,
-};
+// Form.propTypes = {
+//   id: PropTypes.string.isRequired,
+//   saveExpensesReducer: PropTypes.func.isRequired,
+// };
 
 const mapDispatchToProps = (dispatch) => ({
   saveExpensesReducer: (value) => dispatch(saveExpenses(value)),
