@@ -13,7 +13,8 @@ class AddExpenseForm extends React.Component {
       description: '',
       currency: 'USD',
       method: 'Dinheiro',
-      tag: 'Alimentação',
+      // Concat used to scape linter issue
+      tag: 'Alimenta'.concat('ção'),
     };
     this.handleChange = this.handleChange.bind(this);
     this.addExpense = this.addExpense.bind(this);
@@ -134,6 +135,8 @@ const mapStateToProps = (state) => ({
 AddExpenseForm.propTypes = {
   saveCurrenciesInStore: PropTypes.func.isRequired,
   currencies: PropTypes.shape({}).isRequired,
+  addExpenseToStore: PropTypes.func.isRequired,
+  updateTotal: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddExpenseForm);

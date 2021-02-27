@@ -36,6 +36,10 @@ const mapStateToProps = (state) => ({
 
 WalletHeader.propTypes = {
   userEmail: PropTypes.string.isRequired,
+  walletTotal: PropTypes.number,
 };
 
+WalletHeader.defaulProps = {
+  walletTotal: 0,
+};
 export default connect(mapStateToProps)(WalletHeader);
