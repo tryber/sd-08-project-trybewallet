@@ -25,16 +25,9 @@ class Login extends Component {
   handleChange({ target }) {
     const { name, value } = target;
     this.setState({ [name]: value });
-    if (name === 'email' && this.verifyEmail(value)) {
-      this.setState((prevState) => (
-        { verification: { ...prevState.verification, emailVerified: true } }
-      ));
-    }
-    if (name === 'password' && this.verifyPassword(value)) {
-      this.setState((prevState) => (
-        { verification: { ...prevState.verification, passwordVerified: true } }
-      ));
-    }
+
+    this.verifyEmail(name, value);
+    this.verifyPassword(name, value);
   }
 
   handleClick() {
@@ -45,15 +38,31 @@ class Login extends Component {
     isLogged();
   }
 
-  verifyEmail(email) {
+  verifyEmail(name, email) {
     const regexEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/i;
-    return regexEmail.test(email);
+
+    if (name === 'email' && regexEmail.test(email)) {
+      this.setState((prevState) => (
+        { verification: { ...prevState.verification, emailVerified: true } }
+      ));
+    } else if (name === 'email' && !regexEmail.test(email)) {
+      this.setState((prevState) => (
+        { verification: { ...prevState.verification, emailVerified: false } }
+      ));
+    }
   }
 
-  verifyPassword(password) {
+  verifyPassword(name, password) {
     const minPasswordLength = 6;
-    if (password.length >= minPasswordLength) {
-      return true;
+
+    if (name === 'password' && password.length >= minPasswordLength) {
+      this.setState((prevState) => (
+        { verification: { ...prevState.verification, passwordVerified: true } }
+      ));
+    } else if (name === 'password' && !password.length < minPasswordLength) {
+      this.setState((prevState) => (
+        { verification: { ...prevState.verification, passwordVerified: false } }
+      ));
     }
   }
 

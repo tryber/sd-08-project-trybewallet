@@ -1,9 +1,9 @@
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
 import {
-  ADD_EXPENSES,
   GET_CURRENCY,
   REQUEST_CURRENCY,
   FAILED_REQUEST,
+  ADD_EXPENSES,
 } from '../actions/index';
 
 const INITIAL_STATE = {
@@ -15,8 +15,6 @@ const INITIAL_STATE = {
 
 export default function expensesReducerAction(state = INITIAL_STATE, action) {
   switch (action.type) {
-  case ADD_EXPENSES:
-    return state;
   case GET_CURRENCY:
     return {
       ...state,
@@ -30,6 +28,11 @@ export default function expensesReducerAction(state = INITIAL_STATE, action) {
       ...state,
       error: action.payload,
       isFetching: false,
+    };
+  case ADD_EXPENSES:
+    return {
+      ...state,
+      expenses: [...state.expenses, action.payload],
     };
   default:
     return state;

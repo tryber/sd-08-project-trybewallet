@@ -1,8 +1,8 @@
 import { ADD_EXPENSES } from './index';
 
-export default function addExpensesAction() {
+export default function addExpensesAction(handlingInputs) {
   return {
     type: ADD_EXPENSES,
-    payload: {},
+    payload: handlingInputs[0],
   };
 }

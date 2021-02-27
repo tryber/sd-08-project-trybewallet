@@ -3,7 +3,7 @@ import { GET_CURRENCY, REQUEST_CURRENCY, FAILED_REQUEST } from './index';
 function getCurrency(json) {
   return {
     type: GET_CURRENCY,
-    payload: json,
+    payload: Object.keys(json),
   };
 }
 
@@ -21,7 +21,7 @@ export default function fetchCurrenciesAction() {
     return fetch('https://economia.awesomeapi.com.br/json/all')
       .then((r) => r.json()
         .then(
-          (json) => console.log(json) || dispatch(getCurrency(json)),
+          (json) => dispatch(getCurrency(json)),
           (error) => dispatch(failedRequest(error)),
         ));
   };

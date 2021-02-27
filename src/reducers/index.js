@@ -3,11 +3,13 @@ import { combineReducers } from 'redux';
 import user from './user';
 import wallet from './wallet';
 import logStatus from './logStatus';
+import inputHandler from './inputHandler';
 
 const appReducer = combineReducers({
   user,
   wallet,
   logStatus,
+  inputHandler,
 });
 
 export default appReducer;
