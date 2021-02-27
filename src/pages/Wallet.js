@@ -32,7 +32,7 @@ class Wallet extends React.Component {
   }
 
   header() {
-    const { email, total, isFetching } = this.props;
+    const { email } = this.props;
     return (
       <header>
         <div>TrybeWallet</div>
@@ -42,12 +42,7 @@ class Wallet extends React.Component {
             { email }
           </span>
         </span>
-        {
-          isFetching ? <div data-testid="total-field">0</div>
-            : (
-              <div data-testid="total-field">{ total }</div>
-            )
-        }
+        <span data-testid="total-field">0</span>
         <span data-testid="header-currency-field">BRL</span>
       </header>
     );
