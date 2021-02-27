@@ -14,6 +14,15 @@
   }
 }
 
+.height-100 {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.box-radius{
+  border-radius: 10px;
+}
+
 .App-header {
   align-items: center;
   background-color: #282c34;
