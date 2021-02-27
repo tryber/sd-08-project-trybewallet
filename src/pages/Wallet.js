@@ -30,8 +30,8 @@ class Wallet extends React.Component {
     return (
       <>
         <header>
-          <ul>
-            <li><img src={ logo } alt="Logo" width="50px" /></li>
+          <ul className="topnavDiv">
+            <li><img src={ logo } alt="Logo" height="100px" /></li>
             <li data-testid="email-field">{`User: ${userEmail}`}</li>
             <li data-testid="total-field">
               {`Total Expenses: ${this.calculateTotal()}`}

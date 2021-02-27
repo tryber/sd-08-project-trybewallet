@@ -50,7 +50,7 @@ class Login extends React.Component {
     const { userAction } = this.props;
     return (
       <div className="loginDiv">
-        <img src={ logo } alt="Login Logo" width="50px" />
+        <img src={ logo } alt="Login Logo" height="150px" />
         <input
           type="text"
           id="email"

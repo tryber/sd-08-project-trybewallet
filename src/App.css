@@ -1,3 +1,8 @@
+* {
+  box-sizing: border-box;
+  font-family: Roboto, sans-serif;
+}
+
 ul {
   display: flex;
   flex-flow: row nowrap;
@@ -5,4 +10,69 @@ ul {
   list-style: none;
   margin: 0;
   padding: 0;
+}
+
+:focus {
+  outline: 0;
+}
+
+input {
+  border: 1px solid lightsalmon;
+  border-radius: 4px;
+  font-family: inherit;
+  padding: 0.6rem;
+}
+
+button , select {
+  background: white;
+  border: 1px solid lightsalmon;
+  border-radius: 4px;
+  box-shadow: 2px 2px 3px salmon;
+  color: lightsalmon;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 0.6rem;
+}
+
+button:disabled {
+  border: 1px solid rgba(255, 160, 122, 0.418);
+  box-shadow: none;
+  color: rgba(255, 160, 122, 0.384);
+}
+
+
+button:hover:enabled {
+  background-color: lightsalmon;
+  color: white;
+}
+
+table {
+  border-collapse: collapse;
+  margin-top: 20px;
+  text-align: center;
+  width: 100%;
+}
+
+thead {
+  background-color: darkslategrey;
+  color: white;
+}
+
+th {
+  padding: 1rem 0;
+}
+
+td {
+  padding: 1rem 0;
+}
+
+tr {
+  border-bottom: 1px solid lightgray;
+}
+
+li {
+  align-items: center;
+  display: flex;
+  gap: 20px;
+  justify-content: flex-start;
 }
