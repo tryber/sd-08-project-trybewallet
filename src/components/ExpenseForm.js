@@ -3,22 +3,18 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import ExpenseInput from './ExpenseInput';
-import { fetchCurrencies, addExpense } from '../actions';
+import { fetchCurrencies, addExpense, finishesEdit } from '../actions';
 
 class ExpenseForm extends React.Component {
   constructor(props) {
     super(props);
     this.handleAddExpense = this.handleAddExpense.bind(this);
+    this.handleFinishEditing = this.handleFinishEditing.bind(this);
   }
 
   async componentDidMount() {
     const { fetchCurrencies: fetchCurrenciesAction } = this.props;
     await fetchCurrenciesAction();
-  }
-
-  handleCurrency() {
-    const { currencies } = this.props;
-    return currencies.map((currency) => currency[0]);
   }
 
   async handleAddExpense(event) {
@@ -33,7 +29,24 @@ class ExpenseForm extends React.Component {
     event.target.parentNode.reset();
   }
 
+  handleFinishEditing(event) {
+    event.preventDefault();
+    const { finishesEdit: finishesEditAction } = this.props;
+    finishesEditAction();
+  }
+
   render() {
+    const { editing, currencies } = this.props;
+
+    const buttonGen = (isEditing) => (
+      <button
+        type="submit"
+        onClick={ isEditing ? this.handleFinishEditing : this.handleAddExpense }
+      >
+        {isEditing ? 'Editar despesa' : 'Adicionar despesa'}
+      </button>
+    );
+
     return (
       <section>
         <form>
@@ -43,7 +56,7 @@ class ExpenseForm extends React.Component {
             name="currency"
             type="select"
             label="Moeda"
-            options={ this.handleCurrency() }
+            options={ currencies }
           />
           <ExpenseInput
             name="method"
@@ -57,12 +70,7 @@ class ExpenseForm extends React.Component {
             label="Categoria"
             options={ ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'] }
           />
-          <button
-            type="submit"
-            onClick={ this.handleAddExpense }
-          >
-            Adicionar despesa
-          </button>
+          {buttonGen(editing)}
         </form>
       </section>
     );
@@ -73,17 +81,25 @@ ExpenseForm.propTypes = {
   currencies: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.array]))
     .isRequired,
   fetchCurrencies: PropTypes.func.isRequired,
+  finishesEdit: PropTypes.func.isRequired,
   addExpense: PropTypes.func.isRequired,
+  editing: PropTypes.bool,
+};
+
+ExpenseForm.defaultProps = {
+  editing: false,
 };
 
 const mapStateToProps = (state) => ({
   currencies: state.wallet.currencies,
   expenses: state.wallet.expenses,
+  editing: state.wallet.editing,
 });
 
 const mapDispatchToProps = {
   fetchCurrencies,
   addExpense,
+  finishesEdit,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExpenseForm);

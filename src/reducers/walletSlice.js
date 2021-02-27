@@ -22,12 +22,29 @@ const initialState = {
   editing: false,
 };
 
-function handleEditCase(state) {
+function handleEditing(state, payload) {
+  const editedExpense = [...state.expenses]
+    .find((expense) => expense.id === payload);
+  return {
+    ...state,
+    editing: true,
+    currentExpense: {
+      ...state.currentExpense,
+      id: payload,
+      exchangeRates: editedExpense.exchangeRates,
+      currency: editedExpense.currency,
+    },
+  };
+}
+
+function handleFinishEdit(state) {
   return {
     ...state,
     expenses: [...state.expenses]
-      .map((expense) => ((expense.id === state.currentExpense.id)
-        ? { ...state.currentExpense } : expense)),
+      .map((expense) => {
+        const condition = (expense.id === state.currentExpense.id);
+        return condition ? { ...state.currentExpense } : expense;
+      }),
     editing: false,
     currentExpense: {
       ...state.currentExpense,
@@ -41,7 +58,7 @@ export default function walletReducer(state = initialState, action) {
   case RECEIVE_CURRENCIES:
     return {
       ...state,
-      currencies: Object.entries(action.payload),
+      currencies: Object.keys(action.payload),
       currentExpense: {
         ...state.currentExpense,
         exchangeRates: action.payload,
@@ -70,16 +87,9 @@ export default function walletReducer(state = initialState, action) {
       expenses: [...state.expenses].filter((expense) => expense.id !== action.payload),
     };
   case IS_EDITING:
-    return {
-      ...state,
-      editing: true,
-      currentExpense: {
-        ...state.currentExpense,
-        id: action.payload,
-      },
-    };
+    return handleEditing(state, action.payload);
   case FINISHES_EDIT:
-    return handleEditCase(state);
+    return handleFinishEdit(state);
   default:
     return state;
   }
