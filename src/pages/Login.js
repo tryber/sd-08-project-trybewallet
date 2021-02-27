@@ -12,7 +12,7 @@ class Login extends React.Component {
       password: '',
       errorMessage: '',
       isNotValid: true,
-      login: false,
+      redirector: false,
     };
 
     this.logValidation = this.logValidation.bind(this);
@@ -45,7 +45,7 @@ class Login extends React.Component {
     // handleLogin({ email, password });
     handleEmail(email);
     handlePassword(password);
-    this.setState({ login: true });
+    this.setState({ redirector: true });
   }
 
   handleChange({ target }) {
@@ -57,7 +57,7 @@ class Login extends React.Component {
   }
 
   render() {
-    const { errorMessage, isNotValid, login } = this.state;
+    const { errorMessage, isNotValid, redirector } = this.state;
     return (
       <div className="Login">
         <section className="login-inputs">
@@ -87,7 +87,7 @@ class Login extends React.Component {
           >
             Entrar
           </button>
-          { login ? <Redirect to="/carteira" /> : ''}
+          { redirector ? <Redirect to="/carteira" /> : ''}
         </section>
       </div>
     );
