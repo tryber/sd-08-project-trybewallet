@@ -160,7 +160,6 @@ class Wallet extends React.Component {
 Wallet.propTypes = {
   email: PropTypes.func.isRequired,
   currencies: PropTypes.func.isRequired,
-  total: PropTypes.func.isRequired,
   isFetching: PropTypes.func.isRequired,
   fetchCurrencies: PropTypes.func.isRequired,
   fetchToRegister: PropTypes.func.isRequired,
