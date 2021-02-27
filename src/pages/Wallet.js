@@ -21,6 +21,7 @@ class Wallet extends Component {
       moeda: '',
       metodoPG: '',
       despesa: '',
+      total: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
@@ -41,14 +42,21 @@ class Wallet extends Component {
 
   gastosTotais() {
     const { gastos } = this.props;
-    console.log(gastos);
+    const { total } = this.state;
+    const despesasTotais = gastos.reduce((acc, value) => {
+      const { valor, moeda, cambio } = value;
+      return acc + valor * cambio[moeda].ask;
+    }, 0);
+    if (total !== despesasTotais) {
+      this.setState({ total: despesasTotais });
+    }
   }
 
   handleClick() {
     const { valor, descricao, moeda, metodoPG, despesa } = this.state;
-    const expenses = { valor, descricao, moeda, metodoPG, despesa };
+    const despesas = { valor, descricao, moeda, metodoPG, despesa };
     const { addFetchDespesa } = this.props;
-    addFetchDespesa(expenses);
+    addFetchDespesa(despesas);
   }
 
   handleChange({ target }) {
@@ -99,14 +107,12 @@ class Wallet extends Component {
 
   render() {
     const { userEmail } = this.props;
-    const { descricao, valor } = this.state;
+    const { descricao, valor, total } = this.state;
     return (
       <>
         <header className="Wallet-header">
           <span data-testid="email-field">{userEmail}</span>
-          <span data-testid="total-field">
-            {}
-          </span>
+          <span data-testid="total-field">{parseFloat(total).toFixed(2)}</span>
           <span data-testid="header-currency-field">BRL</span>
         </header>
         <main>
@@ -134,6 +140,8 @@ class Wallet extends Component {
 
 Wallet.propTypes = {
   userEmail: PropTypes.string.isRequired,
+  addFetchDespesa: PropTypes.func.isRequired,
+  gastos: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(wallet, dispatch);
