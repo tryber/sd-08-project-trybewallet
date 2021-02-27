@@ -11,7 +11,7 @@ class FormExpenses extends Component {
     this.state = {
       formControl: {
         value: '0',
-        currency: '',
+        currency: 'USD',
         method: 'Dinheiro',
         tag: 'Alimentação',
         description: '',
