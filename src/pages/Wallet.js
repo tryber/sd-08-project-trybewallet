@@ -73,7 +73,7 @@ class Wallet extends React.Component {
     return (
       <>
         <label htmlFor="description-input">
-          Descrição da despesa:
+          Com o que foi gasto?:
           <input
             name="description-input"
             type="text"
@@ -103,8 +103,9 @@ class Wallet extends React.Component {
     const { value, currency, total } = this.state;
     const { expenses } = this.props;
 
-    const soma = parseFloat(value)
-      * parseFloat(expenses[0].exchangeRates[currency].ask) + total;
+    const soma = parseFloat(value).toFixed(2)
+      * parseFloat(expenses[0].exchangeRates[currency].ask).toFixed(2)
+        + total;
 
     this.setState({
       value: '',
@@ -112,7 +113,7 @@ class Wallet extends React.Component {
       method: '',
       tag: '',
       description: '',
-      total: soma.toFixed(2),
+      total: soma,
     });
   }
 
