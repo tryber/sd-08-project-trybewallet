@@ -21,7 +21,7 @@ function wallet(state = initialState, action) {
   case 'ADD_REGISTER':
   {
     const { total } = state;
-    const soma = action.value.valor * action.value.exchangeRates[action.value.moeda]
+    const soma = action.value.value * action.value.exchangeRates[action.value.currency]
       .ask + total;
     return {
       ...state,

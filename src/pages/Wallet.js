@@ -12,11 +12,11 @@ class Wallet extends React.Component {
     super(props);
 
     this.state = {
-      valor: '',
-      descricao: '',
-      moeda: 'USD',
-      metodoPg: '',
-      categoria: '',
+      value: '',
+      currency: 'USD',
+      method: '',
+      tag: '',
+      description: '',
     };
 
     this.header = this.header.bind(this);
@@ -51,13 +51,13 @@ class Wallet extends React.Component {
   }
 
   valueInput() {
-    const { valor } = this.state;
+    const { value } = this.state;
     return (
       <label htmlFor="value-input">
         Valor:
         <input
-          value={ valor }
-          onChange={ (e) => this.setState({ valor: e.target.value }) }
+          value={ value }
+          onChange={ (e) => this.setState({ value: e.target.value }) }
           name="value-input"
           type="number"
           data-testid="value-input"
@@ -68,7 +68,7 @@ class Wallet extends React.Component {
 
   descEMoedaInput() {
     const { currencies } = this.props;
-    const { descricao, moeda } = this.state;
+    const { description, currency } = this.state;
     return (
       <>
         <label htmlFor="description-input">
@@ -77,19 +77,19 @@ class Wallet extends React.Component {
             name="description-input"
             type="text"
             data-testid="description-input"
-            value={ descricao }
-            onChange={ (e) => this.setState({ descricao: e.target.value }) }
+            value={ description }
+            onChange={ (e) => this.setState({ description: e.target.value }) }
           />
         </label>
         Moeda:
         <select
-          value={ moeda }
-          onChange={ (e) => this.setState({ moeda: e.target.value }) }
+          value={ currency }
+          onChange={ (e) => this.setState({ currency: e.target.value }) }
           data-testid="currency-input"
         >
-          { currencies.map((currency, index) => (
-            <option key={ index } value={ currency } data-testid={ currency }>
-              { currency }
+          { currencies.map((moeda, index) => (
+            <option key={ index } value={ moeda } data-testid={ moeda }>
+              { moeda }
             </option>))}
         </select>
       </>
@@ -100,17 +100,17 @@ class Wallet extends React.Component {
     const { fetchToRegister } = this.props;
     fetchToRegister(this.state);
     this.setState({
-      valor: '',
-      descricao: '',
-      moeda: 'USD',
-      metodoPg: '',
-      categoria: '',
+      value: '',
+      currency: 'USD',
+      method: '',
+      tag: '',
+      description: '',
     });
   }
 
   forms() {
     const { isFetching } = this.props;
-    const { metodoPg, categoria } = this.state;
+    const { method, description } = this.state;
     return (
       isFetching ? <p> loading </p>
         : (
@@ -121,8 +121,8 @@ class Wallet extends React.Component {
               Método de pagamento:
               <select
                 data-testid="method-input"
-                value={ metodoPg }
-                onChange={ (e) => this.setState({ metodoPg: e.target.value }) }
+                value={ method }
+                onChange={ (e) => this.setState({ method: e.target.value }) }
               >
                 {metPg.map((mpg, ind) => (
                   <option key={ ind } value={ mpg }>
@@ -132,8 +132,8 @@ class Wallet extends React.Component {
               Categoria (tag):
               <select
                 data-testid="tag-input"
-                value={ categoria }
-                onChange={ (e) => this.setState({ categoria: e.target.value }) }
+                value={ description }
+                onChange={ (e) => this.setState({ description: e.target.value }) }
               >
                 {tags.map((tag, ind) => (
                   <option key={ ind } value={ tag }>

@@ -23,11 +23,6 @@ export function fetchToRegister(state) {
       const currenciesResponse = await fetch('https://economia.awesomeapi.com.br/json/all');
       const currenciesJason = await currenciesResponse.json();
 
-      // let indice = currenciesJason.code.indexOf('USDT');
-      // while (indice >= 0) {
-      //   currenciesJason.splice(indice, 1);
-      //   indice = currenciesJason.indexOf('USDT');
-      // }
       state = { ...state, exchangeRates: currenciesJason };
 
       return dispatch(addRegister(state));
