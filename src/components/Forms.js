@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Input from './Input';
 import Payments from './Payments';
@@ -11,11 +12,11 @@ class Forms extends Component {
     super();
     this.state = {
       id: 0,
-      value: '',
+      value: '0',
       description: '',
-      currency: '',
-      method: '',
-      tag: '',
+      currency: 'USD',
+      tag: 'Alimentação',
+      method: 'Dinheiro',
     };
     this.handleFetch = this.handleFetch.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -57,7 +58,7 @@ class Forms extends Component {
   }
 
   render() {
-    const { value } = this.state;
+    const { value, description, currency, method, tag } = this.state;
     return (
       <form>
         <Input
@@ -69,7 +70,7 @@ class Forms extends Component {
           {'Valor da despesa: '}
         </Input>
         <Input
-          value={ value }
+          value={ description }
           onChange={ this.onChange }
           name="description"
           datatestid="description-input"
@@ -77,16 +78,19 @@ class Forms extends Component {
           {'Descrição da despesa: '}
         </Input>
         <Select
+          value={ currency }
           onChange={ this.onChange }
           name="currency"
           id="currency-input"
         />
         <Payments
+          value={ method }
           onChange={ this.onChange }
           name="method"
           datatestid="method-input"
         />
         <Categories
+          value={ tag }
           onChange={ this.onChange }
           name="tag"
           datatestid="tag-input"
@@ -100,5 +104,9 @@ class Forms extends Component {
 const mapDispatchToProps = (dispatch) => ({
   addExpense: (value) => dispatch(currentExpensive(value)),
 });
+
+Forms.propTypes = {
+  addExpense: PropTypes.string.isRequired,
+};
 
 export default connect(null, mapDispatchToProps)(Forms);

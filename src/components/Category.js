@@ -3,9 +3,14 @@ import PropTypes from 'prop-types';
 
 class Category extends Component {
   render() {
-    const { datatestid, name, onChange } = this.props;
+    const { datatestid, name, onChange, value } = this.props;
     return (
-      <select onChange={ onChange } name={ name } data-testid={ datatestid }>
+      <select
+        value={ value }
+        onChange={ onChange }
+        name={ name }
+        data-testid={ datatestid }
+      >
         <option>Alimentação</option>
         <option>Lazer</option>
         <option>Trabalho</option>
@@ -18,6 +23,8 @@ class Category extends Component {
 
 Category.propTypes = {
   datatestid: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 
 export default Category;

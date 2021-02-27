@@ -11,12 +11,12 @@ class Select extends Component {
   }
 
   render() {
-    const { currency, id, name, onChange } = this.props;
+    const { currency, id, name, onChange, value } = this.props;
     // console.log(Object.keys(currency));
     return (
       <div>
-        <select onChange={ onChange } name={ name } data-testid={ id }>
-          {Object.keys(currency)
+        <select value={ value } onChange={ onChange } name={ name } data-testid={ id }>
+          {currency
             .filter((curr) => curr.length === THREE)
             .map((key) => (
               <option data-testid={ key } key={ key }>{key}</option>
@@ -37,8 +37,11 @@ const mapDispatchToProps = (dispatch) => ({
 
 Select.propTypes = {
   currency: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
   fetch: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Select);

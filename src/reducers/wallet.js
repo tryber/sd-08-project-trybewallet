@@ -11,7 +11,7 @@ const reducer = (state = initialState, action) => {
   case RECEIVE_CURRENCY:
     return ({
       ...state,
-      currencies: action.payload,
+      currencies: Object.keys(action.payload),
     });
   case EXPENSIVE:
     return ({
