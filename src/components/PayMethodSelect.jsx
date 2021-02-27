@@ -5,7 +5,13 @@ function PayMethodSelect({ onChange, ...rest }) {
   return (
     <label htmlFor="method">
       Metodo de pagamento:
-      <select name="method" data-testid="method-input" onChange={ onChange } { ...rest }>
+      <select
+        name="method"
+        role="combobox"
+        data-testid="method-input"
+        onChange={ onChange }
+        { ...rest }
+      >
         <option value="Dinheiro">Dinheiro</option>
         <option value="Cartão de crédito">Cartão de crédito</option>
         <option value="Cartão de débito">Cartão de débito</option>

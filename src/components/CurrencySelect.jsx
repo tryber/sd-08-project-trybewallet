@@ -20,6 +20,7 @@ function CurrencySelect({ onChange, ...rest }) {
       <select
         name="currency"
         data-testid="currency-input"
+        role="combobox"
         onChange={ onChange }
         { ...rest }
       >

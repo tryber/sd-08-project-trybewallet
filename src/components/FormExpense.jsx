@@ -7,7 +7,7 @@ import PayMethodSelect from './PayMethodSelect';
 import TagSelect from './TagSelect';
 
 const INITIAL_VALUE = {
-  value: 0,
+  value: '0',
   description: '',
   currency: 'USD',
   tag: 'Alimentação',
@@ -35,7 +35,8 @@ function FormExpense() {
   const handleAddExpense = async () => {
     const exchangeRates = await fetch('https://economia.awesomeapi.com.br/json/all')
       .then((response) => response.json());
-    dispatch(actions.addExpense({ ...data, id: getId(expenses), exchangeRates }));
+    dispatch(actions.addExpense({ id: getId(expenses), ...data, exchangeRates }));
+    setData(INITIAL_VALUE);
   };
   const { value, description, currency, tag, method } = data;
   return (
@@ -43,7 +44,7 @@ function FormExpense() {
       <label htmlFor="value">
         Valor:
         <input
-          type="number"
+          type="text"
           value={ value }
           name="value"
           data-testid="value-input"

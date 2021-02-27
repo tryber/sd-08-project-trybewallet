@@ -33,10 +33,10 @@ function WalletTable() {
   });
 
   return (
-    <table className="wallet-table">
+    <table>
       <tbody>
         <tr>
-          {TABLE_HEADERS.map((i) => <th className="wth-header" key={ i }>{i}</th>)}
+          {TABLE_HEADERS.map((i) => <th key={ i }>{i}</th>)}
         </tr>
         {expListBuilder().map((expense) => (
           <WalletTableItem key={ expense.id } data={ expense } />)) || null}
