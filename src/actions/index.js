@@ -13,6 +13,13 @@ export const addExpense = (expense) => ({
   payload: expense,
 });
 
+export const DELETE_EXPENSE = 'DELETE_EXPENSE';
+
+export const deleteExpense = (id) => ({
+  type: DELETE_EXPENSE,
+  payload: id,
+});
+
 export const fetchCurrencys = (expenseFormStateData) => async (dispatch) => {
   const exchangeRates = await fetch('https://economia.awesomeapi.com.br/json/all')
     .then((response) => response.json());
