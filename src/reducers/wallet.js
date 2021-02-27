@@ -22,7 +22,7 @@ const wallet = (state = INITIAL_STATE, action) => {
         currency: action.payload.currency,
         method: action.payload.method,
         tag: action.payload.tag,
-        exchangeRates: action.payload.exchangeRates,
+        exchangeRates: action.payload.currencies,
       }],
     };
   default:

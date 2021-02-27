@@ -21,14 +21,15 @@ class Wallet extends React.Component {
       value: '',
       description: '',
       currency: 'USD',
-      method: 'Dinheiro',
-      tag: 'Alimentação',
+      method: metodos[0],
+      tag: categorias[0],
       totalValue: 0,
     };
     this.handleChange = this.handleChange.bind(this);
     this.renderInputs = this.renderInputs.bind(this);
     this.renderSelects = this.renderSelects.bind(this);
     this.addExpenseToWallet = this.addExpenseToWallet.bind(this);
+    this.resetFields = this.resetFields.bind(this);
   }
 
   componentDidMount() {
@@ -43,17 +44,29 @@ class Wallet extends React.Component {
     });
   }
 
+  resetFields() {
+    this.setState({
+      value: '',
+      description: '',
+      currency: 'USD',
+      method: 'Dinheiro',
+      tag: 'Alimentação',
+    });
+  }
+
   async addExpenseToWallet() {
     const { value, description, currency, method, tag, totalValue } = this.state;
     const { addToWallet, fetchCurrency } = this.props;
     await fetchCurrency();
     const { currencies } = this.props;
     const expense = { value, description, currency, method, tag, currencies };
+    console.log(expense);
     addToWallet(expense);
     const total = parseFloat(value) * parseFloat(currencies[currency].ask);
     this.setState({
       totalValue: totalValue + total,
     });
+    this.resetFields();
   }
 
   renderInputs() {
