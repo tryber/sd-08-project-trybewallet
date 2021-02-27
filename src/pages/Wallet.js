@@ -42,9 +42,12 @@ class Wallet extends React.Component {
             { email }
           </span>
         </span>
-        <span data-testid="total-field">
-          { isFetching ? 0 : total }
-        </span>
+        {
+          isFetching ? <span data-testid="total-field">0</span>
+            : (
+              <span data-testid="total-field">{ total }</span>
+            )
+        }
         <span data-testid="header-currency-field">BRL</span>
       </header>
     );
@@ -110,7 +113,7 @@ class Wallet extends React.Component {
 
   forms() {
     const { isFetching } = this.props;
-    const { method, description } = this.state;
+    const { method, tag } = this.state;
     return (
       isFetching ? <p> loading </p>
         : (
@@ -132,12 +135,12 @@ class Wallet extends React.Component {
               Categoria (tag):
               <select
                 data-testid="tag-input"
-                value={ description }
-                onChange={ (e) => this.setState({ description: e.target.value }) }
+                value={ tag }
+                onChange={ (e) => this.setState({ tag: e.target.value }) }
               >
-                {tags.map((tag, ind) => (
-                  <option key={ ind } value={ tag }>
-                    { tag }
+                {tags.map((categ, ind) => (
+                  <option key={ ind } value={ categ }>
+                    { categ }
                   </option>))}
               </select>
               <button type="button" onClick={ this.handleChange }>
