@@ -11,7 +11,7 @@ class Button extends React.Component {
     const validatePassword = password.length >= minimumLengthOfPassword;
 
     return validateEmail && validatePassword
-      ? <button type="button" onClick={ <Link to="/carteira" /> }> Entrar </button>
+      ? <Link to="/carteira">Entrar</Link>
       : <button type="button" disabled> Entrar </button>;
   }
 }
