@@ -43,8 +43,8 @@ class ExpensesForm extends Component {
     this.setState((state) => ({
       idCount: state.idCount + 1,
       currentExpense: {
-        id: state.idCount,
         ...state.currentExpense,
+        id: state.idCount,
       },
     }), () => {
       const { addExpense } = this.props;
