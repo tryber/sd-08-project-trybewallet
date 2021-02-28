@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
-import login from '../actions';
+import { login } from '../actions';
 
 const PASSWORD_REQUIREMENT = 5;
 const pattern = new RegExp(/^[a-z0-9.]+@[a-z0-9]+\.[a-z]/i);
