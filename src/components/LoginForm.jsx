@@ -56,6 +56,6 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(null, mapDispatchToProps)(LoginForm);
 
 LoginForm.propTypes = {
-  userEmail: PropTypes.string.isRequired,
-  userPassword: PropTypes.string.isRequired,
+  userEmail: PropTypes.func.isRequired,
+  userPassword: PropTypes.func.isRequired,
 };
