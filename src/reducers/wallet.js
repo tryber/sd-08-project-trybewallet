@@ -25,6 +25,11 @@ const wallet = (state = initialState, action) => {
       ...state,
       expenses: state.expenses.concat(action.value),
     };
+  case 'REMOVE_EXPENSE':
+    return {
+      ...state,
+      expenses: action.value,
+    };
   default:
     return state;
   }

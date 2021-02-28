@@ -1,7 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { addExpense, fetchCoins, updatesExpending } from '../../actions';
+import { addExpense,
+  fetchCoins,
+  updatesExpending,
+} from '../../actions';
 
 class ExpenseForm extends React.Component {
   constructor(props) {
@@ -19,7 +22,7 @@ class ExpenseForm extends React.Component {
       expenseValue: 0,
       expenseDescription: '',
       expenseCoin: 'EUR',
-      expenseMethod: 'dinheiro',
+      expenseMethod: 'Dinheiro',
       expenseTag: 'Alimentação',
     };
   }
@@ -109,6 +112,7 @@ class ExpenseForm extends React.Component {
       <label htmlFor="expense-description">
         { 'Descrição da despesa: ' }
         <input
+          className="expense-description"
           name="expenseDescription"
           type="text"
           data-testid="description-input"
@@ -128,7 +132,6 @@ class ExpenseForm extends React.Component {
           type="text"
           data-testid="value-input"
           onChange={ this.handleChange }
-          placeholder={ expenseValue }
           value={ expenseValue }
         />
       </label>

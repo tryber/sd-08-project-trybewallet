@@ -32,3 +32,8 @@ export const updatesExpending = (value) => ({
   type: 'UPDATES_EXPENDING',
   value,
 });
+
+export const removeExpense = (value) => ({
+  type: 'REMOVE_EXPENSE',
+  value,
+});

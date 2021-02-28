@@ -39,12 +39,14 @@
   align-self: center;
   background-color: rgb(211, 214, 221);
   border-radius: 6px;
+  margin-bottom: 30px;
   margin-top: 10px;
 }
 
-.expense-form input {
+.expense-form input:first-child {
   background-color: rgb(211, 214, 221);
   border-radius: 6px;
+  width: 75px;
 }
 
 .expense-form select {
@@ -54,4 +56,15 @@
 
 .expense-form :only-child {
   margin: 10px 0;
+}
+
+.expense-table {
+  border-collapse: collapse;
+  display: flex;
+  justify-content: center;
+}
+
+.expense-table th , .expense-table td {
+  border: 1px solid black;
+  padding: 15px;
 }
