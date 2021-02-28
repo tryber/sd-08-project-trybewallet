@@ -1,0 +1,29 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 30px;
+}
+
+.wallet-data {
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+  flex-wrap: wrap;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+  padding-inline-start: 0;
+  list-style: none;
+}
+
+p {
+  display: inline-block;
+  margin: 0;
+}
+
+span {
+  display: inline-block;
+}

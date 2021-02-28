@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { addExpense, saveCurrencies, sumToExpensesTotal } from '../actions';
 import fetchCurrenciesAPI from '../services/api';
+import '../styles/add-expense-form.css';
 
 class AddExpenseForm extends React.Component {
   constructor() {
