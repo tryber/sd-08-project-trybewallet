@@ -1,10 +1,12 @@
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
 import { ADD_REGISTER, DELETE_REGISTER } from '../store/consts';
 
-const initialState = { currencies: [],
-  expenses: [] };
+const initialState = {
+  currencies: [],
+  expenses: [],
+};
 
-function wallet(state = initialState, action) {
+const wallet = (state = initialState, action) => {
   switch (action.type) {
   case ADD_REGISTER:
     return { ...state,
@@ -14,6 +16,6 @@ function wallet(state = initialState, action) {
   default:
     return state;
   }
-}
+};
 
 export default wallet;

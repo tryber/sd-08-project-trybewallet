@@ -1,7 +1,7 @@
-const ISS_BASE_API = 'http://api.open-notify.org';
+const ECONOMY_API = 'https://economia.awesomeapi.com.br/';
 
-export const getCurrentISSLocation = () => (
-  fetch(`${ISS_BASE_API}/iss-now.json`)
+export const getCurrentCurrencies = () => (
+  fetch(`${ECONOMY_API}/json/all`)
     .then((response) => (
       response
         .json()
@@ -9,4 +9,4 @@ export const getCurrentISSLocation = () => (
     ))
 );
 
-export default getCurrentISSLocation;
+export default getCurrentCurrencies;
