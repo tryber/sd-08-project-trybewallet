@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { addWallet, fetchCurrencies } from '../actions';
+import { addWallet, deleteExpense, fetchCurrencies } from '../actions';
 import InputText from '../components/InputText';
 import Select from '../components/Select';
+import HeaderTable from '../components/HeaderTable';
 
 const metodos = ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'];
 const categorias = ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
@@ -26,6 +27,7 @@ class Wallet extends React.Component {
       method: metodos[0],
       tag: categorias[0],
       totalValue: 0,
+      id: 0,
     };
     this.handleChange = this.handleChange.bind(this);
     this.renderInputs = this.renderInputs.bind(this);
@@ -33,7 +35,7 @@ class Wallet extends React.Component {
     this.addExpenseToWallet = this.addExpenseToWallet.bind(this);
     this.resetFields = this.resetFields.bind(this);
     this.roundUp = this.roundUp.bind(this);
-    this.walletTableHeader = this.walletTableHeader.bind(this);
+    this.deleteExpenses = this.deleteExpenses.bind(this);
   }
 
   componentDidMount() {
@@ -64,40 +66,30 @@ class Wallet extends React.Component {
   }
 
   async addExpenseToWallet() {
-    const { value, description, currency, method, tag, totalValue } = this.state;
+    const { value, description, currency, method, tag, totalValue, id } = this.state;
     const { addToWallet, fetchCurrency } = this.props;
     await fetchCurrency();
     const { currencies } = this.props;
-    const expense = { value, description, currency, method, tag, currencies };
-    console.log(expense);
+    const expense = { id, value, description, currency, method, tag, currencies };
     addToWallet(expense);
     const total = parseFloat(value) * parseFloat(currencies[currency].ask);
     this.setState({
       totalValue: totalValue + total,
+      id: id + 1,
     });
     this.resetFields();
   }
 
-  walletTableHeader() {
-    return (
-      <thead>
-        <tr>
-          <th>Descrição</th>
-          <th>Tag</th>
-          <th>Método de pagamento</th>
-          <th>Valor</th>
-          <th>Moeda</th>
-          <th>Câmbio utilizado</th>
-          <th>Valor convertido</th>
-          <th>Moeda de conversão</th>
-          <th>Editar/Excluir</th>
-        </tr>
-      </thead>);
+  deleteExpenses(index) {
+    const { expenses, deleteExpenseAction } = this.props;
+    expenses.splice(index, 1);
+    deleteExpenseAction(expenses);
+    this.forceUpdate();
   }
 
   walletTable() {
     const { expenses } = this.props;
-    return expenses.map((expense) => (
+    return expenses.map((expense, i, array) => (
       <tbody key={ expense.id }>
         <tr>
           <td>{expense.description}</td>
@@ -111,6 +103,15 @@ class Wallet extends React.Component {
             * parseFloat(expense.value), 2)}
           </td>
           <td>Real</td>
+          <td>
+            <button
+              type="button"
+              data-testid="delete-btn"
+              onClick={ () => this.deleteExpenses(array.indexOf(expense), 1) }
+            >
+              Deletar
+            </button>
+          </td>
         </tr>
       </tbody>));
   }
@@ -199,7 +200,7 @@ class Wallet extends React.Component {
             </button>
           </form>
           <table>
-            {this.walletTableHeader()}
+            {HeaderTable}
             {this.walletTable()}
           </table>
         </section>
@@ -216,6 +217,7 @@ Wallet.propTypes = {
     PropTypes.object.isRequired,
   ).isRequired,
   expenses: PropTypes.shape().isRequired,
+  deleteExpenseAction: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -227,6 +229,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   fetchCurrency: () => dispatch(fetchCurrencies()),
   addToWallet: (object) => dispatch(addWallet(object)),
+  deleteExpenseAction: (position) => dispatch(deleteExpense(position)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Wallet);
