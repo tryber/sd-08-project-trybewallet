@@ -56,6 +56,9 @@ class Button extends Component {
     e.preventDefault();
     saveEmail(email);
     savePassword(password);
+    this.setState({
+      proceed: true,
+    });
   }
 
   renderButton() {
