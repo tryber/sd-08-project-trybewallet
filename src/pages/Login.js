@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { MIN_PASSWORD_LENGHT, REGEX_VERIFY_EMAIL } from '../consts';
 import Button from '../components/Button';
 import './Login.css';
