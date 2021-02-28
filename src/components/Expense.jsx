@@ -99,7 +99,10 @@ class Expense extends React.Component {
       ['tag', 'Categoria', 'select', optionsTag]];
 
     return (
-      <form onSubmit={ this.submit }>
+      <form
+        className={ `add-expense${isEditing >= 0 ? ' editing' : ''}` }
+        onSubmit={ this.submit }
+      >
         {inputs.map((input) => this.input(...input))}
         <button type="submit">
           { isEditing >= 0 ? 'Editar despesa' : 'Adicionar despesa' }

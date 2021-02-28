@@ -3,7 +3,31 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 class Header extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      changeTotal: false,
+    };
+    this.toggleTotal = this.toggleTotal.bind(this);
+  }
+
+  componentDidUpdate(prevProps) {
+    const interval = 200;
+    const { changeTotal } = this.state;
+    const { expenses: prevExpenses } = prevProps;
+    const { expenses } = this.props;
+    if (expenses.length !== prevExpenses.length) this.toggleTotal(true);
+    else if (changeTotal === true) setTimeout(() => this.toggleTotal(false), interval);
+  }
+
+  toggleTotal(value) {
+    this.setState({
+      changeTotal: value,
+    });
+  }
+
   render() {
+    const { changeTotal } = this.state;
     const { email, expenses } = this.props;
     const total = expenses
       .reduce(
@@ -15,8 +39,13 @@ class Header extends React.Component {
     return (
       <header>
         <span data-testid="email-field">{`Email: ${email}`}</span>
-        <span data-testid="total-field">{total}</span>
-        <span data-testid="header-currency-field">BRL</span>
+        <span>TrybeWallet</span>
+        <div className="container">
+          <span data-testid="total-field" className={ changeTotal ? 'animate' : '' }>
+            {total}
+          </span>
+          <span data-testid="header-currency-field">BRL</span>
+        </div>
       </header>
     );
   }

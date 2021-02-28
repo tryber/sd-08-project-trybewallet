@@ -16,9 +16,9 @@ class Table extends React.Component {
         <td>{ parseFloat(exchangeRates[currency].ask).toFixed(2) }</td>
         <td>{ parseFloat(exchangeRates[currency].ask * value).toFixed(2) }</td>
         <td>Real</td>
-        <td>
+        <td className="buttons">
           <button type="button" data-testid="edit-btn" onClick={ () => editRow(id) }>
-            &#9998;
+            &#x270e;
           </button>
           <button data-testid="delete-btn" type="button" onClick={ () => deleteRow(id) }>
             &#128465;

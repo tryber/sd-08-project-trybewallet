@@ -4,6 +4,8 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { login as loginAction } from '../actions';
 
+import './Login.css';
+
 class Login extends React.Component {
   constructor() {
     super();
@@ -41,7 +43,7 @@ class Login extends React.Component {
 
     if (redirect) return <Redirect to="/carteira" />;
     return (
-      <form onSubmit={ this.submit }>
+      <form className="login" onSubmit={ this.submit }>
         <label htmlFor="email-input">
           Email
           <input
