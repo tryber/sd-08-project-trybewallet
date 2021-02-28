@@ -24,7 +24,7 @@ class Table extends React.Component {
             <td>{ expense.description }</td>
             <td>{ expense.tag }</td>
             <td>{ expense.method }</td>
-            <td>{ parseFloat(expense.value).toFixed(2) }</td>
+            <td>{ expense.value }</td>
             <td>{ expense.exchangeRates[expense.currency].name }</td>
             <td>
               {

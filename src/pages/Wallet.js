@@ -45,7 +45,7 @@ class Wallet extends React.Component {
             { email }
           </span>
         </span>
-        <span data-testid="total-field">{ total }</span>
+        <span data-testid="total-field">{ total.toFixed(2) }</span>
         <span data-testid="header-currency-field">BRL</span>
       </header>
     );
@@ -103,8 +103,8 @@ class Wallet extends React.Component {
     const { value, currency, total } = this.state;
     const { expenses } = this.props;
 
-    const soma = parseFloat(value).toFixed(2)
-      * parseFloat(expenses[0].exchangeRates[currency].ask).toFixed(2)
+    const soma = parseFloat(value)
+      * parseFloat(expenses[0].exchangeRates[currency].ask)
         + total;
 
     this.setState({
