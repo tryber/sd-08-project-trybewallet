@@ -1,4 +1,4 @@
-import { createReducer } from 'reduxsauce';
+import { createReducer } from '../libs/reduxsauce';
 import { Types } from '../actions/user';
 
 const INITIAL_STATE = {

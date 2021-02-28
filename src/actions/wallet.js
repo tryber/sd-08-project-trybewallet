@@ -1,4 +1,4 @@
-import { createActions } from 'reduxsauce';
+import { createActions } from '../libs/reduxsauce';
 import getCoins from '../services';
 
 export const { Types, Creators } = createActions({
