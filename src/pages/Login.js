@@ -69,11 +69,13 @@ class Login extends React.Component {
             onChange={ this.handleChange }
           />
         </label>
-        {
-          disabled
-            ? <>ENTRAR</>
-            : <button type="button" onClick={ this.handleClick }>ENTRAR</button>
-        }
+        <button
+          type="button"
+          disabled={ disabled }
+          onClick={ this.handleClick }
+        >
+          ENTRAR
+        </button>
         {
           login
             ? <Redirect to="/carteira" />

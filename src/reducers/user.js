@@ -6,7 +6,7 @@ const INITIAL_STATE = {
 
 const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS';
 
-const user = (state = INITIAL_STATE, action) => {
+const userReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
   case USER_LOGIN_SUCCESS:
     return { ...state, email: action.payload };
@@ -15,4 +15,4 @@ const user = (state = INITIAL_STATE, action) => {
   }
 };
 
-export default user;
+export default userReducer;
