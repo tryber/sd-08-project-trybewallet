@@ -27,23 +27,18 @@ class WalletExpenseIncluder extends React.Component {
       ...INITIAL_STATE,
     };
 
-    this.mapCurrencies = this.mapCurrencies.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.renderCurrencies = this.renderCurrencies.bind(this);
   }
 
   async componentDidMount() {
+    const { addCurrenciesOnState } = this.props;
     fetch('https://economia.awesomeapi.com.br/json/all')
       .then((response) => {
         response.json()
-          .then((data) => this.mapCurrencies(data));
+          .then((data) => addCurrenciesOnState(data));
       });
-  }
-
-  mapCurrencies(data) {
-    const { addCurrenciesOnState } = this.props;
-    addCurrenciesOnState(data);
   }
 
   handleChange({ target }) {
@@ -85,12 +80,14 @@ class WalletExpenseIncluder extends React.Component {
     currencies = Object.keys(currencies);
     return (
       <select
+        id="currency-input"
         name="currency"
         data-testid="currency-input"
         onChange={ this.handleChange }
       >
         {currencies.map((e) => {
           if (e === 'USDT') return '';
+          console.log(<option key={ e } data-testid={ e }>{e}</option>);
           return (
             <option key={ e } data-testid={ e }>{e}</option>
           );
