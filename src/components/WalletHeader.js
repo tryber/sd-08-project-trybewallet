@@ -8,7 +8,7 @@ class WalletHeader extends React.Component {
     return (
       <>
         <h2 data-testid="email-field">{ loggedUserEmail }</h2>
-        <h2 data-testid="total-field">{ totalExpenses }</h2>
+        <h2 data-testid="total-field">{ `Total: R$${totalExpenses}` }</h2>
         <h2 data-testid="header-currency-field">BRL</h2>
       </>
     );
@@ -20,13 +20,9 @@ const mapStateToProps = (state) => ({
   totalExpenses: state.wallet.totalExpenses,
 });
 
-const mapDispatchToProps = () => ({
-
-});
-
 WalletHeader.propTypes = {
   loggedUserEmail: PropTypes.string.isRequired,
   totalExpenses: PropTypes.number.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(WalletHeader);
+export default connect(mapStateToProps, null)(WalletHeader);
