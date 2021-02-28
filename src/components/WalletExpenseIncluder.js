@@ -92,7 +92,7 @@ class WalletExpenseIncluder extends React.Component {
         {currencies.map((e) => {
           if (e === 'USDT') return '';
           return (
-            <option key={ e } value={ e } data-testid={ e }>{e}</option>
+            <option key={ e } data-testid={ e }>{e}</option>
           );
         })}
       </select>
