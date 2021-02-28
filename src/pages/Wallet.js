@@ -80,11 +80,14 @@ class Wallet extends React.Component {
     this.resetFields();
   }
 
-  deleteExpenses(index) {
+  deleteExpenses(index, value) {
+    const { totalValue } = this.state;
     const { expenses, deleteExpenseAction } = this.props;
     expenses.splice(index, 1);
     deleteExpenseAction(expenses);
-    this.forceUpdate();
+    this.setState({
+      totalValue: totalValue - value,
+    });
   }
 
   walletTable() {
@@ -107,7 +110,9 @@ class Wallet extends React.Component {
             <button
               type="button"
               data-testid="delete-btn"
-              onClick={ () => this.deleteExpenses(array.indexOf(expense), 1) }
+              onClick={ () => this.deleteExpenses((array.indexOf(expense), 1),
+                (parseFloat(expense.exchangeRates[expense.currency].ask)
+                * parseFloat(expense.value))) }
             >
               Deletar
             </button>
