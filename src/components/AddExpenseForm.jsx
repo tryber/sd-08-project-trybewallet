@@ -49,8 +49,9 @@ class AddExpenseForm extends React.Component {
     };
     const currencyPosition = Object.keys(exchangeRates).indexOf(currency);
     const quotation = Object.values(exchangeRates)[currencyPosition].ask;
-    const expenseInLocalCurrency = parseFloat(value) * parseFloat(quotation);
+    const expenseInLocalCurrency = value * quotation;
     addExpenseToStore(expenseToAdd);
+    console.log(expenseInLocalCurrency.toFixed(2));
     updateTotal(expenseInLocalCurrency);
     this.setState({
       id: id + 1,

@@ -14,7 +14,7 @@ const walletReducer = (state = INITIAL_STATE, action) => {
   case ADD_EXPENSE:
     return { ...state, expenses: [...state.expenses, ...action.payload] };
   case SUM_TO_EXPENSES:
-    return { ...state, total: parseFloat(state.total + action.payload).toFixed(2) };
+    return { ...state, total: state.total + action.payload };
   default:
     return state;
   }
