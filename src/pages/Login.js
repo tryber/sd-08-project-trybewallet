@@ -32,7 +32,6 @@ class Login extends React.Component {
     const { email } = this.state;
     const { userLoginSuccess } = this.props;
     userLoginSuccess(email);
-    console.log(email);
     this.setState({
       login: true,
     });
