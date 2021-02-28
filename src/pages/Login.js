@@ -1,7 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import loginAction from '../actions';
+import { loginAction } from '../actions';
+
+import './Login.css';
 
 const SEIS = 6;
 
@@ -49,31 +51,33 @@ class Login extends React.Component {
   render() {
     const { buttonDisable } = this.state;
     return (
-      <div className="login-container">
-        <h3>Login</h3>
-        <label htmlFor="email-label">
-          <input
-            type="text"
-            placeholder="Email"
-            data-testid="email-input"
-            onChange={ this.verifyEmail }
-          />
-        </label>
-        <label htmlFor="password-label">
-          <input
-            type="text"
-            placeholder="Password"
-            data-testid="password-input"
-            onChange={ this.verifyPassword }
-          />
-        </label>
-        <button
-          type="submit"
-          disabled={ buttonDisable }
-          onClick={ () => this.submitAndRedirect() }
-        >
-          Entrar
-        </button>
+      <div className="body-content">
+        <div className="login-container">
+          <h3>Login</h3>
+          <label htmlFor="email-label">
+            <input
+              type="text"
+              placeholder="Email"
+              data-testid="email-input"
+              onChange={ this.verifyEmail }
+            />
+          </label>
+          <label htmlFor="password-label">
+            <input
+              type="text"
+              placeholder="Password"
+              data-testid="password-input"
+              onChange={ this.verifyPassword }
+            />
+          </label>
+          <button
+            type="submit"
+            disabled={ buttonDisable }
+            onClick={ () => this.submitAndRedirect() }
+          >
+            Entrar
+          </button>
+        </div>
       </div>
     );
   }
