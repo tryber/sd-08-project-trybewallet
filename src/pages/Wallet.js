@@ -5,6 +5,7 @@ import '../App.css';
 import { bindActionCreators } from 'redux';
 import getAPI from '../services/index';
 import { cambioFetch } from '../actions';
+import TabelaGastos from '../components/TabelaGastos';
 
 const METODOS_PAGAMENTO = ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'];
 const TIPO_DESPESA = ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
@@ -113,7 +114,10 @@ class Wallet extends Component {
       <>
         <header className="Wallet-header">
           <span data-testid="email-field">{userEmail}</span>
-          <span data-testid="total-field">{this.gastosTotais()}</span>
+          <span data-testid="total-field">
+            {(
+              Math.round(this.gastosTotais()) * 100) / 100}
+          </span>
           <span data-testid="header-currency-field">BRL</span>
         </header>
         <main>
@@ -133,6 +137,7 @@ class Wallet extends Component {
           />
           {this.renderSelectInputs()}
           <button onClick={ this.handleClick } type="button">Adicionar despesa</button>
+          <TabelaGastos />
         </main>
       </>
     );
