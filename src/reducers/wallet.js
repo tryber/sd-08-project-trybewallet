@@ -22,6 +22,19 @@ function wallet(state = initialState, action) {
       ...state,
       expenses: [...state.expenses, { id: state.expenses.length, ...action.value }],
     };
+  case 'DELETE_REGISTER':
+  {
+    const expensesNew = state.expenses.filter((expense) => {
+      if (expense === action.value) {
+        return false;
+      }
+      return true;
+    });
+    return {
+      ...state,
+      expenses: expensesNew,
+    };
+  }
   default:
     return state;
   }

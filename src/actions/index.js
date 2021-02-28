@@ -1,4 +1,4 @@
-export const addRegister = (value) => ({ type: 'ADD_REGISTER', value });
+const addRegister = (value) => ({ type: 'ADD_REGISTER', value });
 export const deleteRegister = (value) => ({ type: 'DELETE_REGISTER', value });
 export const editRegister = (value) => ({ type: 'EDIT_REGISTER', data: value });
 const getCurrencies = (value) => ({ type: 'GET_CURRENCIES', value });

@@ -26,11 +26,30 @@ class Wallet extends React.Component {
     this.valueInput = this.valueInput.bind(this);
     this.descEMoedaInput = this.descEMoedaInput.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.afterDelete = this.afterDelete.bind(this);
+    this.fucTest = this.fucTest.bind(this);
   }
 
   componentDidMount() {
     const { fetchCurrencies } = this.props;
     fetchCurrencies();
+    this.fucTest();
+  }
+
+  fucTest() {
+    const { expenses } = this.props;
+    if (expenses.length < 1) return false;
+    const totalBefore = expenses.map((expense) => expense.value
+      * expense.exchangeRates[expense.currency].ask)
+      .reduce((acc, proximo) => acc + proximo);
+
+    this.setState({ total: totalBefore });
+  }
+
+  afterDelete(value) {
+    const { total } = this.state;
+    const totalNew = total - value;
+    this.setState({ total: totalNew });
   }
 
   header() {
@@ -104,7 +123,7 @@ class Wallet extends React.Component {
     const { expenses } = this.props;
 
     const soma = parseFloat(value)
-      * parseFloat(expenses[0].exchangeRates[currency].ask)
+      * parseFloat(expenses[expenses.length - 1].exchangeRates[currency].ask)
         + total;
 
     this.setState({
@@ -163,7 +182,7 @@ class Wallet extends React.Component {
       <body>
         { this.header() }
         { this.forms() }
-        <Table />
+        <Table afterDelete={ (value) => this.afterDelete(value) } />
       </body>
     );
   }
