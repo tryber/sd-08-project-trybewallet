@@ -2,6 +2,7 @@
 const initialState = {
   currencies: [],
   expenses: [],
+  total: 0,
 };
 
 export default function walletReducer(state = initialState, action) {
@@ -10,6 +11,7 @@ export default function walletReducer(state = initialState, action) {
     return {
       currencies: [...state.currencies],
       expenses: [...state.expenses, action.payload.expense],
+      total: state.total + action.payload.convertedValue,
     };
   default:
     return state;
