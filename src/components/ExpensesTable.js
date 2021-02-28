@@ -2,17 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import { RiDeleteBinLine, RiEditLine } from 'react-icons/ri';
 import { deleteExpense as eraseExpense, editExpense as modifyExpense } from '../actions';
 
 class ExpensesTable extends React.Component {
-  renderButton(label, name, expense, callback) {
+  renderButton(name, expense, callback) {
     return (
       <button
         type="button"
         data-testid={ `${name}-btn` }
         onClick={ () => callback(expense) }
+        className={ `${name}-btn expense-opt-btn` }
       >
-        {label}
+        {name === 'edit' ? <RiEditLine /> : <RiDeleteBinLine />}
       </button>
     );
   }
@@ -21,7 +23,7 @@ class ExpensesTable extends React.Component {
     const { expenses, deleteExpense, editExpense } = this.props;
     return (
       <table>
-        <thead>
+        <thead className="table-header">
           <tr>
             <th>Moeda</th>
             <th>Valor</th>
@@ -34,7 +36,7 @@ class ExpensesTable extends React.Component {
             <th>Editar/Excluir</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="table-body">
           {expenses.map((expense, index) => {
             const { description, tag, method, value, currency, exchangeRates } = expense;
             const { name, ask } = exchangeRates[currency];
@@ -49,8 +51,8 @@ class ExpensesTable extends React.Component {
                 <td>{tag}</td>
                 <td>{method}</td>
                 <td>
-                  {this.renderButton('Excluir', 'delete', expense, deleteExpense)}
-                  {this.renderButton('Editar', 'edit', expense, editExpense)}
+                  {this.renderButton('edit', expense, editExpense)}
+                  {this.renderButton('delete', expense, deleteExpense)}
                 </td>
               </tr>
             );

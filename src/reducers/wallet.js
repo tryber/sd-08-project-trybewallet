@@ -28,11 +28,7 @@ export default function wallet(state = INITIAL_STATE_WALLET, action) {
       currencies: [...Object.keys(action.currencies)],
     };
   case REQUEST_FAIL:
-    return {
-      ...state,
-      isFetching: false,
-      error: action.error,
-    };
+    return { ...state, isFetching: false, error: action.error };
   case SAVE_EXPENSE:
     return {
       ...state,
@@ -44,6 +40,7 @@ export default function wallet(state = INITIAL_STATE_WALLET, action) {
       expenses: [
         ...state.expenses.filter((expense) => expense.id !== action.expense.id),
       ],
+      isEditing: false,
     };
   case EDIT_EXPENSE_START:
     return {

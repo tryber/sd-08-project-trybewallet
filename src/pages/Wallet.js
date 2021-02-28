@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import { fetchCurrencies as getCurrencies } from '../actions';
 import { ExpensesTable, Header, NewExpenseForm, EditExpenseForm } from '../components';
 
+import '../styles/Wallet.css';
+
 class Wallet extends React.Component {
   componentDidMount() {
     const { fetchCurrencies } = this.props;
@@ -14,11 +16,11 @@ class Wallet extends React.Component {
   render() {
     const { isEditing } = this.props;
     return (
-      <div>
+      <main className="wallet-main">
         <Header />
         { isEditing ? <EditExpenseForm /> : <NewExpenseForm />}
         <ExpensesTable />
-      </div>
+      </main>
     );
   }
 }

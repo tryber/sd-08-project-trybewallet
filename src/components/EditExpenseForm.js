@@ -54,8 +54,8 @@ class EditExpenseForm extends React.Component {
 
   renderInput(label, type, name, value) {
     return (
-      <label htmlFor="value-input">
-        {`${label}:`}
+      <label htmlFor={ `${name}-input` }>
+        {`${label}: `}
         <input
           type={ type }
           id={ `${name}-input` }
@@ -63,6 +63,7 @@ class EditExpenseForm extends React.Component {
           data-testid={ `${name}-input` }
           onChange={ this.handleChange }
           value={ value }
+          className={ `${name}-input` }
         />
       </label>
     );
@@ -77,6 +78,7 @@ class EditExpenseForm extends React.Component {
         data-testid="currency-input"
         onChange={ handleChange }
         value={ value }
+        className="currency-input"
       >
         {currencies.map((currency) => {
           if (currency === 'USDT') return '';
@@ -114,16 +116,20 @@ class EditExpenseForm extends React.Component {
     const tags = ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
     const methods = ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'];
     return (
-      <form>
-        {this.renderInput('Valor', 'number', 'value', value)}
-        {this.renderInput('Descrição', 'text', 'description', description)}
+      <form className="edit-expense-form">
         <label htmlFor="currency-input">
           {'Moeda: '}
           {this.renderSelectCurrencies(currency, this.handleChange)}
         </label>
-        {this.renderSelect('Método de pagamento', 'method', method, methods)}
+        {this.renderInput('Valor', 'number', 'value', value)}
+        {this.renderInput('Descrição', 'text', 'description', description)}
         {this.renderSelect('Tag', 'tag', tag, tags)}
-        <button type="submit" onClick={ this.handleClick }>
+        {this.renderSelect('Método de pagamento', 'method', method, methods)}
+        <button
+          type="submit"
+          onClick={ this.handleClick }
+          className="expense-btn end-edit"
+        >
           Editar despesa
         </button>
       </form>

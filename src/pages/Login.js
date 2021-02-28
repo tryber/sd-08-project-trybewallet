@@ -2,7 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
+
 import { emailChange } from '../actions';
+
+import '../styles/Login.css';
 
 class Login extends React.Component {
   constructor() {
@@ -32,11 +35,14 @@ class Login extends React.Component {
   }
 
   handleChange({ target }) {
-    this.setState({
-      [target.name]: target.value,
-    }, () => {
-      this.loginValidation();
-    });
+    this.setState(
+      {
+        [target.name]: target.value,
+      },
+      () => {
+        this.loginValidation();
+      },
+    );
   }
 
   loginValidation() {
@@ -51,32 +57,40 @@ class Login extends React.Component {
   render() {
     const { email, password, disabled, login } = this.state;
     return (
-      <form>
-        <input
-          type="text"
-          name="email"
-          value={ email }
-          onChange={ this.handleChange }
-          data-testid="email-input"
-          placeholder="user@email.com"
-        />
-        <input
-          type="password"
-          name="password"
-          value={ password }
-          onChange={ this.handleChange }
-          data-testid="password-input"
-          placeholder="******"
-        />
-        <button
-          type="submit"
-          disabled={ disabled }
-          onClick={ this.handleClick }
-        >
-          Entrar
-        </button>
-        { login ? <Redirect to="/carteira" /> : ''}
-      </form>
+      <main className="login-main">
+        <header className="login-header">
+          <h1>Trybe Wallet</h1>
+        </header>
+        <form className="login-form">
+          <input
+            type="text"
+            name="email"
+            value={ email }
+            onChange={ this.handleChange }
+            data-testid="email-input"
+            placeholder="user@email.com"
+            className="login-input"
+          />
+          <input
+            type="password"
+            name="password"
+            value={ password }
+            onChange={ this.handleChange }
+            data-testid="password-input"
+            placeholder="******"
+            className="login-input"
+          />
+          <button
+            type="submit"
+            disabled={ disabled }
+            onClick={ this.handleClick }
+            className="login-btn"
+          >
+            Entrar
+          </button>
+        </form>
+        {login ? <Redirect to="/carteira" /> : ''}
+      </main>
     );
   }
 }
