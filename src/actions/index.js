@@ -4,7 +4,9 @@
 // export const addRegister = (value) => ({ type: 'ADD_REGISTER', data: value });
 // export const deleteRegister = (value) => ({ type: 'DELETE_REGISTER', value });
 import { getCurrentCurrencies } from '../service/API';
-import { ADD_REGISTER, DELETE_REGISTER, LOGIN, REQUEST_API, REQUEST_API_SUCCESS, REQUEST_API_ERRO } from '../store/consts';
+import {
+  ADD_REGISTER, DELETE_REGISTER, LOGIN, REQUEST_API,
+  REQUEST_API_SUCCESS, REQUEST_API_ERRO } from '../store/consts';
 
 export const login = (email) => ({
   type: LOGIN,
