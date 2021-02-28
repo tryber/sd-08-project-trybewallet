@@ -1,22 +1,28 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
+import { addUserEmail, addUserPassword } from '../actions/user';
 
 class Button extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      saveInformation: '',
+      email: '',
+      password: '',
       undisabled: false,
+      proceed: false,
     };
     this.renderButton = this.renderButton.bind(this);
     this.toggleTrue = this.toggleTrue.bind(this);
     this.toggleFalse = this.toggleFalse.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.renderInformation = this.renderInformation.bind(this);
   }
 
   componentDidUpdate() {
-    const { undisabled } = this.state;
-    const { verifyEmail, verifyPassword } = this.props;
+    const { undisabled, email, password } = this.state;
+    const { verifyEmail, verifyPassword, saveEmail, savePassword } = this.props;
     if (!undisabled && verifyEmail && verifyPassword) {
       this.toggleTrue(); // Fazer duas funções iguais porque o lixo do lint reclama.
     } else if ((undisabled && !verifyEmail) || (undisabled && !verifyPassword)) {
@@ -25,52 +31,63 @@ class Button extends Component {
   }
 
   toggleTrue() {
+    const { emailToSave, passwordToSave, saveEmail, savePassword } = this.props;
+    const { undisabled, email, password } = this.state;
     this.setState({
+      email: emailToSave,
+      password: passwordToSave,
       undisabled: true,
-    });
+    }, () => saveEmail(email),
+    savePassword(password));
     this.renderButton();
   }
 
   toggleFalse() {
+    const { emailToSave, passwordToSave, saveEmail, savePassword } = this.props;
     this.setState({
       undisabled: false,
     });
     this.renderButton();
   }
 
-  handleSubmit() {
-    const { emailToSave, passwordToSave } = this.props;
-    this.setState({ saveInformation: [emailToSave, passwordToSave],
-    });
+  handleSubmit(e) {
+    const { emailToSave, passwordToSave, saveEmail, savePassword } = this.props;
+    const { email, password } = this.state;
+    e.preventDefault();
+    saveEmail(email);
+    savePassword(password);
   }
 
   renderButton() {
-    const { undisabled } = this.state;
-
+    const { undisabled, proceed } = this.state;
     let renderBtn;
     if (undisabled === true) {
       renderBtn = (
         <button
-          type="button"
-          onClick={ this.handleSubmit }
+          type="submit"
+          onClick={ (this.handleSubmit) }
           disabled={ false }
         >
           Entrar
         </button>);
     } else {
-      renderBtn = <button type="button" disabled>Entrar</button>;
+      renderBtn = <button type="submit" disabled>Entrar</button>;
     }
     return renderBtn;
   }
 
+  renderInformation(email, password) {
+    return (<h4>{`Seu e-mail é: ${email}, sua senha é ${password}`}</h4>);
+  }
+
   render() {
-    const { saveInformation } = this.state;
+    const { proceed } = this.state;
+    const { emailToSave, passwordToSave } = this.props;
     return (
       <div>
-        <h2>
-          {`Seu e-mail é: ${saveInformation[0]}, sua senha é ${saveInformation[1]}`}
-        </h2>
-        {(this.renderButton())}
+        {this.renderInformation()}
+        { this.renderButton(emailToSave, passwordToSave)}
+        {proceed ? <Redirect to="/carteira" /> : ''}
       </div>
     );
   }
@@ -83,4 +100,9 @@ Button.propTypes = {
   passwordToSave: PropTypes.string.isRequired,
 };
 
-export default Button;
+const mapDispatchToProps = (dispatch) => ({
+  saveEmail: (payload) => dispatch(addUserEmail(payload)),
+  savePassword: (payload) => dispatch(addUserPassword(payload)),
+});
+
+export default connect(null, mapDispatchToProps)(Button);

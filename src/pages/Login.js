@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import { MIN_PASSWORD_LENGHT, REGEX_VERIFY_EMAIL } from '../components/Allconsts';
+import { MIN_PASSWORD_LENGHT, REGEX_VERIFY_EMAIL } from '../components/RandomConsts';
 import Button from '../components/Button';
 
 class Login extends Component {

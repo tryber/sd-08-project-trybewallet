@@ -1,10 +1,14 @@
-import { SAVE_USER_EMAIL } from '../components/Allconsts';
+const SAVE_USER_EMAIL = 'SAVE_USER_EMAIL';
+const SAVE_USER_PASSWORD = 'SAVE_USER_PASSWORD';
 
-const addUserEmail = (email) => ({
+const addUserEmail = (payload) => ({
   type: SAVE_USER_EMAIL,
-  payload: {
-    email,
-  },
+  payload,
 });
 
-export default addUserEmail;
+const addUserPassword = (payload) => ({
+  type: SAVE_USER_PASSWORD,
+  payload,
+});
+
+export { addUserEmail, addUserPassword, SAVE_USER_EMAIL, SAVE_USER_PASSWORD };
