@@ -1,7 +1,7 @@
 // Esse reducer será responsável por tratar as informações da pessoa usuária
 import { LOGIN } from '../store/consts';
 
-const InitialState = { email: 'viviéesperta@diva.gatinha' };
+const InitialState = { email: '' };
 
 const user = (state = InitialState, action) => {
   switch (action.type) {

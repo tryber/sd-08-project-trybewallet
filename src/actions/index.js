@@ -10,9 +10,9 @@ export const login = (email) => ({
   payload: email,
 });
 
-export const addRegister = (register) => ({
+export const addRegister = (data) => ({
   type: ADD_REGISTER,
-  payload: [register],
+  payload: data,
 });
 
 export const deleteRegister = (register) => ({

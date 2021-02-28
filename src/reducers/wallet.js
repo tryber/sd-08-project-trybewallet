@@ -7,7 +7,8 @@ const initialState = { currencies: [],
 function wallet(state = initialState, action) {
   switch (action.type) {
   case ADD_REGISTER:
-    return [...state, action.data];
+    return { ...state,
+      expenses: [...state.expenses, action.payload] };
   case DELETE_REGISTER:
     return state.filter((register) => register !== action.value);
   default:

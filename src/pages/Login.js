@@ -39,8 +39,7 @@ class Login extends React.Component {
     // setTimeout(() => { this.validate(); }, PASSWORD_LENGTH_MIN * PASSWORD_LENGTH_MIN);
   }
 
-  submitForm(e) {
-    e.preventDefault();
+  submitForm() {
     const { loginEmail } = this.props;
     const { email } = this.state;
     loginEmail(email);

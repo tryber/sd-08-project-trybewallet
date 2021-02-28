@@ -1,35 +1,89 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { addRegister } from '../actions';
 
 const moeda = ['USD', 'CAD', 'EUR', 'GBP', 'ARS',
   'BTC', 'LTC', 'JPY', 'CHF', 'AUD', 'CNY', 'ILS', 'ETH', 'XRP'];
-export default class FormExpenses extends Component {
+const methodInput = ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'];
+const tagInput = ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
+
+class FormExpenses extends Component {
+  constructor() {
+    super();
+    this.state = {
+      value: '',
+      description: '',
+      currency: '',
+      method: '',
+      tag: '',
+    };
+    this.changeForm = this.changeForm.bind(this);
+    this.submitForm = this.submitForm.bind(this);
+  }
+
+  changeForm(e) {
+    const typedValue = e.target.value;
+    this.setState({
+      [e.target.name]: typedValue,
+    });
+  }
+
+  submitForm() {
+    const { send } = this.props;
+    send(this.state);
+  }
+
   render() {
+    const { value, description, currency, method, tag } = this.state;
     return (
       <div>
         <form action="">
-          <input placeholder="" type="number" data-testid="value-input" />
-          <input placeholder="" type="text" data-testid="description-input" />
-          <select data-testid="currency-input">
+          <input
+            placeholder="Dispesas"
+            type="number"
+            data-testid="value-input"
+            value={ value }
+            name="value"
+            onChange={ this.changeForm }
+          />
+          <input
+            placeholder="Descrisão"
+            type="text"
+            data-testid="description-input"
+            value={ description }
+            name="description"
+            onChange={ this.changeForm }
+          />
+          <select data-testid="currency-input" value={ currency } name="currency" onChange={ this.changeForm }>
             <option selected value="BRA">BRA</option>
             { moeda.map(
               (element) => (<option key={ element } value={ element }>{element}</option>),
             )}
           </select>
-          <select data-testid="method-input">
-            <option selected value="Dinheiro">Dinheiro</option>
-            <option selected value="Cartão de crédito">Cartão de crédito</option>
-            <option selected value="Cartão de débito">Cartão de débito</option>
+          <select data-testid="method-input" value={ method } name="method" onChange={ this.changeForm }>
+            { methodInput.map(
+              (element) => (<option key={ element } value={ element }>{element}</option>),
+            )}
           </select>
-          <select data-testid="tag-input">
-            <option selected value="Alimentação">Alimentação</option>
-            <option selected value="Lazer">Lazer</option>
-            <option selected value="Trabalho">Trabalho</option>
-            <option selected value="Transporte">Transporte</option>
-            <option selected value="Saúde">Saúde</option>
+          <select data-testid="tag-input" value={ tag } name="tag" onChange={ this.changeForm }>
+            { tagInput.map(
+              (element) => (<option key={ element } value={ element }>{element}</option>),
+            )}
           </select>
-          <button type="button">Adicionar despesa</button>
+          <button type="button" onClick={ this.submitForm }>Adicionar despesa</button>
         </form>
       </div>
     );
   }
 }
+
+FormExpenses.propTypes = {
+  send: PropTypes.func.isRequired,
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  send: (xablau) => dispatch(addRegister(xablau)),
+});
+
+export default connect(null, mapDispatchToProps)(FormExpenses);
