@@ -2,28 +2,30 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 function _interopDefault(ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex.default : ex; }
 
-const isNil = _interopDefault(require('../../ramda/src/isNil'));
-const is = _interopDefault(require('../../ramda/src/is'));
-const has = _interopDefault(require('../../ramda/src/has'));
-const any = _interopDefault(require('../../ramda/src/any'));
-const equals = _interopDefault(require('../../ramda/src/equals'));
-const keys = _interopDefault(require('../../ramda/src/keys'));
-const pipe = _interopDefault(require('../../ramda/src/pipe'));
-const trim = _interopDefault(require('../../ramda/src/trim'));
-const merge = _interopDefault(require('../../ramda/src/merge'));
-const split = _interopDefault(require('../../ramda/src/split'));
-const reject = _interopDefault(require('../../ramda/src/reject'));
-const map = _interopDefault(require('../../ramda/src/map'));
-const fromPairs = _interopDefault(require('../../ramda/src/fromPairs'));
-const anyPass = _interopDefault(require('../../ramda/src/anyPass'));
-const isEmpty = _interopDefault(require('../../ramda/src/isEmpty'));
-const join = _interopDefault(require('../../ramda/src/join'));
-const mapObjIndexed = _interopDefault(require('../../ramda/src/mapObjIndexed'));
-const pick = _interopDefault(require('../../ramda/src/pick'));
-const replace = _interopDefault(require('../../ramda/src/replace'));
-const toUpper = _interopDefault(require('../../ramda/src/toUpper'));
-const zipObj = _interopDefault(require('../../ramda/src/zipObj'));
-const curry = _interopDefault(require('../../ramda/src/curry'));
+const { 
+  isNil,
+  is,
+  has,
+  any,
+  equals,
+  keys,
+  pipe,
+  trim,
+  merge,
+  split,
+  reject,
+  map,
+  fromPairs,
+  anyPass,
+  isEmpty,
+  join,
+  mapObjIndexed,
+  pick,
+  replace,
+  toUpper,
+  zipObj,
+  curry,
+} = require('../ramda');
 
 const DEFAULT = 'REDUXSAUCE.DEFAULT';
 
