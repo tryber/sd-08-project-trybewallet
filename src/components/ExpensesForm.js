@@ -49,7 +49,7 @@ class ExpensesForm extends Component {
     }), () => {
       const { addExpense } = this.props;
       const { currentExpense } = this.state;
-      this.setState({ currentExpense: {value: 0, tag: '' } });
+      this.setState({ currentExpense: { value: 0, tag: '' } });
       return addExpense(currentExpense);
     });
   }
