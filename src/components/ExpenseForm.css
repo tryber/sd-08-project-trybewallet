@@ -7,10 +7,7 @@
 }
 
 .div-form {
-  display: inline-block;
   align-items: center;
-}
-
-.div-form {
+  display: inline-block;
   margin-left: 10px;
 }
