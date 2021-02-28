@@ -1,5 +1,4 @@
 import React from 'react';
-// import { Button } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { string, func, bool } from 'prop-types';
 import { Link } from 'react-router-dom';
