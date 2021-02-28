@@ -17,14 +17,13 @@ class Button extends Component {
     this.toggleTrue = this.toggleTrue.bind(this);
     this.toggleFalse = this.toggleFalse.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.renderInformation = this.renderInformation.bind(this);
   }
 
   componentDidUpdate() {
     const { undisabled } = this.state;
     const { verifyEmail, verifyPassword } = this.props;
     if (!undisabled && verifyEmail && verifyPassword) {
-      this.toggleTrue(); // Fazer duas funções iguais porque o lixo do lint reclama.
+      this.toggleTrue(); // Fazer duas funções iguais porque o chato do lint reclama.
     } else if ((undisabled && !verifyEmail) || (undisabled && !verifyPassword)) {
       this.toggleFalse();
     }
@@ -78,16 +77,11 @@ class Button extends Component {
     return renderBtn;
   }
 
-  renderInformation(email, password) {
-    return (<h4>{`Seu e-mail é: ${email}, sua senha é ${password}`}</h4>);
-  }
-
   render() {
     const { proceed } = this.state;
     const { emailToSave, passwordToSave } = this.props;
     return (
       <div>
-        {this.renderInformation()}
         { this.renderButton(emailToSave, passwordToSave)}
         {proceed ? <Redirect to="/carteira" /> : ''}
       </div>

@@ -1,4 +1,22 @@
-.login {
+.login-form {
+  align-items: center; 
   display: flex;
   flex-flow: column wrap;
+  justify-content: space-between;
+  margin: auto;
+  position: relative;
+  width: 310px;
+}
+
+.login-form-title {
+  font-size: 20px;
+  text-align: center;
+}
+
+.login-form-email {
+  margin: 10px;
+}
+
+.login-form-password {
+  margin: 10px;
 }

@@ -13,7 +13,7 @@ function App() {
         <Link to="/carteira">Carteira</Link>
       </nav>
       <img src={ logo } alt="logo" className="App-logo" />
-      <h1>Hello, TrybeWallet!</h1>
+      <h1 className="App">Hello, TrybeWallet!</h1>
       <Switch>
         <Route exact path="/" component={ Login } />
         <Route exact path="/carteira" component={ Wallet } />

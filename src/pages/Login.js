@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { MIN_PASSWORD_LENGHT, REGEX_VERIFY_EMAIL } from '../consts';
 import Button from '../components/Button';
+import './Login.css';
 
 class Login extends Component {
   constructor() {
@@ -48,7 +49,19 @@ class Login extends Component {
     const THREE = 3;
     let message;
     if (email.length > THREE) {
-      message = validEmail ? 'E-mail válido!' : 'Digite um e-mail válido...';
+      message = validEmail ? (
+        <span style={ { color: 'green' } }>
+          <span role="img" aria-label="green-checked-box">✅</span>
+          <br />
+          E-mail válido!
+        </span>
+      ) : (
+        <span style={ { color: 'red' } }>
+          <span role="img" aria-label="red-x-mark">❌</span>
+          <br />
+          Digite um e-mail válido...
+        </span>
+      );
     }
     return message;
   }
@@ -57,7 +70,21 @@ class Login extends Component {
     const { password, validPassword } = this.state;
     let message;
     if (password.length) {
-      message = validPassword ? 'Senha serve!' : 'A senha precisa ter ao menos 6 dígitos';
+      message = validPassword
+        ? (
+          <span style={ { color: 'green' } }>
+            <span role="img" aria-label="green-checked-box">✅</span>
+            <br />
+            Senha válida!
+          </span>
+        )
+        : (
+          <span style={ { color: 'red' } }>
+            <span role="img" aria-label="red-x-mark">❌</span>
+            <br />
+            A senha precisa ter ao menos 6 dígitos...
+          </span>
+        );
     }
     return message;
   }
@@ -71,6 +98,7 @@ class Login extends Component {
       <label htmlFor="email">
         E-mail:
         <input
+          className="login-form-email"
           data-testid="email-input"
           name="email"
           type="email"
@@ -78,9 +106,7 @@ class Login extends Component {
           placeholder="Digite seu e-mail"
           required
         />
-        <span>
-          { this.helperMessageEmail()}
-        </span>
+        { this.helperMessageEmail()}
       </label>
     );
   }
@@ -90,17 +116,16 @@ class Login extends Component {
       <label htmlFor="password">
         Senha:
         <input
+          className="login-form-password"
           data-testid="password-input"
           name="password"
           type="password"
           onChange={ this.handleChange }
-          placeholder="Digite sua password"
+          placeholder="Digite sua senha"
           minLength={ MIN_PASSWORD_LENGHT }
           required
         />
-        <span>
-          { this.helperMessagePassword()}
-        </span>
+        { this.helperMessagePassword()}
       </label>
     );
   }
@@ -113,18 +138,17 @@ class Login extends Component {
   render() {
     const { email, password, validEmail, validPassword } = this.state;
     return (
-      <form className="login">
+      <form className="login-form">
         <fieldset>
+          <legend className="login-form-title">Insira seus dados:</legend>
           {this.renderForm()}
         </fieldset>
-        <Link to="/carteira">
-          <Button
-            verifyEmail={ validEmail }
-            verifyPassword={ validPassword }
-            emailToSave={ email }
-            passwordToSave={ password }
-          />
-        </Link>
+        <Button
+          verifyEmail={ validEmail }
+          verifyPassword={ validPassword }
+          emailToSave={ email }
+          passwordToSave={ password }
+        />
       </form>
     );
   }
