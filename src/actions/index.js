@@ -20,15 +20,23 @@ export function addExpense(expense) {
   };
 }
 
-export function fetchExpense() {
+export function fetchExpense(currentExpense) {
   return async (dispatch) => {
     const coinsInfo = await fetch('https://economia.awesomeapi.com.br/json/all');
     const coinsJson = await coinsInfo.json();
     const coinsArray = Object.values(coinsJson);
     const coinsList = coinsArray
       .filter((coin) => coin.codein !== 'BRLT');
+    console.log(coinsList);
+    const conversionRate = coinsList
+      .find((coin) => coin.code === currentExpense.currency).ask;
+    console.log(conversionRate);
+    const convertedValue = parseFloat(currentExpense.value) * conversionRate;
     const expense = {
+      ...currentExpense,
       exchangeRates: coinsList,
+      conversionRate,
+      convertedValue,
     };
     dispatch(addExpense(expense));
   };

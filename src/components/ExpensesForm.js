@@ -8,6 +8,7 @@ class ExpensesForm extends Component {
   constructor() {
     super();
     this.handleChange = this.handleChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
     this.renderCoinList = this.renderCoinsList.bind(this);
     this.renderSelect = this.renderExpenseCoinsSelect.bind(this);
     this.renderPaymentSelect = this.renderPaymentSelect.bind(this);
@@ -16,6 +17,7 @@ class ExpensesForm extends Component {
     this.renderDescriptionInput = this.renderDescriptionInput.bind(this);
 
     this.state = {
+      idCount: 0,
       coins: [],
       currentExpense: {},
     };
@@ -35,6 +37,20 @@ class ExpensesForm extends Component {
         ...newProperty,
       },
     }));
+  }
+
+  handleClick() {
+    this.setState((state) => ({
+      idCount: state.idCount + 1,
+      currentExpense: {
+        id: state.idCount,
+        ...state.currentExpense,
+      },
+    }), () => {
+      const { addExpense } = this.props;
+      const { currentExpense } = this.state;
+      return addExpense(currentExpense);
+    });
   }
 
   async renderCoinsList() {
@@ -91,7 +107,10 @@ class ExpensesForm extends Component {
           value={ currency }
           name="currency"
           data-testid="currency-input"
+          placeholder="moeda"
+          required
         >
+          <option disabled selected value>Selecione</option>
           {coins === []
             ? <option>carregando</option>
             : coins.map((coin) => (
@@ -117,6 +136,7 @@ class ExpensesForm extends Component {
           name="method"
           data-testid="method-input"
         >
+          <option disabled selected value>Selecione</option>
           <option>Dinheiro</option>
           <option>Cartão de crédito</option>
           <option>Cartão de débito</option>
@@ -136,6 +156,7 @@ class ExpensesForm extends Component {
           name="tag"
           data-testid="tag-input"
         >
+          <option disabled selected value>Selecione</option>
           <option>Alimentação</option>
           <option>Lazer</option>
           <option>Trabalho</option>
@@ -147,8 +168,6 @@ class ExpensesForm extends Component {
   }
 
   render() {
-    const { addExpense } = this.props;
-    const { currentExpense } = this.state;
     return (
       <div>
         <form className="expense-form">
@@ -158,7 +177,7 @@ class ExpensesForm extends Component {
           {this.renderPaymentSelect()}
           {this.renderExpenseCategorySelect()}
           <button
-            onClick={ () => addExpense(currentExpense) }
+            onClick={ this.handleClick }
             type="button"
           >
             Adicionar Despesa
