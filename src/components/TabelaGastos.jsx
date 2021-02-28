@@ -34,11 +34,11 @@ class TabelaGastos extends Component {
               <td>{exchangeRates[currency].name}</td>
               <td>
                 {((
-                  Math.round(exchangeRates[currency].ask * 100) / 100)).toFixed(2)}
+                  parseFloat(exchangeRates[currency].ask * 100) / 100)).toFixed(2)}
               </td>
               <td>
                 {((
-                  Math.round(value * exchangeRates[currency].ask)
+                  parseFloat(value * exchangeRates[currency].ask)
                     * 100) / 100).toFixed(2)}
               </td>
               <td>Real</td>
