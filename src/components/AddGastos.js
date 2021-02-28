@@ -22,6 +22,10 @@ class AddGastos extends Component {
     this.getCodesFromAPI = this.getCodesFromAPI.bind(this);
   }
 
+  componentDidMount() {
+    this.getCodesFromAPI();
+  }
+
   async getAPI() {
     const teste = await fetch('https://economia.awesomeapi.com.br/json/all');
     const teste2 = await teste.json();
@@ -29,8 +33,8 @@ class AddGastos extends Component {
   }
 
   async getCodesFromAPI() {
-    const a = await this.getAPI();
-    const promisse = Object.values(a);
+    const awaiit = await this.getAPI();
+    const promisse = Object.values(awaiit);
     const arr1 = Object.values(promisse);
     const arr = [];
     for (let i = 0; i < arr1.length; i += 1) {
@@ -40,6 +44,7 @@ class AddGastos extends Component {
     for (let i = 0; i < arr.length; i += 1) {
       arrFinal.push(arr[i][0]);
     }
+    arrFinal.splice(1, 1);
     this.setState({
       arrFinal,
     });
@@ -134,7 +139,7 @@ class AddGastos extends Component {
 
   render() {
     const { expenses } = this.props;
-    this.getCodesFromAPI();
+    // this.getCodesFromAPI();
     return (
       <div>
         {this.inputsGastos()}
