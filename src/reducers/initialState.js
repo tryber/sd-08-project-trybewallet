@@ -1,8 +1,10 @@
 const INITIAL_STATE = {
-  email: 'alguem@email.com',
+  email: '',
   password: '',
   currencies: [],
+  currenciesData: {},
   expenses: [],
+  idExpense: 0,
   exchangeField: 'BLR',
 };
 

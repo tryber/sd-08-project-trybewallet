@@ -4,8 +4,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { actionUserEmail } from '../actions/walletActions';
 
-import './Login.css';
-
 class Login extends React.Component {
   constructor() {
     super();

@@ -1,4 +1,9 @@
-import { USER_EMAIL, WALLET_CURRENCIES, WALLET_EXPENSES } from './index';
+import {
+  USER_EMAIL,
+  FETCH_CURRENCIES,
+  FETCH_CURRENCIES_DATA,
+  ADD_EXPENSES,
+} from './index';
 
 export function actionUserEmail(email) {
   return {
@@ -7,22 +12,40 @@ export function actionUserEmail(email) {
   };
 }
 
-function arrayValues(answer) {
+export function currencies(answer) {
   return {
-    type: WALLET_CURRENCIES,
-    data: answer,
+    type: FETCH_CURRENCIES,
+    currencies: answer,
+  };
+}
+export function actionFetchCurrencies(dataAPI) {
+  return async (dispatch) => {
+    const response = await dataAPI;
+    const currenciesKeys = Object.keys(response);
+    const filterCurrencies = currenciesKeys.filter((
+      currencyKey,
+    ) => currencyKey !== 'USDT');
+    dispatch(currencies(filterCurrencies));
   };
 }
 
-export function actionWalletCurrencies(dataAPI) {
-  return (dispatch) => {
-    dataAPI.then((answer) => dispatch(arrayValues(answer)));
+export function currenciesData(answer) {
+  return {
+    type: FETCH_CURRENCIES_DATA,
+    currenciesData: answer,
+  };
+}
+export function actionFetchCurrenciesData(dataAPI) {
+  return async (dispatch) => {
+    const CurrenciesData = await dataAPI;
+    console.log(CurrenciesData);
+    dispatch(currenciesData(CurrenciesData));
   };
 }
 
-export function actionWalletExpenses(expenses) {
+export function actionAddExpenses(expenses) {
   return {
-    type: WALLET_EXPENSES,
+    type: ADD_EXPENSES,
     expenses,
   };
 }
