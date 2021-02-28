@@ -21,8 +21,8 @@ class Button extends Component {
   }
 
   componentDidUpdate() {
-    const { undisabled, email, password } = this.state;
-    const { verifyEmail, verifyPassword, saveEmail, savePassword } = this.props;
+    const { undisabled } = this.state;
+    const { verifyEmail, verifyPassword } = this.props;
     if (!undisabled && verifyEmail && verifyPassword) {
       this.toggleTrue(); // Fazer duas funções iguais porque o lixo do lint reclama.
     } else if ((undisabled && !verifyEmail) || (undisabled && !verifyPassword)) {
@@ -32,7 +32,7 @@ class Button extends Component {
 
   toggleTrue() {
     const { emailToSave, passwordToSave, saveEmail, savePassword } = this.props;
-    const { undisabled, email, password } = this.state;
+    const { email, password } = this.state;
     this.setState({
       email: emailToSave,
       password: passwordToSave,
@@ -43,7 +43,6 @@ class Button extends Component {
   }
 
   toggleFalse() {
-    const { emailToSave, passwordToSave, saveEmail, savePassword } = this.props;
     this.setState({
       undisabled: false,
     });
@@ -51,7 +50,7 @@ class Button extends Component {
   }
 
   handleSubmit(e) {
-    const { emailToSave, passwordToSave, saveEmail, savePassword } = this.props;
+    const { saveEmail, savePassword } = this.props;
     const { email, password } = this.state;
     e.preventDefault();
     saveEmail(email);
@@ -62,7 +61,7 @@ class Button extends Component {
   }
 
   renderButton() {
-    const { undisabled, proceed } = this.state;
+    const { undisabled } = this.state;
     let renderBtn;
     if (undisabled === true) {
       renderBtn = (
@@ -101,6 +100,8 @@ Button.propTypes = {
   verifyPassword: PropTypes.bool.isRequired,
   emailToSave: PropTypes.string.isRequired,
   passwordToSave: PropTypes.string.isRequired,
+  saveEmail: PropTypes.func.isRequired,
+  savePassword: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
