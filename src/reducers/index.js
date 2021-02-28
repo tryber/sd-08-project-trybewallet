@@ -4,10 +4,10 @@ import thunk from 'redux-thunk';
 import user from './user';
 import wallet from './wallet';
 
-const rootReducer = combineReducers({ user, wallet });
+const reducer = combineReducers({ user, wallet });
 
 const store = createStore(
-  rootReducer,
+  reducer,
   composeWithDevTools(
     applyMiddleware(thunk),
   ),

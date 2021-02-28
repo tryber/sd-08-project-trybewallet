@@ -1,5 +1,8 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { loginAction } from '../actions/index';
 
 class Login extends React.Component {
   constructor(props) {
@@ -33,6 +36,13 @@ class Login extends React.Component {
     });
   }
 
+  storeEmail() {
+    const { email } = this.state;
+    const { login } = this.props;
+    login(email);
+    this.setState({ shouldRedirect: true });
+  }
+
   render() {
     const { email, password, disabled, shouldRedirect } = this.state;
     if (shouldRedirect) {
@@ -63,7 +73,7 @@ class Login extends React.Component {
         <button
           type="button"
           disabled={ disabled }
-          onClick={ () => this.setState({ shouldRedirect: true }) }
+          onClick={ () => this.storeEmail() }
         >
           Entrar
         </button>
@@ -72,4 +82,12 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+const mapDispatchToProps = (dispatch) => ({
+  login: (email) => dispatch(loginAction(email)),
+});
+
+Login.propTypes = {
+  login: PropTypes.func.isRequired,
+};
+
+export default connect(null, mapDispatchToProps)(Login);
