@@ -8,6 +8,8 @@ const walletReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
   case 'UPAPI':
     return { ...state, currencies: action.value };
+  case 'UPEXPENSES':
+    return { ...state, expenses: [...state.expenses, action.UPexpenses] };
   default:
     return state;
   }

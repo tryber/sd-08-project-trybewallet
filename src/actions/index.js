@@ -10,9 +10,12 @@ function arrayUPAPI(response) {
     value: response,
   };
 }
-
 const actionCurruncies = (value) => (dispatch) => {
   value.then((response) => dispatch(arrayUPAPI(response)));
 };
 
-export { actionEmail, actionCurruncies };
+const actionExpenses = (UPexpenses) => ({
+  type: 'UPEXPENSES',
+  UPexpenses,
+});
+export { actionEmail, actionCurruncies, actionExpenses };

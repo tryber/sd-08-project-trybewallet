@@ -3,18 +3,19 @@ import { connect } from 'react-redux';
 
 class FormSelectCurrencies extends React.Component {
   render() {
-    const { apiCurrencies } = this.props;
+    const { apiCurrencies, currency, handleChange } = this.props;
     return (
       <>
         <span>Moeda:</span>
         <select
-          value={ null }
+          value={ currency }
           name="currency"
-          onChange={ null }
+          onChange={ handleChange }
+          data-testid="currency-input"
         >
           {/* criando um map da props do mapState chamado apiCurrencies */}
           {
-            apiCurrencies.map((value, index) => <option data-testid="currency-input" key={ index }>{value}</option>)
+            apiCurrencies.map((value, index) => <option data-testid={ value } key={ index }>{value}</option>)
           }
         </select>
       </>
