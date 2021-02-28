@@ -18,7 +18,7 @@ class WalletExpenseTable extends React.Component {
             <th>Descrição</th>
             <th>Tag</th>
             <th>Método de pagamento</th>
-            <th>Excluir</th>
+            <th>Editar/Excluir</th>
           </tr>
         </thead>
         <tbody>
@@ -40,6 +40,7 @@ class WalletExpenseTable extends React.Component {
                   <button
                     type="button"
                     onClick={ () => removeExpense(expense) }
+                    data-testid="delete-btn"
                   >
                     X
                   </button>
