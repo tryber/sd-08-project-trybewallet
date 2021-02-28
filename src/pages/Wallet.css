@@ -1,0 +1,134 @@
+.wallet header {
+  align-items: center;
+  background-color: hsl(180, 100%, calc(var(--background-color-lightness) + 75%));
+  box-shadow: 0 1px 4px 1px hsl(180, 100%, calc(var(--background-color-lightness) - 10%));
+  display: flex;
+  font-size: 0.8em;
+  height: 4em;
+  justify-content: space-between;
+  padding: 0.5em 1em;
+}
+
+.wallet header > :nth-child( 2 ) {
+  font-size: 2em;
+  font-weight: 700;
+  left: 50%;
+  position: absolute;
+  transform: translateX(-50%);
+}
+
+.wallet .container :nth-last-child( 2 ) {
+  display: inline-block;
+  font-size: 1.3em;
+  font-weight: 700;
+  padding-right: 0.5em;
+}
+
+.wallet header .animate {
+  animation: shake 0.2s linear;
+}
+
+.wallet .add-expense {
+  display: grid;
+  grid-gap: 1em;
+  grid-template-columns: minmax(7em, 1fr) 4fr 1fr repeat(3, 2fr);
+  padding: 1em;
+}
+
+.wallet .add-expense label {
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+table button {
+  opacity: 0.85;
+  width: 50%;
+}
+
+.wallet button {
+  border: none;
+  border-radius: 0.2em;
+  cursor: pointer;
+  font-size: inherit;
+  outline: none;
+  transition: 0.4s;
+}
+
+
+table button:nth-of-type( 1 ) {
+  background-color: orange;
+}
+
+table button:nth-of-type( 2 ) {
+  background-color: red;
+}
+
+table button:hover {
+  opacity: 1;
+}
+
+.wallet .editing input , .wallet .editing button , .wallet .editing select {
+  background-color: orange;
+  border-color: orange;
+}
+
+.wallet .add-expense button {
+  color: #222;
+}
+
+.wallet .add-expense button:hover , .wallet .add-expense button:focus {
+  background-color: #222;
+  color: white;
+}
+
+@keyframes shake {
+
+  0% {
+    transform: translateY(0);
+  }
+
+  25% {
+    transform: translateY(-0.2em);
+  }
+
+  75% {
+    transform: translateY(0.2em);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+table {
+  background-color: white;
+  border-collapse: collapse;
+  box-shadow: 0 0 10px 2px hsl(180, 100%, calc(var(--background-color-lightness) - 10%));
+  height: 100%;
+  margin: 0 auto;
+  width: calc(100% - 1em);
+}
+
+table thead {
+  background-color: hsl(180, 100%, calc(var(--background-color-lightness) + 75%));
+  height: 100%;
+  width: 100%;
+}
+
+table th {
+  padding: 0.5em;
+}
+
+table td {
+  border-bottom: 1px solid white;
+  padding: 0 0.2em;
+  text-align: center;
+}
+
+.buttons {
+  align-items: stretch;
+  display: flex;
+  flex-basis: auto;
+  height: 100%;
+}
