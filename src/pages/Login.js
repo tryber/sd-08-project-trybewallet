@@ -4,12 +4,9 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { login } from '../actions';
 
-// let isDisable = true;
-const maxLengthPassword = 5;
-// const redirect = false;
+const PASSWORD_LENGTH_MIN = 6;
 
 class Login extends React.Component {
-// const Login = () => {
   constructor() {
     super();
     this.state = {
@@ -27,21 +24,19 @@ class Login extends React.Component {
     const { email, password } = this.state;
     const re = /\S+@\S+\.\S+/;
     // console.table(this.state);
-    if (password.length >= maxLengthPassword && re.test(email)) {
-      console.log('passou');
+    if (password.length >= PASSWORD_LENGTH_MIN && re.test(email)) {
       this.setState({ isDisable: false });
     } else {
       this.setState({ isDisable: true });
     }
   }
 
-  // const [form, setform] = useState({ email: '', password: '' });
   changeform(e) {
     const typedValue = e.target.value;
     this.setState({
       [e.target.id]: typedValue,
-    }, this.validate());
-    // setform({ ...form, [name]: value });
+    });
+    // setTimeout(() => { this.validate(); }, PASSWORD_LENGTH_MIN * PASSWORD_LENGTH_MIN);
   }
 
   submitForm(e) {
@@ -57,7 +52,7 @@ class Login extends React.Component {
     return redirect
       ? <Redirect to="/carteira" />
       : (
-        <form onSubmit={ this.submitForm }>
+        <form>
           Email:
           <input
             name="email"
@@ -67,6 +62,7 @@ class Login extends React.Component {
             required="required"
             value={ email }
             onChange={ this.changeform }
+            onKeyUp={ this.validate }
           />
           Senha:
           <input
@@ -79,14 +75,15 @@ class Login extends React.Component {
             value={ password }
             required="required"
             onChange={ this.changeform }
+            onKeyUp={ this.validate }
           />
           <div>
             <button
-              type="submit"
+              onClick={ this.submitForm }
+              type="button"
               disabled={ isDisable }
             >
               Entrar
-
             </button>
           </div>
         </form>
