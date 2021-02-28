@@ -27,7 +27,8 @@ export default function reducer(state = INITIAL_STATE, action) {
   case ActionTypes.WALLET_EDITEXP:
     return {
       ...state,
-      expenses: [...state.expenses.filter((i) => i.id !== payload.id), payload].sort((a, b) => a.id - b.id),
+      expenses: [...state.expenses.filter((i) => i.id !== payload.id), payload]
+        .sort((a, b) => a.id - b.id),
     };
   case ActionTypes.WALLET_ENTER_EDIT_MODE:
     return {
