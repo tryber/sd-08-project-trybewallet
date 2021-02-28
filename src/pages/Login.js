@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { handleLogin } from '../actions/index';
+import { fetchCurrencies } from '../actions/wallet';
 
 const MIN_PASSWORD_LENGTH = 6;
 
@@ -76,6 +77,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   login: (userEmail) => dispatch(handleLogin(userEmail)),
+  fetchCurr: () => dispatch(fetchCurrencies()),
 });
 
 Login.propTypes = {

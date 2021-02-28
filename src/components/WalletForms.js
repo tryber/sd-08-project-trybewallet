@@ -1,60 +1,45 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { addExpense } from '../actions/wallet';
+import FormsInputs from './FormsInputs';
+import FormsSelectCatergories from './FormsSelectCategories';
+import FormsSelectCurrency from './FormsSelectCurrency';
+import FormsSelectMethod from './FormsSelectMethod';
 
 export class WalletForms extends Component {
   render() {
+    const { handleInput, createAndAddExpense } = this.props;
     return (
-      <forms>
+      <form>
         <fieldset>
-          <label htmlFor="value">
-            Outgoing
-            <input
-              type="number"
-              name="value"
-              id="value"
-              data-testid="value-input"
-              min={ 0.00 }
-              step=".01"
-              // value={ 0.00 }
-            />
-          </label>
-          <label htmlFor="value">
-            Description
-            <input
-              type="text"
-              name="description"
-              id="description"
-              data-testid="description-input"
-            />
-          </label>
-          <label htmlFor="currency">
-            Currency
-            <select
-              type="currency"
-              name="currency"
-              id="currency"
-              data-testid="currency-input"
-            >
-              {' '}
-              <option value="dog">Dog</option>
-              <option value="cat">Cat</option>
-              <option value="hamster">Hamster</option>
-              <option value="parrot">Parrot</option>
-              <option value="spider">Spider</option>
-              <option value="goldfish">Goldfish</option>
-            </select>
-          </label>
+          <FormsInputs handleInput={ handleInput } />
+          <FormsSelectCurrency handleInput={ handleInput } />
+          <FormsSelectMethod handleInput={ handleInput } />
+          <FormsSelectCatergories handleInput={ handleInput } />
+          <button
+            type="button"
+            onClick={ () => createAndAddExpense() }
+          >
+            Adicionar despesa
+          </button>
         </fieldset>
-      </forms>
+      </form>
     );
   }
 }
 
 const mapStateToProps = (state) => ({
-
+  expenses: state.wallet.expenses,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-
+  addExp: (expense) => dispatch(addExpense(expense)),
 });
+
+WalletForms.propTypes = {
+  handleInput: PropTypes.func,
+  addExp: PropTypes.func,
+}.isRequired;
+
 export default connect(mapStateToProps, mapDispatchToProps)(WalletForms);
