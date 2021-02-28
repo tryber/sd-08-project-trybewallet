@@ -11,11 +11,13 @@ export function login(email) {
   };
 }
 
-export function addExpense(expense) {
+export function addExpense(expense, conversionRate, convertedValue) {
   return {
     type: ADD_EXPENSE,
     payload: {
       expense,
+      conversionRate,
+      convertedValue,
     },
   };
 }
@@ -25,18 +27,12 @@ export function fetchExpense(currentExpense) {
     const coinsInfo = await fetch('https://economia.awesomeapi.com.br/json/all');
     const coinsJson = await coinsInfo.json();
     const coinsArray = Object.values(coinsJson);
-    const coinsList = coinsArray
-      .filter((coin) => coin.codein !== 'BRLT');
-    console.log(coinsList);
-    const conversionRate = coinsList
-      .find((coin) => coin.code === currentExpense.currency).ask;
-    console.log(conversionRate);
-    const convertedValue = parseFloat(currentExpense.value) * conversionRate;
+    // const coinsList = coinsArray
+    //   .filter((coin) => coin.codein !== 'BRLT')
+    //   .map((coin) => ({ [coin.code]: coin }));
     const expense = {
       ...currentExpense,
-      exchangeRates: coinsList,
-      conversionRate,
-      convertedValue,
+      exchangeRates: { ...coinsJson },
     };
     dispatch(addExpense(expense));
   };

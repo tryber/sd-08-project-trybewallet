@@ -19,7 +19,7 @@ class ExpensesForm extends Component {
     this.state = {
       idCount: 0,
       coins: [],
-      currentExpense: {},
+      currentExpense: { value: 0, description: '' },
     };
   }
 
@@ -49,6 +49,7 @@ class ExpensesForm extends Component {
     }), () => {
       const { addExpense } = this.props;
       const { currentExpense } = this.state;
+      this.setState({ currentExpense: {value: 0, tag: '' } });
       return addExpense(currentExpense);
     });
   }
@@ -178,9 +179,9 @@ class ExpensesForm extends Component {
           {this.renderExpenseCategorySelect()}
           <button
             onClick={ this.handleClick }
-            type="button"
+            type="reset"
           >
-            Adicionar Despesa
+            Adicionar despesa
           </button>
         </form>
       </div>
