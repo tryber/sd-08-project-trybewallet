@@ -3,18 +3,24 @@ export const ADD_EXPENSE = 'ADD_EXPENSE';
 
 const requestCurrencies = (currencies) => ({
   type: REQUEST_CURRENCIES,
-  currencies,
+  currencies: Object.keys(currencies),
+  exchangeRates: currencies,
 });
 
 export const addExpense = (expense) => ({
   type: ADD_EXPENSE,
   expense,
-  a: console.log(expense),
 });
 
 // action creator returns a function, available in redux-thunk package
 export function fetchCurrencies() {
   return async (dispatch) => fetch('https://economia.awesomeapi.com.br/json/all')
     .then((response) => response.json())
-    .then((currencies) => dispatch(requestCurrencies(Object.values(currencies))));
+    .then((currencies) => dispatch(requestCurrencies(currencies)));
 }
+
+// export function fetchAgainBecauseTheyWanted() {
+//   return async (dispatch) => fetch('https://economia.awesomeapi.com.br/json/all')
+//     .then((response) => response.json())
+//     .then((currencies) => dispatch(saveCurrencies(currencies)));
+// }

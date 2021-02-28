@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const FormsInputs = (props) => {
-  const { handleInput } = props;
+  const { handleInput, value, description } = props;
   return (
     <>
       <label htmlFor="value">
@@ -15,6 +15,7 @@ const FormsInputs = (props) => {
           min={ 0.00 }
           step=".01"
           onChange={ (e) => handleInput('value', e.target.value) }
+          value={ value }
         />
       </label>
       <label htmlFor="description">
@@ -25,6 +26,7 @@ const FormsInputs = (props) => {
           id="description"
           data-testid="description-input"
           onChange={ (e) => handleInput('description', e.target.value) }
+          value={ description }
         />
       </label>
     </>

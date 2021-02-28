@@ -9,13 +9,19 @@ import FormsSelectMethod from './FormsSelectMethod';
 
 export class WalletForms extends Component {
   render() {
-    const { handleInput, createAndAddExpense } = this.props;
+    const { handleInput, createAndAddExpense, value, currency, method,
+      tag, description } = this.props;
     return (
       <form>
         <fieldset>
-          <FormsInputs handleInput={ handleInput } />
-          <FormsSelectCurrency handleInput={ handleInput } />
-          <FormsSelectMethod handleInput={ handleInput } />
+          <FormsInputs
+            handleInput={ handleInput }
+            value={ value }
+            description={ description }
+            tag={ tag }
+          />
+          <FormsSelectCurrency handleInput={ handleInput } currency={ currency } />
+          <FormsSelectMethod handleInput={ handleInput } method={ method } />
           <FormsSelectCatergories handleInput={ handleInput } />
           <button
             type="button"

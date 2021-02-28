@@ -4,14 +4,22 @@ import { REQUEST_CURRENCIES, ADD_EXPENSE } from '../actions/wallet';
 const initialState = {
   currencies: [],
   expenses: [],
+  exchangeRates: {},
 };
 // reducer que executa a action e alter de fato o estado inicial dos carros
 export default function wallet(state = initialState, action) {
+  // console.log(action);
   switch (action.type) {
   case REQUEST_CURRENCIES:
-    return { ...state, currencies: action.currencies }; // need fix
+    return { ...state,
+      currencies: [...action.currencies],
+      exchangeRates: action.exchangeRates,
+    }; // need fix
   case ADD_EXPENSE:
-    return { ...state, expenses: [...state.expenses, action.expense] };
+    return { ...state,
+      expenses: [...state.expenses, action.expense],
+      exchangeRates: action.exchangeRates,
+    };
   default:
     return state;
   }

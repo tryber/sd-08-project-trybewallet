@@ -15,16 +15,16 @@ const FormsSelectCurrency = (props) => {
         data-testid="currency-input"
       >
         {currencies.map((currencie, index) => (
-          currencie.name !== 'Dólar Turismo'
+          currencie !== 'USDT'
             && (
               <option
                 key={ index }
-                data-testid={ currencie.code }
-                value={ currencie.code }
+                data-testid={ currencie }
+                value={ currencie }
                 name="currency"
                 id="currency"
               >
-                {currencie.code}
+                {currencie}
               </option>)))}
       </select>
     </label>

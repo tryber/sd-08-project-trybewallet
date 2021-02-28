@@ -22,13 +22,13 @@ class Wallet extends React.Component {
 
   componentDidMount() {
     const { fetchCurr } = this.props;
-    console.log(fetchCurr);
+    // console.log(fetchCurr);
     fetchCurr();
   }
 
-  handleInput(position, value) {
+  handleInput(position, val) {
     this.setState({
-      [position]: value,
+      [position]: val,
     });
   }
 
@@ -46,9 +46,9 @@ class Wallet extends React.Component {
 
   createAndAddExpense() {
     const { id, value, currency, method, tag, description, total } = this.state;
-    const { currencies, addExp, fetchCurr } = this.props;
-    console.log(currencies);
-    console.log(currency);
+    const { addExp, fetchCurr, exchangeRates } = this.props;
+    // console.log(currencies);
+    // console.log(currency);
     fetchCurr();
     const expense = {
       id: parseInt(id, 10),
@@ -57,26 +57,32 @@ class Wallet extends React.Component {
       method,
       tag,
       description,
-      exchangeRates: currencies,
-      total: parseInt(total, 10) + parseInt(value, 10),
+      exchangeRates,
+      // total: parseInt(total, 10) + parseInt(value, 10),
     };
     addExp(expense);
+    const rating = exchangeRates[currency];
     this.setState({
-      id: parseInt(id, 10) + 1, total: parseInt(total, 10) + parseInt(value, 10),
+      id: parseInt(id, 10) + 1, total: parseFloat(total) + parseFloat(value) * rating.ask,
     });
     this.clearState();
   }
 
   render() {
-    const { total } = this.state;
+    const { total, value, currency, method, tag, description } = this.state;
     const { email, fetchCurr } = this.props;
     return (
       <section>
         <WalletHeader email={ email } total={ total } />
         <WalletForms
           fetchCurr={ fetchCurr }
-          handleInput={ (position, value) => this.handleInput(position, value) }
+          handleInput={ (position, val) => this.handleInput(position, val) }
           createAndAddExpense={ () => this.createAndAddExpense() }
+          value={ value }
+          currency={ currency }
+          method={ method }
+          tag={ tag }
+          description={ description }
         />
       </section>);
   }
@@ -86,6 +92,7 @@ const mapStateToProps = (state) => ({
   email: state.user.email,
   currencies: state.wallet.currencies,
   expenses: state.wallet.expenses,
+  exchangeRates: state.wallet.exchangeRates,
 });
 
 const mapDispatchToProps = (dispatch) => ({
