@@ -20,6 +20,6 @@ export const wallet = {
 export const cambioFetch = {
   addFetchDespesa: (payload) => async (dispatch) => {
     const moedas = await getAPI();
-    dispatch(wallet.addDespesa({ ...payload, cambio: moedas }));
+    dispatch(wallet.addDespesa({ ...payload, exchangeRates: moedas }));
   },
 };

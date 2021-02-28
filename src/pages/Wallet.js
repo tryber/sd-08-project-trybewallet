@@ -16,11 +16,11 @@ class Wallet extends Component {
       formasDePagamento: METODOS_PAGAMENTO,
       tipoDespesa: TIPO_DESPESA,
       moedas: [],
-      valor: '',
-      descricao: '',
-      moeda: '',
-      metodoPG: '',
-      despesa: '',
+      value: '',
+      description: '',
+      currency: '',
+      method: '',
+      tag: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
@@ -38,18 +38,26 @@ class Wallet extends Component {
 
   gastosTotais() {
     const { gastos } = this.props;
-    const despesasTotais = gastos.reduce((acc, value) => {
-      const { valor, moeda, cambio } = value;
-      return acc + parseFloat(valor) * parseFloat(cambio[moeda].ask);
+    const despesasTotais = gastos.reduce((acc, curr) => {
+      const { value, currency, exchangeRates } = curr;
+      const valorCambio = parseFloat(exchangeRates[currency].ask);
+      return acc + parseFloat(value) * valorCambio;
     }, 0);
     return despesasTotais;
   }
 
   handleClick() {
-    const { valor, descricao, moeda, metodoPG, despesa } = this.state;
-    const despesas = { valor, descricao, moeda, metodoPG, despesa };
+    const { value, description, currency, method, tag } = this.state;
+    const despesas = { value, description, currency, method, tag };
     const { addFetchDespesa } = this.props;
     addFetchDespesa(despesas);
+    this.setState({
+      value: '',
+      description: '',
+      currency: '',
+      method: '',
+      tag: '',
+    });
   }
 
   handleChange({ target }) {
@@ -61,13 +69,13 @@ class Wallet extends Component {
 
   renderSelectInputs() {
     const { moedas, formasDePagamento, tipoDespesa,
-      moeda, metodoPG, despesa } = this.state;
+      currency, method, tag } = this.state;
     return (
       <>
         <select
           onChange={ this.handleChange }
-          value={ moeda }
-          name="moeda"
+          value={ currency }
+          name="currency"
           data-testid="currency-input"
         >
           {moedas.map(({ name, code }) => (
@@ -76,8 +84,8 @@ class Wallet extends Component {
         </select>
         <select
           onChange={ this.handleChange }
-          value={ metodoPG }
-          name="metodoPG"
+          value={ method }
+          name="method"
           data-testid="method-input"
         >
           {formasDePagamento.map((payment) => (
@@ -86,8 +94,8 @@ class Wallet extends Component {
         </select>
         <select
           onChange={ this.handleChange }
-          value={ despesa }
-          name="despesa"
+          value={ tag }
+          name="tag"
           data-testid="tag-input"
         >
           {tipoDespesa.map((value) => (
@@ -100,7 +108,7 @@ class Wallet extends Component {
 
   render() {
     const { userEmail } = this.props;
-    const { descricao, valor } = this.state;
+    const { description, value } = this.state;
     return (
       <>
         <header className="Wallet-header">
@@ -111,15 +119,15 @@ class Wallet extends Component {
         <main>
           <input
             onChange={ this.handleChange }
-            value={ valor }
-            name="valor"
+            value={ value }
+            name="value"
             data-testid="value-input"
             type="number"
           />
           <input
             onChange={ this.handleChange }
-            value={ descricao }
-            name="descricao"
+            value={ description }
+            name="description"
             data-testid="description-input"
             type="text"
           />
