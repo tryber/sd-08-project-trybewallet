@@ -114,10 +114,7 @@ class Wallet extends Component {
       <>
         <header className="Wallet-header">
           <span data-testid="email-field">{userEmail}</span>
-          <span data-testid="total-field">
-            {(
-              Math.round(this.gastosTotais()) * 100) / 100}
-          </span>
+          <span data-testid="total-field">{ this.gastosTotais()}</span>
           <span data-testid="header-currency-field">BRL</span>
         </header>
         <main>
