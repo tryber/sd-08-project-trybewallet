@@ -1,41 +1,77 @@
-.App {
-  text-align: center;
+@font-face {
+  font-family: Halaney;
+  src: url('./fonts/Halaney-Demo.otf');
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media ( prefers-reduced-motion : no-preference ) {
-
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  align-items: center;
-  background-color: #282c34;
+body {
+  background: #2b333b;
   color: white;
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.login-container {
+  left: 50%;
+  padding: 40px;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+}
+
+h1 { /* .login-container talvez necessario pra seprar os tilulos */
+  font-family: Halaney, sans-serif;
+  font-size: 3rem;
+  margin: 0 0 30px;
+}
+
+.login-container input {
+  background: none;
+  border: 2px solid white;
+  border-radius: 25px;
+  color: rgb(206, 204, 204);
+  font-size: 1.1rem;
+  height: 50px;
+  margin: 25px 0 15px;
+  text-align: center;
+  transition: 0.25s ease-in-out;
+}
+
+.login-container input:focus {
+  border: 2px solid rgb(235, 212, 12);
+}
+
+.login-container button {
+  background: rgb(235, 212, 12);
+  border: 0;
+  border-radius: 25px;
+  color: #2b333b;
+  font-size: 1.2rem;
+  height: 56px;
+  letter-spacing: 2.5px;
+  margin-top: 30px;
+  transition: 0.25s ease-in-out;
+  width: 284px;
+}
+
+.top-bar {
+  background-color: white;
+  color: #2b333b;
   display: flex;
-  flex-direction: column;
-  font-size: calc(10px + 2vmin);
-  justify-content: center;
-  min-height: 100vh;
 }
 
-.App-link {
-  color: #61dafb;
+.top-bar h1 {
+  margin: 25px 0 10px 25px;
 }
 
-@keyframes App-logo-spin {
+.top-bar-info {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
 
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
+.top-bar-info p {
+  margin: auto 50px auto 0;
 }
