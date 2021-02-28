@@ -1,24 +1,32 @@
 {
-  "requirements": [{
-    "description": "1 - Crie uma página inicial de login com os seguintes campos e características:",
-    "bonus": false
-  }, {
-    "description": "2 - Crie uma página para sua carteira com as seguintes características:",
-    "bonus": false
-  }, {
-    "description": "3 - Crie um header para a página de carteira contendo as seguintes características:",
-    "bonus": false
-  }, {
-    "description": "4 - Desenvolva um formulário para adicionar uma despesa contendo as seguintes características:",
-    "bonus": false
-  }, {
-    "description": "5 - Desenvolva uma tabela com os gastos contendo as seguintes características:",
-    "bonus": false
-  }, {
-    "description": "6 - Crie um botão para deletar uma despesa da tabela contendo as seguintes características:",
-    "bonus": false
-  }, {
-    "description": "7 - Crie um botão para editar uma despesa da tabela contendo as seguintes características:",
-    "bonus": true
-  }]
+  "requirements": [
+    {
+      "description": "1 - Crie uma página inicial de login com os seguintes campos e características:",
+      "bonus": false
+    },
+    {
+      "description": "2 - Crie uma página para sua carteira com as seguintes características:",
+      "bonus": false
+    },
+    {
+      "description": "3 - Crie um header para a página de carteira contendo as seguintes características:",
+      "bonus": false
+    },
+    {
+      "description": "4 - Desenvolva um formulário para adicionar uma despesa contendo as seguintes características:",
+      "bonus": false
+    },
+    {
+      "description": "5 - Desenvolva uma tabela com os gastos contendo as seguintes características:",
+      "bonus": false
+    },
+    {
+      "description": "6 - Crie um botão para deletar uma despesa da tabela contendo as seguintes características:",
+      "bonus": false
+    },
+    {
+      "description": "7 - Crie um botão para editar uma despesa da tabela contendo as seguintes características:",
+      "bonus": true
+    }
+  ]
 }

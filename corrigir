@@ -1,0 +1,16 @@
+#!/bin/sh
+
+clear
+
+# echo "Atenção! "
+# echo ""
+# echo "Feche seus arquivos que estão abertos e pressione [ENTER]"
+# read enter
+#npx prettier --write .
+#wait
+npx eslint --fix .
+wait
+# sleep 1
+# npx stylelint --fix .
+# wait
+# sleep 1
