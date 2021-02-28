@@ -1,7 +1,6 @@
 const INITIAL_STATE = {
-  isFetching: false,
-  currency: {},
-  error: '',
+  isFetching: true,
+  currencies: [],
   expenses: [],
 };
 
@@ -10,7 +9,7 @@ function wallet(state = INITIAL_STATE, action) {
   case 'REQUEST_CURRENCY':
     return { ...state, isFetching: true };
   case 'RECEIVE_CURRENCY':
-    return { ...state, currency: action.currency, isFetching: false };
+    return { ...state, currencies: action.currencies, isFetching: false };
   case 'ADD_EXPENSE':
     return { ...state, expenses: [...state.expenses, action.expenses] };
   default:

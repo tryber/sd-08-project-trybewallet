@@ -5,8 +5,8 @@ import { fetchCurrency as fetchCurrencyAction,
   addExpense as addExpenseAction } from '../actions';
 
 class Form extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       expensesState: {
         id: null,
@@ -17,35 +17,42 @@ class Form extends React.Component {
         tag: '',
         exchangeRates: {},
       },
+      selectOptions: [],
     };
   }
 
   // Primeira chamada a API para gerar o dropdown
   componentDidMount() {
-    const { fetchCurrency } = this.props;
-    fetchCurrency();
+    this.getOptions();
   }
 
-  // Sugunda chamada a API para atualizar o exchangeRates para cada gasto adicionado
-  fetchNewCurrency = async () => {
-    const { fetchCurrency, currencyObject } = this.props;
-    const { expensesState } = this.state;
+  async getOptions() {
+    const { fetchCurrency } = this.props;
     await fetchCurrency();
-    this.setState({
-      expensesState: { ...expensesState, exchangeRates: currencyObject },
-    });
+    const { currencyObject } = this.props;
+
+    const currencyList = Object.values(currencyObject);
+    const currencyListFiltered = currencyList.filter(
+      (object) => object.codein !== 'BRLT',
+    );
+    const options = currencyListFiltered.map(
+      (currency) => currency.code,
+    );
+
+    this.setState({ selectOptions: options });
   }
 
   // Implementei esta função com a ajuda de https://learn.co/lessons/react-updating-state
 
   // A cada mudança nos inputs o state é atualizado
-  handleChange = (event) => {
+  inputChange = (event) => {
     const { expensesState } = this.state;
-    const { expenses } = this.props;
+    const { expenses, currencyObject } = this.props;
     this.setState({
       expensesState: { ...expensesState,
         [event.target.name]: event.target.value,
-        id: expenses.length },
+        id: expenses.length,
+        exchangeRates: currencyObject },
     });
   }
 
@@ -65,42 +72,13 @@ class Form extends React.Component {
   }
 
   // Envio o state para o store
-  saveExpenses = async (event) => {
+  saveExpenses = (event) => {
     const { expensesState } = this.state;
     const { addExpense } = this.props;
+    fetchCurrency();
     event.preventDefault();
-    await this.fetchNewCurrency();
+    console.log('save');
     addExpense(expensesState);
-    this.resetState();
-  }
-
-  // Renderiza o dropdown com os dados da primeira chamada a API
-  renderSelect = () => {
-    const { isFetching, currencyObject } = this.props;
-    const { expensesState } = this.state;
-    if (isFetching === false) {
-      const currencyList = Object.values(currencyObject);
-      const currencyListFiltered = currencyList.filter(
-        (object) => object.codein !== 'BRLT',
-      );
-      return (
-        <select
-          data-testid="currency-input"
-          name="currency"
-          value={ expensesState.currency }
-          onChange={ this.handleChange }
-        >
-          {currencyListFiltered.map(
-            (currency) => (
-              <option
-                key={ currency.code }
-                data-testid={ currency.code }
-              >
-                {currency.code}
-              </option>),
-          )}
-        </select>);
-    }
   }
 
   sumValue = () => {
@@ -114,6 +92,30 @@ class Form extends React.Component {
     );
   }
 
+  // Renderiza o dropdown com os dados da primeira chamada a API
+  renderSelect = () => {
+    const { selectOptions, expensesState } = this.state;
+    return (
+      <select
+        data-testid="currency-input"
+        name="currency"
+        onChage={ this.inputChange }
+        value={ expensesState.currency }
+      >
+        );
+        {selectOptions.map(
+          (currency) => (
+            <option
+              key={ currency }
+              data-testid={ currency }
+              value={ currency }
+            >
+              {currency}
+            </option>),
+        )}
+      </select>);
+  }
+
   renderDescription = () => {
     const { expensesState } = this.state;
     return (
@@ -123,7 +125,7 @@ class Form extends React.Component {
           data-testid="description-input"
           name="description"
           value={ expensesState.description }
-          onChange={ this.handleChange }
+          onChange={ this.inputChange }
         />
       </label>
     );
@@ -132,7 +134,7 @@ class Form extends React.Component {
   renderTagInput = () => (
     <label htmlFor="tag">
       Tag
-      <select data-testid="tag-input" name="tag" onChange={ this.handleChange }>
+      <select data-testid="tag-input" name="tag" onChange={ this.inputChange }>
         <option>Alimentação</option>
         <option>Lazer</option>
         <option>Trabalho</option>
@@ -142,7 +144,7 @@ class Form extends React.Component {
     </label>
   )
 
-  render() {
+  renderForm = () => {
     const { expensesState } = this.state;
     return (
       <div>
@@ -157,7 +159,8 @@ class Form extends React.Component {
               data-testid="value-input"
               name="value"
               value={ expensesState.value }
-              onChange={ this.handleChange }
+              onChange={ this.inputChange }
+              // onClick={ this.fetchNewCurrency }
             />
           </label>
           {this.renderDescription()}
@@ -170,7 +173,7 @@ class Form extends React.Component {
             <select
               data-testid="method-input"
               name="method"
-              onChange={ this.handleChange }
+              onChange={ this.inputChange }
             >
               <option>Dinheiro</option>
               <option>Cartão de crédito</option>
@@ -181,8 +184,24 @@ class Form extends React.Component {
           <button type="submit" onClick={ this.saveExpenses }>Adicionar despesa</button>
         </form>
       </div>
-
     );
+  }
+
+  render() {
+    const { isFetching } = this.props;
+
+    if (isFetching === true) {
+      return (
+        <div>
+          <p data-testid="total-field">
+            Despesa Total:
+            0
+          </p>
+          <h2>Loading...</h2>
+        </div>
+      );
+    }
+    return this.renderForm();
   }
 }
 
@@ -192,7 +211,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const mapStateToProps = (state) => ({
-  currencyObject: state.wallet.currency,
+  currencyObject: state.wallet.currencies,
   isFetching: state.wallet.isFetching,
   expenses: state.wallet.expenses,
 });

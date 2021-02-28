@@ -8,9 +8,9 @@ const requestCurrency = () => ({
   type: 'REQUEST_CURRENCY',
 });
 
-const receiveCurrency = (currency) => ({
+const receiveCurrency = (currencies) => ({
   type: 'RECEIVE_CURRENCY',
-  currency,
+  currencies,
 });
 
 export const addExpense = (array) => ({
@@ -23,6 +23,6 @@ export function fetchCurrency() {
     dispatch(requestCurrency());
     return fetch('https://economia.awesomeapi.com.br/json/all')
       .then((response) => response.json())
-      .then((currency) => dispatch(receiveCurrency(currency)));
+      .then((currencies) => dispatch(receiveCurrency(currencies)));
   };
 }
