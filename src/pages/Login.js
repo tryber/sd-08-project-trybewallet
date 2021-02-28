@@ -17,13 +17,19 @@ class Login extends React.Component {
     };
   }
 
+  validateEmail(email) {
+    const re = new RegExp('^(([^<>()[\\]\\\\.,;:\\s@"]+(\\.[^<>()[\\]\\\\.,;:\\s@"]+)*)'
+    + '|(".+"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])'
+    + '|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$');
+    return re.test(String(email).toLowerCase());
+  }
+
   loginValidation() {
     const { email, password } = this.state;
-    const MINIMUM_CHARACTERS = 5;
+    const MINIMUM_CHARACTERS = 6;
     if (
-      email.includes('@')
-      && email.includes('.com')
-      && password.length > MINIMUM_CHARACTERS) {
+      this.validateEmail(email)
+      && password.length >= MINIMUM_CHARACTERS) {
       return false;
     }
     return true;
@@ -32,7 +38,10 @@ class Login extends React.Component {
   handleChange({ target: { value, type } }) {
     this.setState({
       [type]: value,
-      disabled: this.loginValidation(),
+    }, () => {
+      this.setState({
+        disabled: this.loginValidation(),
+      });
     });
   }
 
