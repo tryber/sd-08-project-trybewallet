@@ -11,20 +11,26 @@ class Currency extends React.Component {
   }
 
   render() {
-    const { onChange, currencies } = this.props;
+    const { currency, onChange, currencies } = this.props;
     return (
       <label className="div-form" htmlFor="currency">
         Moeda:
-        <select name="currency" data-testid="currency-input">
-          {currencies.map((currency) => (
+        {' '}
+        <select
+          name="currency"
+          data-testid="currency-input"
+          id={ currency }
+          value={ currency }
+          onChange={ onChange }
+        >
+          {currencies.map((curr) => (
             <option
-              data-testid={ currency }
-              key={ currency }
-              id={ currency }
-              value={ currency }
-              onChange={ onChange }
+              data-testid={ curr }
+              key={ curr }
+              id={ curr }
+              value={ curr }
             >
-              {currency}
+              {curr}
             </option>
           ))}
         </select>
@@ -46,5 +52,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(Currency);
 Currency.propTypes = {
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
   fetchCurrencies: PropTypes.func.isRequired,
+  currency: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
 };

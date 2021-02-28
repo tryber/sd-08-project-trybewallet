@@ -1,0 +1,15 @@
+.expense-table {
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+}
+
+.title {
+  background-color: gray;
+  color: whitesmoke;
+  padding: 5px 10px;
+}
+
+.data {
+  padding: 5px 10px;
+}

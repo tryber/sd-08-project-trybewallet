@@ -7,6 +7,7 @@ class Method extends React.Component {
     return (
       <label className="div-form" htmlFor="method">
         Método de pagamento:
+        {' '}
         <select
           name="method"
           data-testid="method-input"

@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { actionUserEmail } from '../actions/walletActions';
 
+import './Login.css';
+
 class Login extends React.Component {
   constructor() {
     super();
@@ -68,9 +70,9 @@ class Login extends React.Component {
     const { email, btnDisabled } = this.state;
 
     return (
-      <form className="form" onSubmit={ this.handleSubmit }>
-        Login
-        <div>
+      <form className="form-login" onSubmit={ this.handleSubmit }>
+        <div className="login-pass">Login</div>
+        <div className="login-pass">
           <input
             type="text"
             name="email"
@@ -86,15 +88,17 @@ class Login extends React.Component {
             data-testid="password-input"
           />
         </div>
-        <Link to="/carteira">
-          <button
-            type="button"
-            disabled={ btnDisabled }
-            onClick={ () => writeEmail(email) }
-          >
-            Entrar
-          </button>
-        </Link>
+        <div className="login-pass">
+          <Link to="/carteira">
+            <button
+              type="button"
+              disabled={ btnDisabled }
+              onClick={ () => writeEmail(email) }
+            >
+              Entrar
+            </button>
+          </Link>
+        </div>
       </form>
     );
   }

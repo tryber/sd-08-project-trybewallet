@@ -12,6 +12,7 @@ class Description extends React.Component {
         onChange={ onChange }
       >
         Descrição:
+        {' '}
         <input type="text" name="description" data-testid="description-input" />
       </label>
     );

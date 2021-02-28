@@ -7,6 +7,7 @@ class Tag extends React.Component {
     return (
       <label className="div-form" htmlFor="tag">
         Tag:
+        {' '}
         <select
           name="tag"
           data-testid="tag-input"

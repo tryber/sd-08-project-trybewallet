@@ -7,6 +7,7 @@ class Value extends React.Component {
     return (
       <label className="div-form" htmlFor="value">
         Valor:
+        {' '}
         <input
           type="number"
           name="value"

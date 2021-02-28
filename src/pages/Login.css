@@ -1,0 +1,12 @@
+.form-login {
+  align-items: center;
+  background-color: black;
+  display: flex;
+  height: 500px;
+  justify-content: center;
+}
+
+.login-pass {
+  color: aliceblue;  
+  padding: 10px;
+}

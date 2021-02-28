@@ -13,6 +13,7 @@ import Currency from './expanseForm/Currency';
 import Method from './expanseForm/Method';
 import Tag from './expanseForm/Tag';
 import Description from './expanseForm/Description';
+import ExpenseTable from './ExpenseTable';
 
 import './ExpenseForm.css';
 
@@ -24,7 +25,7 @@ class expenseForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
 
     this.state = {
-      value: 0,
+      value: '',
       currency: 'USD',
       method: 'Dinheiro',
       tag: 'Alimentação',
@@ -61,14 +62,23 @@ class expenseForm extends React.Component {
     } = this.state;
 
     return (
-      <form className="form" onSubmit={ this.handleSubmit }>
-        <Value value={ value } onChange={ this.handleChange } />
-        <Currency value={ currency } onChange={ this.handleChange } />
-        <Method method={ method } onChange={ this.handleChange } />
-        <Tag tag={ tag } onChange={ this.handleChange } />
-        <Description description={ description } onChange={ this.handleChange } />
-        <button type="button" onClick={ this.handleSubmit }>Adicionar Despesa</button>
-      </form>
+      <div>
+        <form className="expense-form" onSubmit={ this.handleSubmit }>
+          <Value value={ value } onChange={ this.handleChange } />
+          <Currency value={ currency } onChange={ this.handleChange } />
+          <Method method={ method } onChange={ this.handleChange } />
+          <Tag tag={ tag } onChange={ this.handleChange } />
+          <Description description={ description } onChange={ this.handleChange } />
+          <button
+            className="div-form"
+            type="button"
+            onClick={ this.handleSubmit }
+          >
+            Adicionar Despesa
+          </button>
+        </form>
+        <ExpenseTable />
+      </div>
     );
   }
 }
