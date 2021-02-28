@@ -6,6 +6,7 @@ class AddGastos extends Component {
   constructor() {
     super();
     this.state = {
+      arrFinal: [],
       valor: '',
       detalhes: '',
       moeda: '',
@@ -18,13 +19,32 @@ class AddGastos extends Component {
     this.metodoPagamento = this.metodoPagamento.bind(this);
     this.change = this.change.bind(this);
     this.getAPI = this.getAPI.bind(this);
+    this.getCodesFromAPI = this.getCodesFromAPI.bind(this);
   }
 
   async getAPI() {
     const teste = await fetch('https://economia.awesomeapi.com.br/json/all');
-    const teste2 = teste.json();
-    return teste2.results;
+    const teste2 = await teste.json();
+    return teste2;
   }
+
+  async getCodesFromAPI() {
+    const a = await this.getAPI();
+    const promisse = Object.values(a);
+    const arr1 = Object.values(promisse);
+    const arr = [];
+    for (let i = 0; i < arr1.length; i += 1) {
+      arr.push(Object.values(arr1[i]));
+    }
+    const arrFinal = [];
+    for (let i = 0; i < arr.length; i += 1) {
+      arrFinal.push(arr[i][0]);
+    }
+    this.setState({
+      arrFinal,
+    });
+  }
+
 
   metodoPagamento() {
     return (
@@ -43,6 +63,7 @@ class AddGastos extends Component {
   }
 
   tipoDeMoeda() {
+    const { arrFinal } = this.state;
     return (
       <div>
         Moeda:
@@ -51,20 +72,13 @@ class AddGastos extends Component {
           name="moeda"
           onChange={ (event) => this.change(event) }
         >
-          <option data-testid="USD" value="USD">USD</option>
-          <option data-testid="CAD" value="CAD">CAD</option>
-          <option data-testid="EUR" value="EUR">EUR</option>
-          <option data-testid="GBP" value="GBP">GBP</option>
-          <option data-testid="ARS" value="ARS">ARS</option>
-          <option data-testid="BTC" value="BTC">BTC</option>
-          <option data-testid="LTC" value="LTC">LTC</option>
-          <option data-testid="JPY" value="JPY">JPY</option>
-          <option data-testid="CHF" value="CHF">CHF</option>
-          <option data-testid="AUD" value="AUD">AUD</option>
-          <option data-testid="CNY" value="CNY">CNY</option>
-          <option data-testid="ILS" value="ILS">ILS</option>
-          <option data-testid="XRP" value="XRP">XRP</option>
-          <option data-testid="ETH" value="ETH">ETH</option>
+          {arrFinal.map((moeda) => (moeda !== 'USDT') && (
+            (
+              <option key={ moeda } value={ moeda } data-testid={ moeda }>
+                {moeda}
+              </option>
+            )
+          ))}
         </select>
       </div>);
   }
@@ -121,9 +135,7 @@ class AddGastos extends Component {
 
   render() {
     const { expenses } = this.props;
-    const api = this.getAPI();
-    console.log(api);
-
+    this.getCodesFromAPI();
     return (
       <div>
         {this.inputsGastos()}
