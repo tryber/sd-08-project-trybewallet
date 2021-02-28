@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import {
   addCurrenciesAction,
   addExpenseAction,
-  updateTotalExpensesAction,
 } from '../actions';
 
 const INITIAL_STATE = {
@@ -51,8 +50,6 @@ class WalletExpenseIncluder extends React.Component {
     e.preventDefault();
     const {
       addExpenseOnState,
-      updateTotalExpenses,
-      totalExpenses,
       currencies,
     } = this.props;
     const { value, description, currency, method, tag, id } = this.state;
@@ -65,14 +62,11 @@ class WalletExpenseIncluder extends React.Component {
       tag,
       exchangeRates: currencies,
     };
-    const sumExpense = parseFloat(totalExpenses) + parseFloat(value);
-    console.log(sumExpense);
     this.setState({
       ...INITIAL_STATE,
       id: id + 1,
     });
     addExpenseOnState(newExpense);
-    updateTotalExpenses(sumExpense);
   }
 
   renderCurrencies() {
@@ -87,7 +81,6 @@ class WalletExpenseIncluder extends React.Component {
       >
         {currencies.map((e) => {
           if (e === 'USDT') return '';
-          console.log(<option key={ e } data-testid={ e }>{e}</option>);
           return (
             <option key={ e } data-testid={ e }>{e}</option>
           );
@@ -143,20 +136,16 @@ class WalletExpenseIncluder extends React.Component {
 
 const mapStateToProps = (state) => ({
   currencies: state.wallet.currencies,
-  totalExpenses: state.wallet.totalExpenses,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   addCurrenciesOnState: (currencies) => dispatch(addCurrenciesAction(currencies)),
   addExpenseOnState: (expense) => dispatch(addExpenseAction(expense)),
-  updateTotalExpenses: (value) => dispatch(updateTotalExpensesAction(value)),
 });
 
 WalletExpenseIncluder.propTypes = {
   addCurrenciesOnState: PropTypes.func.isRequired,
-  totalExpenses: PropTypes.number.isRequired,
   addExpenseOnState: PropTypes.func.isRequired,
-  updateTotalExpenses: PropTypes.func.isRequired,
   currencies: PropTypes.shape({
     map: PropTypes.func,
   }).isRequired,

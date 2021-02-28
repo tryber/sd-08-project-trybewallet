@@ -3,13 +3,12 @@
 import {
   ADD_CURRENCIES_ON_STATE,
   ADD_EXPENSE_ON_STATE,
-  UPDATE_TOTAL_EXPENSES,
+  REMOVE_EXPENSE_FROM_STATE,
 } from '../actions';
 
 const INITIAL_STATE = {
   currencies: [],
   expenses: [],
-  totalExpenses: 0,
 };
 
 const walletReducer = (state = INITIAL_STATE, action) => {
@@ -18,8 +17,11 @@ const walletReducer = (state = INITIAL_STATE, action) => {
     return { ...state, currencies: action.payload };
   case ADD_EXPENSE_ON_STATE:
     return { ...state, expenses: [...state.expenses, action.payload] };
-  case UPDATE_TOTAL_EXPENSES:
-    return { ...state, totalExpenses: action.payload };
+  case REMOVE_EXPENSE_FROM_STATE:
+    return { ...state,
+      expenses: [
+        ...state.expenses.filter((expense) => expense.id !== action.payload.id),
+      ] };
   default:
     return state;
   }

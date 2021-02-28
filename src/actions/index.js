@@ -2,7 +2,7 @@
 export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS';
 export const ADD_CURRENCIES_ON_STATE = 'ADD_CURRENCIES_ON_STATE';
 export const ADD_EXPENSE_ON_STATE = 'ADD_EXPENSE_ON_STATE';
-export const UPDATE_TOTAL_EXPENSES = 'UPDATE_TOTAL_EXPENSES';
+export const REMOVE_EXPENSE_FROM_STATE = 'REMOVE_EXPENSE_FROM_STATE';
 
 export const userLoginSuccessAction = (item) => ({
   type: USER_LOGIN_SUCCESS,
@@ -19,7 +19,7 @@ export const addExpenseAction = (expense) => ({
   payload: expense,
 });
 
-export const updateTotalExpensesAction = (value) => ({
-  type: UPDATE_TOTAL_EXPENSES,
+export const removeExpenseAction = (value) => ({
+  type: REMOVE_EXPENSE_FROM_STATE,
   payload: value,
 });
