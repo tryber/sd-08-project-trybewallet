@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import {
   addExpense as addExpenseAction,
+  deleteExpense as deleteExpenseAction,
   fetchCurrencies as fetchCurrenciesAction,
 } from '../actions';
 
@@ -11,8 +12,7 @@ class ExpensesForm extends React.Component {
   constructor() {
     super();
 
-    this.state = {
-      id: 0,
+    this.initialState = {
       value: 0,
       description: '',
       currency: 'USD',
@@ -21,8 +21,13 @@ class ExpensesForm extends React.Component {
       exchangeRates: {},
     };
 
+    this.state = { id: 0, ...this.initialState };
+
     this.handleChange = this.handleChange.bind(this);
-    this.handleClick = this.handleClick.bind(this);
+    this.handleAddClick = this.handleAddClick.bind(this);
+    this.handleEditClick = this.handleEditClick.bind(this);
+    this.renderAddButton = this.renderAddButton.bind(this);
+    this.renderEditButton = this.renderEditButton.bind(this);
     this.renderInput = this.renderInput.bind(this);
     this.renderSelect = this.renderSelect.bind(this);
   }
@@ -39,7 +44,7 @@ class ExpensesForm extends React.Component {
     });
   }
 
-  async handleClick(event) {
+  async handleAddClick(event) {
     event.preventDefault();
     const { addExpense } = this.props;
     const apiResponse = await fetch('https://economia.awesomeapi.com.br/json/all');
@@ -47,9 +52,25 @@ class ExpensesForm extends React.Component {
     this.setState({ exchangeRates: apiJson }, () => {
       this.setState((previousState) => ({
         id: previousState.id + 1,
-        value: 0,
+        ...this.initialState,
       }));
       addExpense(this.state);
+    });
+  }
+
+  handleEditClick(event) {
+    event.preventDefault();
+    const { addExpense, editTarget, deleteExpense } = this.props;
+    const { value, description, currency, method, tag } = this.state;
+    deleteExpense(parseInt(editTarget.id, 10));
+    addExpense({
+      id: editTarget.id,
+      value,
+      description,
+      currency,
+      method,
+      tag,
+      exchangeRates: editTarget.exchangeRates,
     });
   }
 
@@ -93,8 +114,30 @@ class ExpensesForm extends React.Component {
     );
   }
 
+  renderAddButton() {
+    return (
+      <button
+        onClick={ this.handleAddClick }
+        type="submit"
+      >
+        Adicionar despesa
+      </button>
+    );
+  }
+
+  renderEditButton() {
+    return (
+      <button
+        onClick={ this.handleEditClick }
+        type="submit"
+      >
+        Editar despesa
+      </button>
+    );
+  }
+
   render() {
-    const { loading, currencies } = this.props;
+    const { loading, currencies, editTarget } = this.props;
     const { value, description, currency, method, tag } = this.state;
     const paymentMethods = ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'];
     const expenseTags = ['Lazer', 'Alimentação', 'Trabalho', 'Transporte', 'Saúde'];
@@ -106,7 +149,8 @@ class ExpensesForm extends React.Component {
         { !loading && this.renderSelect('Moeda:', 'currency', currency, currencies) }
         { this.renderSelect('Método de pagamento:', 'method', method, paymentMethods) }
         { this.renderSelect('Categoria da Despesa:', 'tag', tag, expenseTags) }
-        <button onClick={ this.handleClick } type="submit">Adicionar Despesa</button>
+        { Object.keys(editTarget).length === 0
+          ? this.renderAddButton() : this.renderEditButton() }
       </form>
     );
   }
@@ -115,22 +159,27 @@ class ExpensesForm extends React.Component {
 const mapStateToProps = (state) => ({
   loading: state.wallet.isFetching,
   currencies: state.wallet.currencies,
+  editTarget: state.wallet.editTarget,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   addExpense: (payload) => dispatch(addExpenseAction(payload)),
+  deleteExpense: (payload) => dispatch(deleteExpenseAction(payload)),
   fetchCurrencies: () => dispatch(fetchCurrenciesAction()),
 });
 
 ExpensesForm.propTypes = {
-  addExpense: PropTypes.func.isRequired,
-  fetchCurrencies: PropTypes.func.isRequired,
   loading: PropTypes.bool,
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
+  editTarget: PropTypes.objectOf(PropTypes.any),
+  addExpense: PropTypes.func.isRequired,
+  deleteExpense: PropTypes.func.isRequired,
+  fetchCurrencies: PropTypes.func.isRequired,
 };
 
 ExpensesForm.defaultProps = {
   loading: undefined,
+  editTarget: {},
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExpensesForm);

@@ -17,10 +17,6 @@
   color: #61dafb;
 }
 
-input {
-  display: block;
-}
-
 .error-message {
   color: red;
 }

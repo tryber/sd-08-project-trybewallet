@@ -1,4 +1,5 @@
 export const ADD_EXPENSE = 'ADD_EXPENSE';
+export const CONFIRM_EDIT = 'CONFIRM_EDIT';
 export const DELETE_EXPENSE = 'DELETE_EXPENSE';
 export const EDIT_EXPENSE = 'EDIT_EXPENSE';
 export const LOGIN = 'LOGIN';
