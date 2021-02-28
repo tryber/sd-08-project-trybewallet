@@ -20,6 +20,7 @@ class Currency extends React.Component {
             <option
               data-testid={ currency }
               key={ currency }
+              id={ currency }
               value={ currency }
               onChange={ onChange }
             >

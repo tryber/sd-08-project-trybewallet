@@ -10,12 +10,28 @@ class Method extends React.Component {
         <select
           name="method"
           data-testid="method-input"
+          id={ method }
           value={ method }
           onChange={ onChange }
         >
-          <option>Dinheiro</option>
-          <option>Cartão de crédito</option>
-          <option>Cartão de débito</option>
+          <option
+            id="Dinheiro"
+            value="Dinheiro"
+          >
+            Dinheiro
+          </option>
+          <option
+            id="Cartão de crédito"
+            value="Cartão de crédito"
+          >
+            Cartão de crédito
+          </option>
+          <option
+            id="Cartão de débito"
+            value="Cartão de débito"
+          >
+            Cartão de débito
+          </option>
         </select>
       </label>
     );

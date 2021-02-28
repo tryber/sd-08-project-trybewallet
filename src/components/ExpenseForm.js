@@ -25,7 +25,7 @@ class expenseForm extends React.Component {
 
     this.state = {
       value: 0,
-      valueCurrency: 'USD',
+      currency: 'USD',
       method: 'Dinheiro',
       tag: 'Alimentação',
       description: '',
@@ -54,7 +54,7 @@ class expenseForm extends React.Component {
   render() {
     const {
       value,
-      valueCurrency,
+      currency,
       method,
       tag,
       description,
@@ -63,7 +63,7 @@ class expenseForm extends React.Component {
     return (
       <form className="form" onSubmit={ this.handleSubmit }>
         <Value value={ value } onChange={ this.handleChange } />
-        <Currency valueCurrency={ valueCurrency } onChange={ this.handleChange } />
+        <Currency value={ currency } onChange={ this.handleChange } />
         <Method method={ method } onChange={ this.handleChange } />
         <Tag tag={ tag } onChange={ this.handleChange } />
         <Description description={ description } onChange={ this.handleChange } />
