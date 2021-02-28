@@ -5,12 +5,10 @@ import Wallet from './pages/Wallet';
 
 function App() {
   return (
-    <ruani>
-      <Switch>
-        <Route path="/carteira" component={ Wallet } />
-        <Route exact path="/" component={ Login } />
-      </Switch>
-    </ruani>
+    <Switch>
+      <Route path="/carteira" component={ Wallet } />
+      <Route exact path="/" component={ Login } />
+    </Switch>
   );
 }
 
