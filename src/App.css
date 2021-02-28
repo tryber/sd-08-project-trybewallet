@@ -6,6 +6,7 @@ body {
 .wallet-header {
   display: flex;
   justify-content: center;
+  margin-bottom: 20px;
 }
 
 .wallet-header-content {
@@ -29,8 +30,16 @@ body {
 
 .wth-header {
   color: rgb(31, 31, 31);
+  margin-bottom: 20px;
 }
 
 .wth-row {
   color: rgb(71, 71, 71);
+}
+
+.edit-area {
+  border: 1px solid black;
+  padding: 10px;
+  padding-bottom: 30px;
+  width: 100%;
 }

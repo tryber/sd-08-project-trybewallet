@@ -4,20 +4,8 @@ import { useDispatch } from 'react-redux';
 
 import * as actions from '../actions';
 
-// const TABLE_HEADERS = [
-//   'Descrição',
-//   'Tag',
-//   'Método de pagamento',
-//   'Valor',
-//   'Moeda',
-//   'Câmbio utilizado',
-//   'Valor convertido',
-//   'Moeda de conversão',
-// ];
-
 function WalletTableItem({ data, ...rest }) {
   const dispatch = useDispatch();
-
   return (
     <tr role="row" { ...rest }>
       <td role="cell">{ data.description }</td>
@@ -40,9 +28,9 @@ function WalletTableItem({ data, ...rest }) {
         <button
           type="button"
           data-testid="edit-btn"
+          onClick={ () => dispatch(actions.enterEditMode(data.id)) }
         >
           EDITAR
-
         </button>
       </td>
     </tr>

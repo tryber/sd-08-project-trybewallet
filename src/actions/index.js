@@ -26,3 +26,21 @@ export function delExpense(id) {
     payload: id,
   };
 }
+export function editExpense(payload) {
+  return {
+    type: ActionTypes.WALLET_EDITEXP,
+    payload,
+  };
+}
+
+export function enterEditMode(id) {
+  return {
+    type: ActionTypes.WALLET_ENTER_EDIT_MODE,
+    id,
+  };
+}
+export function exitEditMode() {
+  return {
+    type: ActionTypes.WALLET_EXIT_EDIT_MODE,
+  };
+}
