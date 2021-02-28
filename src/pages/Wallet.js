@@ -200,7 +200,7 @@ class Wallet extends React.Component {
             </button>
           </form>
           <table>
-            {HeaderTable}
+            <HeaderTable />
             {this.walletTable()}
           </table>
         </section>
