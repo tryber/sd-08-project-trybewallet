@@ -45,7 +45,6 @@ class AddGastos extends Component {
     });
   }
 
-
   metodoPagamento() {
     return (
       <div>
