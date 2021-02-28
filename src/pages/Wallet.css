@@ -1,0 +1,23 @@
+.wallet-container {
+  margin: 0;
+}
+
+.header {
+  align-items: center;
+  background-color: rgb(15, 163, 107);
+  color: white;
+  display: flex;
+  flex-direction: row;
+  font-size: 30px;
+  height: 80px;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.total-field {
+  display: flex;
+}
+
+.exchange-field {
+  margin-left: 20px;
+}

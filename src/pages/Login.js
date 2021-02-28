@@ -40,42 +40,47 @@ class Login extends React.Component {
     const { email, password, isValid } = this.state;
     const { login } = this.props;
     return (
-      <div className="login">
-        <section className="login-inputs">
-          <input
-            data-testid="email-input"
-            onChange={ (e) => {
-              this.setState({ email: e.target.value });
-              this.validInputs();
-            } }
-            placeholder="E-mail"
-            type="text"
-            value={ email }
-          />
-          <input
-            data-testid="password-input"
-            onChange={ (e) => {
-              this.setState({ password: e.target.value });
-              this.validInputs();
-            } }
-            placeholder="Password"
-            type="text"
-            value={ password }
-          />
-        </section>
-        <section className="link">
-          <Link to="/carteira">
-            <button
-              data-testid="btn-login"
-              onClick={ () => login({ email, password }) }
-              type="button"
-              disabled={ isValid }
-            >
-              Entrar
-            </button>
-          </Link>
-        </section>
-      </div>
+      <main className="main">
+        <div className="login">
+          <section className="login-inputs">
+            <input
+              className="input"
+              data-testid="email-input"
+              onChange={ (e) => {
+                this.setState({ email: e.target.value });
+                this.validInputs();
+              } }
+              placeholder="E-mail"
+              type="text"
+              value={ email }
+            />
+            <input
+              className="input"
+              data-testid="password-input"
+              onChange={ (e) => {
+                this.setState({ password: e.target.value });
+                this.validInputs();
+              } }
+              placeholder="Password"
+              type="text"
+              value={ password }
+            />
+          </section>
+          <section className="link">
+            <Link to="/carteira">
+              <button
+                className="button"
+                data-testid="btn-login"
+                onClick={ () => login({ email, password }) }
+                type="button"
+                disabled={ isValid }
+              >
+                Entrar
+              </button>
+            </Link>
+          </section>
+        </div>
+      </main>
     );
   }
 }
