@@ -23,8 +23,3 @@ export const updateTotalExpensesAction = (value) => ({
   type: UPDATE_TOTAL_EXPENSES,
   payload: value,
 });
-
-// export default (item) => ({
-//   type: USER_LOGIN_SUCCESS,
-//   payload: item,
-// });

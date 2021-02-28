@@ -30,9 +30,10 @@ class WalletExpenseIncluder extends React.Component {
     this.mapCurrencies = this.mapCurrencies.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.renderCurrencies = this.renderCurrencies.bind(this);
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     fetch('https://economia.awesomeapi.com.br/json/all')
       .then((response) => {
         response.json()
@@ -42,8 +43,7 @@ class WalletExpenseIncluder extends React.Component {
 
   mapCurrencies(data) {
     const { addCurrenciesOnState } = this.props;
-    const currencies = Object.keys(data);
-    addCurrenciesOnState(currencies);
+    addCurrenciesOnState(data);
   }
 
   handleChange({ target }) {
@@ -52,9 +52,14 @@ class WalletExpenseIncluder extends React.Component {
     });
   }
 
-  handleSubmit(e) {
+  async handleSubmit(e) {
     e.preventDefault();
-    const { addExpenseOnState, updateTotalExpenses, totalExpenses } = this.props;
+    const {
+      addExpenseOnState,
+      updateTotalExpenses,
+      totalExpenses,
+      currencies,
+    } = this.props;
     const { value, description, currency, method, tag, id } = this.state;
     const newExpense = {
       id,
@@ -63,6 +68,7 @@ class WalletExpenseIncluder extends React.Component {
       currency,
       method,
       tag,
+      exchangeRates: currencies,
     };
     const sumExpense = parseFloat(totalExpenses) + parseFloat(value);
     console.log(sumExpense);
@@ -74,12 +80,30 @@ class WalletExpenseIncluder extends React.Component {
     updateTotalExpenses(sumExpense);
   }
 
+  renderCurrencies() {
+    let { currencies } = this.props;
+    currencies = Object.keys(currencies);
+    return (
+      <select
+        name="currency"
+        data-testid="currency-input"
+        onChange={ this.handleChange }
+      >
+        {currencies.map((e) => {
+          if (e === 'USDT') return '';
+          return (
+            <option key={ e } value={ e }>{e}</option>
+          );
+        })}
+      </select>
+    );
+  }
+
   render() {
-    const { currencies } = this.props;
     return (
       <form>
         <label htmlFor="value">
-          Valor:
+          {'Valor: '}
           <input
             onChange={ this.handleChange }
             name="value"
@@ -88,30 +112,24 @@ class WalletExpenseIncluder extends React.Component {
             data-testid="value-input"
           />
         </label>
-        <label htmlFor="cur">
-          Moeda:
-          <select
-            name="currency"
-            data-testid="currency-input"
-            onChange={ this.handleChange }
-          >
-            {currencies.map((e) => <option key={ e } value={ e }>{e}</option>)}
-          </select>
+        <label htmlFor="currency">
+          {'Moeda: '}
+          {this.renderCurrencies()}
         </label>
         <label htmlFor="method">
-          Forma de Pagamento:
+          {'Forma de Pagamento: '}
           <select name="method" data-testid="method-input" onChange={ this.handleChange }>
             {methodList.map((e) => <option key={ e } value={ e }>{e}</option>)}
           </select>
         </label>
         <label htmlFor="tag">
-          Tag:
+          {'Tag: '}
           <select name="tag" data-testid="tag-input" onChange={ this.handleChange }>
             {tagList.map((tag) => <option key={ tag } value={ tag }>{tag}</option>)}
           </select>
         </label>
         <label htmlFor="description">
-          Descrição:
+          {'Descrição: '}
           <input
             onChange={ this.handleChange }
             name="description"
