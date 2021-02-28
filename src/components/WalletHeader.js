@@ -39,7 +39,7 @@ const mapStateToProps = (state) => ({
 
 WalletHeader.propTypes = {
   loggedUserEmail: PropTypes.string.isRequired,
-  expenses: PropTypes.shape.isRequired,
+  expenses: PropTypes.arrayOf(Object).isRequired,
 };
 
 export default connect(mapStateToProps, null)(WalletHeader);
