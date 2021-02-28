@@ -12,6 +12,7 @@ class FormExpenses extends Component {
   constructor() {
     super();
     this.state = {
+      id: 0,
       value: '',
       description: '',
       currency: '',
@@ -30,7 +31,9 @@ class FormExpenses extends Component {
   }
 
   submitForm() {
+    const { id } = this.state;
     const { send } = this.props;
+    this.setState({ id: id + 1 });
     send(this.state);
   }
 
