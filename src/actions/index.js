@@ -2,6 +2,7 @@
 export const ADCIONAR_EMAIL = 'ADCIONAR_EMAIL';
 export const FET_API = 'FET_API';
 export const EXPENSE = 'EXPENSE';
+export const REMOVE = 'REMOVE';
 
 export const adcionarEmail = (value) => ({
   type: ADCIONAR_EMAIL,
@@ -15,6 +16,11 @@ function getApi(json) {
 export const despesaAtual = (value) => ({
   type: EXPENSE,
   value,
+});
+
+export const removeExpense = (id) => ({
+  type: REMOVE,
+  payload: id,
 });
 
 export function fetApi() {

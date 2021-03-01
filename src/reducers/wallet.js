@@ -1,5 +1,5 @@
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
-import { FET_API, EXPENSE } from '../actions';
+import { FET_API, EXPENSE, REMOVE } from '../actions';
 
 const INITIAL_STATE = {
   currencies: [],
@@ -14,6 +14,11 @@ export default (state = INITIAL_STATE, action) => {
     return ({
       ...state,
       expenses: [...state.expenses, action.value],
+    });
+  case REMOVE:
+    return ({
+      ...state,
+      expenses: state.expenses.filter((expense) => expense.id !== action.payload),
     });
   default:
     return state;

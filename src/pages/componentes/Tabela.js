@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { removeExpense } from '../../actions';
 
 class Tabela extends React.Component {
   render() {
-    const { dados } = this.props;
+    const { dados, remove } = this.props;
     return (
       <table>
         <thead>
@@ -34,6 +35,16 @@ class Tabela extends React.Component {
                 <td>{ (Math.round(ask * 100) / 100).toFixed(2) }</td>
                 <td>{ (Math.round(convertedValue * 100) / 100).toFixed(2) }</td>
                 <td>Real</td>
+                <td>Editar</td>
+                <td>
+                  <button
+                    type="button"
+                    data-testid="delete-btn"
+                    onClick={ () => remove(key.id) }
+                  >
+                    Excluir
+                  </button>
+                </td>
               </tr>
             );
           })}
@@ -47,9 +58,13 @@ const mapStateToProps = (state) => ({
   dados: state.wallet.expenses,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  remove: (e) => dispatch(removeExpense(e)),
+});
+
 Tabela.propTypes = {
   dados: PropTypes.arrayOf(PropTypes.shape).isRequired,
-
+  remove: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps)(Tabela);
+export default connect(mapStateToProps, mapDispatchToProps)(Tabela);
