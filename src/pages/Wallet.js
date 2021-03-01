@@ -9,6 +9,7 @@ import Description from '../components/Description';
 import Currency from '../components/Currency';
 import Method from '../components/Method';
 import Tag from '../components/Tag';
+import Table from '../components/Table';
 
 class Wallet extends React.Component {
   constructor() {
@@ -60,7 +61,7 @@ class Wallet extends React.Component {
   }
 
   render() {
-    const { userEmail, fillType } = this.props;
+    const { userEmail, fillType, expenseList } = this.props;
     const { total, value } = this.state;
     return (
       <div>
@@ -77,6 +78,7 @@ class Wallet extends React.Component {
           <Tag func={ this.handleChange } />
           <button type="submit" onClick={ this.handleClick }>Adicionar despesa</button>
         </form>
+        <Table list={ expenseList } fill={ fillType[0] } />
       </div>
     );
   }
