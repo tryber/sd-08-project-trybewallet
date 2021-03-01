@@ -6,6 +6,7 @@
 
 .table {
   background: white;
+  border-collapse: collapse;
   margin: 15px;
   text-align: center;
   width: 100%;
@@ -14,9 +15,40 @@
 .fundo-verde {
   background-image: linear-gradient(rgb(50, 122, 83), rgb(50, 122, 100));
   height: 100vh;
+  left: 0;
   overflow: hidden;
   position: absolute;
+  top: 0;
   width: 100vw;
   z-index: -1;
 }
 
+
+.table th {
+  background-image: linear-gradient(white, rgb(182, 182, 182));
+  border-bottom: solid 2px;
+  box-shadow: 0 0 5px 1px rgb(175, 175, 175);
+  height: 30px;
+  padding: 5px;
+}
+
+.table tr {
+  height: 40px;
+  background: rgb(206, 255, 229);
+
+}
+
+.table tr:nth-child(odd) {
+  background: rgb(105, 155, 105);
+}
+
+.button-excluir {
+  border-radius: 50%;
+  width: 100%;
+}
+
+.table tbody tr button {
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+}

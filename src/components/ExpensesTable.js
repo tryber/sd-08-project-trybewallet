@@ -6,6 +6,9 @@ import { Creators as WalletActions } from '../actions/wallet';
 
 import expenseType from '../types';
 
+import buttonLixeira from './images/button-lixeira.png';
+import buttonEdit from './images/edit.jpeg';
+
 import './ExpensesTable.css';
 
 class ExpensesTable extends Component {
@@ -25,13 +28,15 @@ class ExpensesTable extends Component {
         <td>{ (Math.round(convertedValue * 100) / 100).toFixed(2) }</td>
         <td>Real</td>
         <td>
-          <button type="button">Editar</button>
+          <button type="button">
+            <img className="button-excluir" alt="edit" src={ buttonEdit } />
+          </button>
           <button
             type="button"
             data-testid="delete-btn"
             onClick={ () => removeExpense(id) }
           >
-            Excluir
+            <img className="button-excluir" alt="excluir" src={ buttonLixeira } />
           </button>
         </td>
       </tr>
