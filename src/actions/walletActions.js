@@ -20,10 +20,9 @@ export function currencies(answer) {
     currencies: answer,
   };
 }
-export function actionFetchCurrencies() {
-  return async (dispatch) => {
-    const response = await getAPI();
-    const currenciesKeys = Object.keys(response);
+function currenciesArray(answer) {
+  return (dispatch) => {
+    const currenciesKeys = Object.keys(answer);
     const filterCurrencies = currenciesKeys.filter((
       currencyKey,
     ) => currencyKey !== 'USDT');
@@ -42,6 +41,7 @@ export function actionFetchCurrenciesData() {
     const CurrenciesData = await getAPI();
     console.log(CurrenciesData);
     dispatch(currenciesData(CurrenciesData));
+    dispatch(currenciesArray(CurrenciesData));
   };
 }
 
