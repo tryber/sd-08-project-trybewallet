@@ -21,8 +21,8 @@ class WalletHeader extends React.Component {
       .replace(',', '.')
       .split(' ');
     return (
-      <header>
-        <h1>TrybeWallet</h1>
+      <header role="banner">
+        <h1 title="TrybeWallet">TrybeWallet</h1>
         <div>
           <span data-testid="email-field">{email}</span>
           <strong>
@@ -31,7 +31,6 @@ class WalletHeader extends React.Component {
           </strong>
 
           <SelectExchange
-            title="moeda"
             data-testid="header-currency-field"
             name="currency-field"
             id="id-currency-field"
@@ -49,16 +48,18 @@ class WalletHeader extends React.Component {
   }
 }
 
-const mapStateToProps = (
+function mapStateToProps(
   { user: { email },
     wallet: { expenses, currencies, exchange: placeOfAcronym },
   },
-) => ({
-  email,
-  placeOfAcronym,
-  currencies,
-  expenses,
-});
+) {
+  return {
+    email,
+    placeOfAcronym,
+    currencies,
+    expenses,
+  };
+}
 
 function mapDispatchToProps(dispatch) {
   return {

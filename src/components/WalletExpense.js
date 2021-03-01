@@ -62,7 +62,6 @@ class WalletExpense extends Component {
         />
         <SelectExpense
           value={ method }
-          title="método de pagamento"
           data-testid="method-input"
           type="text"
           name="method"
@@ -71,7 +70,6 @@ class WalletExpense extends Component {
           onChange={ this.handleChange }
         />
         <SelectExpense
-          title="tag"
           data-testid="tag-input"
           type="text"
           name="tag"

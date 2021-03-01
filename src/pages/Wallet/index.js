@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { getCurrenciesSymbol } from '../../actions';
 import WalletHeader from '../../components/WalletHeader';
 import WalletExpense from '../../components/WalletExpense';
+import WalletExpenseForm from '../../components/WalletExpenseForm';
 import './style.css';
 
 class Wallet extends React.Component {
@@ -19,7 +20,8 @@ class Wallet extends React.Component {
       <div className="walletContainer">
         <WalletHeader />
         <WalletExpense />
-        ...
+        <WalletExpenseForm />
+
       </div>
     );
   }
