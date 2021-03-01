@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap");
 
 a {
-  color: #666666;
+  color: #666;
   font-family: Roboto;
   font-size: 14px;
   line-height: 1.7;
@@ -166,9 +166,6 @@ iframe {
 
 .wrap-header-wallet {
   background: #9152f8;
-  background: -webkit-linear-gradient(to top, #7579ff, #b224ef);
-  background: -o-linear-gradient(to top, #7579ff, #b224ef);
-  background: -moz-linear-gradient(to top, #7579ff, #b224ef);
   background: linear-gradient(to top, #7579ff, #b224ef);
   border-radius: 10px;
   height: 95px;
@@ -190,10 +187,6 @@ iframe {
   background-size: 150px 150px;
   border-radius: 50%;
   color: #333;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
   display: flex;
   font-size: 60px;
   height: 120px;
@@ -264,10 +257,6 @@ iframe {
   height: 2px;
   left: 0;
   position: absolute;
-
-  -webkit-transition: all 0.4s;
-  -o-transition: all 0.4s;
-  -moz-transition: all 0.4s;
   transition: all 0.4s;
   width: 0;
 }
@@ -282,9 +271,6 @@ iframe {
   padding-left: 5px;
   position: absolute;
   top: 6px;
-  -webkit-transition: all 0.4s;
-  -o-transition: all 0.4s;
-  -moz-transition: all 0.4s;
   transition: all 0.4s;
   width: 100%;
 }
@@ -322,10 +308,6 @@ iframe {
 }
 
 .container-header-wallet-form-btn {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -335,16 +317,9 @@ iframe {
 .header-wallet-form-btn {
   align-items: center;
   background: #9152f8;
-  background: -webkit-linear-gradient(to bottom, #7579ff, #b224ef);
-  background: -o-linear-gradient(to bottom, #7579ff, #b224ef);
-  background: -moz-linear-gradient(to bottom, #7579ff, #b224ef);
   background: linear-gradient(to bottom, #7579ff, #b224ef);
   border-radius: 25px;
   color: #555;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
   display: flex;
   font-family: Roboto;
   font-size: 18px;
@@ -355,9 +330,6 @@ iframe {
   min-width: 120px;
   padding: 0 20px;
   position: relative;
-  -webkit-transition: all 0.4s;
-  -o-transition: all 0.4s;
-  -moz-transition: all 0.4s;
   transition: all 0.4s;
   z-index: 1;
 }
@@ -372,10 +344,6 @@ iframe {
   opacity: 1;
   position: absolute;
   top: 0;
-
-  -webkit-transition: all 0.4s;
-  -o-transition: all 0.4s;
-  -moz-transition: all 0.4s;
   transition: all 0.4s;
   width: 100%;
   z-index: -1;
@@ -417,15 +385,7 @@ iframe {
   right: 0px;
   text-align: left;
   top: 50%;
-  -webkit-transform: translateY(-50%);
-  -moz-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  -o-transform: translateY(-50%);
   transform: translateY(-50%);
-
-  -webkit-transition: opacity 0.4s;
-  -o-transition: opacity 0.4s;
-  -moz-transition: opacity 0.4s;
   transition: opacity 0.4s;
 
   visibility: hidden;
@@ -441,10 +401,6 @@ iframe {
   position: absolute;
   right: 5px;
   top: 50%;
-  -webkit-transform: translateY(-50%);
-  -moz-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  -o-transform: translateY(-50%);
   transform: translateY(-50%);
 }
 

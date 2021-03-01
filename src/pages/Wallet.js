@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import './Wallet.css';
-import HearderWallet from './HearderWallet';
+import HeaderWallet from './HeaderWallet';
 import MenuWallet from './MenuWallet';
 import { fetchAPI } from '../actions/wallet';
 
@@ -73,7 +73,7 @@ class Wallet extends Component {
     return (
       <div className="limiter-wallet">
         <div className="container-wallet container-wallet-bg">
-          <HearderWallet />
+          <HeaderWallet />
           <MenuWallet />
           <div className="wrap-wallet">
             <form name="f1" className="wallet-form validate-form">

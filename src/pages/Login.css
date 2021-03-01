@@ -1,15 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap");
 
 a {
-  color: #666666;
+  color: #666;
   font-family: Roboto;
   font-size: 14px;
   line-height: 1.7;
   margin: 0px;
   transition: all 0.4s;
-  -webkit-transition: all 0.4s;
-  -o-transition: all 0.4s;
-  -moz-transition: all 0.4s;
 }
 
 a:focus {
@@ -142,10 +139,6 @@ iframe {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -170,9 +163,6 @@ iframe {
 
 .wrap-login {
   background: #9152f8;
-  background: -webkit-linear-gradient(to top, #7579ff, #b224ef);
-  background: -o-linear-gradient(to top, #7579ff, #b224ef);
-  background: -moz-linear-gradient(to top, #7579ff, #b224ef);
   background: linear-gradient(to top, #7579ff, #b224ef);
   border-radius: 10px;
   overflow: hidden;
@@ -192,10 +182,6 @@ iframe {
   background-size: 150px 150px;
   border-radius: 50%;
   color: #333333;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
   display: flex;
   font-size: 60px;
   height: 150px;
@@ -252,9 +238,6 @@ iframe {
   height: 2px;
   left: 0;
   position: absolute;
-  -webkit-transition: all 0.4s;
-  -o-transition: all 0.4s;
-  -moz-transition: all 0.4s;
   transition: all 0.4s;
   width: 0;
 }
@@ -270,9 +253,6 @@ iframe {
   padding-left: 5px;
   position: absolute;
   top: 6px;
-  -webkit-transition: all 0.4s;
-  -o-transition: all 0.4s;
-  -moz-transition: all 0.4s;
   transition: all 0.4s;
   width: 100%;
 }
@@ -309,56 +289,7 @@ iframe {
   padding-top: 5px;
 }
 
-.input-checkbox {
-  display: none;
-}
-
-.label-checkbox {
-  color: #fff;
-  cursor: pointer;
-  display: block;
-  font-family: Roboto;
-  font-size: 14px;
-  line-height: 1.2;
-  padding-left: 26px;
-  position: relative;
-}
-
-.label-checkbox::before {
-  align-items: center;
-  background: #fff;
-  border-radius: 2px;
-  color: transparent;
-  content: "\f26b";
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-  font-family: Material-Design-Iconic-Font;
-  font-size: 13px;
-  height: 16px;
-  justify-content: center;
-  left: 0;
-  position: absolute;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  -moz-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  -o-transform: translateY(-50%);
-  transform: translateY(-50%);
-  width: 16px;
-}
-
-.input-checkbox:checked + .label-checkbox::before {
-  color: #555555;
-}
-
 .container-login-form-btn {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -368,16 +299,9 @@ iframe {
 .login-form-btn {
   align-items: center;
   background: #9152f8;
-  background: -webkit-linear-gradient(to bottom, #7579ff, #b224ef);
-  background: -o-linear-gradient(to bottom, #7579ff, #b224ef);
-  background: -moz-linear-gradient(to bottom, #7579ff, #b224ef);
   background: linear-gradient(to bottom, #7579ff, #b224ef);
   border-radius: 25px;
   color: #555555;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
   display: flex;
   font-family: Roboto;
   font-size: 18px;
@@ -388,9 +312,6 @@ iframe {
   min-width: 120px;
   padding: 0 20px;
   position: relative;
-  -webkit-transition: all 0.4s;
-  -o-transition: all 0.4s;
-  -moz-transition: all 0.4s;
   transition: all 0.4s;
   z-index: 1;
 }
@@ -405,9 +326,6 @@ iframe {
   opacity: 1;
   position: absolute;
   top: 0;
-  -webkit-transition: all 0.4s;
-  -o-transition: all 0.4s;
-  -moz-transition: all 0.4s;
   transition: all 0.4s;
   width: 100%;
   z-index: -1;
@@ -447,14 +365,7 @@ iframe {
   right: 0px;
   text-align: left;
   top: 50%;
-  -webkit-transform: translateY(-50%);
-  -moz-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  -o-transform: translateY(-50%);
   transform: translateY(-50%);
-  -webkit-transition: opacity 0.4s;
-  -o-transition: opacity 0.4s;
-  -moz-transition: opacity 0.4s;
   transition: opacity 0.4s;
   visibility: hidden;
 }
@@ -468,10 +379,6 @@ iframe {
   position: absolute;
   right: 5px;
   top: 50%;
-  -webkit-transform: translateY(-50%);
-  -moz-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  -o-transform: translateY(-50%);
   transform: translateY(-50%);
 }
 

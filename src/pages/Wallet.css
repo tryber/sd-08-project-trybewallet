@@ -8,9 +8,6 @@ a {
   line-height: 1.7;
   margin: 0px;
   transition: all 0.4s;
-  -webkit-transition: all 0.4s;
-  -o-transition: all 0.4s;
-  -moz-transition: all 0.4s;
 }
 .txt1 {
   color: #e5e5e5;
@@ -33,10 +30,6 @@ a {
 
   background-repeat: no-repeat;
   background-size: cover;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -62,9 +55,6 @@ a {
 .wrap-wallet {
   /* padding: 55px 55px 37px 55px; */
   background: #9152f8;
-  background: -webkit-linear-gradient(to top, #7579ff, #b224ef);
-  background: -o-linear-gradient(to top, #7579ff, #b224ef);
-  background: -moz-linear-gradient(to top, #7579ff, #b224ef);
   background: linear-gradient(to top, #7579ff, #b224ef);
   border-radius: 10px;
   height: 55vh;
