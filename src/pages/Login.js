@@ -14,7 +14,7 @@ class Login extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
-    this.emailValidation = this.emailValidation.bind(this);
+    this.validationEmail = this.validationEmail.bind(this);
   }
 
   handleChange(event) {
@@ -29,7 +29,7 @@ class Login extends React.Component {
     walletLogin(email);
   }
 
-  emailValidation() {
+  validationEmail() {
     const { email, password } = this.state;
     const regexEmail = new RegExp('[a-zA-Z0-9.]+@[a-zA-Z0-9]+.[a-zA-Z0-9]+$', 'gm');
     const passwordLength = 6;
