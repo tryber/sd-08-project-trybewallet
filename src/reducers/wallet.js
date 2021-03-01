@@ -1,15 +1,10 @@
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
 const InitialState = {
-  user: {
-    email: '',
-  },
-  wallet: {
-    currencies: [],
-    expenses: [],
-  },
+  currencies: [],
+  expenses: [],
 };
 // moedas da carteira
-export const inwalletReducer = (state = InitialState, action) => {
+export default function inwalletReducer(state = InitialState, action) {
   switch (action.type) {
   case 'MOEDA':
     return {
@@ -18,15 +13,6 @@ export const inwalletReducer = (state = InitialState, action) => {
         currencies: [action.currencies],
       },
     };
-
-  default:
-    return state;
-  }
-};
-
-// se SAIR dinheiro na carteira
-export const outwalletReducer = (state = 'Initial State', action) => {
-  switch (action.type) {
   case 'MONEI_OUT':
     return {
       ...state,
@@ -38,4 +24,4 @@ export const outwalletReducer = (state = 'Initial State', action) => {
   default:
     return state;
   }
-};
+}
