@@ -21,7 +21,7 @@ class Header extends Component {
 }
 
 Header.propTypes = {
-  email: PropTypes.string.isRequered,
+  email: PropTypes.string.isRequired,
 };
 
 const mapStateToPros = ({ user }) => ({ email: user.email });
