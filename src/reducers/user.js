@@ -4,22 +4,22 @@ const INITIAL_STATE = {
   },
   wallet: {
     currencies: [],
-    expenses: []
-  }
-}
+    expenses: [],
+  },
+};
 
 const user = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case 'GET_LOGIN':
-      return {
-        ...state,
-        user: {
-          email: action.payload.email,
-        }
-      };
-    default:
-      return state;
+  case 'GET_LOGIN':
+    return {
+      ...state,
+      user: {
+        email: action.payload.email,
+      },
+    };
+  default:
+    return state;
   }
-}
+};
 
 export default user;
