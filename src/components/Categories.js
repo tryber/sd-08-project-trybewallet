@@ -24,6 +24,7 @@ Categories.propTypes = {
   datatestid: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
 };
 
 export default Categories;
