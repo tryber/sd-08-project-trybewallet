@@ -73,6 +73,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 Table.propTypes = {
   expenses: PropTypes.arrayOf(PropTypes.object),
+  deleteExpense: PropTypes.func.isRequired,
 };
 
 Table.defaultProps = {
