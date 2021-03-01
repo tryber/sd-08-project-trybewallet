@@ -14,7 +14,14 @@ export function totalMoneyInTheWallet(expensesData, placeOfAcronym) {
   const combineExpenseValue = valorExpenses
     .reduce((acc, crr) => acc + crr, 0);
 
-  return formatMoney(combineExpenseValue, placeOfAcronym);
+  const symbol = formatMoney(
+    combineExpenseValue, placeOfAcronym,
+  );
+
+  return {
+    symbol,
+    combineExpenseValue,
+  };
 }
 
 export function convertedValueExchange(exchangeRates, currency, value) {

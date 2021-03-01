@@ -17,20 +17,19 @@ class WalletHeader extends React.Component {
       addCurrentExchange,
     } = this.props;
 
-    const walletTotal = totalMoneyInTheWallet(expenses, placeOfAcronym)
-      .replace(',', '.')
-      .split(' ');
+    const {
+      symbol, combineExpenseValue,
+    } = totalMoneyInTheWallet(expenses, placeOfAcronym);
+    const symbolCash = symbol.split(' ')[0];
+    const totalCash = ((combineExpenseValue / 100) * 100).toFixed(2);
     return (
       <header>
         <h1>TrybeWallet</h1>
         <div>
           <span data-testid="email-field">{email}</span>
           <strong>
-            {`Despesa Total: ${walletTotal[0]}` }
-            <span data-testid="total-field">
-              {parseFloat(walletTotal[1]) === 0.00
-                ? 0 : walletTotal[1]}
-            </span>
+            {`Despesa Total: ${symbolCash}` }
+            <span data-testid="total-field">{totalCash}</span>
           </strong>
 
           <SelectExchange
