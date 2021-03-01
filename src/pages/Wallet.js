@@ -87,7 +87,7 @@ class Wallet extends React.Component {
     const listOfCurrencies = exchangeValues && exchangeValues.length && exchangeValues[0];
     const arrayOfCurrencies = Object.keys(listOfCurrencies);
     return (
-      <label htmlFor="currency-input">
+      <label htmlFor="currency">
         Moeda:
         <select
           id="currency"
@@ -108,7 +108,7 @@ class Wallet extends React.Component {
 
   fillPaymentOption(paymentType, onSelectedPayment) {
     return (
-      <label htmlFor="genre-input-label">
+      <label htmlFor="method">
         Método de Pagamento:
         <select
           id="method"
@@ -127,7 +127,7 @@ class Wallet extends React.Component {
 
   fillTagOption(tagType, onSelectedTag) {
     return (
-      <label htmlFor="tag-input">
+      <label htmlFor="tag">
         Tag:
         <select
           id="tag"
@@ -164,10 +164,8 @@ class Wallet extends React.Component {
 
   render() {
     const { value, currency, method, tag, description } = this.state;
-    const { isFetching } = this.props;
-    return isFetching ? (
-      <p> loading </p>
-    ) : (
+    // const { isFetching } = this.props;
+    return (
       <div>
         <header>
           <Header />
@@ -194,13 +192,11 @@ Wallet.propTypes = {
   fetchCurrencies: PropTypes.func.isRequired,
   addRegister: PropTypes.func.isRequired,
   allExpenses: PropTypes.arrayOf(PropTypes.object).isRequired,
-  isFetching: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   userInfos: state.user,
   exchangeValues: state.wallet.currencies,
-  isFetching: state.wallet.isFetching,
   allExpenses: state.wallet.expenses,
 });
 
