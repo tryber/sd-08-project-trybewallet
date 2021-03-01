@@ -16,12 +16,20 @@ body {
 }
 
 .login {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: rgb(0, 0, 0) 0 0 10px 1px;
   display: flex;
   flex-direction: column;
+  padding: 20px;
 }
 
 .login input {
+  border: 1px solid grey;
+  border-radius: 5px;
   height: 25px;
+  margin-bottom: 5px;
+  padding: 0 10px;
   width: 250px;
 }
 
@@ -31,6 +39,7 @@ body {
   cursor: pointer;
   font-size: 20px;
   font-weight: 200;
+  margin-bottom: 20px;
   overflow: hidden;
   padding: 5px;
 }
@@ -62,4 +71,18 @@ body {
 
 .login button:disabled:hover:before {
   height: 0%;
+}
+
+.title-container {
+  text-align: center;
+}
+
+.title-container h1 p {
+  width: 100%;
+}
+
+.title-container h1 {
+  font-family: MuseoModerno, cursive;
+  font-size: 45px;
+  padding: 10px 0;
 }

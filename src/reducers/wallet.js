@@ -1,20 +1,40 @@
-// Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
-const initialState = {
+import { Types } from '../actions/wallet';
+
+const INITIAL_STATE = {
+  currencies: [],
   expenses: [],
+  idCount: 0,
 };
-const expensesReducer = (state = initialState, action) => {
+
+const saveCurrencies = (state = INITIAL_STATE, action) => ({
+  ...state, currencies: action.payload,
+});
+
+const addExpense = (state = INITIAL_STATE, action) => {
+  const { idCount, expenses } = state;
+  const newExpense = {
+    id: idCount,
+    ...action.payload,
+  };
+  return {
+    ...state,
+    expenses: [...expenses, newExpense],
+    idCount: idCount + 1,
+  };
+};
+
+const removeExpense = (state = INITIAL_STATE, action) => ({
+  ...state,
+  expenses: state.expenses.filter((expense) => expense.id !== action.payload),
+});
+
+const wallet = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-  case 'REQUEST_API':
-    return ({ ...state, isFetching: true });
-  case 'GET_EXPENSES':
-    return { ...state,
-      expenses: [...state.expenses, action.payload],
-      isFetching: false };
-  case 'FAILED_REQUEST':
-    return { ...state, error: action.payload, isFetching: false };
-  default:
-    return state;
+  case Types.SAVE_CURRENCIES: return saveCurrencies(state, action);
+  case Types.ADD_EXPENSE: return addExpense(state, action);
+  case Types.REMOVE_EXPENSE: return removeExpense(state, action);
+  default: return state;
   }
 };
 
-export default expensesReducer;
+export default wallet;
