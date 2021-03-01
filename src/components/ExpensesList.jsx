@@ -7,11 +7,48 @@ class ExpensesList extends React.Component {
   constructor() {
     super();
     this.deleteClick = this.deleteClick.bind(this);
+    this.renderExpense = this.renderExpense.bind(this);
   }
 
   deleteClick(index) {
     const { expenses, updateExpenses } = this.props;
     updateExpenses(expenses.filter((expense, expenseIndex) => expenseIndex !== index));
+  }
+
+  renderExpense(expense, index) {
+    return (
+      <tr key={ index }>
+        <td>{expense.description}</td>
+        <td>{expense.tag}</td>
+        <td>{expense.method}</td>
+        <td>{expense.value}</td>
+        <td>{expense.exchangeRates[expense.currency].name}</td>
+        <td>
+          {parseFloat(expense.exchangeRates[expense.currency].ask)
+            .toFixed(2)}
+        </td>
+        <td>
+          {expense.value
+          * parseFloat(expense.exchangeRates[expense.currency].ask)}
+        </td>
+        <td>Real</td>
+        <td>
+          <button
+            type="button"
+            onClick={ () => this.editClick(index) }
+          >
+            Edit
+          </button>
+          <button
+            type="button"
+            data-testid="delete-btn"
+            onClick={ () => this.deleteClick(index) }
+          >
+            X
+          </button>
+        </td>
+      </tr>
+    );
   }
 
   render() {
@@ -32,33 +69,7 @@ class ExpensesList extends React.Component {
           </tr>
         </thead>
         <tbody>
-          {expenses.map((expense, index) => (
-            <tr key={ index }>
-              <td>{expense.description}</td>
-              <td>{expense.tag}</td>
-              <td>{expense.method}</td>
-              <td>{expense.value}</td>
-              <td>{expense.exchangeRates[expense.currency].name}</td>
-              <td>
-                {parseFloat(expense.exchangeRates[expense.currency].ask)
-                  .toFixed(2)}
-              </td>
-              <td>
-                {expense.value
-                * parseFloat(expense.exchangeRates[expense.currency].ask)}
-              </td>
-              <td>Real</td>
-              <td>
-                <button
-                  type="button"
-                  onClick={ () => this.editClick(index) }
-                >
-                  Edit
-                </button>
-                <button type="button" onClick={ () => this.deleteClick(index) }>X</button>
-              </td>
-            </tr>
-          ))}
+          {expenses.map(this.renderExpense)}
         </tbody>
       </table>
     );
