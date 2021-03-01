@@ -88,6 +88,8 @@ class WalletExpense extends Component {
       <main className="walletExpense">
         <Input
           data-testid="value-input"
+          pattern="[0-9]+([\.,][0-9]+)?"
+          step="0.01"
           value={ value }
           type="number"
           name="value"
