@@ -13,7 +13,7 @@ import Currency from './expanseForm/Currency';
 import Method from './expanseForm/Method';
 import Tag from './expanseForm/Tag';
 import Description from './expanseForm/Description';
-import ExpenseTable from './ExpenseTable';
+// import ExpenseTable from './ExpenseTable';
 
 import './ExpenseForm.css';
 
@@ -30,7 +30,7 @@ class expenseForm extends React.Component {
       method: 'Dinheiro',
       tag: 'Alimentação',
       description: '',
-      // currentExchange: {},
+      currentRate: {},
     };
   }
 
@@ -47,9 +47,9 @@ class expenseForm extends React.Component {
 
   async handleSubmit(event) {
     event.preventDefault();
-    const { fetchCurrenciesData } = this.props;
+    const { fetchCurrenciesData, addExpense } = this.props;
     await fetchCurrenciesData(getAPI());
-    // addExpense(this.state);
+    addExpense(this.state);
   }
 
   render() {
@@ -77,7 +77,7 @@ class expenseForm extends React.Component {
             Adicionar Despesa
           </button>
         </form>
-        <ExpenseTable />
+        {/* <ExpenseTable /> */}
       </div>
     );
   }
@@ -98,5 +98,5 @@ export default connect(mapStateToProps, mapDispatchToProps)(expenseForm);
 expenseForm.propTypes = {
   fetchCurrencies: PropTypes.func.isRequired,
   fetchCurrenciesData: PropTypes.func.isRequired,
-  // addExpense: PropTypes.func.isRequired,
+  addExpense: PropTypes.func.isRequired,
 };

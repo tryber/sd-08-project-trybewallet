@@ -11,7 +11,7 @@ class Tag extends React.Component {
         <select
           name="tag"
           data-testid="tag-input"
-          id={ tag }
+          id="tag"
           value={ tag }
           onChange={ onChange }
         >

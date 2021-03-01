@@ -11,7 +11,7 @@ class Method extends React.Component {
         <select
           name="method"
           data-testid="method-input"
-          id={ method }
+          id="method"
           value={ method }
           onChange={ onChange }
         >

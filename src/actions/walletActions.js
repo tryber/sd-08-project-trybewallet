@@ -43,9 +43,9 @@ export function actionFetchCurrenciesData(dataAPI) {
   };
 }
 
-export function actionAddExpenses(expenses) {
+export function actionAddExpenses(expense) {
   return {
     type: ADD_EXPENSES,
-    expenses,
+    expense,
   };
 }

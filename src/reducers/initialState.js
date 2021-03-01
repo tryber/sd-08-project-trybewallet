@@ -2,9 +2,9 @@ const INITIAL_STATE = {
   email: '',
   password: '',
   currencies: [],
-  currenciesData: {},
+  exchangeRates: {},
   expenses: [],
-  idExpense: 0,
+  total: 0,
   exchangeField: 'BLR',
 };
 

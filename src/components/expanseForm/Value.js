@@ -23,6 +23,6 @@ class Value extends React.Component {
 export default Value;
 
 Value.propTypes = {
-  value: PropTypes.number.isRequired,
+  value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
 };

@@ -6,22 +6,22 @@ import './ExpenseTable.css';
 
 class ExpenseTable extends React.Component {
   render() {
-    const { tableData } = this.props;
+    const { expenses } = this.props;
     const tableHead = [
       'Descrição', 'Tag', 'Método de pagamento', 'Valor', 'Moeda', 'Câmbio utilizado',
       'Valor convertido', 'Moeda de conversão', 'Editar/Excluir',
     ];
     return (
-      <table className="expense-table">
-        <thead>
+      <div className="expense-table">
+        <div>
           {tableHead.map((tableKey) => (
-            <th className="title" key={ tableKey }>
+            <div className="title" key={ tableKey }>
               {tableKey}
-            </th>
+            </div>
           ))}
-        </thead>
-        {tableData.map((expense) => (
-          <tbody key={ expense.id }>
+        </div>
+        {expenses.map((expense) => (
+          <td key={ expense.id }>
             <td className="data">{expense.description}</td>
             <td className="data">{expense.tag}</td>
             <td className="data">{expense.method}</td>
@@ -40,19 +40,19 @@ class ExpenseTable extends React.Component {
             </td>
             <td className="data">Real</td>
             <td className="data"> </td>
-          </tbody>
+          </td>
         ))}
-      </table>
+      </div>
     );
   }
 }
 
 const mapStateToProps = (state) => ({
-  tableData: state.wallet.expenses,
+  expenses: state.wallet.expenses,
 });
 
 ExpenseTable.propTypes = {
-  tableData: PropTypes.arrayOf(PropTypes.string).isRequired,
+  expenses: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default connect(mapStateToProps, null)(ExpenseTable);

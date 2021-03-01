@@ -21,7 +21,18 @@ export default function wallet(state = INITIAL_STATE, action) {
   case ADD_EXPENSES:
     return {
       ...state,
-      expenses: [...action.expenses],
+      expenses: [
+        ...state.expenses,
+        {
+          id: state.expenses.length,
+          ...action.expense,
+          exchangeRates: [state.currenciesData],
+        },
+      ],
+      total:
+        state.total
+        + Number(action.expense.value)
+        * Number(state.currenciesData[action.expense.currency].ask),
     };
   default:
     return state;

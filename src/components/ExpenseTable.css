@@ -1,5 +1,5 @@
 .expense-table {
-  display: flex;
+  display: block;
   justify-content: center;
   padding: 15px;
 }
