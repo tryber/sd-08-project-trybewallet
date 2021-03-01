@@ -15,14 +15,14 @@ const expense = {
     { code: 'ETH' },
     { code: 'XRP' },
   ],
-  method: [{ name: 'Dinheiro' },
-    { name: 'Cartão de crédito' },
-    { name: 'Cartão de débito' }],
-  tag: [{ name: 'Alimentação' },
-    { name: 'Lazer' },
-    { name: 'Trabalho' },
-    { name: 'Transporte' },
-    { name: 'Saúde' }],
+  method: ['Dinheiro',
+    'Cartão de crédito',
+    'Cartão de débito'],
+  tag: ['Alimentação',
+    'Lazer',
+    'Trabalho',
+    'Transporte',
+    'Saúde'],
 };
 
 export default expense;
