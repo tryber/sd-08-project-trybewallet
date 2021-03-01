@@ -16,6 +16,7 @@ class CurrenciesSelection extends Component {
       <label htmlFor="currency">
         Moeda:
         <select
+          id="currency"
           name="currency"
           value={ value }
           onChange={ changeInput }

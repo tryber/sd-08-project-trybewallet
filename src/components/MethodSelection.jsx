@@ -9,6 +9,7 @@ class MethodSelection extends Component {
       <label htmlFor="method">
         Método de pagamento:
         <select
+          id="method"
           name="method"
           type="text"
           value={ value }

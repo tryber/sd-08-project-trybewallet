@@ -4,6 +4,8 @@ import {
   GET_EXCHANGE_RATES,
   CLEAR_INPUT_HANDLER,
   ADD_EXPENSES_INDEX,
+  SET_ADDITION,
+  EDIT_EXPENSE,
 } from '../actions/index';
 
 const INITIAL_STATE = {
@@ -16,6 +18,8 @@ const INITIAL_STATE = {
     tag: '',
     exchangeRates: {},
   }],
+  additionToExpenses: false,
+  editionOfExpense: false,
   error: '',
 };
 
@@ -46,6 +50,17 @@ export default function inputHandlerReducer(state = INITIAL_STATE, action) {
     };
   case CLEAR_INPUT_HANDLER:
     return INITIAL_STATE;
+  case SET_ADDITION:
+    return {
+      ...state,
+      additionToExpenses: !state.additionToExpenses,
+    };
+  case EDIT_EXPENSE:
+    return {
+      ...state,
+      handlingInputs: action.payload,
+      editionOfExpense: !state.editionOfExpense,
+    };
   default:
     return state;
   }

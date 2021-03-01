@@ -5,6 +5,9 @@ import fetchExchangeRatesAction from '../actions/requestExchangeRate';
 import addExpensesAction from '../actions/addExpenses';
 import clearInputHandlerAction from '../actions/clearInputHandler';
 import addExpensesIndexAction from '../actions/addExpensesIndex';
+import setAdditionAction from '../actions/setAddition';
+import aprovedEditionAction from '../actions/aprovedEdition';
+import editExpenseAction from '../actions/editExpense';
 
 class AddExpensesBtn extends Component {
   constructor() {
@@ -12,12 +15,21 @@ class AddExpensesBtn extends Component {
 
     this.handleClick = this.handleClick.bind(this);
     this.getLastExpenseId = this.getLastExpenseId.bind(this);
+    this.handleEdition = this.handleEdition.bind(this);
   }
 
-  componentDidUpdate(prevProps) {
-    const { handlingInputs, addExpenses, clearInputHandler, resetInputs } = this.props;
-    if (handlingInputs[0].exchangeRates !== prevProps.handlingInputs[0].exchangeRates
-      && handlingInputs[0].value !== '') {
+  componentDidUpdate() {
+    const {
+      handlingInputs,
+      addExpenses,
+      clearInputHandler,
+      resetInputs,
+      setAddition,
+      additionToExpenses,
+    } = this.props;
+
+    if (additionToExpenses) {
+      setAddition();
       addExpenses(handlingInputs);
       clearInputHandler();
       resetInputs();
@@ -36,16 +48,42 @@ class AddExpensesBtn extends Component {
     addExpensesIndex(newExpenseId);
   }
 
-  handleClick() {
+  async handleClick() {
     const {
       fetchExchangeRates,
+      setAddition,
     } = this.props;
 
-    fetchExchangeRates();
-    this.getLastExpenseId();
+    await fetchExchangeRates();
+    await this.getLastExpenseId();
+    await setAddition();
+  }
+
+  handleEdition() {
+    const { aprovedEdition, handlingInputs, resetInputs, editExpense } = this.props;
+    const INITIAL_VALUES = [{
+      id: '',
+      value: '',
+      description: '',
+      currency: '',
+      method: '',
+      tag: '',
+      exchangeRates: {},
+    }];
+
+    aprovedEdition(handlingInputs, handlingInputs[0].id);
+    resetInputs();
+    editExpense(INITIAL_VALUES);
   }
 
   render() {
+    const { editionOfExpense } = this.props;
+
+    if (editionOfExpense) {
+      return (
+        <button type="button" onClick={ this.handleEdition }>Editar despesa</button>
+      );
+    }
     return (
       <button type="button" onClick={ this.handleClick }>Adicionar despesa</button>
     );
@@ -55,6 +93,8 @@ class AddExpensesBtn extends Component {
 const mapStateToProps = (state) => ({
   expenses: state.wallet.expenses,
   handlingInputs: state.inputHandler.handlingInputs,
+  additionToExpenses: state.inputHandler.additionToExpenses,
+  editionOfExpense: state.inputHandler.editionOfExpense,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -62,6 +102,11 @@ const mapDispatchToProps = (dispatch) => ({
   addExpenses: (handlingInputs) => dispatch(addExpensesAction(handlingInputs)),
   addExpensesIndex: (newExpenseId) => dispatch(addExpensesIndexAction(newExpenseId)),
   clearInputHandler: () => dispatch(clearInputHandlerAction()),
+  setAddition: () => dispatch(setAdditionAction()),
+  aprovedEdition: (handlingInputs, id) => dispatch(
+    aprovedEditionAction(handlingInputs, id),
+  ),
+  editExpense: (editionExp) => dispatch(editExpenseAction(editionExp)),
 });
 
 AddExpensesBtn.propTypes = {
@@ -72,6 +117,11 @@ AddExpensesBtn.propTypes = {
   clearInputHandler: PropTypes.func.isRequired,
   resetInputs: PropTypes.func.isRequired,
   expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
+  setAddition: PropTypes.func.isRequired,
+  additionToExpenses: PropTypes.bool.isRequired,
+  editionOfExpense: PropTypes.bool.isRequired,
+  aprovedEdition: PropTypes.func.isRequired,
+  editExpense: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddExpensesBtn);

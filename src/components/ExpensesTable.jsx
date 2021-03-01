@@ -6,13 +6,13 @@ import TableBody from './TableBody';
 
 class ExpensesTable extends Component {
   render() {
-    const { expenses } = this.props;
+    const { expenses, editExpenseValue } = this.props;
     if (expenses.length > 0) {
       return (
         <div>
           <table>
             <TableHead />
-            <TableBody />
+            <TableBody editExpenseValue={ editExpenseValue } />
           </table>
         </div>
       );
@@ -28,6 +28,7 @@ const mapStateToProps = (state) => ({
 
 ExpensesTable.propTypes = {
   expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
+  editExpenseValue: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps)(ExpensesTable);

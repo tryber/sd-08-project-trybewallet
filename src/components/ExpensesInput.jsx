@@ -26,6 +26,7 @@ class ExpensesInput extends Component {
 
     this.changeInput = this.changeInput.bind(this);
     this.resetInputs = this.resetInputs.bind(this);
+    this.editExpenseValue = this.editExpenseValue.bind(this);
   }
 
   changeInput(event) {
@@ -47,6 +48,24 @@ class ExpensesInput extends Component {
     });
   }
 
+  editExpenseValue(editionExp) {
+    const {
+      value,
+      description,
+      currency,
+      method,
+      tag,
+    } = editionExp;
+
+    this.setState({
+      value,
+      description,
+      currency,
+      method,
+      tag,
+    });
+  }
+
   render() {
     const {
       value,
@@ -64,7 +83,7 @@ class ExpensesInput extends Component {
         <MethodSelection value={ method } changeInput={ this.changeInput } />
         <TagSelection value={ tag } changeInput={ this.changeInput } />
         <AddExpensesBtn resetInputs={ this.resetInputs } />
-        <ExpensesTable />
+        <ExpensesTable editExpenseValue={ this.editExpenseValue } />
       </>
     );
   }

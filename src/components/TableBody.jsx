@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import DeleteBtn from './DeleteBtn';
+import EditBtn from './EditBtn';
 
 class TableBody extends Component {
   constructor() {
@@ -49,7 +50,7 @@ class TableBody extends Component {
   }
 
   render() {
-    const { expenses } = this.props;
+    const { expenses, editExpenseValue } = this.props;
     return (
       <tbody>
         { expenses.map((exp) => (
@@ -63,7 +64,7 @@ class TableBody extends Component {
             <td role="cell">{ this.ConvertTheValue(exp) }</td>
             <td role="cell">{ this.CurrencyToConvert(exp) }</td>
             <td role="cell">
-              <button type="button">Editar</button>
+              <EditBtn id={ exp.id } editExpenseValue={ editExpenseValue } />
               <DeleteBtn id={ exp.id } />
             </td>
           </tr>
@@ -79,6 +80,7 @@ const mapStateToProps = (state) => ({
 
 TableBody.propTypes = {
   expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
+  editExpenseValue: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps)(TableBody);

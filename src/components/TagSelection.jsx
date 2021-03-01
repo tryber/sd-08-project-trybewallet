@@ -9,6 +9,7 @@ class TagSelection extends Component {
       <label htmlFor="tag">
         Categoria:
         <select
+          id="tag"
           name="tag"
           type="text"
           value={ value }
