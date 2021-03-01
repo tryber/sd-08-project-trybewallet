@@ -17,13 +17,13 @@ class WalletSpent extends Component {
         exchangeRates,
         currency,
       }, removeExpenseButton,
+      selectExpenseButton,
     } = this.props;
 
     const { name,
       ask,
       convertedValue,
     } = convertedValueExchange(exchangeRates, currency, value);
-
     return (
       <tr>
         <td>{id}</td>
@@ -41,6 +41,7 @@ class WalletSpent extends Component {
           <button
             type="button"
             data-testid="edit-btn"
+            onClick={ () => selectExpenseButton(id) }
           >
             EDITAR
           </button>
@@ -68,6 +69,7 @@ WalletSpent.propTypes = {
     ask: PropTypes.string.isRequired,
     exchangeRates: PropTypes.shape(PropTypes.string),
   }),
+  selectExpenseButton: PropTypes.func.isRequired,
   removeExpenseButton: PropTypes.func.isRequired,
 };
 
@@ -77,6 +79,7 @@ WalletSpent.defaultProps = {
 
 function mapDispatchToProps(dispatch) {
   return {
+    selectExpenseButton: bindActionCreators(wallet.selectExpense, dispatch),
     removeExpenseButton: bindActionCreators(wallet.removeExpense, dispatch),
   };
 }

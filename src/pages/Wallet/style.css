@@ -47,3 +47,13 @@
   margin-left: 0.5rem;
 }
 
+.walletExpenseEdit {
+  background-color: var(--blue);
+  padding: 1rem;
+}
+
+.walletExpense {
+  background-color: var(--blue-twitter);
+  padding: 1rem;
+}
+

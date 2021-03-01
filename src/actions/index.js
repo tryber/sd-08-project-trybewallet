@@ -7,6 +7,8 @@ export const ADD_EXPENSE = 'ADD_EXPENSE';
 export const ADD_CURRENCIES = 'ADD_CURRENCIES';
 export const ADD_EXCHANGE = 'ADD_EXCHANGE';
 export const REMOVE_EXPENSE = 'REMOVE_EXPENSE';
+export const SELECT_EXPENSE = ' SELECT_EXPENSE';
+export const EDIT_EXPENSE = ' EDIT_EXPENSE';
 
 export const user = {
   login: (payload) => ({ type: LOGIN, payload }),
@@ -28,6 +30,14 @@ export const wallet = {
   }),
   removeExpense: (payload) => ({
     type: REMOVE_EXPENSE,
+    payload,
+  }),
+  selectExpense: (payload) => ({
+    type: SELECT_EXPENSE,
+    payload,
+  }),
+  editExpense: (payload) => ({
+    type: EDIT_EXPENSE,
     payload,
   }),
 };

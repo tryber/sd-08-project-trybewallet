@@ -8,6 +8,7 @@ import WalletHeader from '../../components/WalletHeader';
 import WalletExpense from '../../components/WalletExpense';
 import WalletExpenseForm from '../../components/WalletExpenseForm';
 import './style.css';
+import WalletExpenseEdit from '../../components/WalletExpenseEdit';
 
 class Wallet extends React.Component {
   componentDidMount() {
@@ -16,10 +17,13 @@ class Wallet extends React.Component {
   }
 
   render() {
+    const { isExpenseEdit } = this.props;
     return (
       <div className="walletContainer">
         <WalletHeader />
-        <WalletExpense />
+        {isExpenseEdit && <WalletExpenseEdit />}
+        {!isExpenseEdit && <WalletExpense />}
+
         <WalletExpenseForm />
 
       </div>
@@ -29,9 +33,13 @@ class Wallet extends React.Component {
 function mapDispatchToProps(dispatch) {
   return { fetchCurrenciesSymbol: bindActionCreators(getCurrenciesSymbol, dispatch) };
 }
+function mapStateToProps({ wallet: { editExpense, isExpenseEdit } }) {
+  return { editExpense, isExpenseEdit };
+}
 
 Wallet.propTypes = {
   fetchCurrenciesSymbol: PropTypes.func.isRequired,
+  isExpenseEdit: PropTypes.bool.isRequired,
 };
 
-export default connect(null, mapDispatchToProps)(Wallet);
+export default connect(mapStateToProps, mapDispatchToProps)(Wallet);
