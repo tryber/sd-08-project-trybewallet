@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import WalletHeader from '../components/WalletHeader';
 import { WalletForms } from '../components/WalletForms';
 import { addExpense, fetchCurrencies } from '../actions/wallet';
+import WalletTable from '../components/WalletTable';
 
 class Wallet extends React.Component {
   constructor(props) {
@@ -84,6 +85,7 @@ class Wallet extends React.Component {
           tag={ tag }
           description={ description }
         />
+        <WalletTable />
       </section>);
   }
 }
