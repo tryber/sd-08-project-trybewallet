@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import loginUser from '../actions/index';
 
@@ -10,6 +11,7 @@ class Login extends React.Component {
     this.state = {
       email: '',
       password: '',
+      loginConfirm: false,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -39,11 +41,14 @@ class Login extends React.Component {
     const { clickLogin } = this.props;
     const { email } = this.state;
     clickLogin(email);
+    this.setState({ loginConfirm: true });
     // console.log('teste submit');
   }
 
   render() {
-    const { email, password } = this.state;
+    const { email, password, loginConfirm } = this.state;
+
+    if (loginConfirm) return <Redirect to="/carteira" />;
     return (
       <form
         onSubmit={ this.formSubmit }
