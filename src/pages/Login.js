@@ -2,7 +2,8 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { Creators as UserActions } from '../actions';
+import PropTypes from 'prop-types';
+import { Creators as Actions } from '../actions';
 
 const fieldsValidation = {
   email: (email) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email),
@@ -67,6 +68,10 @@ class Login extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => bindActionCreators(UserActions, dispatch);
+Login.propTypes = {
+  saveEmail: PropTypes.func.isRequired,
+};
+
+const mapDispatchToProps = (dispatch) => bindActionCreators(Actions, dispatch);
 
 export default connect(null, mapDispatchToProps)(Login);
