@@ -78,6 +78,6 @@ label {
   padding: 5px;
 }
 
-select, textarea {
+select , textarea {
   margin-left: 10px;
 }
