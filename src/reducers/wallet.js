@@ -2,6 +2,7 @@
 const initialState = {
   currencies: [],
   expenses: [],
+  total: 0,
 };
 
 export default function walletReducer(state = initialState, action) {
