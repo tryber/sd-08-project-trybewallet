@@ -29,8 +29,10 @@ class Login extends React.Component {
   verifyInputs() {
     const { email, password } = this.state;
 
+    const FIVE = 5
+
     if (email.match(/^\w{3,}@\w+\.\w{2,6}(\.\w{2})?[^\s+]$/gm)
-    && password.length >= 5) {
+    && password.length >= FIVE) {
       console.log('foi');
       this.setState({
         button: false,
@@ -44,6 +46,8 @@ class Login extends React.Component {
   }
 
   render() {
+    const { saveEmail } = this.props
+    const { email, password, button } = this.state
     return (
       <div>
         <h1>
@@ -57,7 +61,7 @@ class Login extends React.Component {
             data-testid="email-input"
             placeholder="email"
             required
-            value={ this.state.email }
+            value={ email }
             onChange={ this.handleChange }
           />
         </div>
@@ -68,14 +72,14 @@ class Login extends React.Component {
             type="password"
             data-testid="password-input"
             placeholder="senha"
-            value={ this.state.password }
+            value={ password }
             onChange={ this.handleChange }
           />
         </div>
         <Link to="/carteira">
           <button
-            disabled={ this.state.button }
-            onClick={ this.props.saveEmail }
+            disabled={ button }
+            onClick={ saveEmail }
             type="button"
           >
             Entrar
