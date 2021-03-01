@@ -5,11 +5,12 @@ class Login extends React.Component {
     super(props);
 
     this.state = {
-      email:'',
-      password:'',
+      email: '',
+      password: '',
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.formsCheck = this.formsCheck.bind(this);
   }
 
   handleChange({ target }) {
@@ -19,10 +20,26 @@ class Login extends React.Component {
     });
   }
 
+  formsCheck() {
+    const { email, password } = this.state;
+    const passwordMin = 6;
+    if (password.length < passwordMin) return true;
+    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) return true;
+    return false;
+  }
+  // https://formik.org/docs/guides/validation (Regex validação e-mail)
+
+  formSubmit(event) {
+    event.preventDefault();
+    console.log('teste submit');
+  }
+
   render() {
     const { email, password } = this.state;
     return (
-      <form>
+      <form
+        onSubmit={ this.formSubmit }
+      >
         <h2>Login</h2>
         <label htmlFor="email">
           E-mail:
@@ -45,6 +62,7 @@ class Login extends React.Component {
           />
         </label>
         <button
+          disabled={ this.formsCheck() }
           type="submit"
         >
           Entrar
