@@ -1,17 +1,16 @@
-@import url("https://fonts.googleapis.com/css2?family='Roboto':wght@400;500;700;900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family="Roboto":wght@400;500;700;900&display=swap');
 
 a {
   color: #666;
-  font-family: 'Roboto';
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
   font-size: 14px;
   line-height: 1.7;
-  margin: 0px;
   transition: all 0.4s;
 }
 
 .txt1 {
   color: #e5e5e5;
-  font-family: 'Roboto';
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
   font-size: 13px;
   line-height: 1.5;
 }
@@ -53,7 +52,6 @@ a {
 }
 
 .wrap-wallet {
-  background: #9152f8;
   background: linear-gradient(to top, #7579ff, #b224ef);
   border-radius: 10px;
   height: 55vh;
@@ -89,7 +87,6 @@ td {
 
 button.table-button {
   background-color: azure;
-
   justify-self: center;
   margin: 2%;
   width: 45%;
