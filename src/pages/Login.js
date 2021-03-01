@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import loginUser from '../actions/index';
 
 class Login extends React.Component {
@@ -13,6 +14,7 @@ class Login extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.formsCheck = this.formsCheck.bind(this);
+    this.formSubmit = this.formSubmit.bind(this);
   }
 
   handleChange({ target }) {
@@ -77,6 +79,10 @@ class Login extends React.Component {
     );
   }
 }
+
+Login.propTypes = {
+  clickLogin: PropTypes.func.isRequired,
+};
 
 const mapDispatchToProps = (dispatch) => ({
   clickLogin: (email) => dispatch(loginUser(email)),
