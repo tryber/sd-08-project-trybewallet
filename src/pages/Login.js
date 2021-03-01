@@ -31,7 +31,6 @@ class Login extends React.Component {
     const { email, password } = this.state;
 
     const FIVE = 5;
-
     if (email.match(/^\w{3,}@\w+\.\w{2,6}(\.\w{2})?[^\s+]$/gm)
     && password.length >= FIVE) {
       this.setState({
