@@ -4,8 +4,8 @@
 }
 
 body {
-  background: rgb(20, 20, 20);
-  overflow-x: hidden;
+  background: rgb(20,20,20);
+  overflow: hidden;
   width: 100vw;
 }
 

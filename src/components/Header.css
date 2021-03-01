@@ -1,6 +1,6 @@
 .header {
   align-items: center;
-  background-image: linear-gradient(white, white, white, grey);
+  background-image: linear-gradient(white, white, white, rgb(95, 230, 158));
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;

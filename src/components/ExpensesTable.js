@@ -6,6 +6,8 @@ import { Creators as WalletActions } from '../actions/wallet';
 
 import expenseType from '../types';
 
+import './ExpensesTable.css';
+
 class ExpensesTable extends Component {
   renderExpenseRow(expense) {
     const { removeExpense } = this.props;
@@ -39,8 +41,9 @@ class ExpensesTable extends Component {
   render() {
     const { expenses } = this.props;
     return (
-      <div className="">
-        <table className="">
+      <div className="table-body">
+        <div className="fundo-verde" />
+        <table className="table">
           <thead>
             <tr>
               <th>Descrição</th>

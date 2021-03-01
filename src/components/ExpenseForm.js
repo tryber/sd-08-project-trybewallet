@@ -38,6 +38,7 @@ class ExpenseForm extends Component {
   renderValueInput(value) {
     return (
       <input
+        step="0.01"
         type="number"
         value={ value }
         name="value"
