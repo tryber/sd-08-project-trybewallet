@@ -5,6 +5,7 @@ const REQUEST_CURRENCY = 'REQUEST_CURRENCY';
 const GET_CURRENCY = 'GET_CURRENCY';
 const FAILED_REQUEST = 'FAILED_REQUEST';
 const SAVE_EXPENSE = 'SAVE_EXPENSE';
+const REMOVE_EXPENSE = 'REMOVE_EXPENSE';
 
 export const userInfo = (email) => ({
   type: USER_INFO,
@@ -40,4 +41,9 @@ export const fetchCurrencies = () => async (dispatch) => {
 export const saveExpense = (expenses) => ({
   type: SAVE_EXPENSE,
   expenses,
+});
+
+export const removeExpense = (id) => ({
+  type: REMOVE_EXPENSE,
+  id,
 });
