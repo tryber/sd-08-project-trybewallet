@@ -72,7 +72,7 @@ class expenseForm extends React.Component {
             type="button"
             onClick={ this.handleSubmit }
           >
-            Adicionar Despesa
+            Adicionar despesa
           </button>
         </form>
         {/* <ExpenseTable /> */}
