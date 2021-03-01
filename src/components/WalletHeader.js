@@ -27,7 +27,10 @@ class WalletHeader extends React.Component {
           <span data-testid="email-field">{email}</span>
           <strong>
             {`Despesa Total: ${walletTotal[0]}` }
-            <span data-testid="total-field">{walletTotal[1]}</span>
+            <span data-testid="total-field">
+              {walletTotal[1] === '0.00'
+                ? 0 : walletTotal[1]}
+            </span>
           </strong>
 
           <SelectExchange
