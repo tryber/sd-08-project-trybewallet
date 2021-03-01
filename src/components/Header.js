@@ -38,7 +38,6 @@ class Header extends React.Component {
 const mapStateToProps = (state) => ({
   email: state.user.email,
   expenses: state.wallet.expenses,
-  // totalExpenses: state.wallet.totalExpenses,
 });
 
 export default connect(mapStateToProps)(Header);
@@ -46,10 +45,8 @@ export default connect(mapStateToProps)(Header);
 Header.propTypes = {
   email: PropTypes.string.isRequired,
   expenses: PropTypes.arrayOf(PropTypes.object),
-  // totalExpenses: PropTypes.number,
 };
 
 Header.defaultProps = {
   expenses: [],
-  // totalExpenses: 0,
 };

@@ -26,14 +26,7 @@ class AddSpend extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
-    // this.totalExpenses = this.totalExpenses.bind(this);
   }
-
-  // totalExpenses() {
-  //   const { totalExpenses, expenses } = this.props;
-  // console.log(totalExpenses);
-  //   return expenses.reduce((first, next) => first.value + next.value, totalExpenses);
-  // }
 
   handleChange({ target }) {
     this.setState({
@@ -59,7 +52,6 @@ class AddSpend extends Component {
       id: id + 1,
     });
     addExpense(expense);
-    // totalExpenses();
   }
 
   renderValueInput() {
@@ -92,7 +84,6 @@ class AddSpend extends Component {
 
   renderCurrencies() {
     const { currencies } = this.props;
-    // currencies.splice(1, 1);
     return (
       <select data-testid="currency-input" onChange={ this.handleChange } name="currency">
         {currencies.map((currency) => {
@@ -171,21 +162,12 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  // fetchCurrencies: () => dispatch(fetchCurrenciesAction()),
   addExpense: (expense) => dispatch(addExpenseAction(expense)),
-  // totalExpenses: (value) => dispatch(totalExpensesAction(value)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddSpend);
 
 AddSpend.propTypes = {
   currencies: PropTypes.arrayOf(String).isRequired,
-  // totalExpenses: PropTypes.func,
-  // expenses: PropTypes.arrayOf(PropTypes.object),
   addExpense: PropTypes.func.isRequired,
-};
-
-AddSpend.defaultProps = {
-  // expenses: [],
-  // totalExpenses: 0,
 };

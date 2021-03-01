@@ -5,13 +5,13 @@ import {
   CURRENCIES_SUCCESS,
   CURRENCIES_FAIL,
   ADD_EXPENSE,
-  TOTAL_EXPENSES,
+  // TOTAL_EXPENSES,
+  DEL_EXPENSE,
 } from '../actions';
 
 const initialStateWallet = {
   expenses: [],
   currencies: [],
-  totalExpenses: 0,
 };
 
 function wallet(state = initialStateWallet, action) {
@@ -36,9 +36,13 @@ function wallet(state = initialStateWallet, action) {
   case ADD_EXPENSE:
     return { ...state, expenses: [...state.expenses, action.expenses] };
 
-  case TOTAL_EXPENSES:
-    return { ...state, totalExpenses: state.totalExpenses + action.value };
-    // return { ...state, totalExpenses: console.log(state) };
+  case DEL_EXPENSE:
+    return {
+      ...state,
+      expenses: [
+        ...state.expenses.filter((expense) => expense.id !== action.id),
+      ],
+    };
 
   default:
     return state;

@@ -39,8 +39,8 @@ export const addExpense = (expenses) => ({
   expenses,
 });
 
-export const TOTAL_EXPENSES = 'TOTAL_EXPENSES';
-export const totalExpenses = (total) => ({
-  type: TOTAL_EXPENSES,
-  total,
+export const DEL_EXPENSE = 'DEL_EXPENSE';
+export const delExpense = (id) => ({
+  type: DEL_EXPENSE,
+  id,
 });

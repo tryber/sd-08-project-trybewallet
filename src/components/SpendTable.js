@@ -3,23 +3,35 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { /* EditDelSpend, */ AddSpend } from './Index';
+import del from '../images/del.png';
+import { delExpense as delExpenseAction } from '../actions';
 
 class SpendTable extends React.Component {
   constructor() {
     super();
 
-    this.renderButtonEditDel = this.renderButtonEditDel.bind(this);
+    this.defaultExpenses = this.defaultExpenses.bind(this);
+    this.renderExpenses = this.renderExpenses.bind(this);
+    this.renderButtonDel = this.renderButtonDel.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(e, id) {
+    const { delExpense } = this.props;
+    e.preventDefault();
+    console.log(id);
+    delExpense(id);
+  }
+
+  defaultExpenses() {
+    const { expenses } = this.props;
+    if (expenses.length === 0) {
+      return <h2>Nenhuma despesa adicionada</h2>;
+    }
   }
 
   renderExpenses() {
     const { expenses } = this.props;
-    if (expenses.length === 0) {
-      return (
-        <tr>
-          <td>Nenhuma despesa adicionada</td>
-        </tr>
-      );
-    }
     return expenses.map((expense, index) => {
       const {
         id,
@@ -42,18 +54,26 @@ class SpendTable extends React.Component {
           <td>{currencyValue.toFixed(2)}</td>
           <td>{(expenseValue * currencyValue).toFixed(2)}</td>
           <td>Real</td>
+          <td>{ this.renderButtonDel(id) }</td>
         </tr>
       );
     });
   }
 
-  renderButtonEditDel() {
+  renderButtonDel(param) {
     return (
       <form>
         <button
           type="button"
+          onClick={ (e) => this.handleClick(e, param) }
         >
-          Editar/Excluir
+          <img
+            data-testid="delete-btn"
+            src={ del }
+            alt="del"
+            width="30px"
+            height="30px"
+          />
         </button>
       </form>
     );
@@ -82,7 +102,7 @@ class SpendTable extends React.Component {
             { this.renderExpenses() }
           </tbody>
         </table>
-        {/* <EditDelSpend /> */}
+        { this.defaultExpenses() }
       </section>
     );
   }
@@ -92,10 +112,15 @@ const mapStateToProps = (state) => ({
   expenses: state.wallet.expenses,
 });
 
-export default connect(mapStateToProps)(SpendTable);
+const mapDispatchToProps = (dispatch) => ({
+  delExpense: (expense) => dispatch(delExpenseAction(expense)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SpendTable);
 
 SpendTable.propTypes = {
   expenses: PropTypes.arrayOf(PropTypes.object),
+  delExpense: PropTypes.func.isRequired,
 };
 
 SpendTable.defaultProps = {
