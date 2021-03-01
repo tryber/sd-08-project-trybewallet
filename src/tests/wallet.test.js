@@ -49,7 +49,7 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
       expect(totalField).toContainHTML(INITIAL_VALUE);
     });
   
-    test('Crie um campo que mostre que qual câmbio está sendo utilizado, que será neste caso \'BRL\'', () => {
+    only.test('Crie um campo que mostre que qual câmbio está sendo utilizado, que será neste caso \'BRL\'', () => {
       renderWithRouterAndStore(<Wallet />, '/carteira');
       const exchangeField = screen.getByTestId('header-currency-field');
   
@@ -59,7 +59,7 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
   });
   
   describe('4 - Desenvolva um formulário para adicionar uma despesa contendo as seguintes características:', () => {
-    test('Um campo para adicionar o valor da despesa', async () => {
+    only.test('Um campo para adicionar o valor da despesa', async () => {
       renderWithRouterAndStore(<Wallet />, '/carteira');
       const valueInput = await screen.findByTestId('value-input');
   
