@@ -1,5 +1,7 @@
 // Coloque aqui suas actions
 // export const LOGIN = 'LOGIN';
+import currenciesAPI from '../services/index';
+
 export const EMAIL = 'EMAIL';
 export const PASS = 'PASS';
 
@@ -11,3 +13,34 @@ export const passwordAction = (value) => ({ type: PASS, value });
 export const EXPENSES = 'EXPENSES';
 
 export const expensesAction = (value) => ({ type: EXPENSES, value });
+
+export const CURRENCIES_INITIAL = 'CURRENCIES_INITIAL';
+export const CURRENCIES_SUCCESS = 'CURRENCIES_SUCCESS';
+export const CURRENCIES_FAIL = 'CURRENCIES_FAIL';
+
+const currenciesInitial = () => ({ type: CURRENCIES_INITIAL });
+const currenciesSuccess = (currencies) => ({
+  type: CURRENCIES_SUCCESS,
+  currencies,
+});
+const currenciesFail = (error) => ({ type: CURRENCIES_FAIL, payload: { error } });
+
+export const fetchCurrencies = () => async (dispatch) => {
+  dispatch(currenciesInitial());
+  try {
+    const currencies = await currenciesAPI();
+    dispatch(currenciesSuccess(currencies));
+  } catch (error) { dispatch(currenciesFail(error)); }
+};
+
+export const ADD_EXPENSE = 'ADD_EXPENSE';
+export const addExpense = (expenses) => ({
+  type: ADD_EXPENSE,
+  expenses,
+});
+
+export const TOTAL_EXPENSES = 'TOTAL_EXPENSES';
+export const totalExpenses = (total) => ({
+  type: TOTAL_EXPENSES,
+  total,
+});
