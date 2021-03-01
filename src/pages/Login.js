@@ -20,7 +20,7 @@ class Login extends React.Component {
   handleChange(event) {
     const { name, value } = event.target;
     this.setState((state) => ({ ...state, [name]: value }),
-      () => this.emailValidation());
+      () => this.validationEmail());
   }
 
   handleClick() {
@@ -88,7 +88,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  loginWallet: (email) => dispatch(login(email)),
+  walletLogin: (email) => dispatch(login(email)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
