@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import getEmail from '../actions';
 
 class Login extends React.Component {
@@ -8,7 +9,7 @@ class Login extends React.Component {
     super(props);
 
     this.handleChange = this.handleChange.bind(this);
-    this.verifyInputs = this.verifyInputs.bind(this);
+    this.verifyInputs = this.verifyInputs.bind(this);;
 
     this.state = {
       email: '',
@@ -29,16 +30,14 @@ class Login extends React.Component {
   verifyInputs() {
     const { email, password } = this.state;
 
-    const FIVE = 5
+    const FIVE = 5;
 
     if (email.match(/^\w{3,}@\w+\.\w{2,6}(\.\w{2})?[^\s+]$/gm)
     && password.length >= FIVE) {
-      console.log('foi');
       this.setState({
         button: false,
       });
     } else {
-      console.log('nao foi');
       this.setState({
         button: true,
       });
@@ -47,7 +46,7 @@ class Login extends React.Component {
 
   render() {
     const { saveEmail } = this.props
-    const { email, password, button } = this.state
+    const { email, password, button } = this.state;
     return (
       <div>
         <h1>
@@ -79,7 +78,7 @@ class Login extends React.Component {
         <Link to="/carteira">
           <button
             disabled={ button }
-            onClick={ saveEmail }
+            onClick={ () => saveEmail(email) }
             type="button"
           >
             Entrar
@@ -89,6 +88,10 @@ class Login extends React.Component {
     );
   }
 }
+
+Login.propTypes = {
+  saveEmail: PropTypes.func.isRequired,
+};
 
 const mapDispatchToProps = (dispatch) => ({
   saveEmail: (email) => dispatch(
