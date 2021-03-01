@@ -11,6 +11,7 @@ export const REQUEST_API = 'REQUEST_API';
 export const REQUEST_API_SUCCESS = 'REQUEST_API_SUCCESS';
 export const REQUEST_API_ERROR = 'REQUEST_API_ERROR';
 export const SAVE_EXPENSE = 'SAVE_EXPENSE';
+export const DELETE_EXPENSE = 'DELETE_EXPENSE';
 
 export const requestWalletAPI = () => ({
   type: REQUEST_API,
@@ -48,6 +49,13 @@ export const fetchWalletAPI = () => async (dispatch) => {
 
 export const saveExpense = (expenses) => ({
   type: SAVE_EXPENSE,
+  payload: {
+    expenses,
+  },
+});
+
+export const deleteExpense = (expenses) => ({
+  type: DELETE_EXPENSE,
   payload: {
     expenses,
   },

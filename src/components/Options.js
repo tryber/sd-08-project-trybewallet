@@ -37,10 +37,10 @@ class Options extends React.Component {
   }
 
   getTotalExpenses() {
-    const { expenses, currencies } = this.props;
+    const { expenses } = this.props;
     const allExpenses = expenses.reduce((total, each) => {
-      const { value, currency } = each;
-      const rate = parseFloat(currencies[currency].ask);
+      const { value, currency, exchangeRates } = each;
+      const rate = parseFloat(exchangeRates[currency].ask);
       return total + parseFloat(value) * rate;
     }, 0);
     return allExpenses.toFixed(2);

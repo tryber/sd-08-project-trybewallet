@@ -1,5 +1,6 @@
 import React from 'react';
 import Options from '../components/Options';
+import Table from '../components/Table';
 
 class Wallet extends React.Component {
   render() {
@@ -7,6 +8,7 @@ class Wallet extends React.Component {
       <>
         {/* <Header /> */}
         <Options />
+        <Table />
       </>
     );
   }

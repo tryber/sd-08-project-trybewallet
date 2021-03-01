@@ -1,7 +1,8 @@
 import { REQUEST_API,
   REQUEST_API_SUCCESS,
   REQUEST_API_ERROR,
-  SAVE_EXPENSE }
+  SAVE_EXPENSE,
+  DELETE_EXPENSE }
   from '../actions';
 
 const INITIAL_VALUE = {
@@ -35,6 +36,13 @@ const wallet = (
     return {
       ...state,
       expenses: [...state.expenses, payload.expenses],
+    };
+  case DELETE_EXPENSE:
+    return {
+      ...state,
+      expenses: [
+        ...state.expenses.filter((expense) => expense.id !== payload.expenses.id),
+      ],
     };
   default:
     return state;
