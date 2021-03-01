@@ -1,10 +1,10 @@
-const currency = {
-  query: 'https://economia.awesomeapi.com.br/json/all',
+const https = {
+  currencies: 'https://economia.awesomeapi.com.br/json/all',
 };
 
-export async function getCurrency() {
+export async function getCurrencies() {
   try {
-    const response = await fetch(currency.query);
+    const response = await fetch(https.currencies);
     const data = await response.json();
     return data;
   } catch (error) {
@@ -12,11 +12,16 @@ export async function getCurrency() {
   }
 }
 
-export function currencySymbol() {
-  return getCurrency().then((data) => {
-    delete data.USDT;
-    return Object.keys(data).map((item) => ({
-      code: data[item].code, name: data[item].name,
-    }));
+export function fetchCurrenciesSymbol() {
+  return getCurrencies().then((currencies) => {
+    delete currencies.USDT;
+    return Object.keys(currencies).map((currency) => currency);
+  });
+}
+
+export function fetchCurrencies() {
+  return getCurrencies().then((currencies) => {
+    delete currencies.USDT;
+    return currencies;
   });
 }
