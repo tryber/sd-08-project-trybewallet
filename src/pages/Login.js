@@ -15,13 +15,14 @@ export default class Login extends React.Component {
   render() {
     return (
       <div className="campos_login">
-        <h1 className="label">Faça login</h1>
-        <input
-          type="email"
-          pattern="/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/"
-          classename="inputeml"
-          data-testid="email-input"
-          title="Formato correto: email@dominio.com.br"
+        <label Faça login
+          <input
+            type="email"
+            pattern="/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/"
+            classename="inputeml"
+            data-testid="email-input"
+            title="Formato correto: email@dominio.com.br"
+          />
         />
         <input type="password" data-testid="password-input" minLength="3" />
         <button
