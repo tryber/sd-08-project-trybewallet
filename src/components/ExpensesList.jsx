@@ -1,8 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { deleteExpense } from '../actions';
 
 class ExpensesList extends React.Component {
+  constructor() {
+    super();
+    this.deleteClick = this.deleteClick.bind(this);
+  }
+
+  deleteClick(index) {
+    const { expenses, updateExpenses } = this.props;
+    updateExpenses(expenses.filter((expense, expenseIndex) => expenseIndex !== index));
+  }
+
   render() {
     const { expenses } = this.props;
     return (
@@ -37,6 +48,15 @@ class ExpensesList extends React.Component {
                 * parseFloat(expense.exchangeRates[expense.currency].ask)}
               </td>
               <td>Real</td>
+              <td>
+                <button
+                  type="button"
+                  onClick={ () => this.editClick(index) }
+                >
+                  Edit
+                </button>
+                <button type="button" onClick={ () => this.deleteClick(index) }>X</button>
+              </td>
             </tr>
           ))}
         </tbody>
@@ -49,8 +69,13 @@ const mapStateToProps = (state) => ({
   expenses: state.wallet.expenses,
 });
 
-ExpensesList.propTypes = ({
-  expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
+const mapDispatchToProps = (dispatch) => ({
+  updateExpenses: (expenses) => dispatch(deleteExpense(expenses)),
 });
 
-export default connect(mapStateToProps, null)(ExpensesList);
+ExpensesList.propTypes = ({
+  expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
+  updateExpenses: PropTypes.func.isRequired,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ExpensesList);

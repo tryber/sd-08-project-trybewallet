@@ -29,4 +29,9 @@ const addExpense = (expense) => ({
   expense,
 });
 
-export { loginAction, fetchAPI, addExpense };
+const deleteExpense = (expenses) => ({
+  type: 'DELETE_EXPENSE',
+  expenses,
+});
+
+export { loginAction, fetchAPI, addExpense, deleteExpense };

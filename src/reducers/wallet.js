@@ -7,7 +7,12 @@ const initialState = {
 };
 
 const updateTotal = (state, action) => {
-  const expenses = state.expenses.concat(action.expense);
+  let expenses = [];
+  if (action.type === 'DELETE_EXPENSE') {
+    expenses = action.expenses;
+  } else {
+    expenses = state.expenses.concat(action.expense);
+  }
   const total = expenses.reduce((acc, expense) => (
     parseFloat(
       (acc + expense.value * expense.exchangeRates[expense.currency].ask).toFixed(2),
@@ -30,10 +35,15 @@ const wallet = (state = initialState, action) => {
       currencies: action.payload,
     };
   case 'ADD_EXPENSE':
-    updateTotal(state, action);
     return {
       ...state,
       expenses: [...state.expenses, action.expense],
+      totalValue: updateTotal(state, action),
+    };
+  case 'DELETE_EXPENSE':
+    return {
+      ...state,
+      expenses: action.expenses,
       totalValue: updateTotal(state, action),
     };
   default: return {
