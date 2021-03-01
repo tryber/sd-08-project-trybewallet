@@ -39,7 +39,7 @@ export function currenciesData(answer) {
 export function actionFetchCurrenciesData() {
   return async (dispatch) => {
     const CurrenciesData = await getAPI();
-    console.log(CurrenciesData);
+    // console.log(CurrenciesData);
     dispatch(currenciesData(CurrenciesData));
     dispatch(currenciesArray(CurrenciesData));
   };
