@@ -26,7 +26,7 @@ export default function wallet(state = INITIAL_STATE, action) {
         {
           id: state.expenses.length,
           ...action.expense,
-          exchangeRates: [state.currenciesData],
+          exchangeRates: state.currenciesData,
         },
       ],
       total:

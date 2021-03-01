@@ -4,45 +4,47 @@ import PropTypes from 'prop-types';
 
 import './ExpenseTable.css';
 
+// https://pt.stackoverflow.com/questions/456689/filtro-de-tabela-pelo-nome-em-react
+// Auxílio do especialista Ícaro Harry (plantão dia 01/03/2021)
 class ExpenseTable extends React.Component {
   render() {
     const { expenses } = this.props;
-    const tableHead = [
+    const tableTitle = [
       'Descrição', 'Tag', 'Método de pagamento', 'Valor', 'Moeda', 'Câmbio utilizado',
       'Valor convertido', 'Moeda de conversão', 'Editar/Excluir',
     ];
     return (
-      <div className="expense-table">
-        <div>
-          {tableHead.map((tableKey) => (
-            <div className="title" key={ tableKey }>
-              {tableKey}
-            </div>
+      <table className="expense-table">
+        <thead>
+          <tr>
+          {tableTitle.map((title) => (
+            <th className="title" key={ title }>
+              {title}
+            </th>
           ))}
-        </div>
+          </tr>
+        </thead>
+        <tbody>
         {expenses.map((expense) => (
-          <td key={ expense.id }>
+          <tr key={ expense.id }>
             <td className="data">{expense.description}</td>
             <td className="data">{expense.tag}</td>
             <td className="data">{expense.method}</td>
             <td className="data">{expense.value}</td>
-            <td className="data">
-              {expense.exchangeRates[expense.currency].name}
-            </td>
+            <td className="data">{expense.exchangeRates[expense.currency].name}</td>
             <td className="data">
               {Number(expense.exchangeRates[expense.currency].ask).toFixed(2)}
             </td>
             <td className="data">
-              {this.toConvertValue(
-                expense.value,
-                expense.exchangeRates[expense.currency].ask,
-              ).toFixed(2)}
+              {parseFloat(expense.value * expense.exchangeRates[expense.currency].ask)
+                .toFixed(2)}
             </td>
             <td className="data">Real</td>
             <td className="data"> </td>
-          </td>
+          </tr>
         ))}
-      </div>
+        </tbody>
+      </table>
     );
   }
 }
@@ -52,7 +54,7 @@ const mapStateToProps = (state) => ({
 });
 
 ExpenseTable.propTypes = {
-  expenses: PropTypes.arrayOf(PropTypes.string).isRequired,
+  expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default connect(mapStateToProps, null)(ExpenseTable);

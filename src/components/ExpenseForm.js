@@ -11,7 +11,7 @@ import Currency from './expanseForm/Currency';
 import Method from './expanseForm/Method';
 import Tag from './expanseForm/Tag';
 import Description from './expanseForm/Description';
-// import ExpenseTable from './ExpenseTable';
+import ExpenseTable from './ExpenseTable';
 
 import './ExpenseForm.css';
 
@@ -48,6 +48,9 @@ class expenseForm extends React.Component {
     const { fetchCurrenciesData, addExpense } = this.props;
     await fetchCurrenciesData();
     addExpense(this.state);
+    this.setState({
+      value: '',
+    });
   }
 
   render() {
@@ -75,7 +78,7 @@ class expenseForm extends React.Component {
             Adicionar despesa
           </button>
         </form>
-        {/* <ExpenseTable /> */}
+        <ExpenseTable />
       </div>
     );
   }
