@@ -5,6 +5,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Creators as UserActions } from '../actions/user';
 
+import walletImg from './images/wallet.png';
+
 class LoginForm extends Component {
   constructor(props) {
     super(props);
@@ -51,7 +53,9 @@ class LoginForm extends Component {
           onSubmit={ this.handleSubmit }
           autoComplete="off"
         >
+
           <div className="title-container">
+            <img alt="wallet" src={ walletImg } />
             <h1>TrybeWallet</h1>
           </div>
           <input

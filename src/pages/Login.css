@@ -5,7 +5,8 @@
 
 body {
   background: rgb(20, 20, 20);
-  overflow: hidden;
+  overflow-x: hidden;
+  width: 100vw;
 }
 
 .login-body {
@@ -22,6 +23,11 @@ body {
   display: flex;
   flex-direction: column;
   padding: 20px;
+}
+
+.login img {
+  width: 100px;
+  margin-bottom: 10px;
 }
 
 .login input {

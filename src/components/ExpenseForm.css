@@ -1,0 +1,23 @@
+.add-expense-form {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  overflow: auto;
+  padding: 10px;
+}
+
+.add-expense-form input , .add-expense-form select {
+  border-radius: 10px;
+  flex: 0.5;
+  height: 30px;
+  margin: 2px;
+  padding: 0 10px;
+}
+
+.add-expense-form button {
+    
+}
+
+.add-expense-form input:nth-child( 2 ) {
+  flex: 1;
+}

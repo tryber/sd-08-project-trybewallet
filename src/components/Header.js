@@ -4,6 +4,10 @@ import { connect } from 'react-redux';
 
 import expenseType from '../types';
 
+import walletImage from './images/wallet.png';
+
+import './Header.css';
+
 class Header extends Component {
   getTotal() {
     const { expenses } = this.props;
@@ -19,24 +23,25 @@ class Header extends Component {
   render() {
     const { email } = this.props;
     return (
-      <header className="">
-        <dl className="">
-          <div className="">
-            <dt>Email</dt>
-            <dd data-testid="email-field">{ email }</dd>
-          </div>
-          <div className="">
-            <dt>Total</dt>
-            <dd data-testid="total-field">
-              RS
+      <header className="header">
+        <div className="title-container">
+          <h1>
+            TrybeWallet
+            <img src={ walletImage } alt="wallet" />
+          </h1>
+        </div>
+        <div className="header-items">
+          <span className="email" data-testid="email-field">{ email }</span>
+          <div>
+            <span data-testid="total-field">
+              TOTAL: R$
               { (Math.round(this.getTotal() * 100) / 100).toFixed(2) }
-            </dd>
+            </span>
+            <span data-testid="header-currency-field">BRL</span>
           </div>
-          <div className="">
-            <dt>Câmbio</dt>
-            <dd data-testid="header-currency-field">BRL</dd>
-          </div>
-        </dl>
+
+        </div>
+
       </header>
     );
   }
