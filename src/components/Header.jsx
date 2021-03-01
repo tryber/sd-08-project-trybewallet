@@ -7,10 +7,25 @@ class Header extends React.Component {
     const { email, totalValue } = this.props;
     return (
       <header>
-        <span>Header</span>
-        <p data-testid="email-field">{ email }</p>
-        <span data-testid="total-field">{ totalValue }</span>
-        <span data-testid="header-currency-field">BRL</span>
+        <img src="https://flomio.com/wp-content/uploads/2016/10/Wallet.png" alt="logo" />
+        <div className="header-content-container">
+          <span>Email: </span>
+          <p data-testid="email-field">{ email }</p>
+          <span>Despesa Total:</span>
+          <span className="header-total-value">R$</span>
+          <span
+            data-testid="total-field"
+            className="header-total-value"
+          >
+            { totalValue }
+          </span>
+          <span
+            data-testid="header-currency-field"
+            className="header-total-value"
+          >
+            BRL
+          </span>
+        </div>
       </header>
     );
   }

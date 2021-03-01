@@ -33,6 +33,7 @@ class EditForm extends React.Component {
     return (
       <select
         data-testid="currency-input"
+        className="form-select"
         value={ currency }
         onChange={ (e) => this.setState({ currency: e.target.value }) }
       >
@@ -55,6 +56,7 @@ class EditForm extends React.Component {
     return (
       <select
         data-testid="method-input"
+        className="form-select"
         value={ method }
         onChange={ (e) => this.setState({ method: e.target.value }) }
       >
@@ -70,6 +72,7 @@ class EditForm extends React.Component {
     return (
       <select
         data-testid="tag-input"
+        className="form-select"
         value={ tag }
         onChange={ (e) => this.setState({ tag: e.target.value }) }
       >
@@ -85,7 +88,7 @@ class EditForm extends React.Component {
   render() {
     const { value, description } = this.state;
     return (
-      <form>
+      <form className="expense-form">
 
         <label htmlFor="value-input">
           Valor
@@ -115,6 +118,7 @@ class EditForm extends React.Component {
 
         <button
           type="button"
+          className="btn btn-warning"
           data-testid="edit-btn"
           onClick={ this.handleEditClick }
         >

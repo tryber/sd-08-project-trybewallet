@@ -45,6 +45,7 @@ class ExpenseForm extends React.Component {
     return (
       <select
         data-testid="currency-input"
+        className="form-select"
         value={ currency }
         onChange={ (e) => this.setState({ currency: e.target.value }) }
       >
@@ -67,6 +68,7 @@ class ExpenseForm extends React.Component {
     return (
       <select
         data-testid="method-input"
+        className="form-select"
         value={ method }
         onChange={ (e) => this.setState({ method: e.target.value }) }
       >
@@ -82,6 +84,7 @@ class ExpenseForm extends React.Component {
     return (
       <select
         data-testid="tag-input"
+        className="form-select"
         value={ tag }
         onChange={ (e) => this.setState({ tag: e.target.value }) }
       >
@@ -99,12 +102,13 @@ class ExpenseForm extends React.Component {
     const { value, description } = this.state;
     if (isFetching) return <h2>Carregando...</h2>;
     return (
-      <form>
+      <form className="expense-form">
 
         <label htmlFor="value-input">
-          Valor
+          Valor:
           <input
             type="text"
+            id="value-input"
             data-testid="value-input"
             value={ value }
             onChange={ (e) => this.setState({ value: e.target.value }) }
@@ -118,7 +122,7 @@ class ExpenseForm extends React.Component {
         {this.renderTag()}
 
         <label htmlFor="description-input">
-          Descrição
+          Descrição:
           <input
             type="text"
             data-testid="description-input"
@@ -129,6 +133,7 @@ class ExpenseForm extends React.Component {
 
         <button
           type="button"
+          className="btn btn-success"
           onClick={ this.handleClick }
         >
           Adicionar despesa
