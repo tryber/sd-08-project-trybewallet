@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 import '../css/login.css';
 
@@ -16,9 +16,11 @@ class Login extends React.Component {
       password: '',
       emailValid: false,
       passwordValid: false,
+      loggedIn: false,
     };
 
     this.getLogin = this.getLogin.bind(this);
+    this.logon = this.logon.bind(this);
   }
 
   getLogin(event) {
@@ -53,9 +55,17 @@ class Login extends React.Component {
     }
   }
 
-  render() {
-    const { email, password, emailValid, passwordValid } = this.state;
+  logon() {
+    const { email } = this.state;
     const { login } = this.props;
+    login(email);
+    this.setState({
+      loggedIn: true,
+    });
+  }
+
+  render() {
+    const { email, password, emailValid, passwordValid, loggedIn } = this.state;
 
     return (
       <section>
@@ -78,20 +88,22 @@ class Login extends React.Component {
               name="password"
               value={ password }
               placeholder="Digite sua senha"
+              data-testid="password-input"
               onChange={ this.getLogin }
             />
           </label>
         </form>
         { (emailValid && passwordValid)
           ? (
-            <Link
-              to="/carteira"
-              className="normal"
-              onClick={ () => login({ email }) }
+            <button
+              type="button"
+              className="button"
+              onClick={ this.logon }
             >
               Entrar
-            </Link>)
-          : <button type="button" className="disable">Não Entrar</button>}
+            </button>)
+          : <button type="button" className="button disabled" disabled>Entrar</button>}
+        {loggedIn && <Redirect to="/carteira" />}
       </section>
     );
   }

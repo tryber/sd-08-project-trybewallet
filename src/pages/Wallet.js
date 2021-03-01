@@ -9,6 +9,7 @@ import walletLogo from '../images/wallet-with-cash-and-coins_150x116.png';
 import nameLogo from '../images/MyWallet_logo_01.png';
 import Form from '../components/Form';
 import ExpensesList from '../components/ExpensesList';
+import { fetchAPI } from '../actions';
 
 class Wallet extends React.Component {
   constructor() {
@@ -16,18 +17,38 @@ class Wallet extends React.Component {
 
     this.state = {
       totalExpenses: 0,
+      currency: '',
     };
+
+    this.getCurrencies = this.getCurrencies.bind(this);
   }
 
   componentDidUpdate() {
+    const { currency } = this.state;
     this.sumExpenses();
+    if (currency === '') return this.getCurrencies();
+  }
+
+  async getCurrencies() {
+    const { currency } = this.state;
+    const { currencies, getAPIData } = this.props;
+
+    if (currency === '') {
+      await getAPIData();
+      const currenciesMap = currencies.find((element) => element.currency === 'USD');
+      const currencyUpdated = currenciesMap.currencyDetails.codein;
+      this.setState({
+        currency: currencyUpdated,
+      });
+    }
   }
 
   sumExpenses() {
     const { totalExpenses } = this.state;
     const { expenses } = this.props;
-    const expensesMap = expenses.map((expense) => parseFloat(expense.exp));
-    const sum = expensesMap.reduce((acc, cur) => acc + cur, 0);
+    const expensesMap = expenses
+      .map((expense) => parseFloat(expense.exp) * parseFloat(expense.exchange.ask));
+    const sum = parseFloat(expensesMap.reduce((acc, cur) => acc + cur, 0)).toFixed(2);
     if (sum !== totalExpenses) {
       this.setState({
         totalExpenses: sum,
@@ -36,7 +57,7 @@ class Wallet extends React.Component {
   }
 
   render() {
-    const { totalExpenses } = this.state;
+    const { totalExpenses, currency } = this.state;
     const { email } = this.props;
     if (typeof (email.email) === 'undefined') {
       return (
@@ -58,7 +79,7 @@ class Wallet extends React.Component {
           <div className="infos-container">
             <p data-testid="email-field">{`E-mail: ${email.email}`}</p>
             <p data-testid="total-field">{`Total: ${totalExpenses}`}</p>
-            <p data-testid="header-currency-field">Moeda</p>
+            <p data-testid="header-currency-field">{currency}</p>
           </div>
         </header>
         <Form />
@@ -71,9 +92,14 @@ class Wallet extends React.Component {
 const mapStateToProps = (state) => ({
   email: state.user,
   expenses: state.wallet.expenses,
+  currencies: state.wallet.currencies,
 });
 
-export default connect(mapStateToProps)(Wallet);
+const mapDispatchToProps = (dispatch) => ({
+  getAPIData: () => dispatch(fetchAPI()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Wallet);
 
 Wallet.propTypes = {
   email: PropTypes.shape(
@@ -81,14 +107,7 @@ Wallet.propTypes = {
       email: PropTypes.string,
     },
   ).isRequired,
-  expenses: PropTypes.arrayOf(PropTypes.shape(
-    {
-      id: PropTypes.number,
-      exp: PropTypes.string,
-      des: PropTypes.string,
-      cur: PropTypes.string,
-      met: PropTypes.string,
-      tag: PropTypes.string,
-    },
-  )).isRequired,
+  expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
+  currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
+  getAPIData: PropTypes.func.isRequired,
 };
