@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './ExpensesTable.css';
+import { removeExpense } from '../actions';
 
 class ExpensesTable extends Component {
   constructor() {
@@ -26,7 +27,7 @@ class ExpensesTable extends Component {
   }
 
   renderTableRows() {
-    const { expenses } = this.props;
+    const { expenses, deleteExpense } = this.props;
     return expenses.map((expense) => {
       const exchangeRate = expense.exchangeRates[`${expense.currency}`].ask;
       const coinName = expense.exchangeRates[`${expense.currency}`].name;
@@ -40,7 +41,7 @@ class ExpensesTable extends Component {
           <td>{ exchangeRate }</td>
           <td>{ parseFloat(expense.value) * parseFloat(exchangeRate) }</td>
           <td>BRL</td>
-          <td><button type="button">Excluir</button></td>
+          <td><button type="button" onClick={ () => deleteExpense(expense) }>Excluir</button></td>
         </tr>
       );
     });
@@ -60,4 +61,8 @@ const mapStateToProps = (state) => ({
   expenses: state.wallet.expenses,
 });
 
-export default connect(mapStateToProps)(ExpensesTable);
+const mapDispatchToProps = (dispatch) => ({
+  deleteExpense: (expense) => dispatch(removeExpense(expense.id)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ExpensesTable);

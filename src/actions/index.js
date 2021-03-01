@@ -1,6 +1,7 @@
 // Coloque aqui suas actions
 const LOGIN = 'LOGIN';
 const ADD_EXPENSE = 'ADD_EXPENSE';
+const DELETE_EXPENSE = 'DELETE_EXPENSE';
 
 export function login(email) {
   return {
@@ -17,6 +18,15 @@ export function addExpense(expense, convertedValue) {
     payload: {
       expense,
       convertedValue,
+    },
+  };
+}
+
+export function removeExpense(id) {
+  return {
+    type: DELETE_EXPENSE,
+    payload: {
+      id,
     },
   };
 }
