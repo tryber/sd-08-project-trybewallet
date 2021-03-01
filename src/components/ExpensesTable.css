@@ -1,11 +1,10 @@
 table {
-  display: flex;
-  flex-direction: column;
   margin: 20px auto;
-  width: 60%;
+  width: 70%;
+  text-align: left;
 }
 
 th , td {
-  padding: 5px 10px;
+  padding: 8px 1px;
 }
 
