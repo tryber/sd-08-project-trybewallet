@@ -1,12 +1,15 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
+import { connect } from 'react-redux';
+import { deleteOrder } from '../actions/index';
+
 class Table extends React.Component {
   tableOrder() {
-    const { expenses } = this.props;
+    const { expenses, deleteButton } = this.props;
     if (expenses.length !== 0) {
       return expenses.map((order, index) => {
-        const { description, tag, method, exchangeRates, value, currency } = order;
+        const { description, tag, method, exchangeRates, value, currency, id } = order;
         const { ask, name } = exchangeRates[currency];
         let number = parseFloat(ask);
         number = number.toFixed(2);
@@ -22,7 +25,14 @@ class Table extends React.Component {
             <td>Real</td>
             <td>
               <button type="button">Editar</button>
-              <button type="button">Excluir</button>
+              <button
+                type="button"
+                data-testid="delete-btn"
+                name={ id }
+                onClick={ () => deleteButton(id) }
+              >
+                Excluir
+              </button>
             </td>
           </tr>
         );
@@ -55,6 +65,13 @@ class Table extends React.Component {
 
 Table.propTypes = {
   expenses: propTypes.arrayOf(propTypes.object).isRequired,
+  deleteButton: propTypes.func.isRequired,
 };
 
-export default Table;
+const mapDispatchToProps = (dispatch) => ({
+  deleteButton: (id) => dispatch(
+    deleteOrder(id),
+  ),
+});
+
+export default connect(null, mapDispatchToProps)(Table);

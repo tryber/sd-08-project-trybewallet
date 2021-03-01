@@ -54,3 +54,10 @@ export const expensesObject = (order) => async (dispatch) => {
     dispatch(exchangeRequestAPIFailed('ERROR REQUEST API'));
   }
 };
+
+export const deleteOrder = (id) => ({
+  type: 'DELETE',
+  payload: {
+    id,
+  },
+});
