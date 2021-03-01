@@ -3,6 +3,7 @@ export const REFRESH_CURRENCIES = 'REFRESH_CURRENCIES';
 export const FAILED_FETCH_CURRENCIES = 'FAILED_FETCH_CURRENCIES';
 export const NEW_CURRENCY_UID = 'NEW_CURRENCY_UID';
 export const ADD_EXPENSE = 'ADD_EXPENSE';
+export const DELETE_EXPENSE = 'DELETE_EXPENSE';
 
 export function storeEmail(email) {
   return {
@@ -54,6 +55,15 @@ export function addExpense(expenseObj) {
     type: ADD_EXPENSE,
     payload: {
       expenseObj,
+    },
+  };
+}
+
+export function deleteExpense(id) {
+  return {
+    type: DELETE_EXPENSE,
+    payload: {
+      id,
     },
   };
 }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { deleteExpense } from '../actions';
 import tableFields from '../Database/tableFields';
 
 class TableWallet extends Component {
@@ -9,6 +10,12 @@ class TableWallet extends Component {
     this.renderHeader = this.renderHeader.bind(this);
     this.renderBody = this.renderBody.bind(this);
     this.findByCurrencyElement = this.findByCurrencyElement.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+  }
+
+  handleDelete(id) {
+    const { propDeleteExpense } = this.props;
+    propDeleteExpense(id);
   }
 
   findByCurrencyElement({ exchangeRates, currency }) {
@@ -38,6 +45,21 @@ class TableWallet extends Component {
           <td>{(ask * 1).toFixed(2)}</td>
           <td>{((ask * 1) * (e.value * 1)).toFixed(2)}</td>
           <td>Real</td>
+          <td>
+            <button
+              type="button"
+              data-testid="edit-btn"
+            >
+              E
+            </button>
+            <button
+              type="button"
+              data-testid="delete-btn"
+              onClick={ () => this.handleDelete(e.id) }
+            >
+              X
+            </button>
+          </td>
         </tr>
       );
     });
@@ -66,9 +88,16 @@ function mapStateToProps({ wallet }) {
   };
 }
 
-export default connect(mapStateToProps)(TableWallet);
+function mapDispatchToProps(dispatch) {
+  return {
+    propDeleteExpense: (id) => dispatch(deleteExpense(id)),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TableWallet);
 
 TableWallet.propTypes = {
+  propDeleteExpense: PropTypes.func.isRequired,
   propExpenses: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     value: PropTypes.string.isRequired,

@@ -1,5 +1,6 @@
 import {
   ADD_EXPENSE, FAILED_FETCH_CURRENCIES, NEW_CURRENCY_UID, REFRESH_CURRENCIES,
+  DELETE_EXPENSE,
 } from '../actions';
 
 const INITIAL_STATE = {
@@ -29,6 +30,11 @@ function wallet(state = INITIAL_STATE, action) {
     return {
       ...state,
       expenseUID: state.expenseUID + 1,
+    };
+  case DELETE_EXPENSE:
+    return {
+      ...state,
+      expenses: state.expenses.filter(({ id }) => id !== action.payload.id),
     };
   default:
     return state;
