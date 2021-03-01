@@ -29,6 +29,7 @@ class WalletForm extends React.Component {
   handleExpense() {
     const { expenses } = this.props;
     expenses(this.state);
+    this.setState({ value: '' });
   }
 
   renderExpenseInput(value) {
@@ -73,6 +74,7 @@ class WalletForm extends React.Component {
           value={ currency }
           name="currency"
           data-testid="currency-input"
+          id="select-currency"
           onChange={ this.handleChange }
         >
           { currencies.map((currencyCode) => (
@@ -97,6 +99,7 @@ class WalletForm extends React.Component {
           onChange={ this.handleChange }
           name="method"
           data-testid="method-input"
+          id="method-payment"
         >
           {this.payments.map((methodPay) => (
             <option key={ methodPay } value={ methodPay }>{ methodPay }</option>
@@ -115,6 +118,7 @@ class WalletForm extends React.Component {
           onChange={ this.handleChange }
           name="tag"
           data-testid="tag-input"
+          id="kindOfExpense"
         >
           {this.tags.map((kind) => (
             <option key={ kind } value={ kind }>{ kind }</option>
@@ -146,7 +150,6 @@ WalletForm.propTypes = {
 
 const mapDispatchToProps = (dispatch) => ({
   expenses: (value) => dispatch(expenseExchangeRates(value)),
-  // expensesWithExchange: (value) => dispatch(expenseExchangeRates(value)),
 });
 
 const mapStateToProps = ({ wallet }) => ({
