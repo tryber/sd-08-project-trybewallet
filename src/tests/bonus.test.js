@@ -21,17 +21,17 @@ describe('7 - Crie um botão para editar uma despesa da tabela contendo as segui
       const toggleEditBtn = screen.getAllByTestId('edit-btn')[0];
       fireEvent.click(toggleEditBtn);
   
-      const valueInput = await screen.findByTestId('value-input');
+      const value = await screen.findByTestId('value-input');
       const currencyInput = await screen.findByTestId('currency-input');
-      const methodInput = await screen.findByTestId('method-input');
-      const tagInput = await screen.findByTestId('tag-input');
+      const method = await screen.findByTestId('method-input');
+      const tag = await screen.findByTestId('tag-input');
       const descriptionInput = await screen.findByTestId('description-input');
       const editButton = await screen.findByText(/Editar despesa/i);
   
-      userEvent.type(valueInput, '100');
+      userEvent.type(value, '100');
       userEvent.selectOptions(currencyInput, 'CAD');
-      userEvent.selectOptions(methodInput, 'Dinheiro');
-      userEvent.selectOptions(tagInput, 'Trabalho');
+      userEvent.selectOptions(method, 'Dinheiro');
+      userEvent.selectOptions(tag, 'Trabalho');
       userEvent.type(descriptionInput, 'Cem dólares canadenses');
   
       fireEvent.click(editButton);
