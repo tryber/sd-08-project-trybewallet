@@ -1,0 +1,55 @@
+.add-expense-form {
+  align-items: center;
+  background-image: linear-gradient(rgb(95, 233, 159),rgb(72, 179, 122) ,rgb(50, 122, 83));
+  display: flex;
+  flex-wrap: wrap;
+  overflow: auto;
+  padding: 10px;
+}
+
+.add-expense-form input , .add-expense-form select {
+  border-radius: 5px;
+  flex: 0.5;
+  height: 30px;
+  margin: 2px;
+  padding: 0 10px;
+}
+
+.add-expense-form input:nth-child( 2 ) {
+  flex: 1;
+}
+
+.add-expense-form button {
+  background: grey;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 200;
+  margin: 0 0 0 5px;
+  overflow: hidden;
+  padding: 5px;
+  position: relative;
+  z-index: 0;
+}
+
+.add-expense-form button:hover {
+  color: white;
+}
+
+.add-expense-form button:before {
+  background: rgb(50, 122, 83);
+  border-radius: 0 0 50% 50%;
+  content: '';
+  height: 0%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  transition: ease-out 0.5s;
+  width: 100%;
+  z-index: -1;
+}
+
+.add-expense-form button:hover:before {
+  height: 200%;
+}

@@ -1,0 +1,32 @@
+.header {
+  align-items: center;
+  background-image: linear-gradient(white, white, white, rgb(95, 230, 158));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 0 30px;
+}
+
+.header-items {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.header-items div {
+  margin-left: 50px;
+}
+
+.header-items .email {
+  font-family: Pacifico, cursive;
+  font-size: 20px;
+  margin: 0 5px;
+}
+
+.header-items :not( .email ) {
+  font-weight: 900;
+}
+
+.title-container h1 img {
+  height: 50px;
+}
