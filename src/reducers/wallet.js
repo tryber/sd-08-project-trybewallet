@@ -1,11 +1,15 @@
-const INITIAL_VALUE = 0;
+const WALLET = ({
+  currencies: [],
+  expenses: [],
+  idCount: 0,
+});
 
-const walletReducer = (state = INITIAL_VALUE, action) => {
+const walletReducer = (state = WALLET, action) => {
   switch (action.type) {
   case 'USER_CURRENCIES':
-    return { ...state + action.value.target.value };
-  case 'USER_EXPENSES':
-    return { ...state - action.value.target.value };
+    return { ...state, currencies: action.payload };
+  case 'ADD_EXPENSE':
+    return { ...state, expenses: action.payload, idCount: state.idCount + 1 };
   default:
     return state;
   }
