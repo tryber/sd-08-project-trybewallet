@@ -148,7 +148,7 @@ class Wallet extends React.Component {
   }
 
   renderTable() {
-    const { expenses } = this.props;
+    const { expenses, removeExpense } = this.props;
     return (
       <table>
         <tr>
@@ -175,7 +175,14 @@ class Wallet extends React.Component {
               <td>Real</td>
               <td>
                 <button type="button">Editar</button>
-                <button type="button" data-testid="delete-btn">Excluir</button>
+                <button
+                  type="button"
+                  data-testid="delete-btn"
+                  onClick={ () => removeExpense(index) }
+                >
+                  Excluir
+
+                </button>
               </td>
             </tr>
           ))}
@@ -227,6 +234,7 @@ Wallet.propTypes = {
   expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
   fetchCurrencies: PropTypes.func.isRequired,
   fetchQuotation: PropTypes.func.isRequired,
+  removeExpense: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Wallet);

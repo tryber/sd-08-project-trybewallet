@@ -265,7 +265,7 @@ describe.only('2 - Crie uma página para sua carteira com as seguintes caracter�
     });
   });
   
-  describe('6 - Crie um botão para deletar uma despesa da tabela contendo as seguintes características:', () => {
+  describe.only('6 - Crie um botão para deletar uma despesa da tabela contendo as seguintes características:', () => {
     const initial = initialStateWithExpenses;
   
     test('O botão deve estar dentro do último item da linha da tabela e deve possuir `data-testid="delete-btn"`', () => {
