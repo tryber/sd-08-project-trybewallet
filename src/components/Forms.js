@@ -142,7 +142,12 @@ const mapDispatchToProps = (dispatch) => ({
 Forms.propTypes = {
   newExpense: PropTypes.func.isRequired,
   fetchCurrencies: PropTypes.func.isRequired,
-  loading: PropTypes.bool.isRequired,
+  loading: PropTypes.bool,
   currencies: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
+
+Forms.defaultProps = {
+  loading: undefined,
+};
+
 export default connect(mapStateToProps, mapDispatchToProps)(Forms);

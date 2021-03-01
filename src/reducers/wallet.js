@@ -12,7 +12,7 @@ const INITIAL_STATE = {
   isFetching: true,
 };
 
-const walletReducer = (state = INITIAL_STATE, { type, payload }) => {
+const wallet = (state = INITIAL_STATE, { type, payload }) => {
   switch (type) {
   case REQUEST_START:
     return { ...state, isFetching: payload.isFetching };
@@ -48,4 +48,4 @@ const walletReducer = (state = INITIAL_STATE, { type, payload }) => {
   }
 };
 
-export default walletReducer;
+export default wallet;

@@ -15,7 +15,7 @@ class ExpensesTable extends React.Component {
         data-testid="delete-btn"
         onClick={ (e) => { deleteExpense(parseInt(e.target.parentElement.id, 10)); } }
       >
-        { }
+        Excluir
       </button>
     );
   }
@@ -26,15 +26,15 @@ class ExpensesTable extends React.Component {
       <table>
         <thead>
           <tr>
-            <th>Tag</th>
             <th>Descrição</th>
-            <th>Moeda</th>
+            <th>Tag</th>
+            <th>Método de pagamento</th>
             <th>Valor</th>
-            <th>Moeda de conversão</th>
+            <th>Moeda</th>
             <th>Câmbio utilizado</th>
             <th>Valor convertido</th>
-            <th>Método de pagamento</th>
-            <th>Excluir</th>
+            <th>Moeda de conversão</th>
+            {/* <th>Excluir</th> */}
           </tr>
         </thead>
 
@@ -46,14 +46,14 @@ class ExpensesTable extends React.Component {
 
             return (
               <tr key={ id }>
-                <td>{tag}</td>
                 <td>{description}</td>
-                <td>Real</td>
-                <td>{value}</td>
-                <td>{name}</td>
-                <td>{parseFloat(ask).toFixed(2)}</td>
-                <td>{(ask * parseInt(value, 10)).toFixed(2)}</td>
+                <td>{tag}</td>
                 <td>{method}</td>
+                <td>{value}</td>
+                <td>Real</td>
+                <td>{name}</td>
+                <td>{(ask * parseInt(value, 10)).toFixed(2)}</td>
+                <td>{parseFloat(ask).toFixed(2)}</td>
                 <td id={ id }>
                   { this.renderDeleteBtn() }
                 </td>

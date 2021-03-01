@@ -5,6 +5,8 @@ import { Redirect } from 'react-router-dom';
 
 import { actionLogin } from '../actions';
 
+import './styles/Login.css';
+
 function validateEmail(email) { const re = /\S+@\S+\.\S+/; return re.test(email); }
 // solution by Luiza Dilly
 class Login extends React.Component {
@@ -54,7 +56,7 @@ class Login extends React.Component {
     const { email, password, login, disabledBtn } = this.state;
 
     return (
-      <fieldset>
+      <fieldset className="fieldsetLogin">
         <label htmlFor="email-input">
           E-mail:
           <input

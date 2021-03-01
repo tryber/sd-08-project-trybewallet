@@ -26,10 +26,6 @@ class WalletHeader extends React.Component {
           {`E-mail: ${email}`}
         </section>
 
-        <section>
-          <h3>Despesas Totais:</h3>
-        </section>
-
         <span data-testid="total-field">
           {`Despesa Total: R$ ${this.getTotalExpenses()} `}
         </span>
