@@ -10,6 +10,7 @@ import InputDescription from './InputDescription';
 import CurrenciesSelection from './CurrenciesSelection';
 import MethodSelection from './MethodSelection';
 import TagSelection from './TagSelection';
+import ExpensesTable from './ExpensesTable';
 
 class ExpensesInput extends Component {
   constructor() {
@@ -63,6 +64,7 @@ class ExpensesInput extends Component {
         <MethodSelection value={ method } changeInput={ this.changeInput } />
         <TagSelection value={ tag } changeInput={ this.changeInput } />
         <AddExpensesBtn resetInputs={ this.resetInputs } />
+        <ExpensesTable />
       </>
     );
   }

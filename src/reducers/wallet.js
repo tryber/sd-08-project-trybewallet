@@ -4,6 +4,7 @@ import {
   REQUEST_CURRENCY,
   FAILED_REQUEST,
   ADD_EXPENSES,
+  DELETE_EXPENSE,
 } from '../actions/index';
 
 const INITIAL_STATE = {
@@ -32,7 +33,12 @@ export default function expensesReducerAction(state = INITIAL_STATE, action) {
   case ADD_EXPENSES:
     return {
       ...state,
-      expenses: [...state.expenses, action.payload],
+      expenses: [...state.expenses, { ...action.payload, id: state.expenses.length }],
+    };
+  case DELETE_EXPENSE:
+    return {
+      ...state,
+      expenses: [...action.payload],
     };
   default:
     return state;

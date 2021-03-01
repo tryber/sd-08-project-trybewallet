@@ -16,9 +16,9 @@ class MethodSelection extends Component {
           data-testid="method-input"
         >
           <option key="choose" value="">Forma de pagamento</option>
-          <option key="money" value="money">Dinheiro</option>
-          <option key="debit" value="debit">Cartão de débito</option>
-          <option key="credit" value="credit">Cartão de crédito</option>
+          <option key="money" value="Dinheiro">Dinheiro</option>
+          <option key="debit" value="Cartão de débito">Cartão de débito</option>
+          <option key="credit" value="Cartão de crédito">Cartão de crédito</option>
         </select>
       </label>
     );

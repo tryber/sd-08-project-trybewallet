@@ -16,11 +16,11 @@ class TagSelection extends Component {
           data-testid="tag-input"
         >
           <option key="choose" value="">Escolha a categoria</option>
-          <option key="grocery" value="grocery">Alimentação</option>
-          <option key="hobby" value="hobby">Lazer</option>
-          <option key="work" value="work">Trabalho</option>
-          <option key="transportation" value="transportation">Transporte</option>
-          <option key="health" value="health">Saúde</option>
+          <option key="grocery" value="Alimentação">Alimentação</option>
+          <option key="hobby" value="Lazer">Lazer</option>
+          <option key="work" value="Trabalho">Trabalho</option>
+          <option key="transportation" value="Transporte">Transporte</option>
+          <option key="health" value="Transporte">Saúde</option>
         </select>
       </label>
     );

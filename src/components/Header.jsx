@@ -31,7 +31,7 @@ class Header extends Component {
     });
     sum = [...currency];
     const reduceSum = ((acc, num) => acc + num);
-    return sum.reduce(reduceSum, 0);
+    return sum.reduce(reduceSum, 0).toFixed(2);
   }
 
   render() {

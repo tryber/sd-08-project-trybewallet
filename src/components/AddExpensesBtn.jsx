@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import fetchExchangeRatesAction from '../actions/requestExchangeRate';
-import addExpenseIndexAction from '../actions/addExpenseIndex';
 import addExpensesAction from '../actions/addExpenses';
 import clearInputHandlerAction from '../actions/clearInputHandler';
 
@@ -16,7 +15,7 @@ class AddExpensesBtn extends Component {
   componentDidUpdate(prevProps) {
     const { handlingInputs, addExpenses, clearInputHandler, resetInputs } = this.props;
     if (handlingInputs[0].exchangeRates !== prevProps.handlingInputs[0].exchangeRates
-    && handlingInputs[0].id !== '') {
+    && handlingInputs[0].value !== '') {
       addExpenses(handlingInputs);
       clearInputHandler();
       resetInputs();
@@ -26,13 +25,9 @@ class AddExpensesBtn extends Component {
   handleClick() {
     const {
       fetchExchangeRates,
-      addExpenseIndex,
-      expenses,
     } = this.props;
-    const id = expenses.length;
 
     fetchExchangeRates();
-    addExpenseIndex(id);
   }
 
   render() {
@@ -49,16 +44,13 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   fetchExchangeRates: () => dispatch(fetchExchangeRatesAction()),
-  addExpenseIndex: (id) => dispatch(addExpenseIndexAction(id)),
   addExpenses: (handlingInputs) => dispatch(addExpensesAction(handlingInputs)),
   clearInputHandler: () => dispatch(clearInputHandlerAction()),
 });
 
 AddExpensesBtn.propTypes = {
   fetchExchangeRates: PropTypes.func.isRequired,
-  addExpenseIndex: PropTypes.func.isRequired,
   addExpenses: PropTypes.func.isRequired,
-  expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
   handlingInputs: PropTypes.arrayOf(PropTypes.object).isRequired,
   clearInputHandler: PropTypes.func.isRequired,
   resetInputs: PropTypes.func.isRequired,
