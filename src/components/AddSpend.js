@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+
 import {
   // fetchCurrencies as fetchCurrenciesAction,
   addExpense as addExpenseAction,
@@ -147,7 +148,7 @@ class AddSpend extends Component {
   render() {
     return (
       <table>
-        <thead>
+        <tbody>
           <tr>
             <th>{this.renderCurrencies()}</th>
             <th>{this.renderValueInput()}</th>
@@ -157,7 +158,7 @@ class AddSpend extends Component {
             <th>{this.renderDescriptionInput()}</th>
             <th>{ this.renderButtonAdd() }</th>
           </tr>
-        </thead>
+        </tbody>
       </table>
     );
   }

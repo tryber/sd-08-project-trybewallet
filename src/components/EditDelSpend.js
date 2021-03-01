@@ -4,7 +4,7 @@ class AddSpend extends React.Component {
   render() {
     return (
       <table>
-        <thead>
+        <tbody>
           <tr>
             <th>ID</th>
             <th>Descrição</th>
@@ -17,7 +17,7 @@ class AddSpend extends React.Component {
             <th>Moeda de conversão</th>
             <th>Editar/Excluir</th>
           </tr>
-        </thead>
+        </tbody>
       </table>
     );
   }
