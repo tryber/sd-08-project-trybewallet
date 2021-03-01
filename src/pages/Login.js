@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
+
 import { actionLogin } from '../actions';
 
 function validateEmail(email) { const re = /\S+@\S+\.\S+/; return re.test(email); }
@@ -12,43 +13,49 @@ class Login extends React.Component {
     this.state = {
       email: '',
       password: '',
+      login: false,
       disabledBtn: true,
     };
 
     this.handleChange = this.handleChange.bind(this);
-    this.emailIsValid = this.emailIsValid.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.loginIsValid = this.loginIsValid.bind(this);
   }
 
   handleChange({ target }) {
     this.setState({
       [target.name]: target.value,
     }, () => {
-      this.emailIsValid();
+      this.loginIsValid();
     });
   }
 
-  emailIsValid() {
-    this.setState({
-      disabledBtn: true,
-    });
+  handleClick(event) {
+    event.preventDefault();
 
+    const { email } = this.state;
+    const { login } = this.props;
+
+    this.setState({ login: true });
+
+    login(email);
+  }
+
+  loginIsValid() {
     const { email, password } = this.state;
     const MINLENGTH = 6;
+    let disabledBtn = false;
 
-    if (password.length >= MINLENGTH && validateEmail(email)) {
-      this.setState({
-        disabledBtn: false,
-      });
-    }
+    disabledBtn = !(password.length >= MINLENGTH && validateEmail(email));
+    this.setState({ disabledBtn });
   }
 
   render() {
-    const { email, password, disabledBtn } = this.state;
-    const { userLogin } = this.props;
+    const { email, password, login, disabledBtn } = this.state;
 
     return (
       <fieldset>
-        <label htmlFor="email">
+        <label htmlFor="email-input">
           E-mail:
           <input
             data-testid="email-input"
@@ -59,7 +66,7 @@ class Login extends React.Component {
           />
         </label>
 
-        <label htmlFor="password">
+        <label htmlFor="password-input">
           Senha:
           <input
             data-testid="password-input"
@@ -73,30 +80,23 @@ class Login extends React.Component {
 
         <button
           type="button"
-          onClick={ () => {
-            userLogin(email);
-            // history.push('/carteira');
-          } }
+          onClick={ this.handleClick }
           disabled={ disabledBtn }
         >
-          <Link to="/carteira">
-            Entrar
-          </Link>
+          Entrar
         </button>
+        {login ? <Redirect to="/carteira" /> : ''}
       </fieldset>
     );
   }
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  userLogin: (value) => dispatch(actionLogin(value)),
+  login: (payload) => dispatch(actionLogin(payload)),
 });
 
 Login.propTypes = {
-  // history: PropTypes.shape({
-  //   push: PropTypes.func,
-  // }).isRequired,
-  userLogin: PropTypes.func.isRequired,
+  login: PropTypes.func.isRequired,
 };
 
 export default connect(null, mapDispatchToProps)(Login);
