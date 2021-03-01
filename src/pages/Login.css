@@ -1,0 +1,20 @@
+.login-form-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+  min-height: 100vh;
+  width: 30%;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  padding: 5rem;
+}
+
+.login-form > div {
+  align-self: center;
+  padding: 0.5rem;
+}

@@ -206,7 +206,7 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
           exchangeRates: mockData,
         },
       ];
-  
+      
       await waitFor(() => {
         expect(valueInput.value === 0 || valueInput.value === '0' || valueInput.value === '').toBe(true);
       });

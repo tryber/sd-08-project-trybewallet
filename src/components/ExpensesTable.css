@@ -1,0 +1,10 @@
+table {
+  margin: 20px auto;
+  text-align: left;
+  width: 70%;
+}
+
+th , td {
+  padding: 8px 1px;
+}
+

@@ -1,0 +1,12 @@
+.expense-form {
+  align-items: center;
+  display: flex;
+  justify-content: flex-start;
+  margin: auto;
+  width: 60%;
+}
+
+.expense-form > span , input , select {
+  margin: 2px 3px;
+  padding: 5px;
+}
