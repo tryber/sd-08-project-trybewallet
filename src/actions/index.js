@@ -18,6 +18,11 @@ export const addExpense = (array) => ({
   expenses: array,
 });
 
+export const deleteExpense = (id) => ({
+  type: 'DELETE_EXPENSE',
+  idExpense: id,
+});
+
 export function fetchCurrency() {
   return (dispatch) => {
     dispatch(requestCurrency());
