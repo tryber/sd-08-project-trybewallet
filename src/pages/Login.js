@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { saveEmail as saveEmailAction } from '../actions';
+// import wave from './images/wave.png';
+import avatar from './images/avatar.svg';
+import './Login.css';
 
 class Login extends React.Component {
   constructor(props) {
@@ -35,43 +38,48 @@ class Login extends React.Component {
     const { email, password } = this.state;
     const { saveEmail } = this.props;
     return (
-      <section>
-        <form>
-          <label htmlFor="email-input">
-            Email:
+      <form className="login-content">
+        <img src={ avatar } alt="avatar" />
+        <h2 className="title">Trybe Wallet</h2>
+        <div className="input-div one">
+          <i className="fas fa-user" />
+          <div className="div">
             <input
               data-testid="email-input"
               id="email-input"
               name="email"
               value={ email }
               onChange={ this.handleChange }
+              type="text"
+              placeholder="email"
             />
-          </label>
-          <label htmlFor="password-input">
-            Senha:
+          </div>
+        </div>
+        <div className="input-div pass">
+          <i className="fas fa-lock" />
+          <div className="div">
             <input
               data-testid="password-input"
               id="password-input"
               name="password"
               value={ password }
               onChange={ this.handleChange }
+              type="password"
+              placeholder="senha"
             />
-          </label>
-          <Link
-            to="/carteira"
+          </div>
+        </div>
+        <Link to="/carteira">
+          <button
+            type="submit"
+            className="btn"
+            disabled={ !this.checkValidity() }
+            onClick={ () => saveEmail(email) }
           >
-            <button
-              type="submit"
-              disabled={ !this.checkValidity() }
-              onClick={ () => saveEmail(email) }
-            >
-              Entrar
-            </button>
-          </Link>
-        </form>
-      </section>
-
-    );
+            Entrar
+          </button>
+        </Link>
+      </form>);
   }
 }
 

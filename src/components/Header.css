@@ -1,0 +1,28 @@
+.app-header {
+  align-items: center;
+
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2rem;
+  min-height: 80px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  border-bottom: 1px solid #ccc;
+  background: #ECECEC;
+  
+}
+
+.app-header-email{
+display : flex;
+justify-content:flex-end
+
+}
+
+.app-header__logo {
+  background: #999;
+  height: 50px;
+  width: 50px;
+  display: flex;
+}
