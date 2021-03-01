@@ -1,0 +1,116 @@
+.login-page {
+  align-items: center;
+  background-color: #ececec;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.login-page section {
+  background-color: #f0f0f0;
+  border: 3px double #acacac;
+  border-radius: 5%;
+  box-shadow: 1px 2px 10px 3px #acacac;
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  padding: calc(5vmin);
+  width: fit-content;
+}
+
+.login-page label {
+  color: #b0b0b0;
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.login-page input {
+  border-radius: 10px;
+  border-style: solid;
+  box-shadow: 2px 3px 4px #acacac;
+  font-size: 1.2rem;
+  padding: 5px;
+}
+
+.login-page input:focus {
+  border-color: #7532d9;
+  outline: none;
+}
+
+.login-page button {
+  background-color: #0000;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  text-decoration: none;
+}
+
+.login-page a {
+  background-color: #0fa36b;
+  border-color: #0fa36b;
+  border-radius: 5px;
+  border-style: outset;
+  border-width: 2px;
+  box-shadow: 4px 5px 5px #acacac;
+  color: white;
+  display: flex;
+  font-size: 1.2rem;
+  font-weight: 900;
+  justify-content: center;
+  margin-top: 25px;
+  padding: 10px;
+  text-decoration: none;
+}
+
+.login-page a:focus {
+  outline: none;
+}
+
+.login-page a:hover {
+  background-color: #13ce86;
+  border-color: #13ce86;
+  box-shadow: 4px 5px 5px #949494;
+}
+
+.login-page .disabled-button {
+  background-color: #f0f0f0;
+  border-color: #ddd;
+  color: #ddd;
+  pointer-events: none;
+}
+
+.login-page a:active {
+  background-color: white;
+  border-color: #0fa36b;
+  border-style: inset;
+  box-shadow: 2px 3px 2px #838383;
+  color: #0fa36b;
+}
+
+.login-page .login-title {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.login-page .login-title h1 {
+  color: #0fa36b;
+  text-shadow: 2px 2px 10px #686868;
+  text-transform: uppercase;
+}
+
+.login-page .login-title p {
+  color: #7532d9;
+  font-size: 18px;
+  margin: 0;
+  padding: 6px;
+  text-shadow: 2px 2px 10px #686868;
+  width: fit-content;
+}
+
+.login-page .login-title img {
+  max-width: 40px;
+}
