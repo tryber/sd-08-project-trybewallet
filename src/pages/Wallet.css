@@ -8,6 +8,7 @@ a {
   margin: 0px;
   transition: all 0.4s;
 }
+
 .txt1 {
   color: #e5e5e5;
   font-family: 'Roboto';
@@ -19,8 +20,9 @@ a {
   margin: 0 auto;
   width: 100%;
 }
+
 .container-wallet-bg {
-  background-image: url("../images/bg-01.jpg");
+  background-image: url('../images/bg-01.jpg');
 }
 
 .container-wallet {
@@ -40,7 +42,7 @@ a {
 
 .container-wallet::before {
   background-color: rgba(255, 255, 255, 0.9);
-  content: "";
+  content: '';
   display: block;
   height: 100%;
   left: 0;
@@ -59,26 +61,32 @@ a {
   overflow: hidden;
   width: 100%;
 }
+
 .table {
   display: flex;
   justify-content: center;
 }
+
 table {
   align-self: center;
   height: 100%;
   width: 95%;
 }
+
 thead {
   color: azure;
 }
+
 tbody {
   color: azure;
 }
+
 td {
   border: 1px solid azure;
   border-radius: 3px;
   width: 12%;
 }
+
 button.table-button {
   background-color: azure;
 
