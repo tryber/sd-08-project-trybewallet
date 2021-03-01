@@ -324,5 +324,6 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
       const totalField = screen.getByTestId('total-field');
       expect(totalField).toContainHTML('131.37');
   });
-  });
+  }
+  );
   
