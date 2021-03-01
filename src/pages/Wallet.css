@@ -73,7 +73,6 @@ a {
   width: 100%;
 }
 .table {
-
   display: flex;
   justify-content: center;
 }
@@ -86,18 +85,18 @@ table {
 thead {
   color: azure;
 }
-tbody{
+tbody {
   color: azure;
 }
 td {
-  border:1px solid azure;
+  border: 1px solid azure;
   border-radius: 3px;
   width: 12%;
 }
 button.table-button {
   background-color: azure;
 
-justify-self: center;
+  justify-self: center;
   margin: 2%;
   width: 45%;
 }
