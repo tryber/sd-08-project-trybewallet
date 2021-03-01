@@ -2,8 +2,9 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
-import updateEmailAction from '../actions';
+// import Button from '@material-ui/core/Button';
+import { updateEmailAction } from '../actions';
+import './LoginForm.css';
 
 const { useState } = React;
 
@@ -61,9 +62,9 @@ const LoginForm = ({ updateEmail }) => {
         value={ validate.email.value }
       />
       { passwordInput(handleChange) }
-      <Button type="button" disabled={ disabled } onClick={ handleClick }>
+      <button type="button" disabled={ disabled } onClick={ handleClick }>
         Entrar
-      </Button>
+      </button>
     </form>
   );
 };

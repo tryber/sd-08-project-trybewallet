@@ -1,2 +1,13 @@
 export const UPDATE_EMAIL = 'UPDATE_EMAIL';
-export const FIX = 'FIX';
+export const UPDATE_EXCHANGE = 'UPDATE_EXCHANGE';
+export const UPDATE_TAG = 'UPDATE_TAG';
+export const UPDATE_METHOD = 'UPDATE_METHOD';
+export const UPDATE_CURRENCY = 'UPDATE_CURRENCY';
+export const UPDATE_DESCRIPTION = 'UPDATE_DESCRIPTION';
+export const UPDATE_VALUE = 'UPDATE_VALUE';
+export const RESET_EXPENSE = 'RESET_EXPENSE';
+export const UPDATE_ID = 'UPDATE_ID';
+export const ADD_EXPENSE = 'ADD_EXPENSE';
+export const REMOVE_EXPENSE = 'REMOVE_EXPENSE';
+export const UPDATE_CURRENCIES = 'UPDATE_CURRENCIES';
+export const UNRESET = 'UNRESET';
