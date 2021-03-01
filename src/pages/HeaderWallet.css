@@ -5,7 +5,6 @@ a {
   font-family: Roboto;
   font-size: 14px;
   line-height: 1.7;
-  margin: 0px;
   transition: all 0.4s;
 }
 
@@ -18,20 +17,6 @@ a:hover {
   text-decoration: none;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin: 0px;
-}
-
-ul,
-li {
-  list-style-type: none;
-  margin: 0px;
-}
 
 input {
   border: none;
@@ -48,10 +33,6 @@ input:focus {
   border-color: transparent !important;
 }
 
-label {
-  display: block;
-  margin: 0;
-}
 
 button {
   background: transparent;
@@ -105,7 +86,6 @@ iframe {
 }
 
 .wrap-header-wallet {
-  background: #9152f8;
   background: linear-gradient(to top, #7579ff, #b224ef);
   border-radius: 10px;
   height: 95px;
@@ -254,7 +234,6 @@ iframe {
 
 .header-wallet-form-btn {
   align-items: center;
-  background: #9152f8;
   background: linear-gradient(to bottom, #7579ff, #b224ef);
   border-radius: 25px;
   color: #555;
