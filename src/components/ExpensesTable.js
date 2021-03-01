@@ -39,12 +39,13 @@ class ExpensesTable extends Component {
           <td>{ expense.method }</td>
           <td>{ expense.value }</td>
           <td>{ coinName }</td>
-          <td>{ exchangeRate }</td>
-          <td>{ parseFloat(expense.value) * parseFloat(exchangeRate) }</td>
-          <td>BRL</td>
+          <td>{ (parseFloat(exchangeRate)).toFixed(2) }</td>
+          <td>{ (parseFloat(expense.value) * parseFloat(exchangeRate)).toFixed(2) }</td>
+          <td>Real</td>
           <td>
             <button
               type="button"
+              data-testid="delete-btn"
               onClick={ () => deleteExpense(expense) }
             >
               Excluir

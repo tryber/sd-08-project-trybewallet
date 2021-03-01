@@ -68,7 +68,7 @@ class ExpensesForm extends Component {
     const { currentExpense: { value } } = this.state;
     return (
       <>
-        <span>Valor</span>
+        <span>Valor:</span>
         <input
           onChange={ this.handleChange }
           value={ value }
@@ -86,7 +86,7 @@ class ExpensesForm extends Component {
     const { currentExpense: { description } } = this.state;
     return (
       <>
-        <span>Descrição</span>
+        <span>Descrição:</span>
         <input
           onChange={ this.handleChange }
           value={ description }
@@ -102,7 +102,7 @@ class ExpensesForm extends Component {
     const { coins, currentExpense: { currency } } = this.state;
     return (
       <>
-        <span>Moeda</span>
+        <span>Moeda:</span>
         <select
           onChange={ this.handleChange }
           value={ currency }
@@ -130,7 +130,7 @@ class ExpensesForm extends Component {
     const { currentExpense: { method } } = this.state;
     return (
       <>
-        <span>Método de pagamento</span>
+        <span>Método de pagamento:</span>
         <select
           onChange={ this.handleChange }
           value={ method }
