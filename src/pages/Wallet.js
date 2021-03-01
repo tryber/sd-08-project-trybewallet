@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import fetchCurrencies from '../actions/walletAction';
-import addRegister from '../actions/index';
+import fetchCurrenciesAction from '../actions/walletAction';
+import { addRegister as addRegisterAction } from '../actions/index';
 import Header from '../components/Header';
 
 class Wallet extends React.Component {
@@ -205,8 +205,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchCurrencies: () => dispatch(fetchCurrencies()),
-  addRegister: (e) => dispatch(addRegister(e)),
+  fetchCurrencies: () => dispatch(fetchCurrenciesAction()),
+  addRegister: (e) => dispatch(addRegisterAction(e)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Wallet);
