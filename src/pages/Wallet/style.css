@@ -1,0 +1,59 @@
+.walletContainer {
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.walletContainer > header {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+}
+
+.walletContainer > header > h1 {
+  color: var(--title);
+}
+
+.walletContainer > header > div {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+}
+
+.walletContainer span {
+  color: var(--text);
+}
+
+.walletContainer > main {
+  display: grid;
+  grid-gap: 0.5rem;
+  grid-template-columns: repeat(6, auto);
+  overflow-x: scroll;
+}
+
+.walletContainer > main::-webkit-scrollbar {
+  display: none;
+}
+
+.walletContainer > main > label {
+  align-items: center;
+  display: flex;
+}
+
+.walletContainer > main > label > input , .walletContainer > main > label > select {
+  margin-left: 0.5rem;
+}
+
+.walletExpenseEdit {
+  background-color: var(--blue);
+  padding: 1rem;
+}
+
+.walletExpense {
+  background-color: var(--blue-twitter);
+  padding: 1rem;
+}
+
