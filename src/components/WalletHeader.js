@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import SelectExchange from './WalletForm/SelectExchange';
 import OptionExchange from './WalletForm/SelectExchange/OptionExchange';
 import { wallet } from '../actions';
-import { totalMoneyInTheWallet } from '../controller/walletController';
+import { totalMoneyInTheWallet } from '../controller/totalWalletController';
 
 class WalletHeader extends React.Component {
   render() {
