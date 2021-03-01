@@ -1,6 +1,7 @@
 // Coloque aqui suas actions
 export const ADCIONAR_EMAIL = 'ADCIONAR_EMAIL';
 export const FET_API = 'FET_API';
+export const EXPENSE = 'EXPENSE';
 
 export const adcionarEmail = (value) => ({
   type: ADCIONAR_EMAIL,
@@ -10,6 +11,11 @@ export const adcionarEmail = (value) => ({
 function getApi(json) {
   return { type: FET_API, payload: json };
 }
+
+export const despesaAtual = (value) => ({
+  type: EXPENSE,
+  value,
+});
 
 export function fetApi() {
   return (dispatch) => {

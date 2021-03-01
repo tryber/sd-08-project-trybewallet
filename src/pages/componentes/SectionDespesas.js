@@ -1,13 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fetApi } from '../../actions';
+import { fetApi, despesaAtual } from '../../actions';
 
 class SectionDespesas extends React.Component {
   constructor() {
     super();
 
     this.state = {
+      id: 0,
       valor: '',
       descricao: '',
       moedaI: 'USD',
@@ -18,6 +19,7 @@ class SectionDespesas extends React.Component {
     this.metodoPag = ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'];
     this.DespesaTags = ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
     this.onChange = this.onChange.bind(this);
+    this.handleFetch = this.handleFetch.bind(this);
     this.renderInputs = this.renderInputs.bind(this);
     this.renderMoeda = this.renderMoeda.bind(this);
   }
@@ -31,6 +33,33 @@ class SectionDespesas extends React.Component {
     this.setState({
       [target.name]: target.value,
     });
+  }
+
+  handleFetch() {
+    const { id, valor, descricao, moedaI, metodo, tag } = this.state;
+    const { addDespesa } = this.props;
+    return (
+      fetch('https://economia.awesomeapi.com.br/json/all')
+        .then((r) => r.json())
+        .then((data) => {
+          delete data.USDT;
+          const expensive = {
+            id,
+            valor,
+            descricao,
+            moedaI,
+            metodo,
+            tag,
+            exchangeRates: data,
+          };
+          addDespesa(expensive);
+          this.setState({
+            id: id + 1,
+            valor: '',
+            descricao: '',
+          });
+        })
+    );
   }
 
   renderInputs(valor, descricao) {
@@ -67,7 +96,6 @@ class SectionDespesas extends React.Component {
   renderMoeda() {
     const { moeda } = this.props;
     const { moedaI } = this.state;
-    console.log(moeda);
     return (
       <>
         Moeda
@@ -122,23 +150,25 @@ class SectionDespesas extends React.Component {
         </select>
         <br />
         <br />
-        <button type="button">Adicionar despesa</button>
+        <button type="button" onClick={ this.handleFetch }>Adicionar despesa</button>
       </>
     );
   }
 }
 
 const mapStateToProps = (state) => ({
-  moeda: state.wallet.currency,
+  moeda: state.wallet.currencies,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetch: (e) => dispatch(fetApi(e)),
+  fetch: () => dispatch(fetApi()),
+  addDespesa: (e) => dispatch(despesaAtual(e)),
 });
 
 SectionDespesas.propTypes = {
   fetch: PropTypes.func.isRequired,
   moeda: PropTypes.arrayOf(PropTypes.string).isRequired,
+  addDespesa: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SectionDespesas);
