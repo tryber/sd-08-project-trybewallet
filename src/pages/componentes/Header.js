@@ -15,8 +15,8 @@ class Header extends React.Component {
           <h2>Lista de Gastos</h2>
           <span data-testid="total-field">
             {despesas.reduce((acc, cur) => {
-              const { ask } = cur.exchangeRates[cur.moedaI];
-              const expense = Number(ask * cur.valor);
+              const { ask } = cur.exchangeRates[cur.currency];
+              const expense = Number(ask * cur.value);
               return acc + Number(expense);
             }, 0).toFixed(2)}
           </span>

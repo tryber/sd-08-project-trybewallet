@@ -9,14 +9,14 @@ class SectionDespesas extends React.Component {
 
     this.state = {
       id: 0,
-      valor: '',
-      descricao: '',
-      moedaI: 'USD',
-      metodo: 'Dinheiro',
+      value: '',
+      description: '',
+      currency: 'USD',
+      method: 'Dinheiro',
       tag: 'Alimentação',
     };
 
-    this.metodoPag = ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'];
+    this.methodPag = ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'];
     this.DespesaTags = ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
     this.onChange = this.onChange.bind(this);
     this.handleFetch = this.handleFetch.bind(this);
@@ -36,7 +36,7 @@ class SectionDespesas extends React.Component {
   }
 
   handleFetch() {
-    const { id, valor, descricao, moedaI, metodo, tag } = this.state;
+    const { id, value, description, currency, method, tag } = this.state;
     const { addDespesa } = this.props;
     return (
       fetch('https://economia.awesomeapi.com.br/json/all')
@@ -45,34 +45,34 @@ class SectionDespesas extends React.Component {
           delete data.USDT;
           const expensive = {
             id,
-            valor,
-            descricao,
-            moedaI,
-            metodo,
+            value,
+            description,
+            currency,
+            method,
             tag,
             exchangeRates: data,
           };
           addDespesa(expensive);
           this.setState({
             id: id + 1,
-            valor: '',
-            descricao: '',
+            value: '',
+            description: '',
           });
         })
     );
   }
 
-  renderInputs(valor, descricao) {
+  renderInputs(value, description) {
     return (
       <>
         <h2>Cadastro de despasa</h2>
         <br />
-        Valor Despesa
+        value Despesa
         <br />
         <input
           type="number"
-          value={ valor }
-          name="valor"
+          value={ value }
+          name="value"
           data-testid="value-input"
           onChange={ this.onChange }
         />
@@ -82,8 +82,8 @@ class SectionDespesas extends React.Component {
         <br />
         <input
           type="text"
-          value={ descricao }
-          name="descricao"
+          value={ description }
+          name="description"
           data-testid="description-input"
           onChange={ this.onChange }
         />
@@ -95,14 +95,14 @@ class SectionDespesas extends React.Component {
 
   renderMoeda() {
     const { moeda } = this.props;
-    const { moedaI } = this.state;
+    const { currency } = this.state;
     return (
       <>
         Moeda
         <br />
         <select
-          value={ moedaI }
-          name="moedaI"
+          value={ currency }
+          name="currency"
           data-testid="currency-input"
           onChange={ this.onChange }
         >
@@ -116,21 +116,21 @@ class SectionDespesas extends React.Component {
   }
 
   render() {
-    const { valor, descricao, metodo, tag } = this.state;
+    const { value, description, method, tag } = this.state;
     return (
       <>
-        { this.renderInputs(valor, descricao) }
+        { this.renderInputs(value, description) }
         { this.renderMoeda() }
         <br />
         Método de Pagamento
         <br />
         <select
-          value={ metodo }
-          name="metodo"
+          value={ method }
+          name="method"
           data-testid="method-input"
           onChange={ this.onChange }
         >
-          { this.metodoPag.map((e) => (
+          { this.methodPag.map((e) => (
             <option key={ e } value={ e }>{ e }</option>
           ))}
         </select>
