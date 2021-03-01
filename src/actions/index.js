@@ -8,6 +8,13 @@ import {
   ADD_REGISTER, DELETE_REGISTER, LOGIN, REQUEST_API,
   REQUEST_API_SUCCESS, REQUEST_API_ERRO } from '../store/consts';
 
+// export const LOGIN = 'LOGIN';
+// export const ADD_REGISTER = 'ADD_REGISTER';
+// export const DELETE_REGISTER = 'DELETE_REGISTER';
+// export const REQUEST_API = 'REQUEST_API';
+// export const REQUEST_API_ERRO = 'REQUEST_API_ERRO';
+// export const REQUEST_API_SUCCESS = 'REQUEST_API_SUCCESS';
+
 export const login = (email) => ({
   type: LOGIN,
   payload: email,
@@ -40,6 +47,7 @@ export const requestAPIErro = (error) => ({
 export const requestAPISuccess = ({ exchangeRates: value }) => ({
   type: REQUEST_API_SUCCESS,
   payload: {
+
     exchangeRates: value,
     isFetching: true,
   },

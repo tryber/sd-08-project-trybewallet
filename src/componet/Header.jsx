@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-const moeda = ['USD', 'CAD', 'EUR', 'GBP', 'ARS',
-  'BTC', 'LTC', 'JPY', 'CHF', 'AUD', 'CNY', 'ILS', 'ETH', 'XRP'];
+// const moeda = ['USD', 'CAD', 'EUR', 'GBP', 'ARS',
+//   'BTC', 'LTC', 'JPY', 'CHF', 'AUD', 'CNY', 'ILS', 'ETH', 'XRP'];
 class Header extends React.Component {
   render() {
     const { email } = this.props;
@@ -13,12 +13,7 @@ class Header extends React.Component {
           {email}
         </div>
         <div data-testid="total-field">0</div>
-        <select data-testid="header-currency-field">
-          <option selected value="BRA">BRA</option>
-          { moeda.map(
-            (element) => (<option key={ element } value={ element }>{element}</option>),
-          )}
-        </select>
+        <span data-testid="header-currency-field">BRL</span>
       </div>
     );
   }

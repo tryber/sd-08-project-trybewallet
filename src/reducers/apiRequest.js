@@ -12,6 +12,7 @@ function apiRequest(state = initialState, { type, payload }) {
       isFetching: payload.isFetching,
     };
   case REQUEST_API_SUCCESS:
+    console.log(payload);
     return {
       ...state,
       exchangeRates: payload,
