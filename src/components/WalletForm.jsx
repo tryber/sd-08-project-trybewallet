@@ -7,7 +7,7 @@ class WalletForm extends React.Component {
   constructor(props) {
     super(props);
 
-    this.payments = ['Dinheiro', 'Cartão de crédito', 'Cartão de Débito'];
+    this.payments = ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'];
     this.tags = ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
 
     this.state = {

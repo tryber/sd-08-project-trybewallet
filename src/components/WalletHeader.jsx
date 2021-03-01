@@ -6,18 +6,17 @@ import PropTypes from 'prop-types';
 class WalletHeader extends React.Component {
   getTotal() {
     const { expenses } = this.props;
-    console.log(expenses)
-    // expenses.map(({ currency, value, exchangeRates }) => {
-    //   const currencyData = exchangeRates[currency];
-    //   const total = Number(value) * Number(currencyData.ask);
-    //   return total;
-    // })
-    //   .reduce((acc, expense) => acc + expense, 0);
+    return expenses.map(({ currency, value, exchangeRates }) => {
+      const currencyData = exchangeRates[currency];
+      const total = Number(value) * Number(currencyData.ask);
+      return total;
+    })
+      .reduce((acc, expense) => acc + expense, 0);
   }
 
   render() {
     const { email } = this.props;
-    this.getTotal();
+    console.log(this.getTotal());
     return (
       <>
         <header data-testid="email-field">{email}</header>
@@ -41,5 +40,5 @@ export default connect(mapStateToProps)(WalletHeader);
 
 WalletHeader.propTypes = {
   email: PropTypes.string.isRequired,
-  expenses: PropTypes.shape.isRequired,
+  expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
