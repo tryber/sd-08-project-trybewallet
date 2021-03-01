@@ -1,3 +1,5 @@
+import getCurrencies from '../services/getCurrencies';
+
 // Coloque aqui suas actions
 export const userEmailAction = (value) => ({
   type: 'LOGIN_EMAIL',
@@ -9,12 +11,17 @@ export const userPasswordAction = (value) => ({
   value,
 });
 
-export const userCurrenciesAction = (value) => ({
+export const userCurrenciesAction = () => ({
   type: 'USER_CURRENCIES',
-  value,
 });
 
-export const userExpensesAction = (value) => ({
-  type: 'USER_EXPENSES',
-  value,
+export const requestCurrencies = ({ moedas }) => ({
+  type: 'REQUEST_CURRENCIES_SUCCESS',
+  value: moedas,
 });
+
+export const walletThunk = () => (dispatch) => {
+  dispatch(userCurrenciesAction());
+  getCurrencies()
+    .then((response) => dispatch(requestCurrencies(response)));
+};
