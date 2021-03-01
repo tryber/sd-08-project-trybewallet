@@ -116,7 +116,7 @@ class Form extends React.Component {
     const { expensesState } = this.state;
     return (
       <label htmlFor="description">
-        descrição da despesa
+        descrição da despesa:
         <input
           data-testid="description-input"
           name="description"
@@ -130,7 +130,7 @@ class Form extends React.Component {
 
   renderTagInput = () => (
     <label htmlFor="tag">
-      Tag
+      Tag:
       <select data-testid="tag-input" name="tag" id="tag" onChange={ this.handleChange }>
         <option>Alimentação</option>
         <option>Lazer</option>
@@ -151,7 +151,7 @@ class Form extends React.Component {
         </p>
         <form>
           <label htmlFor="value">
-            Valor da despesa
+            Valor da despesa:
             <input
               data-testid="value-input"
               name="value"
@@ -162,11 +162,11 @@ class Form extends React.Component {
           </label>
           {this.renderDescription()}
           <label htmlFor="currency">
-            moeda
+            moeda:
             {this.renderSelect()}
           </label>
           <label htmlFor="method">
-            Método de pagamento
+            Método de pagamento:
             <select
               data-testid="method-input"
               name="method"

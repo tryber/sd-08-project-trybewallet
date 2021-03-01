@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Form from '../components/Form';
+import Table from '../components/Table';
 
 class Wallet extends React.Component {
   render() {
@@ -16,6 +17,7 @@ class Wallet extends React.Component {
           <p data-testid="header-currency-field">Câmbio: BRL</p>
         </header>
         <Form />
+        <Table />
       </main>
 
     );
