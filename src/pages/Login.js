@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { login as loginAction } from '../actions/loginAction';
+import login from '../actions/loginAction';
 
 const passwordMinNumber = 6;
 
@@ -19,7 +19,7 @@ class Login extends React.Component {
 
   render() {
     const { email, password, emailValidation } = this.state;
-    const { login } = this.props;
+    const { loginAction } = this.props;
     return (
       <div className="Login">
         <section className="login-inputs">
@@ -43,7 +43,7 @@ class Login extends React.Component {
               || password.length < passwordMinNumber
             }
             type="submit"
-            onClick={ () => login({ email, password }) }
+            onClick={ () => loginAction({ email, password }) }
             data-testid="btn-login"
           >
             Entrar
@@ -55,11 +55,11 @@ class Login extends React.Component {
 }
 
 Login.propTypes = {
-  login: PropTypes.func.isRequired,
+  loginAction: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  login: (e) => dispatch(loginAction(e)),
+  loginAction: (e) => dispatch(login(e)),
 });
 
 export default connect(null, mapDispatchToProps)(Login);

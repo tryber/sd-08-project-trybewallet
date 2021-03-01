@@ -12,11 +12,11 @@ function wallet(state = initialState, action) {
   case REQUEST_CURRENCIES:
     return { ...state, isFetching: true };
   case GET_CURRENCIES:
-    return {...state, currencies: [action.payload], sFetching: false};
+    return { ...state, currencies: [action.payload], isFetching: false };
   case FAILED_REQUEST:
-    return {...state, error: action.payload, sFetching: false};
+    return { ...state, error: action.payload, isFetching: false };
   case 'ADD_REGISTER':
-    return {...state, expenses: [...state.expenses, action.data]};
+    return { ...state, expenses: [...state.expenses, action.data] };
   case 'DELETE_REGISTER':
     return state.filter((register) => register !== action.value);
   default:

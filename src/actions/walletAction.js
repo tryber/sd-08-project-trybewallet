@@ -1,4 +1,4 @@
-import { GET_CURRENCIES, REQUEST_CURRENCIES, FAILED_REQUEST } from '../actions/index';
+import { GET_CURRENCIES, REQUEST_CURRENCIES, FAILED_REQUEST } from './index';
 
 function requestCurrencies() {
   return { type: REQUEST_CURRENCIES };
@@ -17,10 +17,10 @@ function fetchCurrencies() {
     try {
       dispatch(requestCurrencies());
       const exchangeResponse = await fetch(
-        'https://economia.awesomeapi.com.br/json/all'
+        'https://economia.awesomeapi.com.br/json/all',
       );
       const exchangeJson = await exchangeResponse.json();
-      delete exchangeJson.USDT
+      delete exchangeJson.USDT;
       return dispatch(getCurrencies(exchangeJson));
     } catch (error) {
       return dispatch(failedRequest(error));
