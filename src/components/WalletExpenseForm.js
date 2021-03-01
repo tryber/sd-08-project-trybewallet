@@ -50,7 +50,7 @@ WalletExpenseForm.propTypes = {
       tag: PropTypes.string.isRequired,
       method: PropTypes.string.isRequired,
       ask: PropTypes.string.isRequired,
-      exchangeRates: PropTypes.shape(PropTypes.string),
+      exchangeRates: PropTypes.shape(PropTypes.object),
     }),
   ),
 };

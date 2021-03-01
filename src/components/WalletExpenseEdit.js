@@ -124,7 +124,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 WalletExpenseEdit.propTypes = {
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
-  editExpense: PropTypes.arrayOf(PropTypes.string).isRequired,
+  editExpense: PropTypes.arrayOf(PropTypes.object).isRequired,
   editExpenseButton: PropTypes.func.isRequired,
 };
 

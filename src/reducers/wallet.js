@@ -51,7 +51,6 @@ export default function (state = initialState, action) {
       ...state, expenses: [...removeExpense(state.expenses, action.payload)],
     };
   case SELECT_EXPENSE:
-    console.log(action.payload);
     return {
       ...state,
       editExpense: [...selectExpense(state.expenses, action.payload)],
@@ -61,7 +60,7 @@ export default function (state = initialState, action) {
   case EDIT_EXPENSE:
     return {
       ...state,
-      expenses: [...state.expenses, action.payload],
+      expenses: [...state.expenses, action.payload].sort((a, b) => a.id - b.id),
       editExpense: [],
       isExpenseEdit: false,
     };
