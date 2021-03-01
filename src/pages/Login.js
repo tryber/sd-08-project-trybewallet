@@ -28,7 +28,7 @@ class Login extends React.Component {
     const PASSWORD_LENGTH = 6;
     if (password.length < PASSWORD_LENGTH) return false;
     if (/\S+@\S+\.\S+/i.test(email)) return true;
-    return true;
+    return false;
   }
 
   render() {
