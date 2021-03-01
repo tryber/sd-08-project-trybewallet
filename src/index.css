@@ -1,4 +1,6 @@
 body {
+  text-align: center;
+  background-color: #858383;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -10,4 +12,65 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+input {
+  display: block;
+  justify-content: center;
+  align-items: center;
+  background-color: #9b9494;
+  background-image: none;
+  border: none;
+  box-shadow: none;
+  color: white;
+  margin: 10px;
+  padding: 10px;
+}
+
+a {
+  color: rgb(102, 177, 243);
+  text-decoration: none;
+}
+
+.link {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.Login {
+  text-align: center;
+  background-color: #424242;
+  border-radius: 4px;
+  display: block;
+  padding: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+}
+
+.Login .login-inputs {
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  background-image: none;
+  border: 5px;
+  font-weight: 800;
+  margin: 10px;
+  padding: 10px;
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+
+table {
+  width: 100%;
+}
+
+.input-number {
+  width: 60px;
 }
