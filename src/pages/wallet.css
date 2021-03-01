@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
+body{
+  font-family: 'Montserrat', sans-serif;
+  overflow-x: hidden;
+}
+
+.header {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.header p{
+  margin-left: 10px;
+  margin-right: 5px;
+}
+
+.forms {
+  background-color: red;
+  padding: 15px;
+}
+
+.input-value {
+  margin-right: 25px;
+}
+
+.input-value input{
+  border-radius: 5px;
+  border: solid 1px black;
+  font-family: 'Montserrat', sans-serif;
+  margin-left: 10px;
+  padding: 5px;
+  text-align: center;
+  width: 50px;
+}
+
+.input-description {
+  margin-right: 25px;
+}
+
+.input-description input{
+  border-radius: 5px;
+  border: solid 1px black;
+  font-family: 'Montserrat', sans-serif;
+  margin-left: 10px;
+  padding: 5px;
+  text-align: center;
+  width: 150px;
+}
+
+.coin-drop {
+  margin-right: 25px;
+}
+
+.coin-drop select{
+  background-color: white;
+  border: solid 1px black;
+  border-radius: 5px;
+  font-family: 'Montserrat', sans-serif;
+  margin-left: 10px;
+  padding: 5px;
+  text-align: center;
+  width: 70px;
+}
+
+.payment-drop {
+  margin-right: 25px;
+}
+
+.payment-drop select{
+  background-color: white;
+  border: solid 1px black;
+  border-radius: 5px;
+  font-family: 'Montserrat', sans-serif;
+  margin-left: 10px;
+  padding: 5px;
+  text-align: center;
+  width: 150px;
+}
+
+.tag-drop {
+  margin-right: 25px;
+}
+
+.tag-drop select{
+  background-color: white;
+  border-radius: 5px;
+  border: solid 1px black;
+  font-family: 'Montserrat', sans-serif;
+  margin-left: 10px;
+  padding: 5px;
+  text-align: center;
+  width: 150px;
+}
+
+.button-submit {
+  background-color: white;
+  border-radius: 5px;
+  border: solid 1px black;
+  font-family: 'Montserrat', sans-serif;
+  padding: 5px;
+  text-align: center;
+  width: 150px;
+}
+
+.button-submit:hover{
+  cursor: pointer;
+}
+
+.table {
+  background-color: black;
+  color: white;
+  display: flex;
+  font-size: 12px;
+  justify-content: space-between;
+  padding: 0px 15px;
+}
+
+.orders {
+  display: flex;
+  justify-content: space-between;
+}
+
