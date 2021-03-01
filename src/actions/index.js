@@ -11,8 +11,13 @@ function getApi(json) {
   return { type: FET_API, payload: json };
 }
 
-export function fetApi(dispatch) {
-  return fetch('https://dog.ceo/api/breeds/image/random')
-    .then((r) => r.json()
-      .then((json) => dispatch(getApi(json))));
+export function fetApi() {
+  return (dispatch) => {
+    fetch('https://economia.awesomeapi.com.br/json/all')
+      .then((r) => r.json())
+      .then((data) => {
+        delete data.USDT;
+        dispatch(getApi(data));
+      });
+  };
 }
