@@ -1,4 +1,4 @@
-* {
+/* * {
   box-sizing: border-box;
   font-family: Roboto,sans-serif;
 }
@@ -41,7 +41,7 @@ button, select {
   color: #000000;
   font-weight: 600;
   cursor: pointer;
-}
+} */
 
 /* .fieldsetLogin button, .fieldsetLogin input {
 
