@@ -4,15 +4,12 @@ const InitialState = {
 };
 const userReducer = (state = InitialState, action) => {
   switch (action.type) {
-  case 'USR_ADD':
+  case 'USR_LOGIN':
     return {
       ...state,
-      user: {
-        email: action.email,
-      },
+      email: action.payload,
     };
 
-    // change code above this line
   default:
     return state;
   }

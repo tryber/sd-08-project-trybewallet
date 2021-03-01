@@ -1,53 +1,55 @@
 // Coloque aqui suas actions
 
-const USER_LOGIN = 'USER_LOGIN';
-const WALLET_ADDCURR = 'WALLET_ADDCURR';
-const WALLET_ADDEXP = 'WALLET_ADDEXP';
-const WALLET_DELEXP = 'WALLET_DELEXP';
-const WALLET_EDITEXP = 'WALLET_EDITEXP';
-const WALLET_ENTER_EDIT_MODE = 'WALLET_ENTER_EDIT_MODE';
-const WALLET_EXIT_EDIT_MODE = 'WALLET_EXIT_EDIT_MODE';
+// constantes de referencia para chamar na action
+const USR_LOGIN = 'USR_LOGIN';
+const ADDCURR = 'ADDCURR';
+const ADDEXP = 'ADDEXP';
+const DELEXP = 'DELEXP';
+const ENTER_EDIT = 'ENTER_EDIT';
+const EXIT_EDIT = 'EXIT_EDIT';
+const EDITEXP = 'EDITEXP';
 
 export function login(payload) {
   return {
-    type: USER_LOGIN,
+    type: USR_LOGIN,
     payload,
   };
 }
 
 export function addCurrency(payload) {
   return {
-    type: WALLET_ADDCURR,
+    type: ADDCURR,
     payload,
   };
 }
 export function addExpense(payload) {
   return {
-    type: WALLET_ADDEXP,
+    type: ADDEXP,
     payload,
   };
 }
 export function delExpense(id) {
   return {
-    type: WALLET_DELEXP,
+    type: DELEXP,
     payload: id,
-  };
-}
-export function editExpense(payload) {
-  return {
-    type: WALLET_EDITEXP,
-    payload,
   };
 }
 
 export function enterEditMode(id) {
   return {
-    type: WALLET_ENTER_EDIT_MODE,
+    type: ENTER_EDIT,
     id,
   };
 }
 export function exitEditMode() {
   return {
-    type: WALLET_EXIT_EDIT_MODE,
+    type: EXIT_EDIT,
+  };
+}
+
+export function editExpense(payload) {
+  return {
+    type: EDITEXP,
+    payload,
   };
 }
