@@ -17,32 +17,32 @@ class ExpenseTable extends React.Component {
       <table className="expense-table">
         <thead>
           <tr>
-          {tableTitle.map((title) => (
-            <th className="title" key={ title }>
-              {title}
-            </th>
-          ))}
+            {tableTitle.map((title) => (
+              <th className="title" key={ title }>
+                {title}
+              </th>
+            ))}
           </tr>
         </thead>
         <tbody>
-        {expenses.map((expense) => (
-          <tr key={ expense.id }>
-            <td className="data">{expense.description}</td>
-            <td className="data">{expense.tag}</td>
-            <td className="data">{expense.method}</td>
-            <td className="data">{expense.value}</td>
-            <td className="data">{expense.exchangeRates[expense.currency].name}</td>
-            <td className="data">
-              {Number(expense.exchangeRates[expense.currency].ask).toFixed(2)}
-            </td>
-            <td className="data">
-              {parseFloat(expense.value * expense.exchangeRates[expense.currency].ask)
-                .toFixed(2)}
-            </td>
-            <td className="data">Real</td>
-            <td className="data"> </td>
-          </tr>
-        ))}
+          {expenses.map((expense) => (
+            <tr key={ expense.id }>
+              <td className="data">{expense.description}</td>
+              <td className="data">{expense.tag}</td>
+              <td className="data">{expense.method}</td>
+              <td className="data">{expense.value}</td>
+              <td className="data">{expense.exchangeRates[expense.currency].name}</td>
+              <td className="data">
+                {Number(expense.exchangeRates[expense.currency].ask).toFixed(2)}
+              </td>
+              <td className="data">
+                {parseFloat(expense.value * expense.exchangeRates[expense.currency].ask)
+                  .toFixed(2)}
+              </td>
+              <td className="data">Real</td>
+              <td className="data"> </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     );
