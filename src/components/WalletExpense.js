@@ -2,13 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-
-import { currencySymbol, getCurrency } from '../../services/api';
-import expense from '../../data/expense';
-import Select from './WalletForm/Select';
+import { getCurrencies } from '../actions';
+import expense from '../data/expense';
+import SelectExpense from './WalletForm/SelectExpense';
 import Input from './WalletForm/Input';
-import { wallet } from '../../actions';
-import './style.css';
 
 class WalletExpense extends Component {
   constructor(props) {
@@ -19,19 +16,12 @@ class WalletExpense extends Component {
       currency: '',
       method: '',
       tag: '',
-      cambioSymbol: [],
-
     };
 
-    this.rednerSelect = this.rednerSelect.bind(this);
+    this.renderSelects = this.renderSelects.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
-  }
-
-  componentDidMount() {
-    currencySymbol().then((cambio) => this.setState((state) => ({
-      ...state, cambioSymbol: cambio,
-    })));
+    this.handleResetField = this.handleResetField.bind(this);
   }
 
   handleChange({ target }) {
@@ -41,44 +31,36 @@ class WalletExpense extends Component {
     }));
   }
 
-  handleClick() {
-    const {
-      value,
-      description,
-      currency,
-      method,
-      tag,
-    } = this.state;
-
-    const { addExpense } = this.props;
-    getCurrency().then((data) => {
-      const currentCurrency = {
-        value,
-        description,
-        currency,
-        method,
-        tag,
-        exchangeRates: data,
-      };
-      addExpense(currentCurrency);
-    });
+  handleResetField() {
+    const resetState = { value: '', description: '', currency: '', method: '', tag: '' };
+    this.setState(resetState);
   }
 
-  rednerSelect() {
-    const { currency, method, tag, cambioSymbol } = this.state;
+  handleClick() {
+    const validatoField = Object.values(this.state).every((field) => field.length !== 0);
+    const { addExpense } = this.props;
+    if (validatoField) {
+      addExpense(this.state);
+      this.handleResetField();
+    }
+  }
+
+  renderSelects() {
+    const { currency, method, tag } = this.state;
+    const { currencies } = this.props;
     return (
       <>
-        <Select
+        <SelectExpense
           value={ currency }
           data-testid="currency-input"
           type="text"
           name="currency"
           id="id-currency"
           placeholder="valor"
-          options={ cambioSymbol }
+          options={ currencies }
           onChange={ this.handleChange }
         />
-        <Select
+        <SelectExpense
           value={ method }
           title="método de pagamento"
           data-testid="method-input"
@@ -88,7 +70,7 @@ class WalletExpense extends Component {
           options={ expense.method }
           onChange={ this.handleChange }
         />
-        <Select
+        <SelectExpense
           title="tag"
           data-testid="tag-input"
           type="text"
@@ -124,19 +106,28 @@ class WalletExpense extends Component {
           placeholder="descrição da despesa"
           onChange={ this.handleChange }
         />
-        {this.rednerSelect()}
+        {this.renderSelects()}
         <button type="button" onClick={ this.handleClick }>Adicionar despesa</button>
       </main>
     );
   }
 }
 
+const mapStateToProps = ({ wallet: { currencies } }) => ({
+  currencies,
+});
+
 const mapDispatchToProps = (dispatch) => ({
-  addExpense: bindActionCreators(wallet.addExpense, dispatch),
+  addExpense: bindActionCreators(getCurrencies, dispatch),
 });
 
 WalletExpense.propTypes = {
+  currencies: PropTypes.arrayOf(PropTypes.string),
   addExpense: PropTypes.func.isRequired,
 };
 
-export default connect(null, mapDispatchToProps)(WalletExpense);
+WalletExpense.defaultProps = {
+  currencies: [],
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(WalletExpense);

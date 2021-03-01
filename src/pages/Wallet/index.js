@@ -1,9 +1,19 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
+
+import { getCurrenciesSymbol } from '../../actions';
+import WalletHeader from '../../components/WalletHeader';
+import WalletExpense from '../../components/WalletExpense';
 import './style.css';
-import WalletHeader from './WalletHeader';
-import WalletExpense from './WalletExpense';
 
 class Wallet extends React.Component {
+  componentDidMount() {
+    const { fetchCurrenciesSymbol } = this.props;
+    fetchCurrenciesSymbol();
+  }
+
   render() {
     return (
       <div className="walletContainer">
@@ -14,5 +24,12 @@ class Wallet extends React.Component {
     );
   }
 }
+function mapDispatchToProps(dispatch) {
+  return { fetchCurrenciesSymbol: bindActionCreators(getCurrenciesSymbol, dispatch) };
+}
 
-export default Wallet;
+Wallet.propTypes = {
+  fetchCurrenciesSymbol: PropTypes.func.isRequired,
+};
+
+export default connect(null, mapDispatchToProps)(Wallet);

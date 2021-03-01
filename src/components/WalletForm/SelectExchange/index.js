@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Option from './Option';
+import OptionExchange from './OptionExchange';
 
 class Select extends Component {
   render() {
@@ -12,7 +12,7 @@ class Select extends Component {
         <select id={ id } { ...restProps }>
           {children}
           {options.map((option, index) => (
-            <Option
+            <OptionExchange
               key={ index }
               item={ option }
             />
@@ -30,7 +30,7 @@ Select.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]),
-  options: PropTypes.arrayOf(PropTypes.object).isRequired,
+  options: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 Select.defaultProps = {
