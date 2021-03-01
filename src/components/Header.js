@@ -7,7 +7,7 @@ class Header extends React.Component {
     return (
       <header className="header">
         <h2 data-testid="email-field">
-          Email: 
+          Email:
           { ` ${email}` }
         </h2>
         <div className="header-row">
