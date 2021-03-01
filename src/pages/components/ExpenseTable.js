@@ -20,8 +20,19 @@ class ExpenseTable extends React.Component {
     const calculatedExpense = parseFloat(
       (parseFloat(event.value) * coinValue).toFixed(2),
     );
-    const valueToRemove = expending - calculatedExpense;
-    updatesExpendingAction(valueToRemove);
+    let calcExpending = 0;
+    let valueToRemove = 0;
+    if (!expending) {
+      expenses.forEach((expense) => {
+        calcExpending += parseFloat(expense.value) * parseFloat(
+          expense.exchangeRates[expense.currency].ask,
+        );
+      });
+      valueToRemove = calcExpending - calculatedExpense;
+    } else {
+      valueToRemove = expending - calculatedExpense;
+    }
+    updatesExpendingAction(parseFloat(valueToRemove.toFixed(2)));
     const newExpenses = expenses.filter((expense) => expense.id !== event.id);
     removeExpenseAction(newExpenses);
   }

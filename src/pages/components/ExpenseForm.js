@@ -74,8 +74,8 @@ class ExpenseForm extends React.Component {
     }
     submitExpense(expenseObject);
     const expenseValueCalculated = parseFloat(expending)
-        + parseFloat((coins[expenseCoin].ask * expenseValue).toFixed(2));
-    addExpenseValue(expenseValueCalculated);
+        + parseFloat((coins[expenseCoin].ask * parseFloat(expenseValue)).toFixed(2));
+    addExpenseValue(parseFloat(expenseValueCalculated.toFixed(2)));
     this.setState({ expenseValue: 0 });
   }
 
