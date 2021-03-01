@@ -12,17 +12,7 @@ class DeleteBtn extends Component {
 
   handleDelete({ target }) {
     const { deleteExpense, expenses } = this.props;
-
-    const newExpenses = [];
-
-    expenses.forEach((item, index) => {
-      if (item.id < target.id) {
-        newExpenses.push({ ...item, id: index });
-      } else if (item.id > target.id) {
-        newExpenses.push({ ...item, id: index - 1 });
-      }
-    });
-
+    const newExpenses = expenses.filter((item) => item.id !== parseInt(target.id, 10));
     deleteExpense(newExpenses);
   }
 

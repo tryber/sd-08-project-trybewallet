@@ -33,7 +33,7 @@ export default function expensesReducerAction(state = INITIAL_STATE, action) {
   case ADD_EXPENSES:
     return {
       ...state,
-      expenses: [...state.expenses, { ...action.payload, id: state.expenses.length }],
+      expenses: [...state.expenses, { ...action.payload }],
     };
   case DELETE_EXPENSE:
     return {

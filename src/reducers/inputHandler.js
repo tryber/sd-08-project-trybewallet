@@ -3,6 +3,7 @@ import {
   HANDLE_INPUTS,
   GET_EXCHANGE_RATES,
   CLEAR_INPUT_HANDLER,
+  ADD_EXPENSES_INDEX,
 } from '../actions/index';
 
 const INITIAL_STATE = {
@@ -37,6 +38,11 @@ export default function inputHandlerReducer(state = INITIAL_STATE, action) {
         ...state.handlingInputs[0],
         exchangeRates: { ...action.payload },
       }],
+    };
+  case ADD_EXPENSES_INDEX:
+    return {
+      ...state,
+      handlingInputs: [{ ...state.handlingInputs[0], ...action.payload.id }],
     };
   case CLEAR_INPUT_HANDLER:
     return INITIAL_STATE;

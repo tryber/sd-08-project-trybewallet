@@ -54,18 +54,18 @@ class TableBody extends Component {
       <tbody>
         { expenses.map((exp) => (
           <tr key={ exp.id }>
-            <th>{ exp.description }</th>
-            <th>{ exp.tag }</th>
-            <th>{ exp.method }</th>
-            <th>{ exp.value }</th>
-            <th>{ this.handleCurrencyName(exp) }</th>
-            <th>{ this.handleExchangeRate(exp) }</th>
-            <th>{ this.ConvertTheValue(exp) }</th>
-            <th>{ this.CurrencyToConvert(exp) }</th>
-            <th>
+            <td role="cell">{ exp.description }</td>
+            <td role="cell">{ exp.tag }</td>
+            <td role="cell">{ exp.method }</td>
+            <td role="cell">{ exp.value }</td>
+            <td role="cell">{ this.handleCurrencyName(exp) }</td>
+            <td role="cell">{ this.handleExchangeRate(exp) }</td>
+            <td role="cell">{ this.ConvertTheValue(exp) }</td>
+            <td role="cell">{ this.CurrencyToConvert(exp) }</td>
+            <td role="cell">
               <button type="button">Editar</button>
               <DeleteBtn id={ exp.id } />
-            </th>
+            </td>
           </tr>
         )) }
       </tbody>
