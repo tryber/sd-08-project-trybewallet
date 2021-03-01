@@ -11,8 +11,8 @@ const INITIAL_STATE = {
   expenseAmount: '0',
   description: '',
   selectedCoin: 'Dólar Comercial',
-  paymentMethod: 'money',
-  tag: 'food',
+  paymentMethod: 'Dinheiro',
+  tag: 'Alimentação',
 };
 
 class Addexpense extends Component {

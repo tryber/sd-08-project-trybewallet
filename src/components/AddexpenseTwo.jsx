@@ -14,9 +14,9 @@ export default class AddexpenseTwo extends Component {
             name="paymentMethod"
             onChange={ handleChange }
           >
-            <option value="money">Dinheiro</option>
-            <option value="credit-card">Cartão de crédito</option>
-            <option value="debit-card">Cartão de débito</option>
+            <option>Dinheiro</option>
+            <option>Cartão de crédito</option>
+            <option>Cartão de débito</option>
           </select>
         </label>
         <label htmlFor="tag">
@@ -27,11 +27,11 @@ export default class AddexpenseTwo extends Component {
             name="tag"
             data-testid="tag-input"
           >
-            <option value="food">Alimentação</option>
-            <option value="recreation">Lazer</option>
-            <option value="job">Trabalho</option>
-            <option value="transport">Transporte</option>
-            <option value="heath">Saúde</option>
+            <option>Alimentação</option>
+            <option>Lazer</option>
+            <option>Trabalho</option>
+            <option>Transporte</option>
+            <option>Saúde</option>
           </select>
         </label>
         <label htmlFor="description">

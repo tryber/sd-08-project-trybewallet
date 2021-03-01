@@ -5,31 +5,29 @@ import { connect } from 'react-redux';
 import TableHeade from './TableHead';
 
 class Table extends Component {
-  checkPayment(type) {
-    if (type === 'money') {
-      return 'Dinheiro';
-    } if (type === 'credit-card') {
-      return 'Cartão de crédito';
-    }
-    return 'Cartão de débito';
-  }
-
-  checkRecreation(recreation) {
-    if (recreation === 'food') {
-      return 'Alimentação';
-    } if (recreation === 'job') {
-      return 'Trabalho';
-    } if (recreation === 'recreation') {
-      return 'Lazer';
-    } if (recreation === 'transport') {
-      return 'Transporte';
-    }
-    return 'Saúde';
-  }
-
   checkValue(exchangeRates, expenseAmount, selectedCoin) {
-    const value = exchangeRates.find((coinUsed) => coinUsed.name === selectedCoin).code;
-    return `${value} ${Number((expenseAmount)).toFixed(2)}`;
+    const value = Array.from(exchangeRates)
+      .find((coinUsed) => coinUsed.name === selectedCoin);
+    if (value) return `${value.code} ${Number((expenseAmount)).toFixed(2)}`;
+    return '';
+  }
+
+  expenseValue(exchangeRates, selectedCoin) {
+    const number = Array.from(exchangeRates).find((coinUsed) => (
+      coinUsed.name === selectedCoin));
+    if (number) {
+      const result = (1 / Number(number.ask)).toFixed(2);
+      return result;
+    }
+    return '';
+  }
+
+  convertValue(exchangeRates, selectedCoin, expenseAmount) {
+    const ask = Array.from(exchangeRates).find((item) => (item.name === selectedCoin));
+    if (ask) {
+      const value = parseFloat(expenseAmount * ask.ask);
+      return value.toFixed(2);
+    }
   }
 
   //   ${coin.exchangeRates.find((coinUsed) => (
@@ -47,8 +45,8 @@ class Table extends Component {
               <td>
                 {coin.description.charAt(0).toUpperCase() + coin.description.slice(1)}
               </td>
-              <td>{this.checkRecreation(coin.tag)}</td>
-              <td>{this.checkPayment(coin.paymentMethod)}</td>
+              <td>{coin.tag}</td>
+              <td>{coin.paymentMethod}</td>
               <td>
                 { this.checkValue(coin.exchangeRates,
                   coin.expenseAmount, coin.selectedCoin) }
@@ -56,13 +54,12 @@ class Table extends Component {
               <td>{coin.selectedCoin}</td>
               <td>
                 {'R$ '}
-                {Number(1 / coin.exchangeRates.find((coinUsed) => (
-                  coinUsed.name === coin.selectedCoin)).ask).toFixed(2)}
+                {this.expenseValue(coin.exchangeRates, coin.selectedCoin)}
               </td>
               <td>
-                {parseFloat(coin.expenseAmount * coin.exchangeRates.find((item) => (
-                  item.name === coin.selectedCoin
-                )).ask).toFixed(2)}
+                {this.convertValue(coin.exchangeRates,
+                  coin.selectedCoin,
+                  coin.expenseAmount)}
               </td>
               <td>Real</td>
               <td>Editar / Excluir</td>

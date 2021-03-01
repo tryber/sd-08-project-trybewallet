@@ -5,8 +5,12 @@ import PropTypes from 'prop-types';
 class Header extends Component {
   totalExpense(expense) {
     const show = expense.reduce((acc, curr) => {
-      const currence = curr.exchangeRates.find((item) => item.name === curr.selectedCoin);
-      return acc + (curr.expenseAmount * currence.ask);
+      const currence = Array.from(curr.exchangeRates)
+        .find((item) => item.name === curr.selectedCoin);
+      if (currence) {
+        return acc + (curr.expenseAmount * currence.ask);
+      }
+      return acc;
     }, 0);
 
     return Number(show).toFixed(2);
