@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { Creators as Actions } from '../actions';
+import Header from '../components/Header';
 
 const paymentMethods = ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'];
 const tags = ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
@@ -32,27 +33,6 @@ class Wallet extends React.Component {
     this.setState(() => ({
       [name]: value,
     }));
-  }
-
-  renderHeader() {
-    const { email, expenses } = this.props;
-    return (
-      <>
-        <div data-testid="email-field">{ email }</div>
-        <div data-testid="total-field">
-          { expenses.length
-            ? expenses.reduce((
-              total, { value, currency, exchangeRates },
-            ) => {
-              const exchange = (value * exchangeRates[currency].ask);
-              const sum = total + exchange;
-              return sum;
-            }, 0)
-            : 0 }
-        </div>
-        <div data-testid="header-currency-field">BRL</div>
-      </>
-    );
   }
 
   renderValueInput() {
@@ -195,7 +175,7 @@ class Wallet extends React.Component {
               <td>Real</td>
               <td>
                 <button type="button">Editar</button>
-                <button type="button">Excluir</button>
+                <button type="button" data-testid="delete-btn">Excluir</button>
               </td>
             </tr>
           ))}
@@ -227,7 +207,7 @@ class Wallet extends React.Component {
   render() {
     return (
       <>
-        { this.renderHeader() }
+        <Header />
         { this.renderForm() }
         { this.renderTable() }
       </>
@@ -235,8 +215,7 @@ class Wallet extends React.Component {
   }
 }
 
-const mapStateToProps = ({ user, wallet }) => ({
-  email: user.email,
+const mapStateToProps = ({ wallet }) => ({
   currencies: wallet.currencies,
   expenses: wallet.expenses,
 });
@@ -244,7 +223,6 @@ const mapStateToProps = ({ user, wallet }) => ({
 const mapDispatchToProps = (dispatch) => bindActionCreators(Actions, dispatch);
 
 Wallet.propTypes = {
-  email: PropTypes.string.isRequired,
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
   expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
   fetchCurrencies: PropTypes.func.isRequired,
