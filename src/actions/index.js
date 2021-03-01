@@ -39,9 +39,9 @@ export const addWallet = (object) => ({
   },
 });
 
-export const deleteExpense = (newExpenses) => ({
+export const deleteExpense = (id) => ({
   type: 'DELETE_EXPENSE',
   payload: {
-    newExpenses,
+    id,
   },
 });

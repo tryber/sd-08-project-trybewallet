@@ -36,11 +36,21 @@ class Wallet extends React.Component {
     this.resetFields = this.resetFields.bind(this);
     this.roundUp = this.roundUp.bind(this);
     this.deleteExpenses = this.deleteExpenses.bind(this);
+    this.totalValueUpDate = this.totalValueUpDate.bind(this);
   }
 
   componentDidMount() {
     const { fetchCurrency } = this.props;
     fetchCurrency();
+    this.totalValueUpDate();
+  }
+
+  totalValueUpDate() {
+    const { expenses } = this.props;
+    this.setState({
+      totalValue: expenses
+        .reduce((acc, cur) => acc + (cur.value * cur.exchangeRates[cur.currency].ask), 0),
+    });
   }
 
   handleChange({ target }) {
@@ -82,9 +92,8 @@ class Wallet extends React.Component {
 
   deleteExpenses(index, value) {
     const { totalValue } = this.state;
-    const { expenses, deleteExpenseAction } = this.props;
-    expenses.splice(index, 1);
-    deleteExpenseAction(expenses);
+    const { deleteExpenseAction } = this.props;
+    deleteExpenseAction(index);
     this.setState({
       totalValue: totalValue - value,
     });
@@ -92,7 +101,7 @@ class Wallet extends React.Component {
 
   walletTable() {
     const { expenses } = this.props;
-    return expenses.map((expense, i, array) => (
+    return expenses.map((expense) => (
       <tbody key={ expense.id }>
         <tr>
           <td>{expense.description}</td>
@@ -110,7 +119,7 @@ class Wallet extends React.Component {
             <button
               type="button"
               data-testid="delete-btn"
-              onClick={ () => this.deleteExpenses((array.indexOf(expense), 1),
+              onClick={ () => this.deleteExpenses((expense.id),
                 (parseFloat(expense.exchangeRates[expense.currency].ask)
                 * parseFloat(expense.value))) }
             >
@@ -189,7 +198,7 @@ class Wallet extends React.Component {
         <header>
           <span data-testid="email-field">{`Email: ${email}`}</span>
           <span data-testid="total-field">
-            {`Despesa total: ${totalValue}`}
+            {`Despesa total: ${this.roundUp(totalValue, 2)}`}
           </span>
           <span data-testid="header-currency-field">BRL</span>
         </header>
@@ -218,9 +227,7 @@ Wallet.propTypes = {
   email: PropTypes.string.isRequired,
   fetchCurrency: PropTypes.func.isRequired,
   addToWallet: PropTypes.func.isRequired,
-  currencies: PropTypes.shape(
-    PropTypes.object.isRequired,
-  ).isRequired,
+  currencies: PropTypes.shape().isRequired,
   expenses: PropTypes.shape().isRequired,
   deleteExpenseAction: PropTypes.func.isRequired,
 };

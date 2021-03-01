@@ -32,8 +32,8 @@ Select.propTypes = {
   name: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   dataTest: PropTypes.string.isRequired,
-  options: PropTypes.shape(
-    PropTypes.array.isRequired,
+  options: PropTypes.arrayOf(
+    PropTypes.string.isRequired,
   ).isRequired,
   onChange: PropTypes.func.isRequired,
 };
