@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap') ;
 
 body {
   font-family: Montserrat, sans-serif;
@@ -53,8 +53,8 @@ body {
 }
 
 .coin-drop select {
-  border: solid 1px black;
   background-color: white;
+  border: solid 1px black;
   border-radius: 5px;
   font-family: Montserrat, sans-serif;
   margin-left: 10px;
@@ -68,9 +68,9 @@ body {
 }
 
 .payment-drop select {
+  background-color: white;
   border: solid 1px black;
   border-radius: 5px;
-  background-color: white;
   font-family: Montserrat, sans-serif;
   margin-left: 10px;
   padding: 5px;
@@ -84,8 +84,8 @@ body {
 
 .tag-drop select {
   background-color: white;
-  border-radius: 5px;
   border: solid 1px black;
+  border-radius: 5px;
   font-family: Montserrat, sans-serif;
   margin-left: 10px;
   padding: 5px;
@@ -95,8 +95,8 @@ body {
 
 .button-submit {
   background-color: white;
-  border-radius: 5px;
   border: solid 1px black;
+  border-radius: 5px;
   font-family: Montserrat, sans-serif;
   padding: 5px;
   text-align: center;
