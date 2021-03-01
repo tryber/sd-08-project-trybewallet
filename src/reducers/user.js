@@ -2,7 +2,7 @@ const INITIAL_STATE = {
   email: '',
 };
 
-const user = (state = INITIAL_STATE, { type, payload } ) => {
+const user = (state = INITIAL_STATE, { type, payload }) => {
   switch (type) {
   case 'GET_LOGIN':
     return {
