@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 
 import getWalletAPI from '../services/API';
 import { fetchWalletAPI as fetchWalletAPIAction,
-  saveExpense as saveExpenseAction }
+  saveExpense as saveExpenseAction,
+  editedExpense as editedExpenseAction,
+  saveEditedExpense as saveEditedExpenseAction }
   from '../actions';
 
 const INITIAL_VALUE = {
@@ -14,7 +16,6 @@ const INITIAL_VALUE = {
   tag: 'Alimentação',
   description: '',
   id: 0,
-  totalValue: 0,
 };
 
 class Options extends React.Component {
@@ -23,12 +24,13 @@ class Options extends React.Component {
     this.state = {
       ...INITIAL_VALUE,
     };
-
     this.handleChange = this.handleChange.bind(this);
     this.header = this.header.bind(this);
     this.renderOptionsMethod = this.renderOptionsMethod.bind(this);
     this.getTotalExpenses = this.getTotalExpenses.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.handleEditing = this.handleEditing.bind(this);
+    this.renderOptionsTag = this.renderOptionsTag.bind(this);
   }
 
   componentDidMount() {
@@ -85,7 +87,7 @@ class Options extends React.Component {
   async handleClick(e) {
     e.preventDefault();
     const { value, description, currency, method, tag, id } = this.state;
-    const { saveExpense } = this.props;
+    const { saveExpense, saveEditedExpense, isEditing } = this.props;
     const exchangeRates = await getWalletAPI();
     const totalExpense = {
       id,
@@ -96,11 +98,30 @@ class Options extends React.Component {
       tag,
       exchangeRates,
     };
-    saveExpense(totalExpense);
+    if (isEditing === true) {
+      saveEditedExpense(totalExpense);
+    } else {
+      saveExpense(totalExpense);
+    }
     this.setState({
       ...INITIAL_VALUE,
       id: id + 1,
     });
+  }
+
+  handleEditing() {
+    const { editedExpense, editingExpense } = this.props;
+    const { value, method, currency, tag, description, id } = editingExpense;
+    this.setState({
+      ...INITIAL_VALUE,
+      value,
+      method,
+      currency,
+      tag,
+      description,
+      id,
+    });
+    editedExpense();
   }
 
   handleChange({ target }) {
@@ -119,10 +140,22 @@ class Options extends React.Component {
     );
   }
 
+  renderOptionsTag() {
+    return (
+      <>
+        <option value="Alimentação">Alimentação</option>
+        <option value="Lazer">Lazer</option>
+        <option value="Trabalho">Trabalho</option>
+        <option value="Transporte">Transporte</option>
+        <option value="Saúde">Saúde</option>
+      </>
+    );
+  }
+
   render() {
-    const { currencies } = this.props;
+    const { currencies, isEditing, selectEdited } = this.props;
+    const { currency, method, tag } = this.state;
     const coinsdata = Object.keys(currencies).filter((elem) => elem !== 'USDT');
-    if (coinsdata === '') { return <div />; }
     return (
       <div>
         {this.header()}
@@ -131,6 +164,7 @@ class Options extends React.Component {
             data-testid="currency-input"
             id="coin"
             name="currency"
+            value={ currency }
             onChange={ (e) => this.handleChange(e) }
           >
             {coinsdata.map((coin) => (
@@ -144,6 +178,7 @@ class Options extends React.Component {
             data-testid="method-input"
             id="method"
             name="method"
+            value={ method }
             onChange={ (e) => this.handleChange(e) }
           >
             {this.renderOptionsMethod()}
@@ -154,18 +189,16 @@ class Options extends React.Component {
             data-testid="tag-input"
             id="tag"
             name="tag"
+            value={ tag }
             onChange={ (e) => this.handleChange(e) }
           >
-            <option value="Alimentação">Alimentação</option>
-            <option value="Lazer">Lazer</option>
-            <option value="Trabalho">Trabalho</option>
-            <option value="Transporte">Transporte</option>
-            <option value="Saúde">Saúde</option>
+            {this.renderOptionsTag()}
           </select>
         </label>
-        <button type="reset" onClick={ this.handleClick }>
-          Adicionar despesa
+        <button type="button" onClick={ this.handleClick }>
+          {isEditing ? 'Editar despesa' : 'Adicionar despesa'}
         </button>
+        {selectEdited ? this.handleEditing() : null }
       </div>
     );
   }
@@ -177,17 +210,27 @@ Options.propTypes = {
   expenses: PropTypes.arrayOf(PropTypes.string).isRequired,
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
   saveExpense: PropTypes.func.isRequired,
+  editedExpense: PropTypes.arrayOf(PropTypes.string).isRequired,
+  editingExpense: PropTypes.arrayOf(PropTypes.string).isRequired,
+  saveEditedExpense: PropTypes.func.isRequired,
+  isEditing: PropTypes.bool.isRequired,
+  selectEdited: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   currencies: state.wallet.currencies,
   email: state.user.email,
   expenses: state.wallet.expenses,
+  editingExpense: state.edit.editingExpense,
+  isEditing: state.edit.isEditing,
+  selectEdited: state.edit.selectEdited,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   fetchWalletAPI: () => dispatch(fetchWalletAPIAction()),
   saveExpense: (totalExpense) => dispatch(saveExpenseAction(totalExpense)),
+  editedExpense: () => dispatch(editedExpenseAction()),
+  saveEditedExpense: (expense) => dispatch(saveEditedExpenseAction(expense)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Options);

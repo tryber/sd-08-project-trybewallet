@@ -2,7 +2,8 @@ import { REQUEST_API,
   REQUEST_API_SUCCESS,
   REQUEST_API_ERROR,
   SAVE_EXPENSE,
-  DELETE_EXPENSE }
+  DELETE_EXPENSE,
+}
   from '../actions';
 
 const INITIAL_VALUE = {
@@ -16,16 +17,9 @@ const wallet = (
 ) => {
   switch (type) {
   case REQUEST_API:
-    return {
-      ...state,
-      isFetching: payload.isFetching,
-    };
+    return { ...state, isFetching: payload.isFetching };
   case REQUEST_API_SUCCESS:
-    return {
-      ...state,
-      currencies: payload.data,
-      isFetching: payload.isFetching,
-    };
+    return { ...state, currencies: payload.data, isFetching: payload.isFetching };
   case REQUEST_API_ERROR:
     return {
       ...state,
@@ -33,10 +27,7 @@ const wallet = (
       isFetching: payload.isFetching,
     };
   case SAVE_EXPENSE:
-    return {
-      ...state,
-      expenses: [...state.expenses, payload.expenses],
-    };
+    return { ...state, expenses: [...state.expenses, payload.expenses] };
   case DELETE_EXPENSE:
     return {
       ...state,
