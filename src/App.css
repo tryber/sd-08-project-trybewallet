@@ -1,6 +1,6 @@
 .App {
-  text-align: center;
-  margin: 10px;
   display: flex;
   flex-direction: column;
+  margin: 10px;
+  text-align: center;
 }

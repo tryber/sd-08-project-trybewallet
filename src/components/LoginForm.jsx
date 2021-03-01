@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Creators as UserActions } from '../actions/user';
 import { Redirect } from 'react-router-dom';
+import { Creators as UserActions } from '../actions/user';
 
 class LoginForm extends Component {
   constructor(props) {
-    super(props)
-  
+    super(props);
+
     this.state = {
       email: '',
       password: '',
       shouldRedirect: false,
-    }
-  
+    };
+
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -33,15 +33,15 @@ class LoginForm extends Component {
   handleSubmit(event) {
     event.preventDefault();
     const { saveEmail } = this.props;
-    const { email, shouldRedirect } = this.state;
+    const { email } = this.state;
     saveEmail(email);
-    this.setState({ shouldRedirect: true })
+    this.setState({ shouldRedirect: true });
   }
 
   render() {
     const { email, password, shouldRedirect } = this.state;
 
-    if (shouldRedirect) return <Redirect to='/carteira' />;
+    if (shouldRedirect) return <Redirect to="/carteira" />;
 
     return (
       <form onSubmit={ this.handleSubmit }>
@@ -72,9 +72,9 @@ class LoginForm extends Component {
   }
 }
 
-LoginForm.propTypes = { 
+LoginForm.propTypes = {
   saveEmail: PropTypes.func.isRequired,
-}
+};
 
 const mapDispatchToProps = (dispatch) => ({
   saveEmail: (email) => dispatch(UserActions.saveEmail(email)),
