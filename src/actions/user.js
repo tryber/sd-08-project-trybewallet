@@ -1,5 +1,5 @@
-import { GET_USER_EMAIL, DISABLE_BUTTON } from './constants'
+import { GET_USER_EMAIL } from './constants';
 
-export const getUserEmail = (get_User_Email) => ({ type: GET_USER_EMAIL, get_User_Email });
-export const disableButton = () => ({ type: DISABLE_BUTTON });
+const getUserEmail = (UserEmail) => ({ type: GET_USER_EMAIL, UserEmail });
 
+export default getUserEmail;

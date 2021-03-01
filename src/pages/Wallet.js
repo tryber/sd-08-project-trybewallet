@@ -1,89 +1,104 @@
-import React, { Component } from "react";
-import "./Wallet.css";
-import HearderWallet from "./HearderWallet";
-import store from "../store";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import './Wallet.css';
+import HearderWallet from './HearderWallet';
+import MenuWallet from './MenuWallet';
+import { fetchAPI } from '../actions/wallet';
 
 class Wallet extends Component {
-  render() {
+  componentDidMount() {
+    const { getdata } = this.props;
+    getdata();
+  }
+
+  renderTableTbody() {
     return (
-      <>
-        <div className="limiter-wallet">
-          <div className="container-wallet container-wallet-bg">
+      <tbody>
+        <tr key="id">
+          <td>description</td>
+          <td>tag</td>
+          <td>method</td>
+          <td>value</td>
+          <td>exchangeRates</td>
+          <td />
+          <td />
+          <td>Real</td>
+          <td>
+            <button className="table-button" type="button">
+              {' '}
+              V
+            </button>
+            <button
+              className="table-button"
+              type="button"
+              data-testid="delete-btn"
+            >
+              X
+            </button>
+          </td>
+        </tr>
+
+      </tbody>
+
+    );
+  }
+
+  renderTableThead() {
+    return (
+      <table>
+        <thead>
+          <tr>
+            <th>Descrição</th>
+            <th>Tag</th>
+            <th>Método de pagamento</th>
+            <th>Valor</th>
+            <th>Moeda</th>
+            <th>Câmbio utilizado</th>
+            <th>Valor convertido</th>
+            <th>Moeda de conversão</th>
+            <th>Editar/Excluir</th>
+          </tr>
+        </thead>
+        {this.renderTableTbody()}
+
+      </table>
+
+    );
+  }
+
+  render() {
+    const { expenses } = this.props;
+    console.log(expenses && Object.entries(expenses));
+    return (
+      <div className="limiter-wallet">
+        <div className="container-wallet container-wallet-bg">
           <HearderWallet />
-            <div className="wrap-wallet">
-              <form name="f1" className="wallet-form validate-form">
-                <span className="wallet-form-logo">
-                  <i className="zmdi zmdi-landscape"></i>
-                </span>
-
-                <span className="wallet-form-title">Log in</span>
-
-                <div
-                  className="wrap-input validate-input"
-                  data-validate="Enter username"
-                >
-                  <input
-                    data-testid="email-input"
-                    className="input"
-                    type="text"
-                    name="email"
-                    placeholder="Email"
-                  />
-                  <i className=" focus-input" placeholder="&#xf644;"></i>
-                </div>
-
-                <div
-                  className="wrap-input validate-input"
-                  data-validate="Enter password"
-                >
-                  <input
-                    data-testid="password-input"
-                    className="input"
-                    type="text"
-                    name="pass"
-                    placeholder="Password"
-                  />
-                  <span
-                    className="focus-input"
-                    data-placeholder="&#xf191;"
-                  ></span>
-                </div>
-
-                <div className="contact-form-checkbox">
-                  <input
-                    className="input-checkbox"
-                    id="ckb1"
-                    type="checkbox"
-                    name="remember-me"
-                  />
-                  <label className="label-checkbox" htmlFor="ckb1">
-                    Remember me
-                  </label>
-                </div>
-
-                <div className="container-wallet-form-btn">
-                  <button
-                    name="input-email"
-                    type="button"
-                    className="wallet-form-btn"
-                    value="Entrar"
-                  >
-                    Entrar
-                  </button>
-                </div>
-
-                <div className="text-center">
-                  <a className="txt1" href="#">
-                    Forgot Password?
-                  </a>
-                </div>
-              </form>
-            </div>
+          <MenuWallet />
+          <div className="wrap-wallet">
+            <form name="f1" className="wallet-form validate-form">
+              <div className="table">
+                {this.renderTableThead()}
+              </div>
+            </form>
           </div>
         </div>
-      </>
+      </div>
     );
   }
 }
+const mapStateToProps = (state) => ({
+  currencies: state.wallet.Currencies,
+  expenses: state.wallet.get_Expenses,
+});
 
-export default Wallet;
+const mapDispatchToProps = (dispatch) => ({
+  getdata: (getCurrencies) => dispatch(fetchAPI(getCurrencies)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Wallet);
+
+Wallet.propTypes = {
+  getdata: PropTypes.func.isRequired,
+  expenses: PropTypes.objectOf.isRequired,
+};
