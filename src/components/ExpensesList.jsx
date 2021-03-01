@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { updateExpense } from '../actions';
 
+import Pen from '../icons/pen-fill.svg';
+import Trash from '../icons/trash-fill.svg';
+
 class ExpensesList extends React.Component {
   constructor() {
     super();
@@ -41,17 +44,19 @@ class ExpensesList extends React.Component {
         <td>
           <button
             type="button"
+            className="btn btn-warning"
             data-testid="edit-btn"
             onClick={ () => this.editClick(expense) }
           >
-            Edit
+            <img src={ Pen } alt="edit-icon" />
           </button>
           <button
             type="button"
+            className="btn btn-danger"
             data-testid="delete-btn"
             onClick={ () => this.deleteClick(index) }
           >
-            X
+            <img src={ Trash } alt="remove-icon" />
           </button>
         </td>
       </tr>
@@ -61,18 +66,18 @@ class ExpensesList extends React.Component {
   render() {
     const { expenses } = this.props;
     return (
-      <table>
+      <table className="table">
         <thead>
           <tr>
-            <th>Descrição</th>
-            <th>Tag</th>
-            <th>Método de pagamento</th>
-            <th>Valor</th>
-            <th>Moeda</th>
-            <th>Câmbio utilizado</th>
-            <th>Valor convertido</th>
-            <th>Moeda de conversão</th>
-            <th>Editar/Excluir</th>
+            <th scope="col">Descrição</th>
+            <th scope="col">Tag</th>
+            <th scope="col">Método de pagamento</th>
+            <th scope="col">Valor</th>
+            <th scope="col">Moeda</th>
+            <th scope="col">Câmbio utilizado</th>
+            <th scope="col">Valor convertido</th>
+            <th scope="col">Moeda de conversão</th>
+            <th scope="col">Editar/Excluir</th>
           </tr>
         </thead>
         <tbody>

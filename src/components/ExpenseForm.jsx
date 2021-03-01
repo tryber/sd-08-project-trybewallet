@@ -102,7 +102,7 @@ class ExpenseForm extends React.Component {
     const { value, description } = this.state;
     if (isFetching) return <h2>Carregando...</h2>;
     return (
-      <form className="expense-form">
+      <form className="expense-form bg-dark text-white">
 
         <label htmlFor="value-input">
           Valor:

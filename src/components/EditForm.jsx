@@ -88,7 +88,7 @@ class EditForm extends React.Component {
   render() {
     const { value, description } = this.state;
     return (
-      <form className="expense-form">
+      <form className="expense-form bg-success text-white">
 
         <label htmlFor="value-input">
           Valor

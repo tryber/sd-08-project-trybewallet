@@ -66,9 +66,9 @@ class Login extends React.Component {
   render() {
     const { email, password, isComplete } = this.state;
     return (
-      <main>
-        <h2>Wallet Login</h2>
-        <form>
+      <main className="login-container">
+        <img src="https://flomio.com/wp-content/uploads/2016/10/Wallet.png" alt="logo" />
+        <form className="login-form">
           <label htmlFor="email-input">
             Email
             <br />
@@ -93,6 +93,7 @@ class Login extends React.Component {
           <br />
           <button
             type="button"
+            className="btn btn-success login-button"
             disabled={ !isComplete }
             onClick={ this.handleClick }
           >

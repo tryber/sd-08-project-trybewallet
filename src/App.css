@@ -2,6 +2,23 @@
   text-align: center;
 }
 
+.login-container {
+  border: 5px groove gray;
+  border-radius: 20px;
+  width: fit-content;
+  margin: 50px auto;
+  padding: 40px;
+}
+
+.login-form {
+  text-align: center;
+  font-weight: 500;
+}
+
+.login-button {
+  margin: 20px 0;
+}
+
 header {
   display: flex;
   justify-content: space-between;
@@ -49,3 +66,9 @@ header span {
   height: 26px;
   margin: 6px 5px;
 }
+
+table {
+  text-align: center;
+  vertical-align: center;
+}
+
