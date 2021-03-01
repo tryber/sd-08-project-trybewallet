@@ -10,15 +10,15 @@ class Header extends React.Component {
 
   getTotalExpenses() {
     const { allExpenses } = this.props;
-    if(allExpenses.length!==0) {
+    if (allExpenses.length !== 0) {
       const quote = allExpenses.map(
-        (element) => element.value
-          * element.exchangeRates[element.currency].ask,
+        (element) => element.value * element.exchangeRates[element.currency].ask,
       );
-      return (quote
-        .reduce((total, nextElement) => total + nextElement, 0)).toFixed(2);
-    } 
-    return 0; 
+      return quote
+        .reduce((total, nextElement) => total + nextElement, 0)
+        .toFixed(2);
+    }
+    return 0;
   }
 
   render() {
@@ -29,9 +29,7 @@ class Header extends React.Component {
       <div>
         TrybeWallet
         <span data-testid="email-field">{email}</span>
-        <span data-testid="total-field">
-          {this.getTotalExpenses()}
-        </span>
+        <span data-testid="total-field">{this.getTotalExpenses()}</span>
         <span data-testid="header-currency-field">BRL</span>
       </div>
     );

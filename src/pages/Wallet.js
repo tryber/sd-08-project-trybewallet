@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import fetchCurrencies from '../actions/walletAction';
 import addRegister from '../actions/index';
-import Header from '../components/Header'; 
+import Header from '../components/Header';
 
 class Wallet extends React.Component {
   constructor() {
@@ -15,7 +15,6 @@ class Wallet extends React.Component {
       method: 'Dinheiro',
       tag: 'Alimentação',
       description: '',
-      exchangeRates: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.validateRegister = this.validateRegister.bind(this);
@@ -43,20 +42,12 @@ class Wallet extends React.Component {
   }
 
   validateRegister() {
-    const {
-      id,
-      value,
-      currency,
-      method,
-      tag,
-      description,
-    } = this.state;
+    const { id, value, currency, method, tag, description } = this.state;
     const { exchangeValues, fetchCurrencies, addRegister } = this.props;
     fetchCurrencies();
     const exchangeRates = exchangeValues[0];
     this.setState({
       id: id + 1,
-      exchangeRates,
     });
     addRegister({
       id,
@@ -73,13 +64,12 @@ class Wallet extends React.Component {
       method: 'Dinheiro',
       tag: 'Alimentação',
       description: '',
-      exchangeRates: '',
     });
   }
 
   fillValueLabelHTML(valueNumber, handleChange) {
     return (
-      <label>
+      <label htmlFor="value-input">
         Valor:
         <input
           type="number"
@@ -94,12 +84,10 @@ class Wallet extends React.Component {
 
   fillSelectedCurrency(currencyValue, onSelectedCurrency) {
     const { exchangeValues } = this.props;
-    const listOfCurrencies = exchangeValues
-      && exchangeValues.length
-      && exchangeValues[0];
+    const listOfCurrencies = exchangeValues && exchangeValues.length && exchangeValues[0];
     const arrayOfCurrencies = Object.keys(listOfCurrencies);
     return (
-      <label>
+      <label htmlFor="currency-input">
         Moeda:
         <select
           id="currency"
@@ -110,9 +98,9 @@ class Wallet extends React.Component {
         >
           { arrayOfCurrencies.map((element) => (
             <option key={ element } data-testid={ element } value={ element }>
-              {element}
+              { element }
             </option>
-          )) }
+          ))}
         </select>
       </label>
     );
@@ -120,7 +108,7 @@ class Wallet extends React.Component {
 
   fillPaymentOption(paymentType, onSelectedPayment) {
     return (
-      <label data-testid="genre-input-label">
+      <label htmlFor="genre-input-label">
         Método de Pagamento:
         <select
           id="method"
@@ -139,7 +127,7 @@ class Wallet extends React.Component {
 
   fillTagOption(tagType, onSelectedTag) {
     return (
-      <label>
+      <label htmlFor="tag-input">
         Tag:
         <select
           id="tag"
@@ -175,24 +163,18 @@ class Wallet extends React.Component {
   }
 
   render() {
-    const {
-      value,
-      currency,
-      method,
-      tag,
-      description,
-    } = this.state;
+    const { value, currency, method, tag, description } = this.state;
     const { isFetching } = this.props;
-    return (
-      isFetching ? <p> loading </p>
-      : (
+    return isFetching ? (
+      <p> loading </p>
+    ) : (
       <div>
         <header>
           <Header />
         </header>
         <main>
           <form className="form">
-            { this.fillValueLabelHTML(value, this.handleChange)}
+            { this.fillValueLabelHTML(value, this.handleChange) }
             { this.fillSelectedCurrency(currency, this.handleChange) }
             { this.fillPaymentOption(method, this.handleChange) }
             { this.fillTagOption(tag, this.handleChange) }
@@ -203,7 +185,7 @@ class Wallet extends React.Component {
           </form>
         </main>
       </div>
-    ));
+    );
   }
 }
 
@@ -212,12 +194,13 @@ Wallet.propTypes = {
   fetchCurrencies: PropTypes.func.isRequired,
   addRegister: PropTypes.func.isRequired,
   allExpenses: PropTypes.arrayOf(PropTypes.object).isRequired,
+  isFetching: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   userInfos: state.user,
   exchangeValues: state.wallet.currencies,
-  isFeching: state.wallet.isFetching,
+  isFetching: state.wallet.isFetching,
   allExpenses: state.wallet.expenses,
 });
 
