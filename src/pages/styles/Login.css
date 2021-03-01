@@ -1,0 +1,48 @@
+/* * {
+  box-sizing: border-box;
+  font-family: Roboto,sans-serif;
+}
+
+.fieldsetLogin {
+  align-items: center;
+  border: 1px solid rgb(160, 157, 156);
+  border-radius: 8px;
+  box-shadow: 2px 2px 3px rgb(189, 184, 183);
+  display: flex;
+  flex-flow: column;
+  grid-gap: 15px;
+  gap: 15px;
+  height: 150px;
+  justify-content: center;
+  margin: 50px auto;
+  max-width: 300px;
+}
+
+button, input, select {
+  border: 1px solid #a09d9c;
+  border-radius: 4px;
+  font-family: inherit;
+  align-items: center;
+  justify-content: center;
+  padding: .6rem;
+  margin: 5px auto;
+  width: 65%;
+}
+
+button:disabled {
+  border: 1px solid rgb(160, 157, 156, .8);
+  box-shadow: none;
+  color: rgb(189, 184, 183, .7);
+}
+
+button, select {
+  background: rgb(188, 221, 183);
+  box-shadow: 2px 2px 3px rgb(209, 209, 209);
+  color: #000000;
+  font-weight: 600;
+  cursor: pointer;
+} */
+
+/* .fieldsetLogin button, .fieldsetLogin input {
+
+} */
