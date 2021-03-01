@@ -3,19 +3,19 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import fetchCurrencies from '../actions/walletAction';
 import addRegister from '../actions/index';
-import Header from '../components/Header';
+import Header from '../components/Header'; 
 
 class Wallet extends React.Component {
   constructor() {
     super();
     this.state = {
       id: 0,
-      expense: '',
+      value: '',
       currency: 'USD',
-      paymentOption: '',
-      tag: '',
+      method: 'Dinheiro',
+      tag: 'Alimentação',
       description: '',
-      exchangeQuote: [],
+      exchangeRates: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.validateRegister = this.validateRegister.bind(this);
@@ -45,45 +45,45 @@ class Wallet extends React.Component {
   validateRegister() {
     const {
       id,
-      expense,
+      value,
       currency,
-      paymentOption,
+      method,
       tag,
       description,
-      exchangeQuote,
     } = this.state;
     const { exchangeValues, fetchCurrencies, addRegister } = this.props;
     fetchCurrencies();
+    const exchangeRates = exchangeValues[0];
     this.setState({
       id: id + 1,
-      exchangeQuote: exchangeQuote.push(exchangeValues[0]),
+      exchangeRates,
     });
     addRegister({
       id,
-      expense,
+      value,
       currency,
-      paymentOption,
+      method,
       tag,
       description,
-      exchangeQuote,
+      exchangeRates,
     });
     this.setState({
-      expense: '',
+      value: '',
       currency: 'USD',
-      paymentOption: '',
-      tag: '',
+      method: 'Dinheiro',
+      tag: 'Alimentação',
       description: '',
-      exchangeQuote: [],
+      exchangeRates: '',
     });
   }
 
   fillValueLabelHTML(valueNumber, handleChange) {
     return (
-      <label htmlFor="valueNumber">
+      <label>
         Valor:
         <input
           type="number"
-          name="expense"
+          name="value"
           value={ valueNumber }
           onChange={ handleChange }
           data-testid="value-input"
@@ -99,9 +99,10 @@ class Wallet extends React.Component {
       && exchangeValues[0];
     const arrayOfCurrencies = Object.keys(listOfCurrencies);
     return (
-      <label htmlFor="selectList">
+      <label>
         Moeda:
         <select
+          id="currency"
           name="currency"
           value={ currencyValue }
           onChange={ onSelectedCurrency }
@@ -119,10 +120,11 @@ class Wallet extends React.Component {
 
   fillPaymentOption(paymentType, onSelectedPayment) {
     return (
-      <label htmlFor="selectList" data-testid="genre-input-label">
+      <label data-testid="genre-input-label">
         Método de Pagamento:
         <select
-          name="paymentOption"
+          id="method"
+          name="method"
           value={ paymentType }
           onChange={ onSelectedPayment }
           data-testid="method-input"
@@ -137,9 +139,10 @@ class Wallet extends React.Component {
 
   fillTagOption(tagType, onSelectedTag) {
     return (
-      <label htmlFor="selectList" data-testid="genre-input-label">
+      <label>
         Tag:
         <select
+          id="tag"
           name="tag"
           value={ tagType }
           onChange={ onSelectedTag }
@@ -160,6 +163,7 @@ class Wallet extends React.Component {
       <label htmlFor="descriptionText">
         Descrição:
         <input
+          id="description"
           type="text"
           name="description"
           value={ descriptionText }
@@ -172,23 +176,25 @@ class Wallet extends React.Component {
 
   render() {
     const {
-      expense,
+      value,
       currency,
-      paymentOption,
+      method,
       tag,
       description,
     } = this.state;
-
+    const { isFetching } = this.props;
     return (
+      isFetching ? <p> loading </p>
+      : (
       <div>
         <header>
           <Header />
         </header>
         <main>
           <form className="form">
-            { this.fillValueLabelHTML(expense, this.handleChange)}
+            { this.fillValueLabelHTML(value, this.handleChange)}
             { this.fillSelectedCurrency(currency, this.handleChange) }
-            { this.fillPaymentOption(paymentOption, this.handleChange) }
+            { this.fillPaymentOption(method, this.handleChange) }
             { this.fillTagOption(tag, this.handleChange) }
             { this.fillDescriptionLabelHLMT(description, this.handleChange) }
             <button type="button" onClick={ this.validateRegister }>
@@ -197,7 +203,7 @@ class Wallet extends React.Component {
           </form>
         </main>
       </div>
-    );
+    ));
   }
 }
 

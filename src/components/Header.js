@@ -10,12 +10,15 @@ class Header extends React.Component {
 
   getTotalExpenses() {
     const { allExpenses } = this.props;
-    const quote = allExpenses.map(
-      (element) => element.expense
-        * element.exchangeQuote[0][element.currency].ask,
-    );
-    return quote
-      .reduce((total, nextElement) => total + nextElement, 0);
+    if(allExpenses.length!==0) {
+      const quote = allExpenses.map(
+        (element) => element.value
+          * element.exchangeRates[element.currency].ask,
+      );
+      return (quote
+        .reduce((total, nextElement) => total + nextElement, 0)).toFixed(2);
+    } 
+    return 0; 
   }
 
   render() {
