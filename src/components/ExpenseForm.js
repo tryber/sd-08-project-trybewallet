@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import getAPI from '../services/requestAPI';
+// import getAPI from '../services/requestAPI';
 import {
   actionFetchCurrencies,
   actionFetchCurrenciesData,
@@ -36,7 +36,7 @@ class expenseForm extends React.Component {
 
   componentDidMount() {
     const { fetchCurrencies } = this.props;
-    fetchCurrencies(getAPI());
+    fetchCurrencies();
   }
 
   handleChange(event) {
@@ -48,7 +48,7 @@ class expenseForm extends React.Component {
   async handleSubmit(event) {
     event.preventDefault();
     const { fetchCurrenciesData, addExpense } = this.props;
-    await fetchCurrenciesData(getAPI());
+    await fetchCurrenciesData();
     addExpense(this.state);
   }
 
@@ -88,8 +88,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchCurrencies: (dataAPI) => dispatch(actionFetchCurrencies(dataAPI)),
-  fetchCurrenciesData: (dataAPI) => dispatch(actionFetchCurrenciesData(dataAPI)),
+  fetchCurrencies: () => dispatch(actionFetchCurrencies()),
+  fetchCurrenciesData: () => dispatch(actionFetchCurrenciesData()),
   addExpense: (expense) => dispatch(actionAddExpenses(expense)),
 });
 

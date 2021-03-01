@@ -1,3 +1,5 @@
+import getAPI from '../services/requestAPI';
+
 import {
   USER_EMAIL,
   FETCH_CURRENCIES,
@@ -18,9 +20,9 @@ export function currencies(answer) {
     currencies: answer,
   };
 }
-export function actionFetchCurrencies(dataAPI) {
+export function actionFetchCurrencies() {
   return async (dispatch) => {
-    const response = await dataAPI;
+    const response = await getAPI();
     const currenciesKeys = Object.keys(response);
     const filterCurrencies = currenciesKeys.filter((
       currencyKey,
@@ -35,9 +37,9 @@ export function currenciesData(answer) {
     currenciesData: answer,
   };
 }
-export function actionFetchCurrenciesData(dataAPI) {
+export function actionFetchCurrenciesData() {
   return async (dispatch) => {
-    const CurrenciesData = await dataAPI;
+    const CurrenciesData = await getAPI();
     console.log(CurrenciesData);
     dispatch(currenciesData(CurrenciesData));
   };
