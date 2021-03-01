@@ -6,7 +6,7 @@ class Header extends Component {
   render() {
     const { email } = this.props;
     return (
-      <header className="bg-primary d-flex justify-content-between p-5 shadow">
+      <header className="bg-info d-flex justify-content-between p-5 shadow">
         <div className="border-bottom border-light my-auto p-3">
           <span
             data-testid="header-currency-field"
@@ -15,7 +15,7 @@ class Header extends Component {
             BRL
           </span>
           <br />
-          <span data-testid="total-field" className="text-danger">0</span>
+          <p data-testid="total-field" className="text-danger text-center m-auto">0</p>
         </div>
         <h1 className="lead">Minha Carteira</h1>
         <span

@@ -5,7 +5,7 @@ import { response as mockData, initialStateHeader, initialStateWithExpenses } fr
 import App from '../App';
 import Wallet from '../pages/Wallet';
 
-import { renderWithRouterAndStore } from './testConfig'
+import { renderWithRouterAndStore } from './testConfig';
 
 const apiResponse = Promise.resolve({
   json: () => Promise.resolve(mockData),
@@ -29,7 +29,7 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
       expect(container).toBeDefined();
     });
   });
-  
+
   describe('3 - Crie um header para a página de carteira contendo as seguintes características:', () => {
     const initial = initialStateHeader;
   
@@ -58,7 +58,7 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
     });
   });
   
-  describe.only('4 - Desenvolva um formulário para adicionar uma despesa contendo as seguintes características:', () => {
+  describe('4 - Desenvolva um formulário para adicionar uma despesa contendo as seguintes características:', () => {
     test('Um campo para adicionar o valor da despesa', async () => {
       renderWithRouterAndStore(<Wallet />, '/carteira');
       const valueInput = await screen.findByTestId('value-input');
@@ -142,7 +142,7 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
       expect(healthOption).toBeInTheDocument();
     });
   
-    test('Um botão com o texto \'Adicionar despesa\' que salva as informações da despesa no estado global e atualiza a soma de despesas no header', async () => {
+    test.only('Um botão com o texto \'Adicionar despesa\' que salva as informações da despesa no estado global e atualiza a soma de despesas no header', async () => {
       const { store } = renderWithRouterAndStore(<Wallet />, '/carteira');
       const addButton = await screen.findByText(/Adicionar despesa/i);
       const valueInput = await screen.findByTestId('value-input');

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 import PropTypes from 'prop-types';
-import loginUser from '../actions';
+import { login } from '../actions';
 
 class Login extends React.Component {
   constructor() {
@@ -49,7 +49,7 @@ class Login extends React.Component {
     return (
       <div className="d-flex height-100 justify-content-center bg-dark">
         <form
-          className="box-radius border bg-primary w-auto m-auto p-5 shadow"
+          className="box-radius border bg-info w-auto m-auto p-5 shadow"
         >
           <div>
             <label htmlFor="input">
@@ -60,6 +60,7 @@ class Login extends React.Component {
                 name="email"
                 placeholder="digite seu email"
                 onChange={ this.handleChange }
+                className="form-control"
               />
             </label>
           </div>
@@ -72,11 +73,12 @@ class Login extends React.Component {
                 name="password"
                 placeholder="digite sua senha"
                 onChange={ this.handleChange }
+                className="form-control"
               />
             </label>
           </div>
           <button
-            variant="success"
+            className="btn btn-success"
             type="button"
             disabled={ !validated }
             onClick={ () => {
@@ -93,7 +95,7 @@ class Login extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  send: (email) => dispatch(loginUser(email)),
+  send: (email) => dispatch(login.loginUser(email)),
 });
 
 Login.propTypes = {
