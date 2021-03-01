@@ -1,18 +1,18 @@
 .campos_login{
+  align-items: center;
+  background-color:  rgb(68, 117, 182);
+  border: 2px;
+  border-radius: 15%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 30%;
   padding: 200px;
-  border: 2px;
-  background-color:  rgb(68, 117, 182);
-  border-radius: 15%;
   margin: 5px;
+  width: 30%;
 }
 
 .login{
-  padding: 5px;
   border-radius: 15%;
   margin: 5px;
+  padding: 5px;
 }
   
