@@ -3,9 +3,17 @@ import Header from '../components/Header';
 import ListaDeGastos from '../components/ListaDeGastos';
 import Cambio from '../components/Cambio';
 import AddGastos from '../components/AddGastos';
+// import { connect } from 'react-redux';
+// import store from '../store';
 
 class Wallet extends Component {
+  // vercurent() {
+  //   const a = store.getState().wallet;
+  //   return a;
+  // }
+
   render() {
+    // this.vercurent();
     return (
       <div className="flex-container">
         <div className="child1">

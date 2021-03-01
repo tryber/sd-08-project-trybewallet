@@ -92,7 +92,7 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
 
 // Foi imprencidivel na desenvoltura desse projeto o compartilhamento de informações e a
-// constante ajúda mútua entre mim e meus colegas.
+//  constante ajúda mútua entre mim e meus colegas.
 //  Meus agradecimento á Arnaelcio Gomes, que fez com tal proeza os regex necessarios.
 //  Meus agradecimento á Ana Karine que mostrou a beleza das arrows no lugar dos binds e
 //  encontrou sozinha os elses que faltavam,
