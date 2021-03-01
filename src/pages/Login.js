@@ -9,7 +9,7 @@ class Login extends React.Component {
     super(props);
 
     this.handleChange = this.handleChange.bind(this);
-    this.verifyInputs = this.verifyInputs.bind(this);;
+    this.verifyInputs = this.verifyInputs.bind(this);
 
     this.state = {
       email: '',
@@ -45,7 +45,7 @@ class Login extends React.Component {
   }
 
   render() {
-    const { saveEmail } = this.props
+    const { saveEmail } = this.props;
     const { email, password, button } = this.state;
     return (
       <div>

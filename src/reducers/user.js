@@ -1,6 +1,6 @@
 const INITIAL_STATE = {
   email: '',
- }
+};
 
 const user = (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -12,6 +12,6 @@ const user = (state = INITIAL_STATE, action) => {
   default:
     return state;
   }
-}
+};
 
 export default user;
