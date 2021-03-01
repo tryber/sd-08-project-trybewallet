@@ -25,23 +25,22 @@ class WalletSpent extends Component {
     } = convertedValueExchange(exchangeRates, currency, value);
 
     return (
-      <tr role="row">
-        <td role="cell">{id}</td>
-        <td role="cell">{description}</td>
-        <td role="cell">{tag}</td>
-        <td role="cell">{method}</td>
-        <td role="cell">{value}</td>
-        <td role="cell">{name}</td>
-        <td role="cell">{Number(ask).toFixed(2)}</td>
-        <td role="cell">{convertedValue}</td>
-        <td role="cell">
+      <tr>
+        <td>{id}</td>
+        <td>{description}</td>
+        <td>{tag}</td>
+        <td>{method}</td>
+        <td>{value}</td>
+        <td>{name}</td>
+        <td>{Number(ask).toFixed(2)}</td>
+        <td>{convertedValue}</td>
+        <td>
           Real
         </td>
-        <td role="cell">
+        <td>
           <button
             type="button"
             data-testid="edit-btn"
-            onClick={ () => console.log('click') }
           >
             EDITAR
           </button>
@@ -60,20 +59,22 @@ class WalletSpent extends Component {
 
 WalletSpent.propTypes = {
   expense: PropTypes.shape({
-    id: PropTypes.number,
-    value: PropTypes.string,
-    description: PropTypes.string,
-    currency: PropTypes.string,
-    tag: PropTypes.string,
-    method: PropTypes.string,
-    conversionMethod: PropTypes.string,
-    exchange: PropTypes.string,
-    ask: PropTypes.string,
-    converted: PropTypes.string,
-    exchangeRates: PropTypes.shape(PropTypes.object),
-  }).isRequired,
+    id: PropTypes.number.isRequired,
+    value: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    currency: PropTypes.string.isRequired,
+    tag: PropTypes.string.isRequired,
+    method: PropTypes.string.isRequired,
+    ask: PropTypes.string.isRequired,
+    exchangeRates: PropTypes.shape(PropTypes.string),
+  }),
   removeExpenseButton: PropTypes.func.isRequired,
 };
+
+WalletSpent.defaultProps = {
+  expense: [{ exchangeRates: {} }],
+};
+
 function mapDispatchToProps(dispatch) {
   return {
     removeExpenseButton: bindActionCreators(wallet.removeExpense, dispatch),

@@ -21,13 +21,13 @@ class WalletHeader extends React.Component {
       .replace(',', '.')
       .split(' ');
     return (
-      <header role="banner">
-        <h1 title="TrybeWallet">TrybeWallet</h1>
+      <header>
+        <h1>TrybeWallet</h1>
         <div>
           <span data-testid="email-field">{email}</span>
           <strong>
             {`Despesa Total: ${walletTotal[0]}` }
-            <small data-testid="total-field">{walletTotal[1]}</small>
+            <span data-testid="total-field">{walletTotal[1]}</span>
           </strong>
 
           <SelectExchange
@@ -39,6 +39,7 @@ class WalletHeader extends React.Component {
           >
             <OptionExchange
               item="BRL"
+              value="BRL"
             />
           </SelectExchange>
 

@@ -12,9 +12,9 @@ class WalletExpenseForm extends Component {
     return (
       <table>
         <tbody>
-          <tr role="row">
+          <tr>
             {expensesData.headForm.map((tag, index) => (
-              <th role="columnheader" key={ index }>
+              <th key={ index }>
                 {tag}
               </th>
             ))}
@@ -43,17 +43,20 @@ function mapDispatchToProps(dispatch) {
 WalletExpenseForm.propTypes = {
   expenses: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number,
-      value: PropTypes.string,
-      description: PropTypes.string,
-      currency: PropTypes.string,
-      tag: PropTypes.string,
-      method: PropTypes.string,
-      conversionMethod: PropTypes.string,
-      ask: PropTypes.string,
-      converted: PropTypes.string,
+      id: PropTypes.number.isRequired,
+      value: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      currency: PropTypes.string.isRequired,
+      tag: PropTypes.string.isRequired,
+      method: PropTypes.string.isRequired,
+      ask: PropTypes.string.isRequired,
+      exchangeRates: PropTypes.shape(PropTypes.string),
     }),
-  ).isRequired,
+  ),
+};
+
+WalletExpenseForm.defaultProps = {
+  expenses: [{ exchangeRates: {} }],
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(WalletExpenseForm);
