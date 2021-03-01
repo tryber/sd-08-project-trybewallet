@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 
 import { login as loginAction } from '../actions';
 
+import '../Login.css';
+
 class Login extends React.Component {
   constructor() {
     super();
@@ -61,35 +63,40 @@ class Login extends React.Component {
     }
 
     return (
-      <section>
-        <label htmlFor="email-input">
-          <input
-            data-testid="email-input"
-            id="email-input"
-            name="email"
-            onChange={ this.handleChange }
-            type="text"
-            value={ email }
-          />
-        </label>
-        <label htmlFor="password-input">
-          <input
-            data-testid="password-input"
-            id="password-input"
-            name="password"
-            onChange={ this.handleChange }
-            type="text"
-            value={ password }
-          />
-        </label>
-        <button
-          disabled={ this.validateLogin() }
-          onClick={ this.handleClick }
-          type="button"
-        >
-          Entrar
-        </button>
-      </section>
+      <div className="login-page-container">
+        <section className="login-container">
+          <h3>TribeWallet</h3>
+          <label htmlFor="email-input">
+            <input
+              data-testid="email-input"
+              id="email-input"
+              name="email"
+              onChange={ this.handleChange }
+              placeholder="email"
+              type="text"
+              value={ email }
+            />
+          </label>
+          <label htmlFor="password-input">
+            <input
+              data-testid="password-input"
+              id="password-input"
+              name="password"
+              onChange={ this.handleChange }
+              placeholder="senha"
+              type="password"
+              value={ password }
+            />
+          </label>
+          <button
+            disabled={ this.validateLogin() }
+            onClick={ this.handleClick }
+            type="button"
+          >
+            Entrar
+          </button>
+        </section>
+      </div>
     );
   }
 }

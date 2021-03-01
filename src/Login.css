@@ -1,0 +1,48 @@
+.login-page-container {
+  align-items: center;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+}
+
+.login-container {
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px;
+}
+
+.login-container h3 {
+  color: rgb(16, 87, 16);
+}
+
+.login-container input {
+  border: 1.5px solid rgb(98, 94, 94);
+  border-radius: 5px;
+  display: block;
+  margin: 7px;
+  text-align: center;
+}
+
+.login-container input::placeholder {
+  opacity: 0.5;
+}
+
+.login-container button {
+  background: rgb(26, 148, 26);
+  border-radius: 5px;
+  color: white;
+  margin-top: 10px;
+  transition: 0.3s;
+}
+
+.login-container button:disabled {
+  opacity: 0.4;
+}
+
+.login-container button:hover:enabled {
+  background: rgb(9, 82, 9);
+}

@@ -4,16 +4,20 @@ import ExpensesForm from '../components/ExpensesForm';
 import ExpensesTable from '../components/ExpensesTable';
 import ExpensesHeader from '../components/ExpensesHeader';
 
+import '../Wallet.css';
+
 class Wallet extends React.Component {
   render() {
     return (
-      <>
-        <ExpensesHeader />
-        <main>
-          <ExpensesForm />
-          <ExpensesTable />
-        </main>
-      </>
+      <div className="wallet-page-container">
+        <div className="wallet-container">
+          <ExpensesHeader />
+          <main>
+            <ExpensesForm />
+            <ExpensesTable />
+          </main>
+        </div>
+      </div>
     );
   }
 }

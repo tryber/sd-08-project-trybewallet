@@ -13,7 +13,7 @@ class ExpensesHeader extends React.Component {
     const { expenses } = this.props;
     return expenses.length < 1 ? 0 : expenses.reduce(
       (acc, { value, exchangeRates, currency }) => acc
-        + parseFloat(value) * exchangeRates[currency].ask, 0,
+        + (parseFloat(value) * exchangeRates[currency].ask), 0,
     ).toFixed(2);
   }
 
@@ -21,16 +21,17 @@ class ExpensesHeader extends React.Component {
     const { email } = this.props;
     return (
       <header>
-        <h4 data-testid="email-field">{ email }</h4>
         <table>
           <thead>
             <tr>
+              <th>Usuário</th>
               <th>Total de Gastos</th>
               <th>Câmbio</th>
             </tr>
           </thead>
           <tbody>
             <tr>
+              <td data-testid="email-field">{ email }</td>
               <td data-testid="total-field">{ `$ ${this.getExpensesTotal()}` }</td>
               <td data-testid="header-currency-field">BRL</td>
             </tr>

@@ -26,8 +26,7 @@ class ExpensesForm extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleAddClick = this.handleAddClick.bind(this);
     this.handleEditClick = this.handleEditClick.bind(this);
-    this.renderAddButton = this.renderAddButton.bind(this);
-    this.renderEditButton = this.renderEditButton.bind(this);
+    this.renderButton = this.renderButton.bind(this);
     this.renderInput = this.renderInput.bind(this);
     this.renderSelect = this.renderSelect.bind(this);
   }
@@ -37,11 +36,8 @@ class ExpensesForm extends React.Component {
     fetchCurrencies();
   }
 
-  handleChange({ target }) {
-    const { id, value } = target;
-    this.setState({
-      [id]: value,
-    });
+  handleChange({ target: { id, value } }) {
+    this.setState({ [id]: value });
   }
 
   async handleAddClick(event) {
@@ -50,11 +46,11 @@ class ExpensesForm extends React.Component {
     const apiResponse = await fetch('https://economia.awesomeapi.com.br/json/all');
     const apiJson = await apiResponse.json();
     this.setState({ exchangeRates: apiJson }, () => {
+      addExpense(this.state);
       this.setState((previousState) => ({
         id: previousState.id + 1,
         ...this.initialState,
       }));
-      addExpense(this.state);
     });
   }
 
@@ -101,11 +97,7 @@ class ExpensesForm extends React.Component {
           value={ state }
         >
           { options.map((option) => (
-            <option
-              data-testid={ option }
-              key={ option }
-              value={ option }
-            >
+            <option data-testid={ option } key={ option } value={ option }>
               { option }
             </option>
           ))}
@@ -114,30 +106,22 @@ class ExpensesForm extends React.Component {
     );
   }
 
-  renderAddButton() {
+  renderButton() {
+    const { editTarget } = this.props;
     return (
       <button
-        onClick={ this.handleAddClick }
+        onClick={ Object.keys(editTarget).length === 0
+          ? this.handleAddClick : this.handleEditClick }
         type="submit"
       >
-        Adicionar despesa
-      </button>
-    );
-  }
-
-  renderEditButton() {
-    return (
-      <button
-        onClick={ this.handleEditClick }
-        type="submit"
-      >
-        Editar despesa
+        { Object.keys(editTarget).length === 0
+          ? 'Adicionar despesa' : 'Editar despesa' }
       </button>
     );
   }
 
   render() {
-    const { loading, currencies, editTarget } = this.props;
+    const { loading, currencies } = this.props;
     const { value, description, currency, method, tag } = this.state;
     const paymentMethods = ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'];
     const expenseTags = ['Lazer', 'Alimentação', 'Trabalho', 'Transporte', 'Saúde'];
@@ -149,8 +133,7 @@ class ExpensesForm extends React.Component {
         { !loading && this.renderSelect('Moeda:', 'currency', currency, currencies) }
         { this.renderSelect('Método de pagamento:', 'method', method, paymentMethods) }
         { this.renderSelect('Categoria da Despesa:', 'tag', tag, expenseTags) }
-        { Object.keys(editTarget).length === 0
-          ? this.renderAddButton() : this.renderEditButton() }
+        { this.renderButton() }
       </form>
     );
   }

@@ -30,8 +30,8 @@ class ExpensesTable extends React.Component {
           <td>{ (value * exchangeRates[currency].ask).toFixed(2) }</td>
           <td>Real</td>
           <td id={ id }>
-            { this.renderDeleteButton() }
             { this.renderEditButton() }
+            { this.renderDeleteButton() }
           </td>
         </tr>
       ),
@@ -46,7 +46,7 @@ class ExpensesTable extends React.Component {
         onClick={ (e) => { deleteExpense(parseInt(e.target.parentElement.id, 10)); } }
         type="button"
       >
-        Excluir
+        { }
       </button>);
   }
 
@@ -58,7 +58,7 @@ class ExpensesTable extends React.Component {
         onClick={ (e) => { editExpense(parseInt(e.target.parentElement.id, 10)); } }
         type="button"
       >
-        Editar
+        { }
       </button>);
   }
 
