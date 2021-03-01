@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
 
-body{
-  font-family: 'Montserrat', sans-serif;
+body {
+  font-family: Montserrat, sans-serif;
   overflow-x: hidden;
 }
 
@@ -10,7 +10,7 @@ body{
   justify-content: flex-end;
 }
 
-.header p{
+.header p {
   margin-left: 10px;
   margin-right: 5px;
 }
@@ -24,10 +24,10 @@ body{
   margin-right: 25px;
 }
 
-.input-value input{
-  border-radius: 5px;
+.input-value input {
   border: solid 1px black;
-  font-family: 'Montserrat', sans-serif;
+  border-radius: 5px;
+  font-family: Montserrat, sans-serif;
   margin-left: 10px;
   padding: 5px;
   text-align: center;
@@ -38,10 +38,10 @@ body{
   margin-right: 25px;
 }
 
-.input-description input{
-  border-radius: 5px;
+.input-description input {
   border: solid 1px black;
-  font-family: 'Montserrat', sans-serif;
+  border-radius: 5px;
+  font-family: Montserrat, sans-serif;
   margin-left: 10px;
   padding: 5px;
   text-align: center;
@@ -52,11 +52,11 @@ body{
   margin-right: 25px;
 }
 
-.coin-drop select{
-  background-color: white;
+.coin-drop select {
   border: solid 1px black;
+  background-color: white;
   border-radius: 5px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: Montserrat, sans-serif;
   margin-left: 10px;
   padding: 5px;
   text-align: center;
@@ -67,11 +67,11 @@ body{
   margin-right: 25px;
 }
 
-.payment-drop select{
-  background-color: white;
+.payment-drop select {
   border: solid 1px black;
   border-radius: 5px;
-  font-family: 'Montserrat', sans-serif;
+  background-color: white;
+  font-family: Montserrat, sans-serif;
   margin-left: 10px;
   padding: 5px;
   text-align: center;
@@ -82,11 +82,11 @@ body{
   margin-right: 25px;
 }
 
-.tag-drop select{
+.tag-drop select {
   background-color: white;
   border-radius: 5px;
   border: solid 1px black;
-  font-family: 'Montserrat', sans-serif;
+  font-family: Montserrat, sans-serif;
   margin-left: 10px;
   padding: 5px;
   text-align: center;
@@ -97,13 +97,13 @@ body{
   background-color: white;
   border-radius: 5px;
   border: solid 1px black;
-  font-family: 'Montserrat', sans-serif;
+  font-family: Montserrat, sans-serif;
   padding: 5px;
   text-align: center;
   width: 150px;
 }
 
-.button-submit:hover{
+.button-submit:hover {
   cursor: pointer;
 }
 
@@ -113,11 +113,10 @@ body{
   display: flex;
   font-size: 12px;
   justify-content: space-between;
-  padding: 0px 15px;
+  padding: 0 15px;
 }
 
 .orders {
   display: flex;
   justify-content: space-between;
 }
-
