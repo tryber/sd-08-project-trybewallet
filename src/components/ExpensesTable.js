@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './ExpensesTable.css';
+import PropTypes from 'prop-types';
 import { removeExpense } from '../actions';
 
 class ExpensesTable extends Component {
@@ -41,7 +42,14 @@ class ExpensesTable extends Component {
           <td>{ exchangeRate }</td>
           <td>{ parseFloat(expense.value) * parseFloat(exchangeRate) }</td>
           <td>BRL</td>
-          <td><button type="button" onClick={ () => deleteExpense(expense) }>Excluir</button></td>
+          <td>
+            <button
+              type="button"
+              onClick={ () => deleteExpense(expense) }
+            >
+              Excluir
+            </button>
+          </td>
         </tr>
       );
     });
@@ -56,6 +64,11 @@ class ExpensesTable extends Component {
     );
   }
 }
+
+ExpensesTable.propTypes = {
+  expenses: PropTypes.shape([{}]).isRequired,
+  deleteExpense: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = (state) => ({
   expenses: state.wallet.expenses,
