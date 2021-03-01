@@ -1,0 +1,70 @@
+.header-content {
+  align-items: flex-start;
+  background-color: rgb(151, 157, 172);
+  display: flex;
+  margin: 0;
+}
+
+.header {
+  background-color: rgb(0, 40, 85);
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+}
+
+.header p {
+  background-color: rgb(4, 102, 200);
+  border: 1px solid black;
+  border-radius: 4px;
+  color: rgb(0, 40, 85);
+  margin: 20px 50px;
+  padding: 10px;
+}
+
+.expense-form-content {
+  align-items: center;
+  display: flex;
+  height: 250px;
+  justify-content: center;
+}
+
+.expense-form {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.expense-form button {
+  align-self: center;
+  background-color: rgb(211, 214, 221);
+  border-radius: 6px;
+  margin-bottom: 30px;
+  margin-top: 10px;
+}
+
+.expense-form input:first-child {
+  background-color: rgb(211, 214, 221);
+  border-radius: 6px;
+  width: 75px;
+}
+
+.expense-form select {
+  background-color: rgb(211, 214, 221);
+  border-radius: 6px;
+}
+
+.expense-form :only-child {
+  margin: 10px 0;
+}
+
+.expense-table {
+  border-collapse: collapse;
+  display: flex;
+  justify-content: center;
+}
+
+.expense-table th , .expense-table td {
+  border: 1px solid black;
+  padding: 15px;
+}

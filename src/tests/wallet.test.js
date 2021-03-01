@@ -318,7 +318,6 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
           exchangeRates: mockData,
         },
       ];
-  
       expect(store.getState().wallet.expenses).toStrictEqual(newExpenses);
   
       const totalField = screen.getByTestId('total-field');
