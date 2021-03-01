@@ -1,0 +1,10 @@
+table {
+  display: flex;
+  justify-content: flex-start;
+  margin: 20px auto;
+  width: 60%;
+}
+
+th {
+  padding: 5px 10px;
+}
