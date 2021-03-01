@@ -8,7 +8,7 @@ const initialState = {
 
 const updateTotal = (state, action) => {
   let expenses = [];
-  if (action.type === 'DELETE_EXPENSE') {
+  if (action.type === 'UPDATE_EXPENSE') {
     expenses = action.expenses;
   } else {
     expenses = state.expenses.concat(action.expense);
@@ -40,7 +40,7 @@ const wallet = (state = initialState, action) => {
       expenses: [...state.expenses, action.expense],
       totalValue: updateTotal(state, action),
     };
-  case 'DELETE_EXPENSE':
+  case 'UPDATE_EXPENSE':
     return {
       ...state,
       expenses: action.expenses,
