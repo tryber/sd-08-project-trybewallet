@@ -28,7 +28,7 @@ class expenseForm extends React.Component {
       method: 'Dinheiro',
       tag: 'Alimentação',
       description: '',
-      currentRate: {},
+      // currentRate: {},
     };
   }
 
