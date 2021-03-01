@@ -12,11 +12,13 @@ input {
   display: flex;
   justify-content: center;
 }
+
 .Login {
   background-color: #333;
   border-radius: 4px;
   padding: 20px;
 }
+
 .Login .login-inputs {
   display: flex;
   flex-direction: column;
