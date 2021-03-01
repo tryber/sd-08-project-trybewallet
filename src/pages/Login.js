@@ -25,8 +25,8 @@ class Login extends React.Component {
 
   handleClick() {
     const { email } = this.state;
-    const { walletLogin } = this.props;
-    walletLogin(email);
+    const { loginWallet } = this.props;
+    loginWallet(email);
   }
 
   validationEmail() {
@@ -49,7 +49,7 @@ class Login extends React.Component {
   render() {
     const { email, password, isChecked } = this.state;
     const { emailValidation } = this.props;
-    if (emailValidation) return <Redirect to="/carreira" />;
+    if (emailValidation) return <Redirect to="/carteira" />;
     return (
       <div className="Login">
         <header className="headerLogin">Faça seu Login</header>
@@ -88,12 +88,12 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  walletLogin: (email) => dispatch(login(email)),
+  loginWallet: (email) => dispatch(login(email)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
 
 Login.propTypes = {
-  walletLogin: PropTypes.func.isRequired,
+  loginWallet: PropTypes.func.isRequired,
   emailValidation: PropTypes.string.isRequired,
 };
