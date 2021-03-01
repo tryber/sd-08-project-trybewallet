@@ -7,9 +7,6 @@ a {
   line-height: 1.7;
   margin: 0px;
   transition: all 0.4s;
-  -webkit-transition: all 0.4s;
-  -o-transition: all 0.4s;
-  -moz-transition: all 0.4s;
 }
 
 a:focus {
@@ -51,58 +48,6 @@ input:focus {
   border-color: transparent !important;
 }
 
-input:focus::-webkit-input-placeholder {
-  color: transparent;
-}
-input:focus:-moz-placeholder {
-  color: transparent;
-}
-input:focus::-moz-placeholder {
-  color: transparent;
-}
-input:focus:-ms-input-placeholder {
-  color: transparent;
-}
-
-textarea:focus::-webkit-input-placeholder {
-  color: transparent;
-}
-textarea:focus:-moz-placeholder {
-  color: transparent;
-}
-textarea:focus::-moz-placeholder {
-  color: transparent;
-}
-textarea:focus:-ms-input-placeholder {
-  color: transparent;
-}
-
-input::-webkit-input-placeholder {
-  color: white;
-}
-input:-moz-placeholder {
-  color: white;
-}
-input::-moz-placeholder {
-  color: white;
-}
-input:-ms-input-placeholder {
-  color: white;
-}
-
-textarea::-webkit-input-placeholder {
-  color: white;
-}
-textarea:-moz-placeholder {
-  color: white;
-}
-textarea::-moz-placeholder {
-  color: white;
-}
-textarea:-ms-input-placeholder {
-  color: white;
-}
-
 label {
   display: block;
   margin: 0;
@@ -137,13 +82,8 @@ iframe {
 .container-header-wallet {
   align-items: center;
   background-position: center;
-
   background-repeat: no-repeat;
   background-size: cover;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -229,7 +169,6 @@ iframe {
 .input {
   background: transparent;
   color: white;
-
   display: block;
   font-family: Roboto;
   font-size: 18px;
@@ -263,7 +202,6 @@ iframe {
 
 .focus-input::after {
   color: white;
-
   content: attr(data-placeholder);
   display: block;
   font-size: 22px;
@@ -373,7 +311,6 @@ iframe {
   border-radius: 2px;
   color: #c80000;
   content: attr(data-validate);
-
   font-family: Roboto;
   font-size: 13px;
   line-height: 1.4;
@@ -387,14 +324,12 @@ iframe {
   top: 50%;
   transform: translateY(-50%);
   transition: opacity 0.4s;
-
   visibility: hidden;
 }
 
 .alert-validate::after {
   color: #c80000;
   content: "\f12a";
-
   display: block;
   font-family: FontAwesome;
   font-size: 16px;
