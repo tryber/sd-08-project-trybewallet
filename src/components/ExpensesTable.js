@@ -34,7 +34,7 @@ class ExpensesTable extends React.Component {
             <th>Câmbio utilizado</th>
             <th>Valor convertido</th>
             <th>Moeda de conversão</th>
-            {/* <th>Excluir</th> */}
+            <th>Editar/Excluir</th>
           </tr>
         </thead>
 

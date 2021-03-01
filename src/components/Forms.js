@@ -13,7 +13,7 @@ const INITIAL_STATE = {
   value: 0,
   tag: 'Lazer',
   method: 'Dinheiro',
-  // exchangeRates: {},
+  exchangeRates: {},
 };
 
 class Forms extends React.Component {
@@ -111,18 +111,18 @@ class Forms extends React.Component {
 
     return (
       <form>
-        { this.renderInput('Descrição', 'description', description) }
-        { this.renderInput('Valor', 'value', value) }
+        { this.renderInput('Descreva qual o gasto:', 'description', description) }
+        { this.renderInput('Quanto custou?', 'value', value) }
         { this.renderSelectCurrency('Categoria da Despesa', 'tag', tag, expenseTags) }
-        { this.renderSelectCurrency('Método de pagamento',
+        { this.renderSelectCurrency('Forma de pagamento',
           'method', method, paymentMethods) }
 
         { !loading && this.renderSelectCurrency(
-          'Moeda', 'currency', currency, currencies,
+          'Câmbio', 'currency', currency, currencies,
         ) }
 
         <button onClick={ this.handleClick } type="submit">
-          Adicionar Despesa
+          Adicionar despesa
         </button>
       </form>
     );
