@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import loginUser from '../actions/index';
 
 class Login extends React.Component {
   constructor(props) {
@@ -23,15 +25,19 @@ class Login extends React.Component {
   formsCheck() {
     const { email, password } = this.state;
     const passwordMin = 6;
-    if (password.length < passwordMin) return true;
-    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) return true;
+    const passwordCheck = (password.length < passwordMin);
+    const emailCheck = ((!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)));
+    if (passwordCheck || emailCheck) return true;
     return false;
   }
   // https://formik.org/docs/guides/validation (Regex validação e-mail)
 
   formSubmit(event) {
     event.preventDefault();
-    console.log('teste submit');
+    const { clickLogin } = this.props;
+    const { email } = this.state;
+    clickLogin(email);
+    // console.log('teste submit');
   }
 
   render() {
@@ -72,4 +78,8 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+const mapDispatchToProps = (dispatch) => ({
+  clickLogin: (email) => dispatch(loginUser(email)),
+});
+
+export default connect(null, mapDispatchToProps)(Login);
