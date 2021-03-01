@@ -1,11 +1,11 @@
 input {
-  background-color: #5f5e5e;
+  background-color: #aaaaaa;
   background-image: none;
-  border: none;
+  border-radius: 10px;
   box-shadow: none;
-  color: white;
-  margin: 10px;
-  padding: 10px;
+  color: rgb(95, 170, 52);
+  margin: 18px;
+  padding: 20px;
 }
 
 .headerLogin {
@@ -14,9 +14,9 @@ input {
 }
 
 .Login {
-  background-color: #333;
-  border-radius: 4px;
-  padding: 20px;
+  background-color: rgb(44, 44, 44);
+  border-radius: 10px;
+  padding: 25px;
 }
 
 .Login .login-inputs {
@@ -25,11 +25,11 @@ input {
 }
 
 button {
-  background-color: rgb(240, 237, 237);
+  background-color: white;
   background-image: none;
-  border: 5px;
-  color: rgb(238, 159, 40);
+  border-radius: 80px;
+  color: rgb(95, 170, 52);
   font-weight: 800;
-  margin: 10px;
-  padding: 10px;
+  margin: 15px;
+  padding: 15px;
 }
