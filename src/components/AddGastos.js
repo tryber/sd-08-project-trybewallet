@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import store from '../store';
 
 class AddGastos extends Component {
   constructor() {
@@ -9,6 +10,7 @@ class AddGastos extends Component {
       auxiliar: {
         arrFinal: [],
         arrDeValores: [],
+        valor: 0,
       },
       despesas: {
         id: 0,
@@ -31,7 +33,7 @@ class AddGastos extends Component {
     this.acrescimoID = this.acrescimoID.bind(this);
     this.changeValor = this.changeValor.bind(this);
     this.resetValue = this.resetValue.bind(this);
-    // this.getExchandesRates = this.getExchandesRates.bind(this);
+    this.changevalor = this.changevalor.bind(this);
   }
 
   componentDidMount() {
@@ -74,14 +76,21 @@ class AddGastos extends Component {
     } });
   }
 
-  // async getExchandesRates() {
-  //   const { despesas } = this.state;
-  //   const awaiit = await this.getAPI();
-  //   const promisse = Object.values(awaiit);
-  //   this.setState({ despesas: { ...despesas,
-  //     exchangeRates: promisse,
-  //   } });
-  // }
+  changevalor() {
+    const stateAuxiliar = store.getState().wallet.auxiliar;
+    const stateExpenses = store.getState().wallet.expenses;
+    const { arrDeValores, arrFinal } = stateAuxiliar;
+    let total = 0;
+    for (let f = 0; f < stateExpenses.length; f += 1) {
+      for (let i = 0; i < arrDeValores.length; i += 1) {
+        if (stateExpenses[f].currency === arrFinal[i]) {
+          total += arrDeValores[i] * stateExpenses[f].value;
+          this.setState({ auxiliar: { ...auxiliar, valor: total,
+          } });
+        }
+      }
+    }
+  }
 
   tipoDeMoeda() {
     const { auxiliar } = this.state;
@@ -163,21 +172,12 @@ class AddGastos extends Component {
     const { despesas } = this.state;
     const { name, value } = event.target;
     const awaiit = await this.getAPI();
-    // const promisse = Object.values(awaiit);
-    //   this.setState({ despesas: { ...despesas,
-    //     exchangeRates: promisse,
-    //   } });
-    // }
-    // for (let i = 0; i < auxiliar.arrFinal.length; i += 1) {
-    //   if (event.target.value === auxiliar.arrFinal[i]) {
+
     this.setState({ despesas: { ...despesas,
       [name]: value,
       exchangeRates: awaiit,
-      // auxiliar.arrDeValores[i]
     } });
   }
-  //   }
-  // }
 
   acrescimoID() {
     const { despesas } = this.state;
@@ -226,6 +226,7 @@ class AddGastos extends Component {
             this.acrescimoID();
             expenses(despesas);
             auxiliarr(auxiliar);
+            // changevalor();
           } }
         >
           Adicionar despesa

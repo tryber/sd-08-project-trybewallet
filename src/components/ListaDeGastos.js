@@ -13,23 +13,27 @@ class ListaDeGastos extends Component {
   }
 
   changevalor() {
-    let { valor } = this.state;
+    // const { valor } = this.state;
     const stateAuxiliar = store.getState().wallet.auxiliar;
     const stateExpenses = store.getState().wallet.expenses;
     const { arrDeValores, arrFinal } = stateAuxiliar;
- console.log(stateExpenses.map((item) => item[0]));
-  
-for (let f = 0; f < stateExpenses.length; f += 1)
+    //  console.log(stateExpenses.map((item) => item[0]));
 
-  //   for (let f = 0; f < stateExpenses.length; f += 1) {
-  //     for (let i = 0; i < arrDeValores.length; i += 1) {
-  //       if (stateExpenses[f].currency === arrFinal[i]) {
-  //         this.setState({ valor: valor += arrDeValores[i] * stateExpenses[f].value,
-  //         });
-  //       }
-  //     }
-  //   }
-  // }
+    // for (let i = 0; i < stateExpenses.length; i += 1){
+    // if (stateExpenses[i].currency ===  ){
+
+    // }}
+    let total = 0;
+    for (let f = 0; f < stateExpenses.length; f += 1) {
+      for (let i = 0; i < arrDeValores.length; i += 1) {
+        if (stateExpenses[f].currency === arrFinal[i]) {
+          total += arrDeValores[i] * stateExpenses[f].value;
+          this.setState({ valor: total,
+          });
+        }
+      }
+    }
+  }
 
   render() {
     const { valor } = this.state;
@@ -45,24 +49,23 @@ for (let f = 0; f < stateExpenses.length; f += 1)
   }
 }
 
-const mapStateToProps = (expenses, auxiliar) => ({
-  value: expenses.value,
-  arrDeValores: auxiliar.arrDeValores,
-  arrFinal: auxiliar.arrFinal,
-  currency: expenses.currency,
-});
+// const mapStateToProps = (expenses, auxiliar) => ({
+//   value: expenses.value,
+//   arrDeValores: auxiliar.arrDeValores,
+//   arrFinal: auxiliar.arrFinal,
+//   currency: expenses.currency,
+// });
 
 // const mapDispatchToProps = (dispatch) => ({
 //   expenses: (expenses) => dispatch({ type: 'ADD_DESPESA', expenses }),
 // });
-
-export default connect(mapStateToProps)(ListaDeGastos);
+// export default connect(mapStateToProps)(ListaDeGastos);
 // const mapStateToProps = (state) => ({
 //   valor: state.wallet.expenses.valor,
 // });
 
 // export default connect(mapStateToProps)(ListaDeGastos);
-
+export default ListaDeGastos;
 // ListaDeGastos.propTypes = {
 //   valor: PropTypes.shape.isRequired,
 // };
