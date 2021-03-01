@@ -49,10 +49,17 @@ class Wallet extends React.Component {
   }
 
   methodInput() {
+    const { method } = this.state;
     return (
       <label htmlFor="method" className="payment-drop">
         Metodo de pagamento:
-        <select data-testid="method-input" name="method" onChange={ this.handleChange } id="method" value={this.state.payment}>
+        <select
+          data-testid="method-input"
+          name="method"
+          onChange={ this.handleChange }
+          id="method"
+          value={ method }
+        >
           <option>Dinheiro</option>
           <option>Cartão de crédito</option>
           <option>Cartão de débito</option>
@@ -62,10 +69,17 @@ class Wallet extends React.Component {
   }
 
   tagInput() {
+    const { tag } = this.state;
     return (
       <label htmlFor="tag" className="tag-drop">
         Tag:
-        <select data-testid="tag-input" name="tag" onChange={ this.handleChange } id="tag" value={this.state.tag}>
+        <select
+          data-testid="tag-input"
+          name="tag"
+          onChange={ this.handleChange }
+          id="tag"
+          value={ tag }
+        >
           <option>Alimentação</option>
           <option>Lazer</option>
           <option>Trabalho</option>
@@ -78,6 +92,7 @@ class Wallet extends React.Component {
 
   currencyInput() {
     const { currencies } = this.props;
+    const { currency } = this.state;
     return (
       <label htmlFor="currency" className="coin-drop">
         Moeda:
@@ -86,7 +101,7 @@ class Wallet extends React.Component {
           name="currency"
           onChange={ this.handleChange }
           id="currency"
-          value={this.state.currency}
+          value={ currency }
         >
           { currencies
             .map((coin) => (
@@ -116,6 +131,7 @@ class Wallet extends React.Component {
 
   render() {
     const { email, expensesStore } = this.props;
+    const { value, description } = this.state;
     return (
       <>
         <header className="header">
@@ -131,7 +147,7 @@ class Wallet extends React.Component {
               data-testid="value-input"
               name="value"
               onChange={ this.handleChange }
-              value={this.state.value}
+              value={ value }
             />
           </label>
           <label htmlFor="description" className="input-description">
@@ -141,7 +157,7 @@ class Wallet extends React.Component {
               name="description"
               data-testid="description-input"
               onChange={ this.handleChange }
-              value={this.state.description}
+              value={ description }
             />
           </label>
           { this.currencyInput() }

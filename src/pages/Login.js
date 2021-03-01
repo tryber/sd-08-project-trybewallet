@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
 
-import { userLoginFunction, exchangeFetchingAPI } from '../actions/index';
+import { userLoginFunction } from '../actions/index';
 
 class Login extends React.Component {
   constructor() {
@@ -36,7 +36,7 @@ class Login extends React.Component {
   }
 
   render() {
-    const { userLogin, fetchAPI } = this.props;
+    const { userLogin } = this.props;
     const { email } = this.state;
     return (
       <>

@@ -1,19 +1,24 @@
 import React from 'react';
+import propTypes from 'prop-types';
 
 class Table extends React.Component {
   tableOrder() {
     const { expenses } = this.props;
     if (expenses.length !== 0) {
       return expenses.map((order, index) => {
+        const { description, tag, method, exchangeRates, value, currency } = order;
+        const { ask, name } = exchangeRates[currency];
+        let number = parseFloat(ask);
+        number = number.toFixed(2);
         return (
           <tr key={ index }>
-            <td>{order.description}</td>
-            <td>{order.tag}</td>
-            <td>{order.payment}</td>
-            <td>{order.value}</td>
-            <td>{order.exchangeRates[order.currency].name}</td>
-            <td>{order.exchangeRates[order.currency].ask}</td>
-            <td>{order.value * order.exchangeRates[order.currency].ask}</td>
+            <td>{description}</td>
+            <td>{tag}</td>
+            <td>{method}</td>
+            <td>{value}</td>
+            <td>{name}</td>
+            <td>{number}</td>
+            <td>{value * ask}</td>
             <td>Real</td>
             <td>
               <button type="button">Editar</button>
@@ -47,5 +52,9 @@ class Table extends React.Component {
     );
   }
 }
+
+Table.propTypes = {
+  expenses: propTypes.arrayOf(propTypes.object).isRequired,
+};
 
 export default Table;
