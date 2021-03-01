@@ -18,7 +18,7 @@ body {
 .login {
   background-color: white;
   border-radius: 10px;
-  box-shadow: rgb(0, 0, 0) 0 0 10px 1px;
+  box-shadow: black 0 0 10px 1px;
   display: flex;
   flex-direction: column;
   padding: 20px;
