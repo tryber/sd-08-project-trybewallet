@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom';
 
 import { actionLogin } from '../actions';
 
-import './styles/Login.css';
+// import './styles/Login.css';
 
 function validateEmail(email) { const re = /\S+@\S+\.\S+/; return re.test(email); }
 // solution by Luiza Dilly
