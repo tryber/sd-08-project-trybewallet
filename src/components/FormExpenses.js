@@ -24,7 +24,31 @@ class FormExpenses extends Component {
     this.handleAddExpense = this.handleAddExpense.bind(this);
   }
 
-  handleAddExpense() {
+  resetState() {
+    this.setState({
+      formControl: {
+        value: '0',
+        currency: 'USD',
+        method: 'Dinheiro',
+        tag: 'Alimentação',
+        description: '',
+      },
+    });
+  }
+
+  currenciesTransform(currencies) {
+    const response = { };
+    currencies.forEach((element) => {
+      if (element.codein === 'BRL') {
+        Object.assign(response, { [element.code]: element });
+      } else {
+        Object.assign(response, { USDT: element });
+      }
+    });
+    return response;
+  }
+
+  async handleAddExpense() {
     const {
       propAddExpense, propFetchCurrencies, propNewCurrencyID, UID, currencies,
     } = this.props;
@@ -35,7 +59,10 @@ class FormExpenses extends Component {
       tag,
       description,
     } } = this.state;
-    propFetchCurrencies();
+
+    await propFetchCurrencies();
+
+    const newCurrencies = this.currenciesTransform(currencies);
 
     const expenseObj = {
       id: UID,
@@ -44,10 +71,11 @@ class FormExpenses extends Component {
       currency,
       method,
       tag,
-      exchangeRates: currencies,
+      exchangeRates: newCurrencies,
     };
     propAddExpense(expenseObj);
     propNewCurrencyID();
+    this.resetState();
   }
 
   handleInput(type, { value }) {

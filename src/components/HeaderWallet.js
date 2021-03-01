@@ -9,12 +9,30 @@ class HeaderWallet extends Component {
   constructor(props) {
     super(props);
     this.totalValue = this.totalValue.bind(this);
+    this.reduceValue = this.reduceValue.bind(this);
+    this.getHistoricCurrency = this.getHistoricCurrency.bind(this);
+  }
+
+  getHistoricCurrency(exchangeRates, currency) {
+    return Object.values(exchangeRates).reduce((acc, e) => {
+      if (e.code === currency && e.codein !== 'BRLT') {
+        return e;
+      }
+      return acc;
+    }, {});
+  }
+
+  reduceValue(expenses) {
+    return expenses.reduce((acc, { value, exchangeRates, currency }) => {
+      const historicCurrency = this.getHistoricCurrency(exchangeRates, currency);
+      const { ask } = historicCurrency;
+      return ((acc * 1) + (value * 1) * (ask * 1));
+    }, 0);
   }
 
   totalValue() {
     const { expenses } = this.props;
-    const total = expenses.reduce((acc, current) => acc * 1 + current.value * 1, 0);
-    return total;
+    return this.reduceValue(expenses).toFixed(2);
   }
 
   render() {
@@ -60,7 +78,7 @@ HeaderWallet.propTypes = {
     currency: PropTypes.string.isRequired,
     method: PropTypes.string.isRequired,
     tag: PropTypes.string.isRequired,
-    exchangeRates: PropTypes.arrayOf(PropTypes.shape({
+    exchangeRates: PropTypes.shape(PropTypes.shape({
       ask: PropTypes.string.isRequired,
       bid: PropTypes.string.isRequired,
       code: PropTypes.string.isRequired,
