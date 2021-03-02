@@ -3,9 +3,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { updateExpense } from '../actions';
 
-import Pen from '../icons/pen-fill.svg';
-import Trash from '../icons/trash-fill.svg';
-
 class ExpensesList extends React.Component {
   constructor() {
     super();
@@ -48,7 +45,7 @@ class ExpensesList extends React.Component {
             data-testid="edit-btn"
             onClick={ () => this.editClick(expense) }
           >
-            <img src={ Pen } alt="edit-icon" />
+            <img src="icons/pen-fill.svg" alt="edit-icon" />
           </button>
           <button
             type="button"
@@ -56,7 +53,7 @@ class ExpensesList extends React.Component {
             data-testid="delete-btn"
             onClick={ () => this.deleteClick(index) }
           >
-            <img src={ Trash } alt="remove-icon" />
+            <img src="icons/trash-fill.svg" alt="remove-icon" />
           </button>
         </td>
       </tr>

@@ -7,7 +7,7 @@ class Header extends React.Component {
     const { email, totalValue } = this.props;
     return (
       <header>
-        <img src="https://flomio.com/wp-content/uploads/2016/10/Wallet.png" alt="logo" />
+        <img src="Wallet.png" alt="logo" />
         <div className="header-content-container">
           <span>Email: </span>
           <p data-testid="email-field">{ email }</p>
