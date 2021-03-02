@@ -192,7 +192,7 @@ class Wallet extends React.Component {
 }
 
 Wallet.propTypes = {
-  exchangeValues: PropTypes.arrayOf(PropTypes.string).isRequired,
+  exchangeValues: PropTypes.arrayOf(PropTypes.object).isRequired,
   fetchCurrencies: PropTypes.func.isRequired,
   addRegister: PropTypes.func.isRequired,
   allExpenses: PropTypes.arrayOf(PropTypes.object).isRequired,
