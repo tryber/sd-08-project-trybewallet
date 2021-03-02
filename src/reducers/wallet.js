@@ -18,7 +18,7 @@ function wallet(state = initialState, action) {
   case 'ADD_REGISTER':
     return { ...state, expenses: [...state.expenses, action.data] };
   case 'DELETE_REGISTER':
-    return state.filter((register) => register !== action.value);
+    return {...state, expenses: [...state.expenses.filter((element) => element !== action.value)]};
   default:
     return state;
   }

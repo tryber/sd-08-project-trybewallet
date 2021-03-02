@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { deleteRegister as deleteRegisterAction } from '../actions/index';
 
 class ExpensesTable extends React.Component {
   render() {
@@ -28,8 +29,9 @@ class ExpensesTable extends React.Component {
             description,
             exchangeRates,
           } = element;
-          const defaultExchange = exchangeRates[currency].codein;
-          console.log(defaultExchange);
+          const { deleteRegister } = this.props;
+          // const defaultExchange = exchangeRates[currency].codein;
+          console.log(element);
           return (
             <tr key={ id }>
               <td>{description}</td>
@@ -44,7 +46,7 @@ class ExpensesTable extends React.Component {
               <td>Real</td>
               <td>
                 <button type="button">Editar</button>
-                <button data-testid="delete-btn" type="button">Excluir</button>
+                <button data-testid="delete-btn" type="button" onClick={() => deleteRegister(element)}>Excluir</button>
               </td>
             </tr>
           );
@@ -58,8 +60,12 @@ ExpensesTable.propTypes = {
   allExpenses: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-const mapDispatchToProps = (state) => ({
+const mapStateToProps = (state) => ({
   allExpenses: state.wallet.expenses,
 });
 
-export default connect(mapDispatchToProps, null)(ExpensesTable);
+const mapDispatchToProps = (dispatch) => ({
+  deleteRegister: (e) => dispatch(deleteRegisterAction(e)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ExpensesTable);
