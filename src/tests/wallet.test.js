@@ -219,7 +219,7 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
   
   describe('5 - Desenvolva uma tabela com os gastos contendo as seguintes características:', () => {
     const initial = initialStateWithExpenses;
-  
+
     test('A tabela deve possuir um cabeçalho com os campos Descrição, Tag, Método de pagamento, Valor, Moeda, Câmbio utilizado, Valor convertido e Moeda de conversão', () => {
       renderWithRouterAndStore(<Wallet />, '/carteira', initial);
       const thDescricao = screen.getByText('Descrição');
@@ -231,7 +231,7 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
       const thValorConvertido = screen.getByText('Valor convertido');
       const thMoedaConversao = screen.getByText('Moeda de conversão');
       const thEditarExcluir = screen.getByText('Editar/Excluir');
-  
+
       expect(thDescricao).toBeInTheDocument();
       expect(thTag).toBeInTheDocument();
       expect(thMetodo).toBeInTheDocument();
@@ -242,7 +242,7 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
       expect(thMoedaConversao).toBeInTheDocument();
       expect(thEditarExcluir).toBeInTheDocument();
     });
-  
+
     test('A tabela deve ser alimentada pelo estado da aplicação, que estará disponível na chave expenses que vem do reducer wallet.', () => {
       renderWithRouterAndStore(<Wallet />, '/carteira', initial);
       expect(screen.getAllByRole('cell', { name: 'Dez dólares' })[0]).toBeInTheDocument();
@@ -253,7 +253,7 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
       expect(screen.getAllByRole('cell', { name: '5.58' })[0]).toBeInTheDocument();
       expect(screen.getAllByRole('cell', { name: '55.75' })[0]).toBeInTheDocument();
       expect(screen.getAllByRole('cell', { name: 'Real' })[0]).toBeInTheDocument();
-  
+
       expect(screen.getAllByRole('cell', { name: 'Vinte euros' })[0]).toBeInTheDocument();
       expect(screen.getAllByRole('cell', { name: 'Trabalho' })[0]).toBeInTheDocument();
       expect(screen.getAllByRole('cell', { name: 'Dinheiro' })[0]).toBeInTheDocument();
@@ -264,20 +264,20 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
       expect(screen.getAllByRole('cell', { name: 'Real' })[1]).toBeInTheDocument();
     });
   });
-  
+
   describe('6 - Crie um botão para deletar uma despesa da tabela contendo as seguintes características:', () => {
     const initial = initialStateWithExpenses;
-  
+
     test('O botão deve estar dentro do último item da linha da tabela e deve possuir `data-testid="delete-btn"`', () => {
       renderWithRouterAndStore(<Wallet />, '/carteira', initial);
       expect(screen.getAllByTestId('delete-btn')[0]).toBeInTheDocument();
     });
-  
+
     test('Ao ser clicado, o botão deleta a linha da tabela, alterando o estado global.', () => {
       const { store } = renderWithRouterAndStore(<Wallet />, '/carteira', initial);
       const deleteBtn = screen.getAllByTestId('delete-btn')[0];
       fireEvent.click(deleteBtn);
-  
+
       expect(screen.getByRole('cell', { name: 'Vinte euros' })).toBeInTheDocument();
       expect(screen.getByRole('cell', { name: 'Trabalho' })).toBeInTheDocument();
       expect(screen.getByRole('cell', { name: 'Dinheiro' })).toBeInTheDocument();
@@ -304,7 +304,7 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
     test('Ao clicar no botão para remover uma despesa, o valor correspondente deve ser subtraído e a despesa total deve ser atualizada no header', () => {
       const { store } = renderWithRouterAndStore(<Wallet />, '/carteira', initial);
       const deleteBtn = screen.getAllByTestId('delete-btn')[0];
-  
+
       fireEvent.click(deleteBtn);
   
       const newExpenses = [
@@ -320,9 +320,8 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
       ];
   
       expect(store.getState().wallet.expenses).toStrictEqual(newExpenses);
-  
+
       const totalField = screen.getByTestId('total-field');
       expect(totalField).toContainHTML('131.37');
   });
   });
-  
