@@ -26,7 +26,7 @@ class Select extends React.Component {
                 <option data-testid={ validCurr } key={ validCurr }>{ validCurr }</option>
               ))}
           </select>
-          Moeda
+          Tipo
         </label>
       </div>
     );

@@ -79,7 +79,7 @@ class ExpensesForm extends React.Component {
             value={ description }
             onChange={ this.handleChange }
           />
-          Descrição
+          Detalhes
         </label>
         <label htmlFor="method">
           <select
