@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import store from '../store';
 
 class AddGastos extends Component {
   constructor() {
     super();
     this.state = {
       auxiliar: {
-        arrFinal: [],
-        arrDeValores: [],
+        arrFinal: ['USD'],
+        arrDeValores: [1],
         valor: 0,
       },
       despesas: {
@@ -33,7 +32,6 @@ class AddGastos extends Component {
     this.acrescimoID = this.acrescimoID.bind(this);
     this.changeValor = this.changeValor.bind(this);
     this.resetValue = this.resetValue.bind(this);
-    this.changevalor = this.changevalor.bind(this);
   }
 
   componentDidMount() {
@@ -53,7 +51,6 @@ class AddGastos extends Component {
     for (let i = 0; i < arr1.length; i += 1) {
       arr.push(Object.values(arr1[i]));
     }
-    console.log();
     const arrFinal = [];
     const arrDeValores = [];
     for (let i = 0; i < arr.length; i += 1) {
@@ -73,23 +70,7 @@ class AddGastos extends Component {
       method: 'Dinheiro',
       tag: 'Alimentação',
       exchangeRates: await this.getAPI(),
-    } });
-  }
-
-  changevalor() {
-    const stateAuxiliar = store.getState().wallet.auxiliar;
-    const stateExpenses = store.getState().wallet.expenses;
-    const { arrDeValores, arrFinal } = stateAuxiliar;
-    let total = 0;
-    for (let f = 0; f < stateExpenses.length; f += 1) {
-      for (let i = 0; i < arrDeValores.length; i += 1) {
-        if (stateExpenses[f].currency === arrFinal[i]) {
-          total += arrDeValores[i] * stateExpenses[f].value;
-          this.setState({ auxiliar: { ...auxiliar, valor: total,
-          } });
-        }
-      }
-    }
+    } }, this.changevalor);
   }
 
   tipoDeMoeda() {
@@ -226,7 +207,6 @@ class AddGastos extends Component {
             this.acrescimoID();
             expenses(despesas);
             auxiliarr(auxiliar);
-            // changevalor();
           } }
         >
           Adicionar despesa
@@ -235,7 +215,6 @@ class AddGastos extends Component {
     );
   }
 }
-
 const mapStateToProps = (state) => ({
   email: state.email,
 });
@@ -243,7 +222,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   expenses: (expenses) => dispatch({ type: 'ADD_DESPESA', expenses }),
   auxiliarr: (auxiliar) => dispatch({ type: 'ADD_AUXILIAR', auxiliar }),
-
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddGastos);
@@ -251,5 +229,4 @@ export default connect(mapStateToProps, mapDispatchToProps)(AddGastos);
 AddGastos.propTypes = {
   expenses: PropTypes.func.isRequired,
   auxiliarr: PropTypes.func.isRequired,
-
 };

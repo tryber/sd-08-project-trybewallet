@@ -1,6 +1,10 @@
 const INITIAL_STATE = {
   expenses: [],
-  auxiliar: {},
+  auxiliar: {
+    arrFinal: ['USD'],
+    arrDeValores: [1],
+    valor: 0,
+  },
 };
 
 export default function user(state = INITIAL_STATE, action) {
