@@ -7,7 +7,7 @@ class HeaderWallet extends React.Component {
     const { expenses } = this.props;
     const expensesMap = expenses.map(({ currency, value, exchangeRates }) => {
       const dayCurrency = exchangeRates[currency];
-      const sumExpense = Number(value) + Number(dayCurrency.ask);
+      const sumExpense = Number(value) * Number(dayCurrency.ask);
       return sumExpense;
     });
     return expensesMap.reduce((total, expense) => total + expense, 0);
