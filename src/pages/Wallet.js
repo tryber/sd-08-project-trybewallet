@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fetchApiThunk, userWallet } from '../actions/index';
+import { fetchApiThunk, userWallet, typeTag, headerTable } from '../actions/index';
 
 class Wallet extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: '',
+      value: 0,
       description: '',
       currency: 'USD',
       method: '',
@@ -28,10 +28,10 @@ class Wallet extends React.Component {
   sumExpenses() {
     const { dataExpenses } = this.props;
     const sum = dataExpenses.reduce((acc, curr) => {
-      const filterCurrency = curr.exchangeRates[`${curr.currency}`].ask;
-      acc = Number(curr.value * filterCurrency) + acc;
+      const value = Number(curr.exchangeRates[curr.currency].ask * curr.value);
+      acc = value + acc;
       return acc;
-    }, 0);
+    }, 0).toFixed(2);
     return sum;
   }
 
@@ -119,7 +119,6 @@ class Wallet extends React.Component {
   }
 
   rendercurrencyTag() {
-    const tag = ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
     return (
       <label htmlFor="tag">
         Tag:
@@ -132,7 +131,7 @@ class Wallet extends React.Component {
           <option selected name="">
             -
           </option>
-          {tag.map((elemento, index) => (
+          {typeTag.map((elemento, index) => (
             <option
               key={ index }
             >
@@ -155,15 +154,42 @@ class Wallet extends React.Component {
     );
   }
 
+  renderTable(dataExpenses) {
+    return (
+      <table border="1">
+        <thead>
+          <tr>
+            { headerTable.map((header) => <th key={ header }>{header}</th>)}
+          </tr>
+        </thead>
+        { dataExpenses.length > 0 ? dataExpenses.map((elemento) => (
+          <tr key={ elemento.id }>
+            <td>{ elemento.description }</td>
+            <td>{ elemento.tag }</td>
+            <td>{ elemento.method }</td>
+            <td>{ elemento.value }</td>
+            <td>{ elemento.exchangeRates[elemento.currency].name }</td>
+            <td>{ Number(elemento.exchangeRates[elemento.currency].ask).toFixed(2) }</td>
+            <td>
+              {
+                Number(
+                  elemento.exchangeRates[elemento.currency].ask * elemento.value,
+                )
+                  .toFixed(2)
+              }
+            </td>
+            <td>Real</td>
+            <button type="button" data-testid="delete-btn">Excluir</button>
+          </tr>
+        )) : <p>Nada acrescentado</p> }
+      </table>
+
+    );
+  }
+
   render() {
-    const { showEmail, sendExpend } = this.props;
-    const {
-      value,
-      description,
-      currency,
-      method,
-      tag,
-    } = this.state;
+    const { showEmail, sendExpend, dataExpenses } = this.props;
+    const { value, description, currency, method, tag } = this.state;
     return (
       <div>
         <header>
@@ -185,18 +211,13 @@ class Wallet extends React.Component {
         <button
           type="button"
           onClick={ () => {
-            sendExpend({
-              value,
-              description,
-              currency,
-              method,
-              tag,
-            });
+            sendExpend({ value, description, currency, method, tag });
             this.setState({ value: 0 });
           } }
         >
           Adicionar despesa
         </button>
+        { this.renderTable(dataExpenses) }
       </div>
     );
   }

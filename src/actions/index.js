@@ -1,5 +1,15 @@
 export const REQUEST_API = 'REQUEST_API';
 export const REQUEST_API_SUCESS = 'REQUEST_API_SUCESS';
+export const typeTag = ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
+export const headerTable = ['Descrição',
+  'Tag',
+  'Método de pagamento',
+  'Valor',
+  'Moeda',
+  'Câmbio utilizado',
+  'Valor convertido',
+  'Moeda de conversão',
+  'Editar/Excluir'];
 const url = 'https://economia.awesomeapi.com.br/json/all';
 
 const requestApi = () => (
