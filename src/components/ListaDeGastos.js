@@ -40,7 +40,6 @@ class ListaDeGastos extends Component {
     let total = 0;
     const { stateAuxiliar, stateExpenses } = this.props;
     if (typeof (stateAuxiliar) !== 'undefined') {
-      console.log(stateAuxiliar);
       const { arrFinal, arrDeValores } = stateAuxiliar;
       total = this.lintChato(arrFinal, stateExpenses, arrDeValores);
     }
