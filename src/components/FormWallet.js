@@ -113,7 +113,7 @@ class FormWallet extends React.Component {
   botoes(btBool, handleSubmit) {
     return (
       <div>
-        { (btBool)
+        { (!btBool)
           ? (
             <button
               type="button"

@@ -1,5 +1,5 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 export default class Table extends React.Component {
   constructor(props) {
@@ -26,7 +26,7 @@ export default class Table extends React.Component {
   }
 
   render() {
-    // const { expenses, btEditar, btDelete } = this.props;
+    const { expense, btEditar, btDelete, id } = this.props;
     return (
       <div>
         <table id="wallet-table">
@@ -46,33 +46,34 @@ export default class Table extends React.Component {
                   <td>{(ask * valor).toFixed(2)}</td>
                   <td>Real</td>
                   <td>
-                    <button
-                      type="button"
-                      onClick={ () => btEditar(expense) }
-                      data-testid="edit-btn"
-                    >
-                      Editar
-                    </button>
-                    <button
-                      type="button"
-                      onClick={ () => btDelete(id) }
-                      data-testid="delete-btn"
-                    >
-                      Excluir
-                    </button>
                   </td>
                 </tr>
               </tbody>
             );
           })} */}
+          <button
+            type="button"
+            onClick={ () => btEditar(expense) }
+            data-testid="edit-btn"
+          >
+            Editar
+          </button>
+          <button
+            type="button"
+            onClick={ () => btDelete(id) }
+            data-testid="delete-btn"
+          >
+            Excluir
+          </button>
         </table>
       </div>
     );
   }
 }
 
-// Table.propTypes = {
-//   expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
-//   btDelete: PropTypes.func.isRequired,
-//   btEditar: PropTypes.func.isRequired,
-// };
+Table.propTypes = {
+  expense: PropTypes.arrayOf(PropTypes.object).isRequired,
+  btDelete: PropTypes.func.isRequired,
+  btEditar: PropTypes.func.isRequired,
+  id: PropTypes.number.isRequired,
+};
