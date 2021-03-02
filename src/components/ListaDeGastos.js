@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import PropTypes from 'prop-types';
-import store from '../store';
+import PropTypes from 'prop-types';
+// import store from '../store';
 
 class ListaDeGastos extends Component {
   constructor() {
@@ -39,7 +39,7 @@ class ListaDeGastos extends Component {
   changevalor() {
     let total = 0;
     const { stateAuxiliar, stateExpenses } = this.props;
-    if (typeof(stateAuxiliar) !== 'undefined') {
+    if (typeof (stateAuxiliar) !== 'undefined') {
       console.log(stateAuxiliar);
       const { arrFinal, arrDeValores } = stateAuxiliar;
       total = this.lintChato(arrFinal, stateExpenses, arrDeValores);
@@ -78,8 +78,9 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps)(ListaDeGastos);
 // export default ListaDeGastos;
-// ListaDeGastos.propTypes = {
-//   arrFinal: PropTypes.arrayOf(PropTypes.string).isRequired,
-//   arrDeValores: PropTypes.arrayOf(PropTypes.number).isRequired,
-//   stateExpenses: PropTypes.shape.isRequired,
-// };
+ListaDeGastos.propTypes = {
+  // arrFinal: PropTypes.arrayOf(PropTypes.string).isRequired,
+  // arrDeValores: PropTypes.arrayOf(PropTypes.number).isRequired,
+  stateAuxiliar: PropTypes.shape.isRequired,
+  stateExpenses: PropTypes.shape.isRequired,
+};
