@@ -4,6 +4,7 @@ import { func } from 'prop-types';
 import { fetchCurrencies } from '../actions';
 import Header from '../components/Header';
 import RegisterExpense from '../components/RegisterExpenses';
+import TableExpenditure from '../components/TableExpenditure';
 
 class Wallet extends React.Component {
   constructor() {
@@ -57,7 +58,6 @@ class Wallet extends React.Component {
   }
 
   handleChange({ target: { value, name } }) {
-    // const valueResult = name === 'valueExpenditure' ? parseInt(value, 10) || 0 : value;
     this.setState({ [name]: value });
   }
 
@@ -72,6 +72,7 @@ class Wallet extends React.Component {
           getExpenses={ this.getExpenses }
           resetForm={ this.resetForm }
         />
+        <TableExpenditure />
       </>
     );
   }

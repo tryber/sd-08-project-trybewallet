@@ -1,0 +1,17 @@
+.table-container {
+  height: auto;
+  width: 100%;
+}
+
+.content-table {
+  height: auto;
+  margin: auto;
+  width: 98%;
+}
+
+.header-table {
+  background-color: #013440;
+  font-size: 20px;
+  height: 20%;
+  padding: 4px;
+}

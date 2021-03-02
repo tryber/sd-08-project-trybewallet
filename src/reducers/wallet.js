@@ -3,6 +3,7 @@ import { GET_CURRENCIES, SAVE_EXPENDITURE } from '../actions';
 const initialState = {
   currencies: [],
   expenses: [],
+  isCurrency: 'BRL',
 };
 
 function reducerGetCurrencies(state = initialState, action) {
