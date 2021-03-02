@@ -1,0 +1,13 @@
+.button {
+  background-color: rgba(128, 128, 128);
+  color: rgba(0, 0, 0);
+  height: 30px;
+  margin-top: 10px;
+  padding: 5px;
+  width: 90px;
+}
+
+.disabled {
+  background-color: rgba(128, 128, 128, 0.5);
+  color: rgba(0, 0, 0, 0.5);
+}
