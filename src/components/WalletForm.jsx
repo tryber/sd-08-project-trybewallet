@@ -1,19 +1,23 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { requestCurrencies as requestCurrenciesAction } from '../actions/wallet';
+import fetchAPI from '../API';
+import './WalletForm.css';
+import {
+  requestCurrencies as requestCurrenciesAction,
+  addExpense as addExpenseAction } from '../actions/wallet';
 
 class WalletForm extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      id: 0,
       valueInput: '',
       descriptionInput: '',
-      methodInput: '',
-      tagInput: '',
-      currency: '',
+      currency: 'USD',
+      methodInput: 'Dinheiro',
+      tagInput: 'Alimentação',
+      id: 0,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -39,9 +43,18 @@ class WalletForm extends Component {
     });
   }
 
-  handleClick() {
+  async handleClick() {
     const {
       id, valueInput, descriptionInput, methodInput, tagInput, currency } = this.state;
+    const { addExpense } = this.props;
+    const coinsExchange = await fetchAPI();
+    const newExpense = {
+      id, valueInput, descriptionInput, methodInput, tagInput, currency, coinsExchange,
+    };
+    addExpense(newExpense);
+    this.setState((prevState) => ({
+      ...prevState, id: prevState.id + 1,
+    }));
     console.log(id, valueInput, descriptionInput, methodInput, tagInput, currency);
   }
 
@@ -57,7 +70,7 @@ class WalletForm extends Component {
           <input
             name="valueInput"
             data-testid="value-input"
-            type="text"
+            type="number"
             placeholder="Digite o valor da despesa"
             onChange={ this.handleChange }
             required
@@ -137,27 +150,39 @@ class WalletForm extends Component {
   render() {
     const { loading } = this.props;
     return (
-      <section>{loading ? <h1>Loading...</h1> : (this.renderForm())}</section>
+      <section
+        className="wallet-form"
+      >
+        {loading ? <h1>Loading...</h1> : (this.renderForm())}
+      </section>
     );
   }
 }
 
 const mapStateToProps = (state) => ({
   currencies: state.wallet.currencies,
+  expenses: state.wallet.expenses,
+  expenseId: state.wallet.expenseId,
+
 });
 
 const mapDispatchToProps = (dispatch) => ({
   requestCurrencies: () => dispatch(requestCurrenciesAction()),
+  addExpense: (expense) => dispatch(addExpenseAction(expense)),
 });
 
 WalletForm.propTypes = {
   currencies: PropTypes.arrayOf(PropTypes.object),
   loading: PropTypes.bool,
   requestCurrencies: PropTypes.func.isRequired,
+  addExpense: PropTypes.func.isRequired,
+  expenses: PropTypes.arrayOf(PropTypes.object),
+  expenseId: PropTypes.number.isRequired,
 };
 
 WalletForm.defaultProps = {
   currencies: [],
+  expenses: [],
   loading: false,
 };
 

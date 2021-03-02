@@ -38,6 +38,13 @@ class Button extends Component {
       undisabled: true,
     }, () => saveEmail(email),
     savePassword(password));
+
+    // this.setState({
+    //   ... <= Problema com esse ponto
+    // }, () => {
+    //   const { undisabled, email, password } = this.state
+    //  saveEmail(email), savePassword(password)
+    // })
     this.renderButton();
   }
 

@@ -24,6 +24,11 @@ const wallet = (state = initialStateWallet, action) => {
         .filter((noUSTD) => noUSTD.name !== 'Dólar Turismo')],
     };
 
+  case walletAction.ADD_EXPENSE:
+    return {
+      ...state, expenses: action.expenses,
+    };
+
   default:
     return initialStateWallet;
   }
