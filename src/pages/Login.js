@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { Redirect } from 'react-router-dom';
 import { Creators as userActions } from '../actions';
 
@@ -76,9 +77,7 @@ class Login extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  saveEmail: (email) => dispatch(userActions.saveEmail(email)),
-});
+const mapDispatchToProps = (dispatch) => bindActionCreators(userActions, dispatch);
 
 Login.propTypes = {
   saveEmail: PropTypes.func.isRequired,
