@@ -1,15 +1,15 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap') ;
 
 a {
   color: #666;
-  font-family: Roboto;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
   font-size: 14px;
   line-height: 1.7;
   transition: all 0.4s;
 }
 
 a:focus {
-  outline: none !important;
+  outline: none;
 }
 
 a:hover {
@@ -30,14 +30,14 @@ textarea {
 
 textarea:focus,
 input:focus {
-  border-color: transparent !important;
+  border-color: transparent;
 }
 
 
 button {
   background: transparent;
   border: none;
-  outline: none !important;
+  outline: none;
 }
 
 button:hover {
@@ -45,12 +45,12 @@ button:hover {
 }
 
 iframe {
-  border: none !important;
+  border: none;
 }
 
 .txt1 {
   color: #e5e5e5;
-  font-family: Roboto;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
   font-size: 13px;
   line-height: 1.5;
 }
@@ -73,7 +73,7 @@ iframe {
   z-index: 0;
 }
 
-.container-header-wallet::before {
+.container-header-wallet:before {
   background-color: rgba(255, 255, 255, 0.9);
   content: "";
   display: block;
@@ -119,7 +119,7 @@ iframe {
 .header-wallet-title-right {
   color: white;
   display: block;
-  font-family: Roboto;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
   font-size: 25px;
   font-weight: 500;
   line-height: 1.2;
@@ -130,7 +130,7 @@ iframe {
 .header-wallet-title-left {
   color: white;
   display: block;
-  font-family: Roboto;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
   font-size: 25px;
   font-weight: 500;
   line-height: 1.2;
@@ -150,7 +150,7 @@ iframe {
   background: transparent;
   color: white;
   display: block;
-  font-family: Roboto;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
   font-size: 18px;
   height: 45px;
   line-height: 1.2;
@@ -168,7 +168,7 @@ iframe {
   width: 100%;
 }
 
-.focus-input::before {
+.focus-input:before {
   background: white;
   bottom: -2px;
   content: "";
@@ -180,12 +180,11 @@ iframe {
   width: 0;
 }
 
-.focus-input::after {
+.focus-input:after {
   color: white;
   content: attr(data-placeholder);
   display: block;
   font-size: 22px;
-  left: 0px;
   padding-left: 5px;
   position: absolute;
   top: 6px;
@@ -197,21 +196,21 @@ iframe {
   padding-left: 5px;
 }
 
-.input:focus + .focus-input::after {
+.input:focus + .focus-input:after {
   font-size: 18px;
   top: -22px;
 }
 
-.input:focus + .focus-input::before {
+.input:focus + .focus-input:before {
   width: 100%;
 }
 
-.has-val.input + .focus-input::after {
+.has-val.input + .focus-input:after {
   font-size: 18px;
   top: -22px;
 }
 
-.has-val.input + .focus-input::before {
+.has-val.input + .focus-input:before {
   width: 100%;
 }
 
@@ -238,7 +237,7 @@ iframe {
   border-radius: 25px;
   color: #555;
   display: flex;
-  font-family: Roboto;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
   font-size: 18px;
   font-weight: 500;
   height: 50px;
@@ -251,7 +250,7 @@ iframe {
   z-index: 1;
 }
 
-.header-wallet-form-btn::before {
+.header-wallet-form-btn:before {
   background-color: white;
   border-radius: 25px;
   content: "";
@@ -274,7 +273,8 @@ iframe {
   opacity: 0;
 }
 
-@media (max-width: 576px) {
+@media ( max-width : 576px ) {
+
   .wrap-header-wallet {
     padding: 55px 15px 37px 15px;
   }
@@ -284,13 +284,13 @@ iframe {
   position: relative;
 }
 
-.alert-validate::before {
+.alert-validate:before {
   background-color: white;
   border: 1px solid #c80000;
   border-radius: 2px;
   color: #c80000;
   content: attr(data-validate);
-  font-family: Roboto;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
   font-size: 13px;
   line-height: 1.4;
   max-width: 70%;
@@ -298,7 +298,6 @@ iframe {
   padding: 4px 25px 4px 10px;
   pointer-events: none;
   position: absolute;
-  right: 0px;
   text-align: left;
   top: 50%;
   transform: translateY(-50%);
@@ -306,7 +305,7 @@ iframe {
   visibility: hidden;
 }
 
-.alert-validate::after {
+.alert-validate:after {
   color: #c80000;
   content: "\f12a";
   display: block;
@@ -323,8 +322,9 @@ iframe {
   visibility: visible;
 }
 
-@media (max-width: 992px) {
-  .alert-validate::before {
+@media ( max-width : 992px ) {
+
+  .alert-validate:before {
     opacity: 1;
     visibility: visible;
   }
