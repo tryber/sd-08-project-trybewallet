@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto, Arial, Helvetica, sans-serif:wght@400;500;700;900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto, Arial, Helvetica, sans-serif:wght@400;500;700;900&display=swap') ;
 
 a {
   color: #666;
@@ -9,7 +9,7 @@ a {
 }
 
 a:focus {
-  outline: none ! important;
+  outline: none;
 }
 
 a:hover {
@@ -35,7 +35,7 @@ textarea {
 
 textarea:focus,
 input:focus {
-  border-color: transparent ! important;
+  border-color: transparent;
 }
 input::placeholder {
   color: white;
@@ -48,7 +48,7 @@ label {
 button {
   background: transparent;
   border: none;
-  outline: none ! important;
+  outline: none;
 }
 
 button:hover {
@@ -56,7 +56,7 @@ button:hover {
 }
 
 iframe {
-  border: none ! important;
+  border: none;
 }
 
 .txt1 {
@@ -102,7 +102,6 @@ iframe {
 }
 
 .wrap-login {
-  background: #9152f8;
   background: linear-gradient(to top, #7579ff, #b224ef);
   border-radius: 10px;
   overflow: hidden;
@@ -184,10 +183,8 @@ iframe {
 
 .focus-input::after {
   color: white;
-
   content: attr(data-placeholder);
   display: block;
-  font-family: Material-Design-Iconic-Font;
   font-size: 22px;
   left: 0px;
   padding-left: 5px;
@@ -238,7 +235,6 @@ iframe {
 
 .login-form-btn {
   align-items: center;
-  background: #9152f8;
   background: linear-gradient(to bottom, #7579ff, #b224ef);
   border-radius: 25px;
   color: #555;
