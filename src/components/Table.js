@@ -23,7 +23,7 @@ class Table extends React.Component {
         <th>Câmbio utilizado</th>
         <th>Valor convertido</th>
         <th>Moeda de conversão</th>
-        <th>Excluir/Editar</th>
+        <th>Editar/Excluir</th>
       </tr>
     );
   }
@@ -58,17 +58,17 @@ class Table extends React.Component {
                 <td>Real</td>
                 <button
                   type="button"
-                  data-testid="delete-btn"
-                  onClick={ () => deleteExpense(expense) }
-                >
-                  Excluir
-                </button>
-                <button
-                  type="button"
                   data-testid="edit-btn"
                   onClick={ () => editingExpense(expense) }
                 >
                   Editar
+                </button>
+                <button
+                  type="button"
+                  data-testid="delete-btn"
+                  onClick={ () => deleteExpense(expense) }
+                >
+                  Excluir
                 </button>
               </tr>
             );
