@@ -50,12 +50,12 @@ class TableExpenditure extends React.Component {
             <td>{el.value}</td>
             <td>{el.exchangeRates[el.currency].name}</td>
             <td>
-              {el.exchangeRates[el.currency].ask}
+              { (Math.round(el.exchangeRates[el.currency].ask * 100) / 100).toFixed(2) }
             </td>
             <td>
               { (Math.round(this.getTotal(el) * 100) / 100).toFixed(2) }
             </td>
-            <td>Real Brasileiro</td>
+            <td>Real</td>
             <td>
               <button type="button">Editar</button>
               <button type="button">Excluir</button>
