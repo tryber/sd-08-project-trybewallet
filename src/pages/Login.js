@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import addEmail from '../actions/addEmail';
+import { addEmail } from '../actions/index';
 
 class Login extends React.Component {
   constructor() {
@@ -30,7 +30,7 @@ class Login extends React.Component {
           Senha
           <input
             type="text"
-            data-testid="email-password-input"
+            data-testid="password-input"
             onChange={ ({ target }) => this.setState({ password: target.value }) }
           />
         </label>
