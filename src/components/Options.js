@@ -221,9 +221,9 @@ const mapStateToProps = (state) => ({
   currencies: state.wallet.currencies,
   email: state.user.email,
   expenses: state.wallet.expenses,
-  editingExpense: state.edit.editingExpense,
-  isEditing: state.edit.isEditing,
-  selectEdited: state.edit.selectEdited,
+  editingExpense: state.wallet.editingExpense,
+  isEditing: state.wallet.isEditing,
+  selectEdited: state.wallet.selectEdited,
 });
 
 const mapDispatchToProps = (dispatch) => ({
