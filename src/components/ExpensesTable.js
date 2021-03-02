@@ -11,7 +11,7 @@ class ExpensesTable extends React.Component {
 
   headerTable() {
     return (
-      <div>
+      <thead>
         <tr>
           <th>Descrição</th>
           <th>Tag</th>
@@ -23,7 +23,7 @@ class ExpensesTable extends React.Component {
           <th>Moeda de conversão</th>
           <th>Editar/Excluir</th>
         </tr>
-      </div>
+      </thead>
     );
   }
 
@@ -31,8 +31,8 @@ class ExpensesTable extends React.Component {
     const { allExpenses } = this.props;
     return (
       <table>
-        {this.headerTable()}
-        {allExpenses.map((element) => {
+        { this.headerTable() }
+        { allExpenses.map((element) => {
           const {
             id,
             value,
@@ -44,30 +44,32 @@ class ExpensesTable extends React.Component {
           } = element;
           const { deleteRegister } = this.props;
           return (
-            <tr key={ id }>
-              <td>{description}</td>
-              <td>{tag}</td>
-              <td>{method}</td>
-              <td>{value}</td>
-              <td>{exchangeRates[currency].name}</td>
-              <td>{parseFloat(exchangeRates[currency].ask).toFixed(2)}</td>
-              <td>
-                {parseFloat(value * exchangeRates[currency].ask).toFixed(2)}
-              </td>
-              <td>Real</td>
-              <td>
-                <button type="button">Editar</button>
-                <button
-                  data-testid="delete-btn"
-                  type="button"
-                  onClick={ () => deleteRegister(element) }
-                >
-                  Excluir
-                </button>
-              </td>
-            </tr>
+            <tbody key={ id }>
+              <tr>
+                <td>{description}</td>
+                <td>{tag}</td>
+                <td>{method}</td>
+                <td>{value}</td>
+                <td>{exchangeRates[currency].name}</td>
+                <td>{parseFloat(exchangeRates[currency].ask).toFixed(2)}</td>
+                <td>
+                  {parseFloat(value * exchangeRates[currency].ask).toFixed(2)}
+                </td>
+                <td>Real</td>
+                <td>
+                  <button type="button">Editar</button>
+                  <button
+                    data-testid="delete-btn"
+                    type="button"
+                    onClick={ () => deleteRegister(element) }
+                  >
+                    Excluir
+                  </button>
+                </td>
+              </tr>
+            </tbody>
           );
-        })}
+        }) }
       </table>
     );
   }
