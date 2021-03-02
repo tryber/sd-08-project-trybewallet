@@ -29,10 +29,10 @@ class Table extends React.Component {
                 <td>{element.tag}</td>
                 <td>{element.method}</td>
                 <td>{element.value}</td>
-                <td>Real</td>
+                <td>{name}</td>
                 <td>{Number(ask).toFixed(2)}</td>
                 <td>{(ask * Number(element.value)).toFixed(2)}</td>
-                <td>{name}</td>
+                <td>Real</td>
               </tr>
             </tbody>
           );
