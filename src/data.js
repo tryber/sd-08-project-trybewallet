@@ -36,7 +36,7 @@ export default {
     bid: '4.3996',
     ask: '4.402',
     timestamp: '1614600417',
-    create_date: '2021-03-01 09:06:58',
+    create_date: '2021-03-01 09:06:57',
   },
   EUR: {
     code: 'EUR',
