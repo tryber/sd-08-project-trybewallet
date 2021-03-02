@@ -6,13 +6,12 @@ import {
   fetching as fetchingAction,
 } from '../actions';
 import './Wallet.css';
-import { payMethods, expenditures, delayFetch } from '../const';
+import { payMethods, expenditures/* , delayFetch */ } from '../const';
 
 class Wallet extends React.Component {
   constructor() {
     super();
     this.state = {
-      total: 0,
       exchange: 'BRL',
       value: 0,
       description: '',
@@ -25,7 +24,6 @@ class Wallet extends React.Component {
     this.renderSelectCurrencies = this.renderSelectCurrencies.bind(this);
     this.renderSelectMethod = this.renderSelectMethod.bind(this);
     this.renderSelectExpenditures = this.renderSelectExpenditures.bind(this);
-    this.totalSum = this.totalSum.bind(this);
     this.initialState = this.initialState.bind(this);
   }
 
@@ -33,13 +31,6 @@ class Wallet extends React.Component {
     const { fetchCurrency } = this.props;
     fetchCurrency();
     this.initialState();
-  }
-
-  componentDidUpdate() {
-    const { isFetching } = this.props;
-    if (isFetching) {
-      setTimeout(() => this.totalSum(), delayFetch);
-    }
   }
 
   initialState() {
@@ -53,23 +44,9 @@ class Wallet extends React.Component {
     });
   }
 
-  totalSum() {
-    const { values } = this.props;
-    const sum = values.reduce((acc, curr) => (parseFloat(
-      (acc + curr.value
-      * [...Object.values(curr.exchangeRates), { code: 'BRL', ask: 1 }]
-        .find((exg) => exg.code === curr.currency).ask)
-        .toFixed(2),
-    )
-    ), 0);
-    this.setState({
-      total: sum,
-    });
-  }
-
   renderHeader() {
-    const { total, exchange } = this.state;
-    const { email } = this.props;
+    const { exchange } = this.state;
+    const { email, total } = this.props;
     return (
       <header className="header">
         <h3 className="title">TrybeWallet</h3>
@@ -82,8 +59,18 @@ class Wallet extends React.Component {
           </div>
           <div className="total-header">
             <div className="label-total">Despesas totais:</div>
-            <div className="total-field" data-testid="total-field">{ total }</div>
-            <div className="exchange-field" data-testid="header-currency-field">{ exchange }</div>
+            <div
+              className="total-field"
+              data-testid="total-field"
+            >
+              { total }
+            </div>
+            <div
+              className="exchange-field"
+              data-testid="header-currency-field"
+            >
+              { exchange }
+            </div>
           </div>
         </section>
       </header>
@@ -232,6 +219,7 @@ const mapStateToProps = (state) => ({
   currencies: state.wallet.currencies,
   values: state.wallet.expenses,
   isFetching: state.wallet.isFetching,
+  total: state.wallet.total,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -245,9 +233,8 @@ Wallet.propTypes = {
   email: PropTypes.string.isRequired,
   fetchCurrency: PropTypes.func.isRequired,
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
-  values: PropTypes.arrayOf(PropTypes.object).isRequired,
+  total: PropTypes.number.isRequired,
   fetching: PropTypes.func.isRequired,
-  isFetching: PropTypes.bool.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Wallet);

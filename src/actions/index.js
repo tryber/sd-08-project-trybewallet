@@ -3,7 +3,7 @@ import {
   ADD_LOGIN,
   URL,
   GET_CURRENCIES,
-  ERROR,
+  // ERROR,
   FLAG,
   GET_CURRENCIES_ADD_EXPENDITURE,
 } from '../const';
@@ -35,16 +35,16 @@ export function fetchCurrency(expenses = {}, saving = false) {
       }
       return success;
     }
-    function onError(error) {
-      dispatch({ type: ERROR, error });
-      return error;
-    }
-    try {
-      const success = await fetch(URL);
-      const json = await success.json();
-      return onSuccess(json);
-    } catch (error) {
-      return onError(error);
-    }
+    // function onError(error) {
+    //   dispatch({ type: ERROR, error });
+    //   return error;
+    // }
+    // try {
+    const success = await fetch(URL);
+    const json = await success.json();
+    return onSuccess(json);
+    // } catch (error) {
+    //   return onError(error);
+    // }
   };
 }

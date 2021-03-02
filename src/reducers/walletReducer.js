@@ -9,16 +9,23 @@ const INITIAL_STATE = {
   currencies: [],
   expenses: [],
   isFetching: false,
+  total: 0.00,
 };
 
 function wallet(state = INITIAL_STATE, action) {
   let list = [];
-  if (action.type === 'GET_CURRENCIES') {
+  let sum = 0;
+  if (action.type === GET_CURRENCIES) {
     const arrayCurr = Object.keys(action.currencies);
     const usdtIndex = arrayCurr.indexOf('USDT');
     list = [...arrayCurr.slice(0, usdtIndex), ...arrayCurr.slice(usdtIndex + 1)];
   }
-
+  if (action.type === GET_CURRENCIES_ADD_EXPENDITURE) {
+    sum = parseFloat((state.total + action.expenses.value
+      * [...Object.values(action.exchange), { code: 'BRL', ask: 1 }]
+        .find((exg) => exg.code === action.expenses.currency).ask)
+      .toFixed(2));
+  }
   switch (action.type) {
   case GET_CURRENCIES:
     return ({
@@ -36,6 +43,7 @@ function wallet(state = INITIAL_STATE, action) {
           exchangeRates: { ...state.exchangeRates, ...action.exchange },
         },
       ],
+      total: sum,
       isFetching: false,
     });
   case FLAG:
