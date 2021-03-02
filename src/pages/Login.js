@@ -36,7 +36,7 @@ function Login() {
   const handleJoin = () => {
     const { email } = data;
     dispatch(actions.login(email));
-    // testar se returna e muda a rota no final
+    // despachou agora é testar se returna e muda a rota no final
     return history.push('/carteira');
   };
   const { email, password } = data;
