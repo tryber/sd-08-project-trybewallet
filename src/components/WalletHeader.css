@@ -1,0 +1,16 @@
+.wallet-header {
+  background-color: rgb(210, 200, 210);
+  display: flex;
+  justify-content: space-between;
+}
+
+.wallet-header img {
+  height: 70px;
+  margin-left: 20px;
+}
+
+.wallet-header section {
+  display: flex;
+  justify-content: space-evenly;
+  width: 40vw;
+}
