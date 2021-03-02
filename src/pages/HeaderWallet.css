@@ -28,11 +28,13 @@ textarea {
   outline: none;
 }
 
-textarea:focus,
-input:focus {
+textarea:focus {
   border-color: transparent;
 }
 
+input:focus {
+  border-color: transparent;
+}
 
 button {
   background: transparent;
@@ -75,7 +77,7 @@ iframe {
 
 .container-header-wallet:before {
   background-color: rgba(255, 255, 255, 0.9);
-  content: "";
+  content: '';
   display: block;
   height: 100%;
   left: 0;
@@ -91,7 +93,7 @@ iframe {
   height: 95px;
   margin-top: -4%;
   overflow: hidden;
-  padding: 40px 40px 22px 40px;
+  padding: 40px 40px 22px;
   width: 100%;
 }
 
@@ -102,7 +104,7 @@ iframe {
 .header-wallet-logo {
   align-items: center;
   background-color: white;
-  background-image: url("../images/logo-form.jpg");
+  background-image: url('../images/logo-form.jpg');
   background-repeat: no-repeat;
   background-size: 150px 150px;
   border-radius: 50%;
@@ -127,6 +129,7 @@ iframe {
   margin-top: -5%;
   text-align: start;
 }
+
 .header-wallet-title-left {
   color: white;
   display: block;
@@ -171,7 +174,7 @@ iframe {
 .focus-input:before {
   background: white;
   bottom: -2px;
-  content: "";
+  content: '';
   display: block;
   height: 2px;
   left: 0;
@@ -253,7 +256,7 @@ iframe {
 .header-wallet-form-btn:before {
   background-color: white;
   border-radius: 25px;
-  content: "";
+  content: '';
   display: block;
   height: 100%;
   left: 0;
@@ -276,7 +279,7 @@ iframe {
 @media ( max-width : 576px ) {
 
   .wrap-header-wallet {
-    padding: 55px 15px 37px 15px;
+    padding: 55px 15px 37px;
   }
 }
 
@@ -307,9 +310,8 @@ iframe {
 
 .alert-validate:after {
   color: #c80000;
-  content: "\f12a";
+  content: '\f12a';
   display: block;
-  font-family: FontAwesome;
   font-size: 16px;
   position: absolute;
   right: 5px;
