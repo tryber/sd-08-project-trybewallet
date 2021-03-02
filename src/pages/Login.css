@@ -14,7 +14,7 @@ a:focus {
 }
 
 a:hover {
-  color: #fff;
+  color: white;
   text-decoration: none;
 }
 
@@ -47,57 +47,8 @@ textarea:focus,
 input:focus {
   border-color: transparent !important;
 }
-
-input:focus::-webkit-input-placeholder {
-  color: transparent;
-}
-input:focus:-moz-placeholder {
-  color: transparent;
-}
-input:focus::-moz-placeholder {
-  color: transparent;
-}
-input:focus:-ms-input-placeholder {
-  color: transparent;
-}
-
-textarea:focus::-webkit-input-placeholder {
-  color: transparent;
-}
-textarea:focus:-moz-placeholder {
-  color: transparent;
-}
-textarea:focus::-moz-placeholder {
-  color: transparent;
-}
-textarea:focus:-ms-input-placeholder {
-  color: transparent;
-}
-
-input::-webkit-input-placeholder {
-  color: #fff;
-}
-input:-moz-placeholder {
-  color: #fff;
-}
-input::-moz-placeholder {
-  color: #fff;
-}
-input:-ms-input-placeholder {
-  color: #fff;
-}
-
-textarea::-webkit-input-placeholder {
-  color: #fff;
-}
-textarea:-moz-placeholder {
-  color: #fff;
-}
-textarea::-moz-placeholder {
-  color: #fff;
-}
-textarea:-ms-input-placeholder {
-  color: #fff;
+input::placeholder {
+  color: white;
 }
 
 label {
@@ -176,7 +127,7 @@ iframe {
 
 .login-form-logo {
   align-items: center;
-  background-color: #fff;
+  background-color: white;
   background-image: url("../images/logo-form.jpg");
   background-repeat: no-repeat;
   background-size: 150px 150px;
@@ -191,7 +142,7 @@ iframe {
 }
 
 .login-form-title {
-  color: #fff;
+  color: white;
   display: block;
   font-family: Roboto;
   font-size: 30px;
@@ -210,7 +161,7 @@ iframe {
 
 .input {
   background: transparent;
-  color: #fff;
+  color: white;
   display: block;
   font-family: Roboto;
   font-size: 18px;
@@ -231,7 +182,7 @@ iframe {
 }
 
 .focus-input::before {
-  background: #fff;
+  background: white;
   bottom: -2px;
   content: "";
   display: block;
@@ -243,7 +194,7 @@ iframe {
 }
 
 .focus-input::after {
-  color: #fff;
+  color: white;
 
   content: attr(data-placeholder);
   display: block;
@@ -317,7 +268,7 @@ iframe {
 }
 
 .login-form-btn::before {
-  background-color: #fff;
+  background-color: white;
   border-radius: 25px;
   content: "";
   display: block;
@@ -332,7 +283,7 @@ iframe {
 }
 
 .login-form-btn:hover {
-  color: #fff;
+  color: white;
 }
 
 .login-form-btn:hover:before {
@@ -350,7 +301,7 @@ iframe {
 }
 
 .alert-validate::before {
-  background-color: #fff;
+  background-color: white;
   border: 1px solid #c80000;
   border-radius: 2px;
   color: #c80000;
