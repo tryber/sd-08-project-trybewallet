@@ -6,7 +6,7 @@ import { deleteOrder } from '../actions/index';
 
 class Table extends React.Component {
   tableOrder() {
-    const { expenses, deleteButton } = this.props;
+    const { expenses, deleteButton, edit } = this.props;
     if (expenses.length !== 0) {
       return expenses.map((order, index) => {
         const { description, tag, method, exchangeRates, value, currency, id } = order;
@@ -14,7 +14,7 @@ class Table extends React.Component {
         let number = parseFloat(ask);
         number = number.toFixed(2);
         return (
-          <tr key={ index }>
+          <tr key={ index } className="tr-table">
             <td>{description}</td>
             <td>{tag}</td>
             <td>{method}</td>
@@ -24,15 +24,24 @@ class Table extends React.Component {
             <td>{value * ask}</td>
             <td>Real</td>
             <td>
-              <button type="button">Editar</button>
-              <button
-                type="button"
-                data-testid="delete-btn"
-                name={ id }
-                onClick={ () => deleteButton(id) }
-              >
-                Excluir
-              </button>
+              <div className="button-div">
+                <button
+                  type="button"
+                  onClick={ () => edit(id) }
+                  name={ id }
+                  data-testid="edit-btn"
+                >
+                  Editar
+                </button>
+                <button
+                  type="button"
+                  data-testid="delete-btn"
+                  name={ id }
+                  onClick={ () => deleteButton(id) }
+                >
+                  Excluir
+                </button>
+              </div>
             </td>
           </tr>
         );
@@ -45,7 +54,7 @@ class Table extends React.Component {
     return (
       <table className="table">
         <thead>
-          <tr>
+          <tr className="head-table">
             <th>Descrição</th>
             <th>Tag</th>
             <th>Método de pagamento</th>
@@ -56,8 +65,10 @@ class Table extends React.Component {
             <th>Moeda de conversão</th>
             <th>Editar/Excluir</th>
           </tr>
-          {this.tableOrder()}
         </thead>
+        <tbody>
+          {this.tableOrder()}
+        </tbody>
       </table>
     );
   }
@@ -66,6 +77,7 @@ class Table extends React.Component {
 Table.propTypes = {
   expenses: propTypes.arrayOf(propTypes.object).isRequired,
   deleteButton: propTypes.func.isRequired,
+  edit: propTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({

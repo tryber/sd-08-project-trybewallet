@@ -1,6 +1,7 @@
 const INITIAL_STATE = {
   currencies: [],
   expenses: [],
+  editor: false,
 };
 
 const wallet = (state = INITIAL_STATE, action) => {
@@ -24,6 +25,17 @@ const wallet = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       expenses: state.expenses.filter((order) => order.id !== action.payload.id),
+    };
+  case 'EDIT':
+    return {
+      ...state,
+      editor: true,
+    };
+  case 'EDIT_BUTTON':
+    return {
+      ...state,
+      expenses: action.payload.state,
+      editor: false,
     };
   default:
     return state;

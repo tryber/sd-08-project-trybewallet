@@ -2,7 +2,7 @@
 
 body {
   font-family: Montserrat, sans-serif;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
 }
 
 .header {
@@ -105,18 +105,4 @@ body {
 
 .button-submit:hover {
   cursor: pointer;
-}
-
-.table {
-  background-color: black;
-  color: white;
-  display: flex;
-  font-size: 12px;
-  justify-content: space-between;
-  padding: 0 15px;
-}
-
-.orders {
-  display: flex;
-  justify-content: space-between;
 }

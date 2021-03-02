@@ -29,8 +29,8 @@ export const exchangeFetchingAPI = () => async (dispatch) => {
     const jsonAPI = await fetchAPI.json();
     const arrayAPI = Object.values(jsonAPI);
     const newarray = arrayAPI.filter((currency) => currency.codein === 'BRL');
-
-    dispatch(exchangeRequestAPISuccessful(newarray));
+    const mapArray = newarray.map((currencies) => currencies.code);
+    dispatch(exchangeRequestAPISuccessful(mapArray));
   } catch (error) {
     dispatch(exchangeRequestAPIFailed('ERROR REQUEST API'));
   }
@@ -59,5 +59,16 @@ export const deleteOrder = (id) => ({
   type: 'DELETE',
   payload: {
     id,
+  },
+});
+
+export const EditOrder = () => ({
+  type: 'EDIT',
+});
+
+export const edit = (state) => ({
+  type: 'EDIT_BUTTON',
+  payload: {
+    state,
   },
 });

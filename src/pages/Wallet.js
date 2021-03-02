@@ -1,12 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-
-import { exchangeFetchingAPI, expensesObject } from '../actions/index';
+import { exchangeFetchingAPI, expensesObject, edit, EditOrder } from '../actions/index';
 import Table from '../components/table';
-
+import Form from '../components/forms';
 import './wallet.css';
 
+const tagConst = 'Alimentação';
 class Wallet extends React.Component {
   constructor() {
     super();
@@ -17,10 +17,11 @@ class Wallet extends React.Component {
       description: '',
       currency: 'USD',
       method: 'Dinheiro',
-      tag: 'Alimentação',
+      tag: tagConst,
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.editState = this.editState.bind(this);
   }
 
   componentDidMount() {
@@ -44,7 +45,28 @@ class Wallet extends React.Component {
       description: '',
       currency: 'USD',
       method: 'Dinheiro',
-      tag: 'Alimentação',
+      tag: tagConst,
+    });
+  }
+
+  buttonEdit() {
+    const { editButton, expensesStore } = this.props;
+    const { id, value, description, currency, method, tag } = this.state;
+    const expensesStoreClone = [...expensesStore];
+    expensesStoreClone[id].value = value;
+    expensesStoreClone[id].id = id;
+    expensesStoreClone[id].description = description;
+    expensesStoreClone[id].currency = currency;
+    expensesStoreClone[id].method = method;
+    expensesStoreClone[id].tag = tag;
+    editButton(expensesStoreClone);
+    this.setState({
+      id: expensesStoreClone.length,
+      value: 0,
+      description: '',
+      currency: 'USD',
+      method: 'Dinheiro',
+      tag: tagConst,
     });
   }
 
@@ -123,15 +145,52 @@ class Wallet extends React.Component {
       mult.push(store
         .map((order) => order.value * order.exchangeRates[order.currency].ask));
       const total = mult[0].reduce((acc, pvv) => acc + pvv);
-      return <p data-testid="total-field">{total.toFixed(2)}</p>;
+      return <p data-testid="total-field">{`Total: ${total.toFixed(2)}`}</p>;
     }
 
-    return <p data-testid="total-field">0</p>;
+    return <p data-testid="total-field">Total: 0</p>;
+  }
+
+  editState(id) {
+    const { expensesStore, editor } = this.props;
+    editor();
+    const orderID = expensesStore.filter((order) => order.id === id);
+    this.setState({
+      id,
+      value: orderID[0].value,
+      description: orderID[0].description,
+      currency: orderID[0].currency,
+      method: orderID[0].method,
+      tag: orderID[0].tag,
+    });
+  }
+
+  button(bool) {
+    if (bool === true) {
+      return (
+        <button
+          type="button"
+          className="button-submit"
+          onClick={ () => this.buttonEdit() }
+        >
+          Editar despesa
+        </button>
+      );
+    }
+
+    return (
+      <button
+        type="button"
+        className="button-submit"
+        onClick={ () => this.buttonSubmit() }
+      >
+        Adicionar despesa
+      </button>
+    );
   }
 
   render() {
-    const { email, expensesStore } = this.props;
-    const { value, description } = this.state;
+    const { email, expensesStore, currencies, editBool } = this.props;
     return (
       <>
         <header className="header">
@@ -140,38 +199,14 @@ class Wallet extends React.Component {
           <p data-testid="header-currency-field">BRL</p>
         </header>
         <form className="forms">
-          <label htmlFor="value" className="input-value">
-            Valor:
-            <input
-              type="number"
-              data-testid="value-input"
-              name="value"
-              onChange={ this.handleChange }
-              value={ value }
-            />
-          </label>
-          <label htmlFor="description" className="input-description">
-            Descrição:
-            <input
-              type="text"
-              name="description"
-              data-testid="description-input"
-              onChange={ this.handleChange }
-              value={ description }
-            />
-          </label>
-          { this.currencyInput() }
-          { this.methodInput() }
-          { this.tagInput() }
-          <button
-            type="button"
-            className="button-submit"
-            onClick={ () => this.buttonSubmit() }
-          >
-            Adicionar despesa
-          </button>
+          <Form
+            onChange={ this.handleChange }
+            currencies={ currencies }
+            state={ this.state }
+          />
+          { this.button(editBool) }
         </form>
-        <Table expenses={ expensesStore } />
+        <Table expenses={ expensesStore } edit={ this.editState } />
       </>
     );
   }
@@ -179,17 +214,20 @@ class Wallet extends React.Component {
 
 Wallet.propTypes = {
   email: PropTypes.string.isRequired,
-  currencies: PropTypes.arrayOf(PropTypes.object).isRequired,
+  currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
   expensesStore: PropTypes.arrayOf(PropTypes.object).isRequired,
   fetchAPI: PropTypes.func.isRequired,
   expenses: PropTypes.func.isRequired,
+  editButton: PropTypes.func.isRequired,
+  editBool: PropTypes.bool.isRequired,
+  editor: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  isFetching: state.wallet.isFetching,
   currencies: state.wallet.currencies,
   expensesStore: state.wallet.expenses,
   email: state.user.email,
+  editBool: state.wallet.editor,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -198,6 +236,12 @@ const mapDispatchToProps = (dispatch) => ({
   ),
   expenses: (state) => dispatch(
     expensesObject(state),
+  ),
+  editButton: (state) => dispatch(
+    edit(state),
+  ),
+  editor: () => dispatch(
+    EditOrder(),
   ),
 });
 
