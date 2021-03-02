@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { requestCurrencies } from '../../actions';
+import PropTypes from 'prop-types';
+import { requestCurrencies, addExpense } from '../../actions';
 
 const METHOD = ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'];
 const TAGS = ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
@@ -9,23 +10,32 @@ class Expenses extends Component {
   constructor() {
     super();
     this.state = {
-      currencies: [],
+      id: 0,
       value: '',
       description: '',
       currency: '',
       method: '',
       tag: '',
+      exchangeRates: {},
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
-    requestCurrencies().then((data) => this.setState({ currencies: data }));
+    requestCurrencies().then((data) => this.setState({ exchangeRates: data }));
   }
 
   handleChange({ target: { name, value } }) {
-    this.setState((state) => ({ ...state, [name]: value }));
+    this.setState({ [name]: value });
+  }
+
+  handleClick() {
+    const { id } = this.state;
+    const { sendInput } = this.props;
+    sendInput(this.state);
+    this.setState({ id: id + 1 });
   }
 
   labels() {
@@ -72,20 +82,18 @@ class Expenses extends Component {
       <button
         type="button"
         className="btn btn-info"
-        onClick={ () => console.log('oi') }
+        onClick={ this.handleClick }
       >
         Adicionar despesa
       </button>
     );
   }
 
-  render() {
-    const { currencies } = this.state;
+  selects() {
+    const { exchangeRates } = this.state;
+    const currencies = Object.keys(exchangeRates).filter((item) => item !== 'USDT');
     return (
-      <form
-        className="bg-secondary p-5  d-flex justify-content-around align-items-center"
-      >
-        {this.labels()}
+      <>
         <select
           className="p-2"
           name="tag"
@@ -125,10 +133,29 @@ class Expenses extends Component {
               .map((item) => <option key={ item } data-testid={ item }>{ item }</option>)
           }
         </select>
+      </>
+    );
+  }
+
+  render() {
+    return (
+      <form
+        className="bg-secondary p-5  d-flex justify-content-around align-items-center"
+      >
+        {this.labels()}
+        {this.selects()}
         {this.button()}
       </form>
     );
   }
 }
 
-export default connect(null, null)(Expenses);
+const mapDispatchToProps = (dispatch) => ({
+  sendInput: (value) => dispatch(addExpense(value)),
+});
+
+Expenses.propTypes = {
+  sendInput: PropTypes.func.isRequired,
+};
+
+export default connect(null, mapDispatchToProps)(Expenses);

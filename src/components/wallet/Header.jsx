@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 class Header extends Component {
   render() {
-    const { email } = this.props;
+    const { email, expenses } = this.props;
     return (
       <header className="bg-info d-flex justify-content-between p-5 shadow">
         <div className="border-bottom border-light my-auto p-3">
@@ -15,7 +15,19 @@ class Header extends Component {
             BRL
           </span>
           <br />
-          <p data-testid="total-field" className="text-danger text-center m-auto">0</p>
+          <span
+            id="totalValue"
+            data-testid="total-field"
+            className="text-danger text-center m-auto"
+          >
+            {
+              expenses.reduce((acc, cur) => {
+                const { ask } = cur.exchangeRates[cur.currency];
+                const expense = ask * cur.value;
+                return acc + expense;
+              }, 0).toFixed(2)
+            }
+          </span>
         </div>
         <h1 className="lead">Minha Carteira</h1>
         <span
@@ -35,10 +47,12 @@ class Header extends Component {
 
 const mapStateToProps = (store) => ({
   email: store.user.email,
+  expenses: store.wallet.expenses,
 });
 
 Header.propTypes = {
   email: PropTypes.string.isRequired,
+  expenses: PropTypes.arrayOf(Object).isRequired,
 };
 
 export default connect(mapStateToProps, null)(Header);

@@ -7,18 +7,15 @@ export const login = {
   ),
 };
 
-export const addExpenses = {
-  addExpenses: (payload) => (
-    { type: ADD_EXPENSE, payload }
-  ),
-};
+export const addExpense = (payload) => (
+  { type: ADD_EXPENSE, payload }
+);
 
 export async function requestCurrencies() {
   try {
     const response = await fetch('https://economia.awesomeapi.com.br/json/all');
     const json = await response.json();
-    const currencies = Object.keys(json).filter((item) => item !== 'USDT');
-    return (currencies);
+    return json;
   } catch (error) {
     console.log(error);
   }
