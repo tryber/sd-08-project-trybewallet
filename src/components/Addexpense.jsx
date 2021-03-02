@@ -8,10 +8,10 @@ import AddexpenseTwo from './AddexpenseTwo';
 import { reqForAddExpenseThunk } from '../actions';
 
 const INITIAL_STATE = {
-  expenseAmount: '0',
+  value: '0',
   description: '',
-  selectedCoin: 'Dólar Comercial',
-  paymentMethod: 'Dinheiro',
+  currency: 'USD',
+  method: 'Dinheiro',
   tag: 'Alimentação',
 };
 
@@ -37,7 +37,7 @@ class Addexpense extends Component {
 
   checkInfo(params) {
     const { saveExpense } = this.props;
-    if (params.expenseAmount !== 0 && params.description) {
+    if (params.value !== 0 && params.description) {
       saveExpense(params);
       this.clearFields();
     }
@@ -45,9 +45,9 @@ class Addexpense extends Component {
 
   render() {
     const { handleChange, checkInfo } = this;
-    const { expenseAmount, description, selectedCoin, paymentMethod, tag } = this.state;
-    const infoOne = { expenseAmount, handleChange, selectedCoin };
-    const infoTwo = { paymentMethod, description, tag, handleChange };
+    const { value, description, currency, method, tag } = this.state;
+    const infoOne = { value, handleChange, currency };
+    const infoTwo = { method, description, tag, handleChange };
     const { id } = this.props;
     const expenseId = (id.length !== 0) ? id.length : 0;
 

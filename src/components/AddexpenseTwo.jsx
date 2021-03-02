@@ -3,15 +3,16 @@ import PropTypes from 'prop-types';
 
 export default class AddexpenseTwo extends Component {
   render() {
-    const { infos: { description, paymentMethod, tag, handleChange } } = this.props;
+    const { infos: { description, method, tag, handleChange } } = this.props;
     return (
       <>
-        <label htmlFor="paymentMethod">
-          Payment Method
+        <label htmlFor="method">
+          Método de pagamento
           <select
+            value={ method }
+            name="method"
             data-testid="method-input"
-            value={ paymentMethod }
-            name="paymentMethod"
+            id="method"
             onChange={ handleChange }
           >
             <option>Dinheiro</option>
@@ -25,6 +26,7 @@ export default class AddexpenseTwo extends Component {
             onChange={ handleChange }
             value={ tag }
             name="tag"
+            id="tag"
             data-testid="tag-input"
           >
             <option>Alimentação</option>
@@ -53,7 +55,7 @@ export default class AddexpenseTwo extends Component {
 AddexpenseTwo.propTypes = {
   infos: PropTypes.shape({
     description: PropTypes.string.isRequired,
-    paymentMethod: PropTypes.string.isRequired,
+    method: PropTypes.string.isRequired,
     tag: PropTypes.string.isRequired,
     handleChange: PropTypes.func.isRequired,
   }).isRequired,

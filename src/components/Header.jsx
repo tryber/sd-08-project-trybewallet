@@ -5,14 +5,13 @@ import PropTypes from 'prop-types';
 class Header extends Component {
   totalExpense(expense) {
     const show = expense.reduce((acc, curr) => {
-      const currence = Array.from(curr.exchangeRates)
-        .find((item) => item.name === curr.selectedCoin);
+      const values = Object.values(curr.exchangeRates);
+      const currence = values.find((item) => item.code === curr.currency);
       if (currence) {
-        return acc + (curr.expenseAmount * currence.ask);
+        return acc + (curr.value * currence.ask);
       }
       return acc;
     }, 0);
-
     return Number(show).toFixed(2);
   }
 

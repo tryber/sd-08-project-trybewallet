@@ -19,11 +19,15 @@ export const reqForAddExpenseThunk = (expense) => async (dispatch) => {
   try {
     const req = await fetch('https://economia.awesomeapi.com.br/json/all');
     const coinsJson = await req.json();
-    let filterCoins = [];
-    Object.entries(coinsJson).forEach((coin) => {
-      if (coin[0] !== 'USDT') filterCoins = [...filterCoins, coin[1]];
-    });
-    expense.exchangeRates = filterCoins;
+    // let filterCoins = {};
+    // let filterCoins = [];
+    // Object.entries(coinsJson).forEach((coin) => {
+    //   // if (coin[0] !== 'USDT') filterCoins = [...filterCoins, coin[1]];
+    //   if (coin[0] !== 'USDT') {
+    //     filterCoins = { ...filterCoins, [coin[0]]: coin[1] };
+    //   }
+    // });
+    expense.exchangeRates = coinsJson;
     dispatch(reqForAddExpenseSuccess(expense));
   } catch (error) {
     dispatch(reqForAddExpenseError(error));

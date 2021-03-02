@@ -5,39 +5,41 @@ import PropTypes from 'prop-types';
 class AddexpenseOne extends Component {
   render() {
     const { infos: {
-      expenseAmount,
-      selectedCoin,
+      value,
+      currency,
       handleChange },
     coins } = this.props;
     return (
       <>
-        <label htmlFor="expenseAmount">
+        <label htmlFor="value">
           Valor:
           {' '}
           <input
-            value={ expenseAmount }
+            value={ value }
             onChange={ handleChange }
             type="number"
-            name="expenseAmount"
+            name="value"
             data-testid="value-input"
           />
         </label>
-        <label htmlFor="selectedCoin">
+        <label htmlFor="currency">
           Moeda:
           {' '}
           <select
             data-testid="currency-input"
-            name="selectedCoin"
+            id="currency"
+            name="currency"
+            value={ currency }
             onChange={ handleChange }
-            value={ selectedCoin }
           >
             {coins.map((coin) => (
               <option
                 name="coins"
                 data-testid={ coin.code }
                 key={ coin.code }
+                value={ coin.code }
               >
-                {coin.name}
+                {coin.code}
               </option>
             ))}
           </select>
@@ -56,8 +58,8 @@ export default connect(mapStateToProps)(AddexpenseOne);
 AddexpenseOne.propTypes = {
   coins: PropTypes.arrayOf(PropTypes.object).isRequired,
   infos: PropTypes.shape({
-    expenseAmount: PropTypes.string.isRequired,
-    selectedCoin: PropTypes.string.isRequired,
+    value: PropTypes.string.isRequired,
+    currency: PropTypes.string.isRequired,
     handleChange: PropTypes.func.isRequired,
   }).isRequired,
 };
