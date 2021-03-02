@@ -27,7 +27,11 @@ textarea {
   outline: none;
 }
 
-textarea:focus, input:focus {
+textarea:focus {
+  border-color: transparent;
+}
+
+input:focus {
   border-color: transparent;
 }
 
@@ -100,7 +104,7 @@ iframe {
   background: linear-gradient(to top, #7579ff, #b224ef);
   border-radius: 10px;
   overflow: hidden;
-  padding: 55px 55px 37px 55px;
+  padding: 55px 55px 37px;
   width: 500px;
 }
 
@@ -272,7 +276,7 @@ iframe {
 @media ( max-width : 576px ) {
 
   .wrap-login {
-    padding: 55px 15px 37px 15px;
+    padding: 55px 15px 37px;
   }
 }
 
