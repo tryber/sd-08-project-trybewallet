@@ -35,8 +35,8 @@ header p {
   display: flex;
   line-height: 60px;
   margin-bottom: 0;
-  margin-top: 0;
   margin-right: 40px;
+  margin-top: 0;
 }
 
 header span {
@@ -47,7 +47,7 @@ header span {
 }
 
 .header-total-value {
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .expense-form {
