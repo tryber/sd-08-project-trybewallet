@@ -1,8 +1,8 @@
 // Esse reducer será responsável por tratar as informações da pessoa usuária
 import { SAVE_USER_EMAIL, SAVE_USER_PASSWORD } from '../actions/user';
 
-const initialState = { email: '', password: '' };
-const user = (state = initialState, action) => {
+const initialStateUser = { email: '', password: '' };
+const user = (state = initialStateUser, action) => {
   switch (action.type) {
   case SAVE_USER_EMAIL:
     return { ...state,
