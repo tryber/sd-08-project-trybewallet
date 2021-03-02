@@ -27,6 +27,7 @@ class EditBtn extends Component {
         type="button"
         onClick={ this.handleEdit }
         data-testid="edit-btn"
+        className="btn-expenses-container"
       >
         Editar
       </button>

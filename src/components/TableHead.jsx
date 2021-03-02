@@ -5,14 +5,14 @@ class TableHead extends Component {
     return (
       <thead>
         <tr>
-          <th>Descrição</th>
-          <th>Tag</th>
-          <th>Método de pagamento</th>
-          <th>Valor</th>
-          <th>Moeda</th>
-          <th>Câmbio utilizado</th>
-          <th>Valor convertido</th>
-          <th>Moeda de conversão</th>
+          <th className="table-head-division">Descrição</th>
+          <th className="table-head-division">Tag</th>
+          <th className="table-head-division">Método de pagamento</th>
+          <th className="table-head-division">Valor</th>
+          <th className="table-head-division">Moeda</th>
+          <th className="table-head-division">Câmbio utilizado</th>
+          <th className="table-head-division">Valor convertido</th>
+          <th className="table-head-division">Moeda de conversão</th>
           <th>Editar/Excluir</th>
         </tr>
       </thead>

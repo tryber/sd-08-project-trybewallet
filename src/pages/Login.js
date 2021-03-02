@@ -78,35 +78,40 @@ class Login extends Component {
     }
 
     return (
-      <>
-        <label htmlFor="email">
-          Email:
-          <input
-            name="email"
-            type="text"
-            value={ email }
-            onChange={ this.handleChange }
-            data-testid="email-input"
-          />
-        </label>
-        <label htmlFor="password">
-          Password:
-          <input
-            name="password"
-            type="text"
-            value={ password }
-            onChange={ this.handleChange }
-            data-testid="password-input"
-          />
-        </label>
+      <div className="login-page">
+        <div className="login-container">
+          <label htmlFor="email" className="label-container">
+            Email:
+            <input
+              name="email"
+              type="text"
+              value={ email }
+              onChange={ this.handleChange }
+              data-testid="email-input"
+              className="input-container"
+            />
+          </label>
+          <label htmlFor="password" className="label-container">
+            Password:
+            <input
+              name="password"
+              type="text"
+              value={ password }
+              onChange={ this.handleChange }
+              data-testid="password-input"
+              className="input-container"
+            />
+          </label>
+        </div>
         <button
           type="button"
           onClick={ this.handleClick }
           disabled={ !(emailVerified && passwordVerified) }
+          className="btn-container"
         >
           Entrar
         </button>
-      </>
+      </div>
     );
   }
 }

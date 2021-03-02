@@ -15,6 +15,7 @@ class MethodSelection extends Component {
           value={ value }
           onChange={ changeInput }
           data-testid="method-input"
+          className="expenses-input dropdown-height"
         >
           <option key="choose" value="">Forma de pagamento</option>
           <option key="money" value="Dinheiro">Dinheiro</option>

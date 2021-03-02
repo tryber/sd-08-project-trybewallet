@@ -15,13 +15,14 @@ class TagSelection extends Component {
           value={ value }
           onChange={ changeInput }
           data-testid="tag-input"
+          className="expenses-input dropdown-height"
         >
           <option key="choose" value="">Escolha a categoria</option>
           <option key="grocery" value="Alimentação">Alimentação</option>
           <option key="hobby" value="Lazer">Lazer</option>
           <option key="work" value="Trabalho">Trabalho</option>
           <option key="transportation" value="Transporte">Transporte</option>
-          <option key="health" value="Transporte">Saúde</option>
+          <option key="health" value="Saúde">Saúde</option>
         </select>
       </label>
     );

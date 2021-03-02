@@ -9,7 +9,7 @@ class ExpensesTable extends Component {
     const { expenses, editExpenseValue } = this.props;
     if (expenses.length > 0) {
       return (
-        <div>
+        <div className="table-expenses-container">
           <table>
             <TableHead />
             <TableBody editExpenseValue={ editExpenseValue } />

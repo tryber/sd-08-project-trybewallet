@@ -81,11 +81,23 @@ class AddExpensesBtn extends Component {
 
     if (editionOfExpense) {
       return (
-        <button type="button" onClick={ this.handleEdition }>Editar despesa</button>
+        <button
+          type="button"
+          onClick={ this.handleEdition }
+          className="btn-expenses-container"
+        >
+          Editar despesa
+        </button>
       );
     }
     return (
-      <button type="button" onClick={ this.handleClick }>Adicionar despesa</button>
+      <button
+        type="button"
+        onClick={ this.handleClick }
+        className="btn-expenses-container"
+      >
+        Adicionar despesa
+      </button>
     );
   }
 }

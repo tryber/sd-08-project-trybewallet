@@ -21,6 +21,7 @@ class CurrenciesSelection extends Component {
           value={ value }
           onChange={ changeInput }
           data-testid="currency-input"
+          className="expenses-input dropdown-height"
         >
           <option key="choose" value="">Escolha a Moeda</option>
           { currencies.map((option, index) => (option !== 'USDT') && (

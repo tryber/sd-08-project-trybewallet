@@ -54,7 +54,7 @@ class TableBody extends Component {
     return (
       <tbody>
         { expenses.map((exp) => (
-          <tr key={ exp.id }>
+          <tr key={ exp.id } className="table-body-container">
             <td role="cell">{ exp.description }</td>
             <td role="cell">{ exp.tag }</td>
             <td role="cell">{ exp.method }</td>

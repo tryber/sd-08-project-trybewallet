@@ -37,15 +37,20 @@ class Header extends Component {
   render() {
     const { email } = this.props;
     return (
-      <header>
-        <h4>
+      <header className="wallet-header-container">
+        <h4 className="wallet-info-header">
           Email:
-          <span data-testid="email-field">{ email }</span>
+          <span data-testid="email-field" className="wallet-info">{ email }</span>
         </h4>
-        <h4>
+        <h4 className="wallet-info-header">
           Despesas gerais:
-          <span data-testid="total-field">{ this.sumExpenses() }</span>
-          <span data-testid="header-currency-field">BRL</span>
+          <span
+            data-testid="total-field"
+            className="wallet-info"
+          >
+            { this.sumExpenses() }
+          </span>
+          <span data-testid="header-currency-field" className="wallet-info">BRL</span>
         </h4>
       </header>
     );

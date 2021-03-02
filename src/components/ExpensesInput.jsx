@@ -77,13 +77,17 @@ class ExpensesInput extends Component {
 
     return (
       <>
-        <InputExpenses value={ value } changeInput={ this.changeInput } />
-        <InputDescription value={ description } changeInput={ this.changeInput } />
-        <CurrenciesSelection value={ currency } changeInput={ this.changeInput } />
-        <MethodSelection value={ method } changeInput={ this.changeInput } />
-        <TagSelection value={ tag } changeInput={ this.changeInput } />
-        <AddExpensesBtn resetInputs={ this.resetInputs } />
-        <ExpensesTable editExpenseValue={ this.editExpenseValue } />
+        <section className="input-expenses-container">
+          <InputExpenses value={ value } changeInput={ this.changeInput } />
+          <InputDescription value={ description } changeInput={ this.changeInput } />
+          <CurrenciesSelection value={ currency } changeInput={ this.changeInput } />
+          <MethodSelection value={ method } changeInput={ this.changeInput } />
+          <TagSelection value={ tag } changeInput={ this.changeInput } />
+          <AddExpensesBtn resetInputs={ this.resetInputs } />
+        </section>
+        <section>
+          <ExpensesTable editExpenseValue={ this.editExpenseValue } />
+        </section>
       </>
     );
   }

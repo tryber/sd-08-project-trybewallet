@@ -24,6 +24,7 @@ class DeleteBtn extends Component {
         type="button"
         onClick={ this.handleDelete }
         data-testid="delete-btn"
+        className="btn-expenses-container"
       >
         Excluir
       </button>

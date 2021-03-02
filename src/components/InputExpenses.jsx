@@ -14,6 +14,7 @@ class InputExpenses extends Component {
           value={ value }
           onChange={ changeInput }
           data-testid="value-input"
+          className="expenses-input"
         />
       </label>
     );
