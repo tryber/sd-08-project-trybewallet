@@ -2,7 +2,7 @@
 
 a {
   color: #666;
-  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
   font-size: 14px;
   line-height: 1.7;
   transition: all 0.4s;
@@ -10,7 +10,7 @@ a {
 
 .txt1 {
   color: #e5e5e5;
-  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
   font-size: 13px;
   line-height: 1.5;
 }
@@ -85,7 +85,7 @@ td {
   width: 12%;
 }
 
-button.table-button {
+.table-button button {
   background-color: azure;
   justify-self: center;
   margin: 2%;
