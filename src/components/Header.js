@@ -3,17 +3,25 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 class Header extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      total: 0,
+    };
+  }
+
   render() {
     const { email } = this.props;
+    const { total } = this.state;
     return (
-      <div>
+      <header>
         TrybeWallet
         email
         <input value={ email } data-testid="email-field" readOnly />
         depesa total
-        <input value="0" data-testid="total-field" />
+        <input value={ total } data-testid="total-field" readOnly />
         <input value="BRL" data-testid="header-currency-field" readOnly />
-      </div>
+      </header>
     );
   }
 }

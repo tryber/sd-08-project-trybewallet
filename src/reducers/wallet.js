@@ -1,21 +1,56 @@
+import {
+  ADD_DESPESA,
+  EDIT_DESPESA,
+  DELETE_DESPESA,
+  UPDATE_COIN,
+  BT_BOOL,
+  SAVE_COINS,
+} from '../actions';
+
 const INITIAL_STATE = {
   currencies: [],
   expenses: [],
+  btBool: false,
+  id: 0,
+  editExpenses: {},
+  total: 0,
 };
 
 function wallet(state = INITIAL_STATE, action) {
-  const { expense, updatedExpenses, type } = action;
-  switch (type) {
-  case 'ADD_EXPENSE':
+  switch (action.type) {
+  case ADD_DESPESA:
     return {
       ...state,
-      expenses: [...state.expenses, expense],
+      expenses: [
+        ...state.expenses, {
+          ...action.payload,
+          id: state.expenses.length,
+          exchangeRates: state.currencies,
+        },
+      ],
     };
-  case 'UPDATE_EXPENSES':
-    return {
+  case EDIT_DESPESA:
+    return (
+      {
+        ...state,
+        expenses: action.expenses,
+      }
+    );
+  case UPDATE_COIN:
+    return ({ ...state, currencies: action.exchangeRates });
+  case DELETE_DESPESA:
+    return ({
       ...state,
-      expenses: updatedExpenses,
-    };
+      expenses: state.expenses.filter((expense) => expense.id !== action.id),
+    });
+  case BT_BOOL:
+    return (
+      {
+        ...state,
+        isEditing: action.change,
+      });
+  case SAVE_COINS:
+    return ({ ...state, currencies: action.payload });
   default:
     return state;
   }

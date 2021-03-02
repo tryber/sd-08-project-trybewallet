@@ -37,9 +37,10 @@ class Login extends React.Component {
     const { inputEmail, inputPassword } = this.state;
     const btBool = this.validate();
     return (
-      <div>
+      <form>
         <input
           type="email"
+          name="email"
           placeholder="email"
           data-testid="email-input"
           value={ inputEmail }
@@ -47,6 +48,7 @@ class Login extends React.Component {
         />
         <input
           type="password"
+          name="password"
           placeholder="password"
           data-testid="password-input"
           maxLength="8"
@@ -60,7 +62,7 @@ class Login extends React.Component {
         >
           Entrar
         </button>
-      </div>
+      </form>
     );
   }
 }

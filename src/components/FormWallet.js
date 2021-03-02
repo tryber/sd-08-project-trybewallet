@@ -1,10 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 class FormWallet extends React.Component {
   constructor(props) {
     super(props);
+    // this.state = {
+    //   valor: 0,
+    // };
+
     this.valor = this.valor.bind(this);
     this.descricao = this.descricao.bind(this);
     this.moeda = this.moeda.bind(this);
@@ -13,64 +17,70 @@ class FormWallet extends React.Component {
     this.botoes = this.botoes.bind(this);
   }
 
-  // const { arrayCoins } = this.props;
-  valor() {
+  valor(valor, handleChange) {
+    console.log('valor', this.props);
     return (
-      <label htmlFor="value-input">
+      <label htmlFor="valor">
         Valor:
         <input
           type="number"
-          // value={ valor }
+          name="valor"
+          value={ valor }
           data-testid="value-input"
-          // onChange={ (event) => handleChange(event) }
+          onChange={ (event) => handleChange(event) }
         />
       </label>
     );
   }
 
-  descricao() {
+  descricao(descricao, handleChange) {
     return (
-      <label htmlFor="description-input">
+      <label htmlFor="descricao">
         Descrição:
         <input
           type="text"
-          // value={ descricao }
+          name="descricao"
+          value={ descricao }
           data-testid="description-input"
-          // onChange={ (event) => handleChange(event) }
+          onChange={ (event) => handleChange(event) }
         />
       </label>
     );
   }
 
-  moeda() {
+  moeda(moeda, arrayMoedas, handleChange) {
     return (
-      <label htmlFor="currency-input">
+      <label htmlFor="moeda">
         Moeda:
-        <input
+        <select
+          name="moeda"
+          value={ moeda }
           data-testid="currency-input"
-          // onChange={ (event) => handleChange(event) }
-        />
-        {/* {arrayMoedas.map((moeda) => (
-          <option
-            key={ moeda }
-            value={ moeda }
-            data-testid={ moeda }
-          >
-            {moeda}
-          </option>
-        ))} */}
+          onChange={ (event) => handleChange(event) }
+        >
+          {arrayMoedas.map((moedas) => (
+            <option
+              key={ moedas }
+              value={ moedas }
+              data-testid={ moedas }
+            >
+              {moedas}
+            </option>
+          ))}
+        </select>
       </label>
     );
   }
 
-  categorias() {
+  categorias(categoria, handleChange) {
     return (
-      <label htmlFor="tag-input">
+      <label htmlFor="categoria">
         Categoria:
         <select
+          name="categoria"
+          value={ categoria }
           data-testid="tag-input"
-          // value={ tag }
-          // onChange={ (event) => handleChange(event) }
+          onChange={ (event) => handleChange(event) }
         >
           <option value="Alimentação">Alimentação</option>
           <option value="Lazer">Lazer</option>
@@ -82,14 +92,15 @@ class FormWallet extends React.Component {
     );
   }
 
-  pagamentos() {
+  pagamentos(pagamentos, handleChange) {
     return (
-      <label htmlFor="method-input">
+      <label htmlFor="pagamentos">
         Método de Pagamento:
         <select
+          name="pagamentos"
           data-testid="method-input"
-          // value={ pagamentos }
-          // onChange={ (event) => handleChange(event) }
+          value={ pagamentos }
+          onChange={ (event) => handleChange(event) }
         >
           <option value="Dinheiro">Dinheiro</option>
           <option value="Cartão de crédito">Cartão de crédito</option>
@@ -99,37 +110,69 @@ class FormWallet extends React.Component {
     );
   }
 
-  botoes() {
+  botoes(btBool, handleSubmit) {
     return (
       <div>
-        <button
-          type="button"
-          // onClick={ (event) => handleClick(event) }
-        >
-          Adicionar despesa
-        </button>
-        <button
-          type="button"
-          // onClick={ (event) => handleClick(event) }
-        >
-          Editar despesa
-        </button>
+        { (btBool)
+          ? (
+            <button
+              type="button"
+              onClick={ (event) => handleSubmit(event) }
+            >
+              Adicionar despesa
+            </button>)
+          : (
+            <button
+              type="button"
+              onClick={ (event) => handleSubmit(event) }
+            >
+              Editar despesa
+            </button>
+          )}
       </div>
     );
   }
 
   render() {
+    const { arrayMoedas, handleChange, handleClick, state, btBool } = this.props;
+    const { descricao, moeda, pagamentos, categoria, valor } = this.props;
+    console.log(arrayMoedas);
     return (
       <div>
-        { this.valor() }
-        { this.descricao() }
-        { this.moeda() }
-        { this.categorias() }
-        { this.pagamentos() }
-        <p>{ this.botoes() }</p>
+        { this.valor(valor, handleChange) }
+        { this.descricao(descricao, handleChange) }
+        { this.moeda(moeda, arrayMoedas, handleChange) }
+        { this.categorias(categoria, handleChange) }
+        { this.pagamentos(pagamentos, handleChange) }
+        <p>{ this.botoes(state, btBool, handleClick) }</p>
       </div>
     );
   }
 }
+const mapStateToProps = (state) => ({
+  btBool: state.wallet.btBool,
+  arrayMoedas: state.wallet.currencies,
+});
 
-export default connect(null, null)(FormWallet);
+FormWallet.propTypes = {
+  arrayMoedas: PropTypes.arrayOf(PropTypes.string).isRequired,
+  handleChange: PropTypes.func.isRequired,
+  btBool: PropTypes.bool.isRequired,
+  descricao: PropTypes.string.isRequired,
+  moeda: PropTypes.string.isRequired,
+  pagamentos: PropTypes.string.isRequired,
+  categoria: PropTypes.string.isRequired,
+  valor: PropTypes.number.isRequired,
+  handleClick: PropTypes.func.isRequired,
+  state: PropTypes.shape({
+    expense: PropTypes.shape({
+      valor: PropTypes.number,
+      descricao: PropTypes.string,
+      moeda: PropTypes.string,
+      pagamentos: PropTypes.string,
+      categoria: PropTypes.string,
+    }).isRequired,
+  }).isRequired,
+};
+
+export default connect(mapStateToProps, null)(FormWallet);
