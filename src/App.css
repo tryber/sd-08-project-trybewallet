@@ -1,41 +1,121 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media ( prefers-reduced-motion : no-preference ) {
-
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
+.main-container {
   align-items: center;
-  background-color: #282c34;
-  color: white;
+  background-color: #52796f;
   display: flex;
-  flex-direction: column;
-  font-size: calc(10px + 2vmin);
+  flex-flow: column wrap;
+  height: 800px;
+}
+
+.main-container h2 {
+  color: #2f3e46;
+  font-size: 30px;
+  margin-top: 40px;
+}
+
+.login-page {
+  align-items: center;
+  display: flex;
+  flex-flow: column wrap;
+  margin-top: 100px;
+}
+
+.login-container {
+  align-items: center;
+  background-color: #354f52;
+  border: 1px solid black;
+  border-radius: 5px;
+  color: #cad2c5;
+  display: flex;
+  flex-flow: column wrap;
+  height: 300px;
   justify-content: center;
-  min-height: 100vh;
+  width: 300px;
 }
 
-.App-link {
-  color: #61dafb;
+.label-container {
+  background-color: #2f3e46;
+  border-radius: 3px;
+  padding: 5px 10px 10px;
+  width: 200px;
 }
 
-@keyframes App-logo-spin {
+.input-container {
+  background-color: #cad2c5;
+  border-radius: 5px;
+  height: 20px;
+  margin-top: 3px;
+  width: 96%;
+}
 
-  from {
-    transform: rotate(0deg);
-  }
+.btn-container {
+  background-color: #cad2c5;
+  border-radius: 5px;
+  height: 40px;
+  margin-top: 15px;
+  width: 80px;
+}
 
-  to {
-    transform: rotate(360deg);
-  }
+.wallet-header-container {
+  align-self: flex-start;
+  background-color: #426159;
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+}
+
+.wallet-info-header {
+  color: #cad2c5;
+  margin-left: 40px;
+}
+
+.wallet-info {
+  font-weight: 400;
+  margin-left: 10px;
+}
+
+.input-expenses-container {
+  border: 2px solid #2f3e46;
+  color: #cad2c5;
+  display: flex;
+  flex-flow: row wrap;
+  font-weight: 500;
+  padding: 10px 40px;
+  width: 100%;
+}
+
+.expenses-input {
+  background-color: #cad2c5;
+  border-radius: 5px;
+  height: 20px;
+  margin: 3px 10px;
+  width: 90%;
+}
+
+.btn-expenses-container {
+  align-self: flex-end;
+  background-color: #cad2c5;
+  border-radius: 5px;
+  height: 30px;
+  margin-bottom: 3px;
+  width: auto;
+}
+
+.dropdown-height {
+  height: 25px;
+}
+
+.table-expenses-container {
+  background-color: #cad2c5;
+  border: 2px solid #2f3e46;
+  margin-top: 20px;
+  padding: 10px;
+}
+
+.table-head-division {
+  border-right: 2px solid #2f3e46;
+  padding: 5px 15px;
+}
+
+.table-body-container {
+  text-align: center;
 }
