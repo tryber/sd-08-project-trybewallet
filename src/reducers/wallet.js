@@ -1,5 +1,6 @@
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
 import * as ActionTypes from '../actions/index';
+
 console.log(ActionTypes);
 const INITIAL_STATE = {
   currencies: [],
