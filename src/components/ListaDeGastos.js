@@ -1,20 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // import PropTypes from 'prop-types';
-// import store from '../store';
+import store from '../store';
 
 class ListaDeGastos extends Component {
   constructor() {
     super();
-    // this.state = {
-    //   valor: 0,
-    // };
     this.changevalor = this.changevalor.bind(this);
+    this.changhádo = this.changhádo.bind(this);
   }
 
   changevalor() {
-    const { stateAuxiliar, stateExpenses } = this.props;
-    const { arrFinal } = stateAuxiliar;
+    const { arrFinal, arrDeValores, stateExpenses } = this.props;
     let total = 0;
     for (let f = 0; f < stateExpenses.length; f += 1) {
       for (let i = 0; i < arrDeValores.length; i += 1) {
@@ -23,24 +20,28 @@ class ListaDeGastos extends Component {
         }
       }
     }
+
     return total;
   }
 
-  render() {
-    // const { valor } = this.state;
+  changhádo() {
+    return store.subscribe(this.changevalor);
+  }
 
+  render() {
     return (
       <div data-testid="total-field">
         Total de Despesas:
         {' '}
-        {this.changevalor()}
+        {this.changhádo()}
       </div>
     );
   }
 }
 
 const mapStateToProps = (state) => ({
-  stateAuxiliar: state.wallet.auxiliar,
+  arrDeValores: state.wallet.auxiliar.arrDeValores,
+  arrFinal: state.wallet.auxiliar.arrFinal,
   stateExpenses: state.wallet.expenses,
 });
 
@@ -55,5 +56,7 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps)(ListaDeGastos);
 // export default ListaDeGastos;
 // ListaDeGastos.propTypes = {
-//   valor: PropTypes.shape.isRequired,
+//   arrFinal: PropTypes.arrayOf(PropTypes.string).isRequired,
+//   arrDeValores: PropTypes.arrayOf(PropTypes.number).isRequired,
+//   stateExpenses: PropTypes.shape.isRequired,
 // };

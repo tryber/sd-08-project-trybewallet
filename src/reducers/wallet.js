@@ -1,8 +1,8 @@
 const INITIAL_STATE = {
   expenses: [],
   auxiliar: {
-    arrFinal: ['USD'],
-    arrDeValores: [1],
+    arrFinal: ['USD', 'ADS'],
+    arrDeValores: [1, 1, 1],
     valor: 0,
   },
 };
