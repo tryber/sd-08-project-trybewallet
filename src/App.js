@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import {
   Route,
   Switch,
@@ -9,7 +9,7 @@ import {
   Wallet,
 } from './pages';
 
-function App(props) {
+function App() {
   return (
     <Switch>
       <Route exact path="/" render={ () => <Login /> } />
