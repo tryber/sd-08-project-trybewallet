@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import getAPI, { getCurrencies } from '../services/requestAPI';
-import { actionCurruncies, actionExpenses } from '../actions';
+import { getCurrencies } from '../services/requestAPI';
+import { fetchCurrencies as fetchCurrenciesAction, actionExpenses } from '../actions';
 import FormLabel from './FormLabel';
 import FormSelectMethod from './FormSelectMethod';
 import FormSelectTag from './FormSelectTag';
@@ -22,12 +22,13 @@ class FormExpense extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.addOne = this.addOne.bind(this);
+    this.handleArray = this.handleArray.bind(this);
   }
 
   componentDidMount() {
-    const { showCurrencies } = this.props;
-    const api = getAPI();
-    showCurrencies(api);
+    const { fetchCurrencies } = this.props;
+    fetchCurrencies();
+    this.handleArray();
   }
 
   handleChange(e) {
@@ -44,14 +45,21 @@ class FormExpense extends Component {
 
   handleClick() {
     const { showExpenses } = this.props;
-    const { state } = this;
     this.addOne();
-    showExpenses(state);
+    showExpenses(this.state);
+  }
+
+  async handleArray() {
+    const { exchangeRates } = this.state;
+    const apiAr = await getCurrencies();
+    this.setState({
+      exchangeRates: apiAr,
+    });
   }
 
   render() {
     const { value, currency, method, tag, description } = this.state;
-    console.log(getCurrencies());
+
     return (
       <section>
 
@@ -66,8 +74,15 @@ class FormExpense extends Component {
             currency={ currency }
             handleChange={ this.handleChange }
           />
-          <FormSelectMethod method={ method } handleChange={ this.handleChange } />
-          <FormSelectTag tag={ tag } handleChange={ this.handleChange } />
+          <FormSelectMethod
+            method={ method }
+            handleChange={ this.handleChange }
+          />
+          <FormSelectTag
+            tag={ tag }
+            handleChange={ this.handleChange }
+          />
+
           <button type="button" onClick={ this.handleClick }> Adicionar despesa </button>
         </form>
       </section>
@@ -76,8 +91,9 @@ class FormExpense extends Component {
 }
 
 const mapDispactToProps = (dispatch) => ({
-  showCurrencies: (value) => dispatch(actionCurruncies(value)),
+  fetchCurrencies: () => dispatch(fetchCurrenciesAction()),
   showExpenses: (UPexpenses) => dispatch(actionExpenses(UPexpenses)),
+
 });
 
 export default connect(null, mapDispactToProps)(FormExpense);

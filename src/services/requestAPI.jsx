@@ -9,5 +9,5 @@ export default async function getApi() {
 export async function getCurrencies() {
   const endpoint = await fetch('https://economia.awesomeapi.com.br/json/all');
   const response = await endpoint.json();
-  return console.log(response);
+  return response;
 }
