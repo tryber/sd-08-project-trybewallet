@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import './WalletHeader.css';
 
 const WalletHeader = ({ email, spentAmount }) => {
-  const parsedAmount = (Math.round(spentAmount * 100) / 100).toLocaleString('pt-br');
+  const parsedAmount = (Math.round(spentAmount * 100) / 100);
   return (
     <header className="wallet-header">
       <img src="https://theme.zdassets.com/theme_assets/9633455/9814df697eaf49815d7df109110815ff887b3457.png" alt="Trybe Logo" />
