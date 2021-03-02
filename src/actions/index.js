@@ -1,6 +1,9 @@
-import { LOGIN_USER, ADD_WALLET } from './ActionTypes';
+import { LOGIN_USER, ADD_EXPENSE, FETCH_CURRENCIES } from './ActionTypes';
 
 export const loginUser = (email) => ({ type: LOGIN_USER, payload: { email } });
 
-export const addWallet = (currencies, expenses) => ({
-  type: ADD_WALLET, paypload: { currencies, expenses } });
+export const addExpense = (expenses) => ({
+  type: ADD_EXPENSE, paypload: { expenses } });
+
+export const fetchCurrencies = (currencies) => ({
+  type: FETCH_CURRENCIES, paypload: { currencies } });
