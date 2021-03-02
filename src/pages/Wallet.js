@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import WalletHeader from '../components/WalletHeader';
 import WalletForm from '../components/WalletForm';
 import { walletThunk } from '../actions';
+import TableComponent from '../components/TableComponent';
 
 class Wallet extends React.Component {
   componentDidMount() {
@@ -16,6 +17,7 @@ class Wallet extends React.Component {
       <div>
         <WalletHeader />
         <WalletForm />
+        <TableComponent />
       </div>
     );
   }

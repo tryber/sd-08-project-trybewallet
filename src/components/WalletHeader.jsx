@@ -21,9 +21,9 @@ class WalletHeader extends React.Component {
       <>
         <header data-testid="email-field">{email}</header>
         <div data-testid="total-field">
-          `R$: $
+          R$
+          {' '}
           {Math.round(this.getTotal() * 100) / 100}
-          `
         </div>
         <div data-testid="header-currency-field">BRL</div>
       </>
