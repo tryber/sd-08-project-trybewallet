@@ -17,12 +17,6 @@ a:hover {
   text-decoration: none;
 }
 
-
-ul ,
-li {
-  list-style-type: none;
-}
-
 input {
   border: none;
   outline: none;
@@ -33,8 +27,7 @@ textarea {
   outline: none;
 }
 
-textarea:focus ,
-input:focus {
+textarea:focus, input:focus {
   border-color: transparent;
 }
 
@@ -188,7 +181,6 @@ iframe {
   content: attr(data-placeholder);
   display: block;
   font-size: 22px;
-  left: 0px;
   padding-left: 5px;
   position: absolute;
   top: 6px;
@@ -301,7 +293,6 @@ iframe {
   padding: 4px 25px 4px 10px;
   pointer-events: none;
   position: absolute;
-  right: 0px;
   text-align: left;
   top: 50%;
   transform: translateY(-50%);
