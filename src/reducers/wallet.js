@@ -6,19 +6,14 @@ const initialState = {
 };
 
 const wallet = (state = initialState, { type, payload }) => {
-  const newState = { ...state };
-  let newExpenses = [];
-  if (payload && payload.id) {
-    newExpenses = newState.expenses.filter(({ id }) => id !== payload.id)
-      .map((expense, index) => ({ ...expense, ...{ id: index } }));
-  }
+  const newExpenses = () => state.expenses.filter(({ id }) => id !== payload.id);
+  // .map((expense, index) => ({ ...expense, ...{ id: index } }));
 
   switch (type) {
   case ADD_EXPENSE:
-    newState.expenses.push(payload);
-    return { ...newState };
+    return { ...state, expenses: [...state.expenses, payload] };
   case REMOVE_EXPENSE:
-    return { ...newState, ...{ expenses: newExpenses } };
+    return { ...state, expenses: newExpenses() };
   case UPDATE_CURRENCIES:
     return { ...state, ...payload };
   default:

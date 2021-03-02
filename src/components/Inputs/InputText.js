@@ -12,9 +12,9 @@ const InputText = ({ name, label, toState, reset }) => {
     setValue(target.value);
   };
 
-  const handleBlur = () => {
+  useEffect(() => {
     toState(value);
-  };
+  }, [value]);
 
   useEffect(() => {
     if (reset) setValue('');
@@ -29,7 +29,6 @@ const InputText = ({ name, label, toState, reset }) => {
         id={ name }
         value={ value }
         onChange={ handleChange }
-        onBlur={ handleBlur }
         data-testid={ name }
       />
     </label>

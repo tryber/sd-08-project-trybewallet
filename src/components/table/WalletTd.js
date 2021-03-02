@@ -1,14 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { removeExpenseAct } from '../../actions';
 
-const WalletTd = ({ data }) => {
-  const { value, currency, exchangeRates, description, tag, method } = data;
-  console.log(value, currency);
-  const parsedValue = Math.round(value * 100) / 100;
-  const ask = parseFloat(exchangeRates[currency].ask);
+const WalletTd = ({ data, removeExpense }) => {
+  const { value, currency, exchangeRates, description, tag, method, id } = data;
+  const parsedValue = Math.round(parseFloat(value) * 100) / 100;
+  let ask = parseFloat(exchangeRates[currency].ask);
   let transformedValue = parsedValue * ask;
   transformedValue = Math.round(transformedValue * 100) / 100;
+  ask = Math.round(ask * 100) / 100;
   const currencyName = exchangeRates[currency].name;
+
+  const remove = () => {
+    removeExpense(id);
+  };
 
   return (
     <tr>
@@ -22,7 +28,7 @@ const WalletTd = ({ data }) => {
       <td>Real</td>
       <td>
         <button type="button">Edi</button>
-        <button type="button">Del</button>
+        <button type="button" onClick={ remove } data-testid="delete-btn">Del</button>
       </td>
     </tr>
   );
@@ -31,13 +37,22 @@ const WalletTd = ({ data }) => {
 WalletTd.propTypes = {
   data: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    value: PropTypes.number.isRequired,
+    value: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     currency: PropTypes.string.isRequired,
     method: PropTypes.string.isRequired,
     tag: PropTypes.string.isRequired,
     exchangeRates: PropTypes.shape({}).isRequired,
   }).isRequired,
+  removeExpense: PropTypes.func.isRequired,
 };
 
-export default WalletTd;
+const mapDispatch = (dispatch) => ({
+  removeExpense: (id) => dispatch(removeExpenseAct(id)),
+});
+
+// const mapState = (state) => ({
+//   expenses: state.wallet.expenses,
+// });
+
+export default connect(null, mapDispatch)(WalletTd);

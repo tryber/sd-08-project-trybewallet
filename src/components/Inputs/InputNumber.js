@@ -3,13 +3,14 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { updateValueAct } from '../../actions';
 
-import { toNumericValue, formatInputNumber } from '../../services';
+import { formatInputNumber } from '../../services';
+// toNumericValue,
 
 const { useState, useEffect } = React;
 
 const InputNumber = ({ name, language, placeHolder, label, toState, reset }) => {
   const [textValue, setTextValue] = useState('');
-  const [numericValue, setNumericValue] = useState(0);
+  // const [numericValue, setNumericValue] = useState(0);
 
   const handleChange = (evt) => {
     const { target: { value } } = evt;
@@ -21,12 +22,13 @@ const InputNumber = ({ name, language, placeHolder, label, toState, reset }) => 
   }, [reset]);
 
   useEffect(() => {
-    setNumericValue(toNumericValue(textValue));
-  }, [textValue]);
+    // setNumericValue(toNumericValue(textValue));
+    toState(textValue);
+  }, [textValue, toState]);
 
-  useEffect(() => {
-    toState(numericValue);
-  }, [numericValue, toState]);
+  // useEffect(() => {
+  //   toState(numericValue);
+  // }, [numericValue, toState]);
 
   return (
     <label htmlFor={ name }>

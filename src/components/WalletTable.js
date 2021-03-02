@@ -15,10 +15,10 @@ const WalletTable = ({ expenses }) => (
         </tr>
       </thead>
       <tbody>
-        { expenses.map((expense) => (<WalletTd key={ expense.id } data={ expense } />)) }
+        { expenses.map((expense) => (
+          <WalletTd key={ expense.id } data={ expense } />)) }
       </tbody>
     </table>
-    { expenses.map((expense) => (<WalletTd key={ expense.id } data={ expense } />)) }
   </section>
 );
 

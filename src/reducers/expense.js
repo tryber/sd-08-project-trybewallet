@@ -3,7 +3,7 @@ import { UPDATE_EXCHANGE, UPDATE_TAG, UPDATE_METHOD,
 
 const initialState = {
   id: 0,
-  value: 0,
+  value: '',
   description: '',
   currency: '',
   method: '',
