@@ -11,6 +11,9 @@ class WalletForm extends Component {
       id: 0,
       valueInput: '',
       descriptionInput: '',
+      methodInput: '',
+      tagInput: '',
+      currency: '',
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -37,7 +40,9 @@ class WalletForm extends Component {
   }
 
   handleClick() {
-    const { id, valueInput, descriptionInput } = this.state;
+    const {
+      id, valueInput, descriptionInput, methodInput, tagInput, currency } = this.state;
+    console.log(id, valueInput, descriptionInput, methodInput, tagInput, currency);
   }
 
   renderForm() {
@@ -117,6 +122,7 @@ class WalletForm extends Component {
         <select
           name="tagInput"
           data-testid="tag-input"
+          onChange={ this.handleChange }
         >
           {tagOptions.map((option) => <option key={ option }>{option}</option>)}
         </select>
@@ -125,7 +131,7 @@ class WalletForm extends Component {
   }
 
   renderAddButton() {
-    return <button type="button">Adicionar despesa</button>;
+    return <button type="button" onClick={ this.handleClick }>Adicionar despesa</button>;
   }
 
   render() {
