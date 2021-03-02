@@ -4,7 +4,7 @@ import * as actions from '../actions';
 
 import CurrencySel from './CurrencySel';
 import MethodSel from './MethodSel';
-import tagSel from './Tagsel';
+import TagSel from './Tagsel';
 
 const INITIAL_VALUE = {
   value: '0',
@@ -21,7 +21,7 @@ const getId = (arr) => {
   return 0;
 };
 
-function formAddDespesa() {
+function FormAddDespesa() {
 // &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&variaveis para uso geral&&&&&&&&&&&&&&&&&&&&&&
   const [data, setData] = useState(INITIAL_VALUE);
   const expenses = useSelector((state) => state.wallet.expenses);
@@ -54,7 +54,7 @@ function formAddDespesa() {
       </label>
       <CurrencySel value={ currency } onChange={ handleChange } />
       <MethodSel value={ method } onChange={ handleChange } />
-      <tagSel value={ tag } onChange={ handleChange } />
+      <TagSel value={ tag } onChange={ handleChange } />
       <label htmlFor="description">
         Descrição:
         <input
@@ -70,4 +70,4 @@ function formAddDespesa() {
   );
 }
 
-export default formAddDespesa;
+export default FormAddDespesa;

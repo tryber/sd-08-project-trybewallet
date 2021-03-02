@@ -1,18 +1,15 @@
-import {React, useState } from 'react';
+import React, { useState } from 'react';
 
-const { INITIAL_VALUE } = this.props;
-const [data, setData] = useState(INITIAL_VALUE);
-
-const handleChange = ({ target }) => {
-  const { name, value } = target;
-  setData({
-    ...data,
-    [name]: value,
-  });
-};
-
-export default function tagSel() {
-
+export default function TagSel(props) {
+  const { INITIAL_VALUE } = props;
+  const [data, setData] = useState(INITIAL_VALUE);
+  const handleChange = ({ target }) => {
+    const { name, value } = target;
+    setData({
+      ...data,
+      [name]: value,
+    });
+  };
   return (
     <select
       name="tag"

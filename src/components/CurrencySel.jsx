@@ -1,8 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import getCurrencyList from '../services/getCurrencyList';
 import * as actions from '../actions';
+
+export async function getCurrencyList() {
+  return fetch('https://economia.awesomeapi.com.br/json/all')
+    .then((res) => res.json())
+    .then((data) => Object.keys(data).filter((i) => i !== 'USDT'));
+}
 
 function CurrencySelect({ onChange, ...rest }) {
   const currList = useSelector((state) => state.wallet.currencies);
