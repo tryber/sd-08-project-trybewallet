@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 import { addExpense, fetchAPI as fetchAPIThunk } from '../actions';
+import getAPIData from '../services/fetchAPI';
 
 import { methodList, tagList } from './Lists';
 
@@ -12,10 +13,10 @@ class Form extends React.Component {
 
     this.state = {
       id: 0,
-      exp: 0,
-      des: '',
-      cur: '',
-      met: '',
+      value: 0,
+      description: '',
+      currency: '',
+      method: '',
       tag: '',
       list: [],
       update: false,
@@ -32,14 +33,14 @@ class Form extends React.Component {
 
   componentDidUpdate() {
     const { id, list, update } = this.state;
-    const { currenciesInfo } = this.props;
-    if (currenciesInfo.length !== list.length - 1) return this.setList();
+    const { currencies } = this.props;
+    if (currencies.length !== list.length - 1) return this.setList();
     if (update) return this.setID(id + 1);
   }
 
   async setList() {
-    const { currenciesInfo } = this.props;
-    const listCur = currenciesInfo.map((item) => item.currency);
+    const { currencies } = this.props;
+    const listCur = currencies.map((item) => item.currency);
     this.setState({
       list: ['', ...listCur],
     });
@@ -58,45 +59,62 @@ class Form extends React.Component {
     });
   }
 
-  handleClick() {
-    const { id, exp, des, cur, met, tag } = this.state;
-    const { addExp, currenciesInfo } = this.props;
-    const finder = currenciesInfo
-      .filter((item) => item.currency === cur).map((item) => item.currencyDetails);
-    addExp({ id, exp, des, cur, met, tag, exchange: { ...finder[0] } });
-    this.setState({ update: true });
+  async handleClick() {
+    const { id, value, description, currency, method, tag } = this.state;
+    const { addExp } = this.props;
+
+    const data = getAPIData()
+      .then((response) => response);
+
+    await addExp({
+      id,
+      value,
+      description,
+      currency,
+      method,
+      tag,
+      exchangeRates: { ...await data } });
+    this.setState({
+      value: 0,
+      description: '',
+      currency: '',
+      method: '',
+      tag: '',
+      list: [],
+      update: true,
+    });
   }
 
   render() {
-    const { exp, des, cur, met, tag, list } = this.state;
+    const { value, description, currency, method, tag, list } = this.state;
     return (
       <form>
         <p>Valor:</p>
         <input
           type="number"
-          value={ exp }
-          onChange={ (e) => this.setState({ exp: e.target.value }) }
+          value={ value }
+          onChange={ (e) => this.setState({ value: e.target.value }) }
           data-testid="value-input"
         />
-        <p>Descrição:</p>
+        <p>Nome da despesa:</p>
         <input
           type="text"
-          value={ des }
-          onChange={ (e) => this.setState({ des: e.target.value }) }
+          value={ description }
+          onChange={ (e) => this.setState({ description: e.target.value }) }
           data-testid="description-input"
         />
         <p>Moeda:</p>
         <select
-          value={ cur }
-          onChange={ (e) => this.setState({ cur: e.target.value }) }
+          value={ currency }
+          onChange={ (e) => this.setState({ currency: e.target.value }) }
           data-testid="currency-input"
         >
           {list.map((it, idx) => <option key={ idx } data-testid={ it }>{it}</option>)}
         </select>
         <p>Forma de pagamento:</p>
         <select
-          value={ met }
-          onChange={ (e) => this.setState({ met: e.target.value }) }
+          value={ method }
+          onChange={ (e) => this.setState({ method: e.target.value }) }
           data-testid="method-input"
         >
           {methodList.map((item, index) => <option key={ index }>{item}</option>)}
@@ -123,15 +141,15 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const mapStateToProps = (state) => ({
-  currenciesInfo: state.wallet.currencies,
-  expensesInfo: state.wallet.expenses,
+  currencies: state.wallet.currencies,
+  expenses: state.wallet.expenses,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Form);
 
 Form.propTypes = {
   addExp: PropTypes.func.isRequired,
-  currenciesInfo: PropTypes.arrayOf(PropTypes.shape(
+  currencies: PropTypes.arrayOf(PropTypes.shape(
     {
       currency: PropTypes.string,
       currencyDetails: PropTypes.shape(

@@ -4,8 +4,46 @@ import { connect } from 'react-redux';
 import { delExpense as delExpenseAction } from '../actions';
 
 class ExpensesList extends React.Component {
+  deleteClick(id) {
+    const { delExpense } = this.props;
+    delExpense(id);
+  }
+
+  tableGenerator() {
+    const { expenses } = this.props;
+    return (
+      <>
+        {expenses.map((expense) => (
+          <tr key={ expense.id }>
+            <td>{expense.description}</td>
+            <td>{expense.tag}</td>
+            <td>{expense.method}</td>
+            <td>{expense.value}</td>
+            <td>{(expense.exchangeRates[expense.currency]).name}</td>
+            <td>
+              {parseFloat((expense.exchangeRates[expense.currency]).ask).toFixed(2)}
+            </td>
+            <td>
+              {parseFloat(expense.value * (expense
+                .exchangeRates[expense.currency]).ask).toFixed(2)}
+            </td>
+            <td>Real</td>
+            <td>
+              <button
+                type="button"
+                onClick={ () => this.deleteClick(expense.id) }
+                data-testid="delete-btn"
+              >
+                X
+              </button>
+            </td>
+          </tr>
+        ))}
+      </>
+    );
+  }
+
   render() {
-    const { expenses, delExpense } = this.props;
     return (
       <section>
         <h2>Lista de Despesas</h2>
@@ -20,34 +58,9 @@ class ExpensesList extends React.Component {
               <th>Câmbio utilizado</th>
               <th>Valor convertido</th>
               <th>Moeda de conversão</th>
-              <th>Excluir</th>
+              <th>Editar/Excluir</th>
             </tr>
-            {expenses.map((expense) => (
-              <tr key={ expense.id }>
-                <td>{expense.des}</td>
-                <td>{expense.tag}</td>
-                <td>{expense.met}</td>
-                <td>{expense.exp}</td>
-                <td>{expense.cur}</td>
-                <td>{parseFloat(expense.exchange.ask).toFixed(2)}</td>
-                <td>
-                  {parseFloat(
-                    expense.exp * expense.exchange.ask,
-                  )
-                    .toFixed(2)}
-                </td>
-                <td>Real</td>
-                <td>
-                  <button
-                    type="button"
-                    onClick={ () => delExpense(expense.id) }
-                    data-testid="delete-btn"
-                  >
-                    X
-                  </button>
-                </td>
-              </tr>
-            ))}
+            {this.tableGenerator()}
           </tbody>
         </table>
       </section>
@@ -81,5 +94,4 @@ ExpensesList.propTypes = {
     },
   )).isRequired,
   delExpense: PropTypes.func.isRequired,
-
 };

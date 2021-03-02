@@ -4,6 +4,7 @@ import getAPIData from '../services/fetchAPI';
 const LOGIN = 'LOGIN';
 const ADD_EXPENSE = 'ADD_EXPENSE';
 const DEL_EXPENSE = 'DEL_EXPENSE';
+const EDIT_EXPENSE = 'EDIT_EXPENSE';
 const REQUEST_API = 'REQUEST_API';
 const REQUEST_API_SUCCESS = 'REQUEST_API_SUCCESS';
 const REQUEST_API_FAIL = 'REQUEST_API_FAIL';
@@ -21,6 +22,14 @@ const addExpense = (item) => ({
 const delExpense = (item) => ({
   type: DEL_EXPENSE,
   payload: item,
+});
+
+const editExpense = (item) => ({
+  type: EDIT_EXPENSE,
+  payload: {
+    item,
+    isEditing: true,
+  },
 });
 
 const requestAPI = () => ({
@@ -67,6 +76,8 @@ export {
   addExpense,
   DEL_EXPENSE,
   delExpense,
+  EDIT_EXPENSE,
+  editExpense,
   REQUEST_API,
   requestAPI,
   REQUEST_API_SUCCESS,

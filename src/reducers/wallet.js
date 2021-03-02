@@ -10,6 +10,7 @@ const INITIAL_STATE = {
   currencies: [],
   expenses: [],
   isFatching: false,
+  idEditing: false,
 };
 
 const wallet = (state = INITIAL_STATE, action) => {
