@@ -33,7 +33,7 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
   describe('3 - Crie um header para a página de carteira contendo as seguintes características:', () => {
     const initial = initialStateHeader;
   
-    test('Um elemento que exiba o email do usuário que fez login.', () => {
+    test.skip('Um elemento que exiba o email do usuário que fez login.', () => {
       const { store } = renderWithRouterAndStore(<Wallet />, '/carteira', initial);
       const emailField = screen.getByTestId('email-field');
   
@@ -41,7 +41,7 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
       expect(emailField).toContainHTML(store.getState().user.email);
     });
   
-    test('Crie um campo com a despesa total gerada pela lista de gastos.', () => {
+    test.skip('Crie um campo com a despesa total gerada pela lista de gastos.', () => {
       renderWithRouterAndStore(<Wallet />, '/carteira', initial);
       const totalField = screen.getByTestId('total-field');
   
@@ -49,7 +49,7 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
       expect(totalField).toContainHTML(INITIAL_VALUE);
     });
   
-    test('Crie um campo que mostre que qual câmbio está sendo utilizado, que será neste caso \'BRL\'', () => {
+    test.skip('Crie um campo que mostre que qual câmbio está sendo utilizado, que será neste caso \'BRL\'', () => {
       renderWithRouterAndStore(<Wallet />, '/carteira');
       const exchangeField = screen.getByTestId('header-currency-field');
   
@@ -59,21 +59,21 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
   });
   
   describe('4 - Desenvolva um formulário para adicionar uma despesa contendo as seguintes características:', () => {
-    test.skip('Um campo para adicionar o valor da despesa', async () => {
+    test('Um campo para adicionar o valor da despesa', async () => {
       renderWithRouterAndStore(<Wallet />, '/carteira');
       const valueInput = await screen.findByTestId('value-input');
   
       expect(valueInput).toBeInTheDocument();
     });
   
-    test.skip('Um campo para adicionar a descrição da despesa', async () => {
+    test('Um campo para adicionar a descrição da despesa', async () => {
       renderWithRouterAndStore(<Wallet />, '/carteira');
       const descriptionInput = await screen.findByTestId('description-input');
   
       expect(descriptionInput).toBeInTheDocument();
     });
   
-    test.skip('Um campo para selecionar em qual moeda será registrada a despesa', async () => {
+    test('Um campo para selecionar em qual moeda será registrada a despesa', async () => {
       renderWithRouterAndStore(<Wallet />, '/carteira');
       const currencyInput = await screen.findByTestId('currency-input');
       const USD = screen.getByTestId('USD');
@@ -112,7 +112,7 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
       expect(USDT).not.toBeInTheDocument();
     });
   
-    test.skip('Um campo para selecionar qual método de pagamento será utilizado', async () => {
+    test('Um campo para selecionar qual método de pagamento será utilizado', async () => {
       renderWithRouterAndStore(<Wallet />, '/carteira');
       const methodInput = await screen.findByTestId('method-input');
       const moneyOption = screen.getByText(/Dinheiro/);
@@ -142,7 +142,7 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
       expect(healthOption).toBeInTheDocument();
     });
   
-    test.skip('Um botão com o texto \'Adicionar despesa\' que salva as informações da despesa no estado global e atualiza a soma de despesas no header', async () => {
+    test('Um botão com o texto \'Adicionar despesa\' que salva as informações da despesa no estado global e atualiza a soma de despesas no header', async () => {
       const { store } = renderWithRouterAndStore(<Wallet />, '/carteira');
       const addButton = await screen.findByText(/Adicionar despesa/i);
       const valueInput = await screen.findByTestId('value-input');

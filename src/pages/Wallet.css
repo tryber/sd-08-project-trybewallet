@@ -1,21 +1,39 @@
-.wallet-container {
-  margin: 0;
-}
-
 .header {
   align-items: center;
   background-color: rgb(15, 163, 107);
   color: white;
   display: flex;
-  flex-direction: row;
-  font-size: 30px;
+  flex-direction: column;
+  font-size: 20px;
   height: 80px;
-  justify-content: space-between;
+  justify-content: flex-start;
   padding: 10px;
 }
 
-.total-field {
+.title {
+  margin: 5px;
+  text-align: center;
+  width: 100%;
+}
+
+.wallet-content {
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 5px;
+  width: 100%;
+}
+
+.total-header {
+  display: flex;
+}
+
+.label-total {
+  margin-left: 20px;
+}
+
+.total-field {
+  margin-left: 20px;
 }
 
 .exchange-field {
