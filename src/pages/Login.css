@@ -18,7 +18,7 @@ a:hover {
 }
 
 
-ul,
+ul , 
 li {
   list-style-type: none;
 }
@@ -33,10 +33,11 @@ textarea {
   outline: none;
 }
 
-textarea:focus,
+textarea:focus , 
 input:focus {
   border-color: transparent;
 }
+
 input::placeholder {
   color: white;
 }
@@ -70,8 +71,9 @@ iframe {
   margin: 0 auto;
   width: 100%;
 }
+
 .container-login-bg {
-  background-image: url("../images/bg-01.jpg");
+  background-image: url('../images/bg-01.jpg');
 }
 
 .container-login {
@@ -91,7 +93,7 @@ iframe {
 
 .container-login::before {
   background-color: rgba(255, 255, 255, 0.9);
-  content: "";
+  content: '';
   display: block;
   height: 100%;
   left: 0;
@@ -116,7 +118,7 @@ iframe {
 .login-form-logo {
   align-items: center;
   background-color: white;
-  background-image: url("../images/logo-form.jpg");
+  background-image: url('../images/logo-form.jpg');
   background-repeat: no-repeat;
   background-size: 150px 150px;
   border-radius: 50%;
@@ -169,10 +171,10 @@ iframe {
   width: 100%;
 }
 
-.focus-input::before {
+.focus-input:before {
   background: white;
   bottom: -2px;
-  content: "";
+  content: '';
   display: block;
   height: 2px;
   left: 0;
@@ -181,7 +183,7 @@ iframe {
   width: 0;
 }
 
-.focus-input::after {
+.focus-input:after {
   color: white;
   content: attr(data-placeholder);
   display: block;
@@ -252,10 +254,10 @@ iframe {
   z-index: 1;
 }
 
-.login-form-btn::before {
+.login-form-btn:before {
   background-color: white;
   border-radius: 25px;
-  content: "";
+  content: '';
   display: block;
   height: 100%;
   left: 0;
@@ -285,7 +287,7 @@ iframe {
   position: relative;
 }
 
-.alert-validate::before {
+.alert-validate:before {
   background-color: white;
   border: 1px solid #c80000;
   border-radius: 2px;
@@ -306,11 +308,10 @@ iframe {
   visibility: hidden;
 }
 
-.alert-validate::after {
+.alert-validate:after {
   color: #c80000;
-  content: "\f12a";
+  content: '\f12a';
   display: block;
-  font-family: FontAwesome;
   font-size: 16px;
   position: absolute;
   right: 5px;
@@ -324,7 +325,7 @@ iframe {
 }
 
 @media (max-width: 992px) {
-  .alert-validate::before {
+  .alert-validate:before {
     opacity: 1;
     visibility: visible;
   }
