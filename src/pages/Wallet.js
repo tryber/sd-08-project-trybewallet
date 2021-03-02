@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fetchApiThunk } from '../actionCreator/actionApi.js';
-import { userWallet } from '../actions/index';
+import { fetchApiThunk, userWallet } from '../actions/index';
 
 class Wallet extends React.Component {
   constructor(props) {

@@ -1,5 +1,4 @@
-import { REQUEST_API, REQUEST_API_SUCESS } from '../actionCreator/actionApi.js';
-import { USER_WALLET } from '../actions/index';
+import { REQUEST_API, REQUEST_API_SUCESS, USER_WALLET } from '../actions/index';
 
 const INITIAL_STATE = {
   currencies: [],
