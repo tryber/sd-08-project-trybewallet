@@ -6,8 +6,8 @@
   border: 5px groove gray;
   border-radius: 20px;
   margin: 50px auto;
-  width: fit-content;
   padding: 40px;
+  width: fit-content;
 }
 
 .login-form {
@@ -20,10 +20,10 @@
 }
 
 header {
-  display: flex;
   background-color: floralwhite;
-  justify-content: space-between;
+  display: flex;
   height: 60px;
+  justify-content: space-between;
   margin: 0 20px;
 }
 
@@ -47,7 +47,7 @@ header span {
 }
 
 .header-total-value {
-  font-weight: bold;
+  font-weight: 900;
 }
 
 .expense-form {
