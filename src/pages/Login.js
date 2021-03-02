@@ -1,6 +1,8 @@
 import React from 'react';
 import FormLogin from '../components/LoginForm';
 
+import './Login.css';
+
 class Login extends React.Component {
   constructor() {
     super();
@@ -33,7 +35,10 @@ class Login extends React.Component {
   render() {
     const { email, password, disabledBtn } = this.state;
     return (
-      <main>
+      <main className="content-login">
+        <div className="content-title-login">
+          <h1 className="title-login">Login</h1>
+        </div>
         <FormLogin
           { ...{ email, password, disabledBtn } }
           handleInputChange={ this.handleInputChange }

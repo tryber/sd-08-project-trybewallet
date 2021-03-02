@@ -1,13 +1,50 @@
 body {
   margin: 0;
+  background-color: #617A88;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 100%;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.input-text, .input-email, .input-password, .input-select {
+  border: 1px solid rgb(192, 192, 192);
+  border-radius: 4px;
+  font-size: 25px;
+  height: 40px;
+  margin: 2px;
+  padding: 2px;
+  width: 300px;
+}
+
+.input-text:focus, .input-email:focus, .input-password:focus, .input-select {
+  outline: none;
+}
+
+.input-select {
+  font-size: 30px;
+  height: 48px;
+  width: 300px;
+}
+
+button {
+  border: 1px solid rgba(141, 141, 141, 0.904);
+  border: 1px solid gray;
+  border-radius: 4px;
+  height: 40px;
+  font-size: 1.2em;
+  margin: 4px;
+  width: 120px;
+}
+
+button:hover {
+  cursor: pointer;
+}
+

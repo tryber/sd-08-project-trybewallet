@@ -4,11 +4,15 @@ import { string, func, bool } from 'prop-types';
 import { Link } from 'react-router-dom';
 import { loginAction } from '../../actions';
 
+import './LoginForm.css';
+
 class FormLogin extends React.Component {
   renderInputEmail(email, handleInputChange) {
     return (
-      <div>
+      <div className="content-login-email">
         <input
+          className="input-email"
+          placeholder="E-mail"
           value={ email }
           onChange={ handleInputChange }
           name="email"
@@ -22,8 +26,10 @@ class FormLogin extends React.Component {
 
   renderInputPassword(password, handleInputChange) {
     return (
-      <div>
+      <div className="content-login-password">
         <input
+          className="input-password"
+          placeholder="Senha"
           onChange={ handleInputChange }
           value={ password }
           name="password"
@@ -39,9 +45,10 @@ class FormLogin extends React.Component {
     const user = { email };
     const { saveEmail: getEmail } = this.props;
     return (
-      <div>
+      <div className="content-login-button">
         <Link to="/carteira">
           <button
+            className={ !disabledBtn ? 'login-button-btn' : '' }
             disabled={ disabledBtn }
             onClick={ () => getEmail(user) }
             type="button"
@@ -61,7 +68,7 @@ class FormLogin extends React.Component {
       handleInputChange,
     } = this.props;
     return (
-      <form onSubmit={ (event) => event.preventDefault() }>
+      <form className="form-login-content" onSubmit={ (event) => event.preventDefault() }>
         {this.renderInputEmail(email, handleInputChange)}
         {this.renderInputPassword(password, handleInputChange)}
         {this.renderButtonEnter(disabledBtn, email)}

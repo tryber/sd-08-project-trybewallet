@@ -1,0 +1,50 @@
+.container-wallet {
+  height: 100%;
+  width: 100%;
+}
+
+.form-register-wallet {
+  align-items: center;
+  background-color: #324454;
+  box-shadow: 1px 1px 3px 3px;
+  display: flex;
+  height: 10vh;
+  justify-content: center;
+  margin: 3vh auto;
+  overflow: auto;
+  width: 99%;
+}
+
+.content-input-expenditure {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  margin: 0 auto;
+  width: 16.6%;
+}
+
+.input-value-expenditure {
+  background-color: inherit;
+  border: 1px solid #324454;
+  border-bottom: 1px solid #161e25;
+  box-sizing: border-box;
+  font-size: 1.4em;
+  height: 50%;
+  letter-spacing: 2px;
+  margin: 0 auto;
+  padding: 4px;
+  width: 90%;
+}
+
+.btn-add-expenditure {
+  background-color: rgb(0, 255, 200);
+  box-sizing: border-box;
+  color: black;
+  font-size: 1.2em;
+  height: 6vh;
+  width: 150px;
+}
+
+.btn-add-expenditure:focus {
+  outline: none;
+}
