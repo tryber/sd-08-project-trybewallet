@@ -1,24 +1,55 @@
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
-const InitialState = {
+import * as ActionTypes from '../actions/index';
+console.log(ActionTypes);
+const INITIAL_STATE = {
   currencies: [],
   expenses: [],
+  editmode: false,
+  editid: null,
 };
-// moedas da carteira
-export default function inwalletReducer(state = InitialState, action) {
-  switch (action.type) {
-  case 'MOEDA':
+
+export default function inwalletReducer(state = INITIAL_STATE, action) {
+  const { type, payload } = action;
+
+  switch (type) {
+  case ActionTypes.addCurrency:
+
     return {
       ...state,
-      wallet: {
-        currencies: [action.currencies],
-      },
+      currencies: [...payload],
     };
-  case 'MONEI_OUT':
+  case ActionTypes.addExpense:
+
     return {
       ...state,
-      wallet: {
-        expenses: [action.expenses],
-      },
+      expenses: [...state.expenses, { ...payload }],
+    };
+  case ActionTypes.delExpense:
+
+    return {
+      ...state,
+      expenses: [...state.expenses.filter((i) => i.id !== payload)],
+    };
+  case ActionTypes.editExpense:
+
+    return {
+      ...state,
+      expenses: [...state.expenses.filter((i) => i.id !== payload.id), payload]
+        .sort((a, b) => a.id - b.id),
+    };
+  case ActionTypes.enterEditMode:
+
+    return {
+      ...state,
+      editmode: true,
+      editid: action.id,
+    };
+  case ActionTypes.exitEditMode:
+
+    return {
+      ...state,
+      editmode: false,
+      editid: null,
     };
 
   default:

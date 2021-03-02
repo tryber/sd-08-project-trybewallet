@@ -30,26 +30,25 @@ export function addExpense(payload) {
 }
 export function delExpense(id) {
   return {
-    type: DELEXP,
+    type: 'WALLET_DELEXP',
     payload: id,
+  };
+}
+export function editExpense(payload) {
+  return {
+    type: 'WALLET_EDITEXP',
+    payload,
   };
 }
 
 export function enterEditMode(id) {
   return {
-    type: ENTER_EDIT,
+    type: 'WALLET_ENTER_EDIT_MODE',
     id,
   };
 }
 export function exitEditMode() {
   return {
-    type: EXIT_EDIT,
-  };
-}
-
-export function editExpense(payload) {
-  return {
-    type: EDITEXP,
-    payload,
+    type: 'WALLET_EXIT_EDIT_MODE',
   };
 }
