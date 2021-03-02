@@ -46,7 +46,8 @@ class AddGastos extends Component {
 
   async getCodesFromAPI() {
     const { despesas } = this.state;
-    const arr1 = Object.values(Object.values(await this.getAPI()));
+    const awaait = await this.getAPI();
+    const arr1 = Object.values(Object.values(awaait));
     const arr = [];
     for (let i = 0; i < arr1.length; i += 1) {
       arr.push(Object.values(arr1[i]));
@@ -69,8 +70,8 @@ class AddGastos extends Component {
       currency: 'USD',
       method: 'Dinheiro',
       tag: 'Alimentação',
-      exchangeRates: await this.getAPI(),
-    } }, this.changevalor);
+      exchangeRates: awaait,
+    } });
   }
 
   tipoDeMoeda() {
