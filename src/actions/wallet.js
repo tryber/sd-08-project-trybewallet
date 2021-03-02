@@ -17,14 +17,16 @@ const getCurrencie = (payload) => ({
   payload,
 });
 
-export default function fetchCurrencie() {
-  return async (dispatch) => {
+export function fetchCurrencie() {
+  return (dispatch) => {
     dispatch(requestCurrencie());
-    const response = await fetch('https://economia.awesomeapi.com.br/json/all');
-    const currencie = await response.json();
-    delete currencie.USDT;
-    const currencie1 = (currencie);
-    return dispatch(getCurrencie(currencie1));
+    return fetch('https://economia.awesomeapi.com.br/json/all')
+      .then((response) => response.json())
+      .then((currencie) => {
+        delete currencie.USDT;
+        return currencie;
+      })
+      .then((currencie) => dispatch(getCurrencie(currencie)));
   };
 }
 
@@ -53,3 +55,5 @@ export const edit = (payload) => ({
 export const finishEdit = () => ({
   type: FINISH_EDIT,
 });
+
+export default fetchCurrencie;
