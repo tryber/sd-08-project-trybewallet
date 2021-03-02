@@ -23,7 +23,7 @@ class Table extends React.Component {
         <th>Câmbio utilizado</th>
         <th>Valor convertido</th>
         <th>Moeda de conversão</th>
-        <th>Editar/Excluir</th>
+        <th>Excluir/Editar</th>
       </tr>
     );
   }

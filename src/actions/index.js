@@ -28,7 +28,7 @@ export const requestWalletAPISuccess = (data) => ({
   type: REQUEST_API_SUCCESS,
   payload: {
     data,
-    isFetching: true,
+    isFetching: false,
   },
 });
 

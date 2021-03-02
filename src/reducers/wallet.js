@@ -49,9 +49,10 @@ const wallet = (
   case SAVE_EDITED_EXPENSE:
     return {
       ...state,
+      editingExpense: null,
       isEditing: payload.isEditing,
       selectEdited: payload.selectEdited,
-      expenses: state.expenses.map((expense) => {
+      expenses: [...state.expenses].map((expense) => {
         if (expense.id === payload.expenses.id) {
           return { ...expense, ...payload.expenses };
         }

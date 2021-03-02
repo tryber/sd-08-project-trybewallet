@@ -1,11 +1,5 @@
 const initialState = {
-  user: {
-    email: '',
-  },
-  wallet: {
-    currencies: [],
-    expenses: [],
-  },
+  email: '',
 };
 
 function userLogin(state = initialState, { type, payload }) {
