@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../actions';
 
+import CurrencySel from './CurrencySel';
+import MethodSel from './MethodSel';
+import tagSel from './Tagsel';
+
 const INITIAL_VALUE = {
   value: '0',
   description: '',
@@ -10,19 +14,32 @@ const INITIAL_VALUE = {
   method: 'Dinheiro',
 };
 
-export default function formAddDespesa() {
+const getId = (arr) => {
+  if (arr.length > 0) {
+    return arr[arr.length - 1].id + 1;
+  }
+  return 0;
+};
+
+function formAddDespesa() {
+// &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&variaveis para uso geral&&&&&&&&&&&&&&&&&&&&&&
   const [data, setData] = useState(INITIAL_VALUE);
   const expenses = useSelector((state) => state.wallet.expenses);
   const dispatch = useDispatch();
 
-  // lembrar de dar o nome igual a chave
-  const handleChange = ({ target }) => {
+  // ############################## funções para uso geral #######################
+  function handleChange({ target }) {
     const { name, value } = target;
-    setData({
-      ...data,
-      [name]: value,
-    });
+    setData({ ...data, [name]: value });
+  }
+  const handleAddExpense = async () => {
+    const exchangeRates = await fetch('https://economia.awesomeapi.com.br/json/all')
+      .then((response) => response.json());
+    dispatch(actions.addExpense({ id: getId(expenses), ...data, exchangeRates }));
+    setData(INITIAL_VALUE);
   };
+  const { tag, currency, value, description, method } = data;
+  // #####################formulário de despesas##################################
   return (
     <form>
       <label htmlFor="value">
@@ -35,19 +52,22 @@ export default function formAddDespesa() {
           onChange={ handleChange }
         />
       </label>
-      <input
-        type="text"
-        value="descrição da despesa"
-        data-testid="description-input"
-        onChange={ handlechange }
-      />
-      <input
-        type="text"
-        value="valor da despesa"
-        data-testid="value-input"
-        onChange={ handlechange }
-      />
+      <CurrencySel value={ currency } onChange={ handleChange } />
+      <MethodSel value={ method } onChange={ handleChange } />
+      <tagSel value={ tag } onChange={ handleChange } />
+      <label htmlFor="description">
+        Descrição:
+        <input
+          type="text"
+          value={ description }
+          name="description"
+          data-testid="description-input"
+          onChange={ handleChange }
+        />
+      </label>
       <button type="button" onClick={ handleAddExpense }>Adicionar despesa</button>
     </form>
   );
 }
+
+export default formAddDespesa;

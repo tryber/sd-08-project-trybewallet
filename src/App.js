@@ -7,9 +7,9 @@ function App() {
   return (
     <main>
       <Switch>
-        <Route path="/Login" component={ Login } />
-        <Route path="/carteira" component={ Wallet } />
-        <Route path="/" component={ Login } />
+        <Route strict path="/Login" component={ Login } />
+        <Route strict path="/carteira" component={ Wallet } />
+        <Route strict path="/" component={ Login } />
       </Switch>
     </main>
   );
