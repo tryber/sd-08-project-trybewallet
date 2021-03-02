@@ -1,16 +1,15 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto, Arial, Helvetica, sans-serif:wght@400;500;700;900&display=swap");
 
 a {
   color: #666;
-  font-family: Roboto;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
   font-size: 14px;
   line-height: 1.7;
-  margin: 0px;
   transition: all 0.4s;
 }
 
 a:focus {
-  outline: none !important;
+  outline: none ! important;
 }
 
 a:hover {
@@ -18,19 +17,10 @@ a:hover {
   text-decoration: none;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin: 0px;
-}
 
 ul,
 li {
   list-style-type: none;
-  margin: 0px;
 }
 
 input {
@@ -45,7 +35,7 @@ textarea {
 
 textarea:focus,
 input:focus {
-  border-color: transparent !important;
+  border-color: transparent ! important;
 }
 input::placeholder {
   color: white;
@@ -53,13 +43,12 @@ input::placeholder {
 
 label {
   display: block;
-  margin: 0;
 }
 
 button {
   background: transparent;
   border: none;
-  outline: none !important;
+  outline: none ! important;
 }
 
 button:hover {
@@ -67,12 +56,12 @@ button:hover {
 }
 
 iframe {
-  border: none !important;
+  border: none ! important;
 }
 
 .txt1 {
   color: #e5e5e5;
-  font-family: Roboto;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
   font-size: 13px;
   line-height: 1.5;
 }
@@ -132,7 +121,7 @@ iframe {
   background-repeat: no-repeat;
   background-size: 150px 150px;
   border-radius: 50%;
-  color: #333333;
+  color: #333;
   display: flex;
   font-size: 60px;
   height: 150px;
@@ -144,7 +133,7 @@ iframe {
 .login-form-title {
   color: white;
   display: block;
-  font-family: Roboto;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
   font-size: 30px;
   font-weight: 500;
   line-height: 1.2;
@@ -163,7 +152,7 @@ iframe {
   background: transparent;
   color: white;
   display: block;
-  font-family: Roboto;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
   font-size: 18px;
   height: 45px;
   line-height: 1.2;
@@ -252,9 +241,9 @@ iframe {
   background: #9152f8;
   background: linear-gradient(to bottom, #7579ff, #b224ef);
   border-radius: 25px;
-  color: #555555;
+  color: #555;
   display: flex;
-  font-family: Roboto;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
   font-size: 18px;
   font-weight: 500;
   height: 50px;
@@ -305,7 +294,7 @@ iframe {
   border: 1px solid #c80000;
   border-radius: 2px;
   color: #c80000;
-  font-family: Roboto;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
   font-size: 13px;
   line-height: 1.4;
   max-width: 70%;
