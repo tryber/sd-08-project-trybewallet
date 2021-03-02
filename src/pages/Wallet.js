@@ -101,7 +101,7 @@ class Wallet extends React.Component {
             <option key={ element } data-testid={ element } value={ element }>
               { element }
             </option>
-          ))}
+          )) }
         </select>
       </label>
     );

@@ -4,10 +4,14 @@ import PropTypes from 'prop-types';
 import { deleteRegister as deleteRegisterAction } from '../actions/index';
 
 class ExpensesTable extends React.Component {
-  render() {
-    const { allExpenses } = this.props;
+  constructor() {
+    super();
+    this.headerTable = this.headerTable.bind(this);
+  }
+
+  headerTable() {
     return (
-      <table>
+      <div>
         <tr>
           <th>Descrição</th>
           <th>Tag</th>
@@ -19,6 +23,15 @@ class ExpensesTable extends React.Component {
           <th>Moeda de conversão</th>
           <th>Editar/Excluir</th>
         </tr>
+      </div>
+    );
+  }
+
+  render() {
+    const { allExpenses } = this.props;
+    return (
+      <table>
+        {this.headerTable()}
         {allExpenses.map((element) => {
           const {
             id,
@@ -30,8 +43,6 @@ class ExpensesTable extends React.Component {
             exchangeRates,
           } = element;
           const { deleteRegister } = this.props;
-          // const defaultExchange = exchangeRates[currency].codein;
-          console.log(element);
           return (
             <tr key={ id }>
               <td>{description}</td>
@@ -46,7 +57,13 @@ class ExpensesTable extends React.Component {
               <td>Real</td>
               <td>
                 <button type="button">Editar</button>
-                <button data-testid="delete-btn" type="button" onClick={() => deleteRegister(element)}>Excluir</button>
+                <button
+                  data-testid="delete-btn"
+                  type="button"
+                  onClick={ () => deleteRegister(element) }
+                >
+                  Excluir
+                </button>
               </td>
             </tr>
           );
@@ -58,6 +75,7 @@ class ExpensesTable extends React.Component {
 
 ExpensesTable.propTypes = {
   allExpenses: PropTypes.arrayOf(PropTypes.object).isRequired,
+  deleteRegister: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

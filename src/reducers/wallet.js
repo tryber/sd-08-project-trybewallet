@@ -1,4 +1,8 @@
-import { GET_CURRENCIES, REQUEST_CURRENCIES, FAILED_REQUEST } from '../actions/index';
+import {
+  GET_CURRENCIES,
+  REQUEST_CURRENCIES,
+  FAILED_REQUEST,
+} from '../actions/index';
 
 const initialState = {
   currencies: [],
@@ -18,7 +22,12 @@ function wallet(state = initialState, action) {
   case 'ADD_REGISTER':
     return { ...state, expenses: [...state.expenses, action.data] };
   case 'DELETE_REGISTER':
-    return {...state, expenses: [...state.expenses.filter((element) => element !== action.value)]};
+    return {
+      ...state,
+      expenses: [
+        ...state.expenses.filter((element) => element !== action.value),
+      ],
+    };
   default:
     return state;
   }
