@@ -7,8 +7,6 @@ import './Header.css';
 class Header extends React.Component {
   getTotal() {
     const { expenses } = this.props;
-    console.log(expenses);
-    // if (!expenses.length) return 0;
     return expenses.map(({ currency, value, exchangeRates }) => {
       const currencyData = exchangeRates[currency];
       const total = Number(value) * Number(currencyData.ask);
