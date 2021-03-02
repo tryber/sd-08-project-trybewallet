@@ -1,0 +1,26 @@
+table {
+  background-color: mediumseagreen;
+}
+
+tr {
+  height: 50px;
+}
+
+th {
+  border: 1px solid black;
+  padding: 20px;
+  width: 100%;
+}
+
+td {
+  border: 1px solid black;
+  color: black;
+  text-align: center;
+}
+
+.button-td {
+  background-color: #555;
+  color: white;
+  cursor: pointer;
+  margin: 5px;
+}

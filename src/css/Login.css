@@ -1,0 +1,21 @@
+body {
+  background-color: #555;
+}
+
+.login {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.button-login {
+  color: black;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.input-login {
+  padding: 10px;
+}
+

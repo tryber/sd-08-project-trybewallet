@@ -1,0 +1,9 @@
+header {
+  background-color: mediumseagreen;
+  display: flex;
+  padding: 30px;
+}
+
+span {
+  margin-right: 40px;
+}

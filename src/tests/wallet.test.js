@@ -16,7 +16,7 @@ const mockedExchange = jest.spyOn(global, 'fetch').mockImplementation(() => apiR
 
 afterEach(() => jest.clearAllMocks());
 
-describe('2 - Crie uma página para sua carteira com as seguintes características:', () => {
+describe.only('2 - Crie uma página para sua carteira com as seguintes características:', () => {
     test('A rota para esta página deve ser \'/carteira\'', () => {
       const { history } = renderWithRouterAndStore(<App />);
       history.push('/carteira');
@@ -30,7 +30,7 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
     });
   });
   
-  describe('3 - Crie um header para a página de carteira contendo as seguintes características:', () => {
+  describe.only('3 - Crie um header para a página de carteira contendo as seguintes características:', () => {
     const initial = initialStateHeader;
   
     test('Um elemento que exiba o email do usuário que fez login.', () => {
@@ -58,7 +58,7 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
     });
   });
   
-  describe('4 - Desenvolva um formulário para adicionar uma despesa contendo as seguintes características:', () => {
+  describe.only('4 - Desenvolva um formulário para adicionar uma despesa contendo as seguintes características:', () => {
     test('Um campo para adicionar o valor da despesa', async () => {
       renderWithRouterAndStore(<Wallet />, '/carteira');
       const valueInput = await screen.findByTestId('value-input');
@@ -217,7 +217,7 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
     });
   });
   
-  describe('5 - Desenvolva uma tabela com os gastos contendo as seguintes características:', () => {
+  describe.only('5 - Desenvolva uma tabela com os gastos contendo as seguintes características:', () => {
     const initial = initialStateWithExpenses;
   
     test('A tabela deve possuir um cabeçalho com os campos Descrição, Tag, Método de pagamento, Valor, Moeda, Câmbio utilizado, Valor convertido e Moeda de conversão', () => {

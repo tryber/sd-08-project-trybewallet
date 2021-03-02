@@ -1,0 +1,27 @@
+.form { 
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+label {
+  font-weight: 700;
+  margin-left: 5px;
+}
+
+input {
+  margin: 0 5px;
+  padding: 10px;
+}
+
+select {
+  margin: 0 5px;
+}
+
+.button-form {
+  background-color: mediumseagreen;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+}
