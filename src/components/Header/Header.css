@@ -1,0 +1,18 @@
+.header-content-wallet {
+  align-items: center;
+  background-color: #2e0002;
+  box-shadow: 0 0 10px 0;
+  display: flex;
+  height: 10vh;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+.email-content-wallet , .total-field-content-wallet {
+  align-items: center;
+  box-sizing: border-box;
+  color: #617a88;
+  display: flex;
+  height: 100%;
+  width: 15%;
+}
