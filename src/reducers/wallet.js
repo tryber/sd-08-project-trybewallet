@@ -15,7 +15,7 @@ export default function inwalletReducer(state = INITIAL_STATE, action) {
   case ActionTypes.addCurrency:
     return {
       ...state,
-      currencies: [...payload],
+      wallet: { currencies: [state.currencies.concat(payload)] },
     };
   case ActionTypes.addExpense:
     return {

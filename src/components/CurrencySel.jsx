@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
-// import * as fetch from 'node-fetch';
+import { useDispatch, useSelector, connect } from 'react-redux';
+
 import * as actions from '../actions';
 
-export async function getCurrencyList() {
+async function getCurrencyList() {
   return fetch('https://economia.awesomeapi.com.br/json/all')
     .then((res) => res.json())
     .then((data) => Object.keys(data).filter((i) => i !== 'USDT'));
@@ -13,13 +13,14 @@ export async function getCurrencyList() {
 function CurrencySelect({ onChange, ...rest }) {
   const currList = useSelector((state) => state.wallet.currencies);
   const dispatch = useDispatch();
-  const fetchCurrList = async () => {
-    if (currList.length === 0) {
-      const list = await getCurrencyList();
-      dispatch(actions.addCurrency(list));
-    }
-  };
-  fetchCurrList();
+  // const fetchCurrList = async () => {
+  //  if (currList.length === 0) {
+  // const list = await getCurrencyList();
+  // dispatch(actions.addCurrency(list));
+  //  }
+  // };
+
+  // fetchCurrList();
   return (
     <select
       name="currency"
@@ -28,7 +29,7 @@ function CurrencySelect({ onChange, ...rest }) {
       onChange={ onChange }
       { ...rest }
     >
-      {currList.map((curr) => (
+      {currList && currList.map((curr) => (
         <option
           key={ curr }
           data-testid={ curr }
@@ -49,4 +50,7 @@ CurrencySelect.propTypes = {
   onChange: PropTypes.func,
 };
 
-export default CurrencySelect;
+const mapDispatchToProps = (dispatch) => ({
+  addCurrency: dispatch(actions.addCurrency),
+});
+export default connect(null, mapDispatchToProps)(CurrencySelect);

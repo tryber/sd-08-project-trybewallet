@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector, connect } from 'react-redux';
 import * as actions from '../actions';
 import './frm.css';
 
@@ -23,7 +23,6 @@ const getId = (arr) => {
 };
 
 function FormAddDespesa() {
-// &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&variaveis para uso geral&&&&&&&&&&&&&&&&&&&&&&
   const [data, setData] = useState(INITIAL_VALUE);
   const expenses = useSelector((state) => state.wallet.expenses);
   const dispatch = useDispatch();
@@ -72,5 +71,5 @@ function FormAddDespesa() {
     </form>
   );
 }
-
-export default FormAddDespesa;
+const mapStateToProps = (state) => ({ ...state });
+export default connect(mapStateToProps, null)(FormAddDespesa);
