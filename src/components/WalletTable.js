@@ -5,7 +5,6 @@ class WalletTable extends React.Component {
     return (
       <div>
         <h1>Tabela</h1>
-
       </div>
     );
   }

@@ -1,6 +1,5 @@
-import { render } from '@testing-library/react/dist/pure';
-import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 class Header extends Component {

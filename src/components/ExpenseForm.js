@@ -65,8 +65,8 @@ class ExpenseForm extends React.Component {
           onChance={ this.handleChange }
         >
           {/* { getCurrencies.map((el) => (
-            <option key={ el } value={ el }>{ el }</option> */}
-          ))}
+            <option key={ el } value={ el }>{ el }</option>
+          ))} */}
         </select>
       </label>
     );
