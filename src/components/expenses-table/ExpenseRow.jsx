@@ -76,6 +76,8 @@ ExpenseRow.propTypes = {
     currency: PropTypes.string,
     exchangeRates: PropTypes.shape({}),
   }).isRequired,
+  removeExp: PropTypes.func.isRequired,
+  removeFromTotal: PropTypes.func.isRequired,
 };
 
 export default connect(null, mapDispatchToProps)(ExpenseRow);

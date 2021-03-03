@@ -1,5 +1,11 @@
 // Coloque aqui suas actions
-import { ADD_EXPENSE, LOGIN, REMOVE_EXPENSE, SAVE_CURRENCIES, SUBTRACT_FROM_TOTAL, SUM_TO_EXPENSES } from '../store/consts';
+import {
+  ADD_EXPENSE,
+  LOGIN, REMOVE_EXPENSE,
+  SAVE_CURRENCIES,
+  SUBTRACT_FROM_TOTAL,
+  SUM_TO_EXPENSES,
+} from '../store/consts';
 
 export const loginAction = (email) => ({
   type: LOGIN,

@@ -1,4 +1,10 @@
-import { ADD_EXPENSE, REMOVE_EXPENSE, SAVE_CURRENCIES, SUBTRACT_FROM_TOTAL, SUM_TO_EXPENSES } from '../store/consts';
+import {
+  ADD_EXPENSE,
+  REMOVE_EXPENSE,
+  SAVE_CURRENCIES,
+  SUBTRACT_FROM_TOTAL,
+  SUM_TO_EXPENSES,
+} from '../store/consts';
 
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
 const INITIAL_STATE = {
