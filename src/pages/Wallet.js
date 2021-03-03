@@ -47,7 +47,7 @@ class Wallet extends React.Component {
 
   renderHeader() {
     const { exchange } = this.state;
-    const { email, total } = this.props;
+    const { email, total = 0 } = this.props;
     return (
       <header className="header">
         <h3 className="title">TrybeWallet</h3>
@@ -235,8 +235,12 @@ Wallet.propTypes = {
   email: PropTypes.string.isRequired,
   fetchCurrency: PropTypes.func.isRequired,
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
-  total: PropTypes.number.isRequired,
+  total: PropTypes.number,
   fetching: PropTypes.func.isRequired,
+};
+
+Wallet.defaultProps = {
+  total: 0,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Wallet);
