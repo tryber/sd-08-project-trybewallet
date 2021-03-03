@@ -1,12 +1,15 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import loginAction from '../actions';
 
 class Login extends React.Component {
   constructor() {
     super();
     this.state = {
       email: '',
-      disabled: false,
+      disabled: true,
       password: '',
       redirect: false,
     };
@@ -20,8 +23,9 @@ class Login extends React.Component {
     const { email, password } = this.state;
     const PASSWORD_LENGTH = 6;
     const regexEmail = /^[\w]+@([\w]+\.)+[\w]{2,4}$/gi;
-    const disabled = regexEmail.test(email) && password.length < PASSWORD_LENGTH;
-    console.log(disabled);
+    const emailIsValid = regexEmail.test(email);
+    const passwordIsValid = password.length === PASSWORD_LENGTH;
+    const disabled = !(emailIsValid && passwordIsValid);
     this.setState({
       disabled,
     });
@@ -34,6 +38,9 @@ class Login extends React.Component {
   }
 
   handleClick() {
+    const { email } = this.state;
+    const { signIn } = this.props;
+    signIn(email);
     this.setState({
       redirect: true,
     });
@@ -74,4 +81,12 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+const mapDispatchToProps = (dispatch) => ({
+  signIn: (email) => dispatch(loginAction(email)),
+});
+
+export default connect(null, mapDispatchToProps)(Login);
+
+Login.propTypes = {
+  signIn: PropTypes.func.isRequired,
+};
