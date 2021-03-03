@@ -41,7 +41,7 @@ class Login extends React.Component {
 
   render() {
     const { saveEmail } = this.props;
-    const { email, button } = this.state;
+    const { email, password, button } = this.state;
     return (
       <div>
         <form>
