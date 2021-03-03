@@ -4,9 +4,12 @@ import {
   FETCH_CURRENCIES,
   FETCH_CURRENCIES_DATA,
   ADD_EXPENSES,
+  DELETE_EXPENSES,
 } from '../actions';
 
 export default function wallet(state = INITIAL_STATE, action) {
+  const { expenses, total } = state;
+
   switch (action.type) {
   case FETCH_CURRENCIES:
     return {
@@ -18,21 +21,31 @@ export default function wallet(state = INITIAL_STATE, action) {
       ...state,
       currenciesData: action.currenciesData,
     };
+  // Auxílio do especialista Ícaro Harry (plantão dia 01/03/2021)
   case ADD_EXPENSES:
     return {
       ...state,
       expenses: [
-        ...state.expenses,
+        ...expenses,
         {
-          id: state.expenses.length,
+          id: expenses.length,
           ...action.expense,
           exchangeRates: state.currenciesData,
         },
       ],
       total:
-        state.total
+        total
         + Number(action.expense.value)
         * Number(state.currenciesData[action.expense.currency].ask),
+    };
+  // --------------------------------------------------------------
+  case DELETE_EXPENSES:
+    return {
+      ...state,
+      expenses: [
+        ...expenses
+          .filter(({ id }) => id !== action.expense),
+      ],
     };
   default:
     return state;

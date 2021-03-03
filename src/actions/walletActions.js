@@ -5,6 +5,7 @@ import {
   FETCH_CURRENCIES,
   FETCH_CURRENCIES_DATA,
   ADD_EXPENSES,
+  DELETE_EXPENSES,
 } from './index';
 
 export function actionUserEmail(email) {
@@ -48,6 +49,13 @@ export function actionFetchCurrenciesData() {
 export function actionAddExpenses(expense) {
   return {
     type: ADD_EXPENSES,
+    expense,
+  };
+}
+
+export function actionDeleteExpenses(expense) {
+  return {
+    type: DELETE_EXPENSES,
     expense,
   };
 }

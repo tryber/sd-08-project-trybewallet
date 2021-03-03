@@ -37,10 +37,8 @@ class expenseForm extends React.Component {
     fetchCurrenciesData();
   }
 
-  handleChange(event) {
-    this.setState({
-      [event.target.name]: event.target.value,
-    });
+  handleChange({ target: { name, value } }) {
+    this.setState({ [name]: value });
   }
 
   async handleSubmit(event) {
@@ -70,13 +68,14 @@ class expenseForm extends React.Component {
           <Method method={ method } onChange={ this.handleChange } />
           <Tag tag={ tag } onChange={ this.handleChange } />
           <Description description={ description } onChange={ this.handleChange } />
-          <button
-            className="div-form"
-            type="button"
-            onClick={ this.handleSubmit }
-          >
-            Adicionar despesa
-          </button>
+          <div>
+            <button
+              type="button"
+              onClick={ this.handleSubmit }
+            >
+              Adicionar despesa
+            </button>
+          </div>
         </form>
         <ExpenseTable />
       </div>

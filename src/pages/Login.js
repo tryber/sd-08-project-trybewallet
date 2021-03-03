@@ -35,8 +35,11 @@ class Login extends React.Component {
   }
 
   handleChangeEmail(event) {
-    if (/^[A-Za-z0-9.-]+@[A-Za-z0-9]+(\.[A-Za-z]{3}|\.[A-Za-z]{3}\.[A-Za-z]{2})$/i
-      .test(event.target.value)) {
+    if (
+      /^[A-Za-z0-9.-]+@[A-Za-z0-9]+(\.[A-Za-z]{3}|\.[A-Za-z]{3}\.[A-Za-z]{2})$/i.test(
+        event.target.value,
+      )
+    ) {
       this.setState({
         [event.target.name]: event.target.value,
       });
@@ -70,9 +73,12 @@ class Login extends React.Component {
     const { email, btnDisabled } = this.state;
 
     return (
-      <form className="form-login" onSubmit={ this.handleSubmit }>
-        <div className="login-pass">Login</div>
-        <div className="login-pass">
+      <div className="form-container">
+        <form
+          className="form-login"
+          autoComplete="off"
+          onSubmit={ this.handleSubmit }
+        >
           <input
             type="text"
             name="email"
@@ -87,10 +93,9 @@ class Login extends React.Component {
             placeholder="senha"
             data-testid="password-input"
           />
-        </div>
-        <div className="login-pass">
           <Link to="/carteira">
             <button
+              className="login-btn"
               type="button"
               disabled={ btnDisabled }
               onClick={ () => writeEmail(email) }
@@ -98,8 +103,8 @@ class Login extends React.Component {
               Entrar
             </button>
           </Link>
-        </div>
-      </form>
+        </form>
+      </div>
     );
   }
 }

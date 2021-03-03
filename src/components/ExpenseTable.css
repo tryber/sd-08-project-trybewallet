@@ -1,15 +1,39 @@
+body {
+  background-color: rgb(180, 176, 176);
+}
 .expense-table {
   display: block;
   justify-content: center;
+  margin-left: 60px;
+  overflow-x: auto;
   padding: 15px;
 }
 
+.expense-table tbody tr:nth-child( odd ) {
+  background-color: ghostwhite;
+}
+
 .title {
-  background-color: gray;
+  background-color: rgb(56, 55, 55);
   color: whitesmoke;
   padding: 5px 10px;
 }
 
 .data {
   padding: 5px 10px;
+}
+
+.edit-expense {
+  background-color: rgb(250, 242, 127);
+  border: none;
+  border-radius: 4px;
+  color: black;
+  margin-right: 5px;
+}
+
+.delete-expense {
+  background-color: rgb(243, 118, 118);
+  border: none;
+  border-radius: 4px;
+  color: black;
 }

@@ -15,14 +15,14 @@ class Currency extends React.Component {
           id="currency"
           onChange={ onChange }
         >
-          {currencies.map((curr) => (
+          {currencies.map((currency) => (
             <option
-              data-testid={ curr }
-              key={ curr }
-              id={ curr }
-              value={ curr }
+              data-testid={ currency }
+              key={ currency }
+              id={ currency }
+              value={ currency }
             >
-              {curr}
+              {currency}
             </option>
           ))}
         </select>
