@@ -28,7 +28,7 @@ function CurrencySelect({ onChange, ...rest }) {
       onChange={ onChange }
       { ...rest }
     >
-      {currList && currList.map((curr) => (
+      {currList.map((curr) => (
         <option
           key={ curr }
           data-testid={ curr }
