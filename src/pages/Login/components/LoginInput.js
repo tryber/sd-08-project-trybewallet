@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { login } from '../actions';
+import { login } from '../../../actions';
 
 class Login extends React.Component {
   constructor(props) {
@@ -63,7 +63,7 @@ class Login extends React.Component {
     history.push('/carteira');
   }
 
-  render() {
+  loginButton() {
     const { loginBtn } = this.state;
     let btn;
     if (loginBtn) {
@@ -88,7 +88,10 @@ class Login extends React.Component {
         </button>
       );
     }
+    return btn;
+  }
 
+  render() {
     return (
       <div className="login-container">
         <h1>l o g i n</h1>
@@ -111,7 +114,7 @@ class Login extends React.Component {
           title="6 or more characters"
           onChange={ this.inputOnChange }
         />
-        {btn}
+        {this.loginButton()}
       </div>
     );
   }

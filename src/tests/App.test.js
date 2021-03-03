@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { fireEvent, screen, waitFor } from '@testing-library/react';
 import { response as mockData, initialStateHeader, initialStateWithExpenses } from './mockData';
 import App from '../App';
-import Wallet from '../pages/Wallet';
+import Wallet from '../pages/Wallet/WalletContainer';
 
 import { renderWithRouterAndStore } from './testConfig'
 

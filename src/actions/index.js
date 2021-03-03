@@ -84,7 +84,7 @@ export function deleteExpense(idExpense, expenses) {
 
 export function editExpense(expense) {
   const editExp = expense;
-  console.log(editExp);
+  // console.log(editExp);
 
   return {
     type: EDIT_EXPENSES,
