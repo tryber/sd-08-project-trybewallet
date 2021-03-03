@@ -1,0 +1,7 @@
+export const LOGIN = 'LOGIN';
+export const LOGOUT = 'LOGOUT';
+export const SAVE_CURRENCIES = 'SAVE_CURRENCIES';
+export const ADD_EXPENSE = 'ADD_EXPENSE';
+export const SUM_TO_EXPENSES = 'SUM_TO_EXPENSES';
+export const REMOVE_EXPENSE = 'REMOVE_EXPENSE';
+export const SUBTRACT_FROM_TOTAL = 'SUBTRACT_FROM_TOTAL';
