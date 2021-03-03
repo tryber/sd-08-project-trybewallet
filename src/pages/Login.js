@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import LoginInput from './components/LoginInput';
+import LoginInput from './Login/components/LoginInput';
 
 const Login = ({ history }) => (
   <LoginInput history={ history } />

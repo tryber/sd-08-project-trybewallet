@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import Login from './pages/Login/LoginContainer';
-import Wallet from './pages/Wallet/WalletContainer';
+import Login from './pages/Login';
+import Wallet from './pages/Wallet';
 import './style.css';
 
 class App extends React.Component {
