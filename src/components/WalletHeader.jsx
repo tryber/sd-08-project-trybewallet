@@ -2,10 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import '../styles/wallet-header.css';
+import sumExpensesTotal from '../services/wallet';
 
 class WalletHeader extends React.Component {
   render() {
-    const { userEmail, walletTotal } = this.props;
+    const { userEmail, expensesInTable } = this.props;
     return (
       <div className="header">
         <div className="header-logo">Trybe Wallet</div>
@@ -19,7 +20,12 @@ class WalletHeader extends React.Component {
             Despesa Total: R$
             {' '}
             <span data-testid="total-field">
-              { walletTotal || '0.00'}
+              {
+                expensesInTable.length === 0
+                  ? '0.00'
+                  : sumExpensesTotal(expensesInTable)
+              }
+
             </span>
           </li>
           <li data-testid="header-currency-field">
@@ -34,14 +40,12 @@ class WalletHeader extends React.Component {
 const mapStateToProps = (state) => ({
   userEmail: state.user.email,
   walletTotal: state.wallet.total,
+  expensesInTable: state.wallet.expenses,
 });
 
 WalletHeader.propTypes = {
   userEmail: PropTypes.string.isRequired,
-  walletTotal: PropTypes.number,
+  walletTotal: PropTypes.number.isRequired,
 };
 
-WalletHeader.defaultProps = {
-  walletTotal: 0,
-};
 export default connect(mapStateToProps)(WalletHeader);

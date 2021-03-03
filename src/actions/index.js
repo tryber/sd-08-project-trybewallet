@@ -1,5 +1,5 @@
 // Coloque aqui suas actions
-import { ADD_EXPENSE, LOGIN, SAVE_CURRENCIES, SUM_TO_EXPENSES } from '../store/consts';
+import { ADD_EXPENSE, LOGIN, REMOVE_EXPENSE, SAVE_CURRENCIES, SUBTRACT_FROM_TOTAL, SUM_TO_EXPENSES } from '../store/consts';
 
 export const loginAction = (email) => ({
   type: LOGIN,
@@ -19,4 +19,14 @@ export const addExpense = (expenseInfos) => ({
 export const sumToExpensesTotal = (valueToSum) => ({
   type: SUM_TO_EXPENSES,
   payload: valueToSum,
+});
+
+export const removeExpense = (expenseId) => ({
+  type: REMOVE_EXPENSE,
+  payload: expenseId,
+});
+
+export const subtractFromTotal = (valueToSubtract) => ({
+  type: SUBTRACT_FROM_TOTAL,
+  payload: valueToSubtract,
 });
