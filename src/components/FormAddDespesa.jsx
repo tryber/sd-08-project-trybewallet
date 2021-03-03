@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../actions';
+import './frm.css';
 
 import CurrencySel from './CurrencySel';
 import MethodSel from './MethodSel';
@@ -41,31 +42,33 @@ function FormAddDespesa() {
   const { tag, currency, value, description, method } = data;
   // #####################formulário de despesas##################################
   return (
-    <form>
-      <label htmlFor="value">
-        Valor:
-        <input
-          type="text"
-          value={ value }
-          name="value"
-          data-testid="value-input"
-          onChange={ handleChange }
-        />
-      </label>
-      <CurrencySel value={ currency } onChange={ handleChange } />
-      <MethodSel value={ method } onChange={ handleChange } />
-      <TagSel value={ tag } onChange={ handleChange } />
-      <label htmlFor="description">
-        Descrição:
-        <input
-          type="text"
-          value={ description }
-          name="description"
-          data-testid="description-input"
-          onChange={ handleChange }
-        />
-      </label>
-      <button type="button" onClick={ handleAddExpense }>Adicionar despesa</button>
+    <form className="frm">
+      <div>
+        <label htmlFor="value">
+          Valor:
+          <input
+            type="text"
+            value={ value }
+            name="value"
+            data-testid="value-input"
+            onChange={ handleChange }
+          />
+        </label>
+        <CurrencySel value={ currency } onChange={ handleChange } />
+        <MethodSel value={ method } onChange={ handleChange } />
+        <TagSel value={ tag } onChange={ handleChange } />
+        <label htmlFor="description">
+          Descrição:
+          <input
+            type="text"
+            value={ description }
+            name="description"
+            data-testid="description-input"
+            onChange={ handleChange }
+          />
+        </label>
+        <button type="button" onClick={ handleAddExpense }>Adicionar despesa</button>
+      </div>
     </form>
   );
 }

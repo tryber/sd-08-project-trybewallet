@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
-export default function TagSel(props) {
+function TagSel(props) {
   const { INITIAL_VALUE } = props;
   const [data, setData] = useState(INITIAL_VALUE);
   const handleChange = ({ target }) => {
@@ -25,3 +26,8 @@ export default function TagSel(props) {
     </select>
   );
 }
+TagSel.defaultProps = { INITIAL_VALUE: null };
+
+TagSel.propTypes = { INITIAL_VALUE: PropTypes.string };
+
+export default TagSel;

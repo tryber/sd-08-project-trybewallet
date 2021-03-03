@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-export default function MethodSel({ onChange, ...rest }) {
+function MethodSel({ onChange, ...rest }) {
   return (
     <select
       name="method"
@@ -15,3 +16,12 @@ export default function MethodSel({ onChange, ...rest }) {
     </select>
   );
 }
+
+MethodSel.defaultProps = {
+  onChange: null,
+};
+
+MethodSel.propTypes = {
+  onChange: PropTypes.func,
+};
+export default MethodSel;
