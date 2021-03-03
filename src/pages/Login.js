@@ -1,9 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import LoginInput from './Login/components/LoginInput';
 
-class Login extends React.Component {
-  render() {
-    return <div>Login</div>;
-  }
-}
+const Login = ({ history }) => (
+  <LoginInput history={ history } />
+);
+
+Login.propTypes = {
+  history: PropTypes.instanceOf(Object).isRequired,
+};
 
 export default Login;
