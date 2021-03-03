@@ -3,6 +3,7 @@ import {
   GET_CURRENCIES,
   GET_CURRENCIES_ADD_EXPENDITURE,
   FLAG,
+  localCurrency,
 } from '../const';
 
 const INITIAL_STATE = {
@@ -22,7 +23,7 @@ function wallet(state = INITIAL_STATE, action) {
   }
   if (action.type === GET_CURRENCIES_ADD_EXPENDITURE) {
     sum = parseFloat((state.total + action.expenses.value
-      * [...Object.values(action.exchange), { code: 'BRL', ask: 1 }]
+      * [...Object.values(action.exchange), localCurrency]
         .find((exg) => exg.code === action.expenses.currency).ask)
       .toFixed(2));
   }

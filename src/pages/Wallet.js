@@ -5,8 +5,9 @@ import {
   fetchCurrency as fetchCurrencyAction,
   fetching as fetchingAction,
 } from '../actions';
+import Table from '../components/Table';
+import { payMethods, expenditures } from '../const';
 import './Wallet.css';
-import { payMethods, expenditures/* , delayFetch */ } from '../const';
 
 class Wallet extends React.Component {
   constructor() {
@@ -209,6 +210,7 @@ class Wallet extends React.Component {
           </button>
           <hr className="title" />
         </main>
+        <Table />
       </>
     );
   }
