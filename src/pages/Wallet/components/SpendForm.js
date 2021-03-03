@@ -169,7 +169,7 @@ SpendForm.propTypes = {
     }).isRequired,
     wallet: PropTypes.shape({
       expenses: PropTypes.instanceOf(Array).isRequired,
-      isEditing: PropTypes.bool.isRequired,
+      isEditing: PropTypes.bool,
       editExpense: PropTypes.shape({
         id: PropTypes.number.isRequired,
         value: PropTypes.string.isRequired,
