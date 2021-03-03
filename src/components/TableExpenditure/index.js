@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { deleteExpenditure } from '../../actions';
+import { deleteExpenditure, changeEdit } from '../../actions';
 
 import './TableExpenditure.css';
 
@@ -39,7 +39,11 @@ class TableExpenditure extends React.Component {
   }
 
   tableBody() {
-    const { expenses, deleteExpenditure: deleteRow } = this.props;
+    const {
+      expenses,
+      deleteExpenditure: deleteRow,
+      editSet, onClickSetEdit,
+      changeEdit: editSelect } = this.props;
     return (
       <tbody>
         { expenses.map((el, index) => (
@@ -57,7 +61,17 @@ class TableExpenditure extends React.Component {
             </td>
             <td>Real</td>
             <td>
-              <button type="button">Editar</button>
+              <button
+                data-testid="edit-btn"
+                data-idexpenditure={ el.id }
+                onClick={ (event) => {
+                  editSelect(editSet);
+                  onClickSetEdit(event);
+                } }
+                type="button"
+              >
+                Editar
+              </button>
               <button
                 data-idexpenditure={ el.id }
                 data-testid="delete-btn"
@@ -88,14 +102,19 @@ class TableExpenditure extends React.Component {
 TableExpenditure.propTypes = {
   expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
   deleteExpenditure: PropTypes.func.isRequired,
+  editSet: PropTypes.bool.isRequired,
+  changeEdit: PropTypes.func.isRequired,
+  onClickSetEdit: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ wallet }) => ({
   expenses: wallet.expenses,
+  editSet: wallet.editSet,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   deleteExpenditure: (expenses, id) => dispatch(deleteExpenditure(expenses, id)),
+  changeEdit: (editSet) => dispatch(changeEdit(editSet)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TableExpenditure);

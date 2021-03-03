@@ -4,6 +4,8 @@ export const GET_EMAIL = 'GET_EMAIL';
 export const GET_CURRENCIES = 'GET_CURRENCIES';
 export const SAVE_EXPENDITURE = 'SAVE_EXPENDITURE';
 export const DELETE_EXPENSE = 'DELETE_EXPENSE';
+export const EDIT_CHANGE = 'EDIT_CHANGE';
+export const SET_EDIT_EXPENDITURE = 'SET_EDIT_EXPENDITURE';
 
 export function loginAction({ email }) {
   return { type: GET_EMAIL, email };
@@ -32,6 +34,22 @@ export function fetchCurrencies() {
     const result = Object.values(currencies).map(({ code }) => code);
     dispatch(getCurrencies(result));
   };
+}
+
+export function changeEdit(editSet) {
+  return { type: EDIT_CHANGE, editSet: !editSet };
+}
+
+export function setExpenseEdit(expenses, expenseEdit) {
+  const oldExpenditure = expenses[expenseEdit.id];
+  const newExpense = { ...oldExpenditure, ...expenseEdit };
+  const newExpenses = expenses.map((el) => {
+    if (el.id === newExpense.id) {
+      return newExpense;
+    }
+    return el;
+  });
+  return { type: SET_EDIT_EXPENDITURE, currentExpenseEdit: newExpenses };
 }
 
 export function deleteExpenditure(expenses, { target: { dataset: { idexpenditure } } }) {

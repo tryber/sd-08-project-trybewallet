@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { func } from 'prop-types';
-import { fetchCurrencies } from '../actions';
+import { func, arrayOf, objectOf, bool } from 'prop-types';
+import { fetchCurrencies, setExpenseEdit } from '../actions';
 import Header from '../components/Header';
 import RegisterExpense from '../components/RegisterExpenses';
 import TableExpenditure from '../components/TableExpenditure';
@@ -16,10 +16,12 @@ class Wallet extends React.Component {
       currentCoin: 'USD',
       paymentMethod: 'Dinheiro',
       expenditureCategories: 'Alimentação',
+      setIdEdit: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.getExpenses = this.getExpenses.bind(this);
     this.resetForm = this.resetForm.bind(this);
+    this.onClickSetEdit = this.onClickSetEdit.bind(this);
   }
 
   componentDidMount() {
@@ -27,8 +29,24 @@ class Wallet extends React.Component {
     currencies();
   }
 
+  onClickSetEdit({ target: { dataset: { idexpenditure } } }) {
+    const { expenses } = this.props;
+    const result = expenses.find((el) => el.id === Number(idexpenditure));
+    this.setState({
+      valueExpenditure: result.value,
+      currentCoin: result.currency,
+      paymentMethod: result.method,
+      descriptionExpenditure: result.description,
+      expenditureCategories: result.tag,
+      setIdEdit: result.id,
+    });
+  }
+
   getExpenses() {
-    this.setState((state) => ({ idExpenses: state.idExpenses + 1 }));
+    const { editSeting } = this.props;
+    if (!editSeting) {
+      this.setState((state) => ({ idExpenses: state.idExpenses + 1 }));
+    }
     const {
       idExpenses,
       valueExpenditure,
@@ -36,9 +54,11 @@ class Wallet extends React.Component {
       currentCoin,
       paymentMethod,
       expenditureCategories,
+      setIdEdit,
     } = this.state;
+    const idCur = editSeting ? setIdEdit : idExpenses;
     return {
-      id: idExpenses,
+      id: idCur,
       value: valueExpenditure,
       currency: currentCoin,
       method: paymentMethod,
@@ -72,7 +92,7 @@ class Wallet extends React.Component {
           getExpenses={ this.getExpenses }
           resetForm={ this.resetForm }
         />
-        <TableExpenditure />
+        <TableExpenditure onClickSetEdit={ this.onClickSetEdit } />
       </>
     );
   }
@@ -80,10 +100,19 @@ class Wallet extends React.Component {
 
 Wallet.propTypes = {
   currencies: func.isRequired,
+  setEdit: func.isRequired,
+  expenses: arrayOf(objectOf).isRequired,
+  editSeting: bool.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
   currencies: () => dispatch(fetchCurrencies()),
+  setEdit: (expenses, id) => dispatch(setExpenseEdit(expenses, id)),
 });
 
-export default connect(null, mapDispatchToProps)(Wallet);
+const mapStateToProps = ({ wallet }) => ({
+  expenses: wallet.expenses,
+  editSeting: wallet.editSet,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Wallet);

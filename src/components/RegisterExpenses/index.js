@@ -2,7 +2,7 @@ import React from 'react';
 import './RegisterExpense.css';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getCoin } from '../../actions';
+import { getCoin, changeEdit, setExpenseEdit } from '../../actions';
 
 class RegisterExpenditure extends React.Component {
   renderValueExpenditure(valueExpenditure, handleChange) {
@@ -105,20 +105,49 @@ class RegisterExpenditure extends React.Component {
     );
   }
 
+  renderButtonAdd(saveExpenses, getExpenses, resetForm) {
+    return (
+      <button
+        onClick={ () => {
+          saveExpenses(getExpenses());
+          resetForm();
+        } }
+        className="btn-add-expenditure input-value-expenditure"
+        type="button"
+      >
+        Adicionar despesa
+      </button>
+    );
+  }
+
+  renderButtonSaveEdit(editSet, editChange) {
+    const {
+      setExpenses: saveEdit,
+      wallet: { expenses },
+      getExpenses } = this.props;
+    return (
+      <button
+        onClick={ () => {
+          saveEdit(expenses, getExpenses());
+          editChange(editSet);
+        } }
+        className="btn-add-expenditure input-value-expenditure btn-edit-expenditure"
+        type="button"
+      >
+        Editar despesa
+      </button>
+    );
+  }
+
   renderButtonAddExpenditure(getExpenses, saveExpenses) {
-    const { resetForm } = this.props;
+    const { resetForm, wallet: { editSet }, editChange } = this.props;
+    const btnEdit = this.renderButtonSaveEdit(editSet, editChange);
+    const btnAdd = this.renderButtonAdd(saveExpenses, getExpenses, resetForm);
     return (
       <div className="content-input-expenditure">
-        <button
-          onClick={ () => {
-            saveExpenses(getExpenses());
-            resetForm();
-          } }
-          className="btn-add-expenditure input-value-expenditure"
-          type="button"
-        >
-          Adicionar despesa
-        </button>
+        {editSet
+          ? btnEdit
+          : btnAdd}
       </div>
     );
   }
@@ -163,6 +192,8 @@ RegisterExpenditure.propTypes = {
   getExpenses: PropTypes.func.isRequired,
   saveExpenses: PropTypes.func.isRequired,
   resetForm: PropTypes.func.isRequired,
+  editChange: PropTypes.func.isRequired,
+  setExpenses: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -171,6 +202,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   saveExpenses: (expenses) => dispatch(getCoin(expenses)),
+  editChange: (editSet) => dispatch(changeEdit(editSet)),
+  setExpenses: (expenses, newExpense) => dispatch(setExpenseEdit(expenses, newExpense)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(RegisterExpenditure);
