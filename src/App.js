@@ -1,8 +1,11 @@
 import React from 'react';
 
-//first commit 
+import Routes from './Routes';
+
 function App() {
-  return <div>Hello, TrybeWallet!</div>;
+  return (
+    <Routes />
+  );
 }
 
 export default App;
