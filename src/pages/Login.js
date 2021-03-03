@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Button from '../components/button';
 import addEmail from '../actions';
+import Button from '../components/Button';
 
 class Login extends React.Component {
   constructor() {
@@ -46,9 +46,9 @@ class Login extends React.Component {
           type="password"
         />
         <Button
-          onClick={ addEmails(email) }
-          isPasswordValid={ isPasswordValid }
+          onClick={ addEmails }
           isEmailValid={ isEmailValid }
+          isPasswordValid={ isPasswordValid }
         />
       </div>
     );
