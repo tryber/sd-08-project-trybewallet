@@ -122,6 +122,7 @@ class RegisterExpenditure extends React.Component {
 
   renderButtonSaveEdit(editSet, editChange) {
     const {
+      resetForm,
       setExpenses: saveEdit,
       wallet: { expenses },
       getExpenses } = this.props;
@@ -130,6 +131,7 @@ class RegisterExpenditure extends React.Component {
         onClick={ () => {
           saveEdit(expenses, getExpenses());
           editChange(editSet);
+          resetForm();
         } }
         className="btn-add-expenditure input-value-expenditure btn-edit-expenditure"
         type="button"
