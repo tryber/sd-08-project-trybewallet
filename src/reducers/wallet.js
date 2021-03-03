@@ -13,6 +13,22 @@ const INICIAL_STATE = {
   isFetching: false,
   isEditing: false,
   expenses: [],
+  currencies: [
+    'USD',
+    'CAD',
+    'EUR',
+    'GBP',
+    'ARS',
+    'BTC',
+    'LTC',
+    'JPY',
+    'CHF',
+    'AUD',
+    'CNY',
+    'ILS',
+    'ETH',
+    'XRP',
+  ],
 };
 
 const walletReducer = (state = INICIAL_STATE, action) => {
