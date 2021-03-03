@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import InputWallet from './Input-wallet';
-import { bindActionCreators } from 'redux';
 import { addExpensewithCurrencies as walletActions } from '../actions/wallet.action';
-
 
 class FormExpense extends Component {
   constructor(props) {
@@ -15,9 +14,10 @@ class FormExpense extends Component {
       currency: '',
       method: '',
       tag: '',
-    }
-      this.handleChange = this.handleChange.bind(this);
-      this.handleAddExpense = this.handleAddExpense.bind(this);
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleAddExpense = this.handleAddExpense.bind(this);
   }
 
   handleChange({ target: { name, value } }) {
@@ -28,7 +28,7 @@ class FormExpense extends Component {
     const { addExpenseWithCurrencies } = this.props;
     addExpenseWithCurrencies(this.state);
   }
-  
+
   render() {
     const { currencies } = this.props;
     const { value, description, currency, method, tag } = this.state;
@@ -36,8 +36,18 @@ class FormExpense extends Component {
       <section>
         <form className="form-box">
           <fieldset>
-            <InputWallet name="value" label="Valor" onChange={ this.handleChange } value={ value } />
-            <InputWallet name="description" label="Descrição" onChange={ this.handleChange } value={ description } />
+            <InputWallet
+              name="value"
+              label="Valor"
+              onChange={ this.handleChange }
+              value={ value }
+            />
+            <InputWallet
+              name="description"
+              label="Descrição"
+              onChange={ this.handleChange }
+              value={ description }
+            />
             <InputWallet
               name="currency"
               type="select"
@@ -62,8 +72,11 @@ class FormExpense extends Component {
               options={ ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'] }
               onChange={ this.handleChange }
             />
-            <button type="button" onClick={ this.handleAddExpense }>Adicionar despesa</button>
-            </fieldset>
+            <button type="button" onClick={ this.handleAddExpense }
+            >
+              Adicionar despesa
+            </button>
+          </fieldset>
         </form>
       </section>
     );
@@ -73,7 +86,7 @@ class FormExpense extends Component {
 FormExpense.propTypes = {
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
   addExpenseWithCurrencies: PropTypes.func.isRequired,
-}
+};
 
 const mapStateToProps = (state) => ({
   currencies: state.wallet.currencies,

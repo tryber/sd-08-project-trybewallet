@@ -13,9 +13,8 @@ class Wallet extends React.Component {
     const { fetchCurrencies } = this.props;
     fetchCurrencies();
   }
-  
+
   render() {
-  
     return (
       <div>
         <header>

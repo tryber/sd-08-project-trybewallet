@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { login } from '../actions/user.action';
-import '../pages/login.css';
+import './login.css';
 import iconLogin from '../images/icon-man.jpg';
-import Wallet from '../images/wallet.png'
+import Wallet from '../images/wallet.png';
 
 class Login extends React.Component {
   constructor(props) {
@@ -30,7 +30,7 @@ class Login extends React.Component {
     const { email } = this.state;
     const { loginWallet } = this.props;
     loginWallet(email);
-  } 
+  }
 
   validationEmail() {
     const { email, password } = this.state;
@@ -57,11 +57,11 @@ class Login extends React.Component {
       <div className="login-form-container">
         <div className="login-box">
           <div>
-            <img src={ Wallet } alt="wallet" className="wallet-login-logo" /> 
+            <img src={ Wallet } alt="wallet" className="wallet-login-logo" />
           </div>
           <div className="Login">
             <header className="headerLogin">
-              <img src={ iconLogin } alt="icon-login" className="icon-login"/>
+              <img src={ iconLogin } alt="icon-login" className="icon-login" />
               <h2>Trybe Wallet</h2>
             </header>
             <section className="login-inputs">

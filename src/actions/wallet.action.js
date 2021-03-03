@@ -1,4 +1,4 @@
-import getCurrencies from '../services' // api
+import getCurrencies from '../services'; // api
 
 export const Types = {
   SAVE_CURRENCIES: 'SAVE_CURRENCIES',
@@ -21,11 +21,11 @@ export const Creators = {
   addExpensewithCurrencies: (payload) => ({
     type: Types.ADD_EXPENSE_WITH_CURRENCIES,
     payload,
-  })
+  }),
 };
 
 export const addExpensewithCurrencies = (expense) => async (dispatch) => {
   const currentCurrencies = await getCurrencies();
-  const expenseWithCurrencies = {...expense, exchangeRates: currentCurrencies };
+  const expenseWithCurrencies = { ...expense, exchangeRates: currentCurrencies };
   dispatch(Creators.addExpensewithCurrencies(expenseWithCurrencies));
-}
+};

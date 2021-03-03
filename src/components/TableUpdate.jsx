@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { removeExpense, editingExpense } from '../actions/wallet.action';
+// import { connect } from 'react-redux';
+// import { removeExpense, editingExpense } from '../actions/wallet.action';
 
 class TableUpdate extends Component {
   constructor(props) {
@@ -65,10 +65,10 @@ TableUpdate.propTypes = {
   editingExpense: PropTypes.func.isRequired,
 };
 
-/*const mapDispatchToProps = {
+/* const mapDispatchToProps = {
   removeExpense,
   editingExpense,
-};*/
+}; */
 
 // export default connect(null, mapDispatchToProps)(TableUpdate);
 
