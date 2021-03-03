@@ -5,22 +5,16 @@ class ExpenseForm extends React.Component {
     super(props);
 
     this.state = {
-      value: '',
+      valueExpense: '',
       description: '',
-      currency: 'USD',
-      method: 'Dinheiro',
-      tag: 'Alimentação',
+      currency: '',
+      method: '',
+      tag: '',
     };
 
-    this.getCurrencies = this.getCurrencies.bind(this);
+    // this.getCurrencies = this.getCurrencies.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.btnAddExpense = this.btnAddExpense.bind(this);
-  }
-
-  async getCurrencies() {
-    const endpoint = 'https://economia.awesomeapi.com.br/json/all';
-    const response = await fetch(endpoint);
-    return response.json();
   }
 
   handleChange({ target }) {
@@ -30,14 +24,14 @@ class ExpenseForm extends React.Component {
     });
   }
 
-  formInput(value) {
+  formInput(valueExpense) {
     return (
-      <label htmlFor="value">
+      <label htmlFor="valueExpense">
         Valor da despesa:
         <input
           type="number"
-          value={ value }
-          name="value"
+          value={ valueExpense }
+          name="valueExpense"
           data-testid="value-input"
           onChange={ this.handleChange }
         />
@@ -60,7 +54,7 @@ class ExpenseForm extends React.Component {
     );
   }
 
-  formCurrency(currency) {
+  formCurrency(currency, getCurrencies) {
     return (
       <label htmFor="currency">
         Selecione Moeda da Despesa:
@@ -70,14 +64,15 @@ class ExpenseForm extends React.Component {
           data-testid="USD"
           onChance={ this.handleChange }
         >
-          <option>teste</option>
-          <option>teste2</option>
+          {/* { getCurrencies.map((el) => (
+            <option key={ el } value={ el }>{ el }</option> */}
+          ))}
         </select>
       </label>
     );
   }
 
-  formMethod(method) {
+  formMethod(method, methodOptions) {
     return (
       <label htmFor="method">
         Selecione Método de Pagamento:
@@ -87,14 +82,15 @@ class ExpenseForm extends React.Component {
           data-testid="method-input"
           onChance={ this.handleChange }
         >
-          <option>teste</option>
-          <option>teste2</option>
+          { methodOptions.map((el) => (
+            <option key={ el } value={ el }>{ el }</option>
+          ))}
         </select>
       </label>
     );
   }
 
-  formTag(tag) {
+  formTag(tag, tagOptions) {
     return (
       <label htmFor="tag">
         Selecione a Categoria da Despesa:
@@ -104,8 +100,9 @@ class ExpenseForm extends React.Component {
           data-testid="tag-input"
           onChance={ this.handleChange }
         >
-          <option>teste</option>
-          <option>teste2</option>
+          { tagOptions.map((el) => (
+            <option key={ el } value={ el }>{ el }</option>
+          ))}
         </select>
       </label>
     );
@@ -116,15 +113,23 @@ class ExpenseForm extends React.Component {
   }
 
   render() {
-    const { value, description, currency, method, tag } = this.props;
+    const { valueExpense, description, currency, method, tag } = this.state;
+    const methodOptions = ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'];
+    const tagOptions = ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
+    // const currencyOptions = (this.getCurrencies);
+    const getCurrencies = async () => {
+      const endpoint = 'https://economia.awesomeapi.com.br/json/all';
+      const response = await fetch(endpoint);
+      return response.json();
+    };
 
     return (
       <form>
-        { this.formInput(value) }
+        { this.formInput(valueExpense) }
         { this.formDescription(description) }
-        { this.formCurrency(currency) }
-        { this.formMethod(method) }
-        {this.formTag(tag) }
+        { this.formCurrency(currency, getCurrencies) }
+        { this.formMethod(method, methodOptions) }
+        {this.formTag(tag, tagOptions) }
         <button
           type="button"
           onClick={ this.btnAddExpense }
