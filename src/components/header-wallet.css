@@ -1,0 +1,32 @@
+.header {
+  align-content: center;
+  color: rgb(37, 37, 37);
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  width: 960px;
+}
+
+.wallet-logo {
+  display: flex;
+  padding-left: 30px;
+  width: 7rem;
+}
+
+.image-div {
+  align-self: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.span-div {
+  align-self: flex-end;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 15px;
+  padding-left: 10px;
+}
+
+span {
+  padding: 10px;
+}

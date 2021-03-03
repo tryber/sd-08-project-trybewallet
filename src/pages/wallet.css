@@ -1,0 +1,67 @@
+label {
+  color: rgb(37, 37, 37);
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.form-box button {
+  background-color: #5f5e5e;
+  background-image: none;
+  border: 5px;
+  border-radius: 3px;
+  color: rgb(83, 243, 34);
+  font-size: 10px;
+  font-weight: 800;
+  margin: 10px;
+  padding: 10px;
+  width: 7rem;
+}
+
+.form-box input {
+  background-color: #969494;
+  border: none;
+  border-radius: 3px;
+  color: white;
+  display: flex;
+  margin: 3px;
+  padding: 3px;
+  width: 6rem;
+}
+
+.form-box select {
+  background-color: #969494;
+  border: none;
+  border-radius: 3px;
+  color: white;
+  display: flex;
+  margin: 3px;
+  padding: 3px;
+  width: 6rem;
+}
+
+table th {
+  background-color: #969494;
+  border: none;
+  border-radius: 3px;
+  color: white;
+  font-size: 14px;
+}
+
+table {
+  table-layout: fixed;
+  width: 990px;
+}
+
+th , td {
+  overflow: hidden;
+  width: 100px;
+}
+
+.my-wallet span {
+  align-items: center;
+  align-self: flex-start;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 5px;
+  padding-left: 10px;
+}
