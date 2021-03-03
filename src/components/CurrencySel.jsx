@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import * as fetch from 'node-fetch';
+// import * as fetch from 'node-fetch';
 import * as actions from '../actions';
 
 export async function getCurrencyList() {
