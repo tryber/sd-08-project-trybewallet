@@ -9,7 +9,7 @@
   padding: 30px 10px;
 }
 
-.expense-form input ,.expense-form select ,
+.expense-form input , .expense-form select , 
 .expense-form button {
   border: none;
   border-radius: 4px;
