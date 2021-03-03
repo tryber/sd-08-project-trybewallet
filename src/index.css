@@ -10,3 +10,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+table {
+  color: black;
+  background-color: silver;
+  border: solid 2px;
+  border-color: white;
+  width: 100%;
+}

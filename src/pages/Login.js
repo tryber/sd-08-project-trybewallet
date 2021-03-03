@@ -1,81 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { addUser } from '../actions';
+
+import LoginForm from '../components/LoginForm';
 
 class Login extends React.Component {
-  constructor(props) {
-    super(props);
-    this.validate = this.validate.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-    this.state = {
-      inputEmail: '',
-      inputPassword: '',
-    };
-  }
-
-  handleClick() {
-    const { history, add } = this.props;
-    const { inputEmail } = this.state;
-    add(inputEmail);
-    history.push('/carteira');
-  }
-
-  validate() {
-    const pattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
-    const { inputEmail, inputPassword } = this.state;
-    const passLength = 5;
-    let email = false;
-    let pass = false;
-    email = RegExp(pattern).test(inputEmail);
-    pass = inputPassword.length > passLength;
-    if (!email || !pass) return true;
-    return false;
-  }
-
   render() {
-    const { inputEmail, inputPassword } = this.state;
-    const btBool = this.validate();
     return (
-      <form>
-        <input
-          type="email"
-          name="email"
-          placeholder="email"
-          data-testid="email-input"
-          value={ inputEmail }
-          onChange={ (event) => this.setState({ inputEmail: event.target.value }) }
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="password"
-          data-testid="password-input"
-          maxLength="8"
-          value={ inputPassword }
-          onChange={ (event) => this.setState({ inputPassword: event.target.value }) }
-        />
-        <button
-          type="button"
-          disabled={ btBool }
-          onClick={ this.handleClick }
-        >
-          Entrar
-        </button>
-      </form>
+      <div>
+        <LoginForm />
+      </div>
     );
   }
 }
 
-Login.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func,
-  }).isRequired,
-  add: PropTypes.func.isRequired,
-};
-
-const mapDispatchToProps = (dispatch) => ({
-  add: (email) => dispatch(addUser(email)),
-});
-
-export default connect(null, mapDispatchToProps)(Login);
+export default Login;

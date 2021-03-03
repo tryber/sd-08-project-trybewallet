@@ -1,5 +1,6 @@
-export default async function fetchCoins() {
-  const coinsResponse = await fetch('https://economia.awesomeapi.com.br/json/all')
-    .then((response) => response.json());
-  return coinsResponse;
-}
+const getCurrencies = async () => {
+  const response = await fetch('https://economia.awesomeapi.com.br/json/all');
+  return response.json();
+};
+
+export default getCurrencies;
