@@ -1,6 +1,7 @@
 body {
   background-color: rgb(180, 176, 176);
 }
+
 .expense-table {
   display: block;
   justify-content: center;

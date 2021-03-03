@@ -1,5 +1,6 @@
 /* Auxílio do Paulo Simões (estudo dirigido dia 28/02/2021) */
 /* https://github.com/plantao-de-alunos-trybe/plantao-trybe-wallet-live-code */
+
 .expense-form {
   background-color: black;
   color: white;
@@ -15,11 +16,7 @@
   font-size: 0.9rem;
   margin: 5px;
   outline: none;
-  padding: 5px
-}
-
-.expense-form input[ name = description ] {
-  flex: 1;
+  padding: 5px;
 }
 
 .expense-form *:not( :last-child ) {
@@ -33,6 +30,7 @@
 }
 
 @media ( max-width : 900px ) {
+
   .expense-form {
     display: grid;
   }
