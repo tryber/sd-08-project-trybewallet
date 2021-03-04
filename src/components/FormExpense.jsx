@@ -29,25 +29,34 @@ class FormExpense extends Component {
     addExpenseWithCurrencies(this.state);
   }
 
+  renderInputs() {
+        const { value, description } = this.state;
+    return (
+      <>
+        <InputWallet
+          name="value"
+          label="Valor"
+          onChange={ this.handleChange }
+          value={ value }
+        />
+        <InputWallet
+          name="description"
+          label="Descrição"
+          onChange={ this.handleChange }
+          value={ description }
+        />
+      </>
+    );
+  }
+
   render() {
     const { currencies } = this.props;
-    const { value, description, currency, method, tag } = this.state;
+    const { currency, method, tag } = this.state;
     return (
       <section>
         <form className="form-box">
           <fieldset>
-            <InputWallet
-              name="value"
-              label="Valor"
-              onChange={ this.handleChange }
-              value={ value }
-            />
-            <InputWallet
-              name="description"
-              label="Descrição"
-              onChange={ this.handleChange }
-              value={ description }
-            />
+            {this.renderInputs()}
             <InputWallet
               name="currency"
               type="select"
@@ -72,7 +81,9 @@ class FormExpense extends Component {
               options={ ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'] }
               onChange={ this.handleChange }
             />
-            <button type="button" onClick={ this.handleAddExpense }
+            <button
+              type="button"
+              onClick={ this.handleAddExpense }
             >
               Adicionar despesa
             </button>
