@@ -40,7 +40,7 @@
   }
 }
 
-input {
+.Login input {
   background-color: #404040;
   background-image: none;
   border: none;
@@ -60,9 +60,16 @@ button {
 
 header {
   display: flex;
-  flex-direction: row;
 }
 
-h3 {
-  margin-right: 20px;
+span {
+  padding: 20px;
+}
+
+table {
+  border: 1px solid black;
+}
+
+table, th, td {
+  padding: 10px;
 }
