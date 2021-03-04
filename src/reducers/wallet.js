@@ -1,4 +1,4 @@
-import { ADD_DESPESA } from '../actions';
+import { ADD_DESPESA, DELETE_EXPENSE } from '../actions';
 
 const INITIAL_STATE = {
   expenses: [],
@@ -12,6 +12,12 @@ export default function walletReducer(state = INITIAL_STATE, action) {
       ...state,
       expenses: [...state.expenses, { id: state.contador, ...action.payload }],
       contador: state.contador + 1,
+    };
+  }
+  case DELETE_EXPENSE: {
+    return {
+      ...state,
+      expenses: state.expenses.filter((despesa) => despesa.id !== action.id),
     };
   }
   default:

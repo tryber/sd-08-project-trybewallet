@@ -1,25 +1,33 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
+import { wallet } from '../actions';
 
 class TabelaGastos extends Component {
-  render() {
-    const { expenses } = this.props;
+  renderCabecalho() {
     return (
-      <div>
+      <tr>
+        <th>#</th>
+        <th>Descrição</th>
+        <th>Tag</th>
+        <th>Método de pagamento</th>
+        <th>Valor</th>
+        <th>Moeda</th>
+        <th>Câmbio utilizado</th>
+        <th>Valor convertido</th>
+        <th>Moeda de conversão</th>
+        <th>Editar/Excluir</th>
+      </tr>
+    );
+  }
+
+  render() {
+    const { expenses, deleteExpense } = this.props;
+    return (
+      <main>
         <thead>
-          <tr>
-            <th>#</th>
-            <th>Descrição</th>
-            <th>Tag</th>
-            <th>Método de pagamento</th>
-            <th>Valor</th>
-            <th>Moeda</th>
-            <th>Câmbio utilizado</th>
-            <th>Valor convertido</th>
-            <th>Moeda de conversão</th>
-            <th>Editar/Excluir</th>
-          </tr>
+          {this.renderCabecalho()}
         </thead>
         <tbody>
           {expenses.map((
@@ -42,20 +50,32 @@ class TabelaGastos extends Component {
                     * 100) / 100).toFixed(2)}
               </td>
               <td>Real</td>
+              <td>
+                <button
+                  data-testid="delete-btn"
+                  type="button"
+                  onClick={ () => deleteExpense(id) }
+                >
+                  Excluir
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>
-      </div>
+      </main>
     );
   }
 }
 
 TabelaGastos.propTypes = {
   expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
+  deleteExpense: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   expenses: state.wallet.expenses,
 });
 
-export default connect(mapStateToProps)(TabelaGastos);
+const mapDispatchToProps = (dispatch) => bindActionCreators(wallet, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(TabelaGastos);
