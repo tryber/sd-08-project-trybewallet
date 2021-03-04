@@ -67,53 +67,93 @@ class FormInput extends React.Component {
     ));
   }
 
+  renderValue() {
+    const { value } = this.state;
+    return (
+      <input
+        name="value"
+        data-testid="value-input"
+        value={ value }
+        onChange={ this.handleChange }
+        placeholder="Valor"
+      />
+    );
+  }
+
+  renderSelectCurrency() {
+    const { currency } = this.state;
+    return (
+      <select
+        data-testid="currency-input"
+        name="currency"
+        value={ currency }
+        onChange={ this.handleChange }
+      >
+        { this.createCurrency() }
+      </select>
+    );
+  }
+
+  renderSelectMethod() {
+    const { method } = this.state;
+    return (
+      <select
+        data-testid="method-input"
+        name="method"
+        value={ method }
+        onChange={ this.handleChange }
+      >
+        { this.createPaymentMethods() }
+      </select>
+    );
+  }
+
+  renderSelectTag() {
+    const { tag } = this.state;
+    return (
+      <select
+        data-testid="tag-input"
+        name="tag"
+        value={ tag }
+        onChange={ this.handleChange }
+      >
+        { this.createTags() }
+      </select>
+    );
+  }
+
+  renderDescripton() {
+    const { description } = this.state;
+    return (
+      <input
+        name="description"
+        data-testid="description-input"
+        value={ description }
+        onChange={ this.handleChange }
+        placeholder="Descrição"
+      />
+    );
+  }
+
   render() {
     const { id, value, description, currency, method, tag, exchangeRates } = this.state;
     const { savedInputData } = this.props;
     return (
       <form>
         <label htmlFor="value">
-          <input
-            name="value"
-            data-testid="value-input"
-            value={ value }
-            onChange={ this.handleChange }
-            placeholder="Valor"
-          />
+          { this.renderValue() }
         </label>
         <label htmlFor="currency-input">
-          <select
-            data-testid="currency-input"
-            name="currency"
-            value={ currency }
-            onChange={ this.handleChange }
-          >
-            { this.createCurrency() }
-          </select>
+          { this.renderSelectCurrency() }
         </label>
         <label htmlFor="method-input">
-          <select
-            data-testid="method-input"
-            name="method"
-            value={ method }
-            onChange={ this.handleChange }
-          >
-            { this.createPaymentMethods() }
-          </select>
+          { this.renderSelectMethod() }
         </label>
         <label htmlFor="tag-input">
-          <select data-testid="tag-input" name="tag" value={ tag } onChange={ this.handleChange }>
-            { this.createTags() }
-          </select>
+          { this.renderSelectTag() }
         </label>
         <label htmlFor="description">
-          <input
-            name="description"
-            data-testid="description-input"
-            value={ description }
-            onChange={ this.handleChange }
-            placeholder="Descrição"
-          />
+          { this.renderDescripton() }
         </label>
         <button
           type="button"
