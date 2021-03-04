@@ -10,7 +10,7 @@ class ListOfInputs extends React.Component {
         <tr>
           <th>Descrição</th>
           <th>Tag</th>
-          <th>Método de Pagamento</th>
+          <th>Método de pagamento</th>
           <th>Valor</th>
           <th>Moeda</th>
           <th>Câmbio Utilizado</th>
@@ -35,7 +35,8 @@ class ListOfInputs extends React.Component {
           <td>{ expense.method }</td>
           <td>{ expense.value }</td>
           <td>{ expense.currency }</td>
-          <td>{ expense.exchangeRates[expense.currency].name }</td>
+          <td>Real</td>
+          {/* <td>{ expense.exchangeRates[expense.currency].name }</td> */}
           <td>
             { (Math.round(
               expense.exchangeRates[expense.currency].ask * 100,
