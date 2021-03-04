@@ -1,0 +1,49 @@
+.header {
+  align-content: center;
+  color: rgb(37, 37, 37);
+  display: flex;
+  font-family: Segoe UI, Helvetica Neue, sans-serif;
+  font-weight: 800;
+  justify-content: space-between;
+  margin-top: 20px;
+  width: 960px;
+}
+
+.wallet-logo {
+  display: flex;
+  padding-left: 30px;
+  width: 7rem;
+}
+
+.image-div {
+  align-self: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.span-div {
+  align-self: flex-end;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 15px;
+  padding-left: 10px;
+}
+
+span {
+  padding: 10px;
+}
+
+.total-field {
+  color: blue;
+  margin-right: 25px;
+}
+
+.header-currency-field {
+  background-color: yellow;
+  color: rgb(69, 121, 69);
+}
+
+.email-field {
+  color: blue;
+  margin-right: 25px;
+}

@@ -1,0 +1,83 @@
+.login-form-container {
+  align-items: center;
+  background-color: rgb(240, 237, 237);
+  color: white;
+  display: flex;
+  font-family: Segoe UI, Helvetica Neue,
+    sans-serif;
+  height: 100vh;
+  justify-content: center;
+  margin: 0;
+}
+
+.wallet-login-logo {
+  height: 18rem;
+  padding-right: 200px;
+  padding-top: 25px;
+  width: 18rem;
+}
+
+.icon-login {
+  border-radius: 40px;
+  height: 5rem;
+  width: 5rem;
+}
+
+.login-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.Login {
+  background-color: #333;
+  border-radius: 4px;
+  box-shadow: 0 0 20px rgb(31, 30, 30);
+  padding: 25px;
+  width: 100%;
+}
+
+.Login .login-inputs {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-inputs input {
+  align-items: center;
+  background-color: #5f5e5e;
+  background-image: none;
+  border: none;
+  border-radius: 3px;
+  box-shadow: none;
+  color: white;
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+  padding: 10px;
+}
+
+.headerLogin {
+  display: block;
+  justify-content: center;
+  text-align: center;
+}
+
+.login-inputs button {
+  background-color: rgb(240, 237, 237);
+  background-image: none;
+  border: 5px;
+  border-radius: 3px;
+  color: rgb(238, 159, 40);
+  font-weight: 800;
+  margin: 10px;
+  padding: 10px;
+}
+
+.login-inputs button:disabled {
+  background-color: rgb(240, 237, 237);
+  cursor: not-allowed;
+}
+
+.login-inputs button:not( :disabled ):hover {
+  filter: brightness(0.9);
+}

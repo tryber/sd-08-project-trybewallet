@@ -1,0 +1,107 @@
+label {
+  align-items: center;
+  color: rgb(37, 37, 37);
+  display: flex;
+  font-family: Segoe UI, Helvetica Neue, sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  margin-right: 15px;
+}
+
+table button {
+  font-size: 10px;
+  height: 20px;
+  width: auto;
+}
+
+.form-box {
+  width: 97%;
+}
+
+.form-box fieldset {
+  align-items: center;
+  display: flex;
+  width: 100%;
+}
+
+.form-box button {
+  background-color: #5f5e5e;
+  background-image: none;
+  border: 5px;
+  border-radius: 3px;
+  color: rgb(83, 243, 34);
+  font-size: 10px;
+  font-weight: 800;
+  margin: 10px;
+  padding: 10px;
+  width: 7rem;
+}
+
+.form-box input {
+  background-color: #969494;
+  border: none;
+  border-radius: 3px;
+  color: white;
+  display: flex;
+  margin: 3px;
+  padding: 3px;
+  width: 6rem;
+}
+
+.form-box select {
+  background-color: #969494;
+  border: none;
+  border-radius: 3px;
+  color: white;
+  display: flex;
+  margin: 3px;
+  padding: 3px;
+  width: 6rem;
+}
+
+th , td {
+  background-color: #969494;
+  border: none;
+  border-radius: 3px;
+  color: white;
+  font-size: 14px;
+  overflow: hidden;
+  width: 100px;
+}
+
+table {
+  color: rgb(54, 52, 52);
+  font-family: Segoe UI, Helvetica Neue, sans-serif;
+  padding-right: 10px;
+  table-layout: fixed;
+  width: 990px;
+}
+
+table td {
+  overflow: hidden;
+  text-align: center;
+  width: 100px;
+}
+
+.my-wallet span {
+  align-items: center;
+  align-self: flex-start;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 5px;
+  padding-left: 10px;
+}
+
+.delete-button {
+  background-color: red;
+  border-style: none;
+  color: rgb(29, 28, 28);
+  font-weight: 800;
+}
+
+.edit-button {
+  background-color: orange;
+  border-style: none;
+  color: rgb(29, 28, 28);
+  font-weight: 800;
+}

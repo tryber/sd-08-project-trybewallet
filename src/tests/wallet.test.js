@@ -152,7 +152,6 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
       const descriptionInput = await screen.findByTestId('description-input');
   
       expect(addButton).toBeInTheDocument();
-  
       userEvent.type(valueInput, '10');
       userEvent.selectOptions(currencyInput, 'USD');
       userEvent.selectOptions(methodInput, 'Cartão de crédito');
