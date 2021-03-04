@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function MethodSel({ onChange, ...rest }) {
+function PayMethodSelect({ onChange, ...rest }) {
   return (
     <select
       name="method"
@@ -17,11 +17,12 @@ function MethodSel({ onChange, ...rest }) {
   );
 }
 
-MethodSel.defaultProps = {
+PayMethodSelect.defaultProps = {
   onChange: null,
 };
 
-MethodSel.propTypes = {
+PayMethodSelect.propTypes = {
   onChange: PropTypes.func,
 };
-export default MethodSel;
+
+export default PayMethodSelect;

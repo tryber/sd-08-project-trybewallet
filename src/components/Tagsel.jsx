@@ -1,22 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-function TagSel(props) {
-  const { INITIAL_VALUE } = props;
-  const [data, setData] = useState(INITIAL_VALUE);
-  const handleChange = ({ target }) => {
-    const { name, value } = target;
-    setData({
-      ...data,
-      [name]: value,
-    });
-  };
+function TagSelect({ onChange, ...rest }) {
   return (
     <select
       name="tag"
       data-testid="tag-input"
       role="combobox"
-      onChange={ handleChange }
+      onChange={ onChange }
+      { ...rest }
     >
       <option value="Alimentação">Alimentação</option>
       <option value="Lazer">Lazer</option>
@@ -26,8 +18,13 @@ function TagSel(props) {
     </select>
   );
 }
-TagSel.defaultProps = { INITIAL_VALUE: null };
 
-TagSel.propTypes = { INITIAL_VALUE: PropTypes.string };
+TagSelect.defaultProps = {
+  onChange: null,
+};
 
-export default TagSel;
+TagSelect.propTypes = {
+  onChange: PropTypes.func,
+};
+
+export default TagSelect;
