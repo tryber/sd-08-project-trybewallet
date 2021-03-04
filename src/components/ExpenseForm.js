@@ -1,4 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { fetchCurrenciesAction, addExpenseAction } from '../actions/index';
+
+import fetchAPI from '../services/fetchAPI';
 
 class ExpenseForm extends React.Component {
   constructor(props) {
@@ -12,9 +16,15 @@ class ExpenseForm extends React.Component {
       tag: '',
     };
 
-    // this.getCurrencies = this.getCurrencies.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.btnAddExpense = this.btnAddExpense.bind(this);
+    this.formSubmit = this.formSubmit.bind(this);
+  }
+
+  async componentDidMount() {
+    console.log('didmount');
+    const dataCurrencies = await fetchAPI();
+    console.log(dataCurrencies);
   }
 
   handleChange({ target }) {
@@ -54,7 +64,7 @@ class ExpenseForm extends React.Component {
     );
   }
 
-  formCurrency(currency, getCurrencies) {
+  formCurrency(currency, dataCurrencies) {
     return (
       <label htmFor="currency">
         Selecione Moeda da Despesa:
@@ -64,7 +74,7 @@ class ExpenseForm extends React.Component {
           data-testid="USD"
           onChance={ this.handleChange }
         >
-          {/* { getCurrencies.map((el) => (
+          {/* { dataCurrencies.map((el) => (
             <option key={ el } value={ el }>{ el }</option>
           ))} */}
         </select>
@@ -108,6 +118,15 @@ class ExpenseForm extends React.Component {
     );
   }
 
+  formSubmit(event) {
+    event.preventDefault();
+    // const { AddExpsenseSubmmit } = this.props;
+    // const { objetctExpenses } = this.state;
+    // AddExpsenseSubmmit(objetctExpenses);
+    // this.setState({ loginConfirm: true });
+    console.log('teste submit');
+  }
+
   btnAddExpense() {
     console.log('clicou');
   }
@@ -116,29 +135,34 @@ class ExpenseForm extends React.Component {
     const { valueExpense, description, currency, method, tag } = this.state;
     const methodOptions = ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'];
     const tagOptions = ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
-    // const currencyOptions = (this.getCurrencies);
-    const getCurrencies = async () => {
-      const endpoint = 'https://economia.awesomeapi.com.br/json/all';
-      const response = await fetch(endpoint);
-      return response.json();
-    };
 
     return (
-      <form>
+      <form
+        onSubmit={ this.formSubmit }
+      >
         { this.formInput(valueExpense) }
         { this.formDescription(description) }
-        { this.formCurrency(currency, getCurrencies) }
+        { this.formCurrency(currency) }
         { this.formMethod(method, methodOptions) }
         {this.formTag(tag, tagOptions) }
         <button
-          type="button"
-          onClick={ this.btnAddExpense }
+          type="submit"
         >
-          Adicionar Despesa
+          Entrar
         </button>
       </form>
     );
   }
 }
 
-export default ExpenseForm;
+// const mapStateToProps = (state) => ({
+//   store: state.
+// });
+
+const mapDispatchToProps = (dispatch) => ({
+  fetchCurrenciesSave: (currencies) => dispatch(addExpenseAction(currencies)),
+
+  AddExpsenseSubmmit: (objetctExpenses) => dispatch(addExpenseAction(objetctExpenses)),
+});
+
+export default connect(null, mapDispatchToProps)(ExpenseForm);

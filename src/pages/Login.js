@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { loginUser } from '../actions/index';
+import { loginUserAction } from '../actions/index';
 
 class Login extends React.Component {
   constructor(props) {
@@ -38,9 +38,9 @@ class Login extends React.Component {
 
   formSubmit(event) {
     event.preventDefault();
-    const { clickLogin } = this.props;
+    const { LoginSubmit } = this.props;
     const { email } = this.state;
-    clickLogin(email);
+    LoginSubmit(email);
     this.setState({ loginConfirm: true });
     // console.log('teste submit');
   }
@@ -86,11 +86,11 @@ class Login extends React.Component {
 }
 
 Login.propTypes = {
-  clickLogin: PropTypes.func.isRequired,
+  LoginSubmit: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  clickLogin: (email) => dispatch(loginUser(email)),
+  LoginSubmit: (email) => dispatch(loginUserAction(email)),
 });
 
 export default connect(null, mapDispatchToProps)(Login);
