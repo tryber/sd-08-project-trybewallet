@@ -5,6 +5,7 @@ export const Types = {
   FETCH_CURRENCIES: 'FETCH_CURRENCIES',
   ADD_EXPENSE: 'ADD_EXPENSE',
   ADD_EXPENSE_WITH_CURRENCIES: 'ADD_EXPENSE_WITH_CURRENCIES',
+  REMOVE_EXPENSE: 'REMOVE_EXPENSE',
 };
 
 export const Creators = {
@@ -20,6 +21,10 @@ export const Creators = {
   },
   addExpensewithCurrencies: (payload) => ({
     type: Types.ADD_EXPENSE_WITH_CURRENCIES,
+    payload,
+  }),
+  removeExpense: (payload) => ({
+    type: Types.REMOVE_EXPENSE,
     payload,
   }),
 };
