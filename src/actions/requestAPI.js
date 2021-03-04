@@ -1,12 +1,16 @@
+export const REQUEST_API = 'REQUEST_API';
+export const REQUEST_API_SUCCESS = 'REQUEST_API_SUCCESS';
+export const REQUEST_API_ERROR = 'REQUEST_API_ERROR';
+
 export const reqAPI = () => ({
-  type: 'REQUEST_API',
+  type: REQUEST_API,
   payload: {
     isFetching: true,
   },
 });
 
 export const reqAPISuccess = (coins) => ({
-  type: 'REQUEST_API_SUCCESS',
+  type: REQUEST_API_SUCCESS,
   payload: {
     isFetching: false,
     coins,
@@ -14,7 +18,7 @@ export const reqAPISuccess = (coins) => ({
 });
 
 export const reqAPIFail = (error) => ({
-  type: 'REQUEST_API_ERROR',
+  type: REQUEST_API_ERROR,
   payload: {
     error,
     isFetching: false,

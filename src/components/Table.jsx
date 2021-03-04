@@ -2,32 +2,48 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import TableHeade from './TableHead';
+import { deleteExpense as deleteExpenseAction } from '../actions';
+
+import TableHeader from './TableHeader';
 
 class Table extends Component {
-  checkValue(exchangeRates, expenseAmount, selectedCoin) {
-    const value = Array.from(exchangeRates)
-      .find((coinUsed) => coinUsed.name === selectedCoin);
-    if (value) return `${value.code} ${Number((expenseAmount)).toFixed(2)}`;
+  checkValue(exchangeRates, value, currency) {
+    const checkCoin = Object.values(exchangeRates)
+      .find((coinUsed) => coinUsed.code === currency);
+
+    const newValue = Number(Number(value).toFixed(2));
+    if (checkCoin) return `${newValue}`;
     return '';
   }
 
-  expenseValue(exchangeRates, selectedCoin) {
-    const number = Array.from(exchangeRates).find((coinUsed) => (
-      coinUsed.name === selectedCoin));
+  expenseValue(exchangeRates, currency) {
+    const number = Object.values(exchangeRates).find((coinUsed) => (
+      coinUsed.code === currency));
     if (number) {
-      const result = (1 / Number(number.ask)).toFixed(2);
+      const result = Number(Number(number.ask).toFixed(2)).toString();
       return result;
     }
     return '';
   }
 
-  convertValue(exchangeRates, selectedCoin, expenseAmount) {
-    const ask = Array.from(exchangeRates).find((item) => (item.name === selectedCoin));
+  convertValue(exchangeRates, currency, value) {
+    const ask = Object.values(exchangeRates).find((item) => (item.code === currency));
     if (ask) {
-      const value = parseFloat(expenseAmount * ask.ask);
-      return value.toFixed(2);
+      const newValue = parseFloat(value * ask.ask);
+      return newValue.toFixed(2);
     }
+  }
+
+  deleteExpense(coins, id) {
+    const { deleteExpenseFromState } = this.props;
+    const newExpenses = coins.filter((coin) => coin.id !== id);
+    deleteExpenseFromState(newExpenses);
+  }
+
+  renderCurrencyName(exchangeRates, currency) {
+    const currencyName = Object.values(exchangeRates)
+      .find((coin) => coin.code === currency);
+    return `${currencyName.name}`;
   }
 
   //   ${coin.exchangeRates.find((coinUsed) => (
@@ -38,7 +54,7 @@ class Table extends Component {
     const { coins } = this.props;
     return (
       <table border="1">
-        <TableHeade />
+        <TableHeader />
         <tbody>
           {coins.length > 0 && coins.map((coin) => (
             <tr key={ coin.id }>
@@ -46,23 +62,31 @@ class Table extends Component {
                 {coin.description.charAt(0).toUpperCase() + coin.description.slice(1)}
               </td>
               <td>{coin.tag}</td>
-              <td>{coin.paymentMethod}</td>
+              <td>{coin.method}</td>
               <td>
                 { this.checkValue(coin.exchangeRates,
-                  coin.expenseAmount, coin.selectedCoin) }
+                  coin.value, coin.currency) }
               </td>
-              <td>{coin.selectedCoin}</td>
+              <td>{this.renderCurrencyName(coin.exchangeRates, coin.currency)}</td>
               <td>
-                {'R$ '}
-                {this.expenseValue(coin.exchangeRates, coin.selectedCoin)}
+                {this.expenseValue(coin.exchangeRates, coin.currency)}
               </td>
               <td>
                 {this.convertValue(coin.exchangeRates,
-                  coin.selectedCoin,
-                  coin.expenseAmount)}
+                  coin.currency,
+                  coin.value)}
               </td>
               <td>Real</td>
-              <td>Editar / Excluir</td>
+              <td>
+                <button type="button">Editar</button>
+                <button
+                  onClick={ () => this.deleteExpense(coins, coin.id) }
+                  type="button"
+                  data-testid="delete-btn"
+                >
+                  Deletar
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>
@@ -75,8 +99,13 @@ const mapStateToProps = ({ wallet: { expenses } }) => ({
   coins: expenses,
 });
 
-export default connect(mapStateToProps)(Table);
+const mapDispatchToProps = (dispatch) => ({
+  deleteExpenseFromState: (expense) => dispatch(deleteExpenseAction(expense)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Table);
 
 Table.propTypes = {
   coins: PropTypes.arrayOf(PropTypes.object).isRequired,
+  deleteExpenseFromState: PropTypes.func.isRequired,
 };

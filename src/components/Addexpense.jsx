@@ -43,13 +43,22 @@ class Addexpense extends Component {
     }
   }
 
+  checkId(id) {
+    if (id.length !== 0) {
+      const lastItem = id.length - 1;
+      return id[lastItem].id + 1;
+    }
+    return 0;
+  }
+
   render() {
     const { handleChange, checkInfo } = this;
     const { value, description, currency, method, tag } = this.state;
     const infoOne = { value, handleChange, currency };
     const infoTwo = { method, description, tag, handleChange };
     const { id } = this.props;
-    const expenseId = (id.length !== 0) ? id.length : 0;
+    // const expenseId = (id.length !== 0) ? id.length : (id.length + 1);
+    const expenseId = this.checkId(id);
 
     return (
       <>

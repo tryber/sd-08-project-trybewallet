@@ -1,11 +1,12 @@
 // Esse reducer será responsável por tratar as informações da pessoa usuária
+import { SAVE_EMAIL } from '../actions/saveEmail';
+
 const INITIAL_STATE = {
-  email: 'test@test.com',
+  email: '',
 };
 const user = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-  case 'SAVE_EMAIL':
-    console.log('reducer');
+  case SAVE_EMAIL:
     return {
       ...state,
       email: action.payload.email,

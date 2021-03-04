@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default class TableHead extends Component {
+export default class TableHeader extends Component {
   render() {
     return (
       <thead>

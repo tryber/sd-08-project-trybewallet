@@ -1,16 +1,26 @@
 // Coloque aqui suas actions
+export const REQ_FOR_ADD_EXPENSE = 'REQ_FOR_ADD_EXPENSE';
+export const REQ_FOR_ADD_EXPENSE_SUCCESS = 'REQ_FOR_ADD_EXPENSE_SUCCESS';
+export const REQ_FOR_ADD_EXPENSE_ERROR = 'REQ_FOR_ADD_EXPENSE_ERROR';
+export const DELETE_EXPENSE = 'DELETE_EXPENSE';
+
+export const deleteExpense = (expense) => ({
+  type: DELETE_EXPENSE,
+  payload: expense,
+});
+
 export const reqForAddExpense = () => ({
-  type: 'REQ_FOR_ADD_EXPENSE',
+  type: REQ_FOR_ADD_EXPENSE,
   isFetching: true,
 });
 
 export const reqForAddExpenseSuccess = (coins) => ({
-  type: 'REQ_FOR_ADD_EXPENSE_SUCCESS',
+  type: REQ_FOR_ADD_EXPENSE_SUCCESS,
   payload: { coins },
 });
 
 export const reqForAddExpenseError = (error) => ({
-  type: 'REQ_FOR_ADD_EXPENSE_ERROR',
+  type: REQ_FOR_ADD_EXPENSE_ERROR,
   error,
 });
 

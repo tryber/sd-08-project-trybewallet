@@ -21,7 +21,7 @@ export default class AddexpenseTwo extends Component {
           </select>
         </label>
         <label htmlFor="tag">
-          Tag
+          Gastou com
           <select
             onChange={ handleChange }
             value={ tag }

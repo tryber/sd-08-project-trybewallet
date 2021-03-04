@@ -32,11 +32,11 @@ class AddexpenseOne extends Component {
             value={ currency }
             onChange={ handleChange }
           >
-            {coins.map((coin) => (
+            {coins.map((coin, index) => (
               <option
                 name="coins"
                 data-testid={ coin.code }
-                key={ coin.code }
+                key={ index }
                 value={ coin.code }
               >
                 {coin.code}
