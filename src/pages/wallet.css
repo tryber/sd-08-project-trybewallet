@@ -1,14 +1,27 @@
 label {
+  align-items: center;
   color: rgb(37, 37, 37);
+  display: flex;
   font-family: Segoe UI, Helvetica Neue, sans-serif;
   font-size: 10px;
   font-weight: 800;
+  margin-right: 15px;
 }
 
 table button {
   font-size: 10px;
   height: 20px;
   width: auto;
+}
+
+.form-box {
+  width: 97%;
+}
+
+.form-box fieldset {
+  align-items: center;
+  display: flex;
+  width: 100%;
 }
 
 .form-box button {
