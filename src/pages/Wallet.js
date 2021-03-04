@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
   fetchCurrency as fetchCurrencyAction,
-  fetching as fetchingAction,
 } from '../actions';
 import Table from '../components/Table';
 import { payMethods, expenditures } from '../const';
@@ -183,7 +182,7 @@ class Wallet extends React.Component {
 
   render() {
     const { value, description, currency, method, tag } = this.state;
-    const { fetchCurrency, fetching } = this.props;
+    const { fetchCurrency } = this.props;
     return (
       <>
         <this.renderHeader />
@@ -201,7 +200,6 @@ class Wallet extends React.Component {
                 { value, description, currency, method, tag },
                 true,
               );
-              fetching();
               this.initialState();
             } }
             type="button"
@@ -220,7 +218,6 @@ const mapStateToProps = (state) => ({
   email: state.user.email,
   currencies: state.wallet.currencies,
   values: state.wallet.expenses,
-  isFetching: state.wallet.isFetching,
   total: state.wallet.total,
 });
 
@@ -228,7 +225,6 @@ const mapDispatchToProps = (dispatch) => ({
   fetchCurrency: (expenses, saving) => dispatch(
     fetchCurrencyAction(expenses, saving),
   ),
-  fetching: () => dispatch(fetchingAction()),
 });
 
 Wallet.propTypes = {
@@ -236,7 +232,6 @@ Wallet.propTypes = {
   fetchCurrency: PropTypes.func.isRequired,
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
   total: PropTypes.number,
-  fetching: PropTypes.func.isRequired,
 };
 
 Wallet.defaultProps = {

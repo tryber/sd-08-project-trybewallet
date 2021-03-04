@@ -1,10 +1,9 @@
 // Coloque aqui suas actions
 import {
   ADD_LOGIN,
+  DEL_EXPENSE,
   URL,
   GET_CURRENCIES,
-  // ERROR,
-  FLAG,
   GET_CURRENCIES_ADD_EXPENDITURE,
 } from '../const';
 
@@ -13,9 +12,9 @@ export const dataLogin = (data) => ({
   data,
 });
 
-export const fetching = () => ({
-  type: FLAG,
-  isFetching: true,
+export const deleteExpense = (expense) => ({
+  type: DEL_EXPENSE,
+  expense,
 });
 
 export function fetchCurrency(expenses = {}, saving = false) {
@@ -35,16 +34,8 @@ export function fetchCurrency(expenses = {}, saving = false) {
       }
       return success;
     }
-    // function onError(error) {
-    //   dispatch({ type: ERROR, error });
-    //   return error;
-    // }
-    // try {
     const success = await fetch(URL);
     const json = await success.json();
     return onSuccess(json);
-    // } catch (error) {
-    //   return onError(error);
-    // }
   };
 }

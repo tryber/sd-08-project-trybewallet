@@ -17,14 +17,14 @@ const mockedExchange = jest.spyOn(global, 'fetch').mockImplementation(() => apiR
 afterEach(() => jest.clearAllMocks());
 
 describe('2 - Crie uma página para sua carteira com as seguintes características:', () => {
-    test('A rota para esta página deve ser \'/carteira\'', () => {
+    test.skip('A rota para esta página deve ser \'/carteira\'', () => {
       const { history } = renderWithRouterAndStore(<App />);
       history.push('/carteira');
       const email = screen.queryByTestId('email-input');
       expect(email).toBeNull();
     });
   
-    test('O componente deve se chamar Wallet e estar localizado na pasta "src/pages"', () => {
+    test.skip('O componente deve se chamar Wallet e estar localizado na pasta "src/pages"', () => {
       const { container } = renderWithRouterAndStore(<Wallet />, '/carteira', {});
       expect(container).toBeDefined();
     });
@@ -33,7 +33,7 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
   describe('3 - Crie um header para a página de carteira contendo as seguintes características:', () => {
     const initial = initialStateHeader;
   
-    test('Um elemento que exiba o email do usuário que fez login.', () => {
+    test.skip('Um elemento que exiba o email do usuário que fez login.', () => {
       const { store } = renderWithRouterAndStore(<Wallet />, '/carteira', initial);
       const emailField = screen.getByTestId('email-field');
   
@@ -41,7 +41,7 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
       expect(emailField).toContainHTML(store.getState().user.email);
     });
   
-    test('Crie um campo com a despesa total gerada pela lista de gastos.', () => {
+    test.skip('Crie um campo com a despesa total gerada pela lista de gastos.', () => {
       renderWithRouterAndStore(<Wallet />, '/carteira', initial);
       const totalField = screen.getByTestId('total-field');
   
@@ -49,7 +49,7 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
       expect(totalField).toContainHTML(INITIAL_VALUE);
     });
   
-    test('Crie um campo que mostre que qual câmbio está sendo utilizado, que será neste caso \'BRL\'', () => {
+    test.skip('Crie um campo que mostre que qual câmbio está sendo utilizado, que será neste caso \'BRL\'', () => {
       renderWithRouterAndStore(<Wallet />, '/carteira');
       const exchangeField = screen.getByTestId('header-currency-field');
   
@@ -59,21 +59,21 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
   });
   
   describe('4 - Desenvolva um formulário para adicionar uma despesa contendo as seguintes características:', () => {
-    test('Um campo para adicionar o valor da despesa', async () => {
+    test.skip('Um campo para adicionar o valor da despesa', async () => {
       renderWithRouterAndStore(<Wallet />, '/carteira');
       const valueInput = await screen.findByTestId('value-input');
   
       expect(valueInput).toBeInTheDocument();
     });
   
-    test('Um campo para adicionar a descrição da despesa', async () => {
+    test.skip('Um campo para adicionar a descrição da despesa', async () => {
       renderWithRouterAndStore(<Wallet />, '/carteira');
       const descriptionInput = await screen.findByTestId('description-input');
   
       expect(descriptionInput).toBeInTheDocument();
     });
   
-    test('Um campo para selecionar em qual moeda será registrada a despesa', async () => {
+    test.skip('Um campo para selecionar em qual moeda será registrada a despesa', async () => {
       renderWithRouterAndStore(<Wallet />, '/carteira');
       const currencyInput = await screen.findByTestId('currency-input');
       const USD = screen.getByTestId('USD');
@@ -112,7 +112,7 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
       expect(USDT).not.toBeInTheDocument();
     });
   
-    test('Um campo para selecionar qual método de pagamento será utilizado', async () => {
+    test.skip('Um campo para selecionar qual método de pagamento será utilizado', async () => {
       renderWithRouterAndStore(<Wallet />, '/carteira');
       const methodInput = await screen.findByTestId('method-input');
       const moneyOption = screen.getByText(/Dinheiro/);
@@ -125,7 +125,7 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
       expect(debitOption).toBeInTheDocument();
     });
   
-    test('Um campo para selecionar uma categoria (tag) para a despesa.', async () => {
+    test.skip('Um campo para selecionar uma categoria (tag) para a despesa.', async () => {
       renderWithRouterAndStore(<Wallet />, '/carteira');
       const tagInput = await screen.findByTestId('tag-input');
       const foodOption = screen.getByText(/Alimentação/);
@@ -142,7 +142,7 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
       expect(healthOption).toBeInTheDocument();
     });
   
-    test('Um botão com o texto \'Adicionar despesa\' que salva as informações da despesa no estado global e atualiza a soma de despesas no header', async () => {
+    test.skip('Um botão com o texto \'Adicionar despesa\' que salva as informações da despesa no estado global e atualiza a soma de despesas no header', async () => {
       const { store } = renderWithRouterAndStore(<Wallet />, '/carteira');
       const addButton = await screen.findByText(/Adicionar despesa/i);
       const valueInput = await screen.findByTestId('value-input');
@@ -220,7 +220,7 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
   describe('5 - Desenvolva uma tabela com os gastos contendo as seguintes características:', () => {
     const initial = initialStateWithExpenses;
   
-    test('A tabela deve possuir um cabeçalho com os campos Descrição, Tag, Método de pagamento, Valor, Moeda, Câmbio utilizado, Valor convertido e Moeda de conversão', () => {
+    test.skip('A tabela deve possuir um cabeçalho com os campos Descrição, Tag, Método de pagamento, Valor, Moeda, Câmbio utilizado, Valor convertido e Moeda de conversão', () => {
       renderWithRouterAndStore(<Wallet />, '/carteira', initial);
       const thDescricao = screen.getByText('Descrição');
       const thTag = screen.getByText('Tag');
@@ -243,7 +243,7 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
       expect(thEditarExcluir).toBeInTheDocument();
     });
   
-    test('A tabela deve ser alimentada pelo estado da aplicação, que estará disponível na chave expenses que vem do reducer wallet.', () => {
+    test.skip('A tabela deve ser alimentada pelo estado da aplicação, que estará disponível na chave expenses que vem do reducer wallet.', () => {
       renderWithRouterAndStore(<Wallet />, '/carteira', initial);
       expect(screen.getAllByRole('cell', { name: 'Dez dólares' })[0]).toBeInTheDocument();
       expect(screen.getAllByRole('cell', { name: 'Lazer' })[0]).toBeInTheDocument();
@@ -268,12 +268,12 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
   describe('6 - Crie um botão para deletar uma despesa da tabela contendo as seguintes características:', () => {
     const initial = initialStateWithExpenses;
   
-    test.skip('O botão deve estar dentro do último item da linha da tabela e deve possuir `data-testid="delete-btn"`', () => {
+    test('O botão deve estar dentro do último item da linha da tabela e deve possuir `data-testid="delete-btn"`', () => {
       renderWithRouterAndStore(<Wallet />, '/carteira', initial);
       expect(screen.getAllByTestId('delete-btn')[0]).toBeInTheDocument();
     });
   
-    test.skip('Ao ser clicado, o botão deleta a linha da tabela, alterando o estado global.', () => {
+    test('Ao ser clicado, o botão deleta a linha da tabela, alterando o estado global.', () => {
       const { store } = renderWithRouterAndStore(<Wallet />, '/carteira', initial);
       const deleteBtn = screen.getAllByTestId('delete-btn')[0];
       fireEvent.click(deleteBtn);
@@ -301,7 +301,7 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
       expect(store.getState().wallet.expenses).toStrictEqual(newExpenses);
     });
   
-    test.skip('Ao clicar no botão para remover uma despesa, o valor correspondente deve ser subtraído e a despesa total deve ser atualizada no header', () => {
+    test('Ao clicar no botão para remover uma despesa, o valor correspondente deve ser subtraído e a despesa total deve ser atualizada no header', () => {
       const { store } = renderWithRouterAndStore(<Wallet />, '/carteira', initial);
       const deleteBtn = screen.getAllByTestId('delete-btn')[0];
   
