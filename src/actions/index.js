@@ -7,11 +7,11 @@ export const loginUserAction = (email) => ({
 
 export const addExpenseAction = (objetctExpenses) => ({
   type: ADD_EXPENSE,
-  paypload: { objetctExpenses } });
+  payload: { objetctExpenses } });
 
 export const fetchCurrenciesAction = (dataCurrencies) => ({
   type: SAVE_FETCH_CURRENCIES,
-  paypload: { dataCurrencies } });
+  payload: dataCurrencies });
 
 // export const data = () => async (dispatch) => {
 //   const currencies = await fetchAPI();

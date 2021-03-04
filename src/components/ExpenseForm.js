@@ -14,6 +14,7 @@ class ExpenseForm extends React.Component {
       currency: '',
       method: '',
       tag: '',
+      // currenciesCode: [],
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -22,9 +23,11 @@ class ExpenseForm extends React.Component {
   }
 
   async componentDidMount() {
-    console.log('didmount');
+    // console.log('didmount');
+    const { fetchCurrenciesSave } = this.props;
     const dataCurrencies = await fetchAPI();
-    console.log(dataCurrencies);
+    // console.log(dataCurrencies);
+    fetchCurrenciesSave(dataCurrencies);
   }
 
   handleChange({ target }) {
@@ -64,19 +67,21 @@ class ExpenseForm extends React.Component {
     );
   }
 
-  formCurrency(currency, dataCurrencies) {
+  formCurrency(currency, getCurrencies) {
     return (
-      <label htmFor="currency">
+      <label htmlFor="currency-input">
         Selecione Moeda da Despesa:
         <select
           name="currency"
+          id="currency-input"
           value={ currency }
-          data-testid="USD"
+          data-testid="currency-input"
           onChance={ this.handleChange }
+
         >
-          {/* { dataCurrencies.map((el) => (
+          { getCurrencies.map((el) => (
             <option key={ el } value={ el }>{ el }</option>
-          ))} */}
+          ))}
         </select>
       </label>
     );
@@ -84,13 +89,14 @@ class ExpenseForm extends React.Component {
 
   formMethod(method, methodOptions) {
     return (
-      <label htmFor="method">
+      <label htmlFor="method-input">
         Selecione Método de Pagamento:
         <select
           name="method"
+          id="method-input"
           value={ method }
           data-testid="method-input"
-          onChance={ this.handleChange }
+          onChange={ this.handleChange }
         >
           { methodOptions.map((el) => (
             <option key={ el } value={ el }>{ el }</option>
@@ -102,13 +108,14 @@ class ExpenseForm extends React.Component {
 
   formTag(tag, tagOptions) {
     return (
-      <label htmFor="tag">
+      <label htmlFor="tag-input">
         Selecione a Categoria da Despesa:
         <select
           name="tag"
+          id="tag-input"
           value={ tag }
           data-testid="tag-input"
-          onChance={ this.handleChange }
+          onChange={ this.handleChange }
         >
           { tagOptions.map((el) => (
             <option key={ el } value={ el }>{ el }</option>
@@ -120,9 +127,10 @@ class ExpenseForm extends React.Component {
 
   formSubmit(event) {
     event.preventDefault();
-    // const { AddExpsenseSubmmit } = this.props;
+    const { AddExpsenseSave } = this.props;
+    const { valueExpense, description, currency, method, tag } = this.state;
     // const { objetctExpenses } = this.state;
-    // AddExpsenseSubmmit(objetctExpenses);
+    // AddExpsenseSave(objetctExpenses);
     // this.setState({ loginConfirm: true });
     console.log('teste submit');
   }
@@ -135,6 +143,7 @@ class ExpenseForm extends React.Component {
     const { valueExpense, description, currency, method, tag } = this.state;
     const methodOptions = ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'];
     const tagOptions = ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
+    const { getCurrencies } = this.props;
 
     return (
       <form
@@ -142,27 +151,30 @@ class ExpenseForm extends React.Component {
       >
         { this.formInput(valueExpense) }
         { this.formDescription(description) }
-        { this.formCurrency(currency) }
+        { this.formCurrency(currency, getCurrencies) }
         { this.formMethod(method, methodOptions) }
         {this.formTag(tag, tagOptions) }
         <button
-          type="submit"
+          type="button"
+          onClick={ btnAddExpense }
         >
-          Entrar
+          Adicionar despesa
         </button>
       </form>
     );
   }
 }
 
-// const mapStateToProps = (state) => ({
-//   store: state.
-// });
-
 const mapDispatchToProps = (dispatch) => ({
-  fetchCurrenciesSave: (currencies) => dispatch(addExpenseAction(currencies)),
+  fetchCurrenciesSave: (dataCurrencies) => (
+    dispatch(fetchCurrenciesAction(dataCurrencies))),
 
-  AddExpsenseSubmmit: (objetctExpenses) => dispatch(addExpenseAction(objetctExpenses)),
+  AddExpsenseSave: (objetctExpenses) => (
+    dispatch(addExpenseAction(objetctExpenses))),
 });
 
-export default connect(null, mapDispatchToProps)(ExpenseForm);
+const mapStateToProps = (state) => ({
+  getCurrencies: state.walletReducer.currencies,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ExpenseForm);
