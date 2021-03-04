@@ -1,47 +1,47 @@
 // Coloque aqui suas actions
 
-// constantes de referencia para chamar na action
+import * as ActionTypes from './ActionTypes';
 
 export function login(payload) {
   return {
-    type: 'USR_LOGIN',
+    type: ActionTypes.USER_LOGIN,
     payload,
   };
 }
 
 export function addCurrency(payload) {
   return {
-    type: 'ADDCURR',
+    type: ActionTypes.WALLET_ADDCURR,
     payload,
   };
 }
 export function addExpense(payload) {
   return {
-    type: 'ADDEXP',
+    type: ActionTypes.WALLET_ADDEXP,
     payload,
   };
 }
 export function delExpense(id) {
   return {
-    type: 'WALLET_DELEXP',
+    type: ActionTypes.WALLET_DELEXP,
     payload: id,
   };
 }
 export function editExpense(payload) {
   return {
-    type: 'WALLET_EDITEXP',
+    type: ActionTypes.WALLET_EDITEXP,
     payload,
   };
 }
 
 export function enterEditMode(id) {
   return {
-    type: 'WALLET_ENTER_EDIT_MODE',
+    type: ActionTypes.WALLET_ENTER_EDIT_MODE,
     id,
   };
 }
 export function exitEditMode() {
   return {
-    type: 'WALLET_EXIT_EDIT_MODE',
+    type: ActionTypes.WALLET_EXIT_EDIT_MODE,
   };
 }
