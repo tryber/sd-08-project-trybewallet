@@ -7,11 +7,11 @@ class InputWallet extends React.Component {
 
     if (type === 'select') {
       return (
-        <label htmlFor={name}>
+        <label htmlFor={ name }>
           {`${label}: `}
-          <select name={name} data-testid={`${name}-input`} {...restProps}>
+          <select name={ name } data-testid={ `${name}-input` } { ...restProps }>
             {options.map((option, index) => (
-              <option key={index} value={option} data-testid={option}>
+              <option key={ index } value={ option } data-testid={ option }>
                 {option}
               </option>
             ))}
@@ -21,15 +21,15 @@ class InputWallet extends React.Component {
     }
     return (
       <div>
-        <label htmlFor={name}>
+        <label htmlFor={ name }>
           {`${label}: `}
           <input
-            type={type}
-            data-testid={`${name}-input`}
-            name={name}
-            id={name}
-            value={value}
-            {...restProps}
+            type={ type }
+            data-testid={ `${name}-input` }
+            name={ name }
+            id={ name }
+            value={ value }
+            { ...restProps }
           />
         </label>
       </div>
@@ -42,7 +42,7 @@ InputWallet.propTypes = {
   label: PropTypes.string.isRequired,
   type: PropTypes.string,
   options: PropTypes.arrayOf(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.array])
+    PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   ),
   value: PropTypes.string.isRequired,
 };

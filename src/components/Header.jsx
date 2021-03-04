@@ -21,14 +21,21 @@ class Header extends React.Component {
       <fieldset>
         <div className="header">
           <div className="image-div">
-            <img src={walletLogo} alt="wallet" className="wallet-logo" />
+            <img src={ walletLogo } alt="wallet" className="wallet-logo" />
           </div>
           <div className="span-div">
-            <span>{'E-mail: '} </span>
-            <span data-testid="email-field" className="email-field">
-              {email}{' '}
+            <span>
+              {'E-mail: '}
+              {' '}
             </span>
-            <span>{'Total das Despesas R$ '} </span>
+            <span data-testid="email-field" className="email-field">
+              {email}
+              {' '}
+            </span>
+            <span>
+              {'Total das Despesas R$ '}
+              {' '}
+            </span>
             <span data-testid="total-field" className="total-field">
               {totalCash}
             </span>
