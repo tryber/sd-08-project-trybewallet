@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchCurrenciesAction, addExpenseAction } from '../actions/index';
 
@@ -14,12 +15,10 @@ class ExpenseForm extends React.Component {
       currency: '',
       method: '',
       tag: '',
-      // currenciesCode: [],
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.btnAddExpense = this.btnAddExpense.bind(this);
-    this.formSubmit = this.formSubmit.bind(this);
   }
 
   async componentDidMount() {
@@ -76,11 +75,17 @@ class ExpenseForm extends React.Component {
           id="currency-input"
           value={ currency }
           data-testid="currency-input"
-          onChance={ this.handleChange }
+          onChange={ this.handleChange }
 
         >
           { getCurrencies.map((el) => (
-            <option key={ el } value={ el }>{ el }</option>
+            <option
+              data-testid={ el }
+              key={ el }
+              value={ el }
+            >
+              { el }
+            </option>
           ))}
         </select>
       </label>
@@ -125,18 +130,11 @@ class ExpenseForm extends React.Component {
     );
   }
 
-  formSubmit(event) {
-    event.preventDefault();
+  btnAddExpense(e) {
+    // console.log('clicou');
+    e.preventDefault();
     const { AddExpsenseSave } = this.props;
-    const { valueExpense, description, currency, method, tag } = this.state;
-    // const { objetctExpenses } = this.state;
-    // AddExpsenseSave(objetctExpenses);
-    // this.setState({ loginConfirm: true });
-    console.log('teste submit');
-  }
-
-  btnAddExpense() {
-    console.log('clicou');
+    AddExpsenseSave(this.state);
   }
 
   render() {
@@ -146,9 +144,7 @@ class ExpenseForm extends React.Component {
     const { getCurrencies } = this.props;
 
     return (
-      <form
-        onSubmit={ this.formSubmit }
-      >
+      <form>
         { this.formInput(valueExpense) }
         { this.formDescription(description) }
         { this.formCurrency(currency, getCurrencies) }
@@ -176,5 +172,11 @@ const mapDispatchToProps = (dispatch) => ({
 const mapStateToProps = (state) => ({
   getCurrencies: state.walletReducer.currencies,
 });
+
+ExpenseForm.propTypes = {
+  AddExpsenseSave: PropTypes.func.isRequired,
+  fetchCurrenciesSave: PropTypes.func.isRequired,
+  getCurrencies: PropTypes.func.isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExpenseForm);
