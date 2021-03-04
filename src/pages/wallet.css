@@ -1,7 +1,14 @@
 label {
   color: rgb(37, 37, 37);
+  font-family: Segoe UI, Helvetica Neue, sans-serif;
   font-size: 10px;
   font-weight: 800;
+}
+
+table button {
+  font-size: 10px;
+  height: 20px;
+  width: auto;
 }
 
 .form-box button {
@@ -39,21 +46,27 @@ label {
   width: 6rem;
 }
 
-table th {
+th , td {
   background-color: #969494;
   border: none;
   border-radius: 3px;
   color: white;
   font-size: 14px;
+  overflow: hidden;
+  width: 100px;
 }
 
 table {
+  color: rgb(54, 52, 52);
+  font-family: Segoe UI, Helvetica Neue, sans-serif;
+  padding-right: 10px;
   table-layout: fixed;
   width: 990px;
 }
 
-th {
+table td {
   overflow: hidden;
+  text-align: center;
   width: 100px;
 }
 
@@ -64,4 +77,18 @@ th {
   justify-content: space-between;
   padding-bottom: 5px;
   padding-left: 10px;
+}
+
+.delete-button {
+  background-color: red;
+  border-style: none;
+  color: rgb(29, 28, 28);
+  font-weight: 800;
+}
+
+.edit-button {
+  background-color: orange;
+  border-style: none;
+  color: rgb(29, 28, 28);
+  font-weight: 800;
 }

@@ -29,42 +29,49 @@ class ExpensesTable extends Component {
   render() {
     const { expenses, removeExpenseButton } = this.props;
     return (
-      <section>
-        <table>
-          {this.renderTableThead()}
-          <tbody>
-            {expenses.map((expense) => (
-              <tr key={ expense.id }>
-                <td>{ expense.description }</td>
-                <td>{ expense.tag }</td>
-                <td>{ expense.method }</td>
-                <td>{ expense.value }</td>
-                <td>{ expense.exchangeRates[expense.currency].name }</td>
-                <td>
-                  { parseFloat(expense.exchangeRates[expense.currency].ask).toFixed(2) }
-                </td>
-                <td>
-                  { (parseFloat(expense.exchangeRates[expense.currency].ask
-                    * parseFloat(expense.value))).toFixed(2) }
-                </td>
-                <td>Real</td>
-                <td>
-                  <button
-                    type="button"
-                    data-testid="delete-btn"
-                    onClick={ () => removeExpenseButton(expense.id) }
-                  >
-                    Delete
-                  </button>
-                  <button type="button" data-testid="edit-btn">
-                    Editar
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </section>
+      <fieldset>
+        <section>
+          <table>
+            {this.renderTableThead()}
+            <tbody>
+              {expenses.map((expense) => (
+                <tr key={ expense.id }>
+                  <td>{ expense.description }</td>
+                  <td>{ expense.tag }</td>
+                  <td>{ expense.method }</td>
+                  <td>{ expense.value }</td>
+                  <td>{ expense.exchangeRates[expense.currency].name }</td>
+                  <td>
+                    { parseFloat(expense.exchangeRates[expense.currency].ask).toFixed(2) }
+                  </td>
+                  <td>
+                    { (parseFloat(expense.exchangeRates[expense.currency].ask
+                      * parseFloat(expense.value))).toFixed(2) }
+                  </td>
+                  <td>Real</td>
+                  <td>
+                    <button
+                      type="button"
+                      data-testid="delete-btn"
+                      onClick={ () => removeExpenseButton(expense.id) }
+                      className="delete-button"
+                    >
+                      Delete
+                    </button>
+                    <button
+                      type="button"
+                      data-testid="edit-btn"
+                      className="edit-button"
+                    >
+                      Editar
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </section>
+      </fieldset>
     );
   }
 }

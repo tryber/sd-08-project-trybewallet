@@ -30,20 +30,20 @@ class FormExpense extends Component {
   }
 
   renderInputs() {
-        const { value, description } = this.state;
+    const { value, description } = this.state;
     return (
       <>
         <InputWallet
           name="value"
           label="Valor"
-          onChange={ this.handleChange }
-          value={ value }
+          onChange={this.handleChange}
+          value={value}
         />
         <InputWallet
           name="description"
           label="Descrição"
-          onChange={ this.handleChange }
-          value={ description }
+          onChange={this.handleChange}
+          value={description}
         />
       </>
     );
@@ -60,31 +60,34 @@ class FormExpense extends Component {
             <InputWallet
               name="currency"
               type="select"
-              value={ currency }
+              value={currency}
               label="Moeda"
-              options={ currencies }
-              onChange={ this.handleChange }
+              options={currencies}
+              onChange={this.handleChange}
             />
             <InputWallet
               name="method"
               type="select"
-              value={ method }
+              value={method}
               label="Método de Pagamento"
-              options={ ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'] }
-              onChange={ this.handleChange }
+              options={['Dinheiro', 'Cartão de crédito', 'Cartão de débito']}
+              onChange={this.handleChange}
             />
             <InputWallet
               name="tag"
               type="select"
-              value={ tag }
+              value={tag}
               label="Tag"
-              options={ ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'] }
-              onChange={ this.handleChange }
+              options={[
+                'Alimentação',
+                'Lazer',
+                'Trabalho',
+                'Transporte',
+                'Saúde',
+              ]}
+              onChange={this.handleChange}
             />
-            <button
-              type="button"
-              onClick={ this.handleAddExpense }
-            >
+            <button type="button" onClick={this.handleAddExpense}>
               Adicionar despesa
             </button>
           </fieldset>
