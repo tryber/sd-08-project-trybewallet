@@ -70,6 +70,6 @@ table {
   border: 1px solid black;
 }
 
-table, th, td {
+table , th , td {
   padding: 10px;
 }
