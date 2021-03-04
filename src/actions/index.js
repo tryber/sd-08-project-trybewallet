@@ -1,2 +1,3 @@
 // Coloque aqui suas actions
-export { TYPES, saveEmail } from './userData';
+export { default as TYPES } from './types';
+export { default as saveEmail } from './userData';

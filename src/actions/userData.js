@@ -1,8 +1,8 @@
-export const TYPES = {
-  SAVE_EMAIL: 'SAVE_EMAIL',
-};
+import TYPES from './types';
 
-export const saveEmail = (email) => ({
+const saveEmail = (email) => ({
   type: TYPES.SAVE_EMAIL,
   payload: email,
 });
+
+export default saveEmail;
