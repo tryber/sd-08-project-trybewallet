@@ -52,7 +52,7 @@ table {
   width: 990px;
 }
 
-th , td {
+th {
   overflow: hidden;
   width: 100px;
 }

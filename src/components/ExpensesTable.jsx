@@ -27,9 +27,7 @@ class ExpensesTable extends Component {
                 <td>{ expense.description }</td>
                 <td>{ expense.tag }</td>
                 <td>{ expense.method }</td>
-                <td>
-                  { expense.value }
-                </td>
+                <td>{ expense.value }</td>
                 <td>{ expense.exchangeRates[expense.currency].name }</td>
                 <td>
                   { parseFloat(expense.exchangeRates[expense.currency].ask).toFixed(2) }
@@ -47,11 +45,8 @@ class ExpensesTable extends Component {
                   >
                     Delete
                   </button>
-                  <button
-                    type="button"
-                    data-testid="edit-btn"
-                  >
-                    Delete
+                  <button type="button" data-testid="edit-btn">
+                    Editar
                   </button>
                 </td>
               </tr>

@@ -1,6 +1,6 @@
 import React from 'react';
 // import { connect } from 'react-redux';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 class InputWallet extends React.Component {
   render() {
@@ -45,5 +45,13 @@ class InputWallet extends React.Component {
     );
   }
 }
+
+InputWallet.propTypes = {
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  type: PropTypes.string,
+  options: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.array])),
+  value: PropTypes.string.isRequired,
+};
 
 export default InputWallet;
