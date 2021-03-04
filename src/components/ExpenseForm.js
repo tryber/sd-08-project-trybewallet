@@ -156,7 +156,7 @@ class ExpenseForm extends React.Component {
         {this.formTag(tag, tagOptions) }
         <button
           type="button"
-          onClick={ btnAddExpense }
+          onClick={ this.btnAddExpense }
         >
           Adicionar despesa
         </button>
