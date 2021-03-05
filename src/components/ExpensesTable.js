@@ -41,14 +41,14 @@ class ExpensesTable extends React.Component {
         <td>
           <button
             type="button"
-            data-testId="delete-btn"
+            data-testid="delete-btn"
             onClick={ () => this.handleDeleteExpense(expenses.id) }
           >
             Delete
           </button>
           <button
             type="button"
-            data-testId="edit-btn"
+            data-testid="edit-btn"
             onClick={ () => this.handleEditExpenses(expenses.id) }
           >
             Editar

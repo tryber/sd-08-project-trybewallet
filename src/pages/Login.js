@@ -29,9 +29,10 @@ class Login extends React.Component {
     e.preventDefault();
     const { email } = this.state;
     const { saveEmail: saveEmailAction } = this.props;
+
     saveEmailAction(email);
-    this.state({
-      isloggedIn: true,
+    this.setState({
+      isLoggedIn: true,
     });
   }
 
