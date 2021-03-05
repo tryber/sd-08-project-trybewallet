@@ -23,7 +23,7 @@ class ListOfInputs extends React.Component {
   }
 
   bodyTableListOfInputs() {
-    const { expenses, currencies } = this.props;
+    const { expenses } = this.props;
     // const filterInput = currencies.filter((currency) => currency.code = expenses.currency);
     // console.log(currencies);
     // console.log(expenses);
