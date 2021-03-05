@@ -13,9 +13,9 @@ class ListOfInputs extends React.Component {
           <th>Método de pagamento</th>
           <th>Valor</th>
           <th>Moeda</th>
-          <th>Câmbio Utilizado</th>
-          <th>Valor Convertido</th>
-          <th>Moeda de Conversão</th>
+          <th>Câmbio utilizado</th>
+          <th>Valor convertido</th>
+          <th>Moeda de conversão</th>
           <th>Editar/Excluir</th>
         </tr>
       </thead>
@@ -25,8 +25,8 @@ class ListOfInputs extends React.Component {
   bodyTableListOfInputs() {
     const { expenses, currencies } = this.props;
     // const filterInput = currencies.filter((currency) => currency.code = expenses.currency);
-    console.log(currencies);
-    console.log(expenses);
+    // console.log(currencies);
+    // console.log(expenses);
     return expenses.map((expense) => (
       <tbody key={ expense.id }>
         <tr>
@@ -34,9 +34,7 @@ class ListOfInputs extends React.Component {
           <td>{ expense.tag }</td>
           <td>{ expense.method }</td>
           <td>{ expense.value }</td>
-          <td>{ expense.currency }</td>
-          <td>Real</td>
-          {/* <td>{ expense.exchangeRates[expense.currency].name }</td> */}
+          <td>{ expense.exchangeRates[expense.currency].name }</td>
           <td>
             { (Math.round(
               expense.exchangeRates[expense.currency].ask * 100,
@@ -47,6 +45,7 @@ class ListOfInputs extends React.Component {
               (expense.exchangeRates[expense.currency].ask * expense.value) * 100,
             ) / 100 }
           </td>
+          <td>Real</td>
           <button type="button">Editar</button>
           <button type="button" data-testid="delete-btn">Excluir</button>
         </tr>
