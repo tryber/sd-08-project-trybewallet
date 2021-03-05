@@ -3,20 +3,22 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
 import { Creators as UserActions } from '../actions/user';
 import '../styles/components/LoginForm.css';
 
 class LoginForm extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       email: '',
       password: '',
       shouldRedirect: false,
     };
+
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    // this.validAcess = this.validAcess.bind(this);
   }
 
   handleChange({ target: { name, value } }) {
@@ -81,8 +83,6 @@ LoginForm.propTypes = {
   saveEmail: PropTypes.func.isRequired,
 };
 
-const mapDispatchToPros = (dispatch) => ({
-  saveEmail: (email) => dispatch(UserActions.saveEmail(email)),
-});
+const mapDispatchToPros = (dispatch) => bindActionCreators(UserActions, dispatch);
 
 export default connect(null, mapDispatchToPros)(LoginForm);
