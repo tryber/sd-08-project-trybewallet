@@ -7,7 +7,10 @@ const INITIAL_STATE = {
 const loginUserReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
   case LOGIN_USER:
-    return { email: action.payload.email };
+    return {
+      ...state,
+      email: action.payload.email,
+    };
   default: return state;
   }
 };
