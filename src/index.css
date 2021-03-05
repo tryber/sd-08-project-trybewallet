@@ -1,10 +1,12 @@
 body {
+  height: 100vh;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  width: 100%;
 }
 
 code {
@@ -66,4 +68,62 @@ code {
   background-color: #ceeee7;
   border: 1px solid #036b52;
   color: #036b52;
+}
+
+.wallet-container {
+  align-items: initial;
+  flex-flow: column wrap;
+  justify-content: flex-start;
+}
+
+.header {
+  background-color: #333;
+  color: white;
+  font-weight: 300;
+  padding: 15px;
+  width: 100%;
+}
+
+.header h2 {
+  font-size: 18px;
+  margin: 0;
+}
+
+.header .header-row {
+  display: flex;
+}
+
+.header h3 {
+  font-size: 14px;
+  margin: 0;
+}
+
+.form-header {
+  align-items: center;
+  background-color: #2fc18c;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  padding: 20px 0;
+  width: 100%;
+}
+
+.form-header button, .form-header input, .form-header select {
+  padding: 5px 10px;
+  margin: 0 10px;
+}
+
+
+.form-header button {
+  background-color: #036b52;
+  border: 1px solid #036b52;
+  color: white;
+  padding: 10px 15px;
+  transition: all 0.25s ease;
+}
+
+.form-header button:hover {
+  background-color: #2fc18c;
+  border: 1px solid #036b52;
+  outline: none;
 }
