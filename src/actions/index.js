@@ -5,6 +5,8 @@ export const Types = {
   SAVE_CURRENCIES: 'SAVE_CURRENCIES',
   ADD_EXPENSE: 'ADD_EXPENSE',
   REMOVE_EXPENSE: 'REMOVE_EXPENSE',
+  EDIT_EXPENSE: 'EDIT_EXPENSE',
+  SET_EDIT: 'SET_EDIT',
 };
 
 export const Creators = {
@@ -23,6 +25,14 @@ export const Creators = {
   removeExpense: (id) => ({
     type: Types.REMOVE_EXPENSE,
     payload: id,
+  }),
+  editExpense: (submittedData) => ({
+    type: Types.EDIT_EXPENSE,
+    payload: submittedData,
+  }),
+  setIsEditing: (status, id) => ({
+    type: Types.SET_EDIT,
+    payload: { status, id },
   }),
   fetchCurrencies: () => async (dispatch) => {
     const data = await getQuotations();
