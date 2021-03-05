@@ -20,13 +20,37 @@ const wallet = (state = initialStateWallet, action) => {
     return {
       ...state,
       loading: false,
-      currencies: [...Object.values(action.currencies)
-        .filter((noUSTD) => noUSTD.name !== 'Dólar Turismo')],
+      currencies: [...Object.keys(action.currencies)
+        .filter((noUSTD) => noUSTD !== 'USDT')],
     };
 
   case walletAction.ADD_EXPENSE:
     return {
       ...state, expenses: [...state.expenses, action.expenses],
+    };
+
+  case walletAction.DELETE_EXPENSE:
+    return {
+      ...state,
+      expenses: [
+        ...state.expenses.filter((expense) => expense.id !== action.expense.id),
+      ],
+      editing: false,
+    };
+  case walletAction.INIT_EDIT_EXPENSE:
+    return {
+      ...state,
+      editing: true,
+      expenseId: action.expense.id,
+    };
+  case walletAction.FINISH_EDIT_EXPENSE:
+    return {
+      ...state,
+      expenses: state.expenses.map((item) => {
+        if (item.id === action.expense.id) return { ...item, ...action.expense };
+        return item;
+      }),
+      isEditing: false,
     };
 
   default:

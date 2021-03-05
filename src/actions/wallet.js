@@ -4,6 +4,9 @@ export const REQUEST_TO_API = 'REQUEST_TO_API';
 export const REQUEST_SUCESS = 'REQUEST_SUCESS';
 export const REQUEST_FAIL = 'REQUEST_FAIL';
 export const ADD_EXPENSE = 'ADD_EXPENSE';
+export const DELETE_EXPENSE = 'DELETE_EXPENSE';
+export const INIT_EDIT_EXPENSE = 'INIT_EDIT_EXPENSE';
+export const FINISH_EDIT_EXPENSE = 'FINISH_EDIT_EXPENSE';
 
 const requestToApi = () => ({
   type: REQUEST_TO_API,
@@ -32,4 +35,19 @@ export const requestCurrencies = () => async (dispatch) => {
 export const addExpense = (expenses) => ({
   type: ADD_EXPENSE,
   expenses,
+});
+
+export const deleteExpense = (expense) => ({
+  type: DELETE_EXPENSE,
+  expense,
+});
+
+export const editExpense = (expense) => ({
+  type: INIT_EDIT_EXPENSE,
+  expense,
+});
+
+export const endExpenseEdit = (expense) => ({
+  type: INIT_EDIT_EXPENSE,
+  expense,
 });

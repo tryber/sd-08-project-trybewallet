@@ -58,7 +58,7 @@ describe('3 - Crie um header para a página de carteira contendo as seguintes ca
   });
 });
 
-describe.only('4 - Desenvolva um formulário para adicionar uma despesa contendo as seguintes características:', () => {
+describe('4 - Desenvolva um formulário para adicionar uma despesa contendo as seguintes características:', () => {
   test('Um campo para adicionar o valor da despesa', async () => {
     renderWithRouterAndStore(<Wallet />, '/carteira');
     const valueInput = await screen.findByTestId('value-input');
@@ -215,7 +215,7 @@ describe.only('4 - Desenvolva um formulário para adicionar uma despesa contendo
   });
 });
 
-describe.only('5 - Desenvolva uma tabela com os gastos contendo as seguintes características:', () => {
+describe('5 - Desenvolva uma tabela com os gastos contendo as seguintes características:', () => {
   const initial = initialStateWithExpenses;
 
   test('A tabela deve possuir um cabeçalho com os campos Descrição, Tag, Método de pagamento, Valor, Moeda, Câmbio utilizado, Valor convertido e Moeda de conversão', () => {

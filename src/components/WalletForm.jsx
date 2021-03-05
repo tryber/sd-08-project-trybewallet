@@ -12,8 +12,8 @@ class WalletForm extends Component {
     super(props);
 
     const INITIAL_STATE = {
-      value: '',
-      description: '',
+      value: '10',
+      description: 'Dez Dólares',
       currency: 'USD',
       method: 'Dinheiro',
       tag: 'Alimentação',
@@ -48,9 +48,7 @@ class WalletForm extends Component {
     const {
       id, value, description, method, tag, currency } = this.state;
     const { addExpense } = this.props;
-    const fetch = await fetchAPI();
-    const exchangeRates = Object.values(fetch)
-      .filter((noUSTD) => noUSTD.name !== 'Dólar Turismo');
+    const exchangeRates = await fetchAPI();
     const newExpense = {
       id, value, description, method, tag, currency, exchangeRates,
     };
@@ -101,8 +99,8 @@ class WalletForm extends Component {
   renderCurrenciesOptions() {
     const { currencies } = this.props;
     const coins = currencies.map((currency) => (
-      <option key={ currency.code } data-testid={ currency.code }>
-        {currency.code}
+      <option key={ currency } data-testid={ currency }>
+        {currency}
       </option>));
     return (
       <label htmlFor="currency-input">
@@ -182,7 +180,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 WalletForm.propTypes = {
-  currencies: PropTypes.arrayOf(PropTypes.object),
+  currencies: PropTypes.arrayOf(PropTypes.string),
   loading: PropTypes.bool,
   requestCurrencies: PropTypes.func.isRequired,
   addExpense: PropTypes.func.isRequired,

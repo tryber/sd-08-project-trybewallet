@@ -14,8 +14,7 @@ class WalletHeader extends Component {
 
     const total = expenses.reduce((totalSum, expenseInfos) => {
       const { value, currency, exchangeRates } = expenseInfos;
-      const foundCurrency = exchangeRates.find((coin) => coin.code === currency);
-      const currencyValue = Number(foundCurrency.ask);
+      const currencyValue = Number(exchangeRates[currency].ask);
       return totalSum + (value * currencyValue);
     }, 0);
     return total.toFixed(2);
