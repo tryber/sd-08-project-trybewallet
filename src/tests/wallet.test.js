@@ -159,7 +159,6 @@ describe.only('4 - Desenvolva um formulário para adicionar uma despesa contendo
     userEvent.type(descriptionInput, 'Dez dólares');
     fireEvent.click(addButton);
     expect(mockedExchange).toBeCalledTimes(2);
-
     const expectedStateExpense = [
       {
         id: 0,
@@ -171,10 +170,10 @@ describe.only('4 - Desenvolva um formulário para adicionar uma despesa contendo
         exchangeRates: mockData,
       },
     ];
-
     await waitFor(() => {
       expect(valueInput.value === 0 || valueInput.value === '0' || valueInput.value === '').toBe(true);
     });
+
     expect(store.getState().wallet.expenses).toStrictEqual(expectedStateExpense);
 
     userEvent.type(valueInput, '20');

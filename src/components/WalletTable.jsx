@@ -35,14 +35,14 @@ class WalletTable extends Component {
                 <td>{name}</td>
                 <td>{valueInput}</td>
                 <td>{Number(ask).toFixed(2)}</td>
-                <td>BRL</td>
+                <td>Real</td>
                 <td>{(ask * Number(valueInput, TEN)).toFixed(2)}</td>
                 <td>{descriptionInput}</td>
                 <td>{tagInput}</td>
                 <td>{methodInput}</td>
                 <td>
                   <button type="button">Editar</button>
-                  <button type="button">Excluir</button>
+                  <button type="button" data-testid="delete-btn" id="delete-btn">Excluir</button>
                 </td>
                 <td />
               </tr>
@@ -59,7 +59,7 @@ const mapStateToProps = (state) => ({
 });
 
 WalletTable.propTypes = {
-  expenses: PropTypes.objectOf(PropTypes.object),
+  expenses: PropTypes.arrayOf(PropTypes.object),
 };
 
 WalletTable.defaultProps = {

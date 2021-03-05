@@ -61,6 +61,7 @@ class WalletForm extends Component {
   }
 
   renderForm() {
+    const { valueInput } = this.state;
     const rendersFunctions = [this.renderCurrenciesOptions(),
       this.renderPaymentOptions(),
       this.renderTagOptions(),
@@ -73,6 +74,7 @@ class WalletForm extends Component {
             name="valueInput"
             data-testid="value-input"
             type="number"
+            value={ valueInput }
             placeholder="Digite o valor da despesa"
             onChange={ this.handleChange }
             required
