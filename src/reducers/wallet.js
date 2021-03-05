@@ -13,7 +13,7 @@ const walletReducer = (state = INITIAL_STATE, action) => {
       expenses: [
         ...state.expenses,
         {
-          ...action.objectExpense,
+          ...action.payload.objetctExpenses,
           id: state.expenses.length,
         },
       ],

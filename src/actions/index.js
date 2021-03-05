@@ -14,8 +14,3 @@ export const addExpenseAction = (objetctExpenses) => ({
 export const fetchCurrenciesAction = (dataCurrencies) => ({
   type: SAVE_FETCH_CURRENCIES,
   payload: dataCurrencies });
-
-// export const data = () => async (dispatch) => {
-//   const currencies = await fetchAPI();
-//   return dispatch(fetchCurrenciesAction(currencies));
-// };

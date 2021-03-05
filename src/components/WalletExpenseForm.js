@@ -135,11 +135,6 @@ class WalletExpenseForm extends React.Component {
     // console.log('clicou');
     e.preventDefault();
     const { AddExpsenseSave } = this.props;
-    // const { expenses } = this.state;
-    // console.log(expenses);
-    // const id = expenses.length;
-    // const id = 0;
-    // console.log(id);
     const { valueExpense, description, currency, method, tag } = this.state;
     const exchangeRates = await fetchEntriesAPI();
     // console.log(exchangeRates);

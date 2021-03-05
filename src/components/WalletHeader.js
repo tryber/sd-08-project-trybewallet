@@ -29,6 +29,6 @@ WalletHeader.propTypes = {
 
 const mapStateToProps = (state) => ({
   emailStore: state.loginUserReducer.email,
-  expensesStore: state.walletReducer.expenses.objetctExpenses,
+  expensesStore: state.walletReducer.expenses,
 });
 export default connect(mapStateToProps, null)(WalletHeader);
