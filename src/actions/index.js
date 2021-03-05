@@ -1,5 +1,5 @@
 import { LOGIN_USER, ADD_EXPENSE, SAVE_FETCH_CURRENCIES } from './ActionTypes';
-import fetchAPI from '../services/fetchAPI';
+// import fetchAPI from '../services/fetchCodeAPI';
 
 export const loginUserAction = (email) => ({
   type: LOGIN_USER,
@@ -7,7 +7,9 @@ export const loginUserAction = (email) => ({
 
 export const addExpenseAction = (objetctExpenses) => ({
   type: ADD_EXPENSE,
-  payload: { objetctExpenses } });
+  payload: {
+    objetctExpenses,
+  } });
 
 export const fetchCurrenciesAction = (dataCurrencies) => ({
   type: SAVE_FETCH_CURRENCIES,
