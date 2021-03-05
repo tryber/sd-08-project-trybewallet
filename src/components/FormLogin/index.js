@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 import validateEmail from '../../services/validateEmail';
 import validatePassword from '../../services/validatePassword';
-import addUser from '../../actions/index';
+import { addUser } from '../../actions';
 
 class FormLogin extends React.Component {
   constructor(props) {
