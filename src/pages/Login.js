@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { saveEmail as saveEmailAction } from '../actions';
+import { saveEmail as saveEmailAction } from '../actions/User';
 // import wave from './images/wave.png';
 import avatar from './images/avatar.svg';
 import './Login.css';

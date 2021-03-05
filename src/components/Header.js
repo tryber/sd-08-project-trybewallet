@@ -5,6 +5,16 @@ import PropTypes from 'prop-types';
 import logotrybe from './images/logotrybe.jpg';
 
 class Header extends React.Component {
+  totalValue() {
+    const { expenses } = this.props;
+    const expensesMap = expenses.map(({ currency, value, exchangeRates }) => {
+      const dayCurrency = exchangeRates[currency];
+      const sumExpense = Number(value) * Number(dayCurrency.ask);
+      return sumExpense;
+    });
+    return expensesMap.reduce((total, expense) => total + expense, 0);
+  }
+
   render() {
     const { email } = this.props;
     return (
@@ -13,19 +23,32 @@ class Header extends React.Component {
         <p className="app-header-email" data-testid="email-field">
           {email}
         </p>
-        <p data-testid="total-field">0</p>
-        <p data-testid="header-currency-field">BRL</p>
+        <pre className="app-header-valor" data-testid="total-field">
+          {' '}
+          Total R$
+          {' '}
+          {this.totalValue()}
+          {' '}
+        </pre>
+        <pre
+          data-testid="header-currency-field"
+          className="app-header-cambio"
+        >
+          {' '}
+          Câmbio BRL
+        </pre>
       </header>);
   }
 }
 
 Header.propTypes = {
   email: PropTypes.string.isRequired,
-
+  expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-const mapStateToProps = ({ user }) => ({
-  email: user.email,
+const mapStateToProps = ({ user: { email }, wallet: { expenses } }) => ({
+  email,
+  expenses,
 });
 
 export default connect(mapStateToProps)(Header);

@@ -1,28 +1,41 @@
 .app-header {
   align-items: center;
-
+  background: #ececec;
+  border-bottom: 1px solid #ccc;
   display: flex;
   justify-content: space-between;
-  padding: 0 2rem;
-  min-height: 80px;
-  position: fixed;
-  top: 0;
-  right: 0;
   left: 0;
-  border-bottom: 1px solid #ccc;
-  background: #ECECEC;
-  
+  min-height: 80px;
+  padding: 0 2rem;
+  right: 0;
+  top: 0;
+
 }
 
-.app-header-email{
-display : flex;
-justify-content:flex-end
+.app-header-email {
+  align-items: center;
+  display : flex;
 
 }
 
 .app-header__logo {
   background: #999;
+  display: flex;
   height: 50px;
   width: 50px;
-  display: flex;
+}
+
+.app-header-valor {
+  display : flex;
+  font-size: 20px;
+  justify-content: flex-end;
+
+}
+
+
+.app-header-cambio {
+  display : flex;
+  font-size: 20px;
+  justify-content: flex-end;
+
 }
