@@ -84,5 +84,4 @@ ListOfInputs.propTypes = {
       exchangeRates: PropTypes.shape(PropTypes.object),
     }),
   ).isRequired,
-  currencies: PropTypes.instanceOf(Object).isRequired,
 };
