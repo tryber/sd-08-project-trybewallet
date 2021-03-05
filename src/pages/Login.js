@@ -47,12 +47,14 @@ class Login extends Component {
           type="text"
           onChange={ (event) => this.updates('email', event.target.value) }
           data-testid="email-input"
+
         />
         <p>Senha</p>
         <input
           type="password"
           onChange={ (event) => this.updates('password', event.target.value) }
           data-testid="password-input"
+
         />
         <p>
           <Link to="/carteira">

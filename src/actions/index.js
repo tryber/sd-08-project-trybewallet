@@ -1,8 +1,8 @@
 import { SAVE_EMAIL } from '../const';
 
-export const saveEmail = (data) => ({
+export const saveEmail = (value) => ({
   type: SAVE_EMAIL,
-  data,
+  value,
 });
 
 export const save = {

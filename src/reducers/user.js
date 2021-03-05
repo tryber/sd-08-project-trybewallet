@@ -10,7 +10,7 @@ const INITIAL_STATE = {
 function user(state = INITIAL_STATE, action) {
   switch (action.type) {
   case SAVE_EMAIL:
-    return { ...state, ...action.data };
+    return { ...state, ...action.value };
   default:
     return state;
   }
