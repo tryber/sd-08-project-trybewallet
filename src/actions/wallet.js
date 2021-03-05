@@ -1,6 +1,6 @@
 import {
-  REQ_CURRENCIE,
-  GET_CURRENCIE,
+  REQ_CURRENCY,
+  GET_CURRENCY,
   EXPENSES_FORM,
   ADD_EXPENSES,
   DELETE_EXPENSES,
@@ -8,25 +8,25 @@ import {
   FINISH_EDIT,
 } from './types';
 
-const requestCurrencie = () => ({
-  type: REQ_CURRENCIE,
+const requestCurrency = () => ({
+  type: REQ_CURRENCY,
 });
 
-const getCurrencie = (payload) => ({
-  type: GET_CURRENCIE,
+const getCurrency = (payload) => ({
+  type: GET_CURRENCY,
   payload,
 });
 
-export function fetchCurrencie() {
+export function fetchCurrency() {
   return (dispatch) => {
-    dispatch(requestCurrencie());
+    dispatch(requestCurrency());
     return fetch('https://economia.awesomeapi.com.br/json/all')
       .then((response) => response.json())
-      .then((currencie) => {
-        delete currencie.USDT;
-        return currencie;
+      .then((currency) => {
+        delete currency.USDT;
+        return currency;
       })
-      .then((currencie) => dispatch(getCurrencie(currencie)));
+      .then((currency) => dispatch(getCurrency(currency)));
   };
 }
 
@@ -56,4 +56,4 @@ export const finishEdit = () => ({
   type: FINISH_EDIT,
 });
 
-export default fetchCurrencie;
+export default fetchCurrency;

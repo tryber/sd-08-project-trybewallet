@@ -1,5 +1,5 @@
 import {
-  GET_CURRENCIE,
+  GET_CURRENCY,
   EXPENSES_FORM,
   FINISH_EDIT,
   ADD_EXPENSES,
@@ -26,7 +26,7 @@ function handleEdit(state, payload) {
   const editExpenses = [...state.expenses].find((e) => e.id === payload);
   return {
     ...state,
-    editing: true,
+    edit: true,
     newExpenses: {
       ...state.newExpenses,
       id: payload,
@@ -53,7 +53,7 @@ function handleFinishEdit(state) {
 
 export default function walletReducer(state = initialState, action) {
   switch (action.type) {
-  case GET_CURRENCIE:
+  case GET_CURRENCY:
     return {
       ...state,
       currencies: Object.keys(action.payload),

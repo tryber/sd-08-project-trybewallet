@@ -2,12 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { expensesForm } from '../actions/wallet';
+import { expensesForm } from '../actions';
 
 class InputExpense extends React.Component {
   constructor(props) {
     super(props);
-    this.handleChange = this.handleChange.bind.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(e) {
@@ -17,6 +17,7 @@ class InputExpense extends React.Component {
 
   render() {
     const { name, label, type, options } = this.props;
+
     if (type === 'select') {
       return (
         <label htmlFor={ name }>
@@ -24,18 +25,18 @@ class InputExpense extends React.Component {
           <select
             name={ name }
             id={ name }
-            data-testId={ `${name}-input` }
+            data-testid={ `${name}-input` }
             onChange={ this.handleChange }
           >
-            {options.map((option, index) => (
+            { options.map((option, index) => (
               <option
                 key={ index }
                 value={ option }
-                data-testId={ option }
+                data-testid={ option }
               >
                 { option }
               </option>
-            ))}
+            )) }
           </select>
         </label>
       );
@@ -43,12 +44,12 @@ class InputExpense extends React.Component {
 
     return (
       <label htmlFor={ name }>
-        { `${name}: ` }
+        { `${label}: ` }
         <input
           name={ name }
           id={ name }
           type={ type }
-          data-testId={ `${name}-input` }
+          data-testid={ `${name}-input` }
           onChange={ this.handleChange }
         />
       </label>
@@ -60,13 +61,13 @@ InputExpense.propTypes = {
   name: PropTypes.string.isRequired,
   type: PropTypes.string,
   label: PropTypes.string.isRequired,
-  options: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf])),
+  options: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.array])),
   expensesForm: PropTypes.func.isRequired,
 };
 
 InputExpense.defaultProps = {
   type: 'text',
-  options: null,
+  options: [],
 };
 
 const mapDispatchToProps = {

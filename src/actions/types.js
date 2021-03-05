@@ -1,6 +1,6 @@
 export const SAVE_EMAIL = 'login/SAVE_EMAIL';
-export const REQ_CURRENCIE = 'wallet/REQ_CURRENCIE';
-export const GET_CURRENCIE = 'wallet/GET_CURRENCIE';
+export const REQ_CURRENCY = 'wallet/REQ_CURRENCY';
+export const GET_CURRENCY = 'wallet/GET_CURRENCY';
 export const EXPENSES_FORM = 'wallet/EXPENSES_FORM';
 export const ADD_EXPENSES = 'wallet/ADD_EXPENSES';
 export const DELETE_EXPENSES = 'wallet/DELETE_EXPENSES';

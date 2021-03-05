@@ -26,7 +26,7 @@ class ExpensesForm extends React.Component {
           { expenses.map((e) => (
             <ExpensesTable
               expenses={ e }
-              key={ expenses.id }
+              key={ e.id }
             />
           )) }
         </tbody>

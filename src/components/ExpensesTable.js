@@ -8,6 +8,7 @@ class ExpensesTable extends React.Component {
   constructor(props) {
     super(props);
     this.handleDeleteExpense = this.handleDeleteExpense.bind(this);
+    this.handleEditExpenses = this.handleEditExpenses.bind(this);
   }
 
   handleDeleteExpense(id) {

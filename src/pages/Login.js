@@ -54,6 +54,13 @@ class Login extends React.Component {
           data-testid="email-input"
           onChange={ this.handleChange }
         />
+        <input
+          type="password"
+          name="password"
+          placeholder="Digite sua senha"
+          data-testid="password-input"
+          onChange={ this.handleChange }
+        />
         <button
           type="submit"
           disabled={ !this.handleLoginValidation(email, password) }

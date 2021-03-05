@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import InputExpense from './InputExpense';
-import { fetchCurrencie, finishEdit, addExpenses } from '../actions/wallet';
+import { fetchCurrency, finishEdit, addExpenses } from '../actions/wallet';
 
 class AddExpenseForm extends React.Component {
   constructor(props) {
@@ -13,17 +13,17 @@ class AddExpenseForm extends React.Component {
   }
 
   async componentDidMount() {
-    const { fetchCurrencie: fetchCurrencieAtcion } = this.props;
-    await fetchCurrencieAtcion();
+    const { fetchCurrency: fetchCurrencyAction } = this.props;
+    await fetchCurrencyAction();
   }
 
   async handleAdd(e) {
     e.preventDefault();
     const {
       addExpenses: addExpensesAction,
-      fetchCurrencie: fetchCurrencieAtcion,
+      fetchCurrency: fetchCurrencyAction,
     } = this.props;
-    await fetchCurrencieAtcion();
+    await fetchCurrencyAction();
     addExpensesAction();
     e.target.parentNode.reset();
   }
@@ -35,7 +35,7 @@ class AddExpenseForm extends React.Component {
   }
 
   render() {
-    const { edit, currencie } = this.props;
+    const { edit, currencies } = this.props;
     const btnExpense = (canEdit) => (
       <button
         type="submit"
@@ -48,30 +48,30 @@ class AddExpenseForm extends React.Component {
     return (
       <form>
         <InputExpense
-          name="value"
-          label="Valor"
-        />
-        <InputExpense
           name="description"
           label="Descrição"
         />
         <InputExpense
-          name="currency"
-          label="Moeda"
+          name="tag"
           type="select"
-          options={ currencie }
+          label="Categoria"
+          options={ ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'] }
         />
         <InputExpense
           name="method"
-          label="Método de Pagamento"
           type="select"
+          label="Método de Pagamento"
           option={ ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'] }
         />
         <InputExpense
-          name="tag"
-          label="Categoria"
+          name="value"
+          label="Valor"
+        />
+        <InputExpense
+          name="currency"
           type="select"
-          options={ ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'] }
+          label="Moeda"
+          options={ currencies }
         />
         { btnExpense(edit) }
       </form>
@@ -80,9 +80,9 @@ class AddExpenseForm extends React.Component {
 }
 
 AddExpenseForm.propTypes = {
-  currencie: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.array]))
+  currencies: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.array]))
     .isRequired,
-  fetchCurrencie: PropTypes.func.isRequired,
+  fetchCurrency: PropTypes.func.isRequired,
   finishEdit: PropTypes.func.isRequired,
   addExpenses: PropTypes.func.isRequired,
   edit: PropTypes.bool,
@@ -93,13 +93,13 @@ AddExpenseForm.defaultProps = {
 };
 
 const mapStateToProps = (state) => ({
-  currencie: state.wallet.currencie,
+  currencies: state.wallet.currencies,
   expenses: state.wallet.expenses,
   edit: state.wallet.edit,
 });
 
 const mapDispatchToProps = {
-  fetchCurrencie,
+  fetchCurrency,
   addExpenses,
   finishEdit,
 };
