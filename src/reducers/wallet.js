@@ -26,7 +26,7 @@ const wallet = (state = initialStateWallet, action) => {
 
   case walletAction.ADD_EXPENSE:
     return {
-      ...state, expenses: action.expenses,
+      ...state, expenses: [...state.expenses, action.expenses],
     };
 
   default:

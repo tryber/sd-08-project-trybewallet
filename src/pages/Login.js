@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Timer from 'react-compound-timer';
 import { Redirect } from 'react-router-dom';
 import { MIN_PASSWORD_LENGHT, REGEX_VERIFY_EMAIL } from '../consts';
 import Button from '../components/Button';
@@ -141,18 +140,6 @@ class Login extends Component {
     return (
 
       <form className="login-form">
-        <Timer initialTime={ 5500 } direction="backward">
-          {() => (
-            <>
-              <Timer.Seconds />
-              {' '}
-              seconds
-              {' '}
-              <Timer.Milliseconds />
-              {' '}
-              milliseconds
-            </>)}
-        </Timer>
         <fieldset>
           <legend className="login-form-title">Insira seus dados:</legend>
           {this.renderForm()}

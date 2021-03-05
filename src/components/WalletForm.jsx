@@ -11,7 +11,7 @@ class WalletForm extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
+    const INITIAL_STATE = {
       valueInput: '',
       descriptionInput: '',
       currency: 'USD',
@@ -19,6 +19,8 @@ class WalletForm extends Component {
       tagInput: 'Alimentação',
       id: 0,
     };
+
+    this.state = { ...INITIAL_STATE };
 
     this.handleChange = this.handleChange.bind(this);
     this.renderForm = this.renderForm.bind(this);
@@ -35,19 +37,20 @@ class WalletForm extends Component {
   }
 
   handleChange({ target }) {
-    const { currencies } = this.props;
-    console.log(requestCurrenciesAction(), currencies);
     const { name, value } = target;
     this.setState({
       [name]: value,
     });
   }
 
-  async handleClick() {
+  async handleClick(e) {
+    e.preventDefault();
     const {
       id, valueInput, descriptionInput, methodInput, tagInput, currency } = this.state;
     const { addExpense } = this.props;
-    const coinsExchange = await fetchAPI();
+    const fetch = await fetchAPI();
+    const coinsExchange = Object.values(fetch)
+      .filter((noUSTD) => noUSTD.name !== 'Dólar Turismo');
     const newExpense = {
       id, valueInput, descriptionInput, methodInput, tagInput, currency, coinsExchange,
     };
@@ -55,7 +58,6 @@ class WalletForm extends Component {
     this.setState((prevState) => ({
       ...prevState, id: prevState.id + 1,
     }));
-    console.log(id, valueInput, descriptionInput, methodInput, tagInput, currency);
   }
 
   renderForm() {
@@ -98,25 +100,30 @@ class WalletForm extends Component {
     const { currencies } = this.props;
     const coins = currencies.map((currency) => (
       <option key={ currency.code } data-testid={ currency.code }>
-        {`${currency.code} - ${currency.name}`}
+        {currency.code}
       </option>));
     return (
-      <select
-        name="currency"
-        data-testid="currency-input"
-        onChange={ this.handleChange }
-      >
-        {coins}
-      </select>
+      <label htmlFor="currency-input">
+        Em:
+        <select
+          name="currency"
+          id="currency-input"
+          data-testid="currency-input"
+          onChange={ this.handleChange }
+        >
+          {coins}
+        </select>
+      </label>
     );
   }
 
   renderPaymentOptions() {
     const paymentOptions = ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'];
     return (
-      <label htmlFor="methodInput">
+      <label htmlFor="method-input">
         Método de pagamento:
         <select
+          id="method-input"
           name="methodInput"
           data-testid="method-input"
           onChange={ this.handleChange }
@@ -130,10 +137,11 @@ class WalletForm extends Component {
   renderTagOptions() {
     const tagOptions = ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
     return (
-      <label htmlFor="tagInput">
+      <label htmlFor="tag-input">
         Motivo da despesa (TAG):
         <select
           name="tagInput"
+          id="tag-input"
           data-testid="tag-input"
           onChange={ this.handleChange }
         >
@@ -153,7 +161,7 @@ class WalletForm extends Component {
       <section
         className="wallet-form"
       >
-        {loading ? <h1>Loading...</h1> : (this.renderForm())}
+        {loading ? <h1>Loading...</h1> : this.renderForm()}
       </section>
     );
   }
@@ -176,13 +184,13 @@ WalletForm.propTypes = {
   loading: PropTypes.bool,
   requestCurrencies: PropTypes.func.isRequired,
   addExpense: PropTypes.func.isRequired,
-  expenses: PropTypes.arrayOf(PropTypes.object),
-  expenseId: PropTypes.number.isRequired,
+  // expenses: PropTypes.arrayOf(PropTypes.object),
+  // expenseId: PropTypes.number.isRequired,
 };
 
 WalletForm.defaultProps = {
   currencies: [],
-  expenses: [],
+  // expenses: [],
   loading: false,
 };
 
