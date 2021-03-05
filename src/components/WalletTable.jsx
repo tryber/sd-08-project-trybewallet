@@ -42,7 +42,7 @@ class WalletTable extends Component {
                 <td>{methodInput}</td>
                 <td>
                   <button type="button">Editar</button>
-                  <button type="button" data-testid="delete-btn" id="delete-btn">Excluir</button>
+                  <button type="button" data-testid="delete-btn">Excluir</button>
                 </td>
                 <td />
               </tr>
