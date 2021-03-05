@@ -82,7 +82,7 @@ export default function walletReducer(state = initialState, action) {
   case DELETE_EXPENSES:
     return {
       ...state,
-      expenses: [state.expenses].filter((e) => e.id !== action.payload),
+      expenses: [...state.expenses].filter((e) => e.id !== action.payload),
     };
   case EDIT:
     return handleEdit(state, action.payload);

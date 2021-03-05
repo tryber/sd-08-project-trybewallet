@@ -25,7 +25,7 @@ class AddExpenseForm extends React.Component {
     } = this.props;
     await fetchCurrencyAction();
     addExpensesAction();
-    e.target.parentNode.reset();
+    // e.target.parentNode.reset();
   }
 
   handleFinishEdit(e) {
