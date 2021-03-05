@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector, connect } from 'react-redux';
 import getCurrencyList from '../services/getCurrencyList';
 import * as actions from '../actions';
 
@@ -43,4 +43,5 @@ CurrencySelect.propTypes = {
   onChange: PropTypes.func,
 };
 
-export default CurrencySelect;
+const mapStateToProps = (state) => ({ ...state });
+export default connect(mapStateToProps, null)(CurrencySelect);

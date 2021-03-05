@@ -27,7 +27,7 @@ function FormAddDespesa() {
   const expenses = useSelector((state) => state.wallet.expenses);
   const dispatch = useDispatch();
 
-  // ############################## funções para uso geral #######################
+  // ####################### funções para uso geral #######################
   function handleChange({ target }) {
     const { name, value } = target;
     setData({ ...data, [name]: value });
