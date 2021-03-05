@@ -13,10 +13,10 @@ class WalletHeader extends Component {
     const { expenses } = this.props;
 
     const total = expenses.reduce((totalSum, expenseInfos) => {
-      const { valueInput, currency, coinsExchange } = expenseInfos;
-      const foundCurrency = coinsExchange.find((coin) => coin.code === currency);
+      const { value, currency, exchangeRates } = expenseInfos;
+      const foundCurrency = exchangeRates.find((coin) => coin.code === currency);
       const currencyValue = Number(foundCurrency.ask);
-      return totalSum + (valueInput * currencyValue);
+      return totalSum + (value * currencyValue);
     }, 0);
     return total.toFixed(2);
   }

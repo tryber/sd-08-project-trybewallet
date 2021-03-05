@@ -12,11 +12,11 @@ class WalletForm extends Component {
     super(props);
 
     const INITIAL_STATE = {
-      valueInput: '',
-      descriptionInput: '',
+      value: '',
+      description: '',
       currency: 'USD',
-      methodInput: 'Dinheiro',
-      tagInput: 'Alimentação',
+      method: 'Dinheiro',
+      tag: 'Alimentação',
       id: 0,
     };
 
@@ -46,44 +46,44 @@ class WalletForm extends Component {
   async handleClick(e) {
     e.preventDefault();
     const {
-      id, valueInput, descriptionInput, methodInput, tagInput, currency } = this.state;
+      id, value, description, method, tag, currency } = this.state;
     const { addExpense } = this.props;
     const fetch = await fetchAPI();
-    const coinsExchange = Object.values(fetch)
+    const exchangeRates = Object.values(fetch)
       .filter((noUSTD) => noUSTD.name !== 'Dólar Turismo');
     const newExpense = {
-      id, valueInput, descriptionInput, methodInput, tagInput, currency, coinsExchange,
+      id, value, description, method, tag, currency, exchangeRates,
     };
     addExpense(newExpense);
     this.setState((prevState) => ({
-      ...prevState, id: prevState.id + 1,
+      ...prevState, id: prevState.id + 1, value: '', description: '',
     }));
   }
 
   renderForm() {
-    const { valueInput } = this.state;
+    const { value } = this.state;
     const rendersFunctions = [this.renderCurrenciesOptions(),
       this.renderPaymentOptions(),
       this.renderTagOptions(),
       this.renderAddButton()];
     return (
       <div>
-        <label htmlFor="valueInput">
+        <label htmlFor="value">
           Valor da despesa:
           <input
-            name="valueInput"
+            name="value"
             data-testid="value-input"
             type="number"
-            value={ valueInput }
+            value={ value }
             placeholder="Digite o valor da despesa"
             onChange={ this.handleChange }
             required
           />
         </label>
-        <label htmlFor="valueInput">
+        <label htmlFor="description">
           Descrição da despesa:
           <input
-            name="descriptionInput"
+            name="description"
             data-testid="description-input"
             type="text"
             placeholder="Digite uma descrição para a despesa"
@@ -126,7 +126,7 @@ class WalletForm extends Component {
         Método de pagamento:
         <select
           id="method-input"
-          name="methodInput"
+          name="method"
           data-testid="method-input"
           onChange={ this.handleChange }
         >
@@ -142,7 +142,7 @@ class WalletForm extends Component {
       <label htmlFor="tag-input">
         Motivo da despesa (TAG):
         <select
-          name="tagInput"
+          name="tag"
           id="tag-input"
           data-testid="tag-input"
           onChange={ this.handleChange }

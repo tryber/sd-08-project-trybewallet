@@ -24,22 +24,22 @@ class WalletTable extends Component {
           {expenses.map((expense, index) => {
             const TEN = 10;
             const {
-              descriptionInput, tagInput, methodInput, valueInput,
-              currency, coinsExchange,
+              description, tag, method, value,
+              currency, exchangeRates,
             } = expense;
-            const { name, ask } = coinsExchange.find(
+            const { name, ask } = exchangeRates.find(
               (currentCurrency) => currentCurrency.code === currency,
             );
             return (
               <tr key={ index }>
                 <td>{name}</td>
-                <td>{valueInput}</td>
+                <td>{value}</td>
                 <td>{Number(ask).toFixed(2)}</td>
                 <td>Real</td>
-                <td>{(ask * Number(valueInput, TEN)).toFixed(2)}</td>
-                <td>{descriptionInput}</td>
-                <td>{tagInput}</td>
-                <td>{methodInput}</td>
+                <td>{(ask * Number(value, TEN)).toFixed(2)}</td>
+                <td>{description}</td>
+                <td>{tag}</td>
+                <td>{method}</td>
                 <td>
                   <button type="button">Editar</button>
                   <button type="button" data-testid="delete-btn">Excluir</button>
