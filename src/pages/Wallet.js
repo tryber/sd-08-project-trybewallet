@@ -2,29 +2,35 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import { walletThunk } from '../actions';
+import FormHeader from '../components/FormHeader';
+import Form from '../components/Form';
+import Table from '../components/Table';
+
 class Wallet extends React.Component {
+  componentDidMount() {
+    const { getCurrencies } = this.props;
+    getCurrencies();
+  }
+
   render() {
-    const { email } = this.props;
     return (
       <div>
-        <header>
-          <h3>TrybeWallet</h3>
-          <p data-testid="email-field">{email}</p>
-          <p data-testid="total-field">{0}</p>
-          <p data-testid="header-currency-field">BRL</p>
-        </header>
+        <FormHeader />
+        <Form />
+        <Table />
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => ({
-  email: state.user.email,
-  expenses: state.wallet.expenses,
+const mapDispatchToProps = (dispatch) => ({
+  getCurrencies: (value) => dispatch(walletThunk(value)),
+
 });
 
-export default connect(mapStateToProps)(Wallet);
-
 Wallet.propTypes = {
-  email: PropTypes.string.isRequired,
+  getCurrencies: PropTypes.func.isRequired,
 };
+
+export default connect(null, mapDispatchToProps)(Wallet);

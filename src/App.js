@@ -3,16 +3,15 @@ import { Switch, Route } from 'react-router-dom';
 import Login from './pages/Login';
 import Wallet from './pages/Wallet';
 
-function App() {
-  return (
-    <div>
-      <h3>Hello, TrybeWallet!</h3>
+class App extends React.Component {
+  render() {
+    return (
       <Switch>
         <Route exact path="/" component={ Login } />
-        <Route path="carteira" component={ Wallet } />
+        <Route path="/carteira" component={ Wallet } />
       </Switch>
-    </div>
-  );
+    );
+  }
 }
 
 export default App;
