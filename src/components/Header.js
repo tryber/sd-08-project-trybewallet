@@ -22,6 +22,8 @@ class Header extends Component {
   }
 }
 
+// branch do Rodolfo
+
 const mapStateToProps = (state) => ({
   userEmail: state.user.email,
 });
