@@ -9,7 +9,7 @@ const INITIAL_STATE = {
 };
 
 export default function inwalletReducer(state = INITIAL_STATE, action) {
-  const { type, payload } = action;
+  const { payload } = action;
 
   switch (action.type) {
   case 'WALLET_ADDCURR':
