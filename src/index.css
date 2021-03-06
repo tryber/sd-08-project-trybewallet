@@ -114,7 +114,7 @@ code {
 }
 
 
-.form-header button {
+button {
   background-color: #036b52;
   border: 1px solid #036b52;
   color: white;
@@ -122,8 +122,33 @@ code {
   transition: all 0.25s ease;
 }
 
-.form-header button:hover {
+button:hover {
   background-color: #2fc18c;
   border: 1px solid #036b52;
   outline: none;
+}
+
+table {
+  max-width: 100vw;
+}
+
+table tr {
+  background-color: #ceeee7;
+  text-align: center;
+  width: 100%;
+  padding: 10px !important;
+}
+
+table tr:nth-child(even) {
+  background-color: white;
+  border: none;
+}
+
+table tr:nth-child(even) td {
+  background-color: white;
+  border-collapse: collapse;
+}
+
+table th, td {
+  width: 11.11%;
 }

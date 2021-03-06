@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import Header from '../components/Header';
 import AddExpense from '../components/AddExpense';
+import ExpenseTable from '../components/ExpenseTable';
 
 class Wallet extends React.Component {
   verifyTotal() {
@@ -26,6 +27,7 @@ class Wallet extends React.Component {
       <div className="container wallet-container">
         <Header email={ user } total={ this.verifyTotal() } />
         <AddExpense />
+        <ExpenseTable />
       </div>
     );
   }
