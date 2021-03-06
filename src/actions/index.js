@@ -23,4 +23,11 @@ const actionExpenses = (UPexpenses) => ({
   UPexpenses,
 });
 
+// export function actionAddExpenses(expense) {
+//   return {
+//     type: 'ADD_EXPENSES',
+//     expense,
+//   };
+// }
+
 export { actionEmail, fetchCurrencies, actionExpenses };

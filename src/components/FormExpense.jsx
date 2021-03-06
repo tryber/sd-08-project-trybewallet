@@ -47,6 +47,17 @@ class FormExpense extends Component {
     const { showExpenses } = this.props;
     this.addOne();
     showExpenses(this.state);
+    this.setState(
+      {
+        id: 0,
+        value: 0,
+        currency: 'USD',
+        method: '',
+        tag: '',
+        description: '',
+        exchangeRates: {},
+      },
+    );
   }
 
   async handleArray() {
@@ -93,6 +104,7 @@ class FormExpense extends Component {
 const mapDispactToProps = (dispatch) => ({
   fetchCurrencies: () => dispatch(fetchCurrenciesAction()),
   showExpenses: (UPexpenses) => dispatch(actionExpenses(UPexpenses)),
+  // expense: (expense) => dispatch(actionAddExpensesexpense(expense)),
 
 });
 

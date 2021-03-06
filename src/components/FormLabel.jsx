@@ -7,7 +7,7 @@ const FormLabel = (props) => {
       <label htmlFor="value">
         Despensa:
         <input
-          type="text"
+          type="number"
           id="value"
           data-testid="value-input"
           value={ value }
