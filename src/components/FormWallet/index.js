@@ -66,7 +66,7 @@ class FormWallet extends React.Component {
     return (
       <th>
         <label htmlFor="method-input">
-          Método de pagamento
+          Método de pagamento:
           <select
             id="method-input"
             name="method"
@@ -87,7 +87,7 @@ class FormWallet extends React.Component {
     return (
       <th>
         <label htmlFor="tag-input">
-          Tag
+          Tag:
           <select
             id="tag-input"
             name="tag"
