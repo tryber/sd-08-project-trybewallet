@@ -1,7 +1,7 @@
-const ECONOMY_API = 'https://economia.awesomeapi.com.br/';
+const ECONOMY_API = 'https://economia.awesomeapi.com.br/json/all';
 
 export const getCurrentCurrencies = () => (
-  fetch(`${ECONOMY_API}/json/all`)
+  fetch(ECONOMY_API)
     .then((response) => (
       response
         .json()

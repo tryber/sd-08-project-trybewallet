@@ -44,13 +44,9 @@ export const requestAPIErro = (error) => ({
   },
 });
 
-export const requestAPISuccess = ({ exchangeRates: value }) => ({
+export const requestAPISuccess = (payload) => ({
   type: REQUEST_API_SUCCESS,
-  payload: {
-
-    exchangeRates: value,
-    isFetching: true,
-  },
+  payload,
 });
 
 export const GetAPIData = () => async (dispatch) => {
