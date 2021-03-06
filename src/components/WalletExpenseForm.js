@@ -13,13 +13,14 @@ class WalletExpenseForm extends React.Component {
     this.state = {
       valueExpense: '',
       description: '',
-      currency: 'USD',
-      method: 'Dinheiro',
-      tag: 'Alimentação',
+      currency: '',
+      method: '',
+      tag: '',
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.btnAddExpense = this.btnAddExpense.bind(this);
+    this.clearState = this.clearState.bind(this);
   }
 
   async componentDidMount() {
@@ -39,11 +40,12 @@ class WalletExpenseForm extends React.Component {
 
   formInput(valueExpense) {
     return (
-      <label htmlFor="valueExpense">
+      <label htmlFor="value-input">
         Valor da despesa:
         <input
           type="number"
           value={ valueExpense }
+          id="value-input"
           name="valueExpense"
           data-testid="value-input"
           onChange={ this.handleChange }
@@ -54,11 +56,12 @@ class WalletExpenseForm extends React.Component {
 
   formDescription(description) {
     return (
-      <label htmlFor="description">
+      <label htmlFor="description-input">
         Descrição da Despesa:
         <textarea
           type="text"
           value={ description }
+          id="description-input"
           name="description"
           data-testid="description-input"
           onChange={ this.handleChange }
@@ -136,12 +139,25 @@ class WalletExpenseForm extends React.Component {
     e.preventDefault();
     const { AddExpsenseSave } = this.props;
     const { valueExpense, description, currency, method, tag } = this.state;
-    const exchangeRates = await fetchEntriesAPI();
+    const exchangeRatesFetch = await fetchEntriesAPI();
+    // console.log(exchangeRates);
+    const exchangeRates = Object.fromEntries(exchangeRatesFetch);
     // console.log(exchangeRates);
     const objetctExpenses = {
       valueExpense, description, currency, method, tag, exchangeRates,
     };
     AddExpsenseSave(objetctExpenses);
+    this.clearState();
+  }
+
+  clearState() {
+    this.setState({
+      valueExpense: '',
+      description: '',
+      currency: '',
+      method: '',
+      tag: '',
+    });
   }
 
   render() {
@@ -181,10 +197,10 @@ const mapStateToProps = (state) => ({
   expensesStore: state.walletReducer.expenses,
 });
 
-WalletExpenseForm.propTypes = {
-  AddExpsenseSave: PropTypes.func.isRequired,
-  fetchCurrenciesSave: PropTypes.func.isRequired,
-  getCurrenciesStore: PropTypes.arrayOf(PropTypes.object).isRequired,
-};
+// WalletExpenseForm.propTypes = {
+//   AddExpsenseSave: PropTypes.func.isRequired,
+//   fetchCurrenciesSave: PropTypes.func.isRequired,
+//   getCurrenciesStore: PropTypes.arrayOf(PropTypes.object).isRequired,
+// };
 
 export default connect(mapStateToProps, mapDispatchToProps)(WalletExpenseForm);
