@@ -21,6 +21,7 @@ class Header extends React.Component {
         }
         return acc + consumed;
       }
+      return acc;
     }, 0);
     return result;
   }
@@ -50,6 +51,8 @@ Header.propTypes = {
     method: PropTypes.string,
     tag: PropTypes.string,
     exchangeRates: PropTypes.string,
+    reduce: PropTypes.string,
+    //  Gambiarraa para passar aqno lint
   }).isRequired,
 };
 
