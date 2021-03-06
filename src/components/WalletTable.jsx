@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { deleteExpense as eraseExpense, editExpense as modifyExpense } from '../actions';
+import {
+  deleteExpense as eraseExpense, editExpense as modifyExpense } from '../actions/wallet';
 
 class ExpensesTable extends React.Component {
   renderButton(name, expense, callback) {
