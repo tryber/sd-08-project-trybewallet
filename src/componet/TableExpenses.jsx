@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 class TableExpenses extends Component {
-  constructor() {
-    super();
-    this.state = {
-      expenses: '',
-    };
-  }
+  // constructor() {
+  //   super();
+  //   this.state = {
+  //     expenses: '',
+  //   };
+  // }
 
   componentDidMount() {
     // const { fetchCurrent } = this.props;
