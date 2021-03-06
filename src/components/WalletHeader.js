@@ -13,12 +13,12 @@ class WalletHeader extends Component {
       // console.log(exchangeRatesNumber);
       const valueNumber = Number(value);
       // console.log(valueNumber);
-      const sum = exchangeRatesNumber * valueNumber;
-      // console.log(sum);
-      return sum;
+      const total = exchangeRatesNumber * valueNumber;
+      // console.log(total);
+      return total;
     });
     // console.log(expensesMap);
-    return expensesMap.reduce((total, expense) => total + expense, 0);
+    return expensesMap.reduce((sum, expense) => sum + expense, 0);
   }
 
   render() {
@@ -47,4 +47,5 @@ const mapStateToProps = (state) => ({
   emailStore: state.user.email,
   expensesStore: state.wallet.expenses,
 });
+
 export default connect(mapStateToProps, null)(WalletHeader);
