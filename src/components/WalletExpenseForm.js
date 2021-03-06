@@ -11,7 +11,7 @@ class WalletExpenseForm extends React.Component {
     super(props);
 
     this.state = {
-      valueExpense: '',
+      value: '',
       description: '',
       currency: '',
       method: '',
@@ -38,15 +38,15 @@ class WalletExpenseForm extends React.Component {
     });
   }
 
-  formInput(valueExpense) {
+  formInput(value) {
     return (
       <label htmlFor="value-input">
         Valor da despesa:
         <input
           type="number"
-          value={ valueExpense }
+          value={ value }
           id="value-input"
-          name="valueExpense"
+          name="value"
           data-testid="value-input"
           onChange={ this.handleChange }
         />
@@ -138,13 +138,13 @@ class WalletExpenseForm extends React.Component {
     // console.log('clicou');
     e.preventDefault();
     const { AddExpsenseSave } = this.props;
-    const { valueExpense, description, currency, method, tag } = this.state;
+    const { value, description, currency, method, tag } = this.state;
     const exchangeRatesFetch = await fetchEntriesAPI();
     // console.log(exchangeRates);
     const exchangeRates = Object.fromEntries(exchangeRatesFetch);
     // console.log(exchangeRates);
     const objetctExpenses = {
-      valueExpense, description, currency, method, tag, exchangeRates,
+      value, description, currency, method, tag, exchangeRates,
     };
     AddExpsenseSave(objetctExpenses);
     this.clearState();
@@ -152,7 +152,7 @@ class WalletExpenseForm extends React.Component {
 
   clearState() {
     this.setState({
-      valueExpense: '',
+      value: '',
       description: '',
       currency: '',
       method: '',
@@ -161,14 +161,14 @@ class WalletExpenseForm extends React.Component {
   }
 
   render() {
-    const { valueExpense, description, currency, method, tag } = this.state;
+    const { value, description, currency, method, tag } = this.state;
     const methodOptions = ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'];
     const tagOptions = ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
     const { getCurrenciesStore } = this.props;
 
     return (
       <form>
-        { this.formInput(valueExpense) }
+        { this.formInput(value) }
         { this.formDescription(description) }
         { this.formCurrency(currency, getCurrenciesStore) }
         { this.formMethod(method, methodOptions) }
@@ -193,8 +193,8 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const mapStateToProps = (state) => ({
-  getCurrenciesStore: state.walletReducer.currencies,
-  expensesStore: state.walletReducer.expenses,
+  getCurrenciesStore: state.wallet.currencies,
+  expensesStore: state.wallet.expenses,
 });
 
 // WalletExpenseForm.propTypes = {

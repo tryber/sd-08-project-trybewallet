@@ -5,7 +5,7 @@ const INITIAL_STATE = {
   expenses: [],
 };
 
-const walletReducer = (state = INITIAL_STATE, action) => {
+const wallet = (state = INITIAL_STATE, action) => {
   switch (action.type) {
   case ADD_EXPENSE:
     return {
@@ -27,4 +27,4 @@ const walletReducer = (state = INITIAL_STATE, action) => {
   }
 };
 
-export default walletReducer;
+export default wallet;
