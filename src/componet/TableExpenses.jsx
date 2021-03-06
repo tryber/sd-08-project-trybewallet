@@ -4,40 +4,6 @@ import PropTypes from 'prop-types';
 import { deleteRegister } from '../actions';
 
 class TableExpenses extends Component {
-  // constructor() {
-  //   super();
-  //   this.state = {
-  //     expenses: '',
-  //   };
-  // }
-
-  componentDidMount() {
-    // const { fetchCurrent } = this.props;
-    // fetchCurrent();
-    // .then(this.loading());
-    // console.log(currency);
-  }
-
-  // lineBRA() {
-  //   return(
-  //     <td>Real</td>
-  //     <td>1</td>
-  //     <td>1</td>
-  //     )
-  // }
-
-  // lineNotBRA(linha) {
-  //   return(
-  //         <td>{linha.exchangeRates[linha.currency].name}</td>
-  //         <td>{Math.round(linha.exchangeRates[linha.currency].ask * 100) / 100}</td>
-  //         <td>
-  //           {Math.round(
-  //             (linha.value * linha.exchangeRates[linha.currency].ask) * 100,
-  //             ) / 100}
-  //         </td>
-  //   )
-  // }
-
   makeLine(expenses) {
     const { deleteButton } = this.props;
     return (
@@ -48,24 +14,18 @@ class TableExpenses extends Component {
           <td>{linha.method}</td>
           {/* https://pt.stackoverflow.com/questions/114740/como-arredondar-com-2-casas-decimais-no-javascript-utilizando-uma-regra-específi */}
           <td>{Math.round(linha.value * 100) / 100}</td>
-          {/* {
+          <td>{!linha.currency ? 'real' : linha.exchangeRates[linha.currency].name }</td>
+          <td>
+            {!linha.currency ? 1
+              : Math.round(linha.exchangeRates[linha.currency].ask * 100) / 100}
 
-            (linha.currency === ''|| linha.currency === 'BRA') && {
-            lineNotBRA()
-            } : {
-              lineBRA()
-            }
-          } */}
-          {/* {(() => {
-            switch (linha.currency) {
-              case 'BRA': return (
-
-                <td>Real</td>
-                <td>1</td>
-                <td>1</td>
-                )
-            }
-          })} */}
+          </td>
+          <td>
+            { !linha.currency ? Math.round(linha.value * 100) / 100
+              : Math.round(
+                (linha.value * linha.exchangeRates[linha.currency].ask) * 100,
+              ) / 100}
+          </td>
           <td>Real</td>
           <td>
             <button
