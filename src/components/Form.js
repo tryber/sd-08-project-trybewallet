@@ -8,6 +8,7 @@ class Form extends Component {
     console.log(fetchCurr);
     fetchCurr();
   }
+  // taca-lhe pau
 
   render() {
     const { currency } = this.props;
