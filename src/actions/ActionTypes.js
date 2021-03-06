@@ -1,0 +1,3 @@
+export const LOGIN_USER = 'LOGIN_USER';
+export const ADD_EXPENSE = 'ADD_EXPENSE';
+export const SAVE_FETCH_CURRENCIES = 'SAVE_FETCH_CURRENCIES';
