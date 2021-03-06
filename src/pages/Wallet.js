@@ -1,25 +1,18 @@
 import React from 'react';
 import Form from '../components/Form';
-import { connect } from 'react-redux'
+import Header from '../components/Header';
+import TableWallet from '../components/TableWallet';
 
 class Wallet extends React.Component {
   render() {
-    const { readUser } = this.props;
-    const { wallet: { wallet: { expenses }} } = this.props.readUserState;
-    const { wallet: { wallet: { currencies }} } = this.props.readUserState;
     return (
       <div>
-        <p data-testid="email-field">Email: {readUser}</p>
-        <p data-testid="total-field header-currency-field">Despesa Total: R$ {expenses} {currencies}</p>
+        <Header />
         <Form />
+        <TableWallet />
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => ({
-  readUserState: state,
-  readUser: state.user.email,
-});
-
-export default connect(mapStateToProps)(Wallet);
+export default Wallet;

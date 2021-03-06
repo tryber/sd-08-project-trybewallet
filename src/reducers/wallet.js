@@ -1,17 +1,18 @@
 const INITIAL_STATE = {
-  wallet: {
-    currencies: ['BRL'],
-    expenses: [0],
-  },
+  currencies: ['BRL'],
+  expenses: [],
 };
 
 const walletRedux = (state = INITIAL_STATE, action) => {
   switch (action.type) {
   case 'WALLET_EXPENSES':
-    return { ...state, expenses: action.value };
+    return { ...state, expenses: [...state.expenses, action.value] };
 
   case 'WALLET_CURRENCIES':
-    return { ...state, currencies: action.value };
+    return { ...state, currencies: [action.value] };
+
+  case 'EXCLUIR':
+    return { ...state, expenses: [...state.expenses.filter((expense) => expense.id !== action.expense.id)] };
 
   default:
     return state;

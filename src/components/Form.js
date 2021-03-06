@@ -3,26 +3,18 @@ import { connect } from 'react-redux';
 import { fetchEconomia, walletExpense } from '../actions';
 import TableWallet from './TableWallet';
 
-const expenses = [{
-  id: 0,
-  value: 0,
-  description: '',
-  currency: 'USD',
-  method: 'Dinheiro',
-  tag: 'Alimentação',
-  exchangeRates: {
-    m: {
-    },
-  },
-}];
-
 class Form extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      moeda: [],
-      ...expenses,
+      id: 0,
+      value: 0,
+      description: '',
+      currency: 'USD',
+      method: 'Dinheiro',
+      tag: 'Alimentação',
+      exchangeRates: {},
     };
 
     this.hundleOnClick = this.hundleOnClick.bind(this);
@@ -30,25 +22,36 @@ class Form extends React.Component {
     this.renderInputDescricao = this.renderInputDescricao.bind(this);
     this.renderSelectPagamento = this.renderSelectPagamento.bind(this);
     this.renderTag = this.renderTag.bind(this);
+    this.renderDispatch = this.renderDispatch.bind(this);
   }
 
   componentDidMount() {
     return fetch('https://economia.awesomeapi.com.br/json/all')
       .then((responde) => responde.json())
       .then((data) => this.setState({
-        moeda: Object.entries(data),
+        exchangeRates: data,
       }));
   }
 
   hundleOnClick({ target: { name, value } }) {
-    this.setState((oi) => ({
-      id: oi.id + 1,
-      [name]: value,
-      [name]: value,
-      [name]: value,
-      [name]: value,
+    this.setState(() => ({
       [name]: value,
     }));
+  }
+
+  renderDispatch() {
+    const { id } = this.state;
+    const { addWalletCurrencie, addWalletExpense } = this.props;
+    addWalletCurrencie();
+    addWalletExpense(this.state);
+    this.setState({
+      id: id + 1,
+      value: 0,
+      description: '',
+      currency: 'USD',
+      method: 'Dinheiro',
+      tag: 'Alimentação',
+    });
   }
 
   renderInputValor() {
@@ -58,6 +61,7 @@ class Form extends React.Component {
         <input
           id="value"
           name="value"
+          value={ this.state.value }
           onChange={ this.hundleOnClick }
           type="text"
           data-testid="value-input"
@@ -72,6 +76,7 @@ class Form extends React.Component {
         Descrição:
         <input
           id="description"
+          value={ this.state.description }
           name="description"
           onChange={ this.hundleOnClick }
           data-testid="description-input"
@@ -81,18 +86,20 @@ class Form extends React.Component {
   }
 
   renderSelectMoeda() {
-    const { moeda } = this.state;
+    const { exchangeRates } = this.state;
+
     return (
       <select
         id="currency-input"
+        value={ this.state.currency }
         name="currency"
         data-testid="currency-input"
         onChange={ this.hundleOnClick }
       >
-        {moeda.map((currency) => {
-          if (currency === 'USDT') return '';
+        {Object.entries(exchangeRates).map((currency) => {
+          if (currency[0] === 'USDT') return '';
           return (
-            <option key={ currency[0] } data-testid={ currency[0] }>
+            <option key={ currency[0] } data-testid={ `${currency[0]}` }>
               {currency[0]}
             </option>
           );
@@ -107,6 +114,7 @@ class Form extends React.Component {
         Método de Pagamento:
         <select
           onChange={ this.hundleOnClick }
+          value={ this.state.method }
           name="method"
           id="pagamento"
           data-testid="method-input"
@@ -121,10 +129,11 @@ class Form extends React.Component {
 
   renderTag() {
     return (
-      <label htmlFor="tag">
+      <label htmlFor>
         Tag:
         <select
           name="tag"
+          value={ this.state.tag }
           onChange={ this.hundleOnClick }
           data-testid="tag-input"
         >
@@ -139,8 +148,6 @@ class Form extends React.Component {
   }
 
   render() {
-    const { ...expenses } = this.state;
-    const { addWalletCurrencie, addWalletExpense } = this.props;
     return (
       <div>
         <form>
@@ -150,13 +157,13 @@ class Form extends React.Component {
           { this.renderSelectPagamento() }
           { this.renderTag() }
           <button
-            onClick={ () => (addWalletCurrencie() && addWalletExpense(expenses)) }
+            onClick={ this.renderDispatch }
             type="button"
           >
             Adicionar despesa
           </button>
         </form>
-        <TableWallet />
+
       </div>
     );
   }

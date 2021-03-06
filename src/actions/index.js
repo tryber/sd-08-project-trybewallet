@@ -13,6 +13,11 @@ export const walletCurrencie = (value) => ({
   value,
 });
 
+export const excluirExpense = (value) => ({
+  type: 'EXCLUIR',
+  value,
+});
+
 export const fetchEconomia = () => async (dispatch) => {
   const responseApi = await fetch('https://economia.awesomeapi.com.br/json/all');
   const jsonApi = await responseApi.json();

@@ -66,15 +66,22 @@ class Login extends React.Component {
     return (
       <div>
         <label>E-mail</label>
-        <input onChange={ this.hundleEmailOnChange } type="text" data-testid="email-input" />
+        <input
+          onChange={ this.hundleEmailOnChange }
+          type="text"
+          data-testid="email-input"
+        />
         <label>Senha</label>
-        <input onChange={ this.hundlePasswordOnChange } type="password" data-testid="password-input" />
+        <input
+          onChange={ this.hundlePasswordOnChange }
+          type="password"
+          data-testid="password-input"
+        />
         { validationPassword || validationEmail
-          ? <button onClick={ this.hundleonClick } type="button" disabled={ true }>
+          ? <button onClick={ this.hundleonClick } type="button" disabled>
             Entrar
           </button>
-          : <button onClick={ this.hundleonClick } type="button" disabled={ false }>Entrar</button>
-        }
+          : <button onClick={ this.hundleonClick } type="button" disabled={ false }>Entrar</button>}
       </div>
     );
   }
