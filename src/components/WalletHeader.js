@@ -22,21 +22,8 @@ class WalletHeader extends Component {
     return expensesMap.reduce((total, expense) => total + expense, 0);
   }
 
-// getTotal() {
-//     const { expensesStore } = this.props;
-//     console.log(expensesStore[0]);
-//     return expensesStore
-//       .map(({ currency, value, exchangeRates }) => {
-//         const currencyData = exchangeRates[currency];
-//         const total = Number(value) * Number(currencyData.ask);
-//         return total;
-//       })
-//       .reduce((acc, expense) => acc + expense, 0);
-//   }
-
   render() {
     const { emailStore } = this.props;
-    // console.log(this.expensesSum());
     return (
       <header>
         <ul>
@@ -44,8 +31,6 @@ class WalletHeader extends Component {
           <li data-testid="total-field">
             Total: R$
             {this.expensesSum()}
-            {/* {this.getTotal()} */}
-            {/* { (Math.round(this.getTotal() * 100) / 100).toFixed(2) } */}
           </li>
           <li data-testid="header-currency-field">Câmbio: BRL </li>
         </ul>
