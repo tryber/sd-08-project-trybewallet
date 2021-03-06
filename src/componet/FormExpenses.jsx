@@ -41,15 +41,6 @@ class FormExpenses extends Component {
     // console.log(this.state);
   }
 
-  // async submitForm() {
-  //   const { id } = this.state;
-  //   const { send } = this.props;
-  //   const exchangeRates = await fetch('https://economia.awesomeapi.com.br/json/all')
-  //     .then((response) => response.json());
-  //   console.log(exchangeRates);
-  //   send({ ...this.state, id: id + 1, exchangeRates });
-  // }
-
   async submitForm() {
     const { id, value } = this.state;
     const { send, fetchCurrent, exchangeRates } = this.props;
@@ -57,12 +48,10 @@ class FormExpenses extends Component {
     this.setState({
       exchangeRates: exchangeRates[0],
     });
-    // const exchangeRates = await fetchCurrent();
     if (value) {
       this.setState({ id: id + 1 });
-      console.log(this.state);
+      // console.log(this.state);
       send(this.state);
-      // document.getElementById('input').reset();
       this.setState({ value: '',
         description: '',
         method: '',

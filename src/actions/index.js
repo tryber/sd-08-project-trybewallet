@@ -26,7 +26,7 @@ export const addRegister = (data) => ({
 });
 export const deleteRegister = (register) => ({
   type: DELETE_REGISTER,
-  payload: [register],
+  payload: register,
 });
 
 export const requestAPI = () => ({

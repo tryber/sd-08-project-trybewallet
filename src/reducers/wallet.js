@@ -14,8 +14,12 @@ const wallet = (state = initialState, action) => {
   case ADD_REGISTER:
     return { ...state,
       expenses: [...state.expenses, action.payload] };
-  case DELETE_REGISTER:
-    return state.filter((register) => register !== action.value);
+  case DELETE_REGISTER: {
+    const result = state.expenses;
+    result.splice(action.payload, 1);
+    return { ...state,
+      expenses: result };
+  }
   case REQUEST_API:
     return {
       ...state,

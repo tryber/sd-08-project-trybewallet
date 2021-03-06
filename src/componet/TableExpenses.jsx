@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { deleteRegister } from '../actions';
 
 class TableExpenses extends Component {
   // constructor() {
@@ -17,15 +18,76 @@ class TableExpenses extends Component {
     // console.log(currency);
   }
 
+  // lineBRA() {
+  //   return(
+  //     <td>Real</td>
+  //     <td>1</td>
+  //     <td>1</td>
+  //     )
+  // }
+
+  // lineNotBRA(linha) {
+  //   return(
+  //         <td>{linha.exchangeRates[linha.currency].name}</td>
+  //         <td>{Math.round(linha.exchangeRates[linha.currency].ask * 100) / 100}</td>
+  //         <td>
+  //           {Math.round(
+  //             (linha.value * linha.exchangeRates[linha.currency].ask) * 100,
+  //             ) / 100}
+  //         </td>
+  //   )
+  // }
+
+  makeLine(expenses) {
+    const { deleteButton } = this.props;
+    return (
+      expenses.map((linha) => (
+        <tr key={ linha.id }>
+          <td>{linha.description}</td>
+          <td>{linha.tag}</td>
+          <td>{linha.method}</td>
+          {/* https://pt.stackoverflow.com/questions/114740/como-arredondar-com-2-casas-decimais-no-javascript-utilizando-uma-regra-específi */}
+          <td>{Math.round(linha.value * 100) / 100}</td>
+          {/* {
+
+            (linha.currency === ''|| linha.currency === 'BRA') && {
+            lineNotBRA()
+            } : {
+              lineBRA()
+            }
+          } */}
+          {/* {(() => {
+            switch (linha.currency) {
+              case 'BRA': return (
+
+                <td>Real</td>
+                <td>1</td>
+                <td>1</td>
+                )
+            }
+          })} */}
+          <td>Real</td>
+          <td>
+            <button
+              type="button"
+              onClick={ () => deleteButton(linha.id) }
+              data-testid="delete-btn"
+            >
+              Delete
+            </button>
+            <button type="button" data-testid="edit-btn">Editar despesa</button>
+          </td>
+        </tr>
+      ))
+    );
+  }
+
   render() {
     const { expenses } = this.props;
-    console.table(this.props);
-    console.table(expenses);
+    // console.table(this.props);
+    // console.table(expenses);
     return (
       <div>
-        Tabela prototipo
-        Descrição, Tag, Método de pagamento, Valor, Moeda, Câmbio utilizado,
-        Valor convertido, Moeda de conversão e Editar/Excluir
         <table>
           <tr>
             <td>Descrição</td>
@@ -38,27 +100,7 @@ class TableExpenses extends Component {
             <td>Moeda de conversão</td>
             <td>Editar/Excluir</td>
           </tr>
-          { expenses.map((linha) => (
-            <tr key={ linha.id }>
-              <td>{linha.description}</td>
-              <td>{linha.tag}</td>
-              <td>{linha.method}</td>
-              {/* https://pt.stackoverflow.com/questions/114740/como-arredondar-com-2-casas-decimais-no-javascript-utilizando-uma-regra-específi */}
-              <td>{Math.round(linha.value * 100) / 100}</td>
-              <td>{linha.exchangeRates[linha.currency].name}</td>
-              <td>{Math.round(linha.exchangeRates[linha.currency].ask * 100) / 100}</td>
-              <td>
-                {Math.round(
-                  (linha.value * linha.exchangeRates[linha.currency].ask) * 100,
-                ) / 100}
-              </td>
-              <td>Real</td>
-              <td>
-                <button type="button" data-testid="delete-btn">Delete</button>
-                <button type="button" data-testid="delete-btn">Editar despesa</button>
-              </td>
-            </tr>
-          ))}
+          {this.makeLine(expenses)}
         </table>
       </div>
     );
@@ -66,7 +108,7 @@ class TableExpenses extends Component {
 }
 TableExpenses.propTypes = {
   // send: PropTypes.func.isRequired,
-  // fetchCurrent: PropTypes.func.isRequired,
+  deleteButton: PropTypes.func.isRequired,
   // // currency: PropTypes.objectOf().isRequired,
   expenses: PropTypes.objectOf().isRequired,
   // exchangeRates: PropTypes.objectOf().isRequired,
@@ -80,10 +122,10 @@ function mapStateToProps(state) {
   };
 }
 
-// const mapDispatchToProps = (dispatch) => ({
-//   // send: (xablau) => dispatch(addRegister(xablau)),
-//   // fetchCurrent: (xublau) => dispatch(GetAPIData(xublau)),
-// });
+const mapDispatchToProps = (dispatch) => ({
+  deleteButton: (test) => dispatch(deleteRegister(test)),
+  // send: (xablau) => dispatch(addRegister(xablau)),
+  // fetchCurrent: (xublau) => dispatch(GetAPIData(xublau)),
+});
 
-// export default connect(mapStateToProps, mapDispatchToProps)(TableExpenses);
-export default connect(mapStateToProps, null)(TableExpenses);
+export default connect(mapStateToProps, mapDispatchToProps)(TableExpenses);
