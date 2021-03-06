@@ -1,13 +1,154 @@
 body {
+  height: 100vh;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  width: 100%;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.container {
+  align-items: center;
+  background-color: #ceeee7;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  width: 100%;
+}
+
+.login-form {
+  align-items: center;
+  background-color: white;
+  border: 1px solid #036b52;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  padding: 20px;
+  text-align: center;
+}
+
+.login-form form {
+  display: flex;
+  flex-flow: column wrap;
+}
+
+.login-form form input {
+  border: 1px solid #036b52;
+}
+
+.login-form form input:hover {
+  border: 1px solid #2fc18c;
+}
+
+.login-form form input:focus {
+  outline: none;
+  border: 2px solid #41197f;
+}
+
+.login-form form input, .login-form form button {
+  padding: 5px 10px;
+  margin: 5px 0;
+}
+
+.login-form form button {
+  background-color: #036b52;
+  border: none;
+  color: white;
+  transition: all 0.25s ease;
+}
+
+.login-form form button:disabled {
+  background-color: #ceeee7;
+  border: 1px solid #036b52;
+  color: #036b52;
+}
+
+.wallet-container {
+  align-items: initial;
+  flex-flow: column wrap;
+  justify-content: flex-start;
+}
+
+.header {
+  background-color: #333;
+  color: white;
+  font-weight: 300;
+  padding: 15px;
+  width: 100%;
+}
+
+.header h2 {
+  font-size: 18px;
+  margin: 0;
+}
+
+.header .header-row {
+  display: flex;
+}
+
+.header h3 {
+  font-size: 14px;
+  margin: 0;
+}
+
+.form-header {
+  align-items: center;
+  background-color: #2fc18c;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  padding: 20px 0;
+  width: 100%;
+}
+
+.form-header button, .form-header input, .form-header select {
+  padding: 5px 10px;
+  margin: 0 10px;
+}
+
+
+button {
+  background-color: #036b52;
+  border: 1px solid #036b52;
+  color: white;
+  padding: 10px 15px;
+  transition: all 0.25s ease;
+}
+
+button:hover {
+  background-color: #2fc18c;
+  border: 1px solid #036b52;
+  outline: none;
+}
+
+table {
+  max-width: 100vw;
+}
+
+table tr {
+  background-color: #ceeee7;
+  text-align: center;
+  width: 100%;
+  padding: 10px !important;
+}
+
+table tr:nth-child(even) {
+  background-color: white;
+  border: none;
+}
+
+table tr:nth-child(even) td {
+  background-color: white;
+  border-collapse: collapse;
+}
+
+table th, td {
+  width: 11.11%;
 }
