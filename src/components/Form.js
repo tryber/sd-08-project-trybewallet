@@ -53,7 +53,7 @@ class Form extends React.Component {
   renderDescriptionInput(description) {
     return (
       <label htmlFor="despesa">
-        Descrição
+        Tarefa
         <input
           type="text"
           id="despesa"

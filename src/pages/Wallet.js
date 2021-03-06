@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import Form from '../components/Form';
 import { ActionsExpense } from '../actions';
+import ExpensesTable from '../components/ExpensesTable';
 
 class Wallet extends React.Component {
   componentDidMount() {
@@ -35,6 +36,7 @@ class Wallet extends React.Component {
           <span data-testid="header-currency-field">Câmbio: BRL</span>
         </header>
         <Form />
+        <ExpensesTable />
       </>
 
     );
