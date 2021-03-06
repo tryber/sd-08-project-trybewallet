@@ -6,7 +6,7 @@ import TableRow from './TableRow';
 class ExpenseTable extends React.Component {
   render() {
     const { expenses } = this.props;
-    console.log(expenses);
+    // console.log(expenses);
     return (
       <table cellSpacing="0">
         <tr>

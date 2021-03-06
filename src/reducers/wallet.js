@@ -17,6 +17,11 @@ const reducer = (state = INITIAL, action) => {
       ...state,
       expenses: state.expenses.concat(action.newExpense),
     };
+  case 'REMOVE_AN_EXPENSE':
+    return {
+      ...state,
+      expenses: [...state.expenses].filter((exp) => exp.id !== action.id),
+    };
   default:
     return state;
   }

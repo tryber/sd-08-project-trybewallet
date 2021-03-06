@@ -1,7 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { RemoveAnExpenseAction } from '../actions';
 
 class TableRow extends React.Component {
+  deleteExpense(e) {
+    e.preventDefault();
+    const { expense, remove } = this.props;
+    const { id } = expense;
+    remove(id);
+  }
+
   render() {
     const { expense } = this.props;
     const { description, tag, method } = expense;
@@ -21,13 +30,22 @@ class TableRow extends React.Component {
         <td>{ parseFloat(ask).toFixed(2) }</td>
         <td>{ parseFloat(valorConvertido).toFixed(2) }</td>
         <td>Real</td>
-        <td><button type="button" data-testid="delete-btn">Excluir</button></td>
+        <td>
+          <button
+            type="button"
+            data-testid="delete-btn"
+            onClick={ (e) => this.deleteExpense(e) }
+          >
+            Excluir
+          </button>
+        </td>
       </tr>
     );
   }
 }
 
 TableRow.propTypes = {
+  remove: PropTypes.func.isRequired,
   expense: PropTypes.shape({
     id: PropTypes.number,
     value: PropTypes.number,
@@ -41,4 +59,8 @@ TableRow.propTypes = {
   }).isRequired,
 };
 
-export default TableRow;
+const mapDispatchToProps = (dispatch) => ({
+  remove: (id) => dispatch(RemoveAnExpenseAction(id)),
+});
+
+export default connect(null, mapDispatchToProps)(TableRow);

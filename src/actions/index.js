@@ -28,3 +28,8 @@ export const AddAnExpenseAction = (newExpense) => ({
   type: 'ADD_AN_EXPENSE',
   newExpense,
 });
+
+export const RemoveAnExpenseAction = (id) => ({
+  type: 'REMOVE_AN_EXPENSE',
+  id,
+});
