@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-class Xablau extends Component {
+class Header extends Component {
   render() {
+    const { userEmail } = this.props;
+    console.log(userEmail);
     return (
       <div>
         <div>
-          <p data-testid="email-field">rr</p>
+          <p data-testid="email-field">{userEmail}</p>
         </div>
         <div>
-          <p data-testid="total-field">rr</p>
+          <p data-testid="total-field">0</p>
         </div>
         <div>
-          <p data-testid="header-currency-field">rr</p>
+          <p data-testid="header-currency-field">BRL</p>
         </div>
       </div>
     );
@@ -27,4 +29,4 @@ const mapStateToProps = (state) => ({
 
 // };
 
-export default connect(mapStateToProps)(Xablau);
+export default connect(mapStateToProps)(Header);
