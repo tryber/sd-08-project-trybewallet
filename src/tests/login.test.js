@@ -7,7 +7,11 @@ import { renderWithRouterAndStore } from './testConfig'
 
 afterEach(() => jest.clearAllMocks());
 
+<<<<<<< HEAD
 describe.only('1 - Crie uma página inicial de login com os seguintes campos e características:', () => {
+=======
+xdescribe('1 - Crie uma página inicial de login com os seguintes campos e características:', () => {
+>>>>>>> manda-bala-rodolfo
   test('A rota para esta página deve ser \'/\'', () => {
     const { history } = renderWithRouterAndStore(<App />);
     expect(history.location.pathname).toBe('/');
