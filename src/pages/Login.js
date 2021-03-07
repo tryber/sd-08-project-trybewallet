@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import loginAction from '../actions';
+import { loginAction } from '../actions';
 
 class Login extends React.Component {
   constructor() {
@@ -24,7 +24,7 @@ class Login extends React.Component {
     const PASSWORD_LENGTH = 6;
     const regexEmail = /^[\w]+@([\w]+\.)+[\w]{2,4}$/gi;
     const emailIsValid = regexEmail.test(email);
-    const passwordIsValid = password.length === PASSWORD_LENGTH;
+    const passwordIsValid = password.length >= PASSWORD_LENGTH;
     const disabled = !(emailIsValid && passwordIsValid);
     this.setState({
       disabled,
