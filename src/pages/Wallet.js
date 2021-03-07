@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { Creators as walletActions } from '../actions/wallet.action';
 import Header from '../components/Header';
-import ExpenseForm from '../components/FormExpense';
-import ExpenseTable from '../components/expenseTable';
+import FormExpense from '../components/FormExpense';
+import ExpensesTable from '../components/ExpensesTable';
 
 class Wallet extends React.Component {
   componentDidMount() {
@@ -18,8 +18,8 @@ class Wallet extends React.Component {
       <div>
         <header>
           <Header />
-          <ExpenseForm />
-          <ExpenseTable />
+          <FormExpense />
+          <ExpensesTable />
         </header>
       </div>
     );
