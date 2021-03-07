@@ -6,7 +6,7 @@ class FormSelectCurrencies extends React.Component {
     const { apiCurrencies, currency, handleChange } = this.props;
     return (
       <>
-        <span>Moeda:</span>
+        <span>Moedas:</span>
         <select
           value={ currency }
           name="currency"

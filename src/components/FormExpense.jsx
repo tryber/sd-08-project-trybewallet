@@ -3,9 +3,11 @@ import { connect } from 'react-redux';
 import { getCurrencies } from '../services/requestAPI';
 import { fetchCurrencies as fetchCurrenciesAction, actionExpenses } from '../actions';
 import FormLabel from './FormLabel';
+import FormLabelDescri from './ForlLabelDescri';
 import FormSelectMethod from './FormSelectMethod';
 import FormSelectTag from './FormSelectTag';
 import FormSelectCurrencies from './FormSelectCurrencies';
+import '../styles/Form.css';
 
 class FormExpense extends Component {
   constructor() {
@@ -55,7 +57,6 @@ class FormExpense extends Component {
         method: '',
         tag: '',
         description: '',
-        exchangeRates: {},
       },
     );
   }
@@ -72,13 +73,12 @@ class FormExpense extends Component {
     const { value, currency, method, tag, description } = this.state;
 
     return (
-      <section>
+      <section className="formContainer">
 
         <form>
 
           <FormLabel
             value={ value }
-            description={ description }
             handleChange={ this.handleChange }
           />
           <FormSelectCurrencies
@@ -91,6 +91,10 @@ class FormExpense extends Component {
           />
           <FormSelectTag
             tag={ tag }
+            handleChange={ this.handleChange }
+          />
+          <FormLabelDescri
+            description={ description }
             handleChange={ this.handleChange }
           />
 

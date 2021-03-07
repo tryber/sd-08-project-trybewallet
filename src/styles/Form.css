@@ -1,0 +1,23 @@
+.FormContainer {
+  overflow-x:auto;
+}
+.FormTable{
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.FormTable thead{
+  background-color: rgb(34, 34, 34);
+}
+.FormTable thead tr {
+  padding: 20px;
+  color: white;
+}
+
+.FormTable tbody tr {
+  padding: 20px;
+}
+
+.FormTable tbody tr:nth-child(odd){
+  background-color: rgb(204, 204, 204);
+}

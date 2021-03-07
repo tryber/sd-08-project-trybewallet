@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import '../styles/Header.css';
 
 class Header extends Component {
   constructor() {
@@ -16,6 +17,7 @@ class Header extends Component {
     return valueCurrency.map(({ currency, value, exchangeRates }) => {
       const currencyDate = exchangeRates[currency];
       const amount = Number(value) * Number(currencyDate.ask);
+      console.log(amount);
       return amount;
     }).reduce((acc, valCur) => acc + valCur, 0);
   }
@@ -24,21 +26,29 @@ class Header extends Component {
     const { showEmail } = this.props;
     console.log(this.valueAmount());
     return (
-      <section>
-        <h2>carteira</h2>
-        <div data-testid="email-field">
-          {`E-mail: ${showEmail}`}
-        </div>
-        <div data-testid="total-field">
-          R$:
-          {' '}
-          {(Math.round(this.valueAmount() * 100) / 100).toFixed(2)}
-        </div>
-        <div data-testid="header-currency-field">
-          BRL
-        </div>
-
-      </section>
+      <header className="header">
+        <dl className="headerContainer">
+          <div className="headerContext">
+            <dt>Email:</dt>
+            <dd data-testid="email-field">
+              {showEmail}
+            </dd>
+          </div>
+          <div className="headerContext">
+            <dt>Total:</dt>
+            <dd data-testid="total-field">
+              R$:
+              {(Math.round(this.valueAmount() * 100) / 100).toFixed(2)}
+            </dd>
+          </div>
+          <div className="headerContext">
+            <dt>Câmbio</dt>
+            <dd data-testid="header-currency-field">
+              BRL
+            </dd>
+          </div>
+        </dl>
+      </header>
     );
   }
 }

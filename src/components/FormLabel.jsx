@@ -1,33 +1,19 @@
 import React from 'react';
 
 const FormLabel = (props) => {
-  const { value, description, handleChange } = props;
+  const { value, handleChange } = props;
   return (
-    <>
-      <label htmlFor="value">
-        Despensa:
-        <input
-          type="number"
-          id="value"
-          data-testid="value-input"
-          value={ value }
-          name="value"
-          onChange={ handleChange }
-        />
-      </label>
-
-      <label htmlFor="description">
-        Description:
-        <input
-          type="text"
-          id="description"
-          data-testid="description-input"
-          value={ description }
-          name="description"
-          onChange={ handleChange }
-        />
-      </label>
-    </>
+    <label htmlFor="value">
+      Valor:
+      <input
+        type="number"
+        id="value"
+        data-testid="value-input"
+        value={ value }
+        name="value"
+        onChange={ handleChange }
+      />
+    </label>
 
   );
 };
