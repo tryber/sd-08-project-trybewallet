@@ -2,19 +2,21 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
+import { addExpenseWithCurrencies as walletActions } from '../actions/wallet.action';
 import InputWallet from './Wallet-input';
-import { addExpenseWithCurrencies as walletActions } from '../actions/wallet-action';
+
+const initialState = {
+  value: '',
+  description: '',
+  currency: 'USD',
+  method: 'Dinheiro',
+  tag: 'Alimentação',
+};
 
 class expenseForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      value: '',
-      description: '',
-      currency: '',
-      method: '',
-      tag: '',
-    };
+    this.state = initialState;
 
     this.handleChange = this.handleChange.bind(this);
     this.handleAddExpense = this.handleAddExpense.bind(this);
@@ -27,6 +29,9 @@ class expenseForm extends Component {
   handleExpenseAdd() {
     const { addExpenseWithCurrencies } = this.props;
     addExpenseWithCurrencies(this.state);
+    this.setState((state) => ({
+      ...state, ...initialState,
+    }));
   }
 
   inputRender() {
@@ -34,17 +39,25 @@ class expenseForm extends Component {
     return (
       <>
         <InputWallet
-          name="value"
+          data-testid="value-input"
+          pattern="[0-9]+([\.,][0-9]+)?"
+          step="0.01"
           label="Valor"
-          onChange={ this.handleChange }
           value={ value }
+          type="number"
+          name="value"
+          id="id-value"
+          onChange={ this.handleChange }
         />
 
         <InputWallet
-          name="description"
-          label="Descrição"
-          onChange={ this.handleChange }
+          label="Descrição da despesa"
           value={ description }
+          data-testid="description-input"
+          type="text"
+          name="description"
+          id="id-description"
+          onChange={ this.handleChange }
         />
       </>
     );
@@ -54,56 +67,61 @@ class expenseForm extends Component {
     const { currencies } = this.props;
     const { currency, method, tag } = this.state;
     return (
-      <section>
-        <form className="form-box">
-          <fieldset>
-            {this.inputRender()}
-
-            <InputWallet
-              name="currency"
-              type="select"
-              value={ currency }
-              label="Moeda"
-              options={ currencies }
-              onChange={ this.handleChange }
-            />
-
-            <InputWallet
-              name="method"
-              type="select"
-              value={ method }
-              label="Método de Pagamento"
-              options={ ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'] }
-              onChange={ this.handleChange }
-            />
-
-            <InputWallet
-              name="tag"
-              type="select"
-              value={ tag }
-              label="Tag"
-              options={ [
-                'Alimentação',
-                'Lazer',
-                'Trabalho',
-                'Transporte',
-                'Saúde',
-              ] }
-              onChange={ this.handleChange }
-            />
-            <button type="button" onClick={ this.handleExpenseAdd }>
-              Adicionar despesa
-            </button>
-          </fieldset>
-        </form>
-      </section>
+      <form className="form-box">
+        <fieldset>
+          {this.inputRender()}
+          <InputWallet
+            label="Moeda"
+            value={ currency }
+            data-testid="currency-input"
+            type="select"
+            name="currency"
+            id="id-currency"
+            options={ currencies }
+            onChange={ this.handleChange }
+          />
+          <InputWallet
+            label="Método de pagamento"
+            value={ method }
+            data-testid="method-input"
+            type="select"
+            name="method"
+            id="id-method"
+            onChange={ this.handleChange }
+            options={ ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'] }
+          />
+          <InputWallet
+            data-testid="tag-input"
+            type="select"
+            name="tag"
+            id="id-tag"
+            label="Tag"
+            value={ tag }
+            onChange={ this.handleChange }
+            options={ [
+              'Alimentação',
+              'Lazer',
+              'Trabalho',
+              'Transporte',
+              'Saúde',
+            ] }
+          />
+          <button type="button" onClick={ this.handleAddExpense }>
+            Adicionar despesa
+          </button>
+        </fieldset>
+      </form>
     );
   }
 }
 
 expenseForm.propTypes = {
-  currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
+  currencies: PropTypes.arrayOf(PropTypes.string),
   addExpenseWithCurrencies: PropTypes.func.isRequired,
+};
+
+expenseForm.defaultProps = {
+  currencies: [],
 };
 
 const mapStateToProps = (state) => ({

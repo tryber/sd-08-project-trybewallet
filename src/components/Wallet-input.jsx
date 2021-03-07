@@ -3,13 +3,14 @@ import PropTypes from 'prop-types';
 
 class WalletInput extends React.Component {
   render() {
-    const { label, name, options, type, value, ...restProps } = this.props;
+    const { label, name, options, type, value, id, children, ...restProps } = this.props;
 
     if (type === 'select') {
       return (
-        <label htmlFor={ name }>
+        <label htmlFor={ id }>
           {`${label}: `}
-          <select name={ name } data-testid={ `${name}-input` } { ...restProps }>
+          <select name={ name } id={ id } { ...restProps }>
+            {children}
             {options.map((option, index) => (
               <option key={ index } value={ option } data-testid={ option }>
                 {option}
@@ -46,11 +47,17 @@ WalletInput.propTypes = {
     PropTypes.oneOfTypes([PropTypes.string, PropTypes.array]),
   ),
   value: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]),
 };
 
 WalletInput.defaultProps = {
   type: 'text',
   options: null,
+  children: null,
 };
 
 export default WalletInput;
