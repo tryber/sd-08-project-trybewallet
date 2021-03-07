@@ -71,6 +71,7 @@ class FormInput extends React.Component {
     const { value } = this.state;
     return (
       <input
+        type="number"
         name="value"
         data-testid="value-input"
         value={ value }
@@ -84,6 +85,7 @@ class FormInput extends React.Component {
     const { currency } = this.state;
     return (
       <select
+        id="currency-input"
         data-testid="currency-input"
         name="currency"
         value={ currency }
@@ -98,6 +100,7 @@ class FormInput extends React.Component {
     const { method } = this.state;
     return (
       <select
+        id="method-input"
         data-testid="method-input"
         name="method"
         value={ method }
@@ -112,6 +115,7 @@ class FormInput extends React.Component {
     const { tag } = this.state;
     return (
       <select
+        id="tag-input"
         data-testid="tag-input"
         name="tag"
         value={ tag }
@@ -137,7 +141,7 @@ class FormInput extends React.Component {
 
   render() {
     const { id, value, description, currency, method, tag, exchangeRates } = this.state;
-    const { savedInputData } = this.props;
+    const { savedInputData, fetchCurrencies } = this.props;
     return (
       <form>
         <label htmlFor="value">
@@ -160,8 +164,10 @@ class FormInput extends React.Component {
           onClick={ () => {
             savedInputData(
               { id, value, description, currency, method, tag, exchangeRates },
+              fetchCurrencies(),
             );
-            this.setState((prevState) => ({ id: prevState.id + 1 }));
+            this.setState((prevState) => (
+              { id: prevState.id + 1, value: '', description: '' }));
           } }
         >
           ADICIONAR DESPESA

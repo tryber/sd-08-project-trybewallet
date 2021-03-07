@@ -7,7 +7,6 @@ import {
 const INITIAL_STATE = {
   currencies: [],
   expenses: [],
-  // idCount: 0,
 };
 
 const wallet = (state = INITIAL_STATE, action) => {
@@ -22,7 +21,6 @@ const wallet = (state = INITIAL_STATE, action) => {
     return { ...state,
       expenses: [...state.expenses,
         { ...action.expenses,
-          // id: state.id,
           exchangeRates: state.currencies }],
     };
   default:
