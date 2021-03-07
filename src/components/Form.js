@@ -64,7 +64,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 Form.propTypes = {
-  fetchCurr: PropTypes.object,
+  fetchCurr: PropTypes.func,
   currency: PropTypes.array,
 }.isRequired;
 
