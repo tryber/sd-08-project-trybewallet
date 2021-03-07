@@ -9,7 +9,7 @@ function App() {
   function disclaimer() {
     return (
       <header>
-        <h1>
+        <h1 style={ { color: 'red' } }>
           Em respeito à lealdade à propriedade intelectual exigidas,
           uso este título para dar praticamente integral citação ao projeto ao Massaki.
         </h1>
@@ -43,7 +43,7 @@ function App() {
         <Link to="/">Login</Link>
         <Link to="/carteira">Carteira</Link>
       </nav>
-      <img src="https://i.pinimg.com/originals/cf/e4/2f/cfe42f61d54bffce055b349d6d4f59c4.jpg" alt="tired-face" className="App-logo" />
+      <img src="https://i2.wp.com/letlive.blog.br/wp-content/uploads/2016/10/Eu-desisti.png?fit=1920%2C1080&ssl=1" alt="tired-face" className="App-logo" />
       <h1 className="App">Hello, TrybeWallet!</h1>
       {disclaimer()}
       <Switch>
