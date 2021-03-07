@@ -11,8 +11,9 @@ class ExpensesTable extends React.Component {
         type="button"
         data-testid={ `${name}-btn` }
         onClick={ () => callback(expense) }
+        className={ `${name}-btn expense-opt-btn` }
       >
-        {name === 'edit' ? 'Editar' : 'Excluir' }
+        {name === 'edit' ? 'Editar' : 'Excluir'}
       </button>
     );
   }
@@ -21,7 +22,7 @@ class ExpensesTable extends React.Component {
     const { expenses, deleteExpense, editExpense } = this.props;
     return (
       <table>
-        <thead>
+        <thead className="table-header">
           <tr>
             <th>Moeda</th>
             <th>Valor</th>
@@ -34,7 +35,7 @@ class ExpensesTable extends React.Component {
             <th>Editar/Excluir</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="table-body">
           {expenses.map((expense, index) => {
             const { description, tag, method, value, currency, exchangeRates } = expense;
             const { name, ask } = exchangeRates[currency];
@@ -81,7 +82,6 @@ ExpensesTable.propTypes = {
 ExpensesTable.defaultProps = {
   expenses: [],
 };
-
 // import { connect } from 'react-redux';
 // import PropTypes from 'prop-types';
 // import React, { Component } from 'react';

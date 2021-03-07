@@ -48,6 +48,6 @@ export const editExpense = (expense) => ({
 });
 
 export const endExpenseEdit = (expense) => ({
-  type: INIT_EDIT_EXPENSE,
+  type: FINISH_EDIT_EXPENSE,
   expense,
 });

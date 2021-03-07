@@ -35,12 +35,12 @@ const wallet = (state = initialStateWallet, action) => {
       expenses: [
         ...state.expenses.filter((expense) => expense.id !== action.expense.id),
       ],
-      editing: false,
+      isEditing: false,
     };
   case walletAction.INIT_EDIT_EXPENSE:
     return {
       ...state,
-      editing: true,
+      isEditing: true,
       expenseId: action.expense.id,
     };
   case walletAction.FINISH_EDIT_EXPENSE:

@@ -12,8 +12,8 @@ class WalletForm extends Component {
     super(props);
 
     const INITIAL_STATE = {
-      value: '10',
-      description: 'Dez Dólares',
+      value: '',
+      description: '',
       currency: 'USD',
       method: 'Dinheiro',
       tag: 'Alimentação',
