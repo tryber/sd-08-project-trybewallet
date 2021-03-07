@@ -1,3 +1,4 @@
+/* eslint-disable no-lone-blocks */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -13,35 +14,48 @@ class Wallet extends Component {
   }
 
   renderTableTbody() {
-    // const { expenses, currencies } = this.props;
-    // const result = expenses.map((item, index) => {
+    const { expenses } = this.props;
     return (
       <tbody>
-        {/* {expenses
-          && expenses.map((item, index) => (
-            <tr key={ index }>
-              <td>{item.description}</td>
-              <td>{item.tag}</td>
-              <td>{item.method}</td>
-              <td>{item.value}</td>
-              <td>{item.currency === item.currency}</td>
-              <td>{item.currency}</td>
-              <td>Real</td>
-              <td>
-                <button className="table-button" type="button">
-                  {' '}
-                  V
-                </button>
-                <button
-                  className="table-button"
-                  type="button"
-                  data-testid="delete-btn"
-                  >
-                  X
-                </button>
-              </td>
-            </tr>
-                  ))} */}
+        {expenses
+          && expenses.map(
+            ({
+              id,
+              currency,
+              description,
+              method,
+              tag,
+              value,
+              exchangeRates,
+            }) => {
+              const currencyData = exchangeRates[currency];
+              const convertedValue = Number(value) * Number(currencyData.ask);
+              return (
+                <tr key={ id }>
+                  <td>{description}</td>
+                  <td>{tag}</td>
+                  <td>{method}</td>
+                  <td>{value}</td>
+                  <td>{currencyData.name}</td>
+                  <td>{(Math.round(currencyData.ask * 100) / 100).toFixed(2)}</td>
+                  <td>{(Math.round(convertedValue * 100) / 100).toFixed(2)}</td>
+                  <td>Real</td>
+                  <td>
+                    <button className="table-button" type="button">
+                      V
+                    </button>
+                    <button
+                      className="table-button"
+                      type="button"
+                      data-testid="delete-btn"
+                    >
+                      X
+                    </button>
+                  </td>
+                </tr>
+              );
+            },
+          )}
       </tbody>
     );
   }
@@ -96,5 +110,5 @@ export default connect(mapStateToProps, mapDispatchToProps)(Wallet);
 
 Wallet.propTypes = {
   getdata: PropTypes.func.isRequired,
-  // expenses: PropTypes.objectOf.isRequired,
+  expenses: PropTypes.objectOf.isRequired,
 };
