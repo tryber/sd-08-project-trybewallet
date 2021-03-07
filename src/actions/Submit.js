@@ -1,6 +1,6 @@
-const addExpense = (expense) => ({
+const addExpense = (expenses) => ({
   type: 'ADD_EXPENSE',
-  expense,
+  payload: expenses,
 });
 
 export default addExpense;

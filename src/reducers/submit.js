@@ -1,16 +1,16 @@
 const INITIAL_STATE = {
-  expense: [],
-  id: 0,
+  expenses: [],
+  id: -2,
 };
 
 const addExpense = (state = INITIAL_STATE, action) => {
   const newExpense = {
     id: state.id,
-    ...action,
+    ...action.payload,
   };
   return {
     ...state,
-    expense: [...state.expense, newExpense],
+    expenses: [...state.expenses, newExpense],
     id: state.id + 1,
   };
 };
