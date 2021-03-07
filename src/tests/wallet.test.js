@@ -273,7 +273,7 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
       expect(screen.getAllByTestId('delete-btn')[0]).toBeInTheDocument();
     });
   
-    test.only('Ao ser clicado, o botão deleta a linha da tabela, alterando o estado global.', () => {
+    test('Ao ser clicado, o botão deleta a linha da tabela, alterando o estado global.', () => {
       const { store } = renderWithRouterAndStore(<Wallet />, '/carteira', initial);
       const deleteBtn = screen.getAllByTestId('delete-btn')[0];
       fireEvent.click(deleteBtn);

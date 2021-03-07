@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { userAction } from '../actions';
 
 const NUMERO_SEIS = 6;
@@ -19,7 +20,7 @@ class Login extends React.Component {
     this.passwordValidation = this.passwordValidation.bind(this);
     this.hundlePasswordOnChange = this.hundlePasswordOnChange.bind(this);
     this.hundleEmailOnChange = this.hundleEmailOnChange.bind(this);
-    this.hundleonClick = this.hundleonClick.bind(this);
+    this.Click = this.Click.bind(this);
   }
 
   emailValidation() {
@@ -47,7 +48,7 @@ class Login extends React.Component {
     }, () => this.emailValidation());
   }
 
-  hundleonClick() {
+  Click() {
     const { history, addUser } = this.props;
     const { email } = this.state;
     addUser(email);
@@ -62,26 +63,32 @@ class Login extends React.Component {
 
   render() {
     const { validationEmail, validationPassword } = this.state;
-
+    const f = false;
+    const e = 'Entrar';
     return (
       <div>
-        <label>E-mail</label>
-        <input
-          onChange={ this.hundleEmailOnChange }
-          type="text"
-          data-testid="email-input"
-        />
-        <label>Senha</label>
-        <input
-          onChange={ this.hundlePasswordOnChange }
-          type="password"
-          data-testid="password-input"
-        />
+        <label htmlFor="email">
+          E-mail
+          <input
+            id="email"
+            onChange={ this.hundleEmailOnChange }
+            type="text"
+            data-testid="email-input"
+          />
+        </label>
+        <label htmlFor="senha">
+          Senha
+          <input
+            id="senha"
+            onChange={ this.hundlePasswordOnChange }
+            type="password"
+            data-testid="password-input"
+          />
+        </label>
         { validationPassword || validationEmail
-          ? <button onClick={ this.hundleonClick } type="button" disabled>
-            Entrar
-          </button>
-          : <button onClick={ this.hundleonClick } type="button" disabled={ false }>Entrar</button>}
+          ? <button onClick={ this.Click } type="button" disabled>Entrar</button>
+          : <button onClick={ this.Click } type="button" disabled={ f }>{e}</button>}
+
       </div>
     );
   }
@@ -93,5 +100,11 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   addUser: (value) => dispatch(userAction(value)),
 });
+
+Login.propTypes = {
+  history: PropTypes.func.isRequired,
+  addUser: PropTypes.string.isRequired,
+
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

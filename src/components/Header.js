@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 class Header extends React.Component {
   getCurrencies() {
@@ -13,7 +14,7 @@ class Header extends React.Component {
   }
 
   render() {
-    const { email, expenses } = this.props;
+    const { email } = this.props;
 
     return (
       <div>
@@ -30,8 +31,9 @@ class Header extends React.Component {
           {' '}
 
         </p>
-        <p data-testid="header-currency-field" />
-
+        <p data-testid="header-currency-field">
+          BRL
+        </p>
       </div>);
   }
 }
@@ -41,5 +43,10 @@ const mapStateToProps = ({ user, wallet }) => ({
   expenses: wallet.expenses,
   currencies: wallet.currencies,
 });
+
+Header.propTypes = {
+  expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
+  email: PropTypes.string.isRequired,
+};
 
 export default connect(mapStateToProps)(Header);

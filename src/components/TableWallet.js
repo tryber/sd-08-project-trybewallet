@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { excluirExpense } from '../actions';
 
 class TableWallet extends React.Component {
@@ -20,12 +21,12 @@ class TableWallet extends React.Component {
         <th>Câmbio utilizado</th>
         <th>Valor convertido</th>
         <th>Moeda de conversão</th>
-        <button data-testid="delete-btn" onClick={ this.props.addExcluir }>Excluir</button>
+        <th>Editar/Excluir</th>
       </tr>);
   }
 
   render() {
-    const { addExpenses } = this.props;
+    const { addExpenses, addExcluir } = this.props;
 
     return (
       <div>
@@ -33,7 +34,7 @@ class TableWallet extends React.Component {
           {this.renderTable()}
           {addExpenses !== undefined
               && addExpenses.map((item) => {
-                const { currency, exchangeRates } = item;
+                const { currency, exchangeRates, id } = item;
 
                 const moeda = exchangeRates[currency];
                 return (
@@ -46,6 +47,13 @@ class TableWallet extends React.Component {
                     <td>{parseFloat(moeda.ask).toFixed(2)}</td>
                     <td>{(moeda.ask * parseInt(item.value, 10)).toFixed(2)}</td>
                     <td>Real</td>
+                    <button
+                      type="button"
+                      data-testid="delete-btn"
+                      onClick={ () => addExcluir(id) }
+                    >
+                      Excluir
+                    </button>
                   </tr>);
               })}
         </table>
@@ -61,5 +69,10 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   addExcluir: (value) => dispatch(excluirExpense(value)),
 });
+
+TableWallet.propTypes = {
+  addExpenses: PropTypes.arrayOf(PropTypes.object).isRequired,
+  addExcluir: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(TableWallet);

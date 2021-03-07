@@ -12,7 +12,9 @@ const walletRedux = (state = INITIAL_STATE, action) => {
     return { ...state, currencies: [action.value] };
 
   case 'EXCLUIR':
-    return { ...state, expenses: [...state.expenses.filter((expense) => expense.id !== action.expense.id)] };
+    return { ...state,
+      expenses: [...state.expenses.filter((item) => item.id !== action.value)],
+    };
 
   default:
     return state;

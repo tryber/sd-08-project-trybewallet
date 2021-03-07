@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { fetchEconomia, walletExpense } from '../actions';
-import TableWallet from './TableWallet';
 
 class Form extends React.Component {
   constructor() {
@@ -55,13 +55,14 @@ class Form extends React.Component {
   }
 
   renderInputValor() {
+    const { value } = this.state;
     return (
       <label htmlFor="value">
         Valor:
         <input
           id="value"
           name="value"
-          value={ this.state.value }
+          value={ value }
           onChange={ this.hundleOnClick }
           type="text"
           data-testid="value-input"
@@ -71,12 +72,13 @@ class Form extends React.Component {
   }
 
   renderInputDescricao() {
+    const { description } = this.state;
     return (
       <label htmlFor="description">
         Descrição:
         <input
           id="description"
-          value={ this.state.description }
+          value={ description }
           name="description"
           onChange={ this.hundleOnClick }
           data-testid="description-input"
@@ -86,21 +88,21 @@ class Form extends React.Component {
   }
 
   renderSelectMoeda() {
-    const { exchangeRates } = this.state;
+    const { exchangeRates, currency } = this.state;
 
     return (
       <select
         id="currency-input"
-        value={ this.state.currency }
+        value={ currency }
         name="currency"
         data-testid="currency-input"
         onChange={ this.hundleOnClick }
       >
-        {Object.entries(exchangeRates).map((currency) => {
-          if (currency[0] === 'USDT') return '';
+        {Object.entries(exchangeRates).map((itemCurrency) => {
+          if (itemCurrency[0] === 'USDT') return '';
           return (
-            <option key={ currency[0] } data-testid={ `${currency[0]}` }>
-              {currency[0]}
+            <option key={ itemCurrency[0] } data-testid={ `${itemCurrency[0]}` }>
+              {itemCurrency[0]}
             </option>
           );
         })}
@@ -109,12 +111,13 @@ class Form extends React.Component {
   }
 
   renderSelectPagamento() {
+    const { method } = this.state;
     return (
       <label htmlFor="pagamento">
         Método de Pagamento:
         <select
           onChange={ this.hundleOnClick }
-          value={ this.state.method }
+          value={ method }
           name="method"
           id="pagamento"
           data-testid="method-input"
@@ -128,12 +131,13 @@ class Form extends React.Component {
   }
 
   renderTag() {
+    const { tag } = this.state;
     return (
       <label htmlFor>
         Tag:
         <select
           name="tag"
-          value={ this.state.tag }
+          value={ tag }
           onChange={ this.hundleOnClick }
           data-testid="tag-input"
         >
@@ -177,5 +181,10 @@ const mapDispatchToProps = (dispatch) => ({
   addWalletExpense: (value) => dispatch(walletExpense(value)),
   addWalletCurrencie: (value) => dispatch(fetchEconomia(value)),
 });
+
+Form.propTypes = {
+  addWalletCurrencie: PropTypes.arrayOf(PropTypes.object).isRequired,
+  addWalletExpense: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Form);
