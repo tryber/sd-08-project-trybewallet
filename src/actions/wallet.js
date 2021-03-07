@@ -22,7 +22,7 @@ export const Creators = {
     type: Types.ADD_EXPENSE,
     payload: expense,
   }),
-  addExpenseWithCurencies: (expense) => async (dispatch) => {
+  addExpenseWithCurrencies: (expense) => async (dispatch) => {
     const currentCurrency = await getCurrencies();
     const expenseWithCurrencies = { ...expense, exchangeRates: currentCurrency };
     dispatch(Creators.addExpense(expenseWithCurrencies));

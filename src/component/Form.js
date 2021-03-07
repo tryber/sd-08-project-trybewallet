@@ -25,8 +25,9 @@ class Form extends React.Component {
   }
 
   handleAddExpense() {
-    const { addExpenseWithCurencies } = this.props;
-    addExpenseWithCurencies(this.state);
+    const { addExpenseWithCurrencies } = this.props;
+    addExpenseWithCurrencies(this.state);
+    this.setState({ value: '' });
   }
 
   renderValueInput(value) {
@@ -78,7 +79,7 @@ class Form extends React.Component {
       <select
         name="currency"
         value={ currency }
-        data-testid="method-input"
+        data-testid="currency-input"
         onChange={ this.handleChange }
       >
         { currencies.map((currencycode) => (
@@ -133,7 +134,7 @@ class Form extends React.Component {
 }
 Form.propTypes = {
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
-  addExpenseWithCurencies: PropTypes.func.isRequired,
+  addExpenseWithCurrencies: PropTypes.func.isRequired,
 };
 
 const mapDispatchToPros = (dispatch) => bindActionCreators(WalletActions, dispatch);
