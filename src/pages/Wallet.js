@@ -1,13 +1,12 @@
-import React from 'react';
-import Header from './Header';
+// import React from 'react';
+// import Header from './Header';
 
-class Wallet extends React.Component {
+// class Wallet extends React.Component {
+//   render() {
+//     return (
+//       <Header />
+//     );
+//   }
+// };
 
-  render() {
-    return (
-      <Header />
-    );
-  }
-}
-
-export default Wallet;
+// export default Wallet;

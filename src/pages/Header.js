@@ -7,7 +7,7 @@
 
 //     render() {
 //     const { user } = this.props;
-    
+
 //     return (
 //       <header className="Header">
 //         <span data-testid="email-field">{user.email}</span>
