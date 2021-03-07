@@ -3,11 +3,15 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import AddExpense from '../components/AddExpense';
+import { fetchCurrencies } from '../actions/index';
 
 class Wallet extends React.Component {
+  componentDidMount() {
+    const { getCurrencies } = this.props;
+    getCurrencies();
+  }
+
   render() {
-    const { isFetching } = this.props;
-    if (isFetching) return <div>Loading...</div>;
     return (
       <div>
         <Header />
@@ -17,12 +21,12 @@ class Wallet extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  isFetching: state.wallet.isFetching,
+const mapDispatchToProps = (dispatch) => ({
+  getCurrencies: () => dispatch(fetchCurrencies()),
 });
 
 Wallet.propTypes = {
-  isFetching: PropTypes.bool.isRequired,
+  getCurrencies: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps)(Wallet);
+export default connect(null, mapDispatchToProps)(Wallet);

@@ -8,18 +8,17 @@ import {
 const INIT_STATE = {
   currencies: [],
   expenses: [],
-  isFetching: false,
   error: '',
 };
 
 function walletReducer(state = INIT_STATE, action) {
   switch (action.type) {
   case REQUEST_CURRENCIES:
-    return { ...state, isFetching: true };
+    return { ...state };
   case REQUEST_SUCCESS:
-    return { ...state, currencies: action.currencies, isFetching: false };
+    return { ...state, currencies: action.currencies };
   case REQUEST_FAIL:
-    return { ...state, isFetching: false, error: action.error };
+    return { ...state, error: action.error };
   case EXPENSES:
     return { ...state, expenses: [...state.expenses, action.expenses] };
   default:

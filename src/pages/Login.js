@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { loginAction, fetchCurrencies } from '../actions/index';
+import { loginAction } from '../actions/index';
 
 class Login extends React.Component {
   constructor(props) {
@@ -46,11 +46,10 @@ class Login extends React.Component {
     });
   }
 
-  async storeEmail() {
+  storeEmail() {
     const { email } = this.state;
-    const { login, getCurrencies } = this.props;
+    const { login } = this.props;
     login(email);
-    await getCurrencies();
     this.setState({ shouldRedirect: true });
   }
 
@@ -95,12 +94,10 @@ class Login extends React.Component {
 
 const mapDispatchToProps = (dispatch) => ({
   login: (email) => dispatch(loginAction(email)),
-  getCurrencies: () => dispatch(fetchCurrencies()),
 });
 
 Login.propTypes = {
   login: PropTypes.func.isRequired,
-  getCurrencies: PropTypes.func.isRequired,
 };
 
 export default connect(null, mapDispatchToProps)(Login);
