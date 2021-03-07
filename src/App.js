@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
 import Login from './pages/Login';
-import logo from './logo.svg';
 import './App.css';
 import Wallet from './pages/Wallet';
 
