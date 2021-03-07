@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { deleteExpense as deleteExpenseAction } from '../actions';
 
 class ListOfInputs extends React.Component {
   // conceito visto na w3school
@@ -23,7 +24,7 @@ class ListOfInputs extends React.Component {
   }
 
   bodyTableListOfInputs() {
-    const { expenses } = this.props;
+    const { expenses, deleteExpense } = this.props;
     // const filterInput = currencies.filter((currency) => currency.code = expenses.currency);
     // console.log(currencies);
     // console.log(expenses);
@@ -47,7 +48,13 @@ class ListOfInputs extends React.Component {
           </td>
           <td>Real</td>
           <button type="button">Editar</button>
-          <button type="button" data-testid="delete-btn">Excluir</button>
+          <button
+            type="button"
+            data-testid="delete-btn"
+            onClick={ () => deleteExpense(expense.id) }
+          >
+            Excluir
+          </button>
         </tr>
       </tbody>
     ));
@@ -70,7 +77,11 @@ const mapStateToProps = (state) => ({
   currencies: state.wallet.currencies,
 });
 
-export default connect(mapStateToProps)(ListOfInputs);
+const mapDispatchToProps = (dispatch) => ({
+  deleteExpense: (id) => dispatch(deleteExpenseAction(id)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ListOfInputs);
 
 ListOfInputs.propTypes = {
   expenses: PropTypes.arrayOf(
@@ -84,4 +95,5 @@ ListOfInputs.propTypes = {
       exchangeRates: PropTypes.shape(PropTypes.object),
     }),
   ).isRequired,
+  deleteExpense: PropTypes.func.isRequired,
 };

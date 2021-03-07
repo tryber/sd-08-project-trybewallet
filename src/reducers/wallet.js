@@ -2,7 +2,8 @@ import {
   SAVED_INPUT,
   REQUEST_API,
   GET_CURRENCY_API,
-  FAILED_REQUEST_API } from '../actions';
+  FAILED_REQUEST_API,
+  DELETE_EXPENSE } from '../actions';
 
 const INITIAL_STATE = {
   currencies: [],
@@ -22,6 +23,10 @@ const wallet = (state = INITIAL_STATE, action) => {
       expenses: [...state.expenses,
         { ...action.expenses,
           exchangeRates: state.currencies }],
+    };
+  case DELETE_EXPENSE:
+    return { ...state,
+      expenses: state.expenses.filter((expense) => expense.id !== action.payload.id),
     };
   default:
     return state;

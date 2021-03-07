@@ -6,6 +6,7 @@ export const REQUEST_API = 'REQUEST_API';
 export const GET_CURRENCY_API = 'GET_CURRENCY_API';
 export const FAILED_REQUEST_API = 'FAILED_REQUEST_API';
 export const SAVED_CURRENCY = 'SAVED_CURRENCY';
+export const DELETE_EXPENSE = 'DELETE_EXPENSE';
 
 export const savedUser = (user) => ({
   type: SAVED_USER,
@@ -45,11 +46,9 @@ export const fetchCurrencies = () => (dispatch) => {
     .catch((error) => dispatch(failedRequest(error)));
 };
 
-// export const savedCurrency = (expenses) => (dispatch) => {
-//   fetch('https://economia.awesomeapi.com.br/json/all')
-//     .then((data) => data.json())
-//     .then(
-//       (json) => dispatch(savedInput(json)),
-//     )
-//     .catch((error) => dispatch(failedRequest(error)));
-// };
+export const deleteExpense = (id) => ({
+  type: DELETE_EXPENSE,
+  payload: {
+    id,
+  },
+});
