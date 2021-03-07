@@ -1,3 +1,10 @@
+# _Disclaimer_
+
+> The development of this project have followed, together with Trybe content,
+> the [plantão](https://github.com/plantao-de-alunos-trybe/plantao-trybe-wallet-live-code/tree/4a7ae1149586567fe744a61214735927bdb72094) offered by Paulo Simões.
+> And I've also been kindly helped by Isabella Paz and Rosiele David.
+> God bless them all.
+
 ### Termos e acordos
 
 Ao iniciar este projeto, você concorda com as diretrizes do Código de Ética e Conduta e do Manual da Pessoa Estudante da Trybe.
