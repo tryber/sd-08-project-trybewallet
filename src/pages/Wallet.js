@@ -13,7 +13,7 @@ class Wallet extends Component {
   }
 
   renderTableTbody() {
-    const { expenses, currencies} = this.props;
+    // const { expenses, currencies } = this.props;
     // const result = expenses.map((item, index) => {
     return (
       <tbody>
