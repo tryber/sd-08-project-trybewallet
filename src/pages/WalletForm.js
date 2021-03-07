@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { addExpensesThunk } from '../actions';
 
 class WalletForm extends React.Component {
@@ -27,12 +28,12 @@ class WalletForm extends React.Component {
     const { value } = this.state;
     return (
       <label htmlFor="despesa-input">
-        Valor
+        Valor compra
         <input
           onChange={ this.handleChange }
           name="value"
           id="despesa-input"
-          type="text"
+          type="number"
           data-testid="value-input"
           value={ value }
         />
@@ -44,7 +45,7 @@ class WalletForm extends React.Component {
     const { description } = this.state;
     return (
       <label htmlFor="descricao-despesa">
-        Descrição
+        Descrição despesa
         <input
           onChange={ this.handleChange }
           name="description"
@@ -62,7 +63,7 @@ class WalletForm extends React.Component {
     const { currenciesStore } = this.props;
     return (
       <label htmlFor="coins">
-        Moeda
+        Qual moeda
         <select
           onChange={ this.handleChange }
           name="currency"
@@ -87,7 +88,7 @@ class WalletForm extends React.Component {
     const { method } = this.state;
     return (
       <label htmlFor="metodo-pagamento">
-        Método de pagamento
+        Método
         <select
           onChange={ this.handleChange }
           name="method"
@@ -153,5 +154,11 @@ const mapDispatchToProps = (dispatch) => ({
 const mapStateToProps = (state) => ({
   currenciesStore: state.wallet.currencies,
 });
+
+WalletForm.propTypes = {
+  currenciesStore: PropTypes.func.isRequired,
+  addExpensesStore: PropTypes.func.isRequired,
+
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(WalletForm);

@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import '../App.css';
 
 class Header extends React.Component {
   total() {
@@ -15,7 +16,7 @@ class Header extends React.Component {
   render() {
     const { stateUser } = this.props;
     return (
-      <>
+      <div>
         <header data-testid="email-field">{stateUser}</header>
         <section
           data-testid="total-field"
@@ -28,7 +29,7 @@ class Header extends React.Component {
         >
           BRL
         </div>
-      </>
+      </div>
     );
   }
 }
@@ -40,6 +41,7 @@ const mapStateToProps = (state) => ({
 
 Header.propTypes = {
   stateUser: PropTypes.string.isRequired,
+  walletexpenses: PropTypes.objectOf(PropTypes.number).isRequired,
 };
 
 export default connect(mapStateToProps)(Header);

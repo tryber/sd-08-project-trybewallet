@@ -3,7 +3,7 @@ import requestAPI from '../services/requestAPI';
 export const LOGIN_USER_EMAIL = 'LOGIN_USER_EMAIL';
 export const ADD_CURRENCIES = 'ADD_CURRENCIES';
 export const ADD_EXPENSES = 'ADD_ADD_EXPENSES';
-export const EXPENSES_WITH_COINS = 'EXPENSES_WITH_COINS';
+export const DELETE_EXPENSES = 'DELETE_EXPENSES';
 
 // action User
 export const addEmailStore = (email) => ({
@@ -25,7 +25,6 @@ export const getCurrenciesThunk = () => (dispatch) => {
 };
 
 // action Add expenses
-
 export const addExpenses = (expense) => ({
   type: ADD_EXPENSES,
   payload: expense,
@@ -37,3 +36,9 @@ export const addExpensesThunk = (expense) => async (dispatch) => {
   const reqeustObject = { ...expense, exchangeRates: request };
   dispatch(addExpenses(reqeustObject));
 };
+
+// Acrtion delete
+export const deleteExpenses = (id) => ({
+  type: DELETE_EXPENSES,
+  payload: id,
+});
