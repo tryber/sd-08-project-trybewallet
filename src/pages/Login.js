@@ -140,6 +140,7 @@ class Login extends Component {
     return (
 
       <form className="login-form">
+
         <fieldset>
           <legend className="login-form-title">Insira seus dados:</legend>
           {this.renderForm()}
