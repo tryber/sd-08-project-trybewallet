@@ -20,12 +20,12 @@ class Wallet extends React.Component {
           </label>
 
           <label htmlFor="description-input">
-            <span>Descrição:</span>
+            <span>Descrição: </span>
             <input type="text" id="description-input" data-testid="description-input" />
           </label>
 
           <label htmlFor="method-input">
-            <span>Método de pagamento:</span>
+            <span>Método de pagamento: </span>
             <select id="method-input" data-testid="method-input">
               <option>Dinheiro</option>
               <option>Cartão de crédito</option>
