@@ -74,4 +74,3 @@ describe('7 - Crie um botão para editar uma despesa da tabela contendo as segui
       expect(store.getState().wallet.expenses).toStrictEqual(newExpenses);
     });
   });
-  
