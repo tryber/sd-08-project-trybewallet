@@ -39,3 +39,37 @@
     transform: rotate(360deg);
   }
 }
+
+.Login input {
+  background-color: #404040;
+  background-image: none;
+  border: none;
+  box-shadow: none;
+  color: white;
+  margin: 10px;
+  padding: 10px;
+}
+
+button {
+  background-image: none;
+  border: 5px none;
+  font-weight: 800;
+  margin: 10px;
+  padding: 10px;
+}
+
+header {
+  display: flex;
+}
+
+span {
+  padding: 20px;
+}
+
+table {
+  border: 1px solid black;
+}
+
+table , th , td {
+  padding: 10px;
+}
