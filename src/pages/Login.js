@@ -46,7 +46,7 @@ class Login extends React.Component {
           type="password"
         />
         <Button
-          onClick={ addEmails(email) }
+          onClick={ addEmails }
           isEmailValid={ isEmailValid }
           isPasswordValid={ isPasswordValid }
         />

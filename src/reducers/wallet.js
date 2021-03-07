@@ -1,6 +1,6 @@
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
 const INITIAL_STATE = {
-  obj: {},
+  obj: [],
   error: '',
   expense: [],
   id: 0,
