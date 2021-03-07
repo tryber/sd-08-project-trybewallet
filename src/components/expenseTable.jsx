@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
-import { Creators } from '../actions/wallet.action';
+// import { Creators } from '../actions/wallet.action';
 
 class expenseTable extends Component {
   renderTableThead() {
