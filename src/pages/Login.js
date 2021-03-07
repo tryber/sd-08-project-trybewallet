@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { loginAction } from '../actions/index';
+import { loginAction, fetchCurrencies } from '../actions/index';
 
 class Login extends React.Component {
   constructor(props) {
@@ -23,6 +23,7 @@ class Login extends React.Component {
     + '|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$');
     return re.test(String(email).toLowerCase());
   }
+  // source: https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
 
   loginValidation() {
     const { email, password } = this.state;
@@ -45,10 +46,11 @@ class Login extends React.Component {
     });
   }
 
-  storeEmail() {
+  async storeEmail() {
     const { email } = this.state;
-    const { login } = this.props;
+    const { login, getCurrencies } = this.props;
     login(email);
+    await getCurrencies();
     this.setState({ shouldRedirect: true });
   }
 
@@ -93,10 +95,12 @@ class Login extends React.Component {
 
 const mapDispatchToProps = (dispatch) => ({
   login: (email) => dispatch(loginAction(email)),
+  getCurrencies: () => dispatch(fetchCurrencies()),
 });
 
 Login.propTypes = {
   login: PropTypes.func.isRequired,
+  getCurrencies: PropTypes.func.isRequired,
 };
 
 export default connect(null, mapDispatchToProps)(Login);
