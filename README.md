@@ -380,7 +380,7 @@ Crie uma página para gerenciar a carteira de gastos em diversas moedas, e que t
 
     * Adicione o atributo `data-testid="method-input"`.
 
-    * Este campo deve ser um dropdown. A pessoa usuária deve poder escolher entre os campos: 'Dinheiro', 'Cartão de crédito' e 'Cartão de débito'.
+    * Este campo deve ser um dropdown. A pessoa usuária deve poder escolher entre os campos: .
 
   * Um campo para selecionar uma categoria (tag) para a despesa.
 
