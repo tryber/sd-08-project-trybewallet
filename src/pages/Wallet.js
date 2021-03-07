@@ -13,34 +13,36 @@ class Wallet extends Component {
   }
 
   renderTableTbody() {
+    const { expenses, currencies} = this.props;
+    // const result = expenses.map((item, index) => {
     return (
       <tbody>
-        <tr key="id">
-          <td>description</td>
-          <td>tag</td>
-          <td>method</td>
-          <td>value</td>
-          <td>exchangeRates</td>
-          <td />
-          <td />
-          <td>Real</td>
-          <td>
-            <button className="table-button" type="button">
-              {' '}
-              V
-            </button>
-            <button
-              className="table-button"
-              type="button"
-              data-testid="delete-btn"
-            >
-              X
-            </button>
-          </td>
-        </tr>
-
+        {/* {expenses
+          && expenses.map((item, index) => (
+            <tr key={ index }>
+              <td>{item.description}</td>
+              <td>{item.tag}</td>
+              <td>{item.method}</td>
+              <td>{item.value}</td>
+              <td>{item.currency === item.currency}</td>
+              <td>{item.currency}</td>
+              <td>Real</td>
+              <td>
+                <button className="table-button" type="button">
+                  {' '}
+                  V
+                </button>
+                <button
+                  className="table-button"
+                  type="button"
+                  data-testid="delete-btn"
+                  >
+                  X
+                </button>
+              </td>
+            </tr>
+                  ))} */}
       </tbody>
-
     );
   }
 
@@ -61,15 +63,11 @@ class Wallet extends Component {
           </tr>
         </thead>
         {this.renderTableTbody()}
-
       </table>
-
     );
   }
 
   render() {
-    const { expenses } = this.props;
-    console.log(expenses && Object.entries(expenses));
     return (
       <div className="limiter-wallet">
         <div className="container-wallet container-wallet-bg">
@@ -77,9 +75,7 @@ class Wallet extends Component {
           <MenuWallet />
           <div className="wrap-wallet">
             <form name="f1" className="wallet-form validate-form">
-              <div className="table">
-                {this.renderTableThead()}
-              </div>
+              <div className="table">{this.renderTableThead()}</div>
             </form>
           </div>
         </div>
@@ -87,11 +83,11 @@ class Wallet extends Component {
     );
   }
 }
-const mapStateToProps = (state) => ({
-  currencies: state.wallet.Currencies,
-  expenses: state.wallet.get_Expenses,
+const mapStateToProps = ({ wallet: { currencies, expenses, total } }) => ({
+  currencies,
+  expenses,
+  total,
 });
-
 const mapDispatchToProps = (dispatch) => ({
   getdata: (getCurrencies) => dispatch(fetchAPI(getCurrencies)),
 });

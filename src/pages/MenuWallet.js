@@ -2,107 +2,43 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import './MenuWallet.css';
-import { MakeTotalExpenses, getExpenses } from '../actions/wallet';
+import {
+  fetchAPI,
+  getExpensesWithCoins,
+} from '../actions/wallet';
+
+const INITIAL_STATE = {
+  value: '',
+  description: '',
+  currency: 'USD',
+  method: 'Dinheiro',
+  tag: 'Alimentação',
+};
 
 class MenuWallet extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
-      id: 0,
-      value: '',
-      currency: 'USD',
-      method: 'Dinheiro',
-      tag: 'Alimentação',
-      description: '',
-      exchangeRates: {
-        '': {
-          code: '',
-          codein: '',
-          name: '',
-          high: '',
-          low: '',
-          varBid: '',
-          pctChange: '',
-          bid: '',
-          ask: '',
-          timestamp: '',
-          create_date: '',
-        },
-      },
+      ...INITIAL_STATE,
+
     };
   }
 
-  Value(e) {
+  handleChange({ target: { name, value } }) {
+    this.setState({ [name]: value });
+  }
+
+  handleAddExpenses() {
+    const { expensesWithCoins } = this.props;
+    expensesWithCoins(this.state);
     this.setState({
-      value: e,
+      ...INITIAL_STATE,
     });
   }
 
-  CoinSelected(e) {
-    const { currencies } = this.props;
-    const [result] = currencies.filter((item) => item[1].code === e);
-    this.setState({
-      currency: e,
-      exchangeRates: {
-        result,
-      },
-    });
-  }
+  renderMethodAndTagsSelects() {
+    const { method, tag } = this.state;
 
-  methodSelected(e) {
-    this.setState({
-      method: e,
-    });
-  }
-
-  tagSelected(e) {
-    this.setState({
-      tag: e,
-    });
-  }
-
-  descriptionSelected(e) {
-    this.setState({
-      description: e,
-    });
-  }
-
-  AddExpenses() {
-    const { currencies } = this.props;
-    const {
-      id,
-      value,
-      currency,
-      method,
-      tag,
-      description,
-      exchangeRates,
-    } = this.state;
-    const result = currencies.filter((item) => item[1].code === currency);
-    const actualCode = result[0][1];
-
-    const multiply = actualCode.ask * value;
-
-    this.setState({
-      id: id + 1,
-    });
-    // console.log(exchangeRates);
-    const { totalExpensesGet, getingExpenses } = this.props;
-    totalExpensesGet(multiply);
-    getingExpenses({
-      get_Expenses: {
-        id,
-        value,
-        currency,
-        method,
-        tag,
-        description,
-        exchangeRates,
-      },
-    });
-  }
-
-  renderOtherSelects() {
     return (
       <>
         <label
@@ -112,8 +48,10 @@ class MenuWallet extends Component {
         >
           Método de Pagamento:
           <select
+            value={ method }
+            name="method"
+            onChange={ this.handleChange.bind(this) }
             id="method-input"
-            onChange={ (e) => this.methodSelected(e.target.value) }
           >
             <option>Dinheiro</option>
             <option>Cartão de crédito</option>
@@ -127,7 +65,9 @@ class MenuWallet extends Component {
         >
           Tag:
           <select
-            onChange={ (e) => this.tagSelected(e.target.value) }
+            value={ tag }
+            name="tag"
+            onChange={ this.handleChange.bind(this) }
             id="select"
           >
             <option>Alimentação</option>
@@ -142,6 +82,8 @@ class MenuWallet extends Component {
   }
 
   renderSelectsCurrencies() {
+    const { currency } = this.state;
+
     const { currencies } = this.props;
     const coins = currencies.map(
       (item, index) => item[0] !== 'USDT' && (
@@ -159,51 +101,63 @@ class MenuWallet extends Component {
         >
           Moeda:
           <select
+            value={ currency }
+            name="currency"
+            onChange={ this.handleChange.bind(this) }
             id="currency-input"
-            onChange={ (e) => this.CoinSelected(e.target.value) }
           >
             {coins}
           </select>
         </label>
-        {this.renderOtherSelects()}
+        {this.renderMethodAndTagsSelects()}
       </>
     );
   }
 
   render() {
+    const { value, description } = this.state;
     return (
-      <div className="menu-wallet">
-        <label className="value-input-label" htmlFor="value-input">
-          Valor:
-          <input
-            id="value-input"
-            onChange={ (e) => this.Value(e.target.value) }
-            data-testid="value-input"
-            type="number"
-            className="value-input"
-          />
-        </label>
-        {this.renderSelectsCurrencies()}
+      <form>
+        <div className="menu-wallet">
+          <label className="value-input-label" htmlFor="value-input">
+            Valor:
+            <input
+              name="value"
+              value={ value }
+              onChange={ this.handleChange.bind(this) }
+              id="value"
+              data-testid="value-input"
+              type="text"
+              className="value-input"
+            />
+          </label>
+          {this.renderSelectsCurrencies()}
 
-        <label htmlFor="description-input" className="value-description-label">
-          Descrição:
-          <textarea
-            id="description-input"
-            onChange={ (e) => this.descriptionSelected(e.target.value) }
-            data-testid="description-input"
-            className="value-input"
-          />
-        </label>
-        <div className="add-expenses-button">
-          <button
-            type="button"
-            onClick={ () => this.AddExpenses() }
-            className="add-expenses"
+          <label
+            htmlFor="description-input"
+            className="value-description-label"
           >
-            Adicionar despesa
-          </button>
+            Descrição:
+            <textarea
+              value={ description }
+              name="description"
+              onChange={ this.handleChange.bind(this) }
+              id="description-input"
+              data-testid="description-input"
+              className="value-input"
+            />
+          </label>
+          <div className="add-expenses-button">
+            <button
+              onClick={ this.handleAddExpenses.bind(this) }
+              type="button"
+              className="add-expenses"
+            >
+              Adicionar despesa
+            </button>
+          </div>
         </div>
-      </div>
+      </form>
     );
   }
 }
@@ -214,35 +168,12 @@ const mapStateToProps = ({ wallet: { currencies, expenses, total } }) => ({
   total,
 });
 const mapDispatchToProps = (dispatch) => ({
-  totalExpensesGet: (totalExpenses) => dispatch(MakeTotalExpenses(totalExpenses)),
-  getingExpenses: ({
-    get_Expenses: {
-      id,
-      value,
-      currency,
-      method,
-      tag,
-      description,
-      exchangeRates,
-    },
-  }) => dispatch(
-    getExpenses({
-      get_Expenses: {
-        id,
-        value,
-        currency,
-        method,
-        tag,
-        description,
-        exchangeRates,
-      },
-    }),
-  ),
+  getdata: (getCurrencies) => dispatch(fetchAPI(getCurrencies)),
+  expensesWithCoins: (expenses) => dispatch(getExpensesWithCoins(expenses)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MenuWallet);
 MenuWallet.propTypes = {
   currencies: PropTypes.objectOf.isRequired,
-  totalExpensesGet: PropTypes.func.isRequired,
-  getingExpenses: PropTypes.func.isRequired,
+  expensesWithCoins: PropTypes.func.isRequired,
 };

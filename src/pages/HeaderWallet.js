@@ -1,13 +1,22 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
 import { connect } from 'react-redux';
 import './HeaderWallet.css';
 
 class HearderWallet extends Component {
-  render() {
-    const { email, total } = this.props;
+  total() {
+    const { expenses } = this.props;
+    return expenses.map(({ currency, value, exchangeRates }) => {
+      const currencyData = exchangeRates[currency];
+      const total = Number(value) * Number(currencyData.ask);
+      return total;
+    })
+      .reduce((acc, actual) => acc + actual, 0);
+  }
 
+  render() {
+    const { email } = this.props;
+    console.log();
     return (
       <div className="limiter-header-wallet">
         <div className="container-header-wallet container-header-wallet-bg">
@@ -18,7 +27,7 @@ class HearderWallet extends Component {
               className="header-wallet-title-right "
             >
               Despesas Totais: R$
-              {`${total},00`}
+              {(Math.round(this.total() * 100) / 100).toFixed(2)}
               {' '}
               <span data-testid="header-currency-field">BRL</span>
               {' '}
@@ -38,15 +47,15 @@ class HearderWallet extends Component {
 
 const mapStateToProps = ({
   user: { email },
-  wallet: { currencies, total },
+  wallet: { currencies, expenses },
 }) => ({
   email,
   currencies,
-  total,
+  expenses,
 });
 
 export default connect(mapStateToProps, null)(HearderWallet);
 HearderWallet.propTypes = {
   email: PropTypes.string.isRequired,
-  total: PropTypes.number.isRequired,
+  expenses: PropTypes.arrayOf.isRequired,
 };
