@@ -1,6 +1,7 @@
 // Coloque aqui suas actions
 export const USER_EMAIL = 'USER_EMAIL';
 export const REQUEST_CURRENCY = 'REQUEST_CURRENCY';
+export const SAVE_DATA = 'SAVE_DATA';
 
 export function userEmail(email) {
   return {
@@ -11,9 +12,17 @@ export function userEmail(email) {
 
 export function requestCurrency(currency) {
   return {
-    c: console.log(currency),
+    // c: console.log(currency),
     type: REQUEST_CURRENCY,
     currency,
+  };
+}
+
+export function saveData(expense) {
+  return {
+    d: console.log(expense),
+    type: SAVE_DATA,
+    expense,
   };
 }
 
