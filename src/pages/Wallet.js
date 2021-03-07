@@ -96,5 +96,5 @@ export default connect(mapStateToProps, mapDispatchToProps)(Wallet);
 
 Wallet.propTypes = {
   getdata: PropTypes.func.isRequired,
-  expenses: PropTypes.objectOf.isRequired,
+  // expenses: PropTypes.objectOf.isRequired,
 };
