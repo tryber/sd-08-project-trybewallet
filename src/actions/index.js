@@ -7,6 +7,9 @@ export const REQUEST_CURRENCY_TYPE_SUCCESS = 'REQUEST_CURRENCY_TYPE_SUCCESS';
 export const REQUEST_CURRENCY_TYPE_ERROR = 'REQUEST_CURRENCY_TYPE_ERROR';
 
 export const HANDLE_ADD_EXPENSE = 'HANDLE_ADD_EXPENSE';
+export const HANDLE_DELETE_EXPENSE = 'HANDLE_DELETE_EXPENSE';
+export const HANDLE_EDIT_EXPENSE = 'HANDLE_EDIT_EXPENSE';
+export const HANDLE_SUBMIT_EXPENSE = 'HANDLE_SUBMIT_EXPENSE';
 
 export const handleUserLogin = (email) => ({
   type: HANDLE_USER_LOGIN,
@@ -46,5 +49,20 @@ export const fetchCurrencyType = () => async (dispatch) => {
 
 export const handleAddExpense = (expense) => ({
   type: HANDLE_ADD_EXPENSE,
+  payload: expense,
+});
+
+export const handleDeleteExpense = (expense) => ({
+  type: HANDLE_DELETE_EXPENSE,
+  payload: expense,
+});
+
+export const handleEditExpense = (expense) => ({
+  type: HANDLE_EDIT_EXPENSE,
+  payload: expense,
+});
+
+export const handleSubmitExpense = (expense) => ({
+  type: HANDLE_SUBMIT_EXPENSE,
   payload: expense,
 });

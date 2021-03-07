@@ -7,6 +7,7 @@ import { Header, ExpensesTable } from '../components';
 import {
   fetchCurrencyType as fetchCurrencyTypeThunk,
   handleAddExpense as handleAddExpenseAction,
+  handleSubmitExpense as handleSubmitExpenseAction,
 } from '../actions';
 
 const INITIAL_STATE = {
@@ -28,6 +29,7 @@ class Wallet extends React.Component {
 
     this.handleFieldChange = this.handleFieldChange.bind(this);
     this.handleAddNewExpense = this.handleAddNewExpense.bind(this);
+    this.handleEditSpecificExpense = this.handleEditSpecificExpense.bind(this);
   }
 
   componentDidMount() {
@@ -57,6 +59,23 @@ class Wallet extends React.Component {
     };
 
     handleAddExpense(expense);
+
+    this.setState({ ...INITIAL_STATE, id: id + 1 });
+  }
+
+  handleEditSpecificExpense() {
+    const { id, value, description, currency, payment, tag } = this.state;
+    const { handleSubmitExpense } = this.props;
+
+    const expense = {
+      value,
+      description,
+      currency,
+      method: payment,
+      tag,
+    };
+
+    handleSubmitExpense(expense);
 
     this.setState({ ...INITIAL_STATE, id: id + 1 });
   }
@@ -138,6 +157,8 @@ class Wallet extends React.Component {
   }
 
   render() {
+    const { isEditing } = this.props;
+
     return (
       <>
         <Header />
@@ -149,9 +170,11 @@ class Wallet extends React.Component {
 
           <button
             type="button"
-            onClick={ this.handleAddNewExpense }
+            onClick={ isEditing
+              ? this.handleEditSpecificExpense
+              : this.handleAddNewExpense }
           >
-            Adicionar despesa
+            {isEditing ? 'Editar despesa' : 'Adicionar despesa'}
           </button>
 
           <ExpensesTable />
@@ -161,9 +184,11 @@ class Wallet extends React.Component {
   }
 }
 
-const mapStateToProps = ({ wallet: { currency, expenses } }) => ({
+const mapStateToProps = ({ wallet: { currency, expenses, id, isEditing } }) => ({
   currency,
   expenses,
+  id,
+  isEditing,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -173,12 +198,17 @@ const mapDispatchToProps = (dispatch) => ({
   handleAddExpense: (expense) => dispatch(
     handleAddExpenseAction(expense),
   ),
+  handleSubmitExpense: (expense) => dispatch(
+    handleSubmitExpenseAction(expense),
+  ),
 });
 
 Wallet.propTypes = {
   currency: PropTypes.objectOf(PropTypes.objectOf(PropTypes.string)).isRequired,
   fetchCurrencyType: PropTypes.func.isRequired,
   handleAddExpense: PropTypes.func.isRequired,
+  handleSubmitExpense: PropTypes.func.isRequired,
+  isEditing: PropTypes.bool.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Wallet);

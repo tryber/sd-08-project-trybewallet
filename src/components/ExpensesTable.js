@@ -2,6 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import {
+  handleDeleteExpense as handleDeleteExpenseAction,
+  handleEditExpense as handleEditExpenseAction,
+} from '../actions';
+
 class Expenses extends React.Component {
   constructor() {
     super();
@@ -10,6 +15,8 @@ class Expenses extends React.Component {
   }
 
   handleAddExpense(expense) {
+    const { handleDeleteExpense, handleEditExpense } = this.props;
+
     return (
       <tr key={ expense.id }>
         <td>{expense.description}</td>
@@ -23,6 +30,24 @@ class Expenses extends React.Component {
             * parseFloat(expense.exchangeRates[expense.currency].ask)).toFixed(2)}
         </td>
         <td>Real</td>
+        <td>
+          <button
+            type="button"
+            onClick={ () => handleEditExpense(expense.id) }
+            data-testid="edit-btn"
+          >
+            Editar
+          </button>
+        </td>
+        <td>
+          <button
+            type="button"
+            onClick={ () => handleDeleteExpense(expense.id) }
+            data-testid="delete-btn"
+          >
+            Excluir
+          </button>
+        </td>
       </tr>
     );
   }
@@ -56,8 +81,15 @@ const mapStateToProps = ({ wallet: { expenses } }) => ({
   expenses,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  handleDeleteExpense: (id) => dispatch(handleDeleteExpenseAction(id)),
+  handleEditExpense: (id) => dispatch(handleEditExpenseAction(id)),
+});
+
 Expenses.propTypes = {
   expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
+  handleDeleteExpense: PropTypes.func.isRequired,
+  handleEditExpense: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, null)(Expenses);
+export default connect(mapStateToProps, mapDispatchToProps)(Expenses);
