@@ -2,6 +2,7 @@
 import {
   GET_CURRENCIES,
   GET_EXPENSES,
+  DELETE_EXPENSE,
 } from '../actions/constants';
 
 const INITIAL_STATE = {
@@ -22,12 +23,19 @@ const getExpenses = (state = INITIAL_STATE, action) => {
   };
 };
 
+const deletExpense = (state = INITIAL_STATE, action) => ({
+  ...state,
+  expenses: state.expenses.filter((expense) => expense.id !== action.id),
+});
+
 export default function wallet(state = INITIAL_STATE, action) {
   switch (action.type) {
   case GET_CURRENCIES:
     return { ...state, currencies: action.Currencies };
   case GET_EXPENSES:
     return getExpenses(state, action);
+  case DELETE_EXPENSE:
+    return deletExpense(state, action);
   default:
     return state;
   }

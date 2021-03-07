@@ -1,6 +1,7 @@
 import {
   GET_CURRENCIES,
   GET_EXPENSES,
+  DELETE_EXPENSE,
 } from './constants';
 import getAPI from '../services/RequestApi';
 
@@ -11,6 +12,10 @@ export const getCurrencies = (Currencies) => ({
 export const getExpenses = (expenses) => ({
   type: GET_EXPENSES,
   expenses,
+});
+export const deleteExpense = (id) => ({
+  type: DELETE_EXPENSE,
+  id,
 });
 
 export function fetchAPI() {

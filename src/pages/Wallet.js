@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import './Wallet.css';
 import HeaderWallet from './HeaderWallet';
 import MenuWallet from './MenuWallet';
-import { fetchAPI } from '../actions/wallet';
+import { fetchAPI, deleteExpense } from '../actions/wallet';
 
 class Wallet extends Component {
   componentDidMount() {
@@ -14,7 +14,7 @@ class Wallet extends Component {
   }
 
   renderTableTbody() {
-    const { expenses } = this.props;
+    const { expenses, excludeExpense } = this.props;
     return (
       <tbody>
         {expenses
@@ -45,6 +45,7 @@ class Wallet extends Component {
                       V
                     </button>
                     <button
+                      onClick={ () => excludeExpense(id) }
                       className="table-button"
                       type="button"
                       data-testid="delete-btn"
@@ -104,11 +105,14 @@ const mapStateToProps = ({ wallet: { currencies, expenses, total } }) => ({
 });
 const mapDispatchToProps = (dispatch) => ({
   getdata: (getCurrencies) => dispatch(fetchAPI(getCurrencies)),
+  excludeExpense: (id) => dispatch(deleteExpense(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Wallet);
 
 Wallet.propTypes = {
   getdata: PropTypes.func.isRequired,
+  excludeExpense: PropTypes.func.isRequired,
+
   expenses: PropTypes.objectOf.isRequired,
 };
