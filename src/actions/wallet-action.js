@@ -1,4 +1,4 @@
-import getCurrencies from '../services';
+// import getCurrencies from '../services';
 
 export const Types = {
   SAVE_CURRENCIES: 'SAVE_CURRENCIES',
