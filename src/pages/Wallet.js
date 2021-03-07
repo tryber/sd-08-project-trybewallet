@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import Header from '../components/Header';
+import { Header, ExpensesTable } from '../components';
 
 import {
   fetchCurrencyType as fetchCurrencyTypeThunk,
@@ -88,20 +88,22 @@ class Wallet extends React.Component {
   }
 
   renderSelects() {
-    const { payment, tag } = this.state;
+    const { payment, tag, currency: currencies } = this.state;
     const { currency } = this.props;
 
     return (
       <>
         <select
           name="currency"
-          value={ currency }
+          value={ currencies }
           onChange={ this.handleFieldChange }
           data-testid="currency-input"
         >
-          {Object.keys(currency).map((type, index) => (
-            <option key={ index } data-testid={ type }>{type}</option>
-          ))}
+          {currency
+            ? delete currency.USDT && Object.keys(currency).map((type, index) => (
+              <option key={ index } data-testid={ type }>{type}</option>
+            ))
+            : []}
         </select>
 
         <select
@@ -136,10 +138,6 @@ class Wallet extends React.Component {
   }
 
   render() {
-    const { currency } = this.props;
-
-    delete currency.USDT;
-
     return (
       <>
         <Header />
@@ -155,6 +153,8 @@ class Wallet extends React.Component {
           >
             Adicionar despesa
           </button>
+
+          <ExpensesTable />
         </main>
       </>
     );
