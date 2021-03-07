@@ -4,7 +4,9 @@ import Header from '../components/Header';
 class Wallet extends Component {
   render() {
     return (
-      <Header />
+      <div>
+        <Header />
+      </div>
     );
   }
 }
