@@ -47,11 +47,16 @@ class InputWallet extends React.Component {
 InputWallet.propTypes = {
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
+  type: PropTypes.string,
   options: PropTypes
     .arrayOf(PropTypes
-      .oneOfType([PropTypes.string, PropTypes.array])).isRequired,
+      .oneOfType([PropTypes.string, PropTypes.array])),
   value: PropTypes.string.isRequired,
+};
+
+InputWallet.defaultProps = {
+  type: 'text',
+  options: null,
 };
 
 export default InputWallet;

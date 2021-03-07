@@ -22,6 +22,10 @@ const addExpense = (state = initialState, action) => {
   };
 };
 
+function removeExpense(expenses, id) {
+  return expenses.filter((expense) => expense.id !== id);
+}
+
 const wallet = (state = initialState, action) => {
   switch (action.type) {
   case Types.SAVE_CURRENCIES:
@@ -34,6 +38,10 @@ const wallet = (state = initialState, action) => {
       expenses:
       [...state.expenses, { id: state.idCount, ...action.payload }],
       idCount: state.idCount + 1,
+    };
+  case Types.REMOVE_EXPENSE:
+    return {
+      ...state, expenses: [...removeExpense(state.expenses, action.payload)],
     };
   default:
     return state;
