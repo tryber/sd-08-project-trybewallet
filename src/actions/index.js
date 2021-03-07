@@ -1,6 +1,7 @@
 import getCurrencyPrice from '../services/getCurrencyPrice';
 import {
   ADD_EXPENSE,
+  DELETE_EXPENSE,
   LOGIN,
   REQUEST_CURRENCIES,
   REQUEST_CURRENCIES_ERROR,
@@ -31,6 +32,11 @@ export const requestCurrenciesError = (error) => ({
 
 export const addNewExpense = (expenses) => ({
   type: ADD_EXPENSE,
+  expenses,
+});
+
+export const deleteExpense = (expenses) => ({
+  type: DELETE_EXPENSE,
   expenses,
 });
 

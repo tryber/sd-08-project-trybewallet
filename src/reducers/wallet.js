@@ -1,5 +1,6 @@
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
 import { ADD_EXPENSE,
+  DELETE_EXPENSE,
   REQUEST_CURRENCIES,
   REQUEST_CURRENCIES_ERROR, REQUEST_CURRENCIES_SUCCESS } from '../actions/actionsType';
 
@@ -20,6 +21,8 @@ export default function wallet(state = INITIAL_STATE, action) {
     return { ...state, error: state.error, isFetching: action.isFetching };
   case ADD_EXPENSE:
     return { ...state, expenses: [...state.expenses, action.expenses] };
+  case DELETE_EXPENSE:
+    return { ...state, expenses: [...action.expenses] };
   default:
     return state;
   }

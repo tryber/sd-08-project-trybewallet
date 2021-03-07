@@ -1,9 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { deleteExpense as deleteExpenseAction } from '../actions';
 import './WalletTable.css';
 
 class WalletTable extends React.Component {
+  constructor() {
+    super();
+    this.deleteExpense = this.deleteExpense.bind(this);
+  }
+
+  deleteExpense({ target }) {
+    const { expenses, deleteExpense } = this.props;
+    const newExpensesList = expenses
+      .filter((expense) => expense.description !== target.value);
+    deleteExpense(newExpensesList);
+  }
+
   render() {
     const { expenses } = this.props;
     const fields = [
@@ -36,8 +49,15 @@ class WalletTable extends React.Component {
               </td>
               <td>Real</td>
               <td>
-                <button type="button">Excluir</button>
                 <button type="button">Editar</button>
+                <button
+                  type="button"
+                  data-testid="delete-btn"
+                  value={ expense.description }
+                  onClick={ this.deleteExpense }
+                >
+                  Excluir
+                </button>
               </td>
             </tr>))}
         </tbody>
@@ -50,8 +70,13 @@ const mapStateToProps = ({ wallet: { expenses } }) => ({
   expenses,
 });
 
-export default connect(mapStateToProps)(WalletTable);
+const mapDispatchToProps = (dispatch) => ({
+  deleteExpense: (expenses) => dispatch(deleteExpenseAction(expenses)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(WalletTable);
 
 WalletTable.propTypes = {
   expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
+  deleteExpense: PropTypes.func.isRequired,
 };
