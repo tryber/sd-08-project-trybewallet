@@ -11,7 +11,7 @@ export function userEmail(email) {
 
 export function requestCurrency(currency) {
   return {
-    c: console.log(currency),
+    // c: console.log(currency),
     type: REQUEST_CURRENCY,
     currency,
   };
