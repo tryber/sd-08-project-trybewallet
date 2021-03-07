@@ -78,7 +78,7 @@ class ExpenseForm extends React.Component {
     const { currencies } = this.props;
     return (
       <label htmlFor="input-currency">
-        Moeda
+        Moeda:
         <select
           name="currency"
           id="input-currency"
@@ -105,7 +105,7 @@ class ExpenseForm extends React.Component {
     const method = ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'];
     return (
       <label htmlFor="input-method">
-        Método de pagamento
+        Método de pagamento:
         <select
           name="method"
           id="input-method"
@@ -128,7 +128,7 @@ class ExpenseForm extends React.Component {
     const type = ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
     return (
       <label htmlFor="input-tag">
-        Tag
+        Tag:
         <select
           name="tag"
           id="input-tag"
@@ -146,7 +146,7 @@ class ExpenseForm extends React.Component {
     return (
       <form>
         <label htmlFor="input-value">
-          Valor
+          Valor:
           <input
             type="text"
             id="input-value"
@@ -157,7 +157,7 @@ class ExpenseForm extends React.Component {
           />
         </label>
         <label htmlFor="input-description">
-          Descrição
+          Descrição:
           <input
             type="text"
             id="input-description"

@@ -23,18 +23,18 @@ class WalletTable extends React.Component {
               <td>{expense.description}</td>
               <td>{expense.tag}</td>
               <td>{expense.method}</td>
-              <td>{`${expense.currency} ${expense.value}`}</td>
+              <td>{expense.value}</td>
               <td>{expense.exchangeRates[expense.currency].name}</td>
               <td>
-                {`R$ ${parseFloat(expense.exchangeRates[expense.currency].ask)
-                  .toFixed(2)}`}
+                {parseFloat(expense.exchangeRates[expense.currency].ask)
+                  .toFixed(2)}
               </td>
               <td>
-                {`R$ ${parseFloat(
+                {parseFloat(
                   expense.value * expense.exchangeRates[expense.currency].ask,
-                ).toFixed(2)}`}
+                ).toFixed(2)}
               </td>
-              <td>Real Brasileiro</td>
+              <td>Real</td>
               <td>
                 <button type="button">Excluir</button>
                 <button type="button">Editar</button>
