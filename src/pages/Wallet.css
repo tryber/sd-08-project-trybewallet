@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family="Roboto":wght@400;500;700;900&display=swap') ;
+
+a {
+  color: #666;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  line-height: 1.7;
+  transition: all 0.4s;
+}
+
+.txt1 {
+  color: #e5e5e5;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.limiter-wallet {
+  margin: 0 auto;
+  width: 100%;
+}
+
+.container-wallet-bg {
+  background-image: url('../images/bg-01.jpg');
+}
+
+.container-wallet {
+  align-items: center;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 15px;
+  position: relative;
+  width: 96vw;
+  z-index: 1;
+}
+
+.container-wallet:before {
+  background-color: rgba(255, 255, 255, 0.9);
+  content: '';
+  display: block;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: -1;
+}
+
+.wrap-wallet {
+  background: linear-gradient(to top, #7579ff, #b224ef);
+  border-radius: 10px;
+  height: 55vh;
+  margin-top: -15%;
+  overflow: hidden;
+  width: 100%;
+}
+
+.table {
+  display: flex;
+  justify-content: center;
+}
+
+table {
+  align-self: center;
+  height: 100%;
+  width: 95%;
+}
+
+thead {
+  color: azure;
+}
+
+tbody {
+  color: azure;
+}
+
+td {
+  border: 1px solid azure;
+  border-radius: 3px;
+  width: 12%;
+}
+
+.table-button {
+  background-color: azure;
+  justify-self: center;
+  margin: 2%;
+  width: 45%;
+}

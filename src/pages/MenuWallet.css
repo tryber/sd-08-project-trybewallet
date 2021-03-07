@@ -1,0 +1,97 @@
+.menu-wallet {
+  background: #7579ff;
+  border-radius: 10px;
+  display: flex;
+  height: 60px;
+  margin-bottom: 0.5%;
+  margin-top: -15%;
+  width: 100%;
+  z-index: 10;
+}
+
+.value-input-label {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  font-size: larger;
+  font-weight: 400;
+  margin-left: 2%;
+}
+
+.value-input {
+  border-radius: 4px;
+  height: 45%;
+  margin-left: 1%;
+  margin-right: 1%;
+}
+
+.value-coin-label {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  font-size: larger;
+  font-weight: 400;
+  margin-left: 2%;
+}
+
+.value-paymemt-method-label {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  font-size: larger;
+  font-weight: 400;
+  margin-left: 2%;
+}
+
+.value-tag-label {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  font-size: larger;
+  font-weight: 400;
+  margin-left: 2%;
+}
+
+.value-description-label {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  font-size: larger;
+  font-weight: 400;
+  margin-left: 2%;
+  width: 25%;
+}
+
+select {
+  background-color: white;
+  border-radius: 4px;
+  font-weight: 600;
+  height: 50%;
+}
+
+select:focus {
+  outline: none;
+}
+
+.add-expenses-button {
+  align-items: flex-end;
+  display: flex;
+  font-size: larger;
+  font-weight: 400;
+  justify-content: flex-end;
+  margin-bottom: 0.4%;
+  margin-left: auto;
+  margin-right: 3%;
+  width: 18%;
+}
+
+.add-expenses {
+  background-color: white;
+  border-radius: 20px;
+  font-size: medium;
+  font-weight: 800;
+  height: 90%;
+  margin-left: 1%;
+  margin-right: 1%;
+  width: 80%;
+}
