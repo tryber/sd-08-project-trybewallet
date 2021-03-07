@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { handleUserLoginAction } from '../actions';
+import { handleUserLogin as handleUserLoginAction } from '../actions';
 
 class Login extends React.Component {
   constructor() {
