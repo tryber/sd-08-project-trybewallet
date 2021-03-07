@@ -6,6 +6,7 @@ import { Creators as WalletActions } from '../actions/wallet';
 
 import Header from '../component/Header';
 import Form from '../component/Form';
+import Table from '../component/Table';
 
 class Wallet extends React.Component {
   componentDidMount() {
@@ -18,6 +19,7 @@ class Wallet extends React.Component {
       <div>
         <Header />
         <Form />
+        <Table />
       </div>
     );
   }
