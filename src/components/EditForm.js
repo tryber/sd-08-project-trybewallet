@@ -9,6 +9,13 @@ class EditForm extends Component {
 
     this.editExpenseInfos = this.editExpenseInfos.bind(this);
     this.saveEditedExpense = this.saveEditedExpense.bind(this);
+    this.renderExpenseValueInput = this.renderExpenseValueInput.bind(this);
+    this.renderExpenseDescriptionInput = this.renderExpenseDescriptionInput.bind(this);
+    this.renderCurrencySelect = this.renderCurrencySelect.bind(this);
+    this.renderPaymentMethodSelect = this.renderPaymentMethodSelect.bind(this);
+    this.renderExpenseTagSelect = this.renderExpenseTagSelect.bind(this);
+    this.renderEditExpenseButton = this.renderEditExpenseButton.bind(this);
+
     const { expenseToEdit } = this.props;
     this.state = {
       id: expenseToEdit.id,
@@ -63,6 +70,115 @@ class EditForm extends Component {
     await updateExpensesDataDispatch(newExpensesData);
   }
 
+  renderExpenseValueInput(value) {
+    return (
+      <label htmlFor="editExpenseValue">
+        Valor:
+        <input
+          type="number"
+          id="editExpenseValue"
+          name="value"
+          step="0.01"
+          min="0"
+          data-testid="value-input"
+          value={ value }
+          onChange={ this.editExpenseInfos }
+        />
+      </label>
+    );
+  }
+
+  renderExpenseDescriptionInput(description) {
+    return (
+      <label htmlFor="editExpenseDescription">
+        Descrição:
+        <input
+          type="text"
+          id="editExpenseDescription"
+          name="description"
+          data-testid="description-input"
+          value={ description }
+          onChange={ this.editExpenseInfos }
+        />
+      </label>
+    );
+  }
+
+  renderCurrencySelect(currenciesList, currency) {
+    return (
+      <label htmlFor="editCurrency">
+        Moeda:
+        <select
+          id="editCurrency"
+          name="currency"
+          data-testid="currency-input"
+          value={ currency }
+          onChange={ this.editExpenseInfos }
+        >
+          {currenciesList && currenciesList.map((currencyOption) => (
+            <option
+              key={ currencyOption }
+              data-testid={ `${currencyOption}` }
+            >
+              {currencyOption}
+            </option>))}
+        </select>
+      </label>
+    );
+  }
+
+  renderPaymentMethodSelect(method) {
+    return (
+      <label htmlFor="editPaymentMethod">
+        Método de Pagamento:
+        <select
+          id="editPaymentMethod"
+          name="method"
+          data-testid="method-input"
+          value={ method }
+          onChange={ this.editExpenseInfos }
+        >
+          <option value="Dinheiro">Dinheiro</option>
+          <option value="Cartão de crédito">Cartão de crédito</option>
+          <option value="Cartão de débito">Cartão de débito</option>
+        </select>
+      </label>
+    );
+  }
+
+  renderExpenseTagSelect(tag) {
+    return (
+      <label htmlFor="editExpenseTag">
+        Tag:
+        <select
+          id="editExpenseTag"
+          name="tag"
+          data-testid="tag-input"
+          value={ tag }
+          onChange={ this.editExpenseInfos }
+        >
+          <option value="Alimentação">Alimentação</option>
+          <option value="Lazer">Lazer</option>
+          <option value="Trabalho">Trabalho</option>
+          <option value="Transporte">Transporte</option>
+          <option value="Saúde">Saúde</option>
+        </select>
+      </label>
+    );
+  }
+
+  renderEditExpenseButton() {
+    return (
+      <button
+        type="button"
+        name="Editar Despesa"
+        onClick={ this.saveEditedExpense }
+      >
+        Editar despesa
+      </button>
+    );
+  }
+
   render() {
     const { wallet } = this.props;
     const { currenciesList, isFetching } = wallet;
@@ -75,94 +191,22 @@ class EditForm extends Component {
     } = this.state;
     return (
       <div>
-        {isFetching && (!currenciesList || currenciesList.length) ? <p>Carregando...</p>
+        {isFetching && (!currenciesList || currenciesList.length)
+          ? <p>Carregando...</p>
           : (
             <form id="editExpenseForm">
               <h2>Despesa a Editar</h2>
-              <label htmlFor="editExpenseValue">
-                Valor:
-                <input
-                  type="number"
-                  id="editExpenseValue"
-                  name="value"
-                  step="0.01"
-                  min="0"
-                  data-testid="value-input"
-                  value={ value }
-                  onChange={ this.editExpenseInfos }
-                />
-              </label>
+              { this.renderExpenseValueInput(value) }
               <br />
-              <label htmlFor="editExpenseDescription">
-                Descrição:
-                <input
-                  type="text"
-                  id="editExpenseDescription"
-                  name="description"
-                  data-testid="description-input"
-                  value={ description }
-                  onChange={ this.editExpenseInfos }
-                />
-              </label>
+              { this.renderExpenseDescriptionInput(description) }
               <br />
-              <label htmlFor="editCurrency">
-                Moeda:
-                <select
-                  id="editCurrency"
-                  name="currency"
-                  data-testid="currency-input"
-                  value={ currency }
-                  onChange={ this.editExpenseInfos }
-                >
-                  {currenciesList && currenciesList.map((currencyOption) => (
-                    <option
-                      key={ currencyOption }
-                      data-testid={ `${currencyOption}` }
-                    >
-                      {currencyOption}
-                    </option>))}
-                </select>
-              </label>
+              { this.renderCurrencySelect(currenciesList, currency) }
               <br />
-              <label htmlFor="editPaymentMethod">
-                Método de Pagamento:
-                <select
-                  id="editPaymentMethod"
-                  name="method"
-                  data-testid="method-input"
-                  value={ method }
-                  onChange={ this.editExpenseInfos }
-                >
-                  <option value="Dinheiro">Dinheiro</option>
-                  <option value="Cartão de crédito">Cartão de crédito</option>
-                  <option value="Cartão de débito">Cartão de débito</option>
-                </select>
-              </label>
+              { this.renderPaymentMethodSelect(method) }
               <br />
-              <label htmlFor="editExpenseTag">
-                Tag:
-                <select
-                  id="editExpenseTag"
-                  name="tag"
-                  data-testid="tag-input"
-                  value={ tag }
-                  onChange={ this.editExpenseInfos }
-                >
-                  <option value="Alimentação">Alimentação</option>
-                  <option value="Lazer">Lazer</option>
-                  <option value="Trabalho">Trabalho</option>
-                  <option value="Transporte">Transporte</option>
-                  <option value="Saúde">Saúde</option>
-                </select>
-              </label>
+              { this.renderExpenseTagSelect(tag) }
               <br />
-              <button
-                type="button"
-                name="Editar Despesa"
-                onClick={ this.saveEditedExpense }
-              >
-                Editar despesa
-              </button>
+              { this.renderEditExpenseButton() }
             </form>
           )}
       </div>
@@ -185,9 +229,18 @@ EditForm.propTypes = {
     currencies: PropTypes.arrayOf.isRequired,
     currenciesList: PropTypes.arrayOf.isRequired,
     error: PropTypes.string,
+    isFetching: PropTypes.bool,
   }).isRequired,
   apiCurrenciesDispatch: PropTypes.func.isRequired,
   updateExpensesDataDispatch: PropTypes.func.isRequired,
+  expenseToEdit: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    value: PropTypes.number.isRequired,
+    description: PropTypes.string.isRequired,
+    currency: PropTypes.string.isRequired,
+    method: PropTypes.string.isRequired,
+    tag: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditForm);

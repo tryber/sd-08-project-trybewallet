@@ -39,7 +39,11 @@ export function apiCurrencies() {
       const currenciesList = Object.keys(currenciesJson)
         .filter((currency) => currency !== 'USDT');
       const currencies = currenciesList.map((currency) => currenciesJson[currency]);
-      return dispatch(currenciesRequestSucceed(currenciesJson, currencies, currenciesList));
+      return dispatch(currenciesRequestSucceed(
+        currenciesJson,
+        currencies,
+        currenciesList,
+      ));
     } catch (error) {
       return dispatch(currenciesRequestFailed(error));
     }

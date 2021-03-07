@@ -13,12 +13,12 @@ class Header extends Component {
     const { wallet } = this.props;
     const { expenses } = wallet;
     if (expenses) {
-      const total = expenses.reduce((soma, despesa) => soma + parseFloat(despesa.value), 0);
+      const total = expenses
+        .reduce((soma, despesa) => soma + parseFloat(despesa.value), 0);
       // (Math.round(this.getTotal() * 100) / 100).toFixed(2)
       return total;
-    } else {
-      return 0;
     }
+    return 0;
   }
 
   render() {
