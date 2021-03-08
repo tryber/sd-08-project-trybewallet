@@ -1,0 +1,16 @@
+.headerContainer {
+  background-color: black;
+  color: white;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.headerContext {
+  display: flex;
+  margin-right: 20px;
+  padding: 10px;
+}
+
+.headerContext dd {
+  margin-left: 8px;
+}
