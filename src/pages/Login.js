@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { saveEmail, savePassword } from '../actions';
@@ -14,18 +15,6 @@ function validPassword(password) {
 }
 
 class Login extends React.Component {
-  /* constructor(props) {
-    super(props)
-
-    this.inputValidation = this.inputValidation.bind(this); */
-
-
-    /* this.state = {
-      email: '',
-      password: '',
-    } */
-  
-
   inputValidation() {
     const { email, password } = this.props;
     const emailValidation = validEmail(email);
@@ -52,20 +41,23 @@ class Login extends React.Component {
           <input
             data-testid="email-input"
             name="email"
-            onChange={ (e) => dispatchAddEmail(e.target.value)}
+            onChange={ (e) => dispatchAddEmail(e.target.value) }
             placeholder="Write your email"
             value={ email }
             type="email"
           />
         </label>
-        <input
-          data-testid="password-input"
-          name="password"
-          onChange={ (e) => dispatchAddPassword(e.target.value)}
-          placeholder="password"
-          value={ password }
-          type="password"
-        />
+        <label htmlFor="password-input">
+          Password
+          <input
+            data-testid="password-input"
+            name="password"
+            onChange={ (e) => dispatchAddPassword(e.target.value) }
+            placeholder="password"
+            value={ password }
+            type="password"
+          />
+        </label>
         <Link to="/carteira">
           <button
             disabled={ this.inputValidation() }
@@ -87,7 +79,11 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   dispatchAddEmail: (email) => dispatch(saveEmail(email)),
-  dispatchAddPassword: (password) => dispatch(savePassword(password))
-})
+  dispatchAddPassword: (password) => dispatch(savePassword(password)),
+});
+
+Login.propTypes = {
+  dispatch: PropTypes.func,
+}.isRequired;
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
