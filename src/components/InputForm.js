@@ -11,6 +11,7 @@ class InputForm extends React.Component {
       description: '',
       codes: [],
       currency: '',
+      method: '',
     };
 
     this.onChange = this.onChange.bind(this);
@@ -27,7 +28,8 @@ class InputForm extends React.Component {
   async getCurrencies() {
     const codeCurrencies = await fetch('https://economia.awesomeapi.com.br/json/all')
       .then((response) => response.json());
-    delete codeCurrencies.USDT; // https://stackoverflow.com/questions/208105/how-do-i-remove-a-property-from-a-javascript-object
+    delete codeCurrencies.USDT;
+    // https://stackoverflow.com/questions/208105/how-do-i-remove-a-property-from-a-javascript-object
     const codes = Object.keys(codeCurrencies);
     this.setState({ codes });
   }
@@ -92,14 +94,35 @@ class InputForm extends React.Component {
     );
   }
 
+  paymentMethod(method) {
+    return (
+      <div>
+        Forma de Pagamento:
+        <select
+          type="text"
+          id="method-input"
+          data-testid="method-input"
+          value={ method }
+          name="method"
+          onChange={ this.onChange }
+        >
+          <option value="Dinheiro">Dinheiro</option>
+          <option value="Cartão de crédito">Cartão de crédito</option>
+          <option value="Cartão de débito">Cartão de débito</option>
+        </select>
+      </div>
+    );
+  }
+
   render() {
-    const { value, description, currency } = this.state;
+    const { value, description, currency, method } = this.state;
     return (
       <form>
         { this.expenseValueInput(value) }
         { this.expensesCurrencyOptions(currency) }
         <br />
         { this.expenseDescriptionInput(description) }
+        { this.paymentMethod(method) }
       </form>
     );
   }
