@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { fetchCurrencies, fetchCurrenciesNewValues } from '../actions';
+import SelectForm from './SelectForm';
 
 class ExpensesForm extends React.Component {
   constructor(props) {
@@ -77,41 +78,18 @@ class ExpensesForm extends React.Component {
           />
         </label>
 
-        <span>Escolha a moeda:</span>
         <select
           name="currency"
           data-testid="currency-input"
           value={ currency }
           onChange={ this.handleChange }
         >
-          {currenciesTags.map((currency) => (
-            <option key={ currency } data-testid={ currency }>{currency}</option>
+          {currenciesTags.map((cCurrency) => (
+            <option key={ cCurrency } data-testid={ cCurrency }>{cCurrency}</option>
           ))}
         </select>
 
-        <select
-          name="method"
-          data-testid="method-input"
-          value={ method }
-          onChange={ this.handleChange }
-        >
-          <option>Dinheiro</option>
-          <option>Cartão de crédito</option>
-          <option>Cartão de débito</option>
-        </select>
-
-        <select
-          name="tag"
-          data-testid="tag-input"
-          value={ tag }
-          onChange={ this.handleChange }
-        >
-          <option>Alimentação</option>
-          <option>Lazer</option>
-          <option>Trabalho</option>
-          <option>Transporte</option>
-          <option>Saúde</option>
-        </select>
+        <SelectForm method={ method } tag={ tag } handleChange={ this.handleChange } />
 
         <button
           type="button"
