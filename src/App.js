@@ -8,7 +8,7 @@ function App() {
     <Switch>
       <Route path="/"><Login /></Route>
     </Switch>
-  )
+  );
 }
 
 export default App;
