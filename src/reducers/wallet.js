@@ -3,6 +3,7 @@ import {
   REQUEST_CURRENCIES,
   REQUEST_SUCCESS,
   REQUEST_FAIL,
+  DELETE_EXPENSE,
 } from '../actions/index';
 
 const INIT_STATE = {
@@ -21,6 +22,9 @@ function walletReducer(state = INIT_STATE, action) {
     return { ...state, error: action.error };
   case EXPENSES:
     return { ...state, expenses: [...state.expenses, action.expenses] };
+  case DELETE_EXPENSE:
+    return { ...state,
+      expenses: state.expenses.filter((item) => item.id !== action.expenseID) };
   default:
     return state;
   }

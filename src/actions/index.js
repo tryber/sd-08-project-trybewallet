@@ -3,6 +3,7 @@ export const EXPENSES = 'EXPENSES';
 export const REQUEST_CURRENCIES = 'REQUEST_CURRENCIES';
 export const REQUEST_SUCCESS = 'REQUEST_SUCCESS';
 export const REQUEST_FAIL = 'REQUEST_FAIL';
+export const DELETE_EXPENSE = 'DELETE_EXPENSE';
 
 export const loginAction = (email) => ({ type: LOGIN, email });
 export const expensesAction = (expenses) => ({ type: EXPENSES, expenses });
@@ -25,3 +26,8 @@ export const fetchCurrencies = () => async (dispatch) => {
     dispatch(requestFail(error));
   }
 };
+
+export const deleteExpenseAction = (expenseID) => ({
+  type: DELETE_EXPENSE,
+  expenseID,
+});
