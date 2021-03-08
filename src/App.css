@@ -2,10 +2,22 @@
   text-align: center;
 }
 
-/* button {
-  background-color: rgb(29, 151, 39);
-  border-radius: 10px;
+header {
+  align-items: center;
+  background-color: whitesmoke;
+  display: flex;
+  justify-content: space-around;
+}
+
+h2 {
+  display: inline;
+  width: 50px;
+}
+
+form {
+  background-color: #262B33;
   color: white;
-  padding: 5px;
-  text-decoration: none;
-} */
+  display: flex;
+  justify-content: space-evenly;
+  padding: 20px;
+}
