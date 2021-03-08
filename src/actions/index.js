@@ -11,3 +11,10 @@ export const addExpense = (expense) => ({
   type: ADD_EXPENSE,
   payload: expense,
 });
+
+export const fetchExchangeRates = (InputFormData) => async (dispatch) => {
+  const exchangeRates = await fetch('https://economia.awesomeapi.com.br/json/all')
+    .then((response) => response.json());
+  delete exchangeRates.USDT;
+  dispatch(addExpense({ ...InputFormData, exchangeRates }));
+};

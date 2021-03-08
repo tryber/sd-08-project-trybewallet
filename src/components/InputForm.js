@@ -1,7 +1,8 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import TextInput from './TextInput';
+import { fetchExchangeRates } from '../actions';
 
 class InputForm extends React.Component {
   constructor() {
@@ -10,12 +11,13 @@ class InputForm extends React.Component {
       value: 0,
       description: '',
       codes: [],
-      currency: '',
+      currency: 'USD',
       method: '',
       tag: '',
     };
 
     this.onChange = this.onChange.bind(this);
+    this.addExpense = this.addExpense.bind(this);
   }
 
   componentDidMount() {
@@ -33,6 +35,23 @@ class InputForm extends React.Component {
     // https://stackoverflow.com/questions/208105/how-do-i-remove-a-property-from-a-javascript-object
     const codes = Object.keys(codeCurrencies);
     this.setState({ codes });
+  }
+
+  addExpense(e) {
+    e.preventDefault();
+    const expense = { ...this.state };
+    const { addExpenseProp } = this.props;
+    delete expense.codes;
+    addExpenseProp(expense);
+
+    this.setState({
+      value: 0,
+      description: '',
+      currency: '',
+      method: '',
+      tag: '',
+      exchangeRates: {},
+    });
   }
 
   currencyOptions() {
@@ -140,16 +159,25 @@ class InputForm extends React.Component {
   render() {
     const { value, description, currency, method, tag } = this.state;
     return (
-      <form>
+      <form onSubmit={ this.addExpense }>
         { this.expenseValueInput(value) }
         { this.expensesCurrencyOptions(currency) }
         <br />
         { this.expenseDescriptionInput(description) }
         { this.paymentMethod(method) }
         { this.expensesTag(tag) }
+        <button type="submit">Adicionar Despesa</button>
       </form>
     );
   }
 }
 
-export default connect(null, null)(InputForm);
+const mapDispatchToProps = (dispatch) => ({
+  addExpenseProp: (expense) => dispatch(fetchExchangeRates(expense)),
+});
+
+InputForm.propTypes = {
+  addExpenseProp: PropTypes.func.isRequired,
+};
+
+export default connect(null, mapDispatchToProps)(InputForm);
