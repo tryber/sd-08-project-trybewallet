@@ -1,6 +1,6 @@
 const endPoint = 'https://economia.awesomeapi.com.br/json/all';
 
-const currenciesAPI = () => (
+const api = () => (
   fetch(endPoint)
     .then((response) => (
       response
@@ -9,4 +9,4 @@ const currenciesAPI = () => (
     ))
 );
 
-export default currenciesAPI;
+export default api;

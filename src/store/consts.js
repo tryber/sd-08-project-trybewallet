@@ -6,33 +6,33 @@ export const SALVAR_GASTO = 'SALVAR_GASTO';
 export const ADD_GASTO = 'ADD_GASTO';
 export const SOMAR_GASTO = 'SOMAR_GASTO';
 
-export function renderInput(...args) {
-  const [label, type, name, value, handleChange] = args;
+export function gasto(...args) {
+  const [label, type, name, valor, mudarCampos] = args;
   return (
-    <label htmlFor="value-input">
+    <label htmlFor="valor-input">
       {`${label}:`}
       <input
         type={ type }
         id={ `${name}-input` }
         name={ name }
         data-testid={ `${name}-input` }
-        onChange={ handleChange }
-        value={ value }
+        onChange={ mudarCampos }
+        valor={ valor }
       />
     </label>
   );
 }
 
-export function renderSelectCurrencies(currenciesName, value, handleChange) {
+export function moeda(nome, valor, mudarCampos) {
   return (
     <select
       id="currency-input"
       name="currency"
       data-testid="currency-input"
-      onChange={ handleChange }
-      value={ value }
+      onChange={ mudarCampos }
+      valor={ valor }
     >
-      {currenciesName.map((currency) => {
+      {nome.map((currency) => {
         if (currency === 'USDT') return;
         return (
           <option key={ currency } data-testid={ currency }>
@@ -44,8 +44,8 @@ export function renderSelectCurrencies(currenciesName, value, handleChange) {
   );
 }
 
-export function renderSelect(...args) {
-  const [label, name, value, handleChange, options] = args;
+export function pagamento(...args) {
+  const [label, name, valor, mudarCampos, options] = args;
   return (
     <label htmlFor={ `${name}-input` }>
       {`${label}: `}
@@ -53,8 +53,8 @@ export function renderSelect(...args) {
         id={ `${name}-input` }
         name={ name }
         data-testid={ `${name}-input` }
-        onChange={ handleChange }
-        value={ value }
+        onChange={ mudarCampos }
+        valor={ valor }
       >
         {options.map((option) => (
           <option key={ option }>{option}</option>
@@ -64,7 +64,7 @@ export function renderSelect(...args) {
   );
 }
 
-export function renderExpensesTable(expenses) {
+export function tabela(expenses) {
   return (
     <table>
       <thead>
@@ -82,17 +82,17 @@ export function renderExpensesTable(expenses) {
       </thead>
       <tbody>
         {expenses.map((expense, index) => {
-          const { description, tag, method, value, currency, exchangeRates } = expense;
-          const { name, ask } = exchangeRates[currency];
+          const { description, tag, method, valor, currency, cambio } = expense;
+          const { name, ask } = cambio[currency];
           return (
             <tr key={ index }>
               <td>{description}</td>
               <td>{tag}</td>
               <td>{method}</td>
-              <td>{value}</td>
+              <td>{valor}</td>
               <td>{name}</td>
               <td>{parseFloat(ask).toFixed(2)}</td>
-              <td>{(ask * parseInt(value, 10)).toFixed(2)}</td>
+              <td>{(ask * parseInt(valor, 10)).toFixed(2)}</td>
               <td>Real</td>
               <td>Excluir</td>
             </tr>

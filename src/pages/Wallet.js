@@ -2,17 +2,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { pegar, salvar } from '../actions';
-import currenciesAPI from '../services';
+import api from '../services';
 import {
-  renderInput,
-  renderSelect,
-  renderSelectCurrencies,
-  renderExpensesTable,
+  gasto,
+  pagamento,
+  moeda,
+  tabela,
 } from '../store/consts';
 
 const INITIAL_STATE = {
   value: '0',
-  description: '',
+  descricao: '',
   currency: 'USD',
   method: 'Dinheiro',
   tag: 'Alimentação',
@@ -27,9 +27,9 @@ class Wallet extends React.Component {
       ...INITIAL_STATE,
     };
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-    this.getTotalExpenses = this.getTotalExpenses.bind(this);
+    this.mudarCampos = this.mudarCampos.bind(this);
+    this.sub = this.sub.bind(this);
+    this.somaTotal = this.somaTotal.bind(this);
   }
 
   componentDidMount() {
@@ -37,51 +37,51 @@ class Wallet extends React.Component {
     getCurrencies();
   }
 
-  getTotalExpenses() {
+  somaTotal() {
     const { expenses } = this.props;
 
-    const totalExpenses = expenses.reduce((total, each) => {
-      const { value, currency, exchangeRates } = each;
-      const rate = parseFloat(exchangeRates[currency].ask);
-      return total + parseFloat(value) * rate;
+    const precoTotal = expenses.reduce((total, each) => {
+      const { value, currency, cambio } = each;
+      const taxa = parseFloat(cambio[currency].ask);
+      return total + parseFloat(value) * taxa;
     }, 0);
 
-    return totalExpenses.toFixed(2);
+    return precoTotal.toFixed(2);
   }
 
-  handleChange({ target }) {
+  mudarCampos({ target }) {
     this.setState({
       [target.name]: target.value,
     });
   }
 
-  async handleClick(e) {
+  async sub(e) {
     e.preventDefault();
-    const { value, description, currency, method, tag, id } = this.state;
-    const { saveExpense } = this.props;
-    const exchangeRates = await currenciesAPI();
+    const { value, descricao, currency, method, tag, id } = this.state;
+    const { salvarGasto } = this.props;
+    const cambio = await api();
 
     const expense = {
       id,
       value,
-      description,
+      descricao,
       currency,
       method,
       tag,
-      exchangeRates,
+      cambio,
     };
 
-    saveExpense(expense);
+    salvarGasto(expense);
 
     this.setState({
       ...INITIAL_STATE,
       id: id + 1,
-      total: this.getTotalExpenses(),
+      total: this.somaTotal(),
     });
   }
 
   render() {
-    const { value, description, currency, method, tag, total } = this.state;
+    const { value, descricao, currency, method, tag, total } = this.state;
     const { currencies, expenses, email } = this.props;
     const currenciesName = Object.keys(currencies || {});
     const tags = ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
@@ -95,31 +95,31 @@ class Wallet extends React.Component {
           <p data-testid="header-currency-field">BRL</p>
         </header>
         <form>
-          {renderInput('Valor', 'number', 'value', value, this.handleChange)}
-          {renderInput(
+          {gasto('Valor', 'number', 'value', value, this.mudarCampos)}
+          {gasto(
             'Descrição',
             'text',
-            'description',
-            description,
-            this.handleChange,
+            'descricao',
+            descricao,
+            this.mudarCampos,
           )}
           <label htmlFor="currency-input">
             {'Moeda: '}
-            {renderSelectCurrencies(currenciesName, currency, this.handleChange)}
+            {moeda(currenciesName, currency, this.mudarCampos)}
           </label>
-          {renderSelect(
+          {pagamento(
             'Método de pagamento',
             'method',
             method,
-            this.handleChange,
+            this.mudarCampos,
             methods,
           )}
-          {renderSelect('Tag', 'tag', tag, this.handleChange, tags)}
-          <button type="submit" onClick={ this.handleClick }>
+          {pagamento('Tag', 'tag', tag, this.mudarCampos, tags)}
+          <button type="submit" onClick={ this.sub }>
             Adicionar despesa
           </button>
         </form>
-        {renderExpensesTable(expenses)}
+        {tabela(expenses)}
       </div>
     );
   }
@@ -133,7 +133,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   getCurrencies: () => dispatch(pegar()),
-  saveExpense: (expense) => dispatch(salvar(expense)),
+  salvarGasto: (expense) => dispatch(salvar(expense)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Wallet);
@@ -143,7 +143,7 @@ Wallet.propTypes = {
   expenses: PropTypes.arrayOf(PropTypes.object),
   getCurrencies: PropTypes.func.isRequired,
   currencies: PropTypes.objectOf(PropTypes.object),
-  saveExpense: PropTypes.func.isRequired,
+  salvarGasto: PropTypes.func.isRequired,
 };
 
 Wallet.defaultProps = {
