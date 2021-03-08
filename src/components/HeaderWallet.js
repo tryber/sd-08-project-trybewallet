@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 class HeaderWallet extends Component {
   render() {
     const { email, expenses } = this.props;
-    console.log(expenses);
     const total = expenses.reduce(
       (acc, expense) => (
         acc + (expense.value

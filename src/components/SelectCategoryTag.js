@@ -10,7 +10,7 @@ class SelectCategoryTag extends Component {
     return (
       <div>
         <label htmlFor="methodPayment">
-          Método de pagamento
+          Categoria
           <select
             id="categoryTag"
             name="categoryTag"
