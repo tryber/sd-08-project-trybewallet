@@ -10,7 +10,7 @@ class Form extends Component {
     this.state = {
       value: 0,
       currency: '',
-      id: 0,
+      // id: 0,
       description: '',
       method: '',
       tag: '',
@@ -39,7 +39,7 @@ class Form extends Component {
   // }
   addExpense() {
     const { value, currency, description, method, tag, expense } = this.state;
-    const { fetchCurr, saveDt, currencies, saveSum } = this.props;
+    const { fetchCurr, saveDt, currencies } = this.props;
     fetchCurr();
     const exp = { value, currency, description, method, tag, currencies };
     this.setState({
