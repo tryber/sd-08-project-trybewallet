@@ -47,11 +47,12 @@ class InputForm extends React.Component {
     this.setState({
       value: 0,
       description: '',
-      currency: '',
+      codes: [],
+      currency: 'USD',
       method: '',
       tag: '',
-      exchangeRates: {},
     });
+    this.getCurrencies();
   }
 
   currencyOptions() {
@@ -102,7 +103,7 @@ class InputForm extends React.Component {
     return (
       <TextInput
         htmlFor="description-input"
-        labelText="Descrição"
+        labelText="Origem:"
         id="description-input"
         name="description"
         type="text"

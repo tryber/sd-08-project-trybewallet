@@ -18,3 +18,10 @@ export const fetchExchangeRates = (InputFormData) => async (dispatch) => {
   delete exchangeRates.USDT;
   dispatch(addExpense({ ...InputFormData, exchangeRates }));
 };
+
+export const DEL_EXPENSE = 'DEL_EXPENSE';
+
+export const deleteExpense = (id) => ({
+  type: DEL_EXPENSE,
+  payload: id,
+});

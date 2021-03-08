@@ -23,7 +23,6 @@ class Header extends React.Component {
       const EX_RATE = Number(exchangeRates[currency].ask);
       return prev + (value * EX_RATE);
     }, 0);
-    // console.log(newTotal);
     if (total !== newTotal) {
       return this.setState({ total: newTotal });
     }
