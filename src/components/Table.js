@@ -2,7 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { tableHeaders, localCurrency } from '../const';
-import { deleteExpense as deleteExpenseAction } from '../actions';
+import {
+  deleteExpense as deleteExpenseAction,
+} from '../actions';
 import iconEdit from '../images/icon-edit.png';
 import iconDel from '../images/icon-del.png';
 import './Table.css';
@@ -25,7 +27,7 @@ class Table extends React.Component {
   }
 
   renderExpenses() {
-    const { expenses, deleteExpense } = this.props;
+    const { expenses, deleteExpense, handleChange } = this.props;
     return (
       expenses.map((expense) => {
         const { id, description, tag, method, value, currency, exchangeRates } = expense;
@@ -45,7 +47,7 @@ class Table extends React.Component {
               <button
                 className="button-icon"
                 data-testid="edit-btn"
-                onClick={ () => console.log('Editar', expense) }
+                onClick={ () => handleChange(expense) }
                 type="button"
               >
                 <img src={ iconEdit } alt="edit-icon" />
@@ -92,6 +94,7 @@ Table.propTypes = {
     PropTypes.any.isRequired,
   ).isRequired,
   deleteExpense: PropTypes.func.isRequired,
+  handleChange: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Table);

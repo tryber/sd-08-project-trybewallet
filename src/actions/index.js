@@ -2,6 +2,7 @@
 import {
   ADD_LOGIN,
   DEL_EXPENSE,
+  EDIT_EXPENSE,
   URL,
   GET_CURRENCIES,
   GET_CURRENCIES_ADD_EXPENDITURE,
@@ -15,6 +16,11 @@ export const dataLogin = (data) => ({
 export const deleteExpense = (expense) => ({
   type: DEL_EXPENSE,
   expense,
+});
+
+export const editing = (editExpense) => ({
+  type: EDIT_EXPENSE,
+  editExpense,
 });
 
 export function fetchCurrency(expenses = {}, saving = false) {
