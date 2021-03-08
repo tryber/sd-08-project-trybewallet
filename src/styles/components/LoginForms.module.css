@@ -1,0 +1,33 @@
+ 
+.loginFormContainer {
+    background-color: rgb(232, 232, 241);
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px 30px;
+    margin-top: 10vh;
+    border-radius: 15px;
+    text-align: center;    
+  }
+  
+  .loginForm {
+    padding: 5px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  .loginForm input, label {
+    display: block;
+    width: 100%;
+    text-align: left;
+  }
+
+  .loginForm button {
+    margin-top: 15px;
+    display: block;
+    width: 100%;
+    text-align: left;
+  }
+
+
+
+
