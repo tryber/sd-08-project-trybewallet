@@ -1,10 +1,8 @@
-
-.headerContainer{
+.headerContainer {
+  background-color: black;
+  color: white;
   display: flex;
   justify-content: flex-end;
-  color: white;
-  background-color: black;
-  
 }
 
 .headerContext {

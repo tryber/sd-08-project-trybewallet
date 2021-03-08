@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const FormLabel = (props) => {
   const { value, handleChange } = props;
@@ -19,3 +20,9 @@ const FormLabel = (props) => {
 };
 
 export default FormLabel;
+
+FormLabel.propTypes = {
+  value: PropTypes.string.isRequired,
+  handleChange: PropTypes.func.isRequired,
+
+};

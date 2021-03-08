@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getCurrencies } from '../services/requestAPI';
 import { fetchCurrencies as fetchCurrenciesAction, actionExpenses } from '../actions';
@@ -61,7 +62,6 @@ class FormExpense extends Component {
   }
 
   async handleArray() {
-    const { exchangeRates } = this.state;
     const apiAr = await getCurrencies();
     this.setState({
       exchangeRates: apiAr,
@@ -107,8 +107,11 @@ class FormExpense extends Component {
 const mapDispactToProps = (dispatch) => ({
   fetchCurrencies: () => dispatch(fetchCurrenciesAction()),
   showExpenses: (UPexpenses) => dispatch(actionExpenses(UPexpenses)),
-  // expense: (expense) => dispatch(actionAddExpensesexpense(expense)),
-
 });
 
 export default connect(null, mapDispactToProps)(FormExpense);
+
+FormExpense.propTypes = {
+  showExpenses: PropTypes.string.isRequired,
+  fetchCurrencies: PropTypes.func.isRequired,
+};

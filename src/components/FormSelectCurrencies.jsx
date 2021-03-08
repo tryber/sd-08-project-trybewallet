@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 class FormSelectCurrencies extends React.Component {
@@ -15,7 +16,11 @@ class FormSelectCurrencies extends React.Component {
         >
           {/* criando um map da props do mapState chamado apiCurrencies */}
           {
-            apiCurrencies.map((value, index) => <option data-testid={ value } key={ index }>{value}</option>)
+            apiCurrencies.map(
+              (value, index) => (<option data-testid={ value } key={ index }>
+                {value}
+              </option>),
+            )
           }
         </select>
       </>
@@ -29,3 +34,10 @@ const mapStateToProps = (state) => {
   };
 };
 export default connect(mapStateToProps)(FormSelectCurrencies);
+
+FormSelectCurrencies.propTypes = {
+  currency: PropTypes.string.isRequired,
+  apiCurrencies: PropTypes.arrayOf(PropTypes.object).isRequired,
+  handleChange: PropTypes.func.isRequired,
+
+};

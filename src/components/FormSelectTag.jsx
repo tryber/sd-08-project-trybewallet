@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const FormSelectTag = (props) => {
   const { tag, handleChange } = props;
@@ -31,3 +32,9 @@ const FormSelectTag = (props) => {
   );
 };
 export default FormSelectTag;
+
+FormSelectTag.propTypes = {
+  tag: PropTypes.string.isRequired,
+  handleChange: PropTypes.func.isRequired,
+
+};

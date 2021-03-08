@@ -23,6 +23,7 @@ const actionExpenses = (UPexpenses) => ({
   UPexpenses,
 });
 
+// action  para deletar o item
 const deleteExpense = (id) => ({
   type: 'DELETE_EXPENSE',
   payload: id,

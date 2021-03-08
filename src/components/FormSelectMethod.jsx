@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const FormSelectMethod = (props) => {
   const { method, handleChange } = props;
@@ -25,3 +26,9 @@ const FormSelectMethod = (props) => {
   );
 };
 export default FormSelectMethod;
+
+FormSelectMethod.propTypes = {
+  method: PropTypes.string.isRequired,
+  handleChange: PropTypes.func.isRequired,
+
+};
