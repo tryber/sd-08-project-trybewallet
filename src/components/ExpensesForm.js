@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { fetchCurrencies, fetchCurrenciesNewValues } from '../actions';
 import SelectForm from './SelectForm';
+import ExpenseTable from './ExpenseTable';
 
 class ExpensesForm extends React.Component {
   constructor(props) {
@@ -60,7 +61,6 @@ class ExpensesForm extends React.Component {
           <input
             name="value"
             id="value-input"
-            type="number"
             data-testid="value-input"
             value={ value }
             onChange={ this.handleChange }
@@ -97,6 +97,7 @@ class ExpensesForm extends React.Component {
         >
           Adicionar despesa
         </button>
+        <ExpenseTable />
       </form>
     );
   }
