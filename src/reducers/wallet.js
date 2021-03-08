@@ -28,6 +28,9 @@ const wallet = (state = INITIAL_STATE, action) => {
   case 'DELETE_EXPENSE':
     return { ...state,
       expenses: [...state.expenses.filter((exp) => exp.id !== action.payload.id)] };
+  case 'EDIT_EXPENSE':
+    return { ...state,
+      expenses: [...state.expenses.splice(action.payload.index, action.payload.exp)] };
   default:
     return state;
   }

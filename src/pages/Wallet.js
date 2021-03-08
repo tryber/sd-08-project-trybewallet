@@ -2,20 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { addWallet, deleteExpense, fetchCurrencies } from '../actions';
-import InputText from '../components/InputText';
-import Select from '../components/Select';
+import Header from '../components/Header';
+import Button from '../components/Button';
 import HeaderTable from '../components/HeaderTable';
+import { roundUp } from '../services';
+import RenderForms from '../components/RenderForms';
 
 const metodos = ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'];
 const categorias = ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
-const ROUND_UP = 4;
-const DECIMAL = 10;
-
-const ObjectToArray = (object) => {
-  const array = Object.keys(object);
-  array.splice(1, 1);
-  return array;
-};
 
 class Wallet extends React.Component {
   constructor() {
@@ -30,11 +24,8 @@ class Wallet extends React.Component {
       id: 0,
     };
     this.handleChange = this.handleChange.bind(this);
-    this.renderInputs = this.renderInputs.bind(this);
-    this.renderSelects = this.renderSelects.bind(this);
     this.addExpenseToWallet = this.addExpenseToWallet.bind(this);
     this.resetFields = this.resetFields.bind(this);
-    this.roundUp = this.roundUp.bind(this);
     this.deleteExpenses = this.deleteExpenses.bind(this);
     this.totalValueUpDate = this.totalValueUpDate.bind(this);
   }
@@ -70,11 +61,6 @@ class Wallet extends React.Component {
     });
   }
 
-  roundUp(num, decimal) {
-    const n = parseFloat(num);
-    return parseFloat((n + (ROUND_UP / ((DECIMAL ** (decimal + 1))))).toFixed(decimal));
-  }
-
   async addExpenseToWallet() {
     const { value, description, currency, method, tag, totalValue, id } = this.state;
     const { addToWallet, fetchCurrency } = this.props;
@@ -107,15 +93,22 @@ class Wallet extends React.Component {
           <td>{expense.description}</td>
           <td>{expense.tag}</td>
           <td>{expense.method}</td>
-          <td>{`${this.roundUp(expense.value, 2)}`}</td>
+          <td>{`${roundUp(expense.value, 2)}`}</td>
           <td>{expense.exchangeRates[expense.currency].name}</td>
-          <td>{this.roundUp(expense.exchangeRates[expense.currency].ask, 2)}</td>
+          <td>{roundUp(expense.exchangeRates[expense.currency].ask, 2)}</td>
           <td>
-            {this.roundUp(parseFloat(expense.exchangeRates[expense.currency].ask)
+            {roundUp(parseFloat(expense.exchangeRates[expense.currency].ask)
             * parseFloat(expense.value), 2)}
           </td>
           <td>Real</td>
           <td>
+            <button
+              type="button"
+              data-testid="edit-btn"
+              onClick={ this.edit }
+            >
+              Editar
+            </button>
             <button
               type="button"
               data-testid="delete-btn"
@@ -130,89 +123,25 @@ class Wallet extends React.Component {
       </tbody>));
   }
 
-  renderInputs() {
-    const { value, description } = this.state;
-    return (
-      <>
-        <InputText
-          name="value"
-          dataTest="value-input"
-          value={ value }
-          onChange={ this.handleChange }
-        >
-          Valor:
-        </InputText>
-        <InputText
-          name="description"
-          dataTest="description-input"
-          value={ description }
-          onChange={ this.handleChange }
-        >
-          Descrição:
-        </InputText>
-      </>
-    );
-  }
-
-  renderSelects() {
-    const { currency, method, tag } = this.state;
-    const { currencies } = this.props;
-    return (
-      <>
-        <Select
-          name="currency"
-          dataTest="currency-input"
-          value={ currency }
-          options={ ObjectToArray(currencies) }
-          onChange={ this.handleChange }
-        >
-          Moeda:
-        </Select>
-        <Select
-          name="method"
-          dataTest="method-input"
-          value={ method }
-          options={ metodos }
-          onChange={ this.handleChange }
-        >
-          Método de Pagamento:
-        </Select>
-        <Select
-          name="tag"
-          dataTest="tag-input"
-          value={ tag }
-          options={ categorias }
-          onChange={ this.handleChange }
-        >
-          Método de Pagamento:
-        </Select>
-      </>
-    );
-  }
-
   render() {
-    const { email } = this.props;
-    const { totalValue } = this.state;
+    const { email, currencies } = this.props;
+    const { value, description, totalValue, method, tag, currency } = this.state;
     return (
       <main>
-        <header>
-          <span data-testid="email-field">{`Email: ${email}`}</span>
-          <span data-testid="total-field">
-            {`Despesa total: ${this.roundUp(totalValue, 2)}`}
-          </span>
-          <span data-testid="header-currency-field">BRL</span>
-        </header>
+        <Header email={ email } totalValue={ totalValue } />
         <section>
-          <form>
-            {this.renderInputs()}
-            {this.renderSelects()}
-            <button
-              type="button"
-              onClick={ this.addExpenseToWallet }
-            >
-              Adicionar despesa
-            </button>
-          </form>
+          <RenderForms
+            value={ value }
+            description={ description }
+            onChange={ this.handleChange }
+            currency={ currency }
+            method={ method }
+            tag={ tag }
+            currencies={ currencies }
+          />
+          <Button onClick={ this.addExpenseToWallet }>
+            Adicionar despesa
+          </Button>
           <table>
             <HeaderTable />
             {this.walletTable()}
