@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 import logar from '../actions';
 
 class Login extends React.Component {
@@ -11,6 +11,7 @@ class Login extends React.Component {
       email: '',
       password: '',
       disabled: true,
+      login: false,
     };
     this.mudarCampos = this.mudarCampos.bind(this);
     this.validar = this.validar.bind(this);
@@ -29,6 +30,8 @@ class Login extends React.Component {
     const { handleEmail } = this.props;
     const { email } = this.state;
 
+    this.setState({ login: true });
+
     handleEmail(email);
   }
 
@@ -42,7 +45,7 @@ class Login extends React.Component {
   }
 
   render() {
-    const { email, password, disabled } = this.state;
+    const { email, password, disabled, login } = this.state;
     return (
       <form>
         <input
@@ -66,10 +69,9 @@ class Login extends React.Component {
           disabled={ disabled }
           onClick={ this.handleClick }
         >
-          <Link to="/carteira">
-            Entrar
-          </Link>
+          Entrar
         </button>
+        { login ? <Redirect to="/carteira" /> : ''}
       </form>
     );
   }
