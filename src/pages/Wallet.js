@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import AddExpense from '../components/AddExpense';
+import ExpensesTable from '../components/ExpensesTable';
 import { fetchCurrencies } from '../actions/index';
 
 class Wallet extends React.Component {
@@ -16,6 +17,8 @@ class Wallet extends React.Component {
       <div>
         <Header />
         <AddExpense />
+        <br />
+        <ExpensesTable />
       </div>
     );
   }

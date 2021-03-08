@@ -163,14 +163,12 @@ class AddExpense extends React.Component {
   render() {
     return (
       <div>
-        <div>
-          {this.valueInput()}
-          {this.descriptionInput()}
-          {this.currencyInput()}
-          {this.methodInput()}
-          {this.tagInput()}
-          <button type="button" onClick={ this.addExpense }>Adicionar despesa</button>
-        </div>
+        {this.valueInput()}
+        {this.descriptionInput()}
+        {this.currencyInput()}
+        {this.methodInput()}
+        {this.tagInput()}
+        <button type="button" onClick={ this.addExpense }>Adicionar despesa</button>
       </div>
     );
   }
@@ -185,7 +183,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 AddExpense.propTypes = {
-  currencies: PropTypes.arrayOf(PropTypes.object).isRequired,
+  currencies: PropTypes.objectOf(PropTypes.object).isRequired,
   saveExpense: PropTypes.func.isRequired,
 };
 

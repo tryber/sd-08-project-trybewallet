@@ -9,7 +9,7 @@ class Header extends React.Component {
       const toBRL = exchangeRates[currency].ask;
       return total + (value * toBRL);
     }, 0);
-    return Math.trunc(totalExpenses * 100) / 100;
+    return Math.round(totalExpenses * 100) / 100;
   }
 
   render() {
