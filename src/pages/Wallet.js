@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import ExpenseForm from '../components/ExpenseForm';
 import Header from '../components/Header';
 import { Creators as WalletActions } from '../actions/index';
+import ExpensesTable from '../components/ExpensesTable';
 
 class Wallet extends React.Component {
   componentDidMount() {
@@ -17,6 +18,7 @@ class Wallet extends React.Component {
       <div>
         <Header />
         <ExpenseForm />
+        <ExpensesTable />
       </div>
     );
   }
