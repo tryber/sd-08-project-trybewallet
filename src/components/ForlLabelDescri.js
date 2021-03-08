@@ -5,7 +5,7 @@ const ForlLabelDescri = (props) => {
   const { description, handleChange } = props;
   return (
     <label htmlFor="description">
-      Descrição
+      Descrição:
       <input
         type="text"
         id="description"

@@ -21,7 +21,13 @@ class TabletExpense extends Component {
         <td>{(Math.round(convertedValue * 100) / 100).toFixed(2)}</td>
         <td>Real</td>
         <td>
-          <button type="button">Editar</button>
+          <button
+            type="button"
+            data-testid="edit-btn"
+            onClick={ null }
+          >
+            Editar despesa
+          </button>
           <button
             type="button"
             data-testid="delete-btn"
