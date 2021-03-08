@@ -15,9 +15,19 @@ h2 {
 }
 
 form {
-  background-color: #262B33;
+  background-color: #262b33;
   color: white;
   display: flex;
   justify-content: space-evenly;
   padding: 20px;
+}
+
+table {
+  border-collapse: collapse;
+  text-align: center;
+  width: 100%;
+}
+
+thead {
+  background-color: #2d333d;
 }
