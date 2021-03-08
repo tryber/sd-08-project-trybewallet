@@ -9,7 +9,7 @@ class SelectMethodPayment extends Component {
     return (
       <div>
         <label htmlFor="methodPayment">
-          Método de pagamento
+          Pagamento
           <select
             id="methodPayment"
             name="methodPayment"
