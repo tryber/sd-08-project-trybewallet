@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fetchCurrency, saveData } from '../actions';
+import { fetchCurrency, saveData, saveTotal } from '../actions';
 import FormSelect from './form/formSelect';
 
 class Form extends Component {
@@ -19,12 +19,13 @@ class Form extends Component {
       // },
       // }],
       expense: [],
+      sum: 0,
     };
   }
 
   componentDidMount() {
     const { fetchCurr } = this.props;
-    console.log(fetchCurr);
+    // console.log(fetchCurr);
     fetchCurr();
   }
 
@@ -38,21 +39,57 @@ class Form extends Component {
   //   });
   // }
   addExpense() {
-    const { value, currency, description, method, tag, expense } = this.state;
-    const { fetchCurr, saveDt, currencies } = this.props;
+    const { value, currency, description, method, tag, expense, sum } = this.state;
+    const { fetchCurr, saveDt, currencies, saveSum } = this.props;
     fetchCurr();
     const exp = { value, currency, description, method, tag, currencies };
+    const converction = Object.values(currencies).find((e) => e.code === currency);
     this.setState({
       expense: [...expense, exp],
+      sum: sum + parseFloat(value) * parseFloat(converction.ask),
     });
-    console.log(exp);
+    // console.log(sum + parseFloat(value) * parseFloat(converction.ask));
     saveDt(exp);
+    saveSum(sum + parseFloat(value) * parseFloat(converction.ask).toFixed(2));
   }
 
   handleChange({ target: { name, value } }) {
     return this.setState({
       [name]: value,
     });
+  }
+
+  inputValue() {
+    const { value } = this.state;
+    return (
+      <label htmlFor="value">
+        Valor:
+        <input
+          data-testid="value-input"
+          type="number"
+          value={ value }
+          id="value"
+          name="value"
+          onChange={ (e) => this.handleChange(e) }
+        />
+      </label>
+    );
+  }
+
+  inputDescription() {
+    const { description } = this.state;
+    return (
+      <label htmlFor="description">
+        Descrição:
+        <input
+          data-testid="description-input"
+          type="text"
+          value={ description }
+          name="description"
+          onChange={ (e) => this.handleChange(e) }
+        />
+      </label>
+    );
   }
 
   // handleCurrency({ target: { value } }) {
@@ -67,32 +104,14 @@ class Form extends Component {
   // }
   render() {
     const { currencies } = this.props;
-    const { value, description, currency, method, tag } = this.state;
-    console.log(description);
+    const { currency, method, tag } = this.state;
     const CURRENCY_KEY = Object.keys(currencies).filter((curr) => curr !== 'USDT');
     const ARRAY_OF_PAYMENT_METHOD = ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'];
     const ARRAY_OF_EXPENSES = ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
     return (
       <form>
-        <label data-testid="value-input" htmlFor="value">
-          Valor:
-          <input
-            type="number"
-            value={ value }
-            id="value"
-            name="value"
-            onChange={ (e) => this.handleChange(e) }
-          />
-        </label>
-        <label data-testid="description-input" htmlFor="description">
-          Descrição:
-          <input
-            type="text"
-            value={ description }
-            name="description"
-            onChange={ (e) => this.handleChange(e) }
-          />
-        </label>
+        {this.inputValue()}
+        {this.inputDescription()}
         <FormSelect
           htmlFor="currency"
           dataArray={ CURRENCY_KEY }
@@ -117,7 +136,12 @@ class Form extends Component {
           label="Tag:"
           handleChange={ (e) => this.handleChange(e) }
         />
-        <button type="button" onClick={ () => this.addExpense() }>Adicionar despesa</button>
+        <button
+          type="button"
+          onClick={ () => this.addExpense() }
+        >
+          Adicionar despesa
+        </button>
       </form>
     );
   }
@@ -125,11 +149,13 @@ class Form extends Component {
 
 const mapStateToProps = (state) => ({
   currencies: state.currency.currency,
+  // total: state.sum,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   fetchCurr: () => dispatch(fetchCurrency()),
   saveDt: (expense) => dispatch(saveData(expense)),
+  saveSum: (sum) => dispatch(saveTotal(sum)),
 });
 
 Form.propTypes = {

@@ -1,8 +1,9 @@
-import { REQUEST_CURRENCY, SAVE_DATA } from '../actions/index';
+import { REQUEST_CURRENCY, SAVE_DATA, SAVE_TOTAL } from '../actions/index';
 
 const initialState = {
   currency: {},
   expenses: [],
+  sum: 0,
 };
 
 export default function currency(state = initialState, action) {
@@ -16,6 +17,11 @@ export default function currency(state = initialState, action) {
     return {
       ...state,
       expenses: [...state.expenses, action.expense],
+    };
+  case SAVE_TOTAL:
+    return {
+      ...state,
+      sum: state.sum + action.sum,
     };
 
   default:

@@ -2,6 +2,7 @@
 export const USER_EMAIL = 'USER_EMAIL';
 export const REQUEST_CURRENCY = 'REQUEST_CURRENCY';
 export const SAVE_DATA = 'SAVE_DATA';
+export const SAVE_TOTAL = 'SAVE_TOTAL';
 
 export function userEmail(email) {
   return {
@@ -23,6 +24,14 @@ export function saveData(expense) {
     d: console.log(expense),
     type: SAVE_DATA,
     expense,
+  };
+}
+
+export function saveTotal(sum) {
+  return {
+    // e: console.log(sum),
+    type: SAVE_TOTAL,
+    sum,
   };
 }
 
