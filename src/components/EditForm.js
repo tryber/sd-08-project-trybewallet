@@ -235,7 +235,7 @@ EditForm.propTypes = {
   updateExpensesDataDispatch: PropTypes.func.isRequired,
   expenseToEdit: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    value: PropTypes.number.isRequired,
+    value: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     currency: PropTypes.string.isRequired,
     method: PropTypes.string.isRequired,

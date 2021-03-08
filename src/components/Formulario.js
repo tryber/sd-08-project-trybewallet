@@ -17,7 +17,7 @@ class Formulario extends Component {
     this.renderEditExpenseButton = this.renderEditExpenseButton.bind(this);
 
     this.state = {
-      expenseValue: '0',
+      expenseValue: 0,
       expenseDescription: '',
       currency: 'USD',
       paymentMethod: 'Dinheiro',
@@ -32,7 +32,7 @@ class Formulario extends Component {
 
   resetState() {
     this.setState({
-      expenseValue: '0',
+      expenseValue: 0,
       expenseDescription: '',
       currency: 'USD',
       paymentMethod: 'Dinheiro',
@@ -70,7 +70,7 @@ class Formulario extends Component {
       exchangeRates: currenciesJson,
     };
     const newExpensesData = expenses.concat(newExpense);
-    await updateExpensesDataDispatch(newExpensesData);
+    updateExpensesDataDispatch(newExpensesData);
     this.resetState();
   }
 

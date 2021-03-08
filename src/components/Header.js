@@ -12,10 +12,13 @@ class Header extends Component {
   despesaTotal() {
     const { wallet } = this.props;
     const { expenses } = wallet;
-    if (expenses) {
+    if (expenses !== []) {
       const total = expenses
-        .reduce((soma, despesa) => soma + parseFloat(despesa.value), 0);
-      // (Math.round(this.getTotal() * 100) / 100).toFixed(2)
+        .map((expense) => parseFloat(
+          expense.value * expense.exchangeRates[expense.currency].ask,
+        )
+          .toFixed(2))
+        .reduce((soma, expenseValue) => soma + expenseValue, 0);
       return total;
     }
     return 0;
