@@ -14,7 +14,7 @@ class WalletForm extends Component {
       description: '',
       currency: 'USD',
       methodPayment: 'Dinheiro',
-      categoryTag: 'Lazer',
+      categoryTag: 'Alimentação',
     };
     this.handleChange = this.handleChange.bind(this);
     this.saveExpense = this.saveExpense.bind(this);
@@ -25,26 +25,27 @@ class WalletForm extends Component {
   }
 
   async saveExpense() {
-    const { saveExpenseAction, getCurrencies, expenses, currencies } = this.props;
+    const { saveExpenseAction, expenses } = this.props;
     const { value, description, currency, methodPayment, categoryTag } = this.state;
-    await getCurrencies();
 
-    const currenceSelected = currencies.find((cur) => cur.code === currency);
-    const valueConverted = currenceSelected.ask * value;
+    const currencies = await fetch('https://economia.awesomeapi.com.br/json/all');
+    const exchangeRates = await currencies.json();
 
     const id = expenses.length;
     const expense = {
       id,
-      exchangeRates: currencies,
       value,
       description,
       currency,
-      valueConverted,
       method: methodPayment,
       tag: categoryTag,
+      exchangeRates,
     };
     saveExpenseAction(expense);
-    console.log(expenses);
+    this.handleChange({
+      name: 'value',
+      value: 0,
+    });
   }
 
   render() {
@@ -94,10 +95,8 @@ class WalletForm extends Component {
 }
 
 WalletForm.propTypes = {
-  getCurrencies: PropTypes.func.isRequired,
   saveExpenseAction: PropTypes.func.isRequired,
   expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
-  currencies: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 const mapStateToProps = (state) => (
