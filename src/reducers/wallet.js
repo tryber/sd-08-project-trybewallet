@@ -39,6 +39,3 @@ export default function wallet(state = INITIAL_STATE, action) {
     return state;
   }
 }
-
-// if (item.id !== action.expense.id) return item;
-// return { ...item, ...action.expense };
