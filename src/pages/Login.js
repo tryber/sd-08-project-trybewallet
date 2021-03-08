@@ -1,25 +1,27 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { getEmail as getEmailAction } from '../actions';
 import TextInput from '../components/TextInput';
-
-const PASSWORD_MIN_LENGHT = 5;
 
 class Login extends React.Component {
   constructor() {
     super();
+
     this.state = {
       email: '',
       password: '',
-      isEmailValid: false,
-      isPassWordValid: false,
+      emailIsValid: false,
+      passwordIsValid: false,
     };
 
-    this.onChangeInput = this.onChangeInput.bind(this);
     this.changeState = this.changeState.bind(this);
+    this.onChangeInput = this.onChangeInput.bind(this);
     this.emailValidation = this.emailValidation.bind(this);
     this.passwordValidation = this.passwordValidation.bind(this);
   }
 
-  onChangeInput({ targe: { name, value } }) {
+  onChangeInput({ target: { name, value } }) {
     this.setState({ [name]: value });
     if (name === 'email') {
       this.emailValidation(value);
@@ -43,36 +45,62 @@ class Login extends React.Component {
   }
 
   passwordValidation(password) {
-    this.changeState(password.length > PASSWORD_MIN_LENGHT, 'passwordIsValid');
+    const PASSWORD_MIN_LENGTH = 5;
+    this.changeState(password.length > PASSWORD_MIN_LENGTH, 'passwordIsValid');
   }
 
   render() {
-    const { email, password, isEmailValid, isPassWordValid } = this.state;
+    const { emailIsValid, passwordIsValid, email, password } = this.state;
+    const { history, getEmail } = this.props;
+
     return (
       <div>
         <TextInput
           htmlFor="email-input"
-          labelText="Email"
+          labelText="Email:"
           id="email-input"
           name="email"
           type="text"
           value={ email }
-          onChange={ this.onChangeText }
+          onChange={ this.onChangeInput }
           dataTestId="email-input"
+          placeholder="user@email.com"
         />
-        <TextInput 
+        <TextInput
           htmlFor="password-input"
-          labelText="Senha"
+          labelText="Senha:"
           id="password-input"
           name="password"
           type="text"
           value={ password }
-          onChange={ this.onChangeText }
+          onChange={ this.onChangeInput }
           dataTestId="password-input"
+          placeholder="******"
         />
+        <button
+          disabled={ !passwordIsValid || !emailIsValid }
+          type="button"
+          onClick={ () => {
+            getEmail(email);
+            history.push('carteira');
+          } }
+        >
+          Entrar
+        </button>
       </div>
     );
   }
 }
 
-export default Login;
+const mapDispatchToProps = (dispatch) => ({
+  getEmail: (email) => dispatch(getEmailAction(email)),
+});
+
+Login.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+  getEmail: PropTypes.func.isRequired,
+};
+
+export default connect(null, mapDispatchToProps)(Login);
