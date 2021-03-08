@@ -17,13 +17,22 @@ class Wallet extends React.Component {
   render() {
     const { userEmail, currencies, isLoading } = this.props;
 
-    const availableCurrencies = currencies
+    const Currencies = currencies
       ? currencies.map((currency) => currency.currency) : [];
 
     return (
       <>
         <Header user={ userEmail } />
         <main>
+          {
+            isLoading
+              ? <h1>Loading...</h1>
+              : (
+                <Form
+                  availableCurrencies={ Currencies }
+                />
+              )
+          }
           <Expenses />
         </main>
       </>
