@@ -1,11 +1,21 @@
-import React, { Component } from 'react';
+import { REQUEST_CURRENCY } from '../actions/index';
 
-export default class wallet extends Component {
-  render() {
-    return (
-      <div>
-        Olha eu aqui
-      </div>
-    );
+const initialState = {
+  currencies: [],
+  expenses: [],
+  sum: 0,
+};
+
+function currency(state = initialState, action) {
+  switch (action.type) {
+  case REQUEST_CURRENCY:
+    return {
+      ...state,
+      currencies: [...action.payload],
+    };
+  default:
+    return state;
   }
 }
+
+export default currency;
