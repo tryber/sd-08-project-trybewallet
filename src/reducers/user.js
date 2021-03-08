@@ -4,12 +4,12 @@ const INITIAL_STATE = {
   email: '',
 };
 
-const saveUser = (state = INITIAL_STATE, { type, email }) => {
+const saveUser = (state = INITIAL_STATE, { type, value }) => {
   switch (type) {
   case SAVE_EMAIL:
     return {
       ...state,
-      email,
+      email: value,
     };
   default:
     return state;

@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { saveEmail as saveEmailAction } from '../actions';
+import { saveEmail } from '../actions';
 
-class Login extends React.Component {
+class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -30,7 +30,7 @@ class Login extends React.Component {
 
   render() {
     const { email, password } = this.state;
-    const { saveEmail } = this.props;
+    const { saveEmailRedux } = this.props;
     return (
       <div>
         <form>
@@ -56,7 +56,7 @@ class Login extends React.Component {
             <button
               type="button"
               disabled={ this.validateLogin() }
-              onClick={ () => saveEmail(email) }
+              onClick={ () => saveEmailRedux(email) }
             >
               Entrar
             </button>
@@ -68,11 +68,11 @@ class Login extends React.Component {
 }
 
 Login.propTypes = {
-  saveEmail: PropTypes.func.isRequired,
+  saveEmailRedux: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  saveEmail: (email) => dispatch(saveEmailAction(email)),
+  saveEmailRedux: (email) => dispatch(saveEmail(email)),
 });
 
 export default connect(null, mapDispatchToProps)(Login);
