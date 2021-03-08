@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Header from '../components/Header';
 import FormExpanse from '../components/FormExpanse';
 import { fetchCurrencies as fetchCurrenciesAction } from '../actions/Wallet';
+import ExpenseTable from '../components/ExpenseTable';
 
 class Wallet extends React.Component {
   componentDidMount() {
@@ -17,6 +18,7 @@ class Wallet extends React.Component {
       <div>
         <Header />
         <FormExpanse />
+        <ExpenseTable />
       </div>);
   }
 }

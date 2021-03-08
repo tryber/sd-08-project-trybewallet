@@ -3,6 +3,7 @@
 import {
   SAVE_CURRENCIES,
   ADD_EXPENSE,
+  REMOVE_EXPENSE,
 
 } from '../actions/Wallet';
 
@@ -28,6 +29,11 @@ const addExpense = (state = INITIAL_STATE, action) => {
   };
 };
 
+const removeExpense = (state = INITIAL_STATE, action) => ({
+  ...state,
+  expenses: state.expenses.filter((expense) => expense.id !== action.payload),
+});
+
 const wallet = (state = INITIAL_STATE, action) => {
   switch (action.type) {
   case SAVE_CURRENCIES:
@@ -37,6 +43,8 @@ const wallet = (state = INITIAL_STATE, action) => {
     };
   case ADD_EXPENSE:
     return addExpense(state, action);
+  case REMOVE_EXPENSE:
+    return removeExpense(state, action);
   default:
     return state;
   }

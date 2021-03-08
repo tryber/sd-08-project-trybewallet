@@ -140,7 +140,7 @@ class FormExpanse extends Component {
 
   render() {
     return (
-      <form>
+      <form className="form-inline">
         { this.valueInput() }
         { this.descriptionInput() }
         { this.currencyInput() }
@@ -149,7 +149,6 @@ class FormExpanse extends Component {
         <button
           type="button"
           onClick={ this.handleSubmit }
-
         >
           Adicionar despesa
         </button>
