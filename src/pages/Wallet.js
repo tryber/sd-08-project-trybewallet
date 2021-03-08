@@ -24,15 +24,6 @@ class Wallet extends React.Component {
       <>
         <Header user={ userEmail } />
         <main>
-          {
-            isLoading
-              ? <h1>Loading...</h1>
-              : (
-                <Form
-                  availableCurrencies={ availableCurrencies }
-                />
-              )
-          }
           <Expenses />
         </main>
       </>
