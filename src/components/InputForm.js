@@ -12,6 +12,7 @@ class InputForm extends React.Component {
       codes: [],
       currency: '',
       method: '',
+      tag: '',
     };
 
     this.onChange = this.onChange.bind(this);
@@ -114,8 +115,30 @@ class InputForm extends React.Component {
     );
   }
 
+  expensesTag(tag) {
+    return (
+      <div>
+        Tipo de Despesa:
+        <select
+          type="text"
+          id="tag-input"
+          data-testid="tag-input"
+          value={ tag }
+          name="tag"
+          onChange={ this.onChange }
+        >
+          <option value="Alimentação">Alimentação</option>
+          <option value="Lazer">Lazer</option>
+          <option value="Trabalho">Trabalho</option>
+          <option value="Transporte">Transporte</option>
+          <option value="Saúde">Saúde</option>
+        </select>
+      </div>
+    );
+  }
+
   render() {
-    const { value, description, currency, method } = this.state;
+    const { value, description, currency, method, tag } = this.state;
     return (
       <form>
         { this.expenseValueInput(value) }
@@ -123,6 +146,7 @@ class InputForm extends React.Component {
         <br />
         { this.expenseDescriptionInput(description) }
         { this.paymentMethod(method) }
+        { this.expensesTag(tag) }
       </form>
     );
   }
