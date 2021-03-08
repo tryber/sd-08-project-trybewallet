@@ -8,10 +8,12 @@ class InputForm extends React.Component {
     super();
     this.state = {
       value: 0,
+      description: '',
     };
 
     this.onChange = this.onChange.bind(this);
     this.expenseValueInput = this.expenseValueInput.bind(this);
+    this.expenseDescriptionInput = this.expenseDescriptionInput.bind(this);
   }
 
   onChange({ target: { name, value } }) {
@@ -34,11 +36,29 @@ class InputForm extends React.Component {
     );
   }
 
+  expenseDescriptionInput(description) {
+    return (
+      <TextInput
+        htmlFor="description-input"
+        labelText="Descrição"
+        id="description-input"
+        name="description"
+        type="text"
+        value={ description }
+        onChange={ this.onChange }
+        dataTestId="description-input"
+        placeholder="Qual a origem da despesa"
+      />
+    );
+  }
+
   render() {
-    const { value } = this.state;
+    const { value, description } = this.state;
     return (
       <form>
         { this.expenseValueInput(value) }
+        <br />
+        { this.expenseDescriptionInput(description) }
       </form>
     );
   }
