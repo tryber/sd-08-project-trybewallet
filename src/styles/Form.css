@@ -1,5 +1,5 @@
 .FormContainer {
-  overflow-x:auto;
+  overflow-x: auto;
 }
 
 .FormTable {
@@ -20,6 +20,6 @@
   padding: 20px;
 }
 
-.FormTable tbody tr:nth-child(odd) {
+.FormTable tbody tr:nth-child( odd ) {
   background-color: rgb(204, 204, 204);
 }

@@ -17,9 +17,11 @@ class FormSelectCurrencies extends React.Component {
           {/* criando um map da props do mapState chamado apiCurrencies */}
           {
             apiCurrencies.map(
-              (value, index) => (<option data-testid={ value } key={ index }>
-                {value}
-              </option>),
+              (value, index) => (
+                <option data-testid={ value } key={ index }>
+                  {value}
+                </option>
+              ),
             )
           }
         </select>
