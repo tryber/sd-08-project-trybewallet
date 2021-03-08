@@ -17,14 +17,12 @@ class Header extends Component {
     return valueCurrency.map(({ currency, value, exchangeRates }) => {
       const currencyDate = exchangeRates[currency];
       const amount = Number(value) * Number(currencyDate.ask);
-      console.log(amount);
       return amount;
     }).reduce((acc, valCur) => acc + valCur, 0);
   }
 
   render() {
     const { showEmail } = this.props;
-    console.log(this.valueAmount());
     return (
       <header className="header">
         <dl className="headerContainer">

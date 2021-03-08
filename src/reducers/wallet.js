@@ -16,6 +16,9 @@ const walletReducer = (state = INITIAL_STATE, action) => {
     // };
   case 'UPEXPENSES':
     return { ...state, expenses: [...state.expenses, action.UPexpenses] };
+  case 'DELETE_EXPENSE':
+    return { ...state,
+      expenses: state.expenses.filter((expense) => expense.id !== action.payload) };
     // return {
     //   ...state,
     //   expenses: [

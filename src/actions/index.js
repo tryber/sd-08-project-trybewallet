@@ -23,6 +23,10 @@ const actionExpenses = (UPexpenses) => ({
   UPexpenses,
 });
 
+const deleteExpense = (id) => ({
+  type: 'DELETE_EXPENSE',
+  payload: id,
+});
 // export function actionAddExpenses(expense) {
 //   return {
 //     type: 'ADD_EXPENSES',
@@ -30,4 +34,4 @@ const actionExpenses = (UPexpenses) => ({
 //   };
 // }
 
-export { actionEmail, fetchCurrencies, actionExpenses };
+export { actionEmail, fetchCurrencies, actionExpenses, deleteExpense };

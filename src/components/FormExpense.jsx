@@ -51,7 +51,6 @@ class FormExpense extends Component {
     showExpenses(this.state);
     this.setState(
       {
-        id: 0,
         value: 0,
         currency: 'USD',
         method: '',
