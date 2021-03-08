@@ -2,6 +2,8 @@ import getCurrencyPrice from '../services/getCurrencyPrice';
 import {
   ADD_EXPENSE,
   DELETE_EXPENSE,
+  EDIT_EXPENSE,
+  EDIT_EXPENSE_ADD,
   LOGIN,
   REQUEST_CURRENCIES,
   REQUEST_CURRENCIES_ERROR,
@@ -38,6 +40,18 @@ export const addNewExpense = (expenses) => ({
 export const deleteExpense = (expenses) => ({
   type: DELETE_EXPENSE,
   expenses,
+});
+
+export const editExpense = (expense) => ({
+  type: EDIT_EXPENSE,
+  expense,
+  isEditing: true,
+});
+
+export const editExpenseAdd = (expense) => ({
+  type: EDIT_EXPENSE_ADD,
+  expense,
+  isEditing: false,
 });
 
 export const fetchingCurrenciesThunk = () => async (dispatch) => {

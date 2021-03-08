@@ -1,13 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { deleteExpense as deleteExpenseAction } from '../actions';
+import { deleteExpense as deleteExpenseAction,
+  editExpense as editExpenseAction } from '../actions';
 import './WalletTable.css';
 
 class WalletTable extends React.Component {
   constructor() {
     super();
     this.deleteExpense = this.deleteExpense.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   deleteExpense({ target }) {
@@ -17,13 +19,14 @@ class WalletTable extends React.Component {
     deleteExpense(newExpensesList);
   }
 
+  handleClick(expense) {
+    const { editExpense } = this.props;
+    editExpense(expense);
+  }
+
   render() {
     const { expenses } = this.props;
-    const fields = [
-      'Descrição',
-      'Tag',
-      'Método de pagamento',
-      'Valor', 'Moeda',
+    const fields = ['Descrição', 'Tag', 'Método de pagamento', 'Valor', 'Moeda',
       'Câmbio utilizado', 'Valor convertido', 'Moeda de conversão', 'Editar/Excluir'];
     return (
       <table>
@@ -49,7 +52,14 @@ class WalletTable extends React.Component {
               </td>
               <td>Real</td>
               <td>
-                <button type="button">Editar</button>
+                <button
+                  type="button"
+                  value={ expense.description }
+                  onClick={ () => this.handleClick(expense) }
+                  data-testid="edit-btn"
+                >
+                  Editar
+                </button>
                 <button
                   type="button"
                   data-testid="delete-btn"
@@ -72,6 +82,7 @@ const mapStateToProps = ({ wallet: { expenses } }) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   deleteExpense: (expenses) => dispatch(deleteExpenseAction(expenses)),
+  editExpense: (expense) => dispatch(editExpenseAction(expense)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(WalletTable);
@@ -79,4 +90,5 @@ export default connect(mapStateToProps, mapDispatchToProps)(WalletTable);
 WalletTable.propTypes = {
   expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
   deleteExpense: PropTypes.func.isRequired,
+  editExpense: PropTypes.func.isRequired,
 };
