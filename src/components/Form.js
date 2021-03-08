@@ -10,7 +10,7 @@ class Form extends Component {
     this.state = {
       value: 0,
       currency: '',
-      // id: 0,
+      id: 0,
       description: '',
       method: '',
       tag: '',
@@ -19,7 +19,6 @@ class Form extends Component {
       // },
       // }],
       expense: [],
-      sum: 0,
     };
   }
 
@@ -39,18 +38,15 @@ class Form extends Component {
   //   });
   // }
   addExpense() {
-    const { value, currency, description, method, tag, expense, sum } = this.state;
+    const { value, currency, description, method, tag, expense } = this.state;
     const { fetchCurr, saveDt, currencies, saveSum } = this.props;
     fetchCurr();
     const exp = { value, currency, description, method, tag, currencies };
-    const converction = Object.values(currencies).find((e) => e.code === currency);
     this.setState({
       expense: [...expense, exp],
-      sum: sum + parseFloat(value) * parseFloat(converction.ask),
     });
     // console.log(sum + parseFloat(value) * parseFloat(converction.ask));
     saveDt(exp);
-    saveSum(sum + parseFloat(value) * parseFloat(converction.ask).toFixed(2));
   }
 
   handleChange({ target: { name, value } }) {

@@ -7,7 +7,12 @@ export default class FormSelect extends Component {
     return (
       <label htmlFor={ htmlFor }>
         {label}
-        <select data-testid={ dataTestid } id={ htmlFor } name={ htmlFor } onChange={ (e) => handleChange(e) }>
+        <select
+          data-testid={ dataTestid }
+          id={ htmlFor }
+          name={ htmlFor }
+          onChange={ (e) => handleChange(e) }
+        >
           {dataArray
             .map((item) => (
               <option
