@@ -9,15 +9,55 @@ class InputForm extends React.Component {
     this.state = {
       value: 0,
       description: '',
+      codes: [],
+      currency: '',
     };
 
     this.onChange = this.onChange.bind(this);
-    this.expenseValueInput = this.expenseValueInput.bind(this);
-    this.expenseDescriptionInput = this.expenseDescriptionInput.bind(this);
+  }
+
+  componentDidMount() {
+    this.getCurrencies();
   }
 
   onChange({ target: { name, value } }) {
     this.setState({ [name]: value });
+  }
+
+  async getCurrencies() {
+    const codeCurrencies = await fetch('https://economia.awesomeapi.com.br/json/all')
+      .then((response) => response.json());
+    delete codeCurrencies.USDT; // https://stackoverflow.com/questions/208105/how-do-i-remove-a-property-from-a-javascript-object
+    const codes = Object.keys(codeCurrencies);
+    this.setState({ codes });
+  }
+
+  currencyOptions() {
+    const { codes } = this.state;
+    return codes.map((code) => (
+      <option
+        value={ code }
+        key={ code }
+        data-testid={ code }
+      >
+        { code }
+      </option>
+    ));
+  }
+
+  expensesCurrencyOptions(currency) {
+    return (
+      <select
+        type="text"
+        id="currency-input"
+        value={ currency }
+        name="currency"
+        onChange={ this.onChange }
+        data-testid="currency-input"
+      >
+        { this.currencyOptions() }
+      </select>
+    );
   }
 
   expenseValueInput(value) {
@@ -53,10 +93,11 @@ class InputForm extends React.Component {
   }
 
   render() {
-    const { value, description } = this.state;
+    const { value, description, currency } = this.state;
     return (
       <form>
         { this.expenseValueInput(value) }
+        { this.expensesCurrencyOptions(currency) }
         <br />
         { this.expenseDescriptionInput(description) }
       </form>
