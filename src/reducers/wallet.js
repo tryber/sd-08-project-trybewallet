@@ -5,6 +5,8 @@ const initial = {
   expenses: [],
 };
 
+// Nota mental: sempre retornar o estado anterior
+// junto com o update recebido pela action.
 function wallet(state = initial, action) {
   switch (action.type) {
   case FETCH_CURRENCIES:
@@ -15,7 +17,7 @@ function wallet(state = initial, action) {
   case ADD_EXPENSE:
     return {
       ...state,
-      expenses: action.payload,
+      expenses: [...state.expenses, action.payload],
     };
   default:
     return state;

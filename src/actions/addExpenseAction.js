@@ -15,9 +15,13 @@ function addExpenseAction(expense) {
       .then((data) => {
         const currencies = Object.entries(data);
         const filtered = currencies.filter((item) => item[0] !== 'USDT');
+        const exchanges = {};
+        filtered.forEach((item) => {
+          Object.assign(exchanges, { [item[0]]: item[1] });
+        });
         const expenseToAdd = {
           ...expense,
-          exchangeRates: Object.assign(filtered, {}),
+          exchangeRates: exchanges,
         };
         dispatch(addExpense(expenseToAdd));
       });
