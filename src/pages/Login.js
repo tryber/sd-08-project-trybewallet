@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+
 import { Redirect } from 'react-router-dom';
-import { loginAction } from '../actions';
+import { userLoginAction } from '../actions';
 
 class Login extends React.Component {
   constructor() {
@@ -10,76 +11,76 @@ class Login extends React.Component {
 
     this.state = {
       email: '',
-      senha: '',
-      redirect: false,
-      buttonDisabed: true,
+      password: '',
+      isButtonDisabled: true,
+      shouldRedirect: false,
     };
 
-    this.inputChange = this.inputChange.bind(this);
-    this.validateEmail = this.validateEmail.bind(this);
+    this.onInputChange = this.onInputChange.bind(this);
+    this.verifyFieldsValidation = this.verifyFieldsValidation.bind(this);
+    this.onLogin = this.onLogin.bind(this);
+  }
+
+  onInputChange({ target }) {
+    this.setState(
+      { [target.name]: target.value },
+      () => {
+        this.setState({ isButtonDisabled: !this.verifyFieldsValidation() });
+      },
+    );
   }
 
   onLogin(email) {
     const { submitLogin } = this.props;
     submitLogin(email);
 
-    this.setState({ redirect: true });
+    this.setState({ shouldRedirect: true });
   }
 
-  inputChange({ target }) {
-    const { name, value } = target;
+  verifyFieldsValidation() {
+    const { email, password } = this.state;
+    const MINIMAL_PASSWORD_CHARS = 6;
 
-    this.setState(
-      { [name]: value },
-      () => {
-        this.setState({ buttonDisabed: !this.validateEmail() });
-      },
-    );
-  }
+    // Regex got from https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
+    const emailRegex = new RegExp([
+      '^(([^<>()[\\]\\\\.,;:\\s@"]+(\\.[^<>()[\\]\\\\.,;:\\s@"]+)*)',
+      '|(".+"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])',
+      '|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$',
+    ].join(''));
 
-  validateEmail() {
-    const { email, senha } = this.state;
-    const MINIMAL_PASSWORD_LENGHT = 6;
+    const isEmailValid = emailRegex.test(email);
+    const isPasswordValid = password.length >= MINIMAL_PASSWORD_CHARS;
 
-    const isEmailValidated = email.includes('@') && email.includes('.com');
-    const isPasswordValidated = senha.length >= MINIMAL_PASSWORD_LENGHT;
-
-    return isEmailValidated && isPasswordValidated;
+    return isEmailValid && isPasswordValid;
   }
 
   render() {
-    const { email, senha, buttonDisabed, redirect } = this.state;
+    const { email, password, isButtonDisabled, shouldRedirect } = this.state;
 
-    if (redirect) return <Redirect to="/carteira" />;
+    if (shouldRedirect) return <Redirect to="/carteira" />;
 
     return (
       <>
-        <label htmlFor="email">
-          Email
-          <input
-            id="email"
-            name="email"
-            onChange={ this.inputChange }
-            data-testid="email-input"
-            type="email"
-            value={ email }
-          />
-        </label>
-        <label htmlFor="senha">
-          Senha
-          <input
-            id="senha"
-            name="senha"
-            onChange={ this.inputChange }
-            data-testid="password-input"
-            type="password"
-            value={ senha }
-          />
-        </label>
+        <input
+          type="text"
+          placeholder="Login"
+          name="email"
+          data-testid="email-input"
+          onChange={ this.onInputChange }
+          value={ email }
+        />
+        <input
+          type="password"
+          placeholder="Senha"
+          name="password"
+          data-testid="password-input"
+          onChange={ this.onInputChange }
+          value={ password }
+        />
         <button
-          disabled={ buttonDisabed }
-          onClick={ () => this.onLogin(email) }
           type="button"
+          disabled={ isButtonDisabled }
+          onClick={ () => this.onLogin(email) }
         >
           Entrar
         </button>
@@ -89,7 +90,7 @@ class Login extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  submitLogin: (email) => dispatch(loginAction(email)),
+  submitLogin: (email) => dispatch(userLoginAction(email)),
 });
 
 Login.propTypes = {
