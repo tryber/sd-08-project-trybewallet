@@ -8,7 +8,7 @@ import { addWallet,
 } from '../actions';
 import Header from '../components/Header';
 import HeaderTable from '../components/HeaderTable';
-import { roundUp } from '../services';
+import { roundUp, twoDecimal } from '../services';
 import RenderForms from '../components/RenderForms';
 
 const metodos = ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'];
@@ -135,7 +135,7 @@ class Wallet extends React.Component {
           <td>{expense.method}</td>
           <td>{`${roundUp(expense.value, 2)}`}</td>
           <td>{expense.exchangeRates[expense.currency].name}</td>
-          <td>{roundUp(expense.exchangeRates[expense.currency].ask, 2)}</td>
+          <td>{twoDecimal(expense.exchangeRates[expense.currency].ask, 2)}</td>
           <td>
             {roundUp(parseFloat(expense.exchangeRates[expense.currency].ask)
             * parseFloat(expense.value), 2)}

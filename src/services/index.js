@@ -6,6 +6,11 @@ export const roundUp = (num, decimal) => {
   return parseFloat((n + (ROUND_UP / ((DECIMAL ** (decimal + 1))))).toFixed(decimal));
 };
 
+export const twoDecimal = (num, decimal) => {
+  const n = parseFloat(num);
+  return n.toFixed(decimal);
+};
+
 export const objectToArray = (object) => {
   const array = Object.keys(object);
   array.splice(1, 1);
