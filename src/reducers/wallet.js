@@ -1,11 +1,12 @@
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
 import { REQUEST_API,
-  REQUEST_API_SUCCESS, REQUEST_API_ERROR } from '../actions/requestAPI';
+  REQUEST_API_SUCCESS } from '../actions/requestAPI';
 import { REQ_FOR_ADD_EXPENSE, REQ_FOR_ADD_EXPENSE_SUCCESS,
-  REQ_FOR_ADD_EXPENSE_ERROR, DELETE_EXPENSE } from '../actions/index';
+  REQ_FOR_ADD_EXPENSE_ERROR, DELETE_EXPENSE, UPDATE_EXPENSE } from '../actions/index';
 
 const INITIAL_STATE = {
   currencies: [],
+  currenciesCode: [],
   expenses: [],
 };
 const wallet = (state = INITIAL_STATE, action) => {
@@ -21,13 +22,6 @@ const wallet = (state = INITIAL_STATE, action) => {
       currencies: action.payload.coins,
       isFetching: action.payload.isFetching,
     };
-  case REQUEST_API_ERROR:
-    return {
-      ...state,
-      error: action.payload.error,
-      isFetching: action.payload.isFetching,
-    };
-
   case REQ_FOR_ADD_EXPENSE:
     return {
       ...state,
@@ -47,6 +41,11 @@ const wallet = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       expenses: action.payload,
+    };
+  case UPDATE_EXPENSE:
+    return {
+      ...state,
+      expenses: [...action.payload.expenses],
     };
   default:
     return state;

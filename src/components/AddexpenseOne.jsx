@@ -32,16 +32,11 @@ class AddexpenseOne extends Component {
             value={ currency }
             onChange={ handleChange }
           >
-            {coins.map((coin, index) => (
-              <option
-                name="coins"
-                data-testid={ coin.code }
-                key={ index }
-                value={ coin.code }
-              >
-                {coin.code}
-              </option>
-            ))}
+            {coins.length > 0 && coins.map((item) => {
+              if (item === 'USDT') return '';
+              return (<option data-testid={ item } key={ item }>{item}</option>);
+            })}
+
           </select>
         </label>
       </>
@@ -56,7 +51,7 @@ const mapStateToProps = ({ wallet: { currencies } }) => ({
 export default connect(mapStateToProps)(AddexpenseOne);
 
 AddexpenseOne.propTypes = {
-  coins: PropTypes.arrayOf(PropTypes.object).isRequired,
+  coins: PropTypes.arrayOf(PropTypes.string).isRequired,
   infos: PropTypes.shape({
     value: PropTypes.string.isRequired,
     currency: PropTypes.string.isRequired,

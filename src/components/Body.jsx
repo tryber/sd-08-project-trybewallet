@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { fetchCoins as fetchCoinsThunk } from '../actions/requestAPI';
 import Addexpense from './Addexpense';
 import Table from './Table';
+import Edit from './Edit';
 
 class Body extends Component {
   componentDidMount() {
@@ -13,10 +14,11 @@ class Body extends Component {
   }
 
   render() {
+    const { isEditing } = this.props;
     return (
       <>
         <form autoComplete="off">
-          <Addexpense />
+          {!isEditing ? <Addexpense /> : <Edit />}
         </form>
         <Table />
       </>
@@ -24,12 +26,21 @@ class Body extends Component {
   }
 }
 
+const mapStateToProps = ({ edit: { isEditing } }) => ({
+  isEditing,
+});
+
 const mapDispatchToProps = (dispatch) => ({
   fetchCoins: () => dispatch(fetchCoinsThunk()),
 });
 
-export default connect(null, mapDispatchToProps)(Body);
+export default connect(mapStateToProps, mapDispatchToProps)(Body);
 
 Body.propTypes = {
   fetchCoins: PropTypes.func.isRequired,
+  isEditing: PropTypes.bool,
+};
+
+Body.defaultProps = {
+  isEditing: false,
 };

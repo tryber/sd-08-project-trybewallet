@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { deleteExpense as deleteExpenseAction } from '../actions';
+import { deleteExpense as deleteExpenseAction,
+  changeEditStatus as changeEditStatusAction } from '../actions';
 
 import TableHeader from './TableHeader';
 
@@ -20,7 +21,10 @@ class Table extends Component {
     const number = Object.values(exchangeRates).find((coinUsed) => (
       coinUsed.code === currency));
     if (number) {
-      const result = Number(Number(number.ask).toFixed(2)).toString();
+      if (number % 1 === 0) {
+        return Number(Number(number.ask).toFixed(2)).toString();
+      }
+      const result = Number(number.ask).toFixed(2);
       return result;
     }
     return '';
@@ -51,9 +55,9 @@ class Table extends Component {
   // ${Number((coin.expenseAmount)).toFixed(2)}
 
   render() {
-    const { coins } = this.props;
+    const { coins, changeEditStatus } = this.props;
     return (
-      <table border="1">
+      <table style={ { borderCollapse: 'collapse' } } border="1">
         <TableHeader />
         <tbody>
           {coins.length > 0 && coins.map((coin) => (
@@ -78,7 +82,13 @@ class Table extends Component {
               </td>
               <td>Real</td>
               <td>
-                <button type="button">Editar</button>
+                <button
+                  data-testid="edit-btn"
+                  type="button"
+                  onClick={ () => changeEditStatus(coin.id, true) }
+                >
+                  Editar
+                </button>
                 <button
                   onClick={ () => this.deleteExpense(coins, coin.id) }
                   type="button"
@@ -101,6 +111,7 @@ const mapStateToProps = ({ wallet: { expenses } }) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   deleteExpenseFromState: (expense) => dispatch(deleteExpenseAction(expense)),
+  changeEditStatus: (id, edit) => dispatch(changeEditStatusAction(id, edit)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Table);
@@ -108,4 +119,5 @@ export default connect(mapStateToProps, mapDispatchToProps)(Table);
 Table.propTypes = {
   coins: PropTypes.arrayOf(PropTypes.object).isRequired,
   deleteExpenseFromState: PropTypes.func.isRequired,
+  changeEditStatus: PropTypes.func.isRequired,
 };

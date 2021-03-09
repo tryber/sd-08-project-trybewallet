@@ -3,6 +3,23 @@ export const REQ_FOR_ADD_EXPENSE = 'REQ_FOR_ADD_EXPENSE';
 export const REQ_FOR_ADD_EXPENSE_SUCCESS = 'REQ_FOR_ADD_EXPENSE_SUCCESS';
 export const REQ_FOR_ADD_EXPENSE_ERROR = 'REQ_FOR_ADD_EXPENSE_ERROR';
 export const DELETE_EXPENSE = 'DELETE_EXPENSE';
+export const UPDATE_EXPENSE = 'UPDATE_EXPENSE';
+export const CHANGE_EDIT_STATUS = 'CHANGE_EDIT_STATUS';
+
+export const changeEditStatus = (id, isEditing) => ({
+  type: CHANGE_EDIT_STATUS,
+  payload: {
+    isEditing,
+    id,
+  },
+});
+
+export const updateExpense = (expenses) => ({
+  type: UPDATE_EXPENSE,
+  payload: {
+    expenses,
+  },
+});
 
 export const deleteExpense = (expense) => ({
   type: DELETE_EXPENSE,

@@ -21,15 +21,19 @@ class Home extends Component {
   handleChange({ target }) {
     const { value, name } = target;
 
-    this.setState({ [name]: value });
+    this.setState(() => ({ [name]: value }), () => this.loginValidation());
   }
 
   loginValidation() {
     const { email, password } = this.state;
     const LENGTH_SIX = 6;
-    const regex = /[a-zA-Z0-9\-_.]+@[a-zA-Z0-9]+.[a-zA-Z0-9]+$/gm.test(email);
+    const regex = /[a-zA-Z0-9\-_.]+@[a-zA-Z0-9]+.[a-z]+$/gm.test(email);
     if (regex
-      && password.length >= LENGTH_SIX) this.setState({ buttonValidation: false });
+      && password.length >= LENGTH_SIX) {
+      this.setState({ buttonValidation: false });
+    } else {
+      this.setState({ buttonValidation: true });
+    }
   }
 
   render() {
@@ -51,7 +55,7 @@ class Home extends Component {
           <input
             type="password"
             name="password"
-            onKeyUp={ this.loginValidation }
+            // onKeyUp={ this.loginValidation }
             placeholder="Senha"
             onChange={ this.handleChange }
             data-testid="password-input"

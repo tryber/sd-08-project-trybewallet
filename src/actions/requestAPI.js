@@ -30,12 +30,13 @@ export const fetchCoins = () => async (dispatch) => {
   try {
     const req = await fetch('https://economia.awesomeapi.com.br/json/all');
     const coinsJson = await req.json();
-    const filterCoins = [];
-    Object.entries(coinsJson).forEach((coin) => {
-      if (coin[1].name !== 'Dólar Turismo') filterCoins.push(coin[1]);
-      // if (coin[0] !== 'USDT') filterCoins = [...filterCoins, coin[0]];
-    });
-    dispatch(reqAPISuccess(filterCoins));
+    // const filterCoins = [];
+    const currenciesCode = Object.keys(coinsJson);
+    // Object.entries(coinsJson).forEach((coin) => {
+    //   if (coin[1].name !== 'Dólar Turismo') filterCoins.push(coin[1]);
+    //   // if (coin[0] !== 'USDT') filterCoins = [...filterCoins, coin[0]];
+    // });
+    dispatch(reqAPISuccess(currenciesCode));
   } catch (error) {
     dispatch(reqAPIFail(error));
   }

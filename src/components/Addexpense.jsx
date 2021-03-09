@@ -57,25 +57,35 @@ class Addexpense extends Component {
     const infoOne = { value, handleChange, currency };
     const infoTwo = { method, description, tag, handleChange };
     const { id } = this.props;
+    const editExpense = false;
     // const expenseId = (id.length !== 0) ? id.length : (id.length + 1);
     const expenseId = this.checkId(id);
 
     return (
       <>
-        <AddexpenseOne infos={ infoOne } />
+        {editExpense && (
+          <section>
+            akdj
+          </section>)}
 
-        <AddexpenseTwo infos={ infoTwo } />
-        <button
-          type="button"
-          onClick={ () => {
-            checkInfo({
-              id: expenseId,
-              ...this.state,
-            });
-          } }
-        >
-          Adicionar despesa
-        </button>
+        {!editExpense && (
+          <section>
+            <AddexpenseOne infos={ infoOne } />
+
+            <AddexpenseTwo infos={ infoTwo } />
+            <button
+              type="button"
+              onClick={ () => {
+                checkInfo({
+                  id: expenseId,
+                  ...this.state,
+                });
+              } }
+            >
+              Adicionar despesa
+            </button>
+          </section>
+        )}
       </>
     );
   }
