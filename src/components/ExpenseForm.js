@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Creators as WalletActions } from '../actions/wallet';
 
+import '../styles/components/ExpenseForm.css';
+
 const INITIAL_STATE = {
   value: '',
   description: '',
@@ -122,7 +124,7 @@ class ExpenseForm extends Component {
   render() {
     const { value, description, currency, method, tag } = this.state;
     return (
-      <form>
+      <form className="expenseForm">
         { this.renderValueInput(value) }
         { this.renderDescriptionInput(description) }
         { this.renderCurrencySelect(currency) }

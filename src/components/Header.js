@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import expenseType from '../types';
+import '../styles/components/Header.css';
 
 class Header extends Component {
   getTotal() {
@@ -19,17 +20,26 @@ class Header extends Component {
   render() {
     const { email } = this.props;
     return (
-      <header>
-        <dl>
-          <dt>Email</dt>
-          <dd data-testid="email-field">{ email }</dd>
-          <dt>Total</dt>
-          <dd data-testid="total-field">
-            R$
-            { (Math.round(this.getTotal() * 100) / 100).toFixed(2) }
-          </dd>
-          <dt>Câmbio</dt>
-          <dd data-testid="header-currency-field">BRL</dd>
+      <header className="header">
+        <dl className="headerInfosContainer">
+          <div className="headerInfo">
+            <dt>Email</dt>
+            <dd data-testid="email-field">{email}</dd>
+          </div>
+          <div className="headerInfo">
+
+            <dt>Total</dt>
+            <dd data-testid="total-field">
+              R$
+              {(Math.round(this.getTotal() * 100) / 100).toFixed(2)}
+            </dd>
+          </div>
+
+          <div className="headerInfo">
+
+            <dt>Câmbio</dt>
+            <dd data-testid="header-currency-field">BRL</dd>
+          </div>
         </dl>
       </header>
     );

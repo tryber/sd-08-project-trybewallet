@@ -1,0 +1,17 @@
+.expensesTableContainer {
+  overflow-x: auto;
+}
+
+.expensesTable {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.expesnsesTable thead {
+  background-color: rgba(0, 0, 0 0.7);
+}
+
+.expensesTable thead tr {
+  color: white;
+  padding: 20px;
+}
