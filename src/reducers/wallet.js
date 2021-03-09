@@ -1,4 +1,5 @@
 const INITIAL_STATE = {
+  total: 0,
   expenses: [],
   auxiliar: {
     arrFinal: ['USD', 'ADS'],
@@ -13,6 +14,8 @@ export default function user(state = INITIAL_STATE, action) {
     return { ...state, expenses: [...state.expenses, action.expenses] };
   case 'ADD_AUXILIAR':
     return { ...state, auxiliar: action.auxiliar };
+  case 'CHANGE_TOTAL':
+    return { ...state, total: action.total };
   case 'DELETE_EXPENSES':
     return {
       ...state,

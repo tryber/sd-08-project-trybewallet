@@ -6,10 +6,23 @@ class Cambio extends Component {
   constructor() {
     super();
     this.inputTabela = this.inputTabela.bind(this);
+    this.calculoTotal = this.calculoTotal.bind(this);
+  }
+
+  calculoTotal() {
+    const { stateExpenses, changeTotal } = this.props;
+    let total = 0;
+    const arr = stateExpenses.map((objs) => (objs.value
+    * (objs.exchangeRates[objs.currency].ask)));
+    for (let i = 0; i < arr.length; i += 1) {
+      total += arr[i];
+    }
+    changeTotal(total);
   }
 
   inputTabela() {
     const { stateExpenses, deleteExpense } = this.props;
+    this.calculoTotal();
     return (
       <table className="table">
         <thead>
@@ -62,7 +75,7 @@ class Cambio extends Component {
     return (
       <div>
         <div data-testid="header-currency-field">
-          CAMBIO BRL
+          CAMBIO BRL :
         </div>
         {this.inputTabela()}
       </div>
@@ -71,6 +84,7 @@ class Cambio extends Component {
 }
 const mapDispatchToProps = (dispatch) => ({
   deleteExpense: (id) => dispatch({ type: 'DELETE_EXPENSES', id }),
+  changeTotal: (total) => dispatch({ type: 'CHANGE_TOTAL', total }),
 });
 const mapStateToProps = (state) => ({
   stateExpenses: state.wallet.expenses,
@@ -78,5 +92,6 @@ const mapStateToProps = (state) => ({
 Cambio.propTypes = {
   stateExpenses: PropTypes.shape.isRequired,
   deleteExpense: PropTypes.func.isRequired,
+  changeTotal: PropTypes.func.isRequired,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Cambio);
