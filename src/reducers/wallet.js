@@ -1,9 +1,8 @@
-import { REQUEST_CURRENCY, ADD_EXPENSES } from '../actions/index';
+import { REQUEST_CURRENCY, ADD_EXPENSES, DELETE_EXPENSE } from '../actions/index';
 
 const initialState = {
   currencies: [],
   expenses: [],
-  sum: 0,
 };
 
 function currency(state = initialState, action) {
@@ -17,6 +16,10 @@ function currency(state = initialState, action) {
     return {
       ...state,
       expenses: [...state.expenses, action.payload],
+    };
+  case DELETE_EXPENSE:
+    return {
+      expenses: state.expenses.filter((exp) => exp !== action.payload),
     };
   default:
     return state;

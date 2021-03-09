@@ -16,6 +16,14 @@ const INITIAL_STATE = {
   id: 0,
 };
 
+// A Vivi me ensinou
+const getId = (arr) => {
+  if (arr.length > 0) {
+    return arr[arr.length - 1].id + 1;
+  }
+  return 0;
+};
+
 class Form extends Component {
   constructor(props) {
     super(props);
@@ -33,20 +41,22 @@ class Form extends Component {
   }
 
   async handleClick() {
-    const { addEx } = this.props;
-    const { value, description, currency, method, tag, id } = this.state;
+    const { addEx, exp } = this.props;
+    const { value, description, currency, method, tag } = this.state;
     const exchangeRates = await fetchCurrency();
-    console.log();
+    // console.log(exchangeRates);
     const expenses = {
       value, description, currency, method, tag, exchangeRates,
     };
+    expenses.id = getId(exp);
+    // expenses.id = exp.length;
     addEx(expenses);
   }
 
   render() {
     const { value, description } = this.state;
     const { exp } = this.props;
-    console.log(exp.length, exp);
+    console.log(exp);
     return (
       <form>
         <label htmlFor="value">

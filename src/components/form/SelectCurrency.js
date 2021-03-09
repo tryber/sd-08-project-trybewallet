@@ -21,13 +21,13 @@ class SelectCurrency extends Component {
     // console.log(currList);
     return (
       <select
-        data-testid="USD"
+        data-testid="currency-input"
         name="currency"
         onChange={ (e) => handleChange(e.target) }
       >
         {
           currList.length > 0 && currList.map(
-            (i) => <option key={ `code-${i}` }>{i}</option>,
+            (i) => <option data-testid="USD" key={ `code-${i}` }>{i}</option>,
           )
         }
       </select>

@@ -2,6 +2,7 @@
 export const USER_EMAIL = 'USER_EMAIL';
 export const REQUEST_CURRENCY = 'REQUEST_CURRENCY';
 export const ADD_EXPENSES = 'ADD_EXPENSES';
+export const DELETE_EXPENSE = 'DELETE_EXPENSE';
 
 export function userEmail(email) {
   return {
@@ -12,7 +13,7 @@ export function userEmail(email) {
 
 export function requestCurrency(payload) {
   return {
-    // c: console.log(payload),
+    c: console.log(payload),
     type: REQUEST_CURRENCY,
     payload,
   };
@@ -22,6 +23,13 @@ export function addExpenses(expenses) {
   return {
     type: ADD_EXPENSES,
     payload: expenses,
+  };
+}
+
+export function deleteExpense(expense) {
+  return {
+    type: DELETE_EXPENSE,
+    payload: expense,
   };
 }
 
