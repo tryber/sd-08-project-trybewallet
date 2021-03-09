@@ -2,9 +2,25 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import { RiDeleteBinLine, RiEditLine } from 'react-icons/ri';
+import { deleteExpense as eraseExpense } from '../actions';
+
 class Table extends React.Component {
+  renderButton(name, expense, callback) {
+    return (
+      <button
+        type="button"
+        data-testid={ `${name}-btn` }
+        onClick={ () => callback(expense) }
+        className={ `${name}-btn expense-opt-btn` }
+      >
+        {name === 'edit' ? <RiEditLine /> : <RiDeleteBinLine />}
+      </button>
+    );
+  }
+
   render() {
-    const { expenses } = this.props;
+    const { expenses, deleteExpense, editExpense } = this.props;
     return (
       <table>
         <thead className="table-header">
@@ -34,6 +50,9 @@ class Table extends React.Component {
                 <td>{description}</td>
                 <td>{tag}</td>
                 <td>{method}</td>
+                <td>
+                  {this.renderButton('delete', expense, deleteExpense)}
+                </td>
               </tr>
             );
           })}
@@ -47,8 +66,17 @@ const mapStateToProps = (state) => ({
   expenses: state.wallet.expenses,
 });
 
-export default connect(mapStateToProps)(Table);
+const mapDispatchToProps = (dispatch) => ({
+  deleteExpense: (expense) => dispatch(eraseExpense(expense)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Table);
 
 Table.propTypes = {
-  expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
+  expenses: PropTypes.arrayOf(PropTypes.object),
+  deleteExpense: PropTypes.func.isRequired,
+};
+
+Table.defaultProps = {
+  expenses: [],
 };
