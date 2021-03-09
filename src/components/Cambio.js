@@ -20,23 +20,29 @@ class Cambio extends Component {
     changeTotal(total);
   }
 
+  editExpenses() { console.log('i'); }
+  //   const { expenses } = this.props;
+  //   const expense = expenses.find((expens) => expens.id === id);
+  //   this.setState({
+  //     editedId: expense.id,
+  //     value: expense.value,
+  //     description: expense.description,
+  //     currency: expense.currency,
+  //     method: expense.method,
+  //     tag: expense.tag,
+  //     btnName: 'Editar Despesa',
+  //   });
+  // }
+
   inputTabela() {
-    const { stateExpenses, deleteExpense } = this.props;
+    const { stateExpenses, deleteExpense, editExpense } = this.props;
+    const arrTh = ['Descrição', 'Tag', 'Método de pagamento', 'Valor', 'Moeda',
+      'Câmbio utilizado', 'Valor convertido', 'Moeda de conversão', 'Editar/Excluir'];
     this.calculoTotal();
     return (
       <table className="table">
         <thead>
-          <tr className="table">
-            <th className="table">Descrição</th>
-            <th className="table">Tag</th>
-            <th className="table">Método de pagamento</th>
-            <th className="table">Valor</th>
-            <th className="table">Moeda</th>
-            <th className="table">Câmbio utilizado</th>
-            <th className="table">Valor convertido</th>
-            <th className="table">Moeda de conversão</th>
-            <th className="table">Editar/Excluir</th>
-          </tr>
+          { arrTh.map((item) => <th className="table" key={ item }>{item}</th>)}
         </thead>
         <tbody>
           {stateExpenses.map((objs) => (
@@ -62,6 +68,13 @@ class Cambio extends Component {
                 >
                   Excluir
                 </button>
+                <button
+                  type="button"
+                  onClick={ () => editExpense(objs.id) }
+                  data-testid="edit-btn"
+                >
+                  Editar despesa
+                </button>
               </td>
             </tr>
           ))}
@@ -85,13 +98,18 @@ class Cambio extends Component {
 const mapDispatchToProps = (dispatch) => ({
   deleteExpense: (id) => dispatch({ type: 'DELETE_EXPENSES', id }),
   changeTotal: (total) => dispatch({ type: 'CHANGE_TOTAL', total }),
+  editExpense: (id) => dispatch({ type: 'EDIT_EXPENSES', id }),
 });
+
 const mapStateToProps = (state) => ({
   stateExpenses: state.wallet.expenses,
 });
+
 Cambio.propTypes = {
   stateExpenses: PropTypes.shape.isRequired,
   deleteExpense: PropTypes.func.isRequired,
   changeTotal: PropTypes.func.isRequired,
+  editExpense: PropTypes.func.isRequired,
 };
+
 export default connect(mapStateToProps, mapDispatchToProps)(Cambio);

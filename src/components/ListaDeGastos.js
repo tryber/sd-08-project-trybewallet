@@ -11,15 +11,12 @@ class ListaDeGastos extends Component {
         {' '}
         {total}
         {' '}
-        {/* {this.changevalor()} */}
       </div>
     );
   }
 }
 
 const mapStateToProps = (state) => ({
-  stateAuxiliar: state.wallet.auxiliar,
-  stateExpenses: state.wallet.expenses,
   total: state.wallet.total,
 });
 

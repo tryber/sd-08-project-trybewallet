@@ -1,4 +1,6 @@
 const INITIAL_STATE = {
+  IDediting: '',
+  isEditing: false,
   total: 0,
   expenses: [],
   auxiliar: {
@@ -16,6 +18,8 @@ export default function user(state = INITIAL_STATE, action) {
     return { ...state, auxiliar: action.auxiliar };
   case 'CHANGE_TOTAL':
     return { ...state, total: action.total };
+  case 'EDIT_EXPENSES':
+    return { ...state, isEditing: true, IDediting: action.id };
   case 'DELETE_EXPENSES':
     return {
       ...state,
