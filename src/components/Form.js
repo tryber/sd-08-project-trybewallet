@@ -36,8 +36,9 @@ class Form extends Component {
     const { addEx } = this.props;
     const { value, description, currency, method, tag, id } = this.state;
     const exchangeRates = await fetchCurrency();
+    console.log();
     const expenses = {
-      value, description, currency, method, tag, id, exchangeRates,
+      value, description, currency, method, tag, exchangeRates,
     };
     addEx(expenses);
   }
@@ -45,7 +46,7 @@ class Form extends Component {
   render() {
     const { value, description } = this.state;
     const { exp } = this.props;
-    console.log(exp);
+    console.log(exp.length, exp);
     return (
       <form>
         <label htmlFor="value">

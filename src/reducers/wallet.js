@@ -16,7 +16,7 @@ function currency(state = initialState, action) {
   case ADD_EXPENSES:
     return {
       ...state,
-      expenses: action.payload,
+      expenses: [...state.expenses, action.payload],
     };
   default:
     return state;
