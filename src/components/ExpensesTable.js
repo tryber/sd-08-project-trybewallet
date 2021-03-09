@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { Creators as WalletActions } from '../actions/wallet';
 
 import expenseType from '../types';
 
@@ -8,6 +10,7 @@ import '../styles/components/ExpensesTable.css';
 
 class ExpensesTable extends Component {
   renderExpenseRow(expense) {
+    const { removeExpense } = this.props;
     const { currency, description, method, tag, value, exchangeRates, id } = expense;
     const currencyData = exchangeRates[currency];
     const convertedValue = Number(value) * Number(currencyData.ask);
@@ -23,7 +26,13 @@ class ExpensesTable extends Component {
         <td>Real</td>
         <td>
           <button type="button">Editar</button>
-          <button type="button">Excluir</button>
+          <button
+            type="button"
+            data-testid="delete-btn"
+            onClick={ () => removeExpense(id) }
+          >
+            Excluir
+          </button>
         </td>
       </tr>
     );
@@ -58,10 +67,13 @@ class ExpensesTable extends Component {
 
 ExpensesTable.propTypes = {
   expenses: PropTypes.arrayOf(expenseType).isRequired,
+  removeExpense: PropTypes.func.isRequired,
 };
+
+const mapDispatchToProps = (dispatch) => bindActionCreators(WalletActions, dispatch);
 
 const mapStateToProps = ({ wallet }) => ({
   expenses: wallet.expenses,
 });
 
-export default connect(mapStateToProps)(ExpensesTable);
+export default connect(mapStateToProps, mapDispatchToProps)(ExpensesTable);

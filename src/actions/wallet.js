@@ -13,6 +13,10 @@ export const Creators = {
     type: Types.SAVE_CURRENCIES,
     payload: currencies,
   }),
+  addExpense: (expense) => ({
+    type: Types.ADD_EXPENSE,
+    payload: expense,
+  }),
   removeExpense: (id) => ({ type: Types.REMOVE_EXPENSE, payload: id }),
   fetchCurrencies: () => async (dispatch) => {
     const currencies = await getCurrencies();
@@ -21,11 +25,6 @@ export const Creators = {
       .map(({ code }) => code);
     dispatch(Creators.saveCurrencies(currenciesCodes));
   },
-  addExpense: (expense) => ({
-    type: Types.ADD_EXPENSE,
-    payload: expense,
-  }),
-
   addExpenseWithCurrencies: (expense) => async (dispatch) => {
     const currentCurrencies = await getCurrencies();
     const expenseWithCurrencies = { ...expense, exchangeRates: currentCurrencies };

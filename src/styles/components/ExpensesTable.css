@@ -7,11 +7,19 @@
   width: 100%;
 }
 
-.expesnsesTable thead {
-  background-color: rgba(0, 0, 0 0.7);
+.expensesTable thead {
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
-.expensesTable thead tr {
+.expensesTable thead th {
   color: white;
   padding: 20px;
+}
+
+.expensesTable tbody td {
+  padding: 20px;
+}
+
+.expensesTable tbody tr:nth-child( odd ) {
+  background-color: rgba(0, 200, 0, 0.2);
 }
