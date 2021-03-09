@@ -34,8 +34,8 @@ class Cambio extends Component {
               <td>{objs.tag}</td>
               <td>{objs.method}</td>
               <td>{objs.value}</td>
-              <td>#Câmbio-utilizado</td>
-              <td>#Valor-convertido</td>
+              <td>{objs.exchangeRates[objs.currency].name}</td>
+              <td>{Number(objs.exchangeRates[objs.currency].ask).toFixed(2)}</td>
               <td>Real</td>
               <td>#Delet</td>
             </tr>
