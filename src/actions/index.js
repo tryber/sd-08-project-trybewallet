@@ -1,7 +1,4 @@
 // Coloque aqui suas actions
-export default function addEmail(email) {
-  return {
-    type: 'SET_EMAIL',
-    email,
-  };
-}
+export const LOGIN = 'LOGIN';
+
+export const login = (email) => ({ type: LOGIN, email });
