@@ -1,11 +1,11 @@
 export default async function getCurrencyList() {
   return fetch('https://economia.awesomeapi.com.br/json/all')
-    .then((res) => res.json())
-    .then((data) => Object.keys(data).filter((i) => i !== 'USDT'));
+    .then((response) => response.json())
+    .then((currencies) => Object.keys(currencies).filter((currency) => i !== 'USDT'));
 }
 
-export function fetchCurrency() {
-  return async () => fetch('https://economia.awesomeapi.com.br/json/all')
+export async function fetchCurrency() {
+  return fetch('https://economia.awesomeapi.com.br/json/all')
     .then((response) => response.json())
-    .then((currency) => currency);
+    .then((currencies) => currencies);
 }

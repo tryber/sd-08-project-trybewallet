@@ -18,7 +18,7 @@ class SelectCurrency extends Component {
   render() {
     const { handleChange } = this.props;
     const { currList } = this.props;
-    console.log(currList);
+    // console.log(currList);
     return (
       <select
         data-testid="USD"

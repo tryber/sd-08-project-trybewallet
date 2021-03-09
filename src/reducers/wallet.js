@@ -1,4 +1,4 @@
-import { REQUEST_CURRENCY } from '../actions/index';
+import { REQUEST_CURRENCY, ADD_EXPENSES } from '../actions/index';
 
 const initialState = {
   currencies: [],
@@ -12,6 +12,11 @@ function currency(state = initialState, action) {
     return {
       ...state,
       currencies: [...action.payload],
+    };
+  case ADD_EXPENSES:
+    return {
+      ...state,
+      expenses: action.payload,
     };
   default:
     return state;

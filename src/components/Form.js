@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { addExpenses } from '../actions';
+import { fetchCurrency } from '../services/getCurrencyList';
 import SelectCurrency from './form/SelectCurrency';
 import SelectMethod from './form/SelectMethod';
 import SelectTag from './form/SelectTag';
@@ -12,7 +16,7 @@ const INITIAL_STATE = {
   id: 0,
 };
 
-export default class Form extends Component {
+class Form extends Component {
   constructor(props) {
     super(props);
 
@@ -28,10 +32,20 @@ export default class Form extends Component {
     });
   }
 
+  async handleClick() {
+    const { addEx } = this.props;
+    const { value, description, currency, method, tag, id } = this.state;
+    const exchangeRates = await fetchCurrency();
+    const expenses = {
+      value, description, currency, method, tag, id, exchangeRates,
+    };
+    addEx(expenses);
+  }
+
   render() {
     const { value, description } = this.state;
-    console.log(this.state);
-    console.log(description);
+    const { exp } = this.props;
+    console.log(exp);
     return (
       <form>
         <label htmlFor="value">
@@ -55,10 +69,30 @@ export default class Form extends Component {
           />
         </label>
         <SelectCurrency handleChange={ (e) => this.handleChange(e) } />
-        <SelectMethod />
-        <SelectTag />
-        <button type="button">Adicionar despesa</button>
+        <SelectMethod handleChange={ (e) => this.handleChange(e) } />
+        <SelectTag handleChange={ (e) => this.handleChange(e) } />
+        <button
+          type="button"
+          onClick={ () => this.handleClick() }
+        >
+          Adicionar despesa
+
+        </button>
       </form>
     );
   }
 }
+
+Form.propTypes = {
+  exp: PropTypes.func,
+}.isRequired;
+
+const mapStateToProps = (state) => ({
+  exp: state.currency.expenses,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  addEx: (expenses) => dispatch(addExpenses(expenses)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Form);
