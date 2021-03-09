@@ -10,6 +10,7 @@ class Cambio extends Component {
 
   inputTabela() {
     const { stateExpenses } = this.props;
+    console.log(stateExpenses)
     // if (typeof (stateExpenses) !== 'undefined') {
     //   const { arrFinal, arrDeValores } = stateAuxiliar;
     return (
@@ -36,6 +37,7 @@ class Cambio extends Component {
               <td>{objs.value}</td>
               <td>{objs.exchangeRates[objs.currency].name}</td>
               <td>{Number(objs.exchangeRates[objs.currency].ask).toFixed(2)}</td>
+              <td>{objs.value * (objs.exchangeRates[objs.currency].ask)}</td>
               <td>Real</td>
               <td>#Delet</td>
             </tr>
