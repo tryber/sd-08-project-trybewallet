@@ -9,51 +9,54 @@ class Cambio extends Component {
   }
 
   inputTabela() {
-    const { stateExpenses } = this.props;
-    console.log(stateExpenses)
-    // if (typeof (stateExpenses) !== 'undefined') {
-    //   const { arrFinal, arrDeValores } = stateAuxiliar;
+    const { stateExpenses, deleteExpense } = this.props;
     return (
-      <table>
+      <table className="table">
         <thead>
-          <tr>
-            <th>Descrição</th>
-            <th>Tag</th>
-            <th>Método de pagamento</th>
-            <th>Valor</th>
-            <th>Moeda</th>
-            <th>Câmbio utilizado</th>
-            <th>Valor convertido</th>
-            <th>Moeda de conversão</th>
-            <th>Editar/Excluir</th>
+          <tr className="table">
+            <th className="table">Descrição</th>
+            <th className="table">Tag</th>
+            <th className="table">Método de pagamento</th>
+            <th className="table">Valor</th>
+            <th className="table">Moeda</th>
+            <th className="table">Câmbio utilizado</th>
+            <th className="table">Valor convertido</th>
+            <th className="table">Moeda de conversão</th>
+            <th className="table">Editar/Excluir</th>
           </tr>
         </thead>
         <tbody>
           {stateExpenses.map((objs) => (
-            <tr key={ objs.id }>
-              <td>{objs.description}</td>
-              <td>{objs.tag}</td>
-              <td>{objs.method}</td>
-              <td>{objs.value}</td>
-              <td>{objs.exchangeRates[objs.currency].name}</td>
-              <td>{Number(objs.exchangeRates[objs.currency].ask).toFixed(2)}</td>
-              <td>{objs.value * (objs.exchangeRates[objs.currency].ask)}</td>
-              <td>Real</td>
-              <td>#Delet</td>
+            <tr className="table" key={ objs.id }>
+              <td className="table">{objs.description}</td>
+              <td className="table">{objs.tag}</td>
+              <td className="table">{objs.method}</td>
+              <td className="table">{objs.value}</td>
+              <td className="table">{objs.exchangeRates[objs.currency].name}</td>
+              <td className="table">
+                {Number(objs.exchangeRates[objs.currency].ask).toFixed(2)}
+              </td>
+              <td className="table">
+                {objs.value
+               * (objs.exchangeRates[objs.currency].ask)}
+              </td>
+              <td className="table">Real</td>
+              <td className="table">
+                <button
+                  type="button"
+                  onClick={ () => deleteExpense(objs.id) }
+                  data-testid="delete-btn"
+                >
+                  Excluir
+                </button>
+              </td>
             </tr>
           ))}
-          {/* {stateExpenses.map((moeda) => (moeda !== 'USDT') && (
-          (
-            <option key={ moeda } value={ moeda } data-testid={ moeda }>
-              {moeda}
-            </option>
-          )
-        ))} */}
+
         </tbody>
       </table>
     );
   }
-  // }
 
   render() {
     return (
@@ -66,40 +69,14 @@ class Cambio extends Component {
     );
   }
 }
-
-// export default Cambio;
-
-//   test('A tabela deve ser alimentada pelo estado da aplicação, que estará disponível na chave expenses que vem do reducer wallet.', () => {
-//     renderWithRouterAndStore(<Wallet />, '/carteira', initial);
-//     expect(screen.getAllByRole('cell', { name: 'Dez dólares' })[0]).toBeInTheDocument();
-//     expect(screen.getAllByRole('cell', { name: 'Lazer' })[0]).toBeInTheDocument();
-//     expect(screen.getAllByRole('cell', { name: 'Cartão de crédito' })[0]).toBeInTheDocument();
-//     expect(screen.getAllByRole('cell', { name: '10' })[0]).toBeInTheDocument();
-//     expect(screen.getAllByRole('cell', { name: 'Dólar Comercial' })[0]).toBeInTheDocument();
-//     expect(screen.getAllByRole('cell', { name: '5.58' })[0]).toBeInTheDocument();
-//     expect(screen.getAllByRole('cell', { name: '55.75' })[0]).toBeInTheDocument();
-//     expect(screen.getAllByRole('cell', { name: 'Real' })[0]).toBeInTheDocument();
-
-//     expect(screen.getAllByRole('cell', { name: 'Vinte euros' })[0]).toBeInTheDocument();
-//     expect(screen.getAllByRole('cell', { name: 'Trabalho' })[0]).toBeInTheDocument();
-//     expect(screen.getAllByRole('cell', { name: 'Dinheiro' })[0]).toBeInTheDocument();
-//     expect(screen.getAllByRole('cell', { name: '20' })[0]).toBeInTheDocument();
-//     expect(screen.getAllByRole('cell', { name: 'Euro' })[0]).toBeInTheDocument();
-//     expect(screen.getAllByRole('cell', { name: '6.57' })[0]).toBeInTheDocument();
-//     expect(screen.getAllByRole('cell', { name: '131.37' })[0]).toBeInTheDocument();
-//     expect(screen.getAllByRole('cell', { name: 'Real' })[1]).toBeInTheDocument();
-//   });
-// });
+const mapDispatchToProps = (dispatch) => ({
+  deleteExpense: (id) => dispatch({ type: 'DELETE_EXPENSES', id }),
+});
 const mapStateToProps = (state) => ({
-  // arrDeValores: state.wallet.auxiliar.arrDeValores,
-  // arrFinal: state.wallet.auxiliar.arrFinal,
   stateExpenses: state.wallet.expenses,
 });
-export default connect(mapStateToProps)(Cambio);
-// export default ListaDeGastos;
 Cambio.propTypes = {
-  // arrFinal: PropTypes.arrayOf(PropTypes.string).isRequired,
-  // arrDeValores: PropTypes.arrayOf(PropTypes.number).isRequired,
-  // stateAuxiliar: PropTypes.shape.isRequired,
   stateExpenses: PropTypes.shape.isRequired,
+  deleteExpense: PropTypes.func.isRequired,
 };
+export default connect(mapStateToProps, mapDispatchToProps)(Cambio);
