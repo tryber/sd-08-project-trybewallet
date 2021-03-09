@@ -1,1 +1,5 @@
-// Coloque aqui suas actions.
+import setEmail from './userActions';
+
+export default {
+  setEmail,
+};
