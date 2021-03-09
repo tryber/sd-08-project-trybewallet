@@ -1,6 +1,4 @@
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
-import { response } from '../tests/mockData';
-
 const INITIAL_STATE = {
   expenses: [],
   currencies: [],
