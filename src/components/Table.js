@@ -20,7 +20,7 @@ class Table extends React.Component {
   }
 
   render() {
-    const { expenses, deleteExpense, editExpense } = this.props;
+    const { expenses, deleteExpense } = this.props;
     return (
       <table>
         <thead className="table-header">
