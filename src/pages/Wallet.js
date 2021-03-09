@@ -164,7 +164,7 @@ class Wallet extends React.Component {
   }
 
   render() {
-    const { email, currencies, expenses } = this.props;
+    const { email, expenses, currenciesArray } = this.props;
     const { value,
       description, totalValue, method, tag, currency, btnName, editedId } = this.state;
     const expense = expenses.find((expens) => expens.id === editedId);
@@ -179,7 +179,7 @@ class Wallet extends React.Component {
             currency={ currency }
             method={ method }
             tag={ tag }
-            currencies={ currencies }
+            currencies={ currenciesArray }
             btnName={ btnName }
             onClick={ btnName === ADICIONAR_DESPESA ? this.addExpenseToWallet
               : () => this.editExpenseTable(expense.exchangeRates) }
@@ -199,6 +199,7 @@ Wallet.propTypes = {
   fetchCurrency: PropTypes.func.isRequired,
   addToWallet: PropTypes.func.isRequired,
   currencies: PropTypes.shape().isRequired,
+  currenciesArray: PropTypes.shape().isRequired,
   expenses: PropTypes.shape().isRequired,
   deleteExpense: PropTypes.func.isRequired,
   editExpense: PropTypes.func.isRequired,
@@ -206,7 +207,8 @@ Wallet.propTypes = {
 
 const mapStateToProps = (state) => ({
   email: state.user.email,
-  currencies: state.wallet.currencies,
+  currencies: state.wallet.currenciesAPI,
+  currenciesArray: state.wallet.currencies,
   expenses: state.wallet.expenses,
 });
 

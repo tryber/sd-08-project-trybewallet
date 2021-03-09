@@ -2,6 +2,7 @@
 const INITIAL_STATE = {
   expenses: [],
   currencies: [],
+  currenciesAPI: [],
 };
 
 const wallet = (state = INITIAL_STATE, action) => {
@@ -9,7 +10,11 @@ const wallet = (state = INITIAL_STATE, action) => {
   case 'REQUEST_API':
     return { ...state };
   case 'GET_CURRENCY_FROM_API':
-    return { ...state, currencies: action.payload.currencies };
+    return { ...state,
+      currenciesAPI: action.payload.currencies,
+      currencies: Object.keys(action.payload.currencies)
+        .filter((coin) => coin !== 'USDT'),
+    };
   case 'FAILED_REQUEST_TO_API':
     return { ...state, error: action.payload.error };
   case 'ADD_TO_WALLET':

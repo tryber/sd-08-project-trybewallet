@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import InputText from './InputText';
 import Select from './Select';
-import { objectToArray } from '../services';
 import Button from './Button';
 
 const metodos = ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'];
@@ -48,7 +47,7 @@ class RenderForm extends React.Component {
           name="currency"
           dataTest="currency-input"
           value={ currency }
-          options={ objectToArray(currencies) }
+          options={ currencies }
           onChange={ onChange }
         >
           Moeda:
