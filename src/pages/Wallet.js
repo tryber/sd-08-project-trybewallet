@@ -1,15 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { addWallet, deleteExpense, fetchCurrencies } from '../actions';
+import { addWallet,
+  deleteExpense as deleteExpenseAction,
+  editExpense as editExpenseAction,
+  fetchCurrencies,
+} from '../actions';
 import Header from '../components/Header';
-import Button from '../components/Button';
 import HeaderTable from '../components/HeaderTable';
 import { roundUp } from '../services';
 import RenderForms from '../components/RenderForms';
 
 const metodos = ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'];
 const categorias = ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
+const ADICIONAR_DESPESA = 'Adicionar despesa';
 
 class Wallet extends React.Component {
   constructor() {
@@ -22,12 +26,16 @@ class Wallet extends React.Component {
       tag: categorias[0],
       totalValue: 0,
       id: 0,
+      editedId: 0,
+      btnName: ADICIONAR_DESPESA,
     };
     this.handleChange = this.handleChange.bind(this);
     this.addExpenseToWallet = this.addExpenseToWallet.bind(this);
     this.resetFields = this.resetFields.bind(this);
     this.deleteExpenses = this.deleteExpenses.bind(this);
     this.totalValueUpDate = this.totalValueUpDate.bind(this);
+    this.editExpenses = this.editExpenses.bind(this);
+    this.editExpenseTable = this.editExpenseTable.bind(this);
   }
 
   componentDidMount() {
@@ -42,6 +50,7 @@ class Wallet extends React.Component {
       totalValue: expenses
         .reduce((acc, cur) => acc + (cur.value * cur.exchangeRates[cur.currency].ask), 0),
     });
+    console.log('totalvalueupdate');
   }
 
   handleChange({ target }) {
@@ -58,6 +67,7 @@ class Wallet extends React.Component {
       currency: 'USD',
       method: 'Dinheiro',
       tag: 'Alimentação',
+      btnName: ADICIONAR_DESPESA,
     });
   }
 
@@ -78,11 +88,41 @@ class Wallet extends React.Component {
 
   deleteExpenses(index, value) {
     const { totalValue } = this.state;
-    const { deleteExpenseAction } = this.props;
-    deleteExpenseAction(index);
+    const { deleteExpense } = this.props;
+    deleteExpense(index);
     this.setState({
       totalValue: totalValue - value,
     });
+  }
+
+  editExpenses(id) {
+    const { expenses } = this.props;
+    const expense = expenses.find((expens) => expens.id === id);
+    this.setState({
+      editedId: expense.id,
+      value: expense.value,
+      description: expense.description,
+      currency: expense.currency,
+      method: expense.method,
+      tag: expense.tag,
+      btnName: 'Editar Despesa',
+    });
+  }
+
+  async editExpenseTable(currencies) {
+    const { value,
+      description, method, tag, currency, editedId } = this.state;
+    const { editExpense } = this.props;
+    const edittedExpense = { id: editedId,
+      value,
+      description,
+      currency,
+      method,
+      tag,
+      exchangeRates: currencies };
+    await editExpense(editedId, edittedExpense);
+    this.totalValueUpDate();
+    this.resetFields();
   }
 
   walletTable() {
@@ -105,7 +145,7 @@ class Wallet extends React.Component {
             <button
               type="button"
               data-testid="edit-btn"
-              onClick={ this.edit }
+              onClick={ () => this.editExpenses(expense.id) }
             >
               Editar
             </button>
@@ -124,8 +164,10 @@ class Wallet extends React.Component {
   }
 
   render() {
-    const { email, currencies } = this.props;
-    const { value, description, totalValue, method, tag, currency } = this.state;
+    const { email, currencies, expenses } = this.props;
+    const { value,
+      description, totalValue, method, tag, currency, btnName, editedId } = this.state;
+    const expense = expenses.find((expens) => expens.id === editedId);
     return (
       <main>
         <Header email={ email } totalValue={ totalValue } />
@@ -138,10 +180,10 @@ class Wallet extends React.Component {
             method={ method }
             tag={ tag }
             currencies={ currencies }
+            btnName={ btnName }
+            onClick={ btnName === ADICIONAR_DESPESA ? this.addExpenseToWallet
+              : () => this.editExpenseTable(expense.exchangeRates) }
           />
-          <Button onClick={ this.addExpenseToWallet }>
-            Adicionar despesa
-          </Button>
           <table>
             <HeaderTable />
             {this.walletTable()}
@@ -158,7 +200,8 @@ Wallet.propTypes = {
   addToWallet: PropTypes.func.isRequired,
   currencies: PropTypes.shape().isRequired,
   expenses: PropTypes.shape().isRequired,
-  deleteExpenseAction: PropTypes.func.isRequired,
+  deleteExpense: PropTypes.func.isRequired,
+  editExpense: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -170,7 +213,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   fetchCurrency: () => dispatch(fetchCurrencies()),
   addToWallet: (object) => dispatch(addWallet(object)),
-  deleteExpenseAction: (position) => dispatch(deleteExpense(position)),
+  deleteExpense: (position) => dispatch(deleteExpenseAction(position)),
+  editExpense: (id, exp) => dispatch(editExpenseAction(id, exp)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Wallet);

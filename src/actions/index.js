@@ -46,10 +46,10 @@ export const deleteExpense = (id) => ({
   },
 });
 
-export const editExpense = (index, exp) => ({
+export const editExpense = (id, exp) => ({
   type: 'EDIT_EXPENSE',
   payload: {
-    index,
+    id,
     exp,
   },
 });

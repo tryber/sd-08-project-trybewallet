@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import InputText from './InputText';
 import Select from './Select';
 import { objectToArray } from '../services';
+import Button from './Button';
 
 const metodos = ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'];
 const categorias = ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
@@ -12,6 +13,7 @@ class RenderForm extends React.Component {
     super();
     this.renderInputs = this.renderInputs.bind(this);
     this.renderSelects = this.renderSelects.bind(this);
+    this.renderButton = this.renderButton.bind(this);
   }
 
   renderInputs() {
@@ -67,9 +69,16 @@ class RenderForm extends React.Component {
           options={ categorias }
           onChange={ onChange }
         >
-          Método de Pagamento:
+          Categoria:
         </Select>
       </>
+    );
+  }
+
+  renderButton() {
+    const { btnName, onClick } = this.props;
+    return (
+      <Button onClick={ onClick }>{btnName}</Button>
     );
   }
 
@@ -78,6 +87,7 @@ class RenderForm extends React.Component {
       <form>
         {this.renderInputs()}
         {this.renderSelects()}
+        {this.renderButton()}
       </form>
     );
   }
@@ -86,11 +96,17 @@ class RenderForm extends React.Component {
 RenderForm.propTypes = {
   value: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
+  onChange: PropTypes.func,
   currency: PropTypes.string.isRequired,
   method: PropTypes.arrayOf.isRequired,
   tag: PropTypes.arrayOf.isRequired,
   currencies: PropTypes.shape().isRequired,
+  btnName: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
+
+RenderForm.defaultProps = {
+  onChange: '',
 };
 
 export default RenderForm;

@@ -30,7 +30,8 @@ const wallet = (state = INITIAL_STATE, action) => {
       expenses: [...state.expenses.filter((exp) => exp.id !== action.payload.id)] };
   case 'EDIT_EXPENSE':
     return { ...state,
-      expenses: [...state.expenses.splice(action.payload.index, action.payload.exp)] };
+      expenses: state.expenses.map((expense) => (expense.id === action.payload.id
+        ? action.payload.exp : expense)) };
   default:
     return state;
   }
