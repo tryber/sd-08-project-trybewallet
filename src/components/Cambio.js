@@ -73,7 +73,7 @@ class Cambio extends Component {
                   onClick={ () => editExpense(objs.id) }
                   data-testid="edit-btn"
                 >
-                  Editar despesa
+                  Editar
                 </button>
               </td>
             </tr>
