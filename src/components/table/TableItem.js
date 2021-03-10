@@ -18,7 +18,14 @@ class TableItem extends Component {
         <td>{(ask * parseInt(value, 10).toFixed(2))}</td>
         <td>{name}</td>
         <td>
-          <button type="button" onClick={ () => handleClick(expense) }>Excluir</button>
+          <button
+            data-testid="delete-btn"
+            type="button"
+            onClick={ () => handleClick(expense) }
+          >
+            Excluir
+
+          </button>
         </td>
       </tr>
     );
