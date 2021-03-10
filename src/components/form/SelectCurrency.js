@@ -18,7 +18,6 @@ class SelectCurrency extends Component {
   render() {
     const { handleChange } = this.props;
     const { currList } = this.props;
-    // console.log(currList);
     return (
       <select
         data-testid="currency-input"
@@ -27,7 +26,7 @@ class SelectCurrency extends Component {
       >
         {
           currList.length > 0 && currList.map(
-            (i) => <option data-testid="USD" key={ `code-${i}` }>{i}</option>,
+            (i) => <option data-testid={ i } key={ `code-${i}` }>{i}</option>,
           )
         }
       </select>
@@ -42,7 +41,7 @@ SelectCurrency.propTypes = {
 }.isRequired;
 
 const mapStateToProps = (state) => ({
-  currList: state.currency.currencies,
+  currList: state.wallet.currencies,
 });
 
 const mapDispatchToProps = (dispatch) => ({

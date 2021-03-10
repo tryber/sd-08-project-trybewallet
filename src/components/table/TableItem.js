@@ -5,9 +5,9 @@ import PropTypes from 'prop-types';
 class TableItem extends Component {
   render() {
     const { expense, handleClick } = this.props;
-    const exchangeRates = expense.exchangeRates[expense.currency];
-    const atualizedCurr = exchangeRates.ask;
-    const currencyName = exchangeRates.name;
+    const exRates = expense.exchangeRates[expense.currency];
+    const atualizedCurr = exRates.ask;
+    const currencyName = exRates.name;
     const convertValue = expense.value * atualizedCurr;
     return (
       <tr>

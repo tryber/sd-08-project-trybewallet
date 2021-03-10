@@ -14,6 +14,7 @@ class TableExpenses extends Component {
 
   render() {
     const { expenses } = this.props;
+    console.log(expenses);
     return (
       <table border="1px">
         <thead>
@@ -38,7 +39,7 @@ TableExpenses.propTypes = {
 }.isRequired;
 
 const mapStateToProps = (state) => ({
-  expenses: state.currency.expenses,
+  expenses: state.wallet.expenses,
 });
 
 const mapDispatchToProps = (dispatch) => ({

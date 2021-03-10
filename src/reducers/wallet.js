@@ -5,7 +5,7 @@ const initialState = {
   expenses: [],
 };
 
-function currency(state = initialState, action) {
+function wallet(state = initialState, action) {
   switch (action.type) {
   case REQUEST_CURRENCY:
     return {
@@ -19,6 +19,7 @@ function currency(state = initialState, action) {
     };
   case DELETE_EXPENSE:
     return {
+      ...state,
       expenses: state.expenses.filter((exp) => exp !== action.payload),
     };
   default:
@@ -26,4 +27,4 @@ function currency(state = initialState, action) {
   }
 }
 
-export default currency;
+export default wallet;

@@ -17,12 +17,13 @@ const INITIAL_STATE = {
 };
 
 // A Vivi me ensinou
-const getId = (arr) => {
-  if (arr.length > 0) {
-    return arr[arr.length - 1].id + 1;
-  }
-  return 0;
-};
+// const getId = (arr) => {
+//   if (arr.length > 0) {
+//     return arr[arr.length - 1].id + 1;
+//   }
+//   return 0;
+// };
+// expenses.id = getId(exp);
 
 class Form extends Component {
   constructor(props) {
@@ -34,7 +35,6 @@ class Form extends Component {
   }
 
   handleChange({ name, value }) {
-    // console.log();
     this.setState({
       [name]: value,
     });
@@ -44,19 +44,20 @@ class Form extends Component {
     const { addEx, exp } = this.props;
     const { value, description, currency, method, tag } = this.state;
     const exchangeRates = await fetchCurrency();
-    // console.log(exchangeRates);
     const expenses = {
       value, description, currency, method, tag, exchangeRates,
     };
-    expenses.id = getId(exp);
-    // expenses.id = exp.length;
+    expenses.id = exp.length;
     addEx(expenses);
+    this.setState({
+      value: 0,
+    });
   }
 
   render() {
     const { value, description } = this.state;
-    const { exp } = this.props;
-    console.log(exp);
+    // const { exp } = this.props;
+    // console.log(exp);
     return (
       <form>
         <label htmlFor="value">
@@ -99,7 +100,7 @@ Form.propTypes = {
 }.isRequired;
 
 const mapStateToProps = (state) => ({
-  exp: state.currency.expenses,
+  exp: state.wallet.expenses,
 });
 
 const mapDispatchToProps = (dispatch) => ({
