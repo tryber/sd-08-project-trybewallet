@@ -20,9 +20,8 @@ class Header extends Component {
               expenses.length <= 0 ? 0 : expenses
                 .reduce(
                   (acc, cur) => acc
-                  + parseFloat(cur.value * cur.exchangeRates[cur.currency].ask)
-                    .toFixed(2), 0,
-                )
+                  + cur.value * (+cur.exchangeRates[cur.currency].ask), 0,
+                ).toFixed(2)
             }
           </p>
         </div>
