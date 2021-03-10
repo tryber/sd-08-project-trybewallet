@@ -6,7 +6,7 @@ class TableItem extends Component {
   render() {
     const { expense, handleClick } = this.props;
     const exRates = expense.exchangeRates[expense.currency];
-    const atualizedCurr = exRates.ask;
+    const atualizedCurr = parseFloat(exRates.ask).toFixed(2);
     const currencyName = exRates.name;
     const convertValue = expense.value * atualizedCurr;
     return (

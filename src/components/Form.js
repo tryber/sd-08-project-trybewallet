@@ -56,8 +56,8 @@ class Form extends Component {
 
   render() {
     const { value, description } = this.state;
-    // const { exp } = this.props;
-    // console.log(exp);
+    const { exp } = this.props;
+    console.log(exp);
     return (
       <form>
         <label htmlFor="value">
