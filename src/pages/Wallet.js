@@ -22,11 +22,11 @@ class Wallet extends Component {
         <br />
         <br />
         <div className="child4">
-          <AddGastos />
+          { isEditing ? <EditGastos /> : <AddGastos /> }
           <br />
           <br />
           <div className="child3">
-            { isEditing ? <EditGastos /> : <Cambio /> }
+            <Cambio />
           </div>
         </div>
       </div>

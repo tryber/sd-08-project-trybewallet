@@ -46,6 +46,16 @@ code {
   background-color: rgba(33, 184, 189, 0.2);
 }
 
+.editForm {
+background-image: url('./madeira\ vermelha.png');
+display: flex;
+align-items: center;
+flex-direction: column;
+width: 350px;
+height: 340px;
+margin-right: 80px;
+}
+
 .text {
   width: 85%;
 }
@@ -63,6 +73,7 @@ code {
   height: 0;
   width: 100vw;
 }
+
 .notFound {
   background-image: url("https://zlionbrasil.com.br/img/icons/404.png");
   background-size: cover;
