@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import Redirect from 'react-dom';
 import { Link } from 'react-router-dom';
 import { login } from '../actions/index';
 
@@ -12,6 +13,7 @@ class LoginComponents extends React.Component {
       email: '',
       isEmailValid: false,
       isPasswordValid: false,
+      redirect: false,
     };
 
     this.handleEmail = this.handleEmail.bind(this);
@@ -30,11 +32,13 @@ class LoginComponents extends React.Component {
     const { email } = this.state;
     const { addEmail } = this.props;
     addEmail(email);
+    this.setState({ redirect: true });
   }
 
   render() {
-    const { email, isPasswordValid, isEmailValid } = this.state;
+    const { email, isPasswordValid, isEmailValid, redirect } = this.state;
     const SIX = 6;
+    if (redirect) return <Redirect to="/carteira" />;
     return (
       <div>
         <input
