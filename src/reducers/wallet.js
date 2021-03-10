@@ -20,6 +20,17 @@ export default function user(state = INITIAL_STATE, action) {
     return { ...state, total: action.total };
   case 'EDIT_EXPENSES':
     return { ...state, isEditing: true, IDediting: action.id };
+  case 'SAVE_EDIT':
+    return { ...state,
+      isEditing: false,
+      IDediting: '',
+      expenses:
+  state.expenses.map((obj) => {
+    if (obj.id === action.newObj.id) {
+      return action.newObj;
+    }
+    return obj;
+  }) };
   case 'DELETE_EXPENSES':
     return {
       ...state,
