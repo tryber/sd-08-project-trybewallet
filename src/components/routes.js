@@ -1,5 +1,3 @@
-/* eslint-disable import/no-named-as-default */
-/* eslint-disable import/no-named-as-default-member */
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Login from '../pages/Login';

@@ -20,20 +20,6 @@ class Cambio extends Component {
     changeTotal(total);
   }
 
-  editExpenses() { console.log('i'); }
-  //   const { expenses } = this.props;
-  //   const expense = expenses.find((expens) => expens.id === id);
-  //   this.setState({
-  //     editedId: expense.id,
-  //     value: expense.value,
-  //     description: expense.description,
-  //     currency: expense.currency,
-  //     method: expense.method,
-  //     tag: expense.tag,
-  //     btnName: 'Editar Despesa',
-  //   });
-  // }
-
   inputTabela() {
     const { stateExpenses, deleteExpense, editExpense } = this.props;
     const arrTh = ['Descrição', 'Tag', 'Método de pagamento', 'Valor', 'Moeda',
