@@ -1,15 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { delExpence } from '../actions';
 
 class Table extends React.Component {
-  convert(value, aks) {
-    const convert = Number(value) * Number(aks);
+  convert(value, ask) {
+    const convert = Number(value) * Number(ask);
     return convert.toFixed(2);
   }
 
   cell() {
-    const { expenses } = this.props;
+    const { expenses, delExpenceFunction } = this.props;
     return (
       expenses.map((expense, index) => (
         <tr key={ index }>
@@ -24,15 +25,23 @@ class Table extends React.Component {
               expense.exchangeRates[expense.currency].ask)}
           </td>
           <td>Real</td>
-          <td>A/E</td>
+          <td>
+            <button
+              onClick={ () => delExpenceFunction(expense.id) }
+              id={ expense.id }
+              data-testid="delete-btn"
+              type="button"
+            >
+              Edit
+            </button>
+            <button type="button">Del</button>
+          </td>
         </tr>
       ))
     );
   }
 
   render() {
-    const { expenses } = this.props;
-    console.log(expenses);
     return (
       <table>
         <tr>
@@ -53,12 +62,16 @@ class Table extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  userData: state.user,
   expenses: state.wallet.expenses,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  delExpenceFunction: (id) => dispatch(delExpence(id)),
 });
 
 Table.propTypes = {
   expenses: PropTypes.node.isRequired,
+  delExpenceFunction: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps)(Table);
+export default connect(mapStateToProps, mapDispatchToProps)(Table);

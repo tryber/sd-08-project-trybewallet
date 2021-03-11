@@ -1,6 +1,6 @@
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
 
-import { REQUEST_QUOTATION, QUOTATION_DATA, EXPENCE_DATA } from '../actions';
+import { REQUEST_QUOTATION, QUOTATION_DATA, EXPENCE_DATA, DEL_EXPENCE } from '../actions';
 
 const INITIAL_STATE = {
   totalExpenses: 0,
@@ -18,6 +18,9 @@ function wallet(state = INITIAL_STATE, { type, payload }) {
   case EXPENCE_DATA:
     return { ...state,
       expenses: state.expenses.concat(payload.expenses) };
+  case DEL_EXPENCE:
+    return { expenses: state.expenses
+      .filter((eachExpence) => eachExpence.id !== payload.id) };
   default:
     return state;
   }

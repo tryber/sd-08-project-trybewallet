@@ -5,6 +5,7 @@ export const USER_LOGIN = 'USER_LOGIN';
 export const REQUEST_QUOTATION = 'REQUEST_QUOTATION';
 export const QUOTATION_DATA = 'QUOTATION_DATA';
 export const EXPENCE_DATA = 'EXPENCE_DATA';
+export const DEL_EXPENCE = 'DEL_EXPENCE';
 
 export const userLogin = (user) => ({
   type: USER_LOGIN,
@@ -26,6 +27,11 @@ export const quotationData = (data) => ({
 export const expenceData = (expencesData) => ({
   type: EXPENCE_DATA,
   payload: { expenses: [expencesData] },
+});
+
+export const delExpence = (id) => ({
+  type: DEL_EXPENCE,
+  payload: { id },
 });
 
 export const fetchGetQuotation = () => async (dispatch) => {
