@@ -11,11 +11,11 @@ class Expenses extends Component {
     super();
     this.state = {
       id: 0,
-      value: '',
+      value: 0,
       description: '',
-      currency: '',
-      method: '',
-      tag: '',
+      currency: 'USD',
+      method: 'Dinheiro',
+      tag: 'Alimentação',
       exchangeRates: {},
     };
 
@@ -154,8 +154,12 @@ const mapDispatchToProps = (dispatch) => ({
   sendInput: (value) => dispatch(addExpense(value)),
 });
 
+const mapStateToProps = (store) => ({
+  fetchCurrencies: store.wallet.currencies,
+});
+
 Expenses.propTypes = {
   sendInput: PropTypes.func.isRequired,
 };
 
-export default connect(null, mapDispatchToProps)(Expenses);
+export default connect(mapStateToProps, mapDispatchToProps)(Expenses);

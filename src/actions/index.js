@@ -1,5 +1,6 @@
 export const LOGIN_USER = 'LOGIN_USER';
 export const ADD_EXPENSE = 'ADD_EXPENSE';
+export const FETCH_CURRENCIES = 'FETCH_CURRENCIES';
 
 export const login = {
   loginUser: (email) => (
@@ -10,6 +11,11 @@ export const login = {
 export const addExpense = (payload) => (
   { type: ADD_EXPENSE, payload }
 );
+
+export const fetchCurrencies = (currencie) => ({
+  type: FETCH_CURRENCIES,
+  payload: currencie,
+});
 
 export async function requestCurrencies() {
   try {

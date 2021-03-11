@@ -55,4 +55,4 @@ Header.propTypes = {
   expenses: PropTypes.arrayOf(Object).isRequired,
 };
 
-export default connect(mapStateToProps, null)(Header);
+export default connect(mapStateToProps)(Header);
