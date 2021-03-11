@@ -1,21 +1,24 @@
-import React from 'react';
+// o projeto todo foi feito acompanhando um plantão guiado pelo colega Paulo Simões
+
+import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import Login from './pages/Login';
 import Wallet from './pages/Wallet';
 
-import './App.css';
+import './styles/global.css';
 
-function App() {
-  return (
-    <div className="App">
-      <h1>Trybe Wallet</h1>
-      <Switch>
-        <Route path="/carteira" component={ Wallet } />
-        <Route path="/" component={ Login } />
-      </Switch>
-    </div>
-  );
+class App extends Component {
+  render() {
+    return (
+      <div>
+        <Switch>
+          <Route path="/carteira" component={ Wallet } />
+          <Route path="/" component={ Login } />
+        </Switch>
+      </div>
+    );
+  }
 }
 
 export default App;

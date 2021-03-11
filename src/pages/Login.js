@@ -1,4 +1,5 @@
 import React from 'react';
+
 import LoginForm from '../components/LoginForm';
 
 class Login extends React.Component {
@@ -6,7 +7,8 @@ class Login extends React.Component {
     return (
       <div>
         <LoginForm />
-      </div>);
+      </div>
+    );
   }
 }
 
