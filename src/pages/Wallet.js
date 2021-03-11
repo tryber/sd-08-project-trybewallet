@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { responseCurrencies, newExpenseSave as newExpenseAdd } from '../actions';
-
+import { responseCurrencies,
+  newExpenseSave as newExpenseAdd,
+  removeExpense as deleteExpense } from '../actions';
+import Header from './Header';
 import fetchApiCurrencies from '../services';
 
 const INITIAL_STATE = {
@@ -20,7 +22,6 @@ class Wallet extends Component {
     super();
     this.state = {
       ...INITIAL_STATE,
-
     };
     this.onChangeInputs = this.onChangeInputs.bind(this);
     this.submitExpense = this.submitExpense.bind(this);
@@ -39,9 +40,7 @@ class Wallet extends Component {
     const { value, description, currency, method, tag, id, total } = this.state;
     const { newExpenseSave } = this.props;
     const exchangeRates = await fetchApiCurrencies();
-
-    const newExpense = {
-      id,
+    const newExpense = { id,
       value,
       description,
       currency,
@@ -56,7 +55,7 @@ class Wallet extends Component {
       const sum = (parseFloat(value) * (exchangeRates[currency].ask)) + parseFloat(total);
       return sum.toFixed(2);
     }
-    console.log(exchangeRates[currency].ask);
+
     this.setState({
       ...INITIAL_STATE,
       id: id + 1,
@@ -64,34 +63,17 @@ class Wallet extends Component {
     });
   }
 
-  renderHeader() {
-    const { total } = this.state;
-    const { email } = this.props;
-    return (
-
-      <header>
-        <p data-testid="email-field">
-          {email}
-        </p>
-        <p data-testid="total-field">{total}</p>
-        <p data-testid="header-currency-field">BRL</p>
-      </header>
-
-    );
-  }
-
   renderValue() {
     const { value } = this.state;
     return (
       <div>
-        Valor
+        R$ Valor
         <input
           value={ value }
           type="number"
           data-testid="value-input"
           onChange={ (event) => this.onChangeInputs('value', event.target.value) }
         />
-
       </div>
     );
   }
@@ -99,15 +81,13 @@ class Wallet extends Component {
   renderDescrip() {
     return (
       <div>
-        Descrição
+        Descrição da despesa
         <input
           defaultValue=""
           data-testid="description-input"
           onChange={ (event) => this.onChangeInputs('description', event.target.value) }
         />
-
       </div>
-
     );
   }
 
@@ -116,9 +96,7 @@ class Wallet extends Component {
     const dropDownCurrencies = Object.keys(currencies || {});
 
     return (
-
       <div>
-
         Moeda/Cambio
         <select
           data-testid="currency-input"
@@ -131,55 +109,120 @@ class Wallet extends Component {
             );
           })}
         </select>
+      </div>
+    );
+  }
+
+  renderMethod() {
+    return (
+      <div>
+
+        Forma de pagamento
+        <select
+          data-testid="method-input"
+          onChange={ (event) => this.onChangeInputs('method', event.target.value) }
+        >
+          <option value="Dinheiro">Dinheiro</option>
+          <option value="Cartão de crédito">Cartão de crédito</option>
+          <option value="Cartão de débito">Cartão de débito</option>
+        </select>
+      </div>
+    );
+  }
+
+  rendertag() {
+    return (
+      <div>
+        Categoria
+        <select
+          data-testid="tag-input"
+          onChange={ (event) => this.onChangeInputs('tag', event.target.value) }
+        >
+          <option>Alimentação</option>
+          <option>Lazer</option>
+          <option>Trabalho</option>
+          <option>Transporte</option>
+          <option>Saúde</option>
+        </select>
 
       </div>
+    );
+  }
 
+  renderBtt() {
+    return (
+      <div>
+        <button
+          type="button"
+          onClick={ this.submitExpense }
+        >
+          Adicionar despesa
+        </button>
+      </div>
+    );
+  }
+
+  renderTitleHeader() {
+    return (
+      <tr>
+        <td>Descrição</td>
+        <td>Tag</td>
+        <td>Método de pagamento</td>
+        <td>Valor</td>
+        <td>Moeda</td>
+        <td>Câmbio utilizado</td>
+        <td>Valor convertido</td>
+        <td>Moeda de conversão</td>
+        <td>Editar/Excluir</td>
+      </tr>
     );
   }
 
   render() {
+    const { expenses } = this.props;
+    const { removeExpense } = this.props;
     return (
       <span>
-        { this.renderHeader()}
-        { this.renderValue()}
-        { this.renderDescrip()}
-        { this.renderCambio()}
-        <div>
-
-          Método de pagamento
-          <select
-            data-testid="method-input"
-            onChange={ (event) => this.onChangeInputs('method', event.target.value) }
-          >
-            <option value="Dinheiro">Dinheiro</option>
-            <option value="Cartão de crédito">Cartão de crédito</option>
-            <option value="Cartão de débito">Cartão de débito</option>
-          </select>
-          Categoria
-          <select
-            data-testid="tag-input"
-            onChange={ (event) => this.onChangeInputs('tag', event.target.value) }
-          >
-            <option>Alimentação</option>
-            <option>Lazer</option>
-            <option>Trabalho</option>
-            <option>Transporte</option>
-            <option>Saúde</option>
-          </select>
-          <button
-            type="button"
-            onClick={ this.submitExpense }
-          >
-            Adicionar despesa
-
-          </button>
-        </div>
+        <tr>
+          <td><Header /></td>
+          <td>{ this.renderValue()}</td>
+          <td>{ this.renderDescrip()}</td>
+          <td>{ this.renderCambio()}</td>
+          <td>{ this.renderMethod()}</td>
+          <td>{ this.rendertag()}</td>
+          <td>{ this.renderBtt()}</td>
+        </tr>
+        {this.renderTitleHeader()}
+        {expenses.map((expense, index) => {
+          const { description, tag, method, value, currency, exchangeRates } = expense;
+          const { name, ask } = exchangeRates[currency];
+          return (
+            <tr key={ index }>
+              <td>{description}</td>
+              <td>{tag}</td>
+              <td>{method}</td>
+              <td>{value}</td>
+              <td>{name}</td>
+              <td>{parseFloat(ask).toFixed(2)}</td>
+              <td>{(ask * value).toFixed(2)}</td>
+              <td>Real</td>
+              <td>
+                <button
+                  type="button"
+                  data-testid="delete-btn"
+                  onClick={ () => removeExpense(expense) }
+                >
+                  Excluir
+                </button>
+              </td>
+            </tr>
+          );
+        })}
       </span>);
   }
 }
 
 const mapStateToProps = (state) => ({
-
   email: state.user.email,
   currencies: state.wallet.currencies[0],
   expenses: state.wallet.expenses,
@@ -188,18 +231,18 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   currenciesRequest: () => dispatch(responseCurrencies()),
   newExpenseSave: (expense) => dispatch(newExpenseAdd(expense)),
-
+  removeExpense: (expense) => dispatch(deleteExpense(expense)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Wallet);
 
 Wallet.propTypes = {
-  email: PropTypes.string.isRequired,
   currencies: PropTypes.objectOf(PropTypes.object),
   newExpenseSave: PropTypes.func.isRequired,
+  removeExpense: PropTypes.func.isRequired,
   currenciesRequest: PropTypes.func.isRequired,
+  expenses: PropTypes.func.isRequired,
 };
 
 Wallet.defaultProps = {
-
   currencies: {},
 };

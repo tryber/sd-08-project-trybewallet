@@ -1,5 +1,5 @@
 import { SAVE_EMAIL, REQUEST_TRY,
-  REQUEST_SUCCESS, REQUEST_FAIL,
+  REQUEST_SUCCESS, REQUEST_FAIL, REMOVE_EXPENSE,
   SAVE_EXPENSE } from '../const';
 import fetchApiCurrencies from '../services';
 
@@ -37,4 +37,9 @@ export const responseCurrencies = () => async (dispatch) => {
 export const newExpenseSave = (expenses) => ({
   type: SAVE_EXPENSE,
   expenses,
+});
+
+export const removeExpense = (expense) => ({
+  type: REMOVE_EXPENSE,
+  expense,
 });

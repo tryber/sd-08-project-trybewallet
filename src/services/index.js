@@ -1,7 +1,7 @@
-import { APIURL } from '../const';
+import { API_URL } from '../const';
 
 const fetchApiCurrencies = () => (
-  fetch(APIURL)
+  fetch(API_URL)
     .then((response) => (
       response
         .json()
