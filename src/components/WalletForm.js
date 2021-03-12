@@ -181,7 +181,7 @@ const mapDispatchToProps = (dispatch) => ({
 WalletForm.propTypes = {
   currencies: PropTypes.arrayOf(PropTypes.string),
   isFetching: PropTypes.bool,
-  requestCurrencies: PropTypes.func.isRequired,
+  // requestCurrencies: PropTypes.func.isRequired,
   addExpense: PropTypes.func.isRequired,
   // expenses: PropTypes.arrayOf(PropTypes.object),
   // expenseId: PropTypes.number.isRequired,
