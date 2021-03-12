@@ -7,7 +7,7 @@ const INITIAL_STATE = {
   password: '',
 };
 
-export default function state(state = INITIAL_STATE, action) {
+export default function reducer(state = INITIAL_STATE, action) {
   switch (action.type) {
   case SET_EMAIL:
     return ({
