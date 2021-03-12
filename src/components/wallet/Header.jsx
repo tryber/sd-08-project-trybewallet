@@ -6,7 +6,10 @@ class Header extends Component {
   render() {
     const { email, expenses } = this.props;
     return (
-      <header className="bg-info d-flex justify-content-between p-5 shadow">
+      <header
+        className="bg-info d-flex
+      justify-content-between p-5 shadow border-bottom border-light"
+      >
         <div className="border-bottom border-light my-auto p-3">
           <span
             data-testid="header-currency-field"

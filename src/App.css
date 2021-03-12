@@ -19,6 +19,20 @@
   overflow: hidden;
 }
 
+.overflowX {
+  overflow-x: auto;
+}
+
+.entireScreen {
+  width: auto;
+}
+
+@media screen and (max-width: 800px) {
+  .entireScreen {
+    width: fit-content;
+  }
+}
+
 .box-radius {
   border-radius: 10px;
 }

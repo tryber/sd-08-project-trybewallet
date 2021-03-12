@@ -35,11 +35,11 @@ class Expenses extends Component {
     const { id } = this.state;
     const { sendInput } = this.props;
     sendInput(this.state);
-    this.setState({ id: id + 1, value: '' });
+    this.setState({ id: id + 1, value: '', description: '' });
   }
 
   labels() {
-    const { value } = this.state;
+    const { value, description } = this.state;
     return (
       <div
         className="
@@ -53,8 +53,8 @@ class Expenses extends Component {
         border-light"
       >
         <label htmlFor="inputValue">
-          Valor:
           <input
+            placeholder="valor"
             className="form-control"
             type="number"
             data-testid="value-input"
@@ -65,14 +65,15 @@ class Expenses extends Component {
           />
         </label>
         <label htmlFor="inputDescrition">
-          Descrição
           <input
+            placeholder="descrição"
             className="form-control"
             type="text"
             data-testid="description-input"
             id="inputDescrition"
             name="description"
             onChange={ this.handleChange }
+            value={ description }
           />
         </label>
       </div>
@@ -98,54 +99,52 @@ class Expenses extends Component {
     const { exchangeRates } = this.state;
     const currencies = Object.keys(exchangeRates).filter((item) => item !== 'USDT');
     return (
-      <>
+      <div className="d-flex m-5">
         <select
-          className="p-2"
+          className="p-2 m-3"
           name="tag"
           id="tagsSelect"
           data-testid="tag-input"
           onChange={ this.handleChange }
         >
-          <option selected disabled>Tag</option>
           {
             TAGS
               .map((item) => <option key={ item }>{ item }</option>)
           }
         </select>
         <select
-          className="p-2"
+          className="p-2 m-3"
           name="method"
           id="methodSelect"
           data-testid="method-input"
           onChange={ this.handleChange }
         >
-          <option selected disabled>Método</option>
           {
             METHOD
               .map((item) => <option key={ item }>{ item }</option>)
           }
         </select>
         <select
-          className="p-2"
+          className="p-2 m-3"
           name="currency"
           id="currenciesSelect"
           data-testid="currency-input"
           onChange={ this.handleChange }
         >
-          <option selected disabled>Moeda</option>
           {
             currencies
               .map((item) => <option key={ item } data-testid={ item }>{ item }</option>)
           }
         </select>
-      </>
+      </div>
     );
   }
 
   render() {
     return (
       <form
-        className="bg-secondary p-5  d-flex justify-content-around align-items-center"
+        className="
+        bg-secondary p-5  d-flex flex-column justify-content-around align-items-center"
       >
         {this.labels()}
         {this.selects()}
