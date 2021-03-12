@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { removeExpense } from '../../actions';
 
 class Table extends React.Component {
   thead() {
@@ -20,7 +21,7 @@ class Table extends React.Component {
   }
 
   render() {
-    const { expense } = this.props;
+    const { expense, rmExpense } = this.props;
     return (
       <table className="table table-hover overflowX">
         { this.thead() }
@@ -51,6 +52,9 @@ class Table extends React.Component {
                     type="button"
                     data-testid="delete-btn"
                     className="btn btn-warning"
+                    onClick={
+                      () => rmExpense(item.id)
+                    }
                   >
                     Excluir
                   </button>
@@ -63,12 +67,17 @@ class Table extends React.Component {
   }
 }
 
+const mapDispatchToProps = (dispatch) => ({
+  rmExpense: (id) => dispatch(removeExpense(id)),
+});
+
 const mapStateToProps = (store) => ({
   expense: store.wallet.expenses,
 });
 
 Table.propTypes = {
   expense: PropTypes.arrayOf(Object).isRequired,
+  rmExpense: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps)(Table);
+export default connect(mapStateToProps, mapDispatchToProps)(Table);
