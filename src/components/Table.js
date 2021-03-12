@@ -70,8 +70,7 @@ class Table extends React.Component {
                 >
                   Excluir
                 </button>
-              </tr>
-            );
+              </tr>);
           })}
         </tbody>
 

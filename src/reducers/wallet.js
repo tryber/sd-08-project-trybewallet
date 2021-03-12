@@ -21,13 +21,11 @@ const wallet = (
   case REQUEST_API:
     return { ...state, isFetching: payload.isFetching };
   case REQUEST_API_SUCCESS:
-    return { ...state, currencies: payload.data, isFetching: payload.isFetching };
-  // case REQUEST_API_ERROR:
-  //   return {
-  //     ...state,
-  //     error: payload.error,
-  //     isFetching: payload.isFetching,
-  //   };
+    return {
+      ...state,
+      currencies: Object.keys(payload.data).filter((elem) => elem !== 'USDT'),
+      isFetching: payload.isFetching,
+    };
   case SAVE_EXPENSE:
     return { ...state, expenses: [...state.expenses, payload.expenses] };
   case DELETE_EXPENSE:
@@ -49,7 +47,6 @@ const wallet = (
   case SAVE_EDITED_EXPENSE:
     return {
       ...state,
-      editingExpense: null,
       isEditing: payload.isEditing,
       selectEdited: payload.selectEdited,
       expenses: [...state.expenses].map((expense) => {

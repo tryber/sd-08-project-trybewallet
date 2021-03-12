@@ -155,7 +155,7 @@ class Options extends React.Component {
   render() {
     const { currencies, isEditing, selectEdited } = this.props;
     const { currency, method, tag } = this.state;
-    const coinsdata = Object.keys(currencies).filter((elem) => elem !== 'USDT');
+    // const coinsdata = Object.keys(currencies).filter((elem) => elem !== 'USDT');
     return (
       <div>
         {this.header()}
@@ -167,7 +167,7 @@ class Options extends React.Component {
             value={ currency }
             onChange={ (e) => this.handleChange(e) }
           >
-            {coinsdata.map((coin) => (
+            {currencies.map((coin) => (
               <option key={ coin } value={ coin } data-testid={ coin }>
                 {coin}
               </option>))}
