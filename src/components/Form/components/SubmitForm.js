@@ -1,21 +1,32 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux';
+import React from 'react';
+import { useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 
-import { REGEX } from '../../../common/defs'
+import { REGEX } from '../../../common/defs';
+import { saveEmail } from '../../../actions/';
 
 export default function SubmitForm() {
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const { email, password } = useSelector((state) => state);
 
-  const { email, password } = useSelector(state => state);
+  function handleClick() {
+    dispatch(saveEmail(
+        {
+          email: email
+        }
+      )
+    );
+    history.push("/carteira");
+  }
 
   return (
-    <Link to='/carteira'>
-      <button
-      type="button"
-      disabled={ !(REGEX.test(email)) || (password.length <= '5') }
-      >
-        Entrar
-      </button>
-    </Link>
-  )
+    <button
+    type="button"
+    onClick={ handleClick }
+    disabled={ !(REGEX.test(email)) || (password.length <= '5') }
+    >
+      Entrar
+    </button>
+  );
 }

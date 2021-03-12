@@ -1,13 +1,12 @@
-import React from 'react'
+import React from 'react';
 import { useDispatch } from 'react-redux';
-import { updatePassword } from '../../../actions'
+import { updatePassword } from '../../../actions';
 
 export default function InputPassword() {
-
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   function handleChange(e) {
-    dispatch(updatePassword(e.target.value))
+    dispatch(updatePassword(e.target.value));
   }
 
   return (
@@ -20,5 +19,5 @@ export default function InputPassword() {
         data-testid="password-input"
       />
     </label>
-  )
+  );
 }

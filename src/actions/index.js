@@ -9,3 +9,8 @@ export const updatePassword = (value) => ({
   type: actionTypes.SET_PASSWORD,
   payload: value,
 });
+
+export const saveEmail = (value) => ({
+  type: actionTypes.SAVE_EMAIL,
+  payload: value,
+});

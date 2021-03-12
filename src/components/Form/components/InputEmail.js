@@ -1,13 +1,12 @@
-import React from 'react'
+import React from 'react';
 import { useDispatch } from 'react-redux';
-import { updateEmail } from '../../../actions'
+import { updateEmail } from '../../../actions';
 
 export default function InputEmail() {
+  const dispatch = useDispatch();
 
-  const dispatch = useDispatch()
-
-  function handleChange(e) { 
-    dispatch(updateEmail(e.target.value))
+  function handleChange(e) {
+    dispatch(updateEmail(e.target.value));
   }
 
   return (
@@ -20,5 +19,5 @@ export default function InputEmail() {
         data-testid="email-input"
       />
     </label>
-  )
+  );
 }

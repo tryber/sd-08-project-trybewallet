@@ -1,10 +1,30 @@
-import { SET_EMAIL, SET_PASSWORD } from '../common/actionTypes';
+import { SET_EMAIL, SET_PASSWORD, SAVE_EMAIL } from '../common/actionTypes';
 // import wallet from './wallet';
 
-
 const INITIAL_STATE = {
+  user: {},
   email: '',
   password: '',
+  wallet: {
+    currencies: [
+      'USD',
+      'USDT',
+      'CAD',
+      'EUR',
+      'GBP',
+      'ARS',
+      'BTC',
+      'LTC',
+      'JPY',
+      'CHF',
+      'AUD',
+      'CNY',
+      'ILS',
+      'ETH',
+      'XRP',
+    ],
+    expenses: [],
+  },
 };
 
 const state = (state = INITIAL_STATE, action) => {
@@ -18,6 +38,11 @@ const state = (state = INITIAL_STATE, action) => {
     return ({
       ...state,
       password: action.payload,
+    });
+  case SAVE_EMAIL:
+    return ({
+      ...state,
+      user: action.payload,
     });
   default: return state;
   }
