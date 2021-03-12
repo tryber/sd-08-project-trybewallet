@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
 export default function Header(props) {
   const { email } = props;
@@ -10,7 +10,7 @@ export default function Header(props) {
       <div data-testid="email-field">
         { email }
       </div>
-      <div>
+      <div data-testid="value-input">
         <p>Despesas totais: </p>
       </div>
       <span data-testid="total-field">0</span>
@@ -21,4 +21,4 @@ export default function Header(props) {
 
 Header.propTypes = {
   email: PropTypes.string.isRequired,
-}
+};

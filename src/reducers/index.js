@@ -5,29 +5,9 @@ const INITIAL_STATE = {
   user: {},
   email: '',
   password: '',
-  wallet: {
-    currencies: [
-      'USD',
-      'USDT',
-      'CAD',
-      'EUR',
-      'GBP',
-      'ARS',
-      'BTC',
-      'LTC',
-      'JPY',
-      'CHF',
-      'AUD',
-      'CNY',
-      'ILS',
-      'ETH',
-      'XRP',
-    ],
-    expenses: [],
-  },
 };
 
-const state = (state = INITIAL_STATE, action) => {
+export default function state(state = INITIAL_STATE, action) {
   switch (action.type) {
   case SET_EMAIL:
     return ({
@@ -46,6 +26,4 @@ const state = (state = INITIAL_STATE, action) => {
     });
   default: return state;
   }
-};
-
-export default state;
+}
