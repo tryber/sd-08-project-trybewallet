@@ -13,8 +13,8 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setIsLoggedIn(true);
     dispatch(emailChange(email));
+    setIsLoggedIn(true);
   };
 
   if (isLoggedIn) return <Redirect to="/carteira" />;
