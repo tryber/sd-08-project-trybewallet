@@ -1,13 +1,17 @@
 import React from 'react';
+import { Redirect } from 'react-router';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
-export default class Login extends React.Component {
-  constructor() {
-    super();
+import dispatchEmail from '../actions';
+
+class Login extends React.Component {
+  constructor(props) {
+    super(props);
     this.state = {
       email: '',
       password: '',
-      disabled: true,
+      redirect: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.validaAndteLogin = this.validaAndteLogin.bind(this);
@@ -15,27 +19,33 @@ export default class Login extends React.Component {
   }
 
   clickRedirect() {
-    const { history } = this.props;
-    history.push('/carteira');
+    const { sendEmail } = this.props;
+    const { email } = this.state;
+    sendEmail(email);
+    this.setState({
+      redirect: true,
+    });
   }
 
   validaAndteLogin() {
     const { password, email } = this.state;
-    const emailRegex = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.([a-z]+)?$/i;
-    const SIX = 6;
-    if (email > emailRegex && password.length > SIX) {
-      this.setState({ disabled: false });
+    const regexEmail = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+    const FIVE = 5;
+    if (regexEmail.test(email) && password.length > FIVE) {
+      return false;
     }
+    return true;
   }
 
-  handleChange(event) {
+  handleChange({ target }) {
+    const { value, name } = target;
     this.setState({
-      [event.target.name]: event.target.value,
-    }, () => this.validaAndteLogin());
+      [name]: value,
+    });
   }
 
   render() {
-    const { email, password, disabled } = this.state;
+    const { email, password, redirect } = this.state;
     return (
       <form>
         <label htmlFor="email">
@@ -62,18 +72,24 @@ export default class Login extends React.Component {
         <br />
         <button
           type="button"
-          onClick={ this.clickRedirect }
-          disabled={ disabled }
+          onClick={ () => this.clickRedirect() }
+          disabled={ this.validaAndteLogin() }
+          data-testid="login-submit-btn"
         >
           Entrar
         </button>
+        { redirect && <Redirect to="/carteira" /> }
       </form>
     );
   }
 }
 
 Login.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func,
-  }).isRequired,
+  sendEmail: PropTypes.func.isRequired,
 };
+
+const mapDispatchToProps = (dispatch) => ({
+  sendEmail: (payload) => dispatch(dispatchEmail(payload)),
+});
+
+export default connect(null, mapDispatchToProps)(Login);
