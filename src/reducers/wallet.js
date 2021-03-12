@@ -34,7 +34,9 @@ export default function wallet(state = INITIAL_STATE_WALLET, action) {
   case ADD_EXPENSE:
     return {
       ...state,
-      expenses: [...state.expenses.filter((expense) => console.log(`expense: ${expense}, action: ${action}`)), action.expenses],
+      expenses: [...state.expenses.filter(
+        (expense) => console.log(`expense: ${expense}, action: ${action}`),
+      ), action.expenses],
     };
   case DELETE_EXPENSE:
     return {
