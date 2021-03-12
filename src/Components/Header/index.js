@@ -6,7 +6,6 @@ class Header extends React.Component {
     const { user, totalExpenses } = this.props;
     return (
       <header>
-
         <div>
           <p data-testid="email-field">{ user }</p>
           <div data-testid="total-field">{ totalExpenses }</div>
@@ -20,4 +19,5 @@ Header.propTypes = {
   user: PropTypes.string.isRequired,
   totalExpenses: PropTypes.number.isRequired,
 };
+
 export default Header;
