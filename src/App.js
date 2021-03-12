@@ -9,7 +9,7 @@ function App() {
     return (
       <header>
         <h1 style={ { color: 'red', textAlign: 'center' } }>
-          Projeto capitoro bicho!
+          Putz, peço perdão pelo vacilo!
         </h1>
       </header>);
   }
@@ -19,7 +19,11 @@ function App() {
         <Link to="/">Login</Link>
         <Link to="/carteira">Carteira</Link>
       </nav>
-      <img src="https://www.dicionarioinformal.com.br/image/c/47.jpg" alt="little-devil" className="App-logo" />
+      <img
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGpR3dAmVnJ6RLewlilzUOjUYKAR7_VX0xMA&usqp=CAU"
+        alt="perdao-pelo-vacilo"
+        className="App-logo"
+      />
       <h1 className="App">Hello, TrybeWallet!</h1>
       {disclaimer()}
       <Switch>
