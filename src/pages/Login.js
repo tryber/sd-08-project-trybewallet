@@ -1,20 +1,27 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import { emailChange } from '../actions';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const minPwdLength = 6;
+  const minPwdLength = 5;
+  const regexValidator = /^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/gim;
+  const dispatch = useDispatch();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsLoggedIn(true);
+    dispatch(emailChange(email));
   };
+
   if (isLoggedIn) return <Redirect to="/carteira" />;
   return (
     <form onSubmit={ handleSubmit }>
       <label htmlFor="email">
-        Email
+        Email:
         <input
           type="email"
           name="email"
@@ -26,7 +33,7 @@ function Login() {
         />
       </label>
       <label htmlFor="password">
-        Senha
+        Senha:
         <input
           type="password"
           name="password"
@@ -39,11 +46,7 @@ function Login() {
       </label>
       <button
         type="submit"
-        disabled={
-          !email.match(
-            /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-          ) && !password.length >= minPwdLength
-        }
+        disabled={ !regexValidator.test(email) || password.length <= minPwdLength }
       >
         Entrar
       </button>
