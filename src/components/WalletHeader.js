@@ -1,12 +1,37 @@
 import React from 'react';
-// import store from '../store';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 class WalletHeader extends React.Component {
   render() {
-    return <h1>HEADER</h1>;
+    const { email } = this.props;
+    const total = 0;
+    return (
+      <header>
+        <span data-testid="email-field">
+          Email:
+          { ' ' }
+          { email }
+          { ' ' }
+        </span>
+        <span data-testid="total-field">
+          Despesa total: R$
+          { ' ' }
+          { total }
+          { ' ' }
+        </span>
+        <span data-testid="header-currency-field">BRL</span>
+      </header>
+    );
   }
 }
 
-// const mapStateToProps = () => {};
+const mapStateToProps = (state) => ({
+  email: state.user.email,
+});
 
-export default WalletHeader;
+WalletHeader.propTypes = {
+  email: PropTypes.string.isRequired,
+};
+
+export default connect(mapStateToProps)(WalletHeader);
