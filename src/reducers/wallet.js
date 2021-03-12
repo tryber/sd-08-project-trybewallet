@@ -1,4 +1,4 @@
-import { TOTAL_EXPENSE } from '../actions';
+import { TOTAL_EXPENSE } from '../actions/index';
 
 const WALLET_INITIAL_STATE = {
   currencies: [],
