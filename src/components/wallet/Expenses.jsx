@@ -35,10 +35,11 @@ class Expenses extends Component {
     const { id } = this.state;
     const { sendInput } = this.props;
     sendInput(this.state);
-    this.setState({ id: id + 1 });
+    this.setState({ id: id + 1, value: '' });
   }
 
   labels() {
+    const { value } = this.state;
     return (
       <div
         className="
@@ -60,6 +61,7 @@ class Expenses extends Component {
             id="inputValue"
             name="value"
             onChange={ this.handleChange }
+            value={ value }
           />
         </label>
         <label htmlFor="inputDescrition">
@@ -82,7 +84,10 @@ class Expenses extends Component {
       <button
         type="button"
         className="btn btn-info"
-        onClick={ this.handleClick }
+        onClick={ () => {
+          this.handleClick();
+          requestCurrencies();
+        } }
       >
         Adicionar despesa
       </button>
