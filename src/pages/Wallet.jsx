@@ -12,7 +12,7 @@ import {
 } from '../actions';
 import Table from '../Components/Table';
 
-class Wallet extends React.Component {
+class Wallet extends Component {
   constructor(props) {
     super(props);
     this.state = {
