@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import Header from '../components/Header';
-import ExpenseForm from '../components/Form';
-import CurrentExpenses from '../components/CurrentExpenses';
+import ExpenseForm from '../components/ExpenseForm/index';
+import CurrentExpenses from '../components/CurrentExpenses/index';
 
 import { fetchCurrencies as fetchCurrenciesAction } from '../actions';
 
