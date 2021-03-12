@@ -1,4 +1,4 @@
-export { default as Header } from './Header';
-export { default as NewExpenseForm } from './NewExpenseForm';
-export { default as EditExpenseForm } from './EditExpenseForm';
-export { default as ExpensesTable } from './ExpensesTable';
+export { default as WalletHeader } from './WalletHeader';
+export { default as WalletForm } from './WalletForm';
+export { default as WalletEditForm } from './WalletEditForm';
+export { default as WalletTable } from './WalletTable';

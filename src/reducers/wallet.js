@@ -1,14 +1,14 @@
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
 
 import {
-  REQUEST_START,
-  REQUEST_SUCCESS,
+  REQUEST_TO_API,
+  REQUEST_SUCESS,
   REQUEST_FAIL,
-  SAVE_EXPENSE,
+  ADD_EXPENSE,
   DELETE_EXPENSE,
-  EDIT_EXPENSE_START,
-  EDIT_EXPENSE_END,
-} from '../actions';
+  INIT_EDIT_EXPENSE,
+  FINISH_EDIT_EXPENSE,
+} from '../actions/wallet';
 
 const INITIAL_STATE_WALLET = {
   currencies: [],
@@ -17,23 +17,24 @@ const INITIAL_STATE_WALLET = {
 
 export default function wallet(state = INITIAL_STATE_WALLET, action) {
   switch (action.type) {
-  case REQUEST_START:
+  case REQUEST_TO_API:
     return {
       ...state,
       isFetching: true,
     };
-  case REQUEST_SUCCESS:
+  case REQUEST_SUCESS:
     return {
       ...state,
       isFetching: false,
-      currencies: [...Object.keys(action.currencies)],
+      currencies: [...Object.keys(action.currencies)
+        .filter((noUSTD) => noUSTD !== 'USDT')],
     };
   case REQUEST_FAIL:
     return { ...state, isFetching: false, error: action.error };
-  case SAVE_EXPENSE:
+  case ADD_EXPENSE:
     return {
       ...state,
-      expenses: [...state.expenses, action.expenses],
+      expenses: [...state.expenses.filter((expense) => console.log(expense, action)), action.expenses],
     };
   case DELETE_EXPENSE:
     return {
@@ -43,13 +44,13 @@ export default function wallet(state = INITIAL_STATE_WALLET, action) {
       ],
       isEditing: false,
     };
-  case EDIT_EXPENSE_START:
+  case INIT_EDIT_EXPENSE:
     return {
       ...state,
       isEditing: true,
       expenseId: action.expense.id,
     };
-  case EDIT_EXPENSE_END:
+  case FINISH_EDIT_EXPENSE:
     return {
       ...state,
       expenses: state.expenses.map((item) => {
@@ -62,63 +63,3 @@ export default function wallet(state = INITIAL_STATE_WALLET, action) {
     return state;
   }
 }
-
-// import * as walletAction from '../actions/wallet';
-
-// const initialStateWallet = {
-//   currencies: [],
-//   expenses: [],
-//   loading: false,
-// };
-
-// const wallet = (state = initialStateWallet, action) => {
-//   switch (action.type) {
-//   case walletAction.REQUEST_TO_API:
-//     return { ...state, loading: true };
-
-//   case walletAction.REQUEST_FAIL:
-//     return { ...state, loading: false, error: action.error };
-
-//   case walletAction.REQUEST_SUCESS:
-//     return {
-//       ...state,
-//       loading: false,
-//       currencies: [...Object.keys(action.currencies)
-//         .filter((noUSTD) => noUSTD !== 'USDT')],
-//     };
-
-//   case walletAction.ADD_EXPENSE:
-//     return {
-//       ...state, expenses: [...state.expenses, action.expenses],
-//     };
-
-//   case walletAction.DELETE_EXPENSE:
-//     return {
-//       ...state,
-//       expenses: [
-//         ...state.expenses.filter((expense) => expense.id !== action.expense.id),
-//       ],
-//       isEditing: false,
-//     };
-//   case walletAction.INIT_EDIT_EXPENSE:
-//     return {
-//       ...state,
-//       isEditing: true,
-//       expenseId: action.expense.id,
-//     };
-//   case walletAction.FINISH_EDIT_EXPENSE:
-//     return {
-//       ...state,
-//       expenses: state.expenses.map((item) => {
-//         if (item.id === action.expense.id) return { ...item, ...action.expense };
-//         return item;
-//       }),
-//       isEditing: false,
-//     };
-
-//   default:
-//     return initialStateWallet;
-//   }
-// };
-
-// export default wallet;

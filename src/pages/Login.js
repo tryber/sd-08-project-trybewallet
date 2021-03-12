@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import { MIN_PASSWORD_LENGHT, REGEX_VERIFY_EMAIL } from '../consts';
 import Button from '../components/Button';
 import './Login.css';
+
+export const MIN_PASSWORD_LENGHT = 6;
+export const REGEX_VERIFY_EMAIL = /([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/gi;
 
 class Login extends Component {
   constructor() {

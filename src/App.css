@@ -32,13 +32,13 @@
 
 @keyframes App-logo-spin {
 
-  from {
+  /* from {
     transform: rotate(0deg);
   }
 
   to {
     transform: rotate(360deg);
-  }
+  } */
 
   0% {
     left: -5%;
@@ -46,18 +46,18 @@
   }
 
   25% {
-    left: 85%;
+    left: -5%;
     top: 100px;
   }
 
   50% {
     left: 85%;
-    top: 0;
+    top: 100px;
   }
 
   75% {
-    left: -5%;
-    top: 100px;
+    left: 85%;
+    top: 0;
   }
 
   100% {
