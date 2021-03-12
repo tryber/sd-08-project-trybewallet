@@ -1,4 +1,4 @@
-import { SAVE_EMAIL, SAVE_PASSWORD } from '../actions';
+import { SAVE_EMAIL, SAVE_PASSWORD } from '../actions/index';
 
 const LOGIN_INITIAL_STATE = {
   email: '',
