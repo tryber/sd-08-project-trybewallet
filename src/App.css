@@ -14,6 +14,35 @@
   }
 }
 
+.height-100 {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.overflowX {
+  overflow-x: auto;
+}
+
+.entireScreen {
+  width: auto;
+}
+
+@media screen and ( max-width : 800px ) {
+
+  .entireScreen {
+    width: fit-content;
+  }
+}
+
+.box-radius {
+  border-radius: 10px;
+}
+
+.image-header {
+  height: 7%;
+  width: 7%;
+}
+
 .App-header {
   align-items: center;
   background-color: #282c34;
