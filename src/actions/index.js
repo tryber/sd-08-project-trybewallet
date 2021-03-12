@@ -1,6 +1,11 @@
-export const SET_EMAIL = 'SET_EMAIL';
+import * as actionTypes from '../common/actionTypes';
 
-export const addEmail = (value) => ({
-  type: SET_EMAIL,
-  value,
+export const updateEmail = (value) => ({
+  type: actionTypes.SET_EMAIL,
+  payload: value,
+});
+
+export const updatePassword = (value) => ({
+  type: actionTypes.SET_PASSWORD,
+  payload: value,
 });
