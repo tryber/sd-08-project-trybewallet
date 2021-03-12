@@ -125,7 +125,7 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
       expect(debitOption).toBeInTheDocument();
     });
   
-    test.skip('Um campo para selecionar uma categoria (tag) para a despesa.', async () => {
+    test('Um campo para selecionar uma categoria (tag) para a despesa.', async () => {
       renderWithRouterAndStore(<Wallet />, '/carteira');
       const tagInput = await screen.findByTestId('tag-input');
       const foodOption = screen.getByText(/Alimentação/);

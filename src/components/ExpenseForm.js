@@ -13,6 +13,7 @@ class ExpenseForm extends React.Component {
       currency: '',
       description: '',
       method: '',
+      tag: '',
       value: '0',
     };
 
@@ -37,6 +38,8 @@ class ExpenseForm extends React.Component {
     const { allCurrencies, description, value } = this.state;
     const allMethods = ['cash', 'debitCard', 'creditCard'];
     const allMethodsName = ['Dinheiro', 'Cartão de débito', 'Cartão de crédito'];
+    const allTags = ['food', 'leisure', 'work', 'transport', 'health'];
+    const allTagsName = ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
 
     return (
       <form>
@@ -63,6 +66,12 @@ class ExpenseForm extends React.Component {
           onChange={ this.handleChange }
           options={ allMethods }
           optionsName={ allMethodsName }
+        />
+        <Select
+          name="tag"
+          onChange={ this.handleChange }
+          options={ allTags }
+          optionsName={ allTagsName }
         />
       </form>
     );
