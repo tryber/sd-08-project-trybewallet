@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import capitalizeFirstLetter from '../helpers/capitalizeFirstLetter';
 
 class Input extends React.Component {
   render() {
     const { name, type, onChange, value } = this.props;
-    const labelText = name.substring(0, 1).toUpperCase() + name.substring(1);
+    const labelText = capitalizeFirstLetter(name);
     return (
       <label htmlFor={ name }>
-        { labelText }
+        { `${labelText}: ` }
         <input
           id={ name }
           name={ name }

@@ -1,5 +1,7 @@
 import React from 'react';
 import Input from './Input';
+import Select from './Select';
+
 import { getCurrenciesAcronym } from '../services/requests';
 
 class ExpenseForm extends React.Component {
@@ -10,6 +12,7 @@ class ExpenseForm extends React.Component {
       allCurrencies: [],
       currency: '',
       description: '',
+      method: '',
       value: '0',
     };
 
@@ -32,6 +35,8 @@ class ExpenseForm extends React.Component {
 
   render() {
     const { allCurrencies, description, value } = this.state;
+    const allMethods = ['cash', 'debitCard', 'creditCard'];
+    const allMethodsName = ['Dinheiro', 'Cartão de débito', 'Cartão de crédito'];
 
     return (
       <form>
@@ -47,25 +52,18 @@ class ExpenseForm extends React.Component {
           onChange={ this.handleChange }
           value={ description }
         />
-        <label htmlFor="currency-input">
-          Currency
-          <select
-            name="currency"
-            id="currency-input"
-            onChange={ this.handleChange }
-            data-testid="currency-input"
-          >
-            { allCurrencies.map((oneCurrency) => (
-              <option
-                key={ oneCurrency }
-                data-testid={ oneCurrency }
-                value={ oneCurrency }
-              >
-                { oneCurrency }
-              </option>
-            ))}
-          </select>
-        </label>
+        <Select
+          name="currency"
+          onChange={ this.handleChange }
+          options={ allCurrencies }
+          optionsName={ allCurrencies }
+        />
+        <Select
+          name="method"
+          onChange={ this.handleChange }
+          options={ allMethods }
+          optionsName={ allMethodsName }
+        />
       </form>
     );
   }
