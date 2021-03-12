@@ -1,17 +1,58 @@
-import { TOTAL_EXPENSE } from '../actions/index';
+import {
+  GET_CURRENCIES,
+  SET_CURRENCIES,
+  FAILED_REQUEST,
+  CREATE_EXPENSE,
+  DELETE_EXPENSE,
+  EDIT_EXPENSE,
+  EDIT_SUBMIT,
+} from '../actions';
 
-const WALLET_INITIAL_STATE = {
+const INITIAL_STATE = {
   currencies: [],
   expenses: [],
-  totalExpenses: 0,
+  isLoading: true,
+  isEditing: false,
+  editingId: 0,
 };
 
-const walletReducer = (state = WALLET_INITIAL_STATE, action) => {
+const walletReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-  case TOTAL_EXPENSE:
+  case GET_CURRENCIES:
+    return { ...state, isLoading: true };
+
+  case SET_CURRENCIES:
+    return { ...state, currencies: action.payload, isLoading: false };
+
+  case FAILED_REQUEST:
+    return { ...state, error: action.payload, isLoading: false };
+
+  case CREATE_EXPENSE:
+    return { ...state, expenses: [...state.expenses, action.payload] };
+
+  case DELETE_EXPENSE:
     return {
-      ...state, totalExpenses: action.totalValue,
+      ...state,
+      expenses: state.expenses.filter((expense) => expense.id !== action.payload),
     };
+
+  case EDIT_EXPENSE:
+    return {
+      ...state,
+      isEditing: true,
+      editingId: action.payload,
+    };
+
+  case EDIT_SUBMIT:
+    return {
+      ...state,
+      isEditing: false,
+      expenses: state.expenses.map(
+        (expense) => (expense.id === state.editingId
+          ? { ...expense, ...action.payload } : expense),
+      ),
+    };
+
   default:
     return state;
   }
