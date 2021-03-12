@@ -19,9 +19,9 @@ function App() {
         <Link to="/">Login</Link>
         <Link to="/carteira">Carteira</Link>
       </nav>
-      {/* <img src="https://www.dicionarioinformal.com.br/image/c/47.jpg" alt="little-devil" className="App-logo" />
+      <img src="https://www.dicionarioinformal.com.br/image/c/47.jpg" alt="little-devil" className="App-logo" />
       <h1 className="App">Hello, TrybeWallet!</h1>
-      {disclaimer()} */}
+      {disclaimer()}
       <Switch>
         <Route exact path="/" component={ Login } />
         <Route exact path="/carteira" component={ Wallet } />
