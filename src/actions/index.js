@@ -1,51 +1,18 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+export const SAVE_EMAIL = 'SAVE_EMAIL';
+export const SAVE_PASSWORD = 'SAVE_PASSWORD';
+export const TOTAL_EXPENSE = 'TOTAL_EXPENSE';
 
-class Header extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.sumOftotalExpenses = this.sumOftotalExpenses.bind(this);
-  }
-
-  sumOftotalExpenses() {
-    const { expenses } = this.props;
-    const total = expenses.reduce((acc, current) => (
-      acc + current.value * current.exchangeRates[current.currency].ask
-    ), 0);
-
-    return total.toFixed(2);
-  }
-
-  render() {
-    const { email } = this.props;
-    return (
-      <div>
-        <p>
-          <strong>Email:</strong>
-          <span data-testid="email-field">{ email }</span>
-        </p>
-        <p>
-          <strong>Despesa Total:</strong>
-          <span data-testid="total-field">{ this.sumOftotalExpenses() }</span>
-          <strong>Câmbio:</strong>
-          <span data-testid="header-currency-field">BRL</span>
-        </p>
-
-      </div>
-    );
-  }
-}
-
-const mapStateToProps = (state) => ({
-  email: state.user.email,
-  expenses: state.wallet.expenses,
+export const saveEmail = (email) => ({
+  type: SAVE_EMAIL,
+  email,
 });
 
-Header.propTypes = {
-  email: PropTypes.string.isRequired,
-  expenses: PropTypes.arrayOf(PropTypes.number).isRequired,
-};
+export const savePassword = (password) => ({
+  type: SAVE_PASSWORD,
+  password,
+});
 
-export default connect(mapStateToProps)(Header);
+export const totalExpense = (totalValue) => ({
+  type: TOTAL_EXPENSE,
+  totalValue,
+});
