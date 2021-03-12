@@ -9,7 +9,7 @@ function App() {
     return (
       <header>
         <h1 style={ { color: 'red', textAlign: 'center' } }>
-          Hello Wallet Demon!
+          Projeto capitoro bicho!
         </h1>
       </header>);
   }

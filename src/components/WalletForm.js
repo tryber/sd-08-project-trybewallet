@@ -11,7 +11,7 @@ class WalletForm extends Component {
   constructor(props) {
     super(props);
 
-    const INITIAL_STATE = {
+    this.state = {
       value: '',
       description: '',
       currency: 'USD',
@@ -19,8 +19,6 @@ class WalletForm extends Component {
       tag: 'Alimentação',
       id: 0,
     };
-
-    this.state = { ...INITIAL_STATE };
 
     this.handleChange = this.handleChange.bind(this);
     this.renderForm = this.renderForm.bind(this);
@@ -31,10 +29,10 @@ class WalletForm extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  componentDidMount() {
-    const { requestCurrencies } = this.props;
-    requestCurrencies();
-  }
+  // componentDidMount() {
+  //   const { requestCurrencies } = this.props;
+  //   requestCurrencies();
+  // }
 
   handleChange({ target }) {
     const { name, value } = target;
@@ -45,6 +43,7 @@ class WalletForm extends Component {
 
   async handleClick(e) {
     e.preventDefault();
+    console.log('chamou handleCLick');
     const {
       id, value, description, method, tag, currency } = this.state;
     const { addExpense } = this.props;
@@ -156,12 +155,12 @@ class WalletForm extends Component {
   }
 
   render() {
-    const { loading } = this.props;
+    const { isFetching } = this.props;
     return (
       <section
         className="wallet-form"
       >
-        {loading ? <h1>Loading...</h1> : this.renderForm()}
+        {isFetching ? <h1>Loading...</h1> : this.renderForm()}
       </section>
     );
   }
@@ -171,7 +170,7 @@ const mapStateToProps = (state) => ({
   currencies: state.wallet.currencies,
   expenses: state.wallet.expenses,
   expenseId: state.wallet.expenseId,
-
+  isFetching: state.wallet.isFetching,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -181,7 +180,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 WalletForm.propTypes = {
   currencies: PropTypes.arrayOf(PropTypes.string),
-  loading: PropTypes.bool,
+  isFetching: PropTypes.bool,
   requestCurrencies: PropTypes.func.isRequired,
   addExpense: PropTypes.func.isRequired,
   // expenses: PropTypes.arrayOf(PropTypes.object),
@@ -191,7 +190,7 @@ WalletForm.propTypes = {
 WalletForm.defaultProps = {
   currencies: [],
   // expenses: [],
-  loading: false,
+  isFetching: false,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(WalletForm);
