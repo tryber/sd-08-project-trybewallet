@@ -220,7 +220,7 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
   describe('5 - Desenvolva uma tabela com os gastos contendo as seguintes características:', () => {
     const initial = initialStateWithExpenses;
   
-    test.skip('A tabela deve possuir um cabeçalho com os campos Descrição, Tag, Método de pagamento, Valor, Moeda, Câmbio utilizado, Valor convertido e Moeda de conversão', () => {
+    test('A tabela deve possuir um cabeçalho com os campos Descrição, Tag, Método de pagamento, Valor, Moeda, Câmbio utilizado, Valor convertido e Moeda de conversão', () => {
       renderWithRouterAndStore(<Wallet />, '/carteira', initial);
       const thDescricao = screen.getByText('Descrição');
       const thTag = screen.getByText('Tag');
@@ -243,7 +243,7 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
       expect(thEditarExcluir).toBeInTheDocument();
     });
   
-    test.skip('A tabela deve ser alimentada pelo estado da aplicação, que estará disponível na chave expenses que vem do reducer wallet.', () => {
+    test('A tabela deve ser alimentada pelo estado da aplicação, que estará disponível na chave expenses que vem do reducer wallet.', () => {
       renderWithRouterAndStore(<Wallet />, '/carteira', initial);
       expect(screen.getAllByRole('cell', { name: 'Dez dólares' })[0]).toBeInTheDocument();
       expect(screen.getAllByRole('cell', { name: 'Lazer' })[0]).toBeInTheDocument();

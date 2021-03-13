@@ -48,6 +48,8 @@ class ExpenseForm extends React.Component {
     const newExpense = { ...this.state };
     const exchangeRates = await fetchCurrencies();
 
+    const idd = expenses.length > 0 ? expenses[expenses.length - 1].id + 1 : 0;
+    console.log(idd);
     newExpense.id = expenses.length;
     newExpense.exchangeRates = exchangeRates;
 
@@ -55,10 +57,10 @@ class ExpenseForm extends React.Component {
     calcTotal();
 
     this.setState({
-      currency: 'USD',
+      // currency: 'USD',
       description: '',
-      method: 'Dinheiro',
-      tag: FOOD,
+      // method: 'Dinheiro',
+      // tag: FOOD,
       value: '0',
     });
   }

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { WalletHeader, ExpenseForm } from '../components';
+import { WalletHeader, ExpenseForm, ExpenseTable } from '../components';
 
 class Wallet extends React.Component {
   constructor() {
@@ -16,12 +16,9 @@ class Wallet extends React.Component {
 
   calcTotal() {
     const { expenses } = this.props;
-    console.log('calc');
-    console.log(expenses);
     const newTotal = expenses.reduce((acc, expense) => {
       const { currency, exchangeRates, value } = expense;
       const rate = parseFloat(exchangeRates[currency].ask);
-      console.log(acc + rate * parseFloat(value));
       return acc + rate * parseFloat(value);
     }, 0);
 
@@ -36,6 +33,7 @@ class Wallet extends React.Component {
       <>
         <WalletHeader total={ total } />
         <ExpenseForm calcTotal={ this.calcTotal } />
+        <ExpenseTable />
       </>
     );
   }
