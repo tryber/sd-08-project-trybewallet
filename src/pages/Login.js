@@ -1,5 +1,4 @@
 import React from 'react';
-import { Redirect } from 'react-router';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -11,7 +10,6 @@ class Login extends React.Component {
     this.state = {
       email: '',
       password: '',
-      redirect: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.validaAndteLogin = this.validaAndteLogin.bind(this);
@@ -19,19 +17,17 @@ class Login extends React.Component {
   }
 
   clickRedirect() {
-    const { sendEmail } = this.props;
+    const { sendEmail, history } = this.props;
     const { email } = this.state;
     sendEmail(email);
-    this.setState({
-      redirect: true,
-    });
+    history.push('/carteira');
   }
 
   validaAndteLogin() {
     const { password, email } = this.state;
     const regexEmail = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
-    const FIVE = 5;
-    if (regexEmail.test(email) && password.length > FIVE) {
+    const SIX = 6;
+    if (regexEmail.test(email) && password.length >= SIX) {
       return false;
     }
     return true;
@@ -45,7 +41,7 @@ class Login extends React.Component {
   }
 
   render() {
-    const { email, password, redirect } = this.state;
+    const { email, password } = this.state;
     return (
       <form>
         <label htmlFor="email">
@@ -78,7 +74,6 @@ class Login extends React.Component {
         >
           Entrar
         </button>
-        { redirect && <Redirect to="/carteira" /> }
       </form>
     );
   }
@@ -86,6 +81,9 @@ class Login extends React.Component {
 
 Login.propTypes = {
   sendEmail: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
