@@ -4,3 +4,7 @@ export const emailChange = (payload) => ({
   type: EMAIL,
   payload,
 });
+export const walletChange = (payload) => ({
+  type: WALLET,
+  payload,
+});
