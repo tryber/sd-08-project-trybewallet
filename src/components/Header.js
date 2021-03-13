@@ -22,7 +22,10 @@ class Header extends React.Component {
       <header>
         <h1>TrybeWallet</h1>
         <p data-testid="email-field">{`Seu email: ${email}`}</p>
-        <span data-testid="total-field">{this.totalExpenses}</span>
+        <span data-testid="total-field">
+          {`Despesas Totais: ${this.totalExpenses()}`}
+        </span>
+        <span data-testid="header-currency-field">BRL</span>
       </header>
     );
   }
