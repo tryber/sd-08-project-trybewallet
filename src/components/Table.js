@@ -11,7 +11,6 @@ class Table extends React.Component {
 
   handleMap() {
     const { despesas } = this.props;
-    console.log(despesas);
     return (
       <table>
         <thead>
@@ -21,10 +20,10 @@ class Table extends React.Component {
             <th>Método de pagamento</th>
             <th>Valor</th>
             <th>Moeda</th>
-            <th>Cãmbio utilizado</th>
+            <th>Câmbio utilizado</th>
             <th>Valor convertido</th>
             <th>Moeda de conversão</th>
-            <th>Edita/Excluir</th>
+            <th>Editar/Excluir</th>
           </tr>
         </thead>
         <tbody>
@@ -38,14 +37,16 @@ class Table extends React.Component {
                 {expenses.exchangeRates[expenses.currency].name}
               </td>
               <td>
-                {expenses.exchangeRates[expenses.currency].ask}
+                {Math.round(expenses.exchangeRates[expenses.currency].ask * 100) / 100}
               </td>
               <td>
-                {Number(expenses.value) * Number(
-                  expenses.exchangeRates[expenses.currency].ask,
-                )}
+                {
+                  Math.round(Number(expenses.value) * Number(
+                    expenses.exchangeRates[expenses.currency].ask,
+                  ) * 100) / 100
+                }
               </td>
-              <td>Real Brasileiro</td>
+              <td>Real</td>
               <td>
                 <button type="button">Editar</button>
                 <button type="button">Excluir</button>
