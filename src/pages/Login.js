@@ -35,7 +35,7 @@ class Login extends React.Component {
 
     return (
       <div>
-        <h1>MY WALLET</h1>
+        <h1>MYWALLET</h1>
         <label htmlFor="email-input">
           Email
           <input
