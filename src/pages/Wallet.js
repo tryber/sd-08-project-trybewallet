@@ -2,28 +2,42 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import { fetchCurrencies as getCurrencies } from '../actions';
+import { ExpensesTable, Header, NewExpenseForm, EditExpenseForm } from '../components';
+
 class Wallet extends React.Component {
+  componentDidMount() {
+    const { fetchCurrencies } = this.props;
+    fetchCurrencies();
+  }
+
   render() {
-    const { email } = this.props;
+    const { isEditing } = this.props;
     return (
-      <div>
-        <header>
-          TrybeWallet
-          <p data-testid="email-field">{email}</p>
-          <p data-testid="total-field">{0}</p>
-          <p data-testid="header-currency-field">BRL</p>
-        </header>
-      </div>);
+      <main className="wallet-main">
+        <Header />
+        { isEditing ? <EditExpenseForm /> : <NewExpenseForm />}
+        <ExpensesTable />
+      </main>
+    );
   }
 }
 
 const mapStateToProps = (state) => ({
-  email: state.user.email,
-  expenses: state.wallet.expenses,
+  isEditing: state.wallet.isEditing,
 });
 
-export default connect(mapStateToProps)(Wallet);
+const mapDispatchToProps = (dispatch) => ({
+  fetchCurrencies: () => dispatch(getCurrencies()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Wallet);
 
 Wallet.propTypes = {
-  email: PropTypes.string.isRequired,
+  isEditing: PropTypes.bool,
+  fetchCurrencies: PropTypes.func.isRequired,
+};
+
+Wallet.defaultProps = {
+  isEditing: false,
 };
