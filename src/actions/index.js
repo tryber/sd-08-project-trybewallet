@@ -1,1 +1,2 @@
-// Coloque aqui suas actions
+const USER = 'USER';
+export default USER;
