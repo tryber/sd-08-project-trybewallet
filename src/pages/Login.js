@@ -44,8 +44,8 @@ class Login extends React.Component {
     event.preventDefault();
     const { history, addEmailToRedux } = this.props;
     const { email } = this.state;
-    addEmailToRedux(email);
     if (this.validateSubmit()) {
+      addEmailToRedux(email);
       history.push('/carteira');
     }
   }

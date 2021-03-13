@@ -1,3 +1,13 @@
-const zero = 0;
+export function addExpense(expense) {
+  return {
+    type: 'ADD_EXPENSE',
+    payload: expense,
+  };
+}
 
-export default zero;
+export function setCurrencies(currencies) {
+  return {
+    type: 'SET_CURRENCIES',
+    payload: currencies,
+  };
+}

@@ -142,7 +142,7 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
       expect(healthOption).toBeInTheDocument();
     });
   
-    test.skip('Um botão com o texto \'Adicionar despesa\' que salva as informações da despesa no estado global e atualiza a soma de despesas no header', async () => {
+    test('Um botão com o texto \'Adicionar despesa\' que salva as informações da despesa no estado global e atualiza a soma de despesas no header', async () => {
       const { store } = renderWithRouterAndStore(<Wallet />, '/carteira');
       const addButton = await screen.findByText(/Adicionar despesa/i);
       const valueInput = await screen.findByTestId('value-input');

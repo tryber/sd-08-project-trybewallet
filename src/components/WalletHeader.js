@@ -4,8 +4,7 @@ import { connect } from 'react-redux';
 
 class WalletHeader extends React.Component {
   render() {
-    const { email } = this.props;
-    const total = 0;
+    const { email, total } = this.props;
     return (
       <header>
         <span data-testid="email-field">
@@ -32,6 +31,7 @@ const mapStateToProps = (state) => ({
 
 WalletHeader.propTypes = {
   email: PropTypes.string.isRequired,
+  total: PropTypes.number.isRequired,
 };
 
 export default connect(mapStateToProps)(WalletHeader);

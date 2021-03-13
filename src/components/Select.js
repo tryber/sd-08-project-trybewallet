@@ -4,7 +4,7 @@ import capitalizeFirstLetter from '../helpers/capitalizeFirstLetter';
 
 class Select extends React.Component {
   render() {
-    const { name, onChange, options, optionsName } = this.props;
+    const { name, onChange, options } = this.props;
     const id = `${name}-input`;
     const label = capitalizeFirstLetter(name);
     return (
@@ -16,13 +16,13 @@ class Select extends React.Component {
           onChange={ onChange }
           data-testid={ id }
         >
-          { options.map((selectOption, index) => (
+          { options.map((selectOption) => (
             <option
               key={ selectOption }
               data-testid={ selectOption }
               value={ selectOption }
             >
-              { optionsName[index] }
+              { selectOption }
             </option>
           ))}
         </select>
@@ -35,9 +35,6 @@ Select.propTypes = {
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   options: PropTypes.arrayOf(
-    PropTypes.string,
-  ).isRequired,
-  optionsName: PropTypes.arrayOf(
     PropTypes.string,
   ).isRequired,
 };
