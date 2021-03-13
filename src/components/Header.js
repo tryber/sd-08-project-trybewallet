@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 class Header extends React.Component {
   render() {
     const { email } = this.props;
+    const VALUE_ONE = 0;
     return (
       <header>
         <h1>Wallet</h1>
@@ -16,7 +17,7 @@ class Header extends React.Component {
         </span>
         <div>
           <h3>Despesas Total:</h3>
-          <span data-testid="total-field">$556</span>
+          <span data-testid="total-field">{ VALUE_ONE }</span>
           <h3>R$:</h3>
           <h3 data-testid="header-currency-field">BRL</h3>
         </div>
