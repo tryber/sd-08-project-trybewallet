@@ -21,6 +21,28 @@ class ExpensesForm extends React.Component {
     this.setState({ currencies: currenciesObject });
   }
 
+  creatTagOption() {
+    return (
+      <>
+        <option value="alimentacao">Alimentação</option>
+        <option value="lazer">Lazer</option>
+        <option value="trabalho">Trabalho</option>
+        <option value="transporte">Transporte</option>
+        <option value="saude">Saúde</option>
+      </>
+    );
+  }
+
+  creatPaymentMethod() {
+    return (
+      <>
+        <option value="dinheiro">Dinheiro</option>
+        <option value="cartao-de-credito">Cartão de crédito</option>
+        <option value="cartao-de-debito">Cartão de débito</option>
+      </>
+    );
+  }
+
   render() {
     const { currencies } = this.state;
     return (
@@ -31,9 +53,9 @@ class ExpensesForm extends React.Component {
             data-testid="value-input"
           />
         </label>
-        <label>
+        <label htmlFor="description-input">
           Descrição:
-          <input data-testid="description-input"/>
+          <input data-testid="description-input" />
         </label>
         <label htmlFor="currency-input">
           Moeda:
@@ -47,24 +69,18 @@ class ExpensesForm extends React.Component {
                 { cur }
               </option>
             ))}
-          </select> 
-        </label>
-        <label>
-          Método de Pagamento:
-          <select data-testid="method-input">
-            <option value="dinheiro">Dinheiro</option>
-            <option value="cartao-de-credito">Cartão de crédito</option>
-            <option value="cartao-de-debito">Cartão de débito</option>
           </select>
         </label>
-        <label>
+        <label htmlFor="tag-input">
           Tag:
           <select data-testid="tag-input">
-            <option value="alimentacao">Alimentação</option>
-            <option value="lazer">Lazer</option>
-            <option value="trabalho">Trabalho</option>
-            <option value="transporte">Transporte</option>
-            <option value="saude">Saúde</option>
+            { this.creatTagOption() }
+          </select>
+        </label>
+        <label htmlFor="method-input">
+          Método de Pagamento:
+          <select data-testid="method-input">
+            { this.creatPaymentMethod() }
           </select>
         </label>
         <button
