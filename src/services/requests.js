@@ -12,7 +12,7 @@ export function fetchCurrencies() {
 
 export function getCurrenciesAcronym() {
   const currenciesAcronym = fetchCurrencies()
-    .then((result) => Object.keys(result))
+    .then((result) => Object.keys(result));
 
   return currenciesAcronym;
 }
