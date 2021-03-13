@@ -1,34 +1,26 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { addExpenses } from '../actions';
-import { fetchCurrency } from '../services/getCurrencyList';
 import SelectCurrency from './form/SelectCurrency';
 import SelectMethod from './form/SelectMethod';
 import SelectTag from './form/SelectTag';
+import { saveExpense } from '../actions';
 
-const INITIAL_STATE = {
-  value: '0',
-  description: '',
-  currency: 'USD',
-  method: 'Dinheiro',
-  tag: 'Alimentação',
-  id: 0,
-};
-
-const createId = (arr) => {
-  if (arr.length === 0) {
-    return 0;
-  }
-  return arr[arr.length - 1].id + 1;
-};
-
-class Form extends Component {
+class EditForm extends Component {
   constructor(props) {
     super(props);
 
+    const { editId, expenses } = this.props;
+    const exp = expenses.find((expense) => expense.id === editId);
+    const { value, description, currency, method, tag, id, exchangeRates } = exp;
     this.state = {
-      ...INITIAL_STATE,
+      value,
+      description,
+      currency,
+      method,
+      tag,
+      id,
+      exchangeRates,
     };
   }
 
@@ -38,23 +30,16 @@ class Form extends Component {
     });
   }
 
-  async handleClick() {
-    const { addEx, exp } = this.props;
-    const { value, description, currency, method, tag } = this.state;
-    const exchangeRates = await fetchCurrency();
-    const expenses = {
-      value, description, currency, method, tag, exchangeRates,
-    };
-
-    expenses.id = createId(exp);
-    addEx(expenses);
-    this.setState({
-      value: 0,
-    });
+  handleClick() {
+    const { saveExp } = this.props;
+    const newExp = { ...this.state };
+    // console.log(newExp);
+    saveExp(newExp);
   }
 
   render() {
     const { value, description } = this.state;
+    // console.log(this.state);
     return (
       <form>
         <label htmlFor="value">
@@ -84,24 +69,24 @@ class Form extends Component {
           type="button"
           onClick={ () => this.handleClick() }
         >
-          Adicionar despesa
-
+          Editar
         </button>
       </form>
     );
   }
 }
 
-Form.propTypes = {
-  exp: PropTypes.func,
-}.isRequired;
+EditForm.propTypes = {
+  expenses: PropTypes.array,
+}.siRequired;
 
 const mapStateToProps = (state) => ({
-  exp: state.wallet.expenses,
+  expenses: state.wallet.expenses,
+  editId: state.wallet.editId,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  addEx: (expenses) => dispatch(addExpenses(expenses)),
+  saveExp: (newExp) => dispatch(saveExpense(newExp)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Form);
+export default connect(mapStateToProps, mapDispatchToProps)(EditForm);

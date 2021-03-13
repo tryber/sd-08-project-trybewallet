@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 class TableItem extends Component {
   render() {
-    const { expense, handleClick } = this.props;
+    const { expense, handleClick, handleEdit } = this.props;
     const { name, ask } = expense.exchangeRates[expense.currency];
     const { description, tag, method, value } = expense;
     return (
@@ -26,6 +26,13 @@ class TableItem extends Component {
             Excluir
 
           </button>
+          <button
+            type="button"
+            data-testid="edit-btn"
+            onClick={ () => handleEdit(expense.id) }
+          >
+            Editar despesa
+          </button>
         </td>
       </tr>
     );
@@ -35,5 +42,9 @@ class TableItem extends Component {
 TableItem.propTypes = {
   expense: PropTypes.array,
 }.isRequired;
+
+// const mapStateToProps = (state) => ({
+
+// })
 
 export default connect()(TableItem);

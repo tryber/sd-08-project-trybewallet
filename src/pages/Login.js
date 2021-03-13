@@ -46,7 +46,7 @@ class Login extends React.Component {
     const { email, password, redirect, disabled } = this.state;
     // console.log(this.state);
     return (
-      <span>
+      <form>
         <h2>Login</h2>
         <input
           type="email"
@@ -71,7 +71,7 @@ class Login extends React.Component {
           Entrar
         </button>
         {redirect ? <Redirect to="/carteira" /> : ''}
-      </span>
+      </form>
     );
   }
 }
