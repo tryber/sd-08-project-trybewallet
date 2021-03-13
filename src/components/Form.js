@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { addExpenseWithRates, getRequest } from '../actions/index';
 
+const alimentação = 'Alimentação';
+
 class Form extends React.Component {
   constructor() {
     super();
@@ -12,8 +14,7 @@ class Form extends React.Component {
       description: '',
       currency: 'USD',
       method: 'Dinheiro',
-      // eslint-disable-next-line sonarjs/no-duplicate-string
-      tag: 'Alimentação',
+      tag: alimentação,
     };
 
     this.handleInputs = this.handleInputs.bind(this);
@@ -104,7 +105,7 @@ class Form extends React.Component {
   }
 
   handleTags() {
-    const tages = ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
+    const tages = [alimentação, 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
     const { tag } = this.state;
 
     return (
@@ -133,7 +134,7 @@ class Form extends React.Component {
       description: '',
       currency: 'USD',
       method: 'Dinheiro',
-      tag: 'Alimentação',
+      tag: alimentação,
     });
   }
 
