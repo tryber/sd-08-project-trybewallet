@@ -3,6 +3,8 @@ const INITIAL_STATE = {
   currencies: [],
   expenses: [],
   id: 0,
+  editorMode: false,
+  idToEdit: null,
 };
 
 const one = 1;
@@ -24,6 +26,27 @@ const wallet = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       expenses: state.expenses.filter((expense) => expense.id !== action.id),
+    };
+  case 'EDIT_EXPENSE':
+    return {
+      ...state,
+      editorMode: true,
+      idToEdit: action.idToEdit,
+    };
+  case 'SAVE_EDITED_EXPENSE':
+    return {
+      ...state,
+      editorMode: false,
+      idToEdit: null,
+      expenses: state.expenses.map((expense) => {
+        if (expense.id === state.idToEdit) {
+          return {
+            ...expense,
+            ...action.payload,
+          };
+        }
+        return expense;
+      }),
     };
   default: return state;
   }

@@ -1,7 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { removeExpenses } from '../actions/index';
+import { editExpense, removeExpenses } from '../actions/index';
+
+import styles from '../styles/components/Table.module.css';
 
 class Table extends React.Component {
   constructor() {
@@ -11,7 +13,7 @@ class Table extends React.Component {
   }
 
   handleMap() {
-    const { despesas, remove } = this.props;
+    const { despesas, remove, setEditor } = this.props;
     return (
       <tbody>
         {despesas.map((expenses) => (
@@ -24,18 +26,24 @@ class Table extends React.Component {
               {expenses.exchangeRates[expenses.currency].name}
             </td>
             <td>
-              {Math.round(expenses.exchangeRates[expenses.currency].ask * 100) / 100}
+              {(Math.round(expenses.exchangeRates[expenses.currency].ask * 100) / 100).toFixed(2)}
             </td>
             <td>
               {
-                Math.round(Number(expenses.value) * Number(
+                (Math.round(Number(expenses.value) * Number(
                   expenses.exchangeRates[expenses.currency].ask,
-                ) * 100) / 100
+                ) * 100) / 100).toFixed(2)
               }
             </td>
             <td>Real</td>
             <td>
-              <button type="button">Editar</button>
+              <button
+                type="button"
+                onClick={ () => setEditor(expenses.id) }
+                data-testid="edit-btn"
+              >
+                Editar
+              </button>
               <button
                 onClick={ () => remove(expenses.id) }
                 data-testid="delete-btn"
@@ -52,7 +60,7 @@ class Table extends React.Component {
 
   render() {
     return (
-      <table>
+      <table className={ styles.table }>
         <thead>
           <tr>
             <th>Descrição</th>
@@ -78,11 +86,13 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   remove: (id) => dispatch(removeExpenses(id)),
+  setEditor: (id) => dispatch(editExpense(id)),
 });
 
 Table.propTypes = {
   despesas: PropTypes.arrayOf(PropTypes.object).isRequired,
   remove: PropTypes.func.isRequired,
+  setEditor: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Table);

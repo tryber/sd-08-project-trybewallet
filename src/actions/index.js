@@ -30,3 +30,13 @@ export const removeExpenses = (id) => ({
   type: 'REMOVE',
   id,
 });
+
+export const editExpense = (idToEdit) => ({
+  type: 'EDIT_EXPENSE',
+  idToEdit,
+});
+
+export const saveExpense = (expense) => ({
+  type: 'SAVE_EDITED_EXPENSE',
+  payload: expense,
+});

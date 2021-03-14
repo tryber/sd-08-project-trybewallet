@@ -1,20 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { addExpenseWithRates, getRequest } from '../actions/index';
+import { getRequest } from '../actions/index';
+
+import styles from '../styles/components/Form.module.css';
 
 const alimentação = 'Alimentação';
 
 class Form extends React.Component {
-  constructor() {
-    super();
-
+  constructor(props) {
+    super(props);
     this.state = {
-      value: '',
-      description: '',
-      currency: 'USD',
-      method: 'Dinheiro',
-      tag: alimentação,
+      ...props.initialState,
     };
 
     this.handleInputs = this.handleInputs.bind(this);
@@ -127,20 +124,18 @@ class Form extends React.Component {
   }
 
   handlAddExpenses() {
-    const { addExpenses } = this.props;
-    addExpenses(this.state);
+    const { buttonAction, initialState } = this.props;
+    console.log(buttonAction);
+    buttonAction(this.state);
     this.setState({
-      value: '',
-      description: '',
-      currency: 'USD',
-      method: 'Dinheiro',
-      tag: alimentação,
+      ...initialState,
     });
   }
 
   render() {
+    const { buttonText } = this.props;
     return (
-      <div>
+      <div className={ styles.form }>
         {this.handleInputs()}
         {this.handleCurrency()}
         {this.handleMethods()}
@@ -149,7 +144,7 @@ class Form extends React.Component {
           type="button"
           onClick={ this.handlAddExpenses }
         >
-          Adicionar despesa
+          {buttonText}
         </button>
       </div>
     );
@@ -161,15 +156,21 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  addExpenses: (expenses) => dispatch((addExpenseWithRates(expenses))),
   getFetch: () => dispatch(getRequest()),
-
 });
 
 Form.propTypes = {
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
-  addExpenses: PropTypes.func.isRequired,
   getFetch: PropTypes.func.isRequired,
+  buttonText: PropTypes.string.isRequired,
+  initialState: PropTypes.shape({
+    value: PropTypes.string,
+    description: PropTypes.string,
+    currency: PropTypes.string,
+    method: PropTypes.string,
+    tag: PropTypes.string,
+  }).isRequired,
+  buttonAction: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Form);
