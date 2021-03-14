@@ -1,20 +1,8 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
-import {
-  Route,
-  Switch,
-} from 'react-router-dom';
-import {
-  Login,
-  Wallet,
-} from './pages';
 
 function App() {
   return (
-    <Switch>
-      <Route exact path="/" render={ () => <Login /> } />
-      <Route path="/carteira" render={ () => <Wallet /> } />
-    </Switch>
+    <h1>Reset no projeto, me perdi no meu próprio código (kek)</h1>
   );
 }
 
