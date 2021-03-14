@@ -25,3 +25,8 @@ export const addExpenseWithRates = (expense) => async (dispatch) => {
     ...expense, exchangeRates: currentCurrency };
   dispatch(addExpenses(expensesWithCurrency));
 };
+
+export const removeExpenses = (id) => ({
+  type: 'REMOVE',
+  id,
+});
