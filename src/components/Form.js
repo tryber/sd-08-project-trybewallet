@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getRequest } from '../actions/index';
 
-import styles from '../styles/components/Form.module.css';
+// import styles from '../styles/components/Form.module.css';
 
 const alimentação = 'Alimentação';
 
