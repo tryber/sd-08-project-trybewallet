@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { editExpense, removeExpenses } from '../actions/index';
 
-import styles from '../styles/components/Table.module.css';
+// import styles from '../styles/components/Table.module.css';
 
 class Table extends React.Component {
   constructor() {
@@ -26,7 +26,8 @@ class Table extends React.Component {
               {expenses.exchangeRates[expenses.currency].name}
             </td>
             <td>
-              {(Math.round(expenses.exchangeRates[expenses.currency].ask * 100) / 100).toFixed(2)}
+              {(Math.round(expenses.exchangeRates[expenses.currency].ask * 100) / 100)
+                .toFixed(2)}
             </td>
             <td>
               {
