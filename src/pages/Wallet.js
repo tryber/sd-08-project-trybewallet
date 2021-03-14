@@ -14,9 +14,11 @@ class Wallet extends React.Component {
     this.calcTotal = this.calcTotal.bind(this);
   }
 
-  calcTotal() {
+  calcTotal(expenseToRemove) {
     const { expenses } = this.props;
-    const newTotal = expenses.reduce((acc, expense) => {
+    const filtredExpense = expenses
+      .filter((expense) => parseInt(expense.id, 10) !== parseInt(expenseToRemove, 10));
+    const newTotal = filtredExpense.reduce((acc, expense) => {
       const { currency, exchangeRates, value } = expense;
       const rate = parseFloat(exchangeRates[currency].ask);
       return acc + rate * parseFloat(value);
@@ -33,7 +35,7 @@ class Wallet extends React.Component {
       <>
         <WalletHeader total={ total } />
         <ExpenseForm calcTotal={ this.calcTotal } />
-        <ExpenseTable />
+        <ExpenseTable calcTotal={ this.calcTotal } />
       </>
     );
   }

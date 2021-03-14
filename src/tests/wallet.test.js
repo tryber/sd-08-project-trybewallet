@@ -268,7 +268,7 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
   describe('6 - Crie um botão para deletar uma despesa da tabela contendo as seguintes características:', () => {
     const initial = initialStateWithExpenses;
   
-    test.skip('O botão deve estar dentro do último item da linha da tabela e deve possuir `data-testid="delete-btn"`', () => {
+    test('O botão deve estar dentro do último item da linha da tabela e deve possuir `data-testid="delete-btn"`', () => {
       renderWithRouterAndStore(<Wallet />, '/carteira', initial);
       expect(screen.getAllByTestId('delete-btn')[0]).toBeInTheDocument();
     });
@@ -301,7 +301,7 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
       expect(store.getState().wallet.expenses).toStrictEqual(newExpenses);
     });
   
-    test.skip('Ao clicar no botão para remover uma despesa, o valor correspondente deve ser subtraído e a despesa total deve ser atualizada no header', () => {
+    test('Ao clicar no botão para remover uma despesa, o valor correspondente deve ser subtraído e a despesa total deve ser atualizada no header', () => {
       const { store } = renderWithRouterAndStore(<Wallet />, '/carteira', initial);
       const deleteBtn = screen.getAllByTestId('delete-btn')[0];
   

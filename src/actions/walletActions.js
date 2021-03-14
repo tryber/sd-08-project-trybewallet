@@ -11,3 +11,10 @@ export function setCurrencies(currencies) {
     payload: currencies,
   };
 }
+
+export function deleteExpense(id) {
+  return {
+    type: 'DELETE_EXPENSE',
+    payload: id,
+  };
+}

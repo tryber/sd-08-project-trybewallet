@@ -43,18 +43,18 @@ class ExpenseForm extends React.Component {
 
   async handleSubmit(event) {
     event.preventDefault();
+    const NONEXISTENT_INDEX = -1;
 
     const { addNewExpense, calcTotal, expenses } = this.props;
     const newExpense = { ...this.state };
     const exchangeRates = await fetchCurrencies();
 
-    const idd = expenses.length > 0 ? expenses[expenses.length - 1].id + 1 : 0;
-    console.log(idd);
-    newExpense.id = expenses.length;
+    const id = expenses.length > 0 ? expenses[expenses.length - 1].id + 1 : 0;
+    newExpense.id = id;
     newExpense.exchangeRates = exchangeRates;
 
     addNewExpense(newExpense);
-    calcTotal();
+    calcTotal(NONEXISTENT_INDEX);
 
     this.setState({
       // currency: 'USD',
