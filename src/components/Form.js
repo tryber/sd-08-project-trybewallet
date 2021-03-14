@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getRequest } from '../actions/index';
 
-// import styles from '../styles/components/Form.module.css';
-
 const alimentação = 'Alimentação';
 
 class Form extends React.Component {
@@ -135,7 +133,7 @@ class Form extends React.Component {
   render() {
     const { buttonText } = this.props;
     return (
-      <div className={ styles.form }>
+      <div>
         {this.handleInputs()}
         {this.handleCurrency()}
         {this.handleMethods()}

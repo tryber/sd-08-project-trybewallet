@@ -61,7 +61,7 @@ class Table extends React.Component {
 
   render() {
     return (
-      <table className={ styles.table }>
+      <table>
         <thead>
           <tr>
             <th>Descrição</th>
