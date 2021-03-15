@@ -12,7 +12,15 @@ class EditForm extends Component {
 
     const { editId, expenses } = this.props;
     const exp = expenses.find((expense) => expense.id === editId);
-    const { value, description, currency, method, tag, id, exchangeRates } = exp;
+    const {
+      value,
+      description,
+      currency,
+      method,
+      tag,
+      id,
+      exchangeRates,
+    } = exp;
     this.state = {
       value,
       description,
@@ -39,7 +47,6 @@ class EditForm extends Component {
 
   render() {
     const { value, description } = this.state;
-    // console.log(this.state);
     return (
       <form>
         <label htmlFor="value">
@@ -65,11 +72,8 @@ class EditForm extends Component {
         <SelectCurrency handleChange={ (e) => this.handleChange(e) } />
         <SelectMethod handleChange={ (e) => this.handleChange(e) } />
         <SelectTag handleChange={ (e) => this.handleChange(e) } />
-        <button
-          type="button"
-          onClick={ () => this.handleClick() }
-        >
-          Editar
+        <button type="button" onClick={ () => this.handleClick() }>
+          Editar despesa
         </button>
       </form>
     );

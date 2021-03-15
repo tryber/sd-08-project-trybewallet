@@ -15,7 +15,7 @@ class TableItem extends Component {
         <td>{value}</td>
         <td>Real</td>
         <td>{parseFloat(ask).toFixed(2)}</td>
-        <td>{(ask * parseInt(value, 10).toFixed(2))}</td>
+        <td>{(ask * parseInt(value, 10)).toFixed(2)}</td>
         <td>{name}</td>
         <td>
           <button
@@ -31,7 +31,7 @@ class TableItem extends Component {
             data-testid="edit-btn"
             onClick={ () => handleEdit(expense.id) }
           >
-            Editar despesa
+            Editar
           </button>
         </td>
       </tr>

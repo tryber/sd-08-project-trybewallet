@@ -40,7 +40,8 @@ function wallet(state = initialState, action) {
     return {
       ...state,
       expenses: [...state.expenses
-        .filter((exp) => exp.id !== state.editId), action.payload],
+        .filter((exp) => exp.id !== state.editId), action.payload]
+        .sort((a, b) => a.id - b.id),
       edit: false,
     };
   default:
