@@ -9,9 +9,9 @@ import EditExpense from './EditExpense';
 import { responseCurrencies } from '../actions';
 
 class Wallet extends Component {
-  componentDidMount() {
+  async componentDidMount() {
     const { currenciesRequest } = this.props;
-    currenciesRequest();
+    await currenciesRequest();
   }
 
   render() {

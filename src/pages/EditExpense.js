@@ -32,8 +32,6 @@ class EditExpense extends Component {
   async submitExpense() {
     const { value, description, currency, method, tag, id, exchangeRates } = this.state;
     const { editedExpenseSave } = this.props;
-    /*  const exchangeRates = await fetchApiCurrencies(); */
-
     const expense = {
       id,
       value,
@@ -77,9 +75,6 @@ class EditExpense extends Component {
 
   renderCambio() {
     const { currencies } = this.props;
-
-    const dropDownCurrencies = Object.keys(currencies || {});
-
     return (
       <div>
         Moeda/Cambio
@@ -87,7 +82,7 @@ class EditExpense extends Component {
           data-testid="currency-input"
           onChange={ (event) => this.onChangeInputs('currency', event.target.value) }
         >
-          {dropDownCurrencies.map((currency) => {
+          {currencies.map((currency) => {
             if (currency === 'USDT') return;
             return (
               <option key={ currency } data-testid={ currency }>{currency}</option>
@@ -160,7 +155,7 @@ class EditExpense extends Component {
   }
 }
 const mapStateToProps = (state) => ({
-  currencies: state.wallet.currencies[0],
+  currencies: state.wallet.currencies,
   expenses: state.wallet.expenses,
   expenseId: state.wallet.expenseId,
 });

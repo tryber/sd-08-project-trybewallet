@@ -13,7 +13,7 @@ const INITIAL_STATE = {
   method: 'Dinheiro',
   tag: 'Alimentação',
   id: 0,
-  total: '0.00',
+  /* total: '0.00', */
 };
 
 class AddExpense extends Component {
@@ -30,8 +30,7 @@ class AddExpense extends Component {
     this.setState({ [field]: newValue });
   }
 
-  async submitExpense(e) {
-    e.preventDefault();
+  async submitExpense() {
     const { newExpenseSave } = this.props;
     const { value, description, currency, method, tag, id, total } = this.state;
 
@@ -89,7 +88,6 @@ class AddExpense extends Component {
 
   renderCambio() {
     const { currencies } = this.props;
-    const dropDownCurrencies = Object.keys(currencies || {});
 
     return (
       <div>
@@ -98,7 +96,7 @@ class AddExpense extends Component {
           data-testid="currency-input"
           onChange={ (event) => this.onChangeInputs('currency', event.target.value) }
         >
-          {dropDownCurrencies.map((currency) => {
+          {currencies.map((currency) => {
             if (currency === 'USDT') return;
             return (
               <option key={ currency } data-testid={ currency }>{currency}</option>
@@ -172,7 +170,7 @@ class AddExpense extends Component {
 }
 const mapStateToProps = (state) => ({
   email: state.user.email,
-  currencies: state.wallet.currencies[0],
+  currencies: state.wallet.currencies,
   expenses: state.wallet.expenses,
 });
 

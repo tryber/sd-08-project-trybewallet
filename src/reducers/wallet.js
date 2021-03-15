@@ -21,7 +21,7 @@ export default function wallet(state = INITIAL_STATE_WALLET, action) {
     return {
       ...state,
       loading: false,
-      currencies: [action.currencies],
+      currencies: Object.keys(action.currencies),
     };
   case REQUEST_FAIL:
     return {

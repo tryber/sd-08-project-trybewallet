@@ -1,21 +1,19 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { /* responseCurrencies, */
-
+import {
   removeExpense as deleteExpense,
   editExpense as completeExpense } from '../actions';
 
 class FildExpense extends Component {
   render() {
-    const { expenses } = this.props;
-    const { removeExpense, editExpense } = this.props;
+    const { expenses, removeExpense, editExpense } = this.props;
     return (
       <>
-
         {expenses.map((expense, index) => {
           const { description, tag, method, value, currency, exchangeRates } = expense;
           const { name, ask } = exchangeRates[currency];
+
           return (
             <tr key={ index }>
               <td>{description}</td>
