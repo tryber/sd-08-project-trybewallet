@@ -1,12 +1,19 @@
-const initialState = {};
+import { ENTER_LOGIN } from '../actions';
 
-function loginReducer(state = initialState, action) {
+const initialState = {
+  email: '',
+};
+
+function user(state = initialState, action) {
   switch (action.type) {
-  case 'LOGIN':
-    return action.value;
+  case ENTER_LOGIN:
+    console.log(action.value)
+    return {
+      email: action.value,
+    };
   default:
     return state;
   }
 }
 
-export default loginReducer;
+export default user;

@@ -6,7 +6,7 @@ import './App.css';
 function App() {
   return (
     <Switch>
-      <Route path="/carteira" component={ Wallet } />
+      {/* <Route path="/carteira" component={ Wallet } /> */}
       <Route exact path="/" component={ Login } />
     </Switch>
   );

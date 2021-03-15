@@ -7,14 +7,14 @@ class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isNotValid: true,
+      isNotValid: false,
       email: '',
       password: '',
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.validButton = this.validButton.bind(this);
-    this.handleLogin = this.handleLogin.bind(this);
+    this.changePageLogin = this.changePageLogin.bind(this);
   }
 
   handleChange(event) {
@@ -23,55 +23,63 @@ class Login extends React.Component {
     }, () => this.validButton());
   }
 
-  handleLogin() {
-    const { history } = this.props;
+  changePageLogin() {
+    const { history, handleLogin } = this.props;
+    const { email } = this.state;
+    handleLogin(email);
     history.push('/carteira');
   }
 
   validButton() {
+    const x = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+    const minPass = 6;
     const { email, password } = this.state;
-    const { handleLogin } = this.props;
-    if (email.length > 0 && password.length > 0) {
-      this.setState({ isNotValid: false });
-      handleLogin({ email, password });
-    }
+    // if (password.length >= minPass && x.test(email)) {
+    this.setState({ isNotValid: password.length >= minPass && x.test(email) });
+
+    // } else {
+    //   this.setState({ isNotValid: true });
+    // }
   }
 
   render() {
     const { email, password, isNotValid } = this.state;
     return (
-      <div className="Login">
-        <section className="login-inputs">
-          <input
-            type="email"
-            onChange={ this.handleChange }
-            placeholder="Type your email"
-            data-testid="email-input"
-            value={ email }
-            required
-          />
-          <input
-            type="password"
-            onChange={ this.handleChange }
-            placeholder="Type your password"
-            data-testid="password-input"
-            minLength="6"
-            value={ password }
-            required
-          />
-        </section>
-        <div className="link">
-          <button
-            type="button"
-            onClick={ this.handleLogin }
-            disabled={ isNotValid }
-            className="btn-login"
-            data-testid="btn-login"
-          >
-            Entrar
-          </button>
+      <form>
+        <div className="Login">
+          <section className="login-inputs">
+            <input
+              type="text"
+              onChange={ this.handleChange }
+              placeholder="Type your email"
+              data-testid="email-input"
+              value={ email }
+              name="email"
+              required
+            />
+            <input
+              type="password"
+              onChange={ this.handleChange }
+              placeholder="Type your password"
+              data-testid="password-input"
+              value={ password }
+              name="password"
+              required
+            />
+          </section>
+          <div className="link">
+            <button
+              type="button"
+              onClick={ this.changePageLogin }
+              disabled={ !isNotValid }
+              className="btn-login"
+              data-testid="btn-login"
+            >
+              Entrar
+            </button>
+          </div>
         </div>
-      </div>
+      </form>
     );
   }
 }
