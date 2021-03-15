@@ -7,13 +7,11 @@ export function userEmail(email) {
   return {
     type: USER_EMAIL,
     payload: email,
-    // sum: 0,
   };
 }
 
 export function requestCurrency(currency) {
   return {
-    // c: console.log(currency),
     type: REQUEST_CURRENCY,
     currency,
   };

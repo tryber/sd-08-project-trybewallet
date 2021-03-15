@@ -20,7 +20,6 @@ class SelectCurrency extends Component {
   async fetchCurrencies() {
     const { requestCurr } = this.props;
     const currencies = await getCurrency();
-    // console.log(currencies);
     this.setState({
       currencies,
     });
@@ -30,7 +29,6 @@ class SelectCurrency extends Component {
   render() {
     const { currencies } = this.state;
     const { handleChange } = this.props;
-    // console.log(currencies);
     return (
       <select name="currency" data-testid="currency-input" onChange={ handleChange }>
         {

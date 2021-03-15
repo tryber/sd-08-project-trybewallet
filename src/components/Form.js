@@ -20,7 +20,7 @@ class Form extends Component {
     super(props);
 
     this.state = {
-      id: 0,
+      // id: 0,
       value: 0,
       description: '',
       currency: 'USD',
@@ -31,7 +31,7 @@ class Form extends Component {
 
   async handleClick() {
     const exchangeRates = await getExchangeRate();
-    console.log(exchangeRates);
+    // console.log(exchangeRates);
     const { value, description, currency, method, tag } = this.state;
     const { saveExpense, expArr } = this.props;
     const newExpense = { value, description, currency, method, tag, exchangeRates };
@@ -50,8 +50,8 @@ class Form extends Component {
   }
 
   render() {
-    const { id, value, description, currency, method, tag } = this.state;
-    console.log(id, value, description, currency, method, tag);
+    const { value } = this.state;
+    // console.log(id, value, description, currency, method, tag);
     return (
       <form>
         <label htmlFor="value">
