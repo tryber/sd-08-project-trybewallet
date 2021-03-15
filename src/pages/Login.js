@@ -28,7 +28,7 @@ class Login extends React.Component {
     this.setState({ [name]: value });
   }
 
-  handleClick() {
+  async handleClick() {
     const { history } = this.props;
     history.push('/carteira');
   }
@@ -70,9 +70,11 @@ class Login extends React.Component {
 Login.propTypes = {
   history: PropTypes.objectOf(PropTypes.object).isRequired,
   user: PropTypes.func.isRequired,
+
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  user: (value) => dispatch(actionUser(value)) });
+  user: (value) => dispatch(actionUser(value)),
+});
 
 export default connect(null, mapDispatchToProps)(Login);

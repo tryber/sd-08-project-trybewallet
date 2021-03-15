@@ -1,2 +1,2 @@
-const USER = 'USER';
-export default USER;
+export const USER = 'USER';
+export const RECEIVE_COIN = 'RECEIVE_COIN';

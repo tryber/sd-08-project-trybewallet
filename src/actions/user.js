@@ -1,4 +1,4 @@
-import USER from './index';
+import { USER } from './index';
 
 const actionUser = (email) => ({ type: USER, email });
 export default actionUser;
