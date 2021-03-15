@@ -160,7 +160,7 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
       userEvent.type(descriptionInput, 'Dez dólares');
       fireEvent.click(addButton);
       expect(mockedExchange).toBeCalledTimes(2);
-  
+      
       const expectedStateExpense = [
         {
           id: 0,
@@ -172,7 +172,7 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
           exchangeRates: mockData,
         },
       ];
-  
+      
       await waitFor(() => {
         expect(valueInput.value === 0 || valueInput.value === '0' || valueInput.value === '').toBe(true);
       });

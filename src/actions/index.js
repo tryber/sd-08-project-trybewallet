@@ -1,1 +1,2 @@
-// Coloque aqui suas actions
+export const USER = 'USER';
+export const WALLET = 'WALLET';
