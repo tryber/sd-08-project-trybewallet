@@ -1,98 +1,80 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { login as loginAction } from '../actions';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { saveEmail as saveEmailAction } from '../actions';
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isNotValid: false,
       email: '',
       password: '',
     };
 
     this.handleChange = this.handleChange.bind(this);
-    this.validButton = this.validButton.bind(this);
-    this.changePageLogin = this.changePageLogin.bind(this);
   }
 
-  handleChange(event) {
+  handleChange({ target }) {
+    const { name, value } = target;
     this.setState({
-      [event.target.name]: event.target.value,
-    }, () => this.validButton());
+      [name]: value,
+    });
   }
 
-  changePageLogin() {
-    const { history, handleLogin } = this.props;
-    const { email } = this.state;
-    handleLogin(email);
-    history.push('/carteira');
-  }
-
-  validButton() {
-    const x = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
-    const minPass = 6;
+  validateLogin() {
     const { email, password } = this.state;
-    // if (password.length >= minPass && x.test(email)) {
-    this.setState({ isNotValid: password.length >= minPass && x.test(email) });
-
-    // } else {
-    //   this.setState({ isNotValid: true });
-    // }
+    const isEmail = /\S+@\S+\.\S+/;
+    const MINIMUM_PASSWORD_SIZE = 6;
+    return !isEmail.test(email) || (password.length < MINIMUM_PASSWORD_SIZE);
   }
 
   render() {
-    const { email, password, isNotValid } = this.state;
+    const { email, password } = this.state;
+    const { saveEmail } = this.props;
     return (
-      <form>
-        <div className="Login">
-          <section className="login-inputs">
-            <input
-              type="text"
-              onChange={ this.handleChange }
-              placeholder="Type your email"
-              data-testid="email-input"
-              value={ email }
-              name="email"
-              required
-            />
-            <input
-              type="password"
-              onChange={ this.handleChange }
-              placeholder="Type your password"
-              data-testid="password-input"
-              value={ password }
-              name="password"
-              required
-            />
-          </section>
-          <div className="link">
-            <button
-              type="button"
-              onClick={ this.changePageLogin }
-              disabled={ !isNotValid }
-              className="btn-login"
-              data-testid="btn-login"
-            >
-              Entrar
-            </button>
-          </div>
-        </div>
-      </form>
-    );
+      <section>
+        <label htmlFor="email-input">
+          Email:
+          <input
+            data-testid="email-input"
+            id="email-input"
+            name="email"
+            value={ email }
+            onChange={ this.handleChange }
+          />
+        </label>
+        <label htmlFor="password-input">
+          Senha:
+          <input
+            data-testid="password-input"
+            id="password-input"
+            name="password"
+            value={ password }
+            onChange={ this.handleChange }
+          />
+        </label>
+        <Link
+          to="/carteira"
+        >
+          <button
+            type="button"
+            disabled={ this.validateLogin() }
+            onClick={ () => saveEmail(email) }
+          >
+            Entrar
+          </button>
+        </Link>
+      </section>);
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  handleLogin: (value) => dispatch(loginAction(value)),
-});
-
 Login.propTypes = {
-  handleLogin: PropTypes.func.isRequired,
-  history: PropTypes.shape({
-    push: PropTypes.func,
-  }).isRequired,
+  saveEmail: PropTypes.func.isRequired,
 };
+
+const mapDispatchToProps = (dispatch) => ({
+  saveEmail: (email) => dispatch(saveEmailAction(email)),
+});
 
 export default connect(null, mapDispatchToProps)(Login);
