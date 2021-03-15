@@ -1,8 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchCurrencies as actualCurrencies } from '../actions';
+import { fetchCurrencies as actualCurrencies,
+  addExpense as saveAction } from '../actions';
+import getCurrencies from '../services';
 
+const INITAL_STATE_FORM = {
+  value: '0',
+  method: 'Dinheiro',
+  tag: 'Alimentação',
+  description: '',
+  currency: 'USD',
+  id: 0,
+
+};
 class ExpensesForm extends React.Component {
   constructor() {
     super();
@@ -10,20 +21,37 @@ class ExpensesForm extends React.Component {
     this.renderSelect = this.renderSelect.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.renderSelectCurrencies = this.renderSelectCurrencies.bind(this);
+    this.handleClick = this.handleClick.bind(this);
 
     this.state = {
-      value: '0',
-      method: 'Dinheiro',
-      tag: 'Alimentação',
-      description: '',
-      currency: 'USD',
-
+      ...INITAL_STATE_FORM,
     };
   }
 
   handleChange({ target }) {
     this.setState({
       [target.name]: target.value,
+    });
+  }
+
+  async handleClick(event) {
+    event.preventDefault();
+    const { value, description, currency, method, tag, id } = this.state;
+    const { addExpense } = this.props;
+    const exchangeRates = await getCurrencies();
+    const expenses = {
+      value,
+      method,
+      tag,
+      description,
+      currency,
+      id,
+      exchangeRates,
+    };
+    addExpense(expenses);
+    this.setState({
+      ...INITAL_STATE_FORM,
+      id: id + 1,
     });
   }
 
@@ -70,10 +98,10 @@ class ExpensesForm extends React.Component {
 
   renderSelect(label, name, value, method) {
     return (
-      <label htmlFor={ `${name}-input` }>
+      <label htmlFor={ `${name}` }>
         { `${label}: `}
         <select
-          id={ `${name}-input ` }
+          id={ `${name}` }
           name={ name }
           data-testid={ `${name}-input` }
           onChange={ this.handleChange }
@@ -89,7 +117,10 @@ class ExpensesForm extends React.Component {
 
   renderButton() {
     return (
-      <button type="button">
+      <button
+        type="button"
+        onClick={ this.handleClick }
+      >
         Adicionar despesa
       </button>
     );
@@ -107,7 +138,6 @@ class ExpensesForm extends React.Component {
         { this.renderSelect('Método de pagamento ', 'method', method, methods) }
         { this.renderSelect('Categoria ', 'tag', tag, tags) }
         { this.renderButton() }
-
       </form>
     );
   }
@@ -115,6 +145,7 @@ class ExpensesForm extends React.Component {
 
 ExpensesForm.propTypes = {
   currencies: PropTypes.arrayOf(PropTypes.string),
+  addExpense: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -123,6 +154,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   fetchCurrencies: () => dispatch(actualCurrencies()),
+  addExpense: (expenses) => dispatch(saveAction(expenses)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExpensesForm);

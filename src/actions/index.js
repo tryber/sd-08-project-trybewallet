@@ -6,6 +6,7 @@ export const ADD_EXPENSE = 'ADD_EXPENSE';
 export const REQUEST_START = 'REQUEST_START';
 export const REQUEST_SUCCESS = 'REQUEST_SUCCESS';
 export const REQUEST_FAIL = 'REQUEST_FAIL';
+export const SAVE_EXPENSES = 'SAVE_EXPENSES';
 
 export const login = (payload) => ({
   type: LOGIN,
@@ -42,3 +43,8 @@ export const fetchCurrencies = () => async (dispatch) => {
     dispatch(requestCurrenciesFail(error));
   }
 };
+
+export const addExpenses = (payload) => ({
+  type: 'SAVE_EXPENSES',
+  payload,
+});
