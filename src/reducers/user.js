@@ -7,7 +7,7 @@ const initialState = {
 function user(state = initialState, action) {
   switch (action.type) {
   case ENTER_LOGIN:
-    console.log(action.value)
+    console.log(action.value);
     return {
       email: action.value,
     };

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { Login, Wallet } from './pages';
+import { Login } from './pages';
 import './App.css';
 
 function App() {
