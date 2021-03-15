@@ -1,8 +1,8 @@
-import { LOGIN } from './types';
+import types from './types';
 
 function loginAction(email) {
   return {
-    type: LOGIN,
+    type: types.LOGIN,
     payload: email,
   };
 }
