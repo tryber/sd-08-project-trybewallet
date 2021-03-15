@@ -1,68 +1,63 @@
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
 import {
-  ADD_EXPENSE,
+  REQUEST_START,
+  REQUEST_SUCCESS,
+  REQUEST_FAIL,
+  SAVE_EXPENSE,
   DELETE_EXPENSE,
-  UPDATE_CURRENCIES,
-  EDIT_EXPENSES,
-  THIS_EDITING,
-  ADD_EDICAO,
+  EDIT_EXPENSE_START,
+  EDIT_EXPENSE_END,
 } from '../actions';
 
-const INITIAL_STATE = {
-  expenses: [],
+const INITIAL_STATE_WALLET = {
   currencies: [],
-  editExpenses: {},
-  isEditing: false,
-  id: 0,
+  expenses: [],
 };
-const wallet = (state = INITIAL_STATE, action) => {
+
+export default function wallet(state = INITIAL_STATE_WALLET, action) {
   switch (action.type) {
-  case ADD_EXPENSE:
+  case REQUEST_START:
+    return {
+      ...state,
+      isFetching: true,
+    };
+  case REQUEST_SUCCESS:
+    return {
+      ...state,
+      isFetching: false,
+      currencies: [...Object.keys(action.currencies)],
+    };
+  case REQUEST_FAIL:
+    return { ...state, isFetching: false, error: action.error };
+  case SAVE_EXPENSE:
+    return {
+      ...state,
+      expenses: [...state.expenses, action.expenses],
+    };
+  case DELETE_EXPENSE:
     return {
       ...state,
       expenses: [
-        ...state.expenses, { ...action.payload,
-          id: state.expenses.length,
-          exchangeRates: state.currencies,
-        },
+        ...state.expenses.filter((expense) => expense.id !== action.expense.id),
       ],
+      isEditing: false,
     };
-  case UPDATE_CURRENCIES:
-    return { ...state, currencies: action.exchangeRates };
-  case DELETE_EXPENSE:
-    console.log({
-      ...state,
-      expenses: state.expenses.filter((expense) => expense.id !== action.id),
-    });
+  case EDIT_EXPENSE_START:
     return {
       ...state,
-      expenses: state.expenses.filter((expense) => expense.id !== action.id),
+      isEditing: true,
+      expenseId: action.expense.id,
     };
-  case THIS_EDITING:
-    return (
-      {
-        ...state,
-        isEditing: action.change,
-      }
-    );
-  case ADD_EDICAO:
-    return (
-      { ...state,
-        expenses: state.expenses.map((expense) => {
-          if (expense.id === action.expense.id) {
-            return action.expense;
-          }
-          return expense;
-        }),
-      }
-    );
-  case EDIT_EXPENSES:
-    return (
-      { ...state, expenses: action.expenses,
-      }
-    );
-  default: return state;
+  case EDIT_EXPENSE_END:
+    return {
+      ...state,
+      expenses: state.expenses.map((item) => {
+        if (item.id === action.expense.id) return { ...item, ...action.expense };
+        return item;
+      }),
+      isEditing: false,
+    };
+  default:
+    return state;
   }
-};
-
-export default wallet;
+}
