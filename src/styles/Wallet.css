@@ -1,4 +1,4 @@
-.wallet-header, .wallet-header-aside {
+.wallet-header , .wallet-header-aside {
   align-items: center;
   background-color: rgb(3, 107, 82);
   color: white;
@@ -35,7 +35,7 @@ label {
   background-color: rgb(47, 193, 140);
 }
 
-input, select {
+input , select {
   background-color: white;
   border: 2px solid gray;
   border-radius: 5px;
@@ -55,7 +55,7 @@ input, select {
   margin-left: 10px;
   width: 140px;
 }
-  
+
 .add-expense {
   background-color: rgb(47, 193, 140);
   color: white;
