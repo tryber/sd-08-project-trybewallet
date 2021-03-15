@@ -16,6 +16,7 @@ const INITIAL_STATE = {
   id: 0,
 };
 
+// Função para criar ids feita com ajuda da Vivi
 const createId = (arr) => {
   if (arr.length === 0) {
     return 0;
