@@ -1,1 +1,24 @@
-// Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
+import { REQUEST_CURRENCY, SAVE_DATA } from '../actions/index';
+
+const initialState = {
+  currency: [],
+  expenses: [],
+};
+
+export default function wallet(state = initialState, action) {
+  switch (action.type) {
+  case REQUEST_CURRENCY:
+    return {
+      ...state,
+      currency: action.currency,
+    };
+  case SAVE_DATA:
+    return {
+      ...state,
+      expenses: [...state.expenses, action.expense],
+    };
+
+  default:
+    return state;
+  }
+}
