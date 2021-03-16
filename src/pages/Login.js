@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { Redirect } from 'react-router';
 import { savesUserEmail as savesUserEmailAction } from '../actions';
 
@@ -38,7 +39,8 @@ class Login extends React.Component {
   emailValidation() {
     const { email, password } = this.state;
     let disabled = true;
-    const emailValid = /^[\w+.]+@\w+\.\w{2,}(?:\.\w{2})?$/, minLength = 6;
+    const emailValid = /^[\w+.]+@\w+\.\w{2,}(?:\.\w{2})?$/;
+    const minLength = 6;
     disabled = !(emailValid.test(email) && password.length >= minLength);
     this.setState({ disabled });
   }
@@ -47,51 +49,53 @@ class Login extends React.Component {
     const { disabled, email, password, redirect } = this.state;
     const { handleChange, handleClick } = this;
     return (
-      <>
-        <section>
-          <form>
-            <label
-              htmlFor="email"
-            >
-              Email
-              <input
-                type="email"
-                name="email"
-                value={ email }
-                data-testid="email-input"
-                onChange={ (event) => handleChange(event) }
-              />
-            </label>
-            <label
-              htmlFor="email"
-            >
-              Senha
-              <input
-                data-testid="password-input"
-                name="password"
-                value={ password }
-                type="password"
-                onChange={ (event) => handleChange(event) }
-              />
-            </label>
-            <button
-              className="login-btn"
-              type="button"
-              disabled={ disabled }
-              onClick={ () => handleClick() }
-            >
-              Entrar
-            </button>
-            { redirect ? <Redirect to="/carteira" /> : '' }
-          </form>
-        </section>
-      </>
+      <section>
+        <form>
+          <label
+            htmlFor="email"
+          >
+            Email
+            <input
+              type="email"
+              name="email"
+              value={ email }
+              data-testid="email-input"
+              onChange={ (event) => handleChange(event) }
+            />
+          </label>
+          <label
+            htmlFor="email"
+          >
+            Senha
+            <input
+              data-testid="password-input"
+              name="password"
+              value={ password }
+              type="password"
+              onChange={ (event) => handleChange(event) }
+            />
+          </label>
+          <button
+            className="login-btn"
+            type="button"
+            disabled={ disabled }
+            onClick={ () => handleClick() }
+          >
+            Entrar
+          </button>
+          { redirect ? <Redirect to="/carteira" /> : '' }
+        </form>
+      </section>
     );
   }
 }
 
+Login.propTypes = {
+  savesUserEmail: PropTypes.func.isRequired,
+};
+
 const mapDispatchToProps = (dispatch) => ({
   savesUserEmail: (email) => dispatch(savesUserEmailAction(email)),
-})
+});
 
-export default connect(null, mapDispatchToProps)(Login)
+export default connect(null, mapDispatchToProps)(Login);
