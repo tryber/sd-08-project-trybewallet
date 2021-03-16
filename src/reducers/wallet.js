@@ -2,8 +2,6 @@ import {
   REQUEST_CURRENCY,
   ADD_EXPENSES,
   DELETE_EXPENSE,
-  EDIT_EXPENSE,
-  SAVE_EXPENSE,
 } from '../actions/index';
 
 const initialState = {
@@ -28,21 +26,7 @@ function wallet(state = initialState, action) {
   case DELETE_EXPENSE:
     return {
       ...state,
-      expenses: state.expenses.filter((exp) => exp !== action.payload),
-    };
-  case EDIT_EXPENSE:
-    return {
-      ...state,
-      edit: true,
-      editId: action.payload,
-    };
-  case SAVE_EXPENSE:
-    return {
-      ...state,
-      edit: false,
-      expenses: [...state.expenses
-        .filter((exp) => exp.id !== state.editId), action.payload]
-        .sort((a, b) => a.id - b.id),
+      expenses: state.expenses.filter((expense) => expense.id !== action.payload),
     };
   default:
     return state;
