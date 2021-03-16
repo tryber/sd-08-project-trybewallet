@@ -1,0 +1,36 @@
+body {
+  font-family: Roboto, sans-serif;
+  margin: 0;
+}
+
+.wallet-header {
+  display: flex;
+  justify-content: center;
+}
+
+.wallet-header-content {
+  display: flex;
+  margin-left: 4px;
+  width: 300px;
+}
+
+.wallet-header-content span {
+  margin: 8px;
+}
+
+
+.wallet-table {
+  border: 1px solid black;
+  margin-top: 20px;
+  padding: 6px;
+  text-align: center;
+  width: 100%;
+}
+
+.wth-header {
+  color: rgb(31, 31, 31);
+}
+
+.wth-row {
+  color: rgb(71, 71, 71);
+}

@@ -1,21 +1,19 @@
-import { SET_PASSWORD, SAVE_EMAIL } from '../common/actionTypes';
+import * as ActionTypes from '../common/ActionTypes';
 
 const INITIAL_STATE = {
   email: '',
 };
 
-export default function user(state = INITIAL_STATE, action) {
-  switch (action.type) {
-  case SET_PASSWORD:
-    return ({
+export default function reducer(state = INITIAL_STATE, action = null) {
+  const { type, payload } = action;
+  switch (type) {
+  case ActionTypes.USER_LOGIN:
+    return {
       ...state,
-      password: action.payload,
-    });
-  case SAVE_EMAIL:
-    return ({
-      ...state,
-      email: action.payload,
-    });
-  default: return state;
+      email: payload,
+    };
+
+  default:
+    return state;
   }
 }
