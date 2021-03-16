@@ -8,12 +8,12 @@ class FormularioDespesa extends React.Component {
   constructor() {
     super();
     this.state = {
-      id: 0,
-      value: 0,
-      description: '',
+      id: -1,
+      value: '0',
       currency: '',
       method: '',
       tag: '',
+      description: '',
       exchangeRates: {},
     };
     this.handleClick = this.handleClick.bind(this);
@@ -44,7 +44,8 @@ class FormularioDespesa extends React.Component {
 
   moeda() {
     const { wallet } = this.props;
-    const moedas = Object.values(wallet);
+    const { currencies } = wallet;
+    const moedas = Object.values(currencies);
     const moedasFiltro = moedas.filter((moeda) => moeda.name !== 'Dólar Turismo');
     return (
       <label htmlFor="moeda">
@@ -128,12 +129,12 @@ class FormularioDespesa extends React.Component {
 
   async handleClick() {
     const obj = await getCoin();
-    const { expense } = this.props;
-    expense(this.state);
     this.setState((estadoAnterior) => ({
       exchangeRates: obj,
       id: estadoAnterior.id + 1,
     }));
+    const { expense } = this.props;
+    expense(this.state);
   }
 
   botao() {

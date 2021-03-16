@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import FormularioDespesa from '../componetes/FormularioDespesa';
 import Header from '../componetes/Header';
 import { fetchCoin as fetchCoinAction } from '../actions/wallet';
+import Tabela from '../componetes/Tabela';
 
 class Wallet extends React.Component {
   async componentDidMount() {
@@ -16,7 +17,7 @@ class Wallet extends React.Component {
       <div>
         <Header />
         <FormularioDespesa />
-        <p>TrybeWallet</p>
+        <Tabela />
       </div>);
   }
 }

@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 
 class Header extends React.Component {
   render() {
-    const { user, expenses } = this.props;
+    const { user, wallet } = this.props;
+    const { expenses } = wallet;
     const valueNumber = expenses.map((e) => Number(e.value));
     const contador = valueNumber.reduce((acc, curr) => acc + curr, 0);
 
@@ -20,18 +21,24 @@ class Header extends React.Component {
 
 const mapStateToProps = (state) => ({
   user: state.user,
-  expenses: state.expenses,
+  wallet: state.wallet,
 });
 
 Header.propTypes = {
   user: PropTypes.shape({
     email: PropTypes.string,
   }).isRequired,
-  expenses: PropTypes.shape({
-    value: PropTypes.string,
-    map: PropTypes.func.isRequired,
-  }).isRequired,
+  wallet: PropTypes.shape({
+    expenses: PropTypes.shape({
+      value: PropTypes.string,
+      map: PropTypes.func,
+    }).isRequired,
 
+  }),
+};
+
+Header.defaultProps = {
+  wallet: PropTypes.objectOf.isRequired,
 };
 
 export default connect(mapStateToProps)(Header);
