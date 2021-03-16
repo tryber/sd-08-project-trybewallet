@@ -20,6 +20,8 @@ class WalletForm extends React.Component {
     this.expenseTags = ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
 
     this.handleChange = this.handleChange.bind(this);
+    this.formInputs = this.formInputs.bind(this);
+    this.formDropdowns = this.formDropdowns.bind(this);
   }
 
   componentDidMount() {
@@ -31,16 +33,37 @@ class WalletForm extends React.Component {
     this.setState({ [target.id]: target.value });
   }
 
-  render() {
-    const { currencies, addExpense } = this.props;
-    const { value, description, currency, method, tag } = this.state;
+  formInputs() {
+    const { value, description } = this.state;
     return (
-      <form>
-        <input id="value" data-testid="value-input" value={ value } onChange={ this.handleChange } />
+      <>
+        <input
+          id="value"
+          data-testid="value-input"
+          value={ value }
+          onChange={ this.handleChange }
+        />
+        <input
+          id="description"
+          data-testid="description-input"
+          value={ description }
+          onChange={ this.handleChange }
+        />
+      </>
+    );
+  }
 
-        <input id="description" data-testid="description-input" value={ description } onChange={ this.handleChange } />
-
-        <select id="currency" data-testid="currency-input" value={ currency } onChange={ this.handleChange }>
+  formDropdowns() {
+    const { currencies } = this.props;
+    const { currency, method, tag } = this.state;
+    return (
+      <>
+        <select
+          id="currency"
+          data-testid="currency-input"
+          value={ currency }
+          onChange={ this.handleChange }
+        >
           {currencies.map((eachCurrency) => (
             <option
               data-testid={ eachCurrency }
@@ -50,15 +73,35 @@ class WalletForm extends React.Component {
             </option>))}
         </select>
 
-        <select id="method" data-testid="method-input" value={ method } onChange={ this.handleChange }>
+        <select
+          id="method"
+          data-testid="method-input"
+          value={ method }
+          onChange={ this.handleChange }
+        >
           {this.paymentMethods
             .map((eachMethod) => <option key={ eachMethod }>{eachMethod}</option>)}
         </select>
 
-        <select id="tag" data-testid="tag-input" value={ tag } onChange={ this.handleChange }>
+        <select
+          id="tag"
+          data-testid="tag-input"
+          value={ tag }
+          onChange={ this.handleChange }
+        >
           {this.expenseTags.map((eachTag) => <option key={ eachTag }>{eachTag}</option>)}
         </select>
+      </>
+    );
+  }
 
+  render() {
+    const { addExpense } = this.props;
+    const { value, description, currency, method, tag } = this.state;
+    return (
+      <form>
+        {this.formInputs()}
+        {this.formDropdowns()}
         <button
           type="button"
           onClick={ () => {

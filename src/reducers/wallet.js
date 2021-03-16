@@ -24,6 +24,11 @@ export default (state = initial, action) => {
       expenses: [...state.expenses, expenseToAdd],
       expenseId: state.expenseId + 1,
     };
+  case types.DELETE_EXPENSE:
+    return {
+      ...state,
+      expenses: state.expenses.filter((expense) => expense.id !== action.payload),
+    };
   default:
     return state;
   }
