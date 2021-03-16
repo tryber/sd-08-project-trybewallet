@@ -32,8 +32,8 @@ class Login extends React.Component {
   handleChange({ target: { name, value } }) {
     this.setState({
       [name]: value,
-    },
-    this.emailValidation());
+    });
+    // this.emailValidation();
   }
 
   emailValidation() {
@@ -47,7 +47,7 @@ class Login extends React.Component {
 
   render() {
     const { disabled, email, password, redirect } = this.state;
-    const { handleChange, handleClick } = this;
+    const { handleChange, handleClick, emailValidation } = this;
     return (
       <section>
         <form>
@@ -56,10 +56,10 @@ class Login extends React.Component {
           >
             Email
             <input
+              data-testid="email-input"
               type="email"
               name="email"
               value={ email }
-              data-testid="email-input"
               onChange={ (event) => handleChange(event) }
             />
           </label>
@@ -73,6 +73,7 @@ class Login extends React.Component {
               value={ password }
               type="password"
               onChange={ (event) => handleChange(event) }
+              onKeyUp={ () => emailValidation() }
             />
           </label>
           <button
