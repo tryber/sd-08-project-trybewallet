@@ -25,7 +25,7 @@ class Header extends React.Component {
           </div>
           <div>
             <h3 data-testid="header-currency-field">
-              {'BRL'}
+              BRL
             </h3>
           </div>
         </section>
@@ -40,6 +40,6 @@ const mapStateToProps = (state) => ({
 
 Header.propTypes = {
   userEmail: PropTypes.string.isRequired,
-}
+};
 
 export default connect(mapStateToProps)(Header);
