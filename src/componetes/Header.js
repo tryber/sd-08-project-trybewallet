@@ -5,13 +5,13 @@ import PropTypes from 'prop-types';
 class Header extends React.Component {
   render() {
     const { user, expenses } = this.props;
+    const valueNumber = expenses.map((e) => Number(e.value));
+    const contador = valueNumber.reduce((acc, curr) => acc + curr, 0);
+
     return (
       <div>
         <p data-testid="email-field">{user.email}</p>
-        <p data-testid="total-field">
-          {expenses.map((e) => Number(e.value))
-            .reduce((acc, curr) => acc + curr, 0)}
-        </p>
+        <p data-testid="total-field">{contador}</p>
         <p data-testid="header-currency-field">BRL</p>
       </div>
     );
@@ -29,8 +29,9 @@ Header.propTypes = {
   }).isRequired,
   expenses: PropTypes.shape({
     value: PropTypes.string,
+    map: PropTypes.func.isRequired,
   }).isRequired,
-  map: PropTypes.func.isRequired,
+
 };
 
 export default connect(mapStateToProps)(Header);
