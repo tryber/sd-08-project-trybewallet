@@ -14,7 +14,7 @@ class Form extends Component {
       currency: 'USD',
       method: 'Dinheiro',
       tag: 'Alimentação',
-      id: '0',
+      id: 0,
     };
     this.handleChange = this.handleChange.bind(this);
     this.addExpense = this.addExpense.bind(this);
@@ -91,7 +91,7 @@ class Form extends Component {
     event.preventDefault();
     const { value, description, currency, method, tag, id } = this.state;
     const { walletAddExpenseAction } = this.props;
-    const rates = await fetchApi();
+    const exchangeRates = await fetchApi();
     const newExpense = {
       id,
       value,
@@ -99,7 +99,7 @@ class Form extends Component {
       currency,
       method,
       tag,
-      rates,
+      exchangeRates,
     };
     console.log(newExpense);
     walletAddExpenseAction(newExpense);
