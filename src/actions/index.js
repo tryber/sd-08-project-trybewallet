@@ -19,7 +19,7 @@ export function requestCurrency(currency) {
 
 export function saveData(expense) {
   return {
-    d: console.log(expense),
+    // d: console.log(expense),
     type: SAVE_DATA,
     expense,
   };

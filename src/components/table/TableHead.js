@@ -13,7 +13,7 @@ export default class TableHead extends Component {
           <th>Câmbio utilizado</th>
           <th>Valor convertido</th>
           <th>Moeda de conversão</th>
-          <th>Editar / Excluir</th>
+          <th>Editar/Excluir</th>
         </tr>
       </table>
     );
