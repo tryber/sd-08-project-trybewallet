@@ -1,13 +1,43 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import getCoin from '../services/getCoin';
+import infoWalletAction from '../actions/expenses';
 
 class FormularioDespesa extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      id: 0,
+      value: 0,
+      description: '',
+      currency: '',
+      method: '',
+      tag: '',
+      exchangeRates: {},
+    };
+    this.handleClick = this.handleClick.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange({ target }) {
+    const { name, value } = target;
+    this.setState({ [name]: value });
+  }
+
   despesa() {
+    const { value } = this.state;
     return (
       <label htmlFor="despesa">
         Valor:
-        <input type="number" data-testid="value-input" id="despesa" />
+        <input
+          type="number"
+          data-testid="value-input"
+          id="despesa"
+          name="value"
+          value={ value }
+          onChange={ this.handleChange }
+        />
       </label>
     );
   }
@@ -19,12 +49,18 @@ class FormularioDespesa extends React.Component {
     return (
       <label htmlFor="moeda">
         Moeda:
-        <select data-testid="currency-input" id="moeda">
+        <select
+          data-testid="currency-input"
+          id="moeda"
+          name="currency"
+          onChange={ this.handleChange }
+        >
           {moedasFiltro.map(({ code }) => (
             <option
               key={ code }
               data-testid={ code }
               value={ code }
+
             >
               {code}
             </option>))}
@@ -37,8 +73,16 @@ class FormularioDespesa extends React.Component {
     return (
       <label htmlFor="pag">
         Método de Pagamento:
-        <select id="pag" data-testid="method-input">
-          <option>Dinheiro</option>
+        <select
+          id="pag"
+          data-testid="method-input"
+          name="method"
+          onChange={ this.handleChange }
+        >
+          <option>
+            Dinheiro
+          </option
+          >
           <option>Cartão de crédito</option>
           <option>Cartão de débito</option>
 
@@ -51,7 +95,12 @@ class FormularioDespesa extends React.Component {
     return (
       <label htmlFor="tag">
         Tag:
-        <select id="tag" data-testid="tag-input">
+        <select
+          id="tag"
+          data-testid="tag-input"
+          name="tag"
+          onChange={ this.handleChange }
+        >
           <option>Alimentação</option>
           <option>Lazer</option>
           <option>Trabalho</option>
@@ -67,14 +116,31 @@ class FormularioDespesa extends React.Component {
     return (
       <label htmlFor="descricao">
         Descrição da Despesa
-        <input data-testid="description-input" id="descricao" />
+        <input
+          data-testid="description-input"
+          id="descricao"
+          name="description"
+          onChange={ this.handleChange }
+        />
       </label>
     );
   }
 
+  async handleClick() {
+    const obj = await getCoin();
+    const { expense } = this.props;
+    expense(this.state);
+    this.setState((estadoAnterior) => ({
+      exchangeRates: obj,
+      id: estadoAnterior.id + 1,
+    }));
+  }
+
   botao() {
+    const { handleClick } = this;
+
     return (
-      <button type="button">Adicionar despesa</button>
+      <button type="button" onClick={ handleClick }>Adicionar despesa</button>
     );
   }
 
@@ -87,6 +153,7 @@ class FormularioDespesa extends React.Component {
           {this.pagamento()}
           {this.tag()}
           {this.descricao()}
+          {this.botao()}
         </form>
       </div>
 
@@ -97,9 +164,13 @@ class FormularioDespesa extends React.Component {
 const mapStateToProps = (state) => ({
   wallet: state.wallet });
 
+const mapDispatchToProps = (dispatch) => ({
+  expense: (value) => dispatch(infoWalletAction(value)),
+});
+
 FormularioDespesa.propTypes = {
   wallet: PropTypes.shape().isRequired,
-
+  expense: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps)(FormularioDespesa);
+export default connect(mapStateToProps, mapDispatchToProps)(FormularioDespesa);
