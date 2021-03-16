@@ -18,7 +18,7 @@ class Header extends React.Component {
     console.log(this.props);
     return (
       <section>
-        <p data-tesid="email-field">{`Email: ${email}`}</p>
+        <p data-testid="email-field">{`Email: ${email}`}</p>
         <p data-testid="total-field">{`Despesa total: ${expenses}`}</p>
         <span data-testid="header-currency-field">{ currency }</span>
       </section>
