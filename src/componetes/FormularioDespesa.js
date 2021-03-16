@@ -135,6 +135,7 @@ class FormularioDespesa extends React.Component {
     }));
     const { expense } = this.props;
     expense(this.state);
+    this.setState({ value: '0' });
   }
 
   botao() {

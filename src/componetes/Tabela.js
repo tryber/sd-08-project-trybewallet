@@ -26,7 +26,7 @@ class Tabela extends Component {
             { (e.value * e.exchangeRates[e.currency].ask).toFixed(2) }
           </th>
           <th>Real</th>
-          <th>Editar/Excluir</th>
+          <th><button type="button" data-testid="delete-btn">detelar</button></th>
         </tr>))
     );
   }

@@ -6,13 +6,14 @@ class Header extends React.Component {
   render() {
     const { user, wallet } = this.props;
     const { expenses } = wallet;
-    const valueNumber = expenses.map((e) => Number(e.value));
+    const valueNumber = expenses.map((e) => Number(e.value)
+    * e.exchangeRates[e.currency].ask);
     const contador = valueNumber.reduce((acc, curr) => acc + curr, 0);
 
     return (
       <div>
         <p data-testid="email-field">{user.email}</p>
-        <p data-testid="total-field">{contador}</p>
+        <p data-testid="total-field">{contador.toFixed(2)}</p>
         <p data-testid="header-currency-field">BRL</p>
       </div>
     );
