@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 export default class TableHead extends Component {
   render() {
     return (
-      <table>
+      <thead>
         <tr>
           <th>Descrição</th>
           <th>Tag</th>
@@ -15,7 +15,7 @@ export default class TableHead extends Component {
           <th>Moeda de conversão</th>
           <th>Editar/Excluir</th>
         </tr>
-      </table>
+      </thead>
     );
   }
 }

@@ -5,9 +5,8 @@ import PropTypes from 'prop-types';
 class TableBody extends Component {
   render() {
     const { expensesToTable } = this.props;
-    // console.log(expensesToTable);
     return (
-      <table>
+      <tbody>
         {
           expensesToTable.length > 0
             && expensesToTable
@@ -38,7 +37,7 @@ class TableBody extends Component {
                 </tr>))
         }
 
-      </table>
+      </tbody>
     );
   }
 }
@@ -52,7 +51,7 @@ const mapStateToProps = (state) => ({
 // };
 
 TableBody.propTypes = {
-  expensesToTable: PropTypes.func.isRequired,
+  expensesToTable: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default connect(mapStateToProps)(TableBody);
