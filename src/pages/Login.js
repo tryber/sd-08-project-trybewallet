@@ -1,9 +1,97 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router';
+import { savesUserEmail as savesUserEmailAction } from '../actions';
 
 class Login extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.handleChange = this.handleChange.bind(this);
+    this.emailValidation = this.emailValidation.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+
+    this.state = {
+      email: '',
+      password: '',
+      disabled: true,
+      redirect: false,
+    };
+  }
+
+  handleClick() {
+    const { email } = this.state;
+    const { savesUserEmail } = this.props;
+    this.setState({
+      redirect: true,
+    });
+    savesUserEmail(email);
+  }
+
+  handleChange({ target: { name, value } }) {
+    this.setState({
+      [name]: value,
+    },
+    this.emailValidation());
+  }
+
+  emailValidation() {
+    const { email, password } = this.state;
+    let disabled = true;
+    const emailValid = /^[\w+.]+@\w+\.\w{2,}(?:\.\w{2})?$/, minLength = 6;
+    disabled = !(emailValid.test(email) && password.length >= minLength);
+    this.setState({ disabled });
+  }
+
   render() {
-    return <div>Login</div>;
+    const { disabled, email, password, redirect } = this.state;
+    const { handleChange, handleClick } = this;
+    return (
+      <>
+        <section>
+          <form>
+            <label
+              htmlFor="email"
+            >
+              Email
+              <input
+                type="email"
+                name="email"
+                value={ email }
+                data-testid="email-input"
+                onChange={ (event) => handleChange(event) }
+              />
+            </label>
+            <label
+              htmlFor="email"
+            >
+              Senha
+              <input
+                data-testid="password-input"
+                name="password"
+                value={ password }
+                type="password"
+                onChange={ (event) => handleChange(event) }
+              />
+            </label>
+            <button
+              className="login-btn"
+              type="button"
+              disabled={ disabled }
+              onClick={ () => handleClick() }
+            >
+              Entrar
+            </button>
+            { redirect ? <Redirect to="/carteira" /> : '' }
+          </form>
+        </section>
+      </>
+    );
   }
 }
 
-export default Login;
+const mapDispatchToProps = (dispatch) => ({
+  savesUserEmail: (email) => dispatch(savesUserEmailAction(email)),
+})
+
+export default connect(null, mapDispatchToProps)(Login)
