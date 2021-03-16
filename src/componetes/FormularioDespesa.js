@@ -116,7 +116,7 @@ class FormularioDespesa extends React.Component {
   descricao() {
     return (
       <label htmlFor="descricao">
-        Descrição da Despesa
+        Descrição:
         <input
           data-testid="description-input"
           id="descricao"

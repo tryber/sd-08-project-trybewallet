@@ -13,20 +13,20 @@ class Tabela extends Component {
     const { expenses } = wallet;
     return (
       expenses.map((e) => (
-        <tr key={ e.id }>
-          <th>{e.description}</th>
-          <th>{e.tag}</th>
-          <th>{e.method}</th>
-          <th>{e.value}</th>
-          <th>{e.exchangeRates[e.currency].name }</th>
-          <th>
+        <tr key={ e.id } role="row">
+          <td>{e.description}</td>
+          <td>{e.tag}</td>
+          <td>{e.method}</td>
+          <td>{e.value}</td>
+          <td>{e.exchangeRates[e.currency].name }</td>
+          <td>
             {parseFloat(e.exchangeRates[e.currency].ask).toFixed(2)}
-          </th>
-          <th>
+          </td>
+          <td>
             { (e.value * e.exchangeRates[e.currency].ask).toFixed(2) }
-          </th>
-          <th>Real</th>
-          <th><button type="button" data-testid="delete-btn">detelar</button></th>
+          </td>
+          <td>Real</td>
+          <td><button type="button" data-testid="delete-btn">detelar</button></td>
         </tr>))
     );
   }
