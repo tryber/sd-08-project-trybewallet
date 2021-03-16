@@ -163,8 +163,8 @@ const mapDispatchToProps = (dispatch) => ({
 
 Form.propTypes = {
   setCurrencies: PropTypes.func.isRequired,
-  addEx: PropTypes.func.isRequired,
-  exp: PropTypes.func.isRequired,
+  addEx: PropTypes.arrayOf(PropTypes.array).isRequired,
+  exp: PropTypes.arrayOf(PropTypes.array).isRequired,
   currencies: PropTypes.shape({
     map: PropTypes.func.isRequired,
   }).isRequired,

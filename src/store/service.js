@@ -12,3 +12,15 @@ export async function fetchCurrency() {
     .then((response) => response.json())
     .then((currencies) => currencies);
 }
+
+export const table = [
+  'Descrição',
+  'Tag',
+  'Método de pagamento',
+  'Valor',
+  'Moeda',
+  'Câmbio utilizado',
+  'Valor convertido',
+  'Moeda de conversão',
+  'Editar/Excluir',
+];
