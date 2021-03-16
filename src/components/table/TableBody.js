@@ -1,10 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { excludesData } from '../../actions';
 
 class TableBody extends Component {
+  handleClick({ target: { value } }) {
+    const { expensesToTable, excludeData } = this.props;
+    // console.log(expensesToTable);
+    // console.log(value);
+    // const buttonValue = value;
+    const newList = expensesToTable
+      .filter((listItem) => Number(listItem.id) !== Number(value));
+    excludeData(newList);
+  }
+
   render() {
     const { expensesToTable } = this.props;
+    // console.log(expensesToTable);
     return (
       <tbody>
         {
@@ -30,13 +42,14 @@ class TableBody extends Component {
                     <button
                       type="button"
                       data-testid="delete-btn"
+                      value={ tableLine.id }
+                      onClick={ (e) => this.handleClick(e) }
                     >
-                      Editar / Excluir
+                      Excluir
                     </button>
                   </td>
                 </tr>))
         }
-
       </tbody>
     );
   }
@@ -46,12 +59,13 @@ const mapStateToProps = (state) => ({
   expensesToTable: state.wallet.expenses,
 });
 
-// const mapDispatchToProps = (dispatch) => {
-
-// };
+const mapDispatchToProps = (dispatch) => ({
+  excludeData: (param) => dispatch(excludesData(param)),
+});
 
 TableBody.propTypes = {
   expensesToTable: PropTypes.arrayOf(PropTypes.object).isRequired,
+  excludeData: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps)(TableBody);
+export default connect(mapStateToProps, mapDispatchToProps)(TableBody);

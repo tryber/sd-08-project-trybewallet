@@ -1,4 +1,4 @@
-import { REQUEST_CURRENCY, SAVE_DATA } from '../actions/index';
+import { REQUEST_CURRENCY, SAVE_DATA, EXCLUDES_DATA } from '../actions/index';
 
 const initialState = {
   currency: [],
@@ -16,6 +16,12 @@ export default function wallet(state = initialState, action) {
     return {
       ...state,
       expenses: [...state.expenses, action.expense],
+    };
+  case EXCLUDES_DATA:
+    // console.log(action.excludeExpense);
+    return {
+      ...state,
+      expenses: action.excludeExpense,
     };
 
   default:
