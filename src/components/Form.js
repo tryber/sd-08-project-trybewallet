@@ -4,14 +4,13 @@ import PropTypes from 'prop-types';
 import { addExpenses, requestCurrency } from '../actions';
 import getCurrencyList, { fetchCurrency } from '../store/service';
 
-const INITAL_STATE_FORM = {
+const INITIAL_STATE = {
   value: '0',
-  method: 'Dinheiro',
-  tag: 'Alimentação',
   description: '',
   currency: 'USD',
+  method: 'Dinheiro',
+  tag: 'Alimentação',
   id: 0,
-
 };
 const createId = (arr) => {
   if (arr.length === 0) {
@@ -24,7 +23,7 @@ class Form extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      ...INITAL_STATE_FORM,
+      ...INITIAL_STATE,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
@@ -85,7 +84,7 @@ class Form extends React.Component {
         Despesas:
         <input
           type="text"
-          name="descrição"
+          name="description"
           value={ descrição }
           data-testid="description-input"
           onChange={ this.handleChange }
@@ -97,10 +96,11 @@ class Form extends React.Component {
   renderCurrency() {
     const { currencies } = this.props;
     return (
-      <select data-testid="USD" name="currency" onChange={ this.handleChange }>
+      <select data-testid="currency-input" name="currency" onChange={ this.handleChange }>
         {
           currencies.map((list, index) => (
             <option
+              data-testid={ list }
               key={ index }
               value={ list }
             >
@@ -163,8 +163,8 @@ const mapDispatchToProps = (dispatch) => ({
 
 Form.propTypes = {
   setCurrencies: PropTypes.func.isRequired,
-  addEx: PropTypes.arrayOf(Object).isRequired,
-  exp: PropTypes.arrayOf(Array).isRequired,
+  addEx: PropTypes.func.isRequired,
+  exp: PropTypes.func.isRequired,
   currencies: PropTypes.shape({
     map: PropTypes.func.isRequired,
   }).isRequired,
