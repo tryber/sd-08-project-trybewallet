@@ -3,13 +3,14 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import currencyFetchAction from '../../actions/currencyFetchAction';
 import addExpenseAction from '../../actions/addExpenseAction';
+import EditExpense from './EditExpense';
 
 class WalletForm extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      value: 0,
+      value: '',
       description: '',
       currency: '',
       method: '',
@@ -20,6 +21,7 @@ class WalletForm extends React.Component {
     this.expenseTags = ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
 
     this.handleChange = this.handleChange.bind(this);
+    this.addForm = this.addForm.bind(this);
     this.formInputs = this.formInputs.bind(this);
     this.formDropdowns = this.formDropdowns.bind(this);
   }
@@ -95,11 +97,11 @@ class WalletForm extends React.Component {
     );
   }
 
-  render() {
+  addForm() {
     const { addExpense } = this.props;
     const { value, description, currency, method, tag } = this.state;
     return (
-      <form>
+      <>
         {this.formInputs()}
         {this.formDropdowns()}
         <button
@@ -113,10 +115,20 @@ class WalletForm extends React.Component {
               tag,
             };
             addExpense(expense);
+            this.setState({ value: '' });
           } }
         >
           Adicionar despesa
         </button>
+      </>
+    );
+  }
+
+  render() {
+    const { editing } = this.props;
+    return (
+      <form>
+        { editing ? <EditExpense /> : this.addForm() }
       </form>
     );
   }
@@ -124,6 +136,7 @@ class WalletForm extends React.Component {
 
 const mapStateToProps = (state) => ({
   currencies: state.wallet.currencies,
+  editing: state.wallet.editing,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -135,6 +148,7 @@ WalletForm.propTypes = {
   addExpense: PropTypes.func.isRequired,
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
   currencyFetch: PropTypes.func.isRequired,
+  editing: PropTypes.bool.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(WalletForm);

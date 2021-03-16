@@ -14,8 +14,7 @@ function addExpenseAction(expense) {
       .then((response) => response.json())
       .then((data) => {
         const exchangeRates = {};
-        const filteredData = Object.entries(data)
-          .filter((currency) => currency[0] !== 'USDT');
+        const filteredData = Object.entries(data);
         filteredData
           .forEach((item) => Object.assign(exchangeRates, { [item[0]]: item[1] }));
 

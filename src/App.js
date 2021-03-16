@@ -20,3 +20,5 @@ export default App;
 // Agradecimentos especiais:
 // - Paulo Simões
 // - Arnaelcio Gomes;
+// - Karine Moreira
+// - Adriano Forcellini;

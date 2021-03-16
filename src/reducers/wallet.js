@@ -5,6 +5,7 @@ const initial = {
   currencies: [],
   expenses: [],
   expenseId: 0,
+  editing: false,
 };
 
 export default (state = initial, action) => {
