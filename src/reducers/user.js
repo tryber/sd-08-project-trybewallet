@@ -1,9 +1,7 @@
 import { SET_PASSWORD, SAVE_EMAIL } from '../common/actionTypes';
-// import wallet from './wallet';
 
 const INITIAL_STATE = {
   email: '',
-  password: '',
 };
 
 export default function user(state = INITIAL_STATE, action) {

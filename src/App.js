@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch, BrowserRouter } from 'react-router-dom';
+import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
 import Login from './pages/Login';
@@ -10,16 +10,12 @@ import store from './store';
 function App() {
   return (
     <Provider store={ store }>
-      <BrowserRouter>
+      <Router>
         <Switch>
-          <Route exact path="/">
-            <Login />
-          </Route>
-          <Route path="/carteira">
-            <Wallet />
-          </Route>
+          <Route exact path="/" component={ Login } />
+          <Route exact path="/carteira" component={ Wallet } />
         </Switch>
-      </BrowserRouter>
+      </Router>
     </Provider>
   );
 }
