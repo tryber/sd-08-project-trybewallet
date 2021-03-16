@@ -1,10 +1,10 @@
-import React from 'react';
-import Form from '../components/LoginForm';
+import React, { Component } from 'react';
+import LoginForm from '../components/LoginForm';
 
-export default function Login() {
-  return (
-    <fielset>
-      <Form />
-    </fielset>
-  );
+class Login extends Component {
+  render() {
+    return <LoginForm />;
+  }
 }
+
+export default Login;

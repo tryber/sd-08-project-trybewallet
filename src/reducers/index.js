@@ -1,29 +1,8 @@
-import { SET_EMAIL, SET_PASSWORD, SAVE_EMAIL } from '../common/actionTypes';
-// import wallet from './wallet';
+import { combineReducers } from 'redux';
 
-const INITIAL_STATE = {
-  user: {},
-  email: '',
-  password: '',
-};
+import user from './user';
+import wallet from './wallet';
 
-export default function reducer(state = INITIAL_STATE, action) {
-  switch (action.type) {
-  case SET_EMAIL:
-    return ({
-      ...state,
-      email: action.payload,
-    });
-  case SET_PASSWORD:
-    return ({
-      ...state,
-      password: action.payload,
-    });
-  case SAVE_EMAIL:
-    return ({
-      ...state,
-      user: action.payload,
-    });
-  default: return state;
-  }
-}
+const reducer = combineReducers({ user, wallet });
+
+export default reducer;

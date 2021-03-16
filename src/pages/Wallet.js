@@ -5,7 +5,7 @@ import Header from '../components/Header';
 import WalletForm from '../components/WalletForm';
 
 export default function Wallet() {
-  const { email } = useSelector((state) => state);
+  const { email } = useSelector((state) => state.user);
 
   return (
     <>

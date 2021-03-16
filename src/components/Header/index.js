@@ -12,9 +12,9 @@ export default function Header(props) {
       </div>
       <div data-testid="value-input">
         <p>Despesas totais: </p>
+        <span data-testid="total-field">0</span>
+        <span data-testid="header-currency-field">BRL</span>
       </div>
-      <span data-testid="total-field">0</span>
-      <span data-testid="header-currency-field">BRL</span>
     </header>
   );
 }

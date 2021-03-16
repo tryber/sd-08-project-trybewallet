@@ -1,23 +1,39 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import { updateEmail } from '../../../actions';
+import React, { Component } from 'react';
 
-export default function InputEmail() {
-  const dispatch = useDispatch();
-
-  function handleChange(e) {
-    dispatch(updateEmail(e.target.value));
+class InputEmail extends Component {
+  render() {
+    const { handleChange } = this.props;
+    return (
+      <label htmlFor="email">
+        E-mail:
+        <input
+          type="email"
+          name="email"
+          onChange={ handleChange }
+          data-testid="email-input"
+        />
+      </label>
+    );
   }
-
-  return (
-    <label htmlFor="email">
-      E-mail:
-      <input
-        type="text"
-        name="email"
-        onChange={ handleChange }
-        data-testid="email-input"
-      />
-    </label>
-  );
 }
+
+export default InputEmail;
+// export default function InputEmail(props) {
+//   const { state, setState } = props;
+
+//   function handleChange({ target }) {
+//     setState({ ...state, email: target.value });
+//   }
+
+//   return (
+//     <label htmlFor="email">
+//       E-mail:
+//       <input
+//         type="email"
+//         name="email"
+//         onChange={ handleChange }
+//         data-testid="email-input"
+//       />
+//     </label>
+//   );
+// }
