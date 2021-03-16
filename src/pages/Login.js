@@ -8,6 +8,9 @@ class Login extends React.Component {
     super();
 
     this.handleInput = this.handleInput.bind(this);
+    this.validateEmail = this.validateEmail.bind(this);
+    this.validatePassword = this.validatePassword.bind(this);
+    this.validateForm = this.validateForm.bind(this);
 
     this.state = {
       email: '',
@@ -27,7 +30,7 @@ class Login extends React.Component {
     return false;
   }
 
-  handleInput({ target }) {
+  validateForm(target) {
     const { email, password } = this.state;
     const checkEmail = target.name === 'email'
       ? this.validateEmail(target.value)
@@ -36,15 +39,19 @@ class Login extends React.Component {
       ? this.validatePassword(target.value)
       : this.validatePassword(password);
     const validForm = checkEmail && checkPassword;
-    this.setState(({
+    return validForm;
+  }
+
+  handleInput({ target }) {
+    this.setState({
       [target.name]: target.value,
-      validForm,
-    }));
+      validForm: this.validateForm(target),
+    });
   }
 
   render() {
     const { validForm, email, password } = this.state;
-    const { handleLogin, history } = this.props;
+    const { saveEmail, history } = this.props;
     return (
       <div>
         <form>
@@ -66,7 +73,7 @@ class Login extends React.Component {
             type="button"
             disabled={ !validForm }
             onClick={ () => {
-              handleLogin(this.state);
+              saveEmail(email);
               history.push('/carteira');
             } }
           >
@@ -79,14 +86,11 @@ class Login extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  handleLogin: (state) => {
-    const { email } = state;
-    dispatch(login({ email }));
-  },
+  saveEmail: (email) => dispatch(login({ email })),
 });
 
 Login.propTypes = {
-  handleLogin: PropTypes.func.isRequired,
+  saveEmail: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,

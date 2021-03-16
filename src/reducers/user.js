@@ -1,23 +1,16 @@
 const INITIAL_STATE = {
-  user: {
-    email: '',
-  },
-  wallet: {
-    currencies: [],
-    expenses: [],
-  },
+  email: '',
 };
 
-function userReducer(state = INITIAL_STATE, action) {
+function user(state = INITIAL_STATE, action) {
   switch (action.type) {
   case 'LOGIN':
     return {
-      ...state,
-      user: { email: action.email },
+      email: action.email,
     };
   default:
     return state;
   }
 }
 
-export default userReducer;
+export default user;
