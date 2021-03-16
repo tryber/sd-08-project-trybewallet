@@ -18,3 +18,10 @@ export function deleteExpense(id) {
     payload: id,
   };
 }
+
+export function editExpense(newExpense) {
+  return {
+    type: 'EDIT_EXPENSE',
+    payload: newExpense,
+  };
+}

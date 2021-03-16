@@ -16,6 +16,46 @@ class ExpenseTable extends React.Component {
     calcTotal(event.target.id);
   }
 
+  dataRow(expense) {
+    const { editRow } = this.props;
+    const { currency, description, exchangeRates,
+      id, method, tag, value } = expense;
+    const { ask, name } = exchangeRates[currency];
+    const convertedValue = (value * ask).toFixed(2);
+    const roundedAsk = parseFloat(ask).toFixed(2);
+
+    return (
+      <tr key={ `${id}-tr` }>
+        <td key={ `${id}-description` }>{ description }</td>
+        <td key={ `${id}-tag` }>{ tag }</td>
+        <td key={ `${id}-method` }>{ method }</td>
+        <td key={ `${id}-value` }>{ value }</td>
+        <td key={ `${id}-currency` }>{ name }</td>
+        <td key={ `${id}-ask` }>{ roundedAsk }</td>
+        <td key={ `${id}-convertedValue` }>{ convertedValue }</td>
+        <td key={ `${id}-BRL` }>Real</td>
+        <td key={ `${id}-buttons` }>
+          <button
+            data-testid="edit-btn"
+            id={ id }
+            onClick={ () => editRow(expense) }
+            type="button"
+          >
+            Editar
+          </button>
+          <button
+            data-testid="delete-btn"
+            id={ id }
+            onClick={ this.deleteExpense }
+            type="button"
+          >
+            Excluir
+          </button>
+        </td>
+      </tr>
+    );
+  }
+
   tableHeaderElements() {
     return (
       <tr>
@@ -36,35 +76,11 @@ class ExpenseTable extends React.Component {
     const { expenses } = this.props;
     return (
       expenses.map((expense) => {
-        const { currency, description, exchangeRates,
-          id, method, tag, value } = expense;
-        const { ask, name } = exchangeRates[currency];
-        const convertedValue = (value * ask).toFixed(2);
-        const roundedAsk = parseFloat(ask).toFixed(2);
+        const { id } = expense;
 
         return (
           <tbody key={ `${id}-tbody` }>
-            <tr key={ `${id}-tr` }>
-              <td key={ `${id}-description` }>{ description }</td>
-              <td key={ `${id}-tag` }>{ tag }</td>
-              <td key={ `${id}-method` }>{ method }</td>
-              <td key={ `${id}-value` }>{ value }</td>
-              <td key={ `${id}-currency` }>{ name }</td>
-              <td key={ `${id}-ask` }>{ roundedAsk }</td>
-              <td key={ `${id}-convertedValue` }>{ convertedValue }</td>
-              <td key={ `${id}-BRL` }>Real</td>
-              <td key={ `${id}-buttons` }>
-                <button type="button">Editar</button>
-                <button
-                  type="button"
-                  onClick={ this.deleteExpense }
-                  id={ id }
-                  data-testid="delete-btn"
-                >
-                  Excluir
-                </button>
-              </td>
-            </tr>
+            { this.dataRow(expense) }
           </tbody>
         );
       })
@@ -94,6 +110,7 @@ ExpenseTable.propTypes = {
   })).isRequired,
   removeExpense: PropTypes.func.isRequired,
   calcTotal: PropTypes.func.isRequired,
+  editRow: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

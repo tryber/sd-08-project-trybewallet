@@ -9,9 +9,11 @@ class Wallet extends React.Component {
 
     this.state = {
       total: 0,
+      editing: { id: -1 },
     };
 
     this.calcTotal = this.calcTotal.bind(this);
+    this.editRow = this.editRow.bind(this);
   }
 
   calcTotal(expenseToRemove) {
@@ -29,13 +31,24 @@ class Wallet extends React.Component {
     });
   }
 
+  editRow(expense) {
+    const expenseToEdit = expense || { id: -1 };
+    this.setState({
+      editing: expenseToEdit,
+    });
+  }
+
   render() {
-    const { total } = this.state;
+    const { total, editing } = this.state;
     return (
       <>
         <WalletHeader total={ total } />
-        <ExpenseForm calcTotal={ this.calcTotal } />
-        <ExpenseTable calcTotal={ this.calcTotal } />
+        <ExpenseForm
+          calcTotal={ this.calcTotal }
+          editRow={ this.editRow }
+          editing={ editing }
+        />
+        <ExpenseTable calcTotal={ this.calcTotal } editRow={ this.editRow } />
       </>
     );
   }

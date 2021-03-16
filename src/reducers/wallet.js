@@ -4,17 +4,28 @@ const INITIAL_STATE = {
 };
 
 function wallet(state = INITIAL_STATE, action) {
-  switch (action.type) {
+  const { type, payload } = action;
+  switch (type) {
   case 'ADD_EXPENSE':
-    return { ...state, expenses: [...state.expenses, action.payload] };
+    return { ...state, expenses: [...state.expenses, payload] };
   case 'SET_CURRENCIES':
-    return { ...state, currencies: action.payload };
+    return { ...state, currencies: payload };
   case 'DELETE_EXPENSE':
-    return { // ...state, expenses: action.payload };
+    return {
       ...state,
       expenses: state.expenses.filter(
-        (expense) => parseFloat(expense.id) !== parseFloat(action.payload),
+        (expense) => parseInt(expense.id, 10) !== parseInt(payload, 10),
       ) };
+  case 'EDIT_EXPENSE':
+    return {
+      ...state,
+      expenses: state.expenses.map((currentExpense) => {
+        if (parseInt(currentExpense.id, 10) === parseInt(payload.id, 10)) {
+          return payload;
+        }
+        return currentExpense;
+      }),
+    };
   default:
     return state;
   }

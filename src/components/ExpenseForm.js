@@ -4,9 +4,8 @@ import { connect } from 'react-redux';
 import Input from './Input';
 import Select from './Select';
 import { getCurrenciesAcronym, fetchCurrencies } from '../services/requests';
-import { addExpense, setCurrencies } from '../actions/walletActions';
-
-const FOOD = 'Alimentação';
+import { addExpense, editExpense, setCurrencies } from '../actions/walletActions';
+import { ALL_METHODS, ALL_TAGS } from '../helpers/constants';
 
 class ExpenseForm extends React.Component {
   constructor() {
@@ -16,7 +15,7 @@ class ExpenseForm extends React.Component {
       currency: 'USD',
       description: '',
       method: 'Dinheiro',
-      tag: FOOD,
+      tag: 'Alimentação',
       value: '0',
     };
 
@@ -60,16 +59,56 @@ class ExpenseForm extends React.Component {
       // currency: 'USD',
       description: '',
       // method: 'Dinheiro',
-      // tag: FOOD,
+      // tag: 'Alimentação',
       value: '0',
     });
   }
 
+  handleEditSubmit(expense) {
+    const { calcTotal, editRow, updateExpense } = this.props;
+    // console.log(expense);
+    const editedExpense = { ...expense, ...this.state };
+    // console.log(editedExpense);
+    const NONEXISTENT_INDEX = -1;
+
+    updateExpense(editedExpense);
+    editRow({ id: NONEXISTENT_INDEX });
+    this.setState({
+      description: '',
+      value: '0',
+    });
+    calcTotal(NONEXISTENT_INDEX);
+  }
+
+  showAddButton() {
+    return (
+      <button
+        type="submit"
+        onClick={ this.handleSubmit }
+      >
+        Adicionar despesa
+      </button>
+    );
+  }
+
+  showEditButton(expense) {
+    return (
+      <button
+        type="submit"
+        onClick={ (event) => {
+          event.preventDefault();
+          this.handleEditSubmit(expense);
+        } }
+      >
+        Editar despesa
+      </button>
+    );
+  }
+
   render() {
     const { description, value } = this.state;
-    const { currencies } = this.props;
-    const allMethods = ['Dinheiro', 'Cartão de débito', 'Cartão de crédito'];
-    const allTags = ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
+    const { currencies, editing } = this.props;
+    const NONEXISTENT_INDEX = -1;
 
     return (
       <form>
@@ -93,19 +132,16 @@ class ExpenseForm extends React.Component {
         <Select
           name="method"
           onChange={ this.handleChange }
-          options={ allMethods }
+          options={ ALL_METHODS }
         />
         <Select
           name="tag"
           onChange={ this.handleChange }
-          options={ allTags }
+          options={ ALL_TAGS }
         />
-        <button
-          type="submit"
-          onClick={ this.handleSubmit }
-        >
-          Adicionar despesa
-        </button>
+        { editing.id === NONEXISTENT_INDEX
+          ? this.showAddButton()
+          : this.showEditButton(editing) }
       </form>
     );
   }
@@ -115,6 +151,8 @@ ExpenseForm.propTypes = {
   addNewExpense: PropTypes.func.isRequired,
   calcTotal: PropTypes.func.isRequired,
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
+  editing: PropTypes.shape({ id: PropTypes.number }).isRequired,
+  editRow: PropTypes.func.isRequired,
   expenses: PropTypes.arrayOf(PropTypes.shape({
     currency: PropTypes.string,
     description: PropTypes.string,
@@ -124,6 +162,7 @@ ExpenseForm.propTypes = {
     value: PropTypes.string,
   })).isRequired,
   setCurrenciesToRedux: PropTypes.func.isRequired,
+  updateExpense: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -134,6 +173,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   addNewExpense: (expense) => dispatch(addExpense(expense)),
   setCurrenciesToRedux: (currencies) => dispatch(setCurrencies(currencies)),
+  updateExpense: (expense) => dispatch(editExpense(expense)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExpenseForm);
