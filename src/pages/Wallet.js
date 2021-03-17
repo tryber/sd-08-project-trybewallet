@@ -81,12 +81,12 @@ class Wallet extends React.Component {
   renderInput(type, name, value, handleChange) {
     return (
       <input
-        type={type}
-        id={`${name}-input`}
-        name={name}
-        data-testid={`${name}-input`}
-        onChange={handleChange}
-        value={value}
+        type={ type }
+        id={ `${name}-input` }
+        name={ name }
+        data-testid={ `${name}-input` }
+        onChange={ handleChange }
+        value={ value }
       />
     );
   }
@@ -97,15 +97,15 @@ class Wallet extends React.Component {
         id="currency-input"
         name="currency"
         data-testid="currency-input"
-        onChange={handleChange}
-        value={value}
+        onChange={ handleChange }
+        value={ value }
       >
-        {currenciesName.map((currency) => {
+        { currenciesName.map((currency) => {
           if (currency === 'USDT') return;
           return (
-            <option key={currency} data-testid={currency}>{currency}</option>
+            <option key={ currency } data-testid={ currency }>{ currency }</option>
           );
-        })}
+        }) }
       </select>
     );
   }
@@ -117,12 +117,12 @@ class Wallet extends React.Component {
         id="method-input"
         name="method"
         data-testid="method-input"
-        onChange={handleChange}
-        value={value}
+        onChange={ handleChange }
+        value={ value }
       >
-        {methods.map((method) => (
-          <option key={method}>{method}</option>
-        ))}
+        { methods.map((method) => (
+          <option key={ method }>{ method }</option>
+        )) }
       </select>
     );
   }
@@ -134,12 +134,12 @@ class Wallet extends React.Component {
         id="tag-input"
         name="tag"
         data-testid="tag-input"
-        onChange={handleChange}
-        value={value}
+        onChange={ handleChange }
+        value={ value }
       >
-        {tags.map((tag) => (
-          <option key={tag}>{tag}</option>
-        ))}
+        { tags.map((tag) => (
+          <option key={ tag }>{ tag }</option>
+        )) }
       </select>
     );
   }
@@ -152,32 +152,32 @@ class Wallet extends React.Component {
       <div>
         <header>
           TrybeWallet
-          <p data-testid="email-field">{email}</p>
-          <p data-testid="total-field">{`R$ ${total}`}</p>
+          <p data-testid="email-field">{ email }</p>
+          <p data-testid="total-field">{ `R$ ${total}` }</p>
           <p data-testid="header-currency-field">BRL</p>
         </header>
         <form>
           <label htmlFor="value-input">
-            {'Valor: '}
-            {this.renderInput('number', 'value', value, this.handleChange)}
+            { 'Valor: ' }
+            { this.renderInput('number', 'value', value, this.handleChange) }
           </label>
           <label htmlFor="description-input">
-            {'Descrição: '}
-            {this.renderInput('text', 'description', description, this.handleChange)}
+            { 'Descrição: ' }
+            { this.renderInput('text', 'description', description, this.handleChange) }
           </label>
           <label htmlFor="currency-input">
-            {'Moeda: '}
-            {this.renderSelectCurrencies(currenciesName, currency, this.handleChange)}
+            { 'Moeda: ' }
+            { this.renderSelectCurrencies(currenciesName, currency, this.handleChange) }
           </label>
           <label htmlFor="method-input">
-            {'Método de Pagamento: '}
-            {this.renderSelectPaymentMethod(method, this.handleChange)}
+            { 'Método de Pagamento: ' }
+            { this.renderSelectPaymentMethod(method, this.handleChange) }
           </label>
           <label htmlFor="tag-input">
-            {'Tag: '}
-            {this.renderSelectTag(tag, this.handleChange)}
+            { 'Tag: ' }
+            { this.renderSelectTag(tag, this.handleChange) }
           </label>
-          <button type="submit" onClick={this.handleClick}>Adicionar despesa</button>
+          <button type="submit" onClick={ this.handleClick }>Adicionar despesa</button>
         </form>
       </div>
     );

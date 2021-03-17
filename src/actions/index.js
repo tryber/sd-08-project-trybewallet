@@ -1,5 +1,6 @@
 // Coloque aqui suas actions
 import currenciesAPI from '../services';
+
 export const EMAIL = 'EMAIL';
 export const REQUEST_START = 'REQUEST_START';
 export const REQUEST_SUCCESS = 'REQUEST_SUCCESS';
