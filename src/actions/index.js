@@ -1,3 +1,4 @@
+// Coloque aqui suas actions
 import * as ActionTypes from '../common/ActionTypes';
 
 export function login(payload) {
@@ -29,5 +30,17 @@ export function editExpense(payload) {
   return {
     type: ActionTypes.WALLET_EDITEXP,
     payload,
+  };
+}
+
+export function enterEditMode(id) {
+  return {
+    type: ActionTypes.WALLET_ENTER_EDIT_MODE,
+    id,
+  };
+}
+export function exitEditMode() {
+  return {
+    type: ActionTypes.WALLET_EXIT_EDIT_MODE,
   };
 }

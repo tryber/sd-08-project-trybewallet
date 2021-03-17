@@ -25,6 +25,7 @@ function WalletHeader() {
         <span data-testid="header-currency-field">BRL</span>
       </div>
     </header>
+
   );
 }
 

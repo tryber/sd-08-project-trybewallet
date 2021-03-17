@@ -6,7 +6,6 @@ import * as actions from '../actions';
 
 function WalletTableItem({ data, ...rest }) {
   const dispatch = useDispatch();
-
   return (
     <tr role="row" { ...rest }>
       <td role="cell">{ data.description }</td>
@@ -29,9 +28,9 @@ function WalletTableItem({ data, ...rest }) {
         <button
           type="button"
           data-testid="edit-btn"
+          onClick={ () => dispatch(actions.enterEditMode(data.id)) }
         >
-          Editar despesa
-
+          EDITAR
         </button>
       </td>
     </tr>

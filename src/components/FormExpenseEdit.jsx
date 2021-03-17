@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
 import * as actions from '../actions';
 
 import CurrencySelect from './CurrencySelect';
@@ -15,9 +14,10 @@ const INITIAL_VALUE = {
   method: 'Dinheiro',
 };
 
-function FormExpenseEdit({ id }) {
+function FormExpenseEdit() {
   const expenses = useSelector((state) => state.wallet.expenses);
-  const [data, setData] = useState([...expenses.find((i) => i.id === id)]);
+  const editid = useSelector((state) => state.wallet.editid);
+  const [data, setData] = useState({ ...expenses.find((i) => i.id === editid) });
   const dispatch = useDispatch();
   const handleChange = ({ target }) => {
     const { name, value } = target;
@@ -27,12 +27,15 @@ function FormExpenseEdit({ id }) {
     });
   };
   const handleEditExpense = async () => {
-    dispatch(actions.editExpense(...data));
+    console.log(data);
+    dispatch(actions.editExpense({ ...data }));
     setData(INITIAL_VALUE);
+    dispatch(actions.exitEditMode());
   };
   const { value, description, currency, tag, method } = data;
   return (
-    <form>
+    <div className="edit-area">
+      <h2>Editar</h2>
       <label htmlFor="value">
         Valor:
         <input
@@ -57,12 +60,8 @@ function FormExpenseEdit({ id }) {
       <PayMethodSelect value={ method } onChange={ handleChange } />
       <TagSelect value={ tag } onChange={ handleChange } />
       <button type="button" onClick={ handleEditExpense }>Editar despesa</button>
-    </form>
+    </div>
   );
 }
-
-FormExpenseEdit.propTypes = {
-  id: PropTypes.number.isRequired,
-};
 
 export default FormExpenseEdit;
