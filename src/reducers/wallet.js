@@ -3,6 +3,7 @@ import {
   REQUEST_SUCCESS,
   REQUEST_FAIL,
   ADD_EXPENSE,
+  DELETE_EXPENSES,
 } from '../actions';
 
 const INITIAL_STATE = {
@@ -28,6 +29,15 @@ export default function wallet(state = INITIAL_STATE, action) {
     return { ...state,
       expenses: [...state.expenses, action.payload],
     };
+
+  case DELETE_EXPENSES:
+    return {
+      ...state,
+      expenses: [
+        ...state.expenses.filter((i) => i.id !== action.payload),
+      ],
+    };
+    // Feito com ajuda do site: https://www.codingame.com/playgrounds/9169/simple-redux-create-delete-contact-application
   default:
     return state;
   }
