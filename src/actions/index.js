@@ -1,8 +1,10 @@
 import getCurrenciesValues from '../services/currenciesValuesApi';
 
+// Actions Data Login User
 export const SAVE_EMAIL_USER = 'SAVE_EMAIL_USER';
 export const actionEmail = (email) => ({ type: SAVE_EMAIL_USER, payload: email });
 
+// Actions Requester Api
 export const REQUEST_CURRENCIES_VALUES = 'REQUEST_CURRENCIES_VALUES';
 export const REQUEST_CURRENCIES_VALUES_SUCCESS = 'REQUEST_CURRENCIES_VALUES_SUCCESS';
 export const REQUEST_CURRENCIES_VALUES_ERROR = 'REQUEST_CURRENCIES_VALUES_ERROR';
@@ -37,9 +39,10 @@ export const fetchCurrenciesValues = () => async (dispatch) => {
   }
 };
 
+// Actions Expenses User
 export const SAVE_EXPENSE_USER = 'SAVE_EXPENSE_USER';
 export const DELETE_EXPENSE_USER = 'DELETE_DELETE_EXPENSE';
-export const EDITAR_EXPENSE_USER = 'EDITAR_EXPENSE_USER';
+export const EDIT_EXPENSE_USER = 'EDITAR_EXPENSE_USER';
 
 export const saveExpenseUser = (expense) => (
   { type: SAVE_EXPENSE_USER, payload: expense }
@@ -49,6 +52,6 @@ export const deleteExpenseUser = (id) => (
   { type: DELETE_EXPENSE_USER, payload: id }
 );
 
-export const editarExpenseUser = (id) => (
-  { type: EDITAR_EXPENSE_USER, payload: id }
+export const editarExpenseUser = (...args) => (
+  { type: EDIT_EXPENSE_USER, payload: args }
 );

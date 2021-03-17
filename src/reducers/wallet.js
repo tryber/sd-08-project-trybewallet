@@ -4,11 +4,13 @@ import {
   REQUEST_CURRENCIES_VALUES_ERROR,
   SAVE_EXPENSE_USER,
   DELETE_EXPENSE_USER,
+  EDIT_EXPENSE_USER,
 } from '../actions';
 
 const INITIAL_WALLET_STATE = {
   currencies: [],
   expenses: [],
+  editExpense: [0, 0],
 };
 
 export default function wallet(state = INITIAL_WALLET_STATE, action) {
@@ -31,9 +33,11 @@ export default function wallet(state = INITIAL_WALLET_STATE, action) {
     return {
       ...state,
       expenses: [
-        ...state.expenses.filter((expense) => expense.id !== action.payload),
-      ],
-      isFetching: false,
+        ...state.expenses.filter((expense) => expense.id !== action.payload)],
+    };
+  case EDIT_EXPENSE_USER:
+    return {
+      ...state, editExpense: action.payload,
     };
   default:
     return state;

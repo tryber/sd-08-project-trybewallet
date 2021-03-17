@@ -50,7 +50,7 @@ class ExpenseTable extends Component {
       <button
         type="button"
         data-testid={ `${name}-btn` }
-        onClick={ () => callback(id) }
+        onClick={ () => callback(id, 1) }
         className={ `${name}-btn expense-opt-btn` }
       >
         {name}
@@ -86,7 +86,7 @@ ExpenseTable.propTypes = {
 
 const mapDispatchToProps = (dispatch) => ({
   deleteExpenseUser: (id) => dispatch(deleteExpense(id)),
-  editarExpenseUser: (id) => dispatch(editExpense(id)),
+  editarExpenseUser: (...args) => dispatch(editExpense(...args)),
 
 });
 
