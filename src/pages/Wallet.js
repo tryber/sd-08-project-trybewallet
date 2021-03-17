@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import WalletForm from '../components/WalletForm';
+import WalletTable from '../components/WalletTable';
 
 function Wallet() {
   const store = useSelector((state) => state);
@@ -22,6 +23,7 @@ function Wallet() {
       </header>
       <main>
         <WalletForm />
+        <WalletTable />
       </main>
     </>);
 }

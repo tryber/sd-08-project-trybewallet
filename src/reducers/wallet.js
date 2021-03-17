@@ -1,4 +1,4 @@
-import { CURRENCIES, EXPANSES } from '../actions';
+import { CURRENCIES, EXPANSES, DELETE_EXPANSE } from '../actions';
 
 const initialState = {
   currencies: [],
@@ -10,6 +10,13 @@ export default function wallet(state = initialState, action) {
     return { ...state, currencies: action.payload };
   case EXPANSES:
     return { ...state, expenses: [...state.expenses, action.payload] };
+  case DELETE_EXPANSE:
+    return {
+      ...state,
+      expenses: state.expenses.filter(
+        (expenses, index) => index !== action.payload,
+      ),
+    };
   default:
     return state;
   }
