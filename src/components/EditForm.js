@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { saveExpense } from '../actions';
 
 class EditForm extends React.Component {
@@ -142,5 +143,12 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   saveExp: (newExp) => dispatch(saveExpense(newExp)),
 });
+
+EditForm.propTypes = {
+  editId: PropTypes.func.isRequired,
+  expenses: PropTypes.func.isRequired,
+  currencies: PropTypes.func.isRequired,
+  saveExp: PropTypes.func.isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditForm);

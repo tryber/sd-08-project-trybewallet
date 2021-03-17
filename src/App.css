@@ -23,7 +23,6 @@ body {
   flex-direction: row;
   font-size: calc(10px + 2vmin);
   justify-content: space-between;
-  min-height: 100vh;
 }
 
 .App-link {
