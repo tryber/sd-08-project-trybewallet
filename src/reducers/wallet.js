@@ -1,4 +1,4 @@
-import { RECEIVE_COIN, INFO_WALLET } from '../actions';
+import { RECEIVE_COIN, INFO_WALLET, DELETE_EXPENSE } from '../actions';
 
 const INITIAL_STATE = {
   currencies: {},
@@ -11,6 +11,9 @@ function CoinReducer(state = INITIAL_STATE, action) {
     return { ...state, currencies: action.payload };
   case INFO_WALLET:
     return { ...state, expenses: [...state.expenses, action.payload] };
+  case DELETE_EXPENSE:
+    return { ...state,
+      expenses: state.expenses.filter((expense) => expense.id !== action.payload) };
   default:
     return state;
   }

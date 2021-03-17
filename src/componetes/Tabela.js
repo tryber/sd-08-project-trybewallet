@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { deleteExpense as deleteExpenseAction } from '../actions/wallet';
 
 class Tabela extends Component {
   constructor(props) {
@@ -9,7 +10,7 @@ class Tabela extends Component {
   }
 
   linhasTabela() {
-    const { wallet } = this.props;
+    const { wallet, deleteExpense } = this.props;
     const { expenses } = wallet;
     return (
       expenses.map((e) => (
@@ -26,7 +27,16 @@ class Tabela extends Component {
             { (e.value * e.exchangeRates[e.currency].ask).toFixed(2) }
           </td>
           <td>Real</td>
-          <td><button type="button" data-testid="delete-btn">detelar</button></td>
+          <td>
+            <button
+              type="button"
+              data-testid="delete-btn"
+              onClick={ () => deleteExpense(e.id) }
+            >
+              deletar
+            </button>
+
+          </td>
         </tr>))
     );
   }
@@ -55,6 +65,10 @@ const mapStateToProps = (state) => ({
   wallet: state.wallet,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  deleteExpense: (payload) => dispatch(deleteExpenseAction(payload)),
+});
+
 Tabela.propTypes = {
   wallet: PropTypes.shape({
     expenses: PropTypes.shape({
@@ -62,10 +76,10 @@ Tabela.propTypes = {
       map: PropTypes.func,
     }).isRequired,
   }),
-
+  deleteExpense: PropTypes.func.isRequired,
 };
 Tabela.defaultProps = {
   wallet: PropTypes.objectOf.isRequired,
 };
 
-export default connect(mapStateToProps)(Tabela);
+export default connect(mapStateToProps, mapDispatchToProps)(Tabela);
