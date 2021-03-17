@@ -1,5 +1,5 @@
 import {
-  EMAIL_USER,
+  SAVE_EMAIL_USER,
 } from '../actions';
 
 const INITIAL_STATE_USER = {
@@ -7,7 +7,7 @@ const INITIAL_STATE_USER = {
 };
 export default function user(state = INITIAL_STATE_USER, action) {
   switch (action.type) {
-  case EMAIL_USER:
+  case SAVE_EMAIL_USER:
     return {
       ...state, email: action.payload };
   default:

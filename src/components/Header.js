@@ -4,37 +4,31 @@ import { connect } from 'react-redux';
 
 class Header extends Component {
   render() {
-    const { email } = this.props;
+    const { email, expenses } = this.props;
+    const value = expenses
+      .reduce((acc, cur) => (acc + (Number(cur.value)
+       * Number(cur.exchangeRates[cur.currency].ask))),
+      0);
     return (
-      <div>
-        <div data-testid="email-field">
-          Email:
-          {' '}
-          {email}
-        </div>
-        <div data-testid="total-field">
-          Total De Gastos
-          :
-          {' '}
-          0
-        </div>
-        <div data-testid="header-currency-field">
-          Cambio Exibido
-          {' '}
-          BRL
-        </div>
-
-      </div>
+      <header>
+        <h1> Wallet</h1>
+        <p data-testid="email-field">{email}</p>
+        <p data-testid="total-field">
+          {value}
+        </p>
+        <p data-testid="header-currency-field">BRL</p>
+      </header>
     );
   }
 }
 
 Header.propTypes = {
   email: PropTypes.string.isRequired,
+  expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
 
 };
 const mapStateToProps = (state) => ({
   email: state.user.email,
+  expenses: state.wallet.expenses,
 });
-
 export default connect(mapStateToProps)(Header);
