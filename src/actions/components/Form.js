@@ -31,13 +31,14 @@ class Form extends Component {
     });
   }
 
-  selectCurrency(value) {
+  selectCurrency(value, handleChange) {
     const { currencies } = this.props;
     return (
       <label htmlFor="currency-input">
         <select
+          id="currency-input"
           data-testid="currency-input"
-          onChange={ this.handleChange }
+          onChange={ handleChange }
           value={ value }
           name="currency"
         >
@@ -55,6 +56,7 @@ class Form extends Component {
     return (
       <label htmlFor="method-input">
         <select
+          id="method-input"
           data-testid="method-input"
           value={ value }
           name="method"
@@ -72,6 +74,7 @@ class Form extends Component {
     return (
       <label htmlFor="tag-input">
         <select
+          id="tag-input"
           data-testid="tag-input"
           onChange={ this.handleChange }
           value={ value }
@@ -101,9 +104,11 @@ class Form extends Component {
       tag,
       exchangeRates,
     };
-    console.log(newExpense);
     walletAddExpenseAction(newExpense);
     this.setState((prevState) => ({ id: prevState.id + 1 }));
+    this.setState({
+      value: 0,
+    });
   }
 
   addExpenseButton() {
@@ -118,8 +123,8 @@ class Form extends Component {
   }
 
   render() {
-    const { currency, method, tag } = this.state;
-    const { currencies, isLoading } = this.props;
+    const { value, currency, method, tag } = this.state;
+    const { isLoading } = this.props;
     return (
       <>
         <label htmlFor="value-input">
@@ -128,6 +133,7 @@ class Form extends Component {
             type="text"
             data-testid="value-input"
             onChange={ this.handleChange }
+            value={ value }
             name="value"
           />
         </label>
@@ -140,7 +146,7 @@ class Form extends Component {
             onChange={ this.handleChange }
           />
         </label>
-        { isLoading ? <p>Loading</p> : this.selectCurrency(currency, currencies) }
+        { isLoading ? <p>Loading</p> : this.selectCurrency(currency, this.handleChange) }
         { this.selectMethod(method) }
         { this.selectTag(tag) }
         { this.addExpenseButton() }
