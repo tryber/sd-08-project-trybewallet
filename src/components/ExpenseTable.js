@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import { deleteExpenseUser as deleteExpense,
+  editarExpenseUser as editExpense } from '../actions';
+
 class ExpenseTable extends Component {
-  expenseDescription(descriptions, expenses) {
+  expenseDescription(descriptions, expenses, deleteExpenseUser, editarExpenseUser) {
     return (
       <table>
         <thead className="table-header">
@@ -16,10 +19,11 @@ class ExpenseTable extends Component {
         </thead>
         <tbody className="table-body">
           {expenses.map((expense) => {
-            const { description, tag, method, value, currency, exchangeRates } = expense;
+            const { description, tag, method, value, currency,
+              exchangeRates, id } = expense;
             const { ask, name } = exchangeRates[currency];
             return (
-              <tr key={ expense.description } role="row">
+              <tr key={ id } role="row">
                 <td>{description}</td>
                 <td>{tag}</td>
                 <td>{method}</td>
@@ -28,6 +32,11 @@ class ExpenseTable extends Component {
                 <td>{Number(ask).toFixed(2)}</td>
                 <td>{(Number(ask) * value).toFixed(2)}</td>
                 <td>Real</td>
+                <td>
+                  {this.renderButton('delete', id, deleteExpenseUser)}
+                  {this.renderButton('edit', id, editarExpenseUser)}
+                  {' '}
+                </td>
               </tr>
             );
           })}
@@ -36,15 +45,29 @@ class ExpenseTable extends Component {
     );
   }
 
+  renderButton(name, id, callback) {
+    return (
+      <button
+        type="button"
+        data-testid={ `${name}-btn` }
+        onClick={ () => callback(id) }
+        className={ `${name}-btn expense-opt-btn` }
+      >
+        {name}
+      </button>
+    );
+  }
+
   render() {
     const descriptions = ['Descrição', 'Tag', 'Método de pagamento',
       'Valor', 'Moeda', 'Câmbio utilizado', 'Valor convertido', 'Moeda de conversão',
       'Editar/Excluir'];
-    const { expenses } = this.props;
+    const { expenses, deleteExpenseUser, editarExpenseUser } = this.props;
     return (
+
       <div>
-        {this.expenseDescription(descriptions, expenses)}
-        ;
+        {this.expenseDescription(descriptions, expenses,
+          deleteExpenseUser, editarExpenseUser)}
       </div>
     );
   }
@@ -56,6 +79,15 @@ const mapStateToProps = (state) => ({
 
 ExpenseTable.propTypes = {
   expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
+  deleteExpenseUser: PropTypes.func.isRequired,
+  editarExpenseUser: PropTypes.func.isRequired,
+
 };
 
-export default connect(mapStateToProps)(ExpenseTable);
+const mapDispatchToProps = (dispatch) => ({
+  deleteExpenseUser: (id) => dispatch(deleteExpense(id)),
+  editarExpenseUser: (id) => dispatch(editExpense(id)),
+
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ExpenseTable);

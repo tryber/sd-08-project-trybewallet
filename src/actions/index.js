@@ -38,6 +38,17 @@ export const fetchCurrenciesValues = () => async (dispatch) => {
 };
 
 export const SAVE_EXPENSE_USER = 'SAVE_EXPENSE_USER';
-export const saveExpenseUser = (expenses) => (
-  { type: SAVE_EXPENSE_USER, payload: expenses }
+export const DELETE_EXPENSE_USER = 'DELETE_DELETE_EXPENSE';
+export const EDITAR_EXPENSE_USER = 'EDITAR_EXPENSE_USER';
+
+export const saveExpenseUser = (expense) => (
+  { type: SAVE_EXPENSE_USER, payload: expense }
+);
+
+export const deleteExpenseUser = (id) => (
+  { type: DELETE_EXPENSE_USER, payload: id }
+);
+
+export const editarExpenseUser = (id) => (
+  { type: EDITAR_EXPENSE_USER, payload: id }
 );

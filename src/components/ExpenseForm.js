@@ -33,16 +33,11 @@ class ExpenseForm extends Component {
   }
 
   async handleClick() {
-    const { value, description, currency, method, tag, id } = this.state;
+    const { id } = this.state;
     const { saveExpenseUser } = this.props;
     const exchangeRates = await getCurrenciesValues();
     const expenses = {
-      id,
-      value,
-      description,
-      currency,
-      method,
-      tag,
+      ...this.state,
       exchangeRates,
     };
     saveExpenseUser(expenses);
