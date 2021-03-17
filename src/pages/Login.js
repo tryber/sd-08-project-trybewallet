@@ -10,7 +10,6 @@ function Login() {
   const minPwdLength = 5;
   const regexValidator = /^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/gim;
   const dispatch = useDispatch();
-
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(emailChange(email));
