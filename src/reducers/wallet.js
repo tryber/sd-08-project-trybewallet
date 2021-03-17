@@ -6,6 +6,17 @@ const initial = {
   expenses: [],
   expenseId: 0,
   editing: false,
+  expenseToEdit: '',
+};
+
+const editedExpense = (prevExpenses, edited) => {
+  const expenses = prevExpenses.map((item) => {
+    if (item.id === edited.id) {
+      item = { ...edited };
+    }
+    return item;
+  });
+  return expenses;
 };
 
 export default (state = initial, action) => {
@@ -29,6 +40,19 @@ export default (state = initial, action) => {
     return {
       ...state,
       expenses: state.expenses.filter((expense) => expense.id !== action.payload),
+    };
+  case types.EDIT_EXPENSE:
+    return {
+      ...state,
+      editing: true,
+      expenseToEdit: action.payload,
+    };
+  case types.SAVE_EXPENSE:
+    return {
+      ...state,
+      editing: false,
+      expenseToEdit: '',
+      expenses: editedExpense(state.expenses, action.payload),
     };
   default:
     return state;

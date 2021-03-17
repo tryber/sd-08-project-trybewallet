@@ -4,6 +4,7 @@ const types = {
   ADD_EXPENSE: 'ADD_EXPENSE',
   DELETE_EXPENSE: 'DELETE_EXPENSE',
   EDIT_EXPENSE: 'EDIT_EXPENSE',
+  SAVE_EXPENSE: 'SAVE_EXPENSE',
 };
 
 export default types;

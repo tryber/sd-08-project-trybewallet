@@ -12,9 +12,9 @@ class WalletForm extends React.Component {
     this.state = {
       value: '',
       description: '',
-      currency: '',
-      method: '',
-      tag: '',
+      currency: 'USD',
+      method: 'Dinheiro',
+      tag: 'Alimentação',
     };
 
     this.paymentMethods = ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'];
