@@ -1,9 +1,24 @@
-import { ADD_EXPENSE, SAVE_CURRENCIES } from '../actions';
+import { ADD_EXPENSE, SAVE_CURRENCIES, DELETE_EXPENSE } from '../actions';
 
 const INITIAL_STATE = {
   currencies: [],
   expenses: [],
   idCount: 0,
+};
+
+const updateTotal = (state, action) => {
+  let expenses = [];
+  if (action.type === 'DELETE_EXPENSE') {
+    expenses = action.expenses;
+  } else {
+    expenses = state.expenses.concat(action.expense);
+  }
+  const total = expenses.reduce((acc, expense) => (
+    parseFloat(
+      (acc + expense.value * expense.exchangeRates[expense.currency].ask).toFixed(2),
+    )
+  ), 0);
+  return total;
 };
 
 const addExpense = (state = INITIAL_STATE, action) => {
@@ -28,6 +43,12 @@ const wallet = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       currencies: action.currencies,
+    };
+  case DELETE_EXPENSE:
+    return {
+      ...state,
+      expenses: action.expenses,
+      totalValue: updateTotal(state, action),
     };
   case ADD_EXPENSE:
     return addExpense(state, action);

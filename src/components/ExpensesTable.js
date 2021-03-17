@@ -1,8 +1,56 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { deleteExpense } from '../actions';
 
 class ExpensesTable extends React.Component {
+  constructor() {
+    super();
+    this.deleteClick = this.deleteClick.bind(this);
+    this.renderExpense = this.renderExpense.bind(this);
+  }
+
+  deleteClick(index) {
+    const { expenses, updateExpenses } = this.props;
+    updateExpenses(expenses.filter((expense, expenseIndex) => expenseIndex !== index));
+  }
+
+  renderExpense(expense, index) {
+    return (
+      <tr key={ index }>
+        <td>{expense.description}</td>
+        <td>{expense.tag}</td>
+        <td>{expense.method}</td>
+        <td>{expense.value}</td>
+        <td>{expense.exchangeRates[expense.currency].name}</td>
+        <td>
+          {parseFloat(expense.exchangeRates[expense.currency].ask)
+            .toFixed(2)}
+        </td>
+        <td>
+          {expense.value
+          * parseFloat(expense.exchangeRates[expense.currency].ask)}
+        </td>
+        <td>Real</td>
+        <td>
+          <button
+            type="button"
+            onClick={ () => this.editClick(index) }
+          >
+            Edit
+          </button>
+          <button
+            type="button"
+            data-testid="delete-btn"
+            onClick={ () => this.deleteClick(index) }
+          >
+            X
+          </button>
+        </td>
+      </tr>
+    );
+  }
+
   render() {
     const { expenses } = this.props;
     return (
@@ -22,36 +70,27 @@ class ExpensesTable extends React.Component {
           </tr>
         </thead>
         <tbody>
-          {expenses.map(({ id, value, description, currency,
-            method, tag, exchangeRates }) => {
-            const dayCurrency = exchangeRates[currency];
-            const sumExpense = dayCurrency.ask * +value;
-            return (
-              <tr key={ id }>
-                <td>{description}</td>
-                <td>{tag}</td>
-                <td>{method}</td>
-                <td>{value}</td>
-                <td>{dayCurrency.name}</td>
-                <td>{Math.round(dayCurrency.ask * 100) / 100}</td>
-                <td>{Math.round(sumExpense * 100) / 100}</td>
-                <td>Real</td>
-              </tr>
-            );
-          })}
+          {expenses.map(this.renderExpense)}
         </tbody>
       </table>
     );
   }
 }
 
-ExpensesTable.propTypes = {
-  expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
-};
-
 const mapStateToProps = ({ wallet: { expenses } }) => ({
   expenses,
 });
 
-export default connect(mapStateToProps)(ExpensesTable);
+const mapDispatchToProps = (dispatch) => ({
+  updateExpenses: (expenses) => dispatch(deleteExpense(expenses)),
+});
+
+ExpensesTable.propTypes = ({
+  expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
+  updateExpenses: PropTypes.func.isRequired,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ExpensesTable);
+
+// export default connect(mapStateToProps)(ExpensesTable);
 // feito code Review from @rosids
