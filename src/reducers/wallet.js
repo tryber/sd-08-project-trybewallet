@@ -1,4 +1,4 @@
-import { ADD_EXPENSE, SAVE_CURRENCIES, DELETE_EXPENSE } from '../actions';
+import { ADD_EXPENSE, SAVE_CURRENCIES, UPDATE_EXPENSE } from '../actions';
 
 const INITIAL_STATE = {
   currencies: [],
@@ -8,7 +8,7 @@ const INITIAL_STATE = {
 
 const updateTotal = (state, action) => {
   let expenses = [];
-  if (action.type === 'DELETE_EXPENSE') {
+  if (action.type === 'UPDATE_EXPENSE') {
     expenses = action.expenses;
   } else {
     expenses = state.expenses.concat(action.expense);
@@ -44,7 +44,7 @@ const wallet = (state = INITIAL_STATE, action) => {
       ...state,
       currencies: action.currencies,
     };
-  case DELETE_EXPENSE:
+  case UPDATE_EXPENSE:
     return {
       ...state,
       expenses: action.expenses,

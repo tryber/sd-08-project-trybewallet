@@ -4,7 +4,7 @@ export const SAVE_EMAIL = 'SAVE_EMAIL';
 export const SAVE_CURRENCIES = 'SAVE_CURRENCIES';
 export const REQUEST_EXPENSE = 'REQUEST_CURRENCY';
 export const ADD_EXPENSE = 'ADD_EXPENSE';
-export const DELETE_EXPENSE = 'DELETE_EXPENSE';
+export const UPDATE_EXPENSE = 'UPDATE_EXPENSE';
 export const REQUEST_EXPENSE_ERROR = 'REQUEST_EXPENSE_ERROR';
 
 export const saveEmail = (email) => ({
@@ -22,8 +22,8 @@ const addExpense = (expenses) => ({
   expenses,
 });
 
-const deleteExpense = (expenses) => ({
-  type: 'DELETE_EXPENSE',
+const updateExpense = (expenses) => ({
+  type: 'UPDATE_EXPENSE',
   expenses,
 });
 
@@ -47,4 +47,4 @@ export const fetchExpense = (expense) => async (dispatch) => {
   dispatch(addExpense(expenseCurrency));
 };
 
-export { saveCurrencies, addExpense, deleteExpense };
+export { saveCurrencies, addExpense, updateExpense };
