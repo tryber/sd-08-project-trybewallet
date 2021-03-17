@@ -1,9 +1,90 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { emailChange } from '../actions';
 
 class Login extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      email: '',
+      password: '',
+      disabled: true,
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.loginValidation = this.loginValidation.bind(this);
+  }
+
+  handleClick(e) {
+    e.preventDefault();
+
+    const { handleEmail } = this.props;
+    const { email } = this.state;
+
+    handleEmail(email);
+  }
+
+  handleChange({ target }) {
+    this.setState({
+      [target.name]: target.value,
+    }, () => {
+      this.loginValidation();
+    });
+  }
+
+  loginValidation() {
+    const { email, password } = this.state;
+    let disabled = false;
+    const EMAIL_VALIDATION = /^[\w]+@([\w]+\.)+[\w]{2,4}$/gi;
+    const MIN_PASSWORD_LENGTH = 6;
+    disabled = !(EMAIL_VALIDATION.test(email) && password.length >= MIN_PASSWORD_LENGTH);
+    this.setState({ disabled });
+  }
+
   render() {
-    return <div>Login</div>;
+    const { email, password, disabled } = this.state;
+    return (
+      <form>
+        <input
+          type="text"
+          name="email"
+          value={ email }
+          onChange={ this.handleChange }
+          data-testid="email-input"
+          placeholder="E-mail"
+        />
+        <input
+          type="password"
+          name="password"
+          value={ password }
+          onChange={ this.handleChange }
+          data-testid="password-input"
+          placeholder="Senha"
+        />
+        <button
+          type="submit"
+          disabled={ disabled }
+          onClick={ this.handleClick }
+        >
+          <Link to="/carteira">
+            Entrar
+          </Link>
+        </button>
+      </form>
+    );
   }
 }
 
-export default Login;
+const mapDispatchToProps = (dispatch) => ({
+  handleEmail: (payload) => dispatch(emailChange(payload)),
+});
+
+export default connect(null, mapDispatchToProps)(Login);
+
+Login.propTypes = {
+  handleEmail: PropTypes.func.isRequired,
+};
