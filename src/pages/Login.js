@@ -18,6 +18,7 @@ class Login extends React.Component {
     this.handleClick = this.handleClick.bind(this);
     this.loginValidation = this.loginValidation.bind(this);
   }
+
   handleClick(e) {
     e.preventDefault();
     const { handleEmail } = this.props;
@@ -35,6 +36,7 @@ class Login extends React.Component {
       this.loginValidation();
     });
   }
+
   loginValidation() {
     const { email, password } = this.state;
     let disabled = false;
@@ -51,23 +53,23 @@ class Login extends React.Component {
         <input
           type="text"
           name="email"
-          value={email}
-          onChange={this.handleChange}
+          value={ email }
+          onChange={ this.handleChange }
           data-testid="email-input"
           placeholder="user@email.com"
         />
         <input
           type="password"
           name="password"
-          value={password}
-          onChange={this.handleChange}
+          value={ password }
+          onChange={ this.handleChange }
           data-testid="password-input"
           placeholder="******"
         />
         <button
           type="submit"
-          disabled={disabled}
-          onClick={this.handleClick}
+          disabled={ disabled }
+          onClick={ this.handleClick }
         >
           Entrar
         </button>

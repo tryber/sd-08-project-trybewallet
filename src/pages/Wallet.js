@@ -27,4 +27,3 @@ export default connect(mapStateToProps)(Wallet);
 Wallet.propTypes = {
   email: PropTypes.string.isRequired,
 };
-
