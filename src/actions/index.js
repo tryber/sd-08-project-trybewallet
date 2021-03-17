@@ -10,6 +10,7 @@ export const REQUEST_CURRENCY = 'REQUEST_CURRENCY';
 export const ADD_EXPENSES = 'ADD_EXPENSES';
 export const DELETE_EXPENSE = 'DELETE_EXPENSE';
 export const SAVE_EXPENSE = 'SAVE_EXPENSE';
+export const EDIT_EXPENSE = 'EDIT_EXPENSE';
 
 export function userEmail(email) {
   return {
@@ -46,4 +47,10 @@ export function saveExpense(expense) {
   };
 }
 
+export function editExpense(expense) {
+  return {
+    type: EDIT_EXPENSE,
+    payload: expense,
+  };
+}
 export default dispatchEmail;

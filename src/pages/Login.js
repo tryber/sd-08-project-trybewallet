@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import '../App.css';
 
 import dispatchEmail from '../actions';
+import logo from '../logo.png';
 
 class Login extends React.Component {
   constructor(props) {
@@ -43,38 +45,41 @@ class Login extends React.Component {
   render() {
     const { email, password } = this.state;
     return (
-      <form>
-        <label htmlFor="email">
-          Email:
-          <input
-            data-testid="email-input"
-            type="text"
-            value={ email }
-            name="email"
-            onChange={ this.handleChange }
-          />
-        </label>
-        <label htmlFor="password">
-          Password:
-          <input
-            data-testid="password-input"
-            type="text"
-            value={ password }
-            name="password"
-            minLength="6"
-            onChange={ this.handleChange }
-          />
-        </label>
-        <br />
-        <button
-          type="button"
-          onClick={ () => this.clickRedirect() }
-          disabled={ this.validaAndteLogin() }
-          data-testid="login-submit-btn"
-        >
-          Entrar
-        </button>
-      </form>
+      <>
+        <img className="App-logo" src={ logo } alt="logoPokewallet" width="600px" />
+        <form className="App">
+          <label htmlFor="email">
+            Email:
+            <input
+              data-testid="email-input"
+              type="text"
+              value={ email }
+              name="email"
+              onChange={ this.handleChange }
+            />
+          </label>
+          <label htmlFor="password">
+            Password:
+            <input
+              data-testid="password-input"
+              type="text"
+              value={ password }
+              name="password"
+              minLength="6"
+              onChange={ this.handleChange }
+            />
+          </label>
+          <br />
+          <button
+            type="button"
+            onClick={ () => this.clickRedirect() }
+            disabled={ this.validaAndteLogin() }
+            data-testid="login-submit-btn"
+          >
+            Entrar
+          </button>
+        </form>
+      </>
     );
   }
 }

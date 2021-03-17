@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { table } from '../store/service';
-import { deleteExpense } from '../actions';
+import { deleteExpense, editExpense } from '../actions';
 
 class Table extends React.Component {
   constructor() {
@@ -11,11 +11,17 @@ class Table extends React.Component {
 
     this.table = this.table.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
   }
 
   handleClick(id) {
     const { deleteExp } = this.props;
     deleteExp(id);
+  }
+
+  handleEdit(id) {
+    const { edit } = this.props;
+    edit(id);
   }
 
   table() {
@@ -37,6 +43,13 @@ class Table extends React.Component {
             onClick={ () => this.handleClick(id) }
           >
             Deletar
+          </button>
+          <button
+            type="button"
+            data-testid="edit-btn"
+            onClick={ () => this.handleEdit(id) }
+          >
+            Editar
           </button>
         </tr>
       ),
@@ -65,6 +78,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   deleteExp: (id) => dispatch(deleteExpense(id)),
+  edit: (id) => dispatch(editExpense(id)),
 });
 
 Table.propTypes = {

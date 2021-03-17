@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import PropTypes from 'prop-types';
+import '../App.css';
+import logo from '../logo.png';
 
 class Header extends React.Component {
   constructor() {
@@ -22,21 +24,18 @@ class Header extends React.Component {
   render() {
     const { email } = this.props;
     return (
-      <header>
-        <h1>Wallet</h1>
-        <p>Email:</p>
+      <header className="App-header">
+        <img src={ logo } alt="logoPokewallet" width="200px" />
+        <span>Email:</span>
         <span data-testid="email-field">
           {' '}
           { email }
         </span>
-        <div>
-          <p>Despesas Total:</p>
-          <span data-testid="total-field">
-            { `R$ ${this.renderValue()}` }
-          </span>
-          <h3 data-testid="header-currency-field">BRL</h3>
-        </div>
-
+        <span>Despesas Total:</span>
+        <span data-testid="total-field">
+          { `R$ ${this.renderValue()}` }
+        </span>
+        <span data-testid="header-currency-field">BRL</span>
       </header>
     );
   }
