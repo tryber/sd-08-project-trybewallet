@@ -1,29 +1,29 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 import { emailChange } from '../actions';
 
 class Login extends React.Component {
   constructor() {
     super();
-
     this.state = {
       email: '',
       password: '',
       disabled: true,
+      login: false,
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.loginValidation = this.loginValidation.bind(this);
   }
-
   handleClick(e) {
     e.preventDefault();
-
     const { handleEmail } = this.props;
     const { email } = this.state;
+
+    this.setState({ login: true });
 
     handleEmail(email);
   }
@@ -35,7 +35,6 @@ class Login extends React.Component {
       this.loginValidation();
     });
   }
-
   loginValidation() {
     const { email, password } = this.state;
     let disabled = false;
@@ -46,45 +45,41 @@ class Login extends React.Component {
   }
 
   render() {
-    const { email, password, disabled } = this.state;
+    const { email, password, disabled, login } = this.state;
     return (
       <form>
         <input
           type="text"
           name="email"
-          value={ email }
-          onChange={ this.handleChange }
+          value={email}
+          onChange={this.handleChange}
           data-testid="email-input"
-          placeholder="E-mail"
+          placeholder="user@email.com"
         />
         <input
           type="password"
           name="password"
-          value={ password }
-          onChange={ this.handleChange }
+          value={password}
+          onChange={this.handleChange}
           data-testid="password-input"
-          placeholder="Senha"
+          placeholder="******"
         />
         <button
           type="submit"
-          disabled={ disabled }
-          onClick={ this.handleClick }
+          disabled={disabled}
+          onClick={this.handleClick}
         >
-          <Link to="/carteira">
-            Entrar
-          </Link>
+          Entrar
         </button>
+        { login ? <Redirect to="/carteira" /> : ''}
       </form>
     );
   }
 }
-
 const mapDispatchToProps = (dispatch) => ({
   handleEmail: (payload) => dispatch(emailChange(payload)),
 });
-
 export default connect(null, mapDispatchToProps)(Login);
-
 Login.propTypes = {
   handleEmail: PropTypes.func.isRequired,
 };
