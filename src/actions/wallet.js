@@ -1,10 +1,15 @@
-import { GET_CURRENCIES } from './index';
+import { SAVE_CURRENCIES, SAVE_EXPENSES } from './index';
 
-const actionWallet = (currencies) => ({
-  type: GET_CURRENCIES,
+export const actionCurrency = (currencies) => ({
+  type: SAVE_CURRENCIES,
   payload: {
     currencies,
   },
 });
 
-export default actionWallet;
+export const actionExpense = (expenses) => ({
+  type: SAVE_EXPENSES,
+  payload: {
+    expenses,
+  },
+});

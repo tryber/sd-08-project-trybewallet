@@ -2,7 +2,8 @@
 import { USER } from '../actions';
 
 const INITIAL_STATE = {
-  state: '',
+  email: '',
+  password: '',
 };
 
 export default function user(state = INITIAL_STATE, action) {
