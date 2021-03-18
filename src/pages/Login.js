@@ -11,6 +11,7 @@ class Login extends React.Component {
     this.renderLogin = this.renderLogin.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
+    this.validateEmail = this.validateEmail.bind(this);
 
     this.state = {
       email: '',
@@ -22,21 +23,33 @@ class Login extends React.Component {
 
   handleChange({ target }) {
     const { name, value } = target;
-    this.setState(() => ({ [name]: value }));
-    this.verifyInputs();
+    this.setState(() => ({ [name]: value }), () => {
+      this.verifyInputs();
+    });
+  }
+
+  // Função de validar email encontrada no site: https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
+  // Descobri esse site pela brach de Bruno Pedrosa
+  validateEmail(email) {
+    const re = new RegExp([
+      '^(([^<>()[\\]\\\\.,;:\\s@"]+(\\.[^<>()[\\]\\\\.,;:\\s@"]+)*)',
+      '|(".+"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])',
+      '|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$',
+    ].join(''));
+    return re.test(String(email).toLowerCase());
   }
 
   verifyInputs() {
     const { email, senha } = this.state;
-    const emailFormat = '*@*.com';
-    const passwordLenght = 5;
-    if (email !== emailFormat && senha.length >= passwordLenght) {
+    const passwordLenght = 6;
+    if (this.validateEmail(email) && senha.length >= passwordLenght) {
       this.setState({ disableBtn: false });
+    } else {
+      this.setState({ disableBtn: true });
     }
   }
 
   handleLogin() {
-    console.log('entrou!');
     const { loginAction } = this.props;
     const { email } = this.state;
     loginAction({ email });
