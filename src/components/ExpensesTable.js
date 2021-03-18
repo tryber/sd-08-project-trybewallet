@@ -50,7 +50,7 @@ class ExpensesTable extends Component {
             data-testid="edit-btn"
             onClick={ editExpense }
           >
-            Edit
+            Editar Despesa
           </button>
         </div>
       </div>
