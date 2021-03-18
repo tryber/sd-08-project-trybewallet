@@ -10,6 +10,7 @@ class ExpensesTable extends React.Component {
   }
 
   renderExpenseRow(expense) {
+    const { deleteExpense } = this.props;
     return (
       <tr key={ expense.id }>
         <td>{ expense.description }</td>
@@ -31,8 +32,24 @@ class ExpensesTable extends React.Component {
         </td>
         <td>Real</td>
         <td>
-          <span><button type="button">Editar</button></span>
-          <span><button type="button">Excluir</button></span>
+          <span>
+            <button
+              type="button"
+            >
+              Editar
+            </button>
+          </span>
+          <span>
+            <button
+              type="button"
+              data-testid="delete-btn"
+              onClick={ () => {
+                deleteExpense(expense.id);
+              } }
+            >
+              Excluir
+            </button>
+          </span>
         </td>
       </tr>
     );
@@ -71,6 +88,10 @@ const mapStateToProps = (state) => ({
   expenses: state.wallet.expenses,
 });
 
+const mapDispatcToProps = (dispatch) => ({
+  deleteExpense: (expenseId) => dispatch(removeExpense(expenseId)),
+});
+
 ExpensesTable.propTypes = {
   expenses: PropTypes.arrayOf(PropTypes.shape({
     value: PropTypes.string,
@@ -84,6 +105,7 @@ ExpensesTable.propTypes = {
       ask: PropTypes.number,
     }),
   })).isRequired,
+  deleteExpense: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, null)(ExpensesTable);
+export default connect(mapStateToProps, mapDispatcToProps)(ExpensesTable);
