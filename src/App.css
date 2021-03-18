@@ -3,14 +3,14 @@ body {
 }
 
 h1 {
-  color: black;
   align-items: center;
+  color: black;
   font-size: 30px;
 }
 
 h3 {
-  color: black;
   align-items: center;
+  color: black;
   font-size: 30px;
 }
 
@@ -28,10 +28,10 @@ h3 {
 }
 
 .input-login {
+  border-radius: 10px;
   height: 30px;
   margin: 5px;
   width: 70%;
-  border-radius: 10px;
 }
 
 .button-login {
@@ -62,15 +62,15 @@ h3 {
 }
 
 .header > img {
-  margin-left: 0;
   height: 40px;
+  margin-left: 0;
 }
 
 .infos-header {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   width: 300px;
 }
 
@@ -137,7 +137,7 @@ form {
   padding: 0 30px;
 }
 
-.julius { 
+.julius {
   margin-top: 10px;
 }
 
