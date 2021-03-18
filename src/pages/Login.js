@@ -49,7 +49,7 @@ class Login extends React.Component {
     const { buttonValidation, email, password } = this.state;
     if (buttonValidation) return <Redirect to="/carteira" />;
     return (
-      <>
+      <form>
         <input
           placeholder="E-mail"
           data-testid="email-input"
@@ -73,7 +73,7 @@ class Login extends React.Component {
         >
           Entrar
         </button>
-      </>
+      </form>
     );
   }
 }
