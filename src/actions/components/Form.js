@@ -18,7 +18,7 @@ class Form extends Component {
   constructor() {
     super();
     this.state = {
-    ...INITIAL_STATE,
+      ...INITIAL_STATE,
     };
     this.handleChange = this.handleChange.bind(this);
     this.addExpense = this.addExpense.bind(this);
