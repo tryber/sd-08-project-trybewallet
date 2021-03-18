@@ -46,13 +46,13 @@ export default function wallet(state = INITIAL_STATE, action) {
     return {
       ...state,
       editTarget: true,
-      expenseId: action.payload.id,
+      expenseId: action.payload,
     };
   case CONFIRM_EDITING:
     return {
       ...state,
       expenses: state.expenses.map((item) => {
-        if (item.id === action.expense.id) return { ...item, ...action.expense };
+        if (item.id === action.payload.id) return { ...item, ...action.payload };
         return item;
       }),
       editTarget: false,

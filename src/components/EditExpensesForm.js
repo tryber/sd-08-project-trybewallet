@@ -5,7 +5,7 @@ import { confirmEditing as endEditAction,
   fetchCurrencies as actualCurrencies,
 } from '../actions';
 
-class EditExpsesForm extends React.Component {
+class EditExpensesForm extends React.Component {
   constructor(props) {
     super(props);
     const { expenses, expenseId } = this.props;
@@ -137,7 +137,7 @@ class EditExpsesForm extends React.Component {
   }
 }
 
-EditExpsesForm.propTypes = {
+EditExpensesForm.propTypes = {
   expenses: PropTypes.arrayOf(PropTypes.object),
   expenseId: PropTypes.number.isRequired,
   confirmEditing: PropTypes.func.isRequired,
@@ -155,9 +155,9 @@ const mapStateToProps = (state) => ({
   expenseId: state.wallet.expenseId,
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditExpsesForm);
+export default connect(mapStateToProps, mapDispatchToProps)(EditExpensesForm);
 
-EditExpsesForm.defaultProps = {
+EditExpensesForm.defaultProps = {
   currencies: [],
   expenses: [],
 };
