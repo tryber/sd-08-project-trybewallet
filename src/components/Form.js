@@ -1,34 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-// eslint-disable-next-line max-lines-per-function
-class Form extends Component {
-  constructor() {
-    super();
-
-  }
-
-  render(){
-    return{
-      
-    }
-  }
-}
-
-export default function Form({
-  currencies,
-  setState,
-  onSubmit,
-  description,
-  value,
-  currency,
-  method,
-  tag,
-  newExpense,
-  editSubmit,
-}) {
-  return (
-    <form>
+export default class Form extends Component {
+  renderDescriptionInput(description, setState) {
+    return (
       <label htmlFor="description-input">
         Despesa:
         <input
@@ -43,6 +18,11 @@ export default function Form({
           onChange={ setState }
         />
       </label>
+    );
+  }
+
+  renderValueInput(value, setState) {
+    return (
       <label htmlFor="value-input">
         Valor:
         <input
@@ -58,6 +38,11 @@ export default function Form({
           onChange={ setState }
         />
       </label>
+    );
+  }
+
+  renderCoinSelect(currency, currencies, setState) {
+    return (
       <div>
         <span>Moeda:</span>
         <select
@@ -71,6 +56,11 @@ export default function Form({
           {currencies()}
         </select>
       </div>
+    );
+  }
+
+  renderPaymentMethod(method, setState) {
+    return (
       <div>
         <span>Método de pagamento:</span>
         <select
@@ -86,6 +76,11 @@ export default function Form({
           <option value="Cartão de débito">Cartão de débito</option>
         </select>
       </div>
+    );
+  }
+
+  renderTag(tag, setState) {
+    return (
       <div>
         <span>Tag:</span>
         <select
@@ -103,27 +98,41 @@ export default function Form({
           <option value="Saúde">Saúde</option>
         </select>
       </div>
-      <div>
-        {newExpense === true ? (
-          <button
-            type="button"
-            className="add-expense"
-            onClick={ onSubmit }
-          >
-            Adicionar despesa
-          </button>
-        ) : (
-          <button
-            type="button"
-            className="add-expense"
-            onClick={ editSubmit }
-          >
-            Editar despesa
-          </button>
-        )}
-      </div>
-    </form>
-  );
+    );
+  }
+
+  render() {
+    const { currencies, setState, onSubmit, description,
+      value, currency, method, tag, newExpense, editSubmit } = this.props;
+    return (
+      <form>
+        { this.renderDescriptionInput(description, setState) }
+        { this.renderValueInput(value, setState) }
+        { this.renderCoinSelect(currency, currencies, setState) }
+        { this.renderPaymentMethod(method, setState) }
+        { this.renderTag(tag, setState) }
+        <div>
+          {newExpense === true ? (
+            <button
+              type="button"
+              className="add-expense"
+              onClick={ onSubmit }
+            >
+              Adicionar despesa
+            </button>
+          ) : (
+            <button
+              type="button"
+              className="add-expense"
+              onClick={ editSubmit }
+            >
+              Editar despesa
+            </button>
+          )}
+        </div>
+      </form>
+    );
+  }
 }
 
 Form.propTypes = {
