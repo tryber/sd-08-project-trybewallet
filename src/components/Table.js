@@ -6,10 +6,24 @@ class Table extends Component {
   constructor() {
     super();
     this.inputTable = this.inputTable.bind(this);
+    this.totalValue = this.totalValue.bind(this);
+  }
+
+  totalValue() {
+    const { expenses, totalAmount } = this.props;
+  
+    let total = 0;
+    const arr = expenses.map((objs) => (objs.value
+    * (objs.exchangeRates[objs.currency].ask)));
+    for (let i = 0; i < arr.length; i += 1) {
+      total += arr[i];
+    }
+    totalAmount(total);
   }
 
   inputTable() {
-    const { expenses } = this.props;
+    this.totalValue();
+    const { expenses, deleteExpense } = this.props;
     const headerArray = ['Descrição', 'Tag', 'Método de pagamento', 'Valor', 'Moeda',
       'Câmbio utilizado', 'Valor convertido', 'Moeda de conversão', 'Editar/Excluir'];
 
@@ -29,6 +43,9 @@ class Table extends Component {
               <td>{Number(data.exchangeRates[data.currency].ask).toFixed(2)}</td>
               <td>{(data.value * data.exchangeRates[data.currency].ask)}</td>
               <td>Real</td>
+              <button type="button" data-testid="delete-btn" onClick={ () => deleteExpense(data.id) }>
+                Excluir
+              </button>
             </tr>))}
         </tbody>
       </table>
@@ -40,12 +57,18 @@ class Table extends Component {
   }
 }
 
+const mapDispatchToProps = (dispatch) => ({
+  deleteExpense: (id) => dispatch({type: 'DELETE_EXPENSE', id}),
+  totalAmount: (amount) => dispatch({ type: 'TOTAL_AMOUNT', amount }),
+})
+
 const mapStateToProps = (state) => ({
   expenses: state.wallet.expenses,
 });
 
 Table.propTypes = {
   expenses: PropTypes.shape.isRequired,
+  totalAmount: PropTypes.number.isRequired,
 };
 
-export default connect(mapStateToProps)(Table);
+export default connect(mapStateToProps, mapDispatchToProps)(Table);
