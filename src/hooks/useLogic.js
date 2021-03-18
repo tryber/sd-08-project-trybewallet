@@ -22,10 +22,6 @@ function useLogic() {
   const dispatch = useDispatch();
   const clearForm = () => {
     setExpanseValue(0);
-    setExpanseDescription('');
-    setExpanseCurrency('USD');
-    setPaymentMethod('dinheiro');
-    setExpenseCategory('alimentacao');
   };
   const handleSubmit = (e) => {
     e.preventDefault();
