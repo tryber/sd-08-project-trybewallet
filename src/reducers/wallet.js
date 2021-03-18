@@ -1,6 +1,7 @@
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
 import { REQUEST_CURRENCIES,
-  RECEIVE_CURRENCIES, FAILED_REQUEST, ADD_EXPENSE } from '../actions/index';
+  RECEIVE_CURRENCIES, FAILED_REQUEST, ADD_EXPENSE,
+  DELETE_EXPENSE } from '../actions/index';
 
 // *ADD_EXPENSE FAILED_REQUEST
 const INITIAL_STATE = {
@@ -22,6 +23,9 @@ const walletReducer = (state = INITIAL_STATE,
     return { ...state, error: payload.error, isLoading: payload.isLoading };
   case ADD_EXPENSE:
     return { ...state, expenses: [...state.expenses, payload.expenses] };
+  case DELETE_EXPENSE:
+    return { ...state,
+      expenses: [...state.expenses].filter((expense) => expense.id !== payload.expense) };
   default:
     return state;
   }

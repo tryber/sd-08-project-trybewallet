@@ -40,6 +40,13 @@ export const walletAddExpenseAction = (expenses) => ({
     expenses,
   },
 });
+
+export const walletDeleteExpenseAction = (expense) => ({
+  type: actions.DELETE_EXPENSE,
+  payload: {
+    expense,
+  },
+});
 // fetchApi().then((response) => dispatch(receiveCurrencies(response)))
 //     .catch((error) => dispatch(failedRequest(error)));
 
