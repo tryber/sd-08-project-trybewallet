@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { saveEmail } from '../actions';
+import walletimg from '../img/walletimg.png';
 
 class Login extends React.Component {
   constructor() {
@@ -50,6 +51,7 @@ class Login extends React.Component {
     return (
       <div>
         <form className="form">
+          <img className="wallet" src={ walletimg } alt="Wallet Logo" />
           <h3>TRYBE WALLET</h3>
           <input
             type="text"

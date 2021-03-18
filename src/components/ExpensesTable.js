@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { deleteExpense } from '../actions';
 import julius from '../img/julius.jpeg';
 
-class ExpensesTable extends React.Component {
+class ExpensesTable extends Component {
   constructor() {
     super();
 
@@ -75,6 +75,7 @@ class ExpensesTable extends React.Component {
         <div className="content-table">
           {expenses.length === 0 ? (
             <p className="message">
+              <span>Se eu não comprar nada, o desconto é maior!</span>
               <img className="julius" src={ julius } alt="Wallet Logo" />
             </p>
           ) : (

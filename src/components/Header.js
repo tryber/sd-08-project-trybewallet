@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import trybe from '../img/trybe.jpeg';
 
 export default function Header({ email, total }) {
   return (
     <div className="header">
+      <img className="trybe" src={ trybe } alt="TRYBE Logo" />
       <h1>TRYBE WALLET</h1>
       <div className="infos-header">
         <p data-testid="total-field">

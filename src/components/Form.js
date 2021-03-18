@@ -1,5 +1,19 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+
+// eslint-disable-next-line max-lines-per-function
+class Form extends Component {
+  constructor() {
+    super();
+
+  }
+
+  render(){
+    return{
+      
+    }
+  }
+}
 
 export default function Form({
   currencies,
@@ -18,6 +32,7 @@ export default function Form({
       <label htmlFor="description-input">
         Despesa:
         <input
+          isRequired
           type="text"
           id="description-input"
           className="input-expense description"
@@ -31,6 +46,7 @@ export default function Form({
       <label htmlFor="value-input">
         Valor:
         <input
+          isRequired
           min="0"
           type="number"
           id="value-input"

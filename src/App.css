@@ -2,10 +2,16 @@ body {
   background-color: rgb(213, 243, 231);
 }
 
-h3 , h1 {
+h1 {
   color: black;
+  align-items: center;
   font-size: 30px;
-  margin-top: 0;
+}
+
+h3 {
+  color: black;
+  align-items: center;
+  font-size: 30px;
 }
 
 .form {
@@ -25,6 +31,7 @@ h3 , h1 {
   height: 30px;
   margin: 5px;
   width: 70%;
+  border-radius: 10px;
 }
 
 .button-login {
@@ -46,24 +53,30 @@ h3 , h1 {
 
 .header {
   align-items: center;
-  background-color: rgb(177, 177, 177);
+  background-color: rgb(213, 243, 231);
   display: flex;
   flex-direction: row;
-  height: 80px;
+  height: 50px;
   justify-content: space-between;
   padding: 0 30px;
+}
+
+.header > img {
+  margin-left: 0;
+  height: 40px;
 }
 
 .infos-header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   width: 300px;
 }
 
 form {
   align-items: center;
-  background-color: rgb(4, 107, 82);
+  background-color: gray;
   display: flex;
   flex-direction: row;
   font-weight: 600;
@@ -93,7 +106,7 @@ form {
 
 .header-table {
   align-items: center;
-  background-color: rgb(4, 107, 82);
+  background-color: gray;
   border-bottom: 1px solid black;
   border-top: 1px solid black;
   display: flex;
@@ -107,6 +120,7 @@ form {
 .message {
   align-items: center;
   display: flex;
+  flex-direction: column;
   font-size: 25px;
   height: 450px;
   justify-content: center;
@@ -121,4 +135,12 @@ form {
   height: 40px;
   justify-content: space-around;
   padding: 0 30px;
+}
+
+.julius { 
+  margin-top: 10px;
+}
+
+.wallet {
+  height: 40px;
 }
