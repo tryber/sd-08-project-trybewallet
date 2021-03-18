@@ -5,6 +5,7 @@ import {
   SAVE_EXPENSE_USER,
   DELETE_EXPENSE_USER,
   EDIT_EXPENSE_USER,
+  UPDATE_EXPENSE_USER,
 } from '../actions';
 
 const INITIAL_WALLET_STATE = {
@@ -38,6 +39,11 @@ export default function wallet(state = INITIAL_WALLET_STATE, action) {
   case EDIT_EXPENSE_USER:
     return {
       ...state, editExpense: action.payload,
+    };
+  case UPDATE_EXPENSE_USER:
+    console.log(action.payload); // esse aqui
+    return {
+      ...state,
     };
   default:
     return state;

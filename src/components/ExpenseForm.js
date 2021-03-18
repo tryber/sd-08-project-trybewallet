@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fetchCurrenciesValues as fetchCurrencies,
-  saveExpenseUser as addExpense } from '../actions';
+import {
+  fetchCurrenciesValues as fetchCurrencies,
+  saveExpenseUser as addExpense,
+  editExpenseUser as editExpense,
+  updateExpenseUser as updateExpense,
+} from '../actions';
+
 import getCurrenciesValues from '../services/currenciesValuesApi';
 
-const INITIAL_STATE = {
+const initialState = {
   value: '0',
   description: '',
   currency: 'USD',
@@ -13,10 +18,12 @@ const INITIAL_STATE = {
   id: 0,
   tag: 'Alimentação',
 };
+
 class ExpenseForm extends Component {
-  constructor() {
-    super();
-    this.state = { ...INITIAL_STATE };
+  constructor(props) {
+    super(props);
+    const { editState } = this.props;
+    this.state = { ...editState };
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
   }
@@ -32,22 +39,28 @@ class ExpenseForm extends Component {
     });
   }
 
-  async handleClick() {
+  async handleClick() { // esse ten que variar
     const { id } = this.state;
-    const { saveExpenseUser } = this.props;
+    const { saveExpenseUser, editExpenseUser, edit, updateExpenseUser } = this.props;
     const exchangeRates = await getCurrenciesValues();
     const expenses = {
       ...this.state,
       exchangeRates,
     };
-    saveExpenseUser(expenses);
-    this.setState({
-      ...INITIAL_STATE,
-      id: id + 1,
-    });
+    if (edit[1] === 1) {
+      editExpenseUser(0, 0);
+      updateExpenseUser(expenses);
+    } else {
+      saveExpenseUser(expenses);
+
+      this.setState({
+        ...initialState,
+        id: id + 1,
+      });
+    }
   }
 
-  addExpenseButton() {
+  addExpenseButton() { // esse tem que variar
     return (
       <button
         type="button"
@@ -125,12 +138,12 @@ class ExpenseForm extends Component {
     const paymentOptions = ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'];
     const tags = ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
     const { value, description, currency, method, tag } = this.state;
-    const { currenciesState } = this.props;
+    const { stateWallet } = this.props;
     return (
       <div>
         {this.renderInput('value', 'Valor', 'number', value)}
         {this.renderInput('description', 'Descrição', 'text', description)}
-        { this.renderSelectCurrencies(currenciesState, currency)}
+        { this.renderSelectCurrencies(stateWallet.currencies, currency)}
         {this.renderSelect('method', 'Meio de Pagamento', method, paymentOptions)}
         {this.renderSelect('tag', 'Tag', tag, tags)}
         {this.addExpenseButton()}
@@ -141,19 +154,34 @@ class ExpenseForm extends Component {
 }
 
 ExpenseForm.propTypes = {
-  currenciesState: PropTypes.arrayOf(PropTypes.object).isRequired,
   fetchCurrenciesValues: PropTypes.func.isRequired,
+  editExpenseUser: PropTypes.func.isRequired,
   saveExpenseUser: PropTypes.func.isRequired,
+  updateExpenseUser: PropTypes.func.isRequired,
+  edit: PropTypes.arrayOf(PropTypes.object).isRequired,
+  stateWallet: PropTypes.arrayOf(PropTypes.object).isRequired,
+  editState: PropTypes.shape({
+    value: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    currency: PropTypes.string.isRequired,
+    method: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+    tag: PropTypes.string.isRequired,
 
+  }).isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  currenciesState: state.wallet.currencies,
+  stateWallet: state.wallet,
+  edit: state.wallet.editExpense,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   fetchCurrenciesValues: () => dispatch(fetchCurrencies()),
   saveExpenseUser: (expense) => dispatch(addExpense(expense)),
+  editExpenseUser: (...args) => dispatch(editExpense(...args)),
+  updateExpenseUser: (expense) => dispatch(updateExpense(expense)),
+
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExpenseForm);

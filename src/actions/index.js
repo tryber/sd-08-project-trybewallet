@@ -14,21 +14,18 @@ const requestCurrenciesValues = () => ({
     isFetching: true,
   },
 });
-
 const requestCurrenciesValuesSuccess = (currencies) => ({
   type: REQUEST_CURRENCIES_VALUES_SUCCESS,
   payload: {
     currencies, isFetching: false,
   },
 });
-
 const requestCurrenciesValuesError = (error) => ({
   type: REQUEST_CURRENCIES_VALUES_ERROR,
   payload: {
     error, isFetching: false,
   },
 });
-
 export const fetchCurrenciesValues = () => async (dispatch) => {
   dispatch(requestCurrenciesValues());
   try {
@@ -43,6 +40,7 @@ export const fetchCurrenciesValues = () => async (dispatch) => {
 export const SAVE_EXPENSE_USER = 'SAVE_EXPENSE_USER';
 export const DELETE_EXPENSE_USER = 'DELETE_DELETE_EXPENSE';
 export const EDIT_EXPENSE_USER = 'EDITAR_EXPENSE_USER';
+export const UPDATE_EXPENSE_USER = 'UPDATE_EXPENSE_USER';
 
 export const saveExpenseUser = (expense) => (
   { type: SAVE_EXPENSE_USER, payload: expense }
@@ -52,6 +50,10 @@ export const deleteExpenseUser = (id) => (
   { type: DELETE_EXPENSE_USER, payload: id }
 );
 
-export const editarExpenseUser = (...args) => (
+export const editExpenseUser = (...args) => (
   { type: EDIT_EXPENSE_USER, payload: args }
+);
+
+export const updateExpenseUser = (expense) => (
+  { type: UPDATE_EXPENSE_USER, payload: expense }
 );

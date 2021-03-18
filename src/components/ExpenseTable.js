@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { deleteExpenseUser as deleteExpense,
-  editarExpenseUser as editExpense } from '../actions';
+  editExpenseUser as editExpense } from '../actions';
 
 class ExpenseTable extends Component {
   expenseDescription(descriptions, expenses, deleteExpenseUser, editarExpenseUser) {
@@ -62,12 +62,12 @@ class ExpenseTable extends Component {
     const descriptions = ['Descrição', 'Tag', 'Método de pagamento',
       'Valor', 'Moeda', 'Câmbio utilizado', 'Valor convertido', 'Moeda de conversão',
       'Editar/Excluir'];
-    const { expenses, deleteExpenseUser, editarExpenseUser } = this.props;
+    const { expenses, deleteExpenseUser, editExpenseUser } = this.props;
     return (
 
       <div>
         {this.expenseDescription(descriptions, expenses,
-          deleteExpenseUser, editarExpenseUser)}
+          deleteExpenseUser, editExpenseUser)}
       </div>
     );
   }
@@ -80,13 +80,13 @@ const mapStateToProps = (state) => ({
 ExpenseTable.propTypes = {
   expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
   deleteExpenseUser: PropTypes.func.isRequired,
-  editarExpenseUser: PropTypes.func.isRequired,
+  editExpenseUser: PropTypes.func.isRequired,
 
 };
 
 const mapDispatchToProps = (dispatch) => ({
   deleteExpenseUser: (id) => dispatch(deleteExpense(id)),
-  editarExpenseUser: (...args) => dispatch(editExpense(...args)),
+  editExpenseUser: (...args) => dispatch(editExpense(...args)),
 
 });
 
