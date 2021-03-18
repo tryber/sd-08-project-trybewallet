@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 class ExpenseTable extends Component {
 /*   deleteExpense() {
     const { expenses } = this.props;
-    
+
   } */
 
   render() {
