@@ -1,12 +1,12 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
-function App() {
+import Login from './pages/Login';
+
+export default function Routes() {
   return (
-    <Router>
-      <div>Hello, Mundo!</div>
-    </Router>
+    <Switch>
+      <Route exact path="/"><Login /></Route>
+    </Switch>
   );
 }
-
-export default App;
