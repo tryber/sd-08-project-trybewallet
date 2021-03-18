@@ -5,6 +5,7 @@ import FormularioDespesa from '../componetes/FormularioDespesa';
 import Header from '../componetes/Header';
 import { fetchCoin as fetchCoinAction } from '../actions/wallet';
 import Tabela from '../componetes/Tabela';
+import FormularioEdicao from '../componetes/FormularioEdicao';
 
 class Wallet extends React.Component {
   async componentDidMount() {
@@ -13,10 +14,12 @@ class Wallet extends React.Component {
   }
 
   render() {
+    const { editStatus } = this.props;
+
     return (
       <div>
         <Header />
-        <FormularioDespesa />
+        {editStatus ? <FormularioEdicao /> : <FormularioDespesa /> }
         <Tabela />
       </div>);
   }
@@ -26,8 +29,12 @@ const mapDispatchToProps = (dispatch) => ({
   fetchCoin: () => dispatch(fetchCoinAction()),
 });
 
+const mapStateToProps = (state) => ({
+  editStatus: state.wallet.editStatus });
+
 Wallet.propTypes = {
   fetchCoin: PropTypes.func.isRequired,
+  editStatus: PropTypes.bool.isRequired,
 };
 
-export default connect(null, mapDispatchToProps)(Wallet);
+export default connect(mapStateToProps, mapDispatchToProps)(Wallet);

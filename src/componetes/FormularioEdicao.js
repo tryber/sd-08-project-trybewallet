@@ -1,14 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import getCoin from '../services/getCoin';
-import { infoWalletAction } from '../actions/wallet';
+import { addEditExpense as addEditExpenseAction,
+  editExpense as editExpenseAction } from '../actions/wallet';
 
-class FormularioDespesa extends React.Component {
+class FormularioEdicao extends React.Component {
   constructor() {
     super();
     this.state = {
-      id: -1,
+      id: '',
       value: '0',
       currency: '',
       method: '',
@@ -18,6 +18,20 @@ class FormularioDespesa extends React.Component {
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.alteraState = this.alteraState.bind(this);
+  }
+
+  componentDidMount() {
+    this.alteraState();
+  }
+
+  alteraState() {
+    const { expenseEdit } = this.props;
+    console.log(expenseEdit);
+
+    this.setState({
+      ...expenseEdit,
+    });
   }
 
   handleChange({ target }) {
@@ -134,27 +148,18 @@ class FormularioDespesa extends React.Component {
     );
   }
 
-  async handleClick() {
-    const obj = await getCoin();
-    this.setState((estadoAnterior) => ({
-      exchangeRates: obj,
-      id: estadoAnterior.id + 1,
-    }));
-    const { expense } = this.props;
-    expense(this.state);
-    this.setState((state) => ({ ...state,
-      value: '0',
-      currency: '',
-      method: '',
-      tag: '',
-      description: '',
-      exchangeRates: {} }));
+  handleClick() {
+    const { addEditExpense, editExpense } = this.props;
+    addEditExpense(this.state);
+    editExpense({});
   }
 
   botao() {
     const { handleClick } = this;
 
-    return <button type="button" onClick={ handleClick }>Adicionar despesa</button>;
+    return (
+      <button type="button" onClick={ handleClick }>Editar despesa</button>
+    );
   }
 
   render() {
@@ -175,15 +180,20 @@ class FormularioDespesa extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  wallet: state.wallet });
+  wallet: state.wallet,
+  expenseEdit: state.wallet.expenseEdit });
 
 const mapDispatchToProps = (dispatch) => ({
-  expense: (value) => dispatch(infoWalletAction(value)),
+  editExpense: (payload) => dispatch(editExpenseAction(payload)),
+  addEditExpense: (payload) => dispatch(addEditExpenseAction(payload)),
 });
 
-FormularioDespesa.propTypes = {
+FormularioEdicao.propTypes = {
   wallet: PropTypes.shape().isRequired,
-  expense: PropTypes.func.isRequired,
+  editExpense: PropTypes.func.isRequired,
+  addEditExpense: PropTypes.func.isRequired,
+  expenseEdit: PropTypes.objectOf().isRequired,
+
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(FormularioDespesa);
+export default connect(mapStateToProps, mapDispatchToProps)(FormularioEdicao);

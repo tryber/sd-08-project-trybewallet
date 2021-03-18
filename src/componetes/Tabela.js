@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { deleteExpense as deleteExpenseAction } from '../actions/wallet';
+import {
+  deleteExpense as deleteExpenseAction,
+  editExpense as editExpenseAction }
+  from '../actions/wallet';
 
 class Tabela extends Component {
   constructor(props) {
     super(props);
-    this.state = { };
+    this.state = {
+    };
   }
 
   linhasTabela() {
-    const { wallet, deleteExpense } = this.props;
+    const { wallet, deleteExpense, editExpense } = this.props;
     const { expenses } = wallet;
     return (
       expenses.map((e) => (
@@ -34,6 +38,13 @@ class Tabela extends Component {
               onClick={ () => deleteExpense(e.id) }
             >
               deletar
+            </button>
+            <button
+              type="button"
+              data-testid="edit-btn"
+              onClick={ () => editExpense(e) }
+            >
+              editar
             </button>
 
           </td>
@@ -67,6 +78,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   deleteExpense: (payload) => dispatch(deleteExpenseAction(payload)),
+  editExpense: (payload) => dispatch(editExpenseAction(payload)),
 });
 
 Tabela.propTypes = {
@@ -77,6 +89,7 @@ Tabela.propTypes = {
     }).isRequired,
   }),
   deleteExpense: PropTypes.func.isRequired,
+  editExpense: PropTypes.func.isRequired,
 };
 Tabela.defaultProps = {
   wallet: PropTypes.objectOf.isRequired,
