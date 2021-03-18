@@ -90,6 +90,7 @@ class ExpenseForm extends React.Component {
             <option
               key={ key }
               value={ key }
+              data-testid={ key }
             >
               { key }
             </option>
