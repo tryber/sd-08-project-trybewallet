@@ -126,7 +126,7 @@ export default class Form extends Component {
               className="add-expense"
               onClick={ editSubmit }
             >
-              Editar
+              Editar despesa
             </button>
           )}
         </div>
