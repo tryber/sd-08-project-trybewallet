@@ -34,7 +34,10 @@ class ExpensesTable extends React.Component {
           }
         </td>
         <td>Real</td>
-        <td>Editar/Excluir</td>
+        <td>
+          <span><button type="button">Editar</button></span>
+          <span><button type="button">Excluir</button></span>
+        </td>
       </tr>
     );
   }
