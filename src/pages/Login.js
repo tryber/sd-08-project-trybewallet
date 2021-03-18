@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { getUserEmail } from '../actions';
 
 class Login extends React.Component {
   constructor() {
@@ -18,7 +20,7 @@ class Login extends React.Component {
   validateLogin() {
     const { email, password } = this.state;
 
-    const VALID_EMAIL = /^[\w]+@([\w]+\.)+[\w]$/gi;
+    const VALID_EMAIL = /^[\w]+@([\w]+\.)+[\w]{2,4}$/gi;
     const VALID_PASSWORD = password.length;
     const minLength = 6;
     if (VALID_EMAIL.test(email) && VALID_PASSWORD >= minLength) {
@@ -37,8 +39,10 @@ class Login extends React.Component {
 
   handleClick() {
     const path = '/carteira';
-    const { history } = this.props;
+    const { email } = this.state;
+    const { history, userEmail } = this.props;
     history.push(path);
+    userEmail(email);
   }
 
   handleChange({ target }) {
@@ -87,4 +91,12 @@ Login.propTypes = {
   }).isRequired,
 };
 
-export default Login;
+const mapDispatchToProps = (dispatch) => ({
+  userEmail: (email) => dispatch(getUserEmail(email)),
+});
+
+Login.propTypes = {
+  userEmail: PropTypes.func.isRequired,
+};
+
+export default connect(null, mapDispatchToProps)(Login);
