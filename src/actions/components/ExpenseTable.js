@@ -18,6 +18,14 @@ class ExpenseTable extends Component {
             {parseFloat(each.exchangeRates[each.currency].ask * each.value).toFixed(2)}
           </th>
           <th>Real</th>
+          <th>
+            <button
+              data-testid="delete-btn"
+              type="button"
+            >
+              X
+            </button>
+          </th>
         </tr>
       ))
     );
@@ -35,6 +43,7 @@ class ExpenseTable extends Component {
           <th>Câmbio utilizado</th>
           <th>Valor convertido</th>
           <th>Moeda de conversão</th>
+          <th>Editar/Excluir</th>
         </thead>
         <tbody>
           {this.expenseRow()}
@@ -49,7 +58,7 @@ const mapStateToProps = (state) => ({
 });
 
 ExpenseTable.propTypes = {
-  expenses: PropTypes.arrayOf().isRequired,
+  expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default connect(mapStateToProps, null)(ExpenseTable);

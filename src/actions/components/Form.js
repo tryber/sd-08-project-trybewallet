@@ -5,16 +5,20 @@ import { fetchCurrencies as fetchCurrenciesThunk,
   walletAddExpenseAction as walletAddExpense } from '../walletActions';
 import fetchApi from '../api';
 
+const INITIAL_STATE = {
+  value: '0',
+  description: '',
+  currency: 'USD',
+  method: 'Dinheiro',
+  tag: 'Alimentação',
+  id: 0,
+};
+
 class Form extends Component {
   constructor() {
     super();
     this.state = {
-      value: 0,
-      description: '',
-      currency: 'USD',
-      method: 'Dinheiro',
-      tag: 'Alimentação',
-      id: 0,
+    ...INITIAL_STATE,
     };
     this.handleChange = this.handleChange.bind(this);
     this.addExpense = this.addExpense.bind(this);
@@ -105,9 +109,9 @@ class Form extends Component {
       exchangeRates,
     };
     walletAddExpenseAction(newExpense);
-    this.setState((prevState) => ({ id: prevState.id + 1 }));
     this.setState({
-      value: 0,
+      ...INITIAL_STATE,
+      id: id + 1,
     });
   }
 
