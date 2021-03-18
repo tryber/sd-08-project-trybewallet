@@ -29,7 +29,6 @@ class Login extends React.Component {
   }
 
   // Função de validar email encontrada no site: https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
-  // Descobri esse site pela brach de Bruno Pedrosa
   validateEmail(email) {
     const re = new RegExp([
       '^(([^<>()[\\]\\\\.,;:\\s@"]+(\\.[^<>()[\\]\\\\.,;:\\s@"]+)*)',
@@ -52,7 +51,7 @@ class Login extends React.Component {
   handleLogin() {
     const { loginAction } = this.props;
     const { email } = this.state;
-    loginAction({ email });
+    loginAction(email);
     this.setState({ redirect: true });
   }
 
