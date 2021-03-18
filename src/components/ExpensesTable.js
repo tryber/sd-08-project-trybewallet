@@ -10,7 +10,7 @@ import '../styles/components/ExpensesTable.css';
 
 class ExpensesTable extends Component {
   renderExpenseRow(expense) {
-    const { removeExpense } = this.props;
+    const { removeExpense, editExpense } = this.props;
     const { currency, description, method, tag, value, exchangeRates, id } = expense;
     const currencyData = exchangeRates[currency];
     const convertedValue = Number(value) * Number(currencyData.ask);
@@ -25,7 +25,13 @@ class ExpensesTable extends Component {
         <td>{ (Math.round(convertedValue * 100) / 100).toFixed(2) }</td>
         <td>Real</td>
         <td>
-          <button type="button">Editar</button>
+          <button
+            type="button"
+            data-testid="edit-btn"
+            onClick={ () => editExpense(id) }
+          >
+            Editar
+          </button>
           <button
             type="button"
             data-testid="delete-btn"

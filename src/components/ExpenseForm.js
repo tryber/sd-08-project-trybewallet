@@ -1,41 +1,35 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { Creators as WalletActions } from '../actions/wallet';
 
 import '../styles/components/ExpenseForm.css';
-
-const INITIAL_STATE = {
-  value: '',
-  description: '',
-  currency: 'USD',
-  method: 'Dinheiro',
-  tag: 'Alimentação',
-};
+import expenseType from '../types';
 
 class ExpenseForm extends Component {
   constructor(props) {
     super(props);
 
+    const { initialState } = this.props;
+
     this.state = {
-      ...INITIAL_STATE,
+      ...initialState,
     };
 
     this.paymentMethods = ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'];
     this.expenseTags = ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
+
     this.handleChange = this.handleChange.bind(this);
-    this.handleAddExpense = this.handleAddExpense.bind(this);
+    this.handleButtonAction = this.handleButtonAction.bind(this);
   }
 
   handleChange({ target: { name, value } }) {
     this.setState({ [name]: value });
   }
 
-  handleAddExpense() {
-    const { addExpenseWithCurrencies } = this.props;
-    addExpenseWithCurrencies(this.state);
-    this.setState({ ...INITIAL_STATE });
+  handleButtonAction() {
+    const { buttonAction, initialState } = this.props;
+    buttonAction(this.state);
+    this.setState({ ...initialState });
   }
 
   renderValueInput(value) {
@@ -123,6 +117,7 @@ class ExpenseForm extends Component {
 
   render() {
     const { value, description, currency, method, tag } = this.state;
+    const { buttonText } = this.props;
     return (
       <form className="expenseForm">
         { this.renderValueInput(value) }
@@ -132,9 +127,9 @@ class ExpenseForm extends Component {
         { this.renderTagSelect(tag) }
         <button
           type="button"
-          onClick={ this.handleAddExpense }
+          onClick={ this.handleButtonAction }
         >
-          Adicionar despesa
+          { buttonText }
         </button>
       </form>
     );
@@ -143,13 +138,13 @@ class ExpenseForm extends Component {
 
 ExpenseForm.propTypes = {
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
-  addExpenseWithCurrencies: PropTypes.func.isRequired,
+  initialState: expenseType.isRequired,
+  buttonText: PropTypes.string.isRequired,
+  buttonAction: PropTypes.func.isRequired,
 };
-
-const mapDispatchToProps = (dispatch) => bindActionCreators(WalletActions, dispatch);
 
 const mapStateToProps = ({ wallet }) => ({
   currencies: wallet.currencies,
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ExpenseForm);
+export default connect(mapStateToProps)(ExpenseForm);

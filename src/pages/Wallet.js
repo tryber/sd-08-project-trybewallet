@@ -5,8 +5,9 @@ import { bindActionCreators } from 'redux';
 import { Creators as WalletActions } from '../actions/wallet';
 
 import Header from '../components/Header';
-import ExpenseForm from '../components/ExpenseForm';
 import ExpensesTable from '../components/ExpensesTable';
+import AddExpenseForm from '../components/AddExpenseForm';
+import EditExpenseForm from '../components/EditExpenseForm';
 
 class Wallet extends Component {
   componentDidMount() {
@@ -15,10 +16,11 @@ class Wallet extends Component {
   }
 
   render() {
+    const { editor } = this.props;
     return (
       <div>
         <Header />
-        <ExpenseForm />
+        { editor ? <EditExpenseForm /> : <AddExpenseForm /> }
         <ExpensesTable />
       </div>
     );
@@ -27,8 +29,13 @@ class Wallet extends Component {
 
 Wallet.propTypes = {
   fetchCurrencies: PropTypes.func.isRequired,
+  editor: PropTypes.bool.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(WalletActions, dispatch);
 
-export default connect(null, mapDispatchToProps)(Wallet);
+const mapStateToProps = (({ wallet }) => ({
+  editor: wallet.editor,
+}));
+
+export default connect(mapStateToProps, mapDispatchToProps)(Wallet);

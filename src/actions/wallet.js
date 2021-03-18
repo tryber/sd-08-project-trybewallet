@@ -6,6 +6,8 @@ export const Types = {
   ADD_EXPENSE: 'ADD EXPENSE',
   ADD_EXPENSE_WITH_CURRENCIES: 'ADD_EXPENSE_WITH_CURRENCIES',
   REMOVE_EXPENSE: 'REMOVE_EXPENSE',
+  EDIT_EXPENSE: 'EDIT_EXPENSE',
+  SAVE_EXPENSE: 'SAVE_EXPENSE',
 };
 
 export const Creators = {
@@ -16,6 +18,14 @@ export const Creators = {
   addExpense: (expense) => ({
     type: Types.ADD_EXPENSE,
     payload: expense,
+  }),
+  saveExpense: (expense) => ({
+    type: Types.SAVE_EXPENSE,
+    payload: expense,
+  }),
+  editExpense: (id) => ({
+    type: Types.EDIT_EXPENSE,
+    payload: id,
   }),
   removeExpense: (id) => ({ type: Types.REMOVE_EXPENSE, payload: id }),
   fetchCurrencies: () => async (dispatch) => {
