@@ -1,6 +1,5 @@
 import React from 'react';
-import { Redirect } from 'react-router';
-
+import PropTypes from 'prop-types';
 
 class Login extends React.Component {
   constructor() {
@@ -14,7 +13,6 @@ class Login extends React.Component {
 
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
-
   }
 
   validateLogin() {
@@ -22,25 +20,25 @@ class Login extends React.Component {
 
     const VALID_EMAIL = /^[\w]+@([\w]+\.)+[\w]$/gi;
     const VALID_PASSWORD = password.length;
-
-    if (VALID_EMAIL.test(email) && VALID_PASSWORD >= 6) {
+    const minLength = 6;
+    if (VALID_EMAIL.test(email) && VALID_PASSWORD >= minLength) {
       return this.setState(
         {
           disabled: false,
-        }
-      )
+        },
+      );
     }
     return (this.setState(
       {
         disabled: true,
-      })
-    )};
-  
+      },
+    ));
+  }
 
   handleClick() {
-      const path = "/carteira"
-      const { history } = this.props;
-      history.push(path);
+    const path = '/carteira';
+    const { history } = this.props;
+    history.push(path);
   }
 
   handleChange({ target }) {
@@ -51,24 +49,28 @@ class Login extends React.Component {
       },
       () => {
         this.validateLogin();
-      })
+      },
+    );
   }
 
   render() {
-    const { disabled }= this.state;
+    const { disabled } = this.state;
     return (
       <div>
         <input
           type="text"
           name="email"
           data-testid="email-input"
-          onChange= { this.handleChange } />
+          onChange={ this.handleChange }
+        />
         <input
           type="password"
           name="password"
           data-testid="password-input"
-          onChange={ this.handleChange } />
+          onChange={ this.handleChange }
+        />
         <button
+          type="submit"
           onClick={ this.handleClick }
           disabled={ disabled }
         >
@@ -78,5 +80,11 @@ class Login extends React.Component {
     );
   }
 }
+
+Login.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+};
 
 export default Login;
