@@ -10,6 +10,7 @@ class SelectCurrency extends Component {
 
     this.state = {
       currencies: [],
+      // currency: '',
     };
   }
 
@@ -26,16 +27,28 @@ class SelectCurrency extends Component {
     requestCurr(currencies);
   }
 
+  // findExpense() {
+  //   const { setEditData, idToEdit, editor } = this.props;
+  //   const editExpenses = setEditData.find((i) => i.id === idToEdit);
+  //   if (editor === true) this.setState({ currency: editExpenses.currency });
+  // }
+
   render() {
     const { currencies } = this.state;
     const { handleChange } = this.props;
     return (
-      <select name="currency" data-testid="currency-input" onChange={ handleChange }>
+      <select
+        name="currency"
+        data-testid="currency-input"
+        onChange={ handleChange }
+      >
         {
-          currencies.map((curr) => (
+          currencies.length > 0
+          && currencies.map((curr) => (
             <option
               key={ curr }
               data-testid={ curr }
+              // value={ currencies.value }
             >
               {curr}
             </option>))
@@ -45,9 +58,11 @@ class SelectCurrency extends Component {
   }
 }
 
-// const mapStateToProps = (state) => ({
-
-// });
+const mapStateToProps = (state) => ({
+  setEditData: state.wallet.expenses,
+  editor: state.wallet.editor,
+  idToEdit: state.wallet.idToEdit,
+});
 
 const mapDispatchToProps = (dispatch) => ({
   requestCurr: (param) => dispatch(requestCurrency(param)),
@@ -58,4 +73,4 @@ SelectCurrency.propTypes = {
   handleChange: PropTypes.func.isRequired,
 };
 
-export default connect(null, mapDispatchToProps)(SelectCurrency);
+export default connect(mapStateToProps, mapDispatchToProps)(SelectCurrency);

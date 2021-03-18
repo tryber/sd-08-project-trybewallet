@@ -1,17 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { excludesData } from '../../actions';
+import { excludesData, editData } from '../../actions';
 
 class TableBody extends Component {
   handleClick({ target: { value } }) {
     const { expensesToTable, excludeData } = this.props;
-    // console.log(expensesToTable);
-    // console.log(value);
-    // const buttonValue = value;
     const newList = expensesToTable
       .filter((listItem) => Number(listItem.id) !== Number(value));
     excludeData(newList);
+  }
+
+  handleEditClick({ target: { value } }) {
+    const { expensesToTable, newData } = this.props;
+    // console.log(expensesToTable);
+    const editList = expensesToTable
+      .find((editItem) => Number(editItem.id) === Number(value));
+    console.log(editList.id);
+    newData(editList.id);
+    // const newEditList = expensesToTable.splice(value, 1, itemEdit);
   }
 
   render() {
@@ -34,11 +41,19 @@ class TableBody extends Component {
                       .toFixed(2)}
                   </td>
                   <td>
-                    {tableLine.value
-                * (+tableLine.exchangeRates[tableLine.currency].ask)}
+                    {(tableLine.value
+                * (+tableLine.exchangeRates[tableLine.currency].ask)).toFixed(2)}
                   </td>
                   <td>Real</td>
                   <td>
+                    <button
+                      type="button"
+                      data-testid="edit-btn"
+                      value={ tableLine.id }
+                      onClick={ (e) => this.handleEditClick(e) }
+                    >
+                      Editar
+                    </button>
                     <button
                       type="button"
                       data-testid="delete-btn"
@@ -61,11 +76,13 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   excludeData: (param) => dispatch(excludesData(param)),
+  newData: (param) => dispatch(editData(param)),
 });
 
 TableBody.propTypes = {
   expensesToTable: PropTypes.arrayOf(PropTypes.object).isRequired,
   excludeData: PropTypes.func.isRequired,
+  newData: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TableBody);
