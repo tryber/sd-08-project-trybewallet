@@ -13,7 +13,6 @@ function Wallet() {
         + (parseFloat(value) * exchangeRates[currency].ask), 0,
   ).toFixed(2));
 
-  if (user.isLoggedIn === false) return <Redirect to="/" />;
   return (
     <>
       <header>
