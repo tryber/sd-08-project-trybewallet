@@ -11,7 +11,7 @@ class Table extends Component {
 
   totalValue() {
     const { expenses, totalAmount } = this.props;
-  
+
     let total = 0;
     const arr = expenses.map((objs) => (objs.value
     * (objs.exchangeRates[objs.currency].ask)));
@@ -43,7 +43,11 @@ class Table extends Component {
               <td>{Number(data.exchangeRates[data.currency].ask).toFixed(2)}</td>
               <td>{(data.value * data.exchangeRates[data.currency].ask)}</td>
               <td>Real</td>
-              <button type="button" data-testid="delete-btn" onClick={ () => deleteExpense(data.id) }>
+              <button
+                type="button"
+                data-testid="delete-btn"
+                onClick={ () => deleteExpense(data.id) }
+              >
                 Excluir
               </button>
             </tr>))}
@@ -58,9 +62,9 @@ class Table extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  deleteExpense: (id) => dispatch({type: 'DELETE_EXPENSE', id}),
+  deleteExpense: (id) => dispatch({ type: 'DELETE_EXPENSE', id }),
   totalAmount: (amount) => dispatch({ type: 'TOTAL_AMOUNT', amount }),
-})
+});
 
 const mapStateToProps = (state) => ({
   expenses: state.wallet.expenses,
@@ -68,6 +72,7 @@ const mapStateToProps = (state) => ({
 
 Table.propTypes = {
   expenses: PropTypes.shape.isRequired,
+  deleteExpense: PropTypes.func.isRequired,
   totalAmount: PropTypes.number.isRequired,
 };
 

@@ -33,13 +33,6 @@ class Form extends Component {
     const data = await this.getApi();
     const objectKeys = Object.keys(data);
     const currencies = objectKeys.filter((item) => item !== 'USDT');
-    const objectValues = Object.values(data);
-    const currencyValue = [];
-    for (let i = 0; i < objectValues.length; i += 1) {
-      if (i !== 1) {
-        currencyValue.push(objectValues[i].ask);
-      }
-    }
 
     this.setState({
       currencies,

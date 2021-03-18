@@ -8,15 +8,16 @@ const INIT_STATE = {
 
 const wallet = (state = INIT_STATE, action) => {
   switch (action.type) {
-    case "ADD_DESPESAS":
-      return { ...state, expenses: [...state.expenses, action.expenses] };
-    case "TOTAL_AMOUNT":
-      return { ...state, amount: action.amount };
-    case "DELETE_EXPENSE":
-      return { ...state, expenses: [...state.expenses
+  case 'ADD_DESPESAS':
+    return { ...state, expenses: [...state.expenses, action.expenses] };
+  case 'TOTAL_AMOUNT':
+    return { ...state, amount: action.amount };
+  case 'DELETE_EXPENSE':
+    return { ...state,
+      expenses: [...state.expenses
         .filter(({ id }) => id !== action.id)] };
-    default:
-      return state;
+  default:
+    return state;
   }
 };
 
