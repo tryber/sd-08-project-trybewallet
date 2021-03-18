@@ -89,7 +89,7 @@ const mapStateToProps = (state) => ({
   expenses: state.wallet.expenses,
 });
 
-const mapDispatcToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch) => ({
   deleteExpense: (expenseId) => dispatch(removeExpense(expenseId)),
 });
 
@@ -109,4 +109,4 @@ ExpensesTable.propTypes = {
   deleteExpense: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatcToProps)(ExpensesTable);
+export default connect(mapStateToProps, mapDispatchToProps)(ExpensesTable);
