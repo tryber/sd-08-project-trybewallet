@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-class Wallet extends React.Component {
+import Header from '../components/header';
+
+class Wallet extends Component {
   render() {
-    return <div>TrybeWallet</div>;
+    return (
+      <Header />
+    );
   }
 }
 
