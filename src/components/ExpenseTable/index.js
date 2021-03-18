@@ -1,30 +1,32 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { actionDelete } from '../../actions/wallet';
 
 class ExpenseTable extends Component {
-/*   deleteExpense() {
-    const { expenses } = this.props;
-
-  } */
+  renderHeadForm() {
+    return (
+      <thead>
+        <tr>
+          <th>Descrição</th>
+          <th>Tag</th>
+          <th>Método de pagamento</th>
+          <th>Valor</th>
+          <th>Moeda</th>
+          <th>Câmbio utilizado</th>
+          <th>Valor convertido</th>
+          <th>Moeda de conversão</th>
+          <th>Editar/Excluir</th>
+        </tr>
+      </thead>
+    );
+  }
 
   render() {
-    const { expenses } = this.props;
+    const { expenses, deleteExpense } = this.props;
     return (
       <table>
-        <thead>
-          <tr>
-            <th>Descrição</th>
-            <th>Tag</th>
-            <th>Método de pagamento</th>
-            <th>Valor</th>
-            <th>Moeda</th>
-            <th>Câmbio utilizado</th>
-            <th>Valor convertido</th>
-            <th>Moeda de conversão</th>
-            <th>Editar/Excluir</th>
-          </tr>
-        </thead>
+        {this.renderHeadForm()}
         <tbody>
           {expenses.length > 0 && expenses
             .map((expense) => (
@@ -38,13 +40,23 @@ class ExpenseTable extends Component {
                 <td>
                   {parseFloat(expense.exchangeRates[expense.currency].ask).toFixed(2)}
                 </td>
-                <td>{expense.value * expense.exchangeRates[expense.currency].ask}</td>
+                <td>
+                  {(expense.value * expense.exchangeRates[expense.currency].ask)
+                    .toFixed(2)}
+                </td>
                 <td>Real</td>
                 <td>
                   <button
                     type="button"
+                    data-testid="edit-btn"
+                    /* onClick={ () => editExpense(expense.id) } */
+                  >
+                    Editar
+                  </button>
+                  <button
+                    type="button"
                     data-testid="delete-btn"
-                    onClick={ this.deleteExpense }
+                    onClick={ () => deleteExpense(expense.id) }
                   >
                     Excluir
                   </button>
@@ -65,4 +77,10 @@ const mapStateToProps = ({ wallet: { expenses } }) => ({
   expenses,
 });
 
-export default connect(mapStateToProps)(ExpenseTable);
+const mapDispatchToProps = (dispatch) => ({
+  deleteExpense: (expenseId) => dispatch(
+    actionDelete(expenseId),
+  ),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ExpenseTable);

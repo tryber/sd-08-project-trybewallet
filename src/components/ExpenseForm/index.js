@@ -43,6 +43,11 @@ class ExpenseForm extends Component {
     id += 1;
     this.setState({
       id,
+      value: 0,
+      currency: 'USD',
+      method: 'Dinheiro',
+      tag: 'Alimentação',
+      description: '',
     });
     document.getElementById('expenseForm').reset();
     // https://stackoverflow.com/questions/43922508/clear-and-reset-form-input-fields
