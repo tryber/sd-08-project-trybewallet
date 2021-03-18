@@ -8,24 +8,24 @@ class ExpenseTable extends Component {
     return (
       expenses.map((each) => (
         <tr key={ each.id }>
-          <th>{each.description}</th>
-          <th>{each.tag}</th>
-          <th>{each.method}</th>
-          <th>{each.value}</th>
-          <th>{each.exchangeRates[each.currency].name}</th>
-          <th>{parseFloat(each.exchangeRates[each.currency].ask).toFixed(2)}</th>
-          <th>
+          <td>{each.description}</td>
+          <td>{each.tag}</td>
+          <td>{each.method}</td>
+          <td>{each.value}</td>
+          <td>{each.exchangeRates[each.currency].name}</td>
+          <td>{parseFloat(each.exchangeRates[each.currency].ask).toFixed(2)}</td>
+          <td>
             {parseFloat(each.exchangeRates[each.currency].ask * each.value).toFixed(2)}
-          </th>
-          <th>Real</th>
-          <th>
+          </td>
+          <td>Real</td>
+          <td>
             <button
               data-testid="delete-btn"
               type="button"
             >
               X
             </button>
-          </th>
+          </td>
         </tr>
       ))
     );
