@@ -17,7 +17,7 @@ class ExpenseForm extends React.Component {
     this.handleChange = this.handleChange.bind(this);
 
     this.state = {
-      value: 0,
+      value: '0',
       description: '',
       currency: 'USD',
       method: 'Dinheiro',
@@ -112,9 +112,9 @@ class ExpenseForm extends React.Component {
           onChange={ this.handleChange }
           data-testid="method-input"
         >
-          <option value="cash">Dinheiro</option>
-          <option value="credit-card">Cartão de crédito</option>
-          <option value="debit-card">Cartão de débito</option>
+          <option value="Dinheiro">Dinheiro</option>
+          <option value="Cartão de crédito">Cartão de crédito</option>
+          <option value="Cartão de débito">Cartão de débito</option>
         </select>
       </label>
     );
@@ -163,6 +163,14 @@ class ExpenseForm extends React.Component {
           onClick={ () => {
             this.updateExchangeRates();
             saveExpense(this.state);
+            this.setState({
+              value: 0,
+              description: '',
+              currency: 'USD',
+              method: 'Dinheiro',
+              tag: 'Alimentação',
+              exchangeRates: {},
+            });
           } }
         >
           Adicionar despesa
