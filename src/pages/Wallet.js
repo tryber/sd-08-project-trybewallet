@@ -5,6 +5,7 @@ import ExpensesForm from '../components/ExpensesForm';
 import Header from '../components/Header';
 import { fetchCurrencies as actualCurrencies } from '../actions';
 import ExpensesTable from '../components/ExpensesTable';
+import EditExpensesForm from '../components/EditExpensesForm';
 
 class Wallet extends React.Component {
   componentDidMount() {
@@ -13,10 +14,11 @@ class Wallet extends React.Component {
   }
 
   render() {
+    const { editTarget } = this.props;
     return (
       <div>
         <Header />
-        <ExpensesForm />
+        {editTarget ? <EditExpensesForm /> : <ExpensesForm />}
         <ExpensesTable />
       </div>
     );
@@ -25,9 +27,18 @@ class Wallet extends React.Component {
 
 Wallet.propTypes = {
   fetchCurrencies: PropTypes.func.isRequired,
+  editTarget: PropTypes.bool,
 };
 
 const mapDispatchToProps = (dispatch) => ({
   fetchCurrencies: () => dispatch(actualCurrencies()),
 });
-export default connect(null, mapDispatchToProps)(Wallet);
+
+const mapStateToProps = (state) => ({
+  editTarget: state.wallet.editTarget,
+});
+export default connect(mapStateToProps, mapDispatchToProps)(Wallet);
+
+Wallet.defaultProps = {
+  editTarget: false,
+};

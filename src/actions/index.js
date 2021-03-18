@@ -8,6 +8,8 @@ export const REQUEST_SUCCESS = 'REQUEST_SUCCESS';
 export const REQUEST_FAIL = 'REQUEST_FAIL';
 export const SAVE_EXPENSES = 'SAVE_EXPENSES';
 export const DELETE_EXPENSES = 'DELETE_EXPENSES';
+export const EDIT_EXPENSES = 'EDIT_EXPENSES';
+export const CONFIRM_EDITING = 'CONFIRM_EDITING';
 
 export const login = (payload) => ({
   type: LOGIN,
@@ -47,5 +49,15 @@ export const fetchCurrencies = () => async (dispatch) => {
 
 export const deleteExpenses = (payload) => ({
   type: DELETE_EXPENSES,
+  payload,
+});
+
+export const editExpenses = (payload) => ({
+  type: EDIT_EXPENSES,
+  payload,
+});
+
+export const confirmEditing = (payload) => ({
+  type: CONFIRM_EDITING,
   payload,
 });
