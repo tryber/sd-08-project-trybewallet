@@ -32,17 +32,18 @@ class Login extends React.Component {
     const { email, password } = this.state;
     const emailIsValid = this.validEmail(email);
     const passwordIsValid = this.validPassword(password);
-    if (emailIsValid && passwordIsValid) return true;
-    return false;
+    return (emailIsValid && passwordIsValid);
   }
 
-  async handleChange(event) {
+  handleChange(event) {
     const { target: { name, value } } = event;
-    await this.setState(
+    this.setState(
       { [name]: value },
+      () => {
+        if (this.checkEmailAndPassword()) this.setState({ disabledButton: false });
+        else this.setState({ disabledButton: true });
+      },
     );
-    if (this.checkEmailAndPassword()) this.setState({ disabledButton: false });
-    else this.setState({ disabledButton: true });
   }
 
   render() {
