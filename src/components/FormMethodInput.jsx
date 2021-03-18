@@ -15,9 +15,9 @@ export default function FormMethodInput({
         onChange={ (e) => setPaymentMethodFuncProps(e.target.value) }
         value={ paymentMethodProps }
       >
-        <option value="dinheiro">Dinheiro</option>
-        <option value="cartao-credito">Cartão de crédito</option>
-        <option value="cartao-debito">Cartão de débito</option>
+        <option value="Dinheiro">Dinheiro</option>
+        <option value="Cartão de crédito">Cartão de crédito</option>
+        <option value="Cartão de débito">Cartão de débito</option>
       </select>
     </label>
   );

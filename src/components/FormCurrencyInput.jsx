@@ -19,7 +19,7 @@ export default function FormCurrencyInput({
         {currencyProps.map((item) => {
           if (item.name === 'Dólar Turismo') return '';
           return (
-            <option value={ item.code } key={ item.code }>
+            <option data-testid={ item.code } value={ item.code } key={ item.code }>
               {item.code}
             </option>
           );
