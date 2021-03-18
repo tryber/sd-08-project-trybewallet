@@ -7,6 +7,8 @@ export const REQUEST_SUCCESS = 'REQUEST_SUCCESS';
 export const REQUEST_FAIL = 'REQUEST_FAIL';
 export const SAVE_EXPENSE = 'SAVE_EXPENSE';
 export const DELETE_EXPENSE = 'DELETE_EXPENSE';
+export const EDIT_EXPENSE_START = 'EDIT_EXPENSE_START';
+export const EDIT_EXPENSE_END = 'EDIT_EXPENSE_END';
 
 export const emailChange = (payload) => ({
   type: EMAIL,
@@ -46,5 +48,15 @@ export const saveExpense = (expenses) => ({
 
 export const deleteExpense = (expense) => ({
   type: DELETE_EXPENSE,
+  expense,
+});
+
+export const editExpense = (expense) => ({
+  type: EDIT_EXPENSE_START,
+  expense,
+});
+
+export const endExpenseEdit = (expense) => ({
+  type: EDIT_EXPENSE_END,
   expense,
 });

@@ -4,6 +4,8 @@ import {
   REQUEST_FAIL,
   SAVE_EXPENSE,
   DELETE_EXPENSE,
+  EDIT_EXPENSE_START,
+  EDIT_EXPENSE_END,
 } from '../actions';
 
 const INITIAL_STATE_WALLET = {
@@ -22,7 +24,7 @@ export default function wallet(state = INITIAL_STATE_WALLET, action) {
     return {
       ...state,
       isFetching: false,
-      currencies: [action.currencies],
+      currencies: [...Object.keys(action.currencies)],
     };
   case REQUEST_FAIL:
     return {
@@ -38,7 +40,24 @@ export default function wallet(state = INITIAL_STATE_WALLET, action) {
   case DELETE_EXPENSE:
     return {
       ...state,
-      expenses: [...state.expenses.filter((expense) => expense.id !== action.expense.id)],
+      expenses: [
+        ...state.expenses.filter((expense) => expense.id !== action.expense.id),
+      ],
+    };
+  case EDIT_EXPENSE_START:
+    return {
+      ...state,
+      isEditing: true,
+      expenseId: action.expense.id,
+    };
+  case EDIT_EXPENSE_END:
+    return {
+      ...state,
+      expenses: state.expenses.map((item) => {
+        if (item.id === action.expense.id) return { ...item, ...action.expense };
+        return item;
+      }),
+      isEditing: false,
     };
   default:
     return state;
