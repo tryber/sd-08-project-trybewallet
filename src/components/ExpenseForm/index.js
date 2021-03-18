@@ -44,46 +44,65 @@ class ExpenseForm extends Component {
     this.setState({
       id,
     });
+    document.getElementById("expenseForm").reset();
+    // https://stackoverflow.com/questions/43922508/clear-and-reset-form-input-fields
+  }
+
+  renderTag() {
+    return (
+      <label htmlFor="tag">
+        Tag:
+        <select
+          name="tag"
+          id="tag"
+          data-testid="tag-input"
+          onChange={ this.handleChange }
+        >
+          <option>Alimentação</option>
+          <option>Lazer</option>
+          <option>Trabalho</option>
+          <option>Transporte</option>
+          <option>Saúde</option>
+        </select>
+      </label>
+    );
   }
 
   render() {
     const { currencies } = this.props;
     return (
-      <form>
+      <form id="expenseForm">
         <label htmlFor="value-input">
           Valor:
           <input name="value" data-testid="value-input" onChange={ this.handleChange } />
         </label>
-        <label htmlFor="currency-input">
+        <label htmlFor="currency">
           Moeda:
           <select
             name="currency"
+            id="currency"
             data-testid="currency-input"
             onChange={ this.handleChange }
           >
             {currencies.map((item) => (
-              <option value={ item } data-testid={ item } key={ item }>{item}</option>
+              <option data-testid={ item } key={ item }>{item}</option>
             ))}
           </select>
         </label>
-        <label htmlFor="method-input">
+        <label htmlFor="method">
           Método de Pagamento:
-          <select name="method" data-testid="method-input" onChange={ this.handleChange }>
+          <select
+            name="method"
+            id="method"
+            data-testid="method-input"
+            onChange={ this.handleChange }
+          >
             <option>Dinheiro</option>
             <option>Cartão de crédito</option>
             <option>Cartão de débito</option>
           </select>
         </label>
-        <label htmlFor="tag-input">
-          Tag:
-          <select name="tag" data-testid="tag-input" onChange={ this.handleChange }>
-            <option>Alimentação</option>
-            <option>Lazer</option>
-            <option>Trabalho</option>
-            <option>Transporte</option>
-            <option>Saúde</option>
-          </select>
-        </label>
+        {this.renderTag()}
         <label htmlFor="description-input">
           Descrição:
           <input
@@ -99,10 +118,10 @@ class ExpenseForm extends Component {
 }
 
 ExpenseForm.propTypes = {
-  saveCurrencyList: PropTypes.func.isRequired,
-  saveExpense: PropTypes.func.isRequired,
-  currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
-};
+  saveCurrencyList: PropTypes.func,
+  saveExpense: PropTypes.func,
+  currencies: PropTypes.arrayOf(PropTypes.string),
+}.isRequired;
 
 const mapStateToProps = ({ wallet: { currencies } }) => ({
   currencies,

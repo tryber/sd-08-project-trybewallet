@@ -13,7 +13,7 @@ export default function wallet(state = INITIAL_STATE, { type, payload }) {
       currencies: payload.currencies };
   case SAVE_EXPENSES:
     return { ...state,
-      expenses: payload.expenses,
+      expenses: [...state.expenses, payload.expenses],
     };
   default:
     return state;

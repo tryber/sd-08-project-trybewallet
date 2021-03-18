@@ -3,6 +3,11 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 class ExpenseTable extends Component {
+/*   deleteExpense() {
+    const { expenses } = this.props;
+    
+  } */
+
   render() {
     const { expenses } = this.props;
     return (
@@ -39,7 +44,7 @@ class ExpenseTable extends Component {
                   <button
                     type="button"
                     data-testid="delete-btn"
-                    onClick={ this.handleClick }
+                    onClick={ this.deleteExpense }
                   >
                     Excluir
                   </button>
@@ -53,8 +58,8 @@ class ExpenseTable extends Component {
 }
 
 ExpenseTable.propTypes = {
-  expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
-};
+  expenses: PropTypes.array,
+}.isRequired;
 
 const mapStateToProps = ({ wallet: { expenses } }) => ({
   expenses,
