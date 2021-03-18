@@ -36,7 +36,7 @@
 }
 
 .loginForm button:not( :disabled ):hover {
-  filter: brightness(1.0);
+  filter: brightness(1.9);
 }
 
 .loginForm > *:not( :last-child ) {
