@@ -18,10 +18,10 @@ class ExpenseForm extends React.Component {
 
     this.state = {
       value: '0',
-      description: '',
       currency: 'USD',
       method: 'Dinheiro',
       tag: 'Alimentação',
+      description: '',
       exchangeRates: {},
     };
   }
@@ -31,8 +31,7 @@ class ExpenseForm extends React.Component {
   }
 
   async updateExchangeRates() {
-    const currencies = await getCurrencies();
-    const { USDT, ...exchangeRates } = currencies;
+    const exchangeRates = await getCurrencies();
 
     this.setState((previousState) => ({
       ...previousState,
@@ -76,6 +75,8 @@ class ExpenseForm extends React.Component {
 
   inputCurrency() {
     const { currency, exchangeRates } = this.state;
+    const { USDT, ...currencies } = exchangeRates;
+
     return (
       <label htmlFor="currency-input">
         Moeda:
@@ -86,7 +87,7 @@ class ExpenseForm extends React.Component {
           onChange={ this.handleChange }
           data-testid="currency-input"
         >
-          {Object.keys(exchangeRates).map((key) => (
+          {Object.keys(currencies).map((key) => (
             <option
               key={ key }
               value={ key }
@@ -165,10 +166,10 @@ class ExpenseForm extends React.Component {
             saveExpense(this.state);
             this.setState({
               value: 0,
-              description: '',
               currency: 'USD',
               method: 'Dinheiro',
               tag: 'Alimentação',
+              description: '',
               exchangeRates: {},
             });
           } }
