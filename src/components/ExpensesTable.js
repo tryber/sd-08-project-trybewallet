@@ -74,6 +74,7 @@ class ExpensesTable extends Component {
 ExpensesTable.propTypes = {
   expenses: PropTypes.arrayOf(expenseType).isRequired,
   removeExpense: PropTypes.func.isRequired,
+  editExpense: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(WalletActions, dispatch);
