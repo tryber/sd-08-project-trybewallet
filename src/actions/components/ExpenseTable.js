@@ -12,8 +12,12 @@ class ExpenseTable extends Component {
           <th>{each.tag}</th>
           <th>{each.method}</th>
           <th>{each.value}</th>
-          <th>{each.currency}</th>
-          <th>Cambio</th>
+          <th>{each.exchangeRates[each.currency].name}</th>
+          <th>{parseFloat(each.exchangeRates[each.currency].ask).toFixed(2)}</th>
+          <th>
+            {parseFloat(each.exchangeRates[each.currency].ask * each.value).toFixed(2)}
+          </th>
+          <th>Real</th>
         </tr>
       ))
     );
@@ -22,15 +26,19 @@ class ExpenseTable extends Component {
   render() {
     return (
       <table>
-        <tr>
+        <thead>
           <th>Descrição</th>
           <th>Tag</th>
           <th>Método de pagamento</th>
           <th>Valor</th>
           <th>Moeda</th>
-          <th>Câmbio</th>
-        </tr>
-        {this.expenseRow}
+          <th>Câmbio utilizado</th>
+          <th>Valor convertido</th>
+          <th>Moeda de conversão</th>
+        </thead>
+        <tbody>
+          {this.expenseRow()}
+        </tbody>
       </table>
     );
   }
