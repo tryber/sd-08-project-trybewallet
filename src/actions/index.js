@@ -6,6 +6,7 @@ export const REQUEST_START = 'REQUEST_START';
 export const REQUEST_SUCCESS = 'REQUEST_SUCCESS';
 export const REQUEST_FAIL = 'REQUEST_FAIL';
 export const SAVE_EXPENSE = 'SAVE_EXPENSE';
+export const DELETE_EXPENSE = 'DELETE_EXPENSE';
 
 export const emailChange = (payload) => ({
   type: EMAIL,
@@ -41,4 +42,9 @@ export const fetchCurrencies = () => async (dispatch) => {
 export const saveExpense = (expenses) => ({
   type: SAVE_EXPENSE,
   expenses,
+});
+
+export const deleteExpense = (expense) => ({
+  type: DELETE_EXPENSE,
+  expense,
 });
