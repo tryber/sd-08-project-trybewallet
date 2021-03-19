@@ -23,6 +23,12 @@ const addExpense = (state = INITIAL_STATE, action) => {
   };
 };
 
+const editExpense = (state = INITIAL_STATE, action) => ({
+  ...state,
+  editor: true,
+  idToEdit: action.id,
+});
+
 const removeExpense = (state = INITIAL_STATE, action) => ({
   ...state,
   expenses: state.expenses.filter((expense) => expense.id !== action.payload),
@@ -41,6 +47,10 @@ const wallet = (state = INITIAL_STATE, action) => {
   case FETCH_SAVE_CURRENCIES.REMOVE_EXPENSE:
     return (
       removeExpense(state, action)
+    );
+  case FETCH_SAVE_CURRENCIES.EDIT_EXPENSE:
+    return (
+      editExpense(state, action)
     );
   default:
     return state;
