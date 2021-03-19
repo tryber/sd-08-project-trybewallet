@@ -1,6 +1,10 @@
 import { LOGIN } from '../actions/user';
 
-const user = (state = {}, action) => {
+const INITIAL_STATE = {
+  email: '',
+};
+
+const user = (state = INITIAL_STATE, action) => {
   switch (action.type) {
   case LOGIN.SAVE_EMAIL:
     return {
