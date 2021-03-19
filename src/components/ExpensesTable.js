@@ -11,7 +11,7 @@ class ExpensesTable extends React.Component {
   }
 
   renderExpenseRow(expense) {
-    const { deleteExpense } = this.props;
+    const { deleteExpense, callback } = this.props;
     return (
       <tr key={ expense.id }>
         <td>{ expense.description }</td>
@@ -36,6 +36,10 @@ class ExpensesTable extends React.Component {
           <span>
             <button
               type="button"
+              data-testid="edit-btn"
+              onClick={ () => {
+                callback(expense.id);
+              } }
             >
               Editar
             </button>
@@ -107,6 +111,7 @@ ExpensesTable.propTypes = {
     }),
   })).isRequired,
   deleteExpense: PropTypes.func.isRequired,
+  callback: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExpensesTable);

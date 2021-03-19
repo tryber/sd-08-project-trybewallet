@@ -1,6 +1,7 @@
 import {
   ADD_NEW_EXPENSE,
   REMOVE_EXPENSE,
+  EDIT_EXPENSE,
 } from '../actions';
 
 const INITIAL_STATE = {
@@ -15,14 +16,14 @@ function wallet(state = INITIAL_STATE, action) {
     if (!expensesLength) {
       return ({
         ...state,
-        expenses: [{ id: 0, ...action.expense }],
+        expenses: [{ ...action.expense, id: 0 }],
       });
     }
     return ({
       ...state,
       expenses: [...state.expenses, {
-        id: state.expenses[expensesLength - 1].id + 1,
         ...action.expense,
+        id: state.expenses[expensesLength - 1].id + 1,
       }],
     });
   case REMOVE_EXPENSE:
@@ -31,6 +32,16 @@ function wallet(state = INITIAL_STATE, action) {
       expenses: state.expenses.length
         ? state.expenses.filter((expense) => expense.id !== action.expenseId)
         : [],
+    });
+  case EDIT_EXPENSE:
+    return ({
+      ...state,
+      expenses: state.expenses.map((expense) => {
+        if (expense.id === action.expenseModified.id) {
+          return action.expenseModified;
+        }
+        return expense;
+      }),
     });
   default:
     return state;

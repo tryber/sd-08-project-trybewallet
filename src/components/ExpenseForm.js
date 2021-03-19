@@ -1,13 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addNewExpense } from '../actions';
+import { addNewExpense, editExpense } from '../actions';
 import getCurrencies from '../services';
+
+const INITIAL_STATE = {
+  id: undefined,
+  value: '0',
+  currency: 'USD',
+  method: 'Dinheiro',
+  tag: 'Alimentação',
+  description: '',
+  exchangeRates: {},
+};
 
 class ExpenseForm extends React.Component {
   constructor() {
     super();
 
+    this.getDataToState = this.getDataToState.bind(this);
     this.updateExchangeRates = this.updateExchangeRates.bind(this);
     this.inputValue = this.inputValue.bind(this);
     this.inputDescription = this.inputDescription.bind(this);
@@ -16,18 +27,27 @@ class ExpenseForm extends React.Component {
     this.inputTag = this.inputTag.bind(this);
     this.handleChange = this.handleChange.bind(this);
 
-    this.state = {
-      value: '0',
-      currency: 'USD',
-      method: 'Dinheiro',
-      tag: 'Alimentação',
-      description: '',
-      exchangeRates: {},
-    };
+    this.state = INITIAL_STATE;
   }
 
   componentDidMount() {
     this.updateExchangeRates();
+  }
+
+  componentDidUpdate() {
+    const { id } = this.props;
+    const { id: emptyId } = this.state;
+    if (id !== emptyId) {
+      this.getDataToState();
+    }
+  }
+
+  getDataToState() {
+    const { id, expenses } = this.props;
+    const expenseToEdit = expenses.find((expense) => expense.id === id);
+    this.setState({
+      ...expenseToEdit,
+    });
   }
 
   async updateExchangeRates() {
@@ -151,7 +171,8 @@ class ExpenseForm extends React.Component {
   }
 
   render() {
-    const { saveExpense } = this.props;
+    const { id, callback, saveExpense, updateExpense } = this.props;
+    const { exchangeRates } = this.state;
     return (
       <form>
         {this.inputValue()}
@@ -159,34 +180,69 @@ class ExpenseForm extends React.Component {
         {this.inputCurrency()}
         {this.inputMethod()}
         {this.inputTag()}
-        <button
-          type="button"
-          onClick={ () => {
-            this.updateExchangeRates();
-            saveExpense(this.state);
-            this.setState({
-              value: 0,
-              currency: 'USD',
-              method: 'Dinheiro',
-              tag: 'Alimentação',
-              description: '',
-              exchangeRates: {},
-            });
-          } }
-        >
-          Adicionar despesa
-        </button>
+        { id || id === 0
+          ? (
+            <button
+              type="button"
+              onClick={ () => {
+                updateExpense(this.state);
+                callback(undefined);
+                this.setState({
+                  ...INITIAL_STATE,
+                  exchangeRates,
+                });
+              } }
+            >
+              Editar despesa
+            </button>)
+          : (
+            <button
+              type="button"
+              onClick={ () => {
+                this.updateExchangeRates();
+                saveExpense(this.state);
+                this.setState(INITIAL_STATE);
+              } }
+            >
+              Adicionar despesa
+            </button>)}
       </form>
     );
   }
 }
 
+const mapStateToProps = (state) => ({
+  expenses: state.wallet.expenses,
+});
+
 const mapDispatchToProps = (dispatch) => ({
   saveExpense: (state) => dispatch(addNewExpense(state)),
+  updateExpense: (state) => dispatch(editExpense(state)),
 });
 
 ExpenseForm.propTypes = {
   saveExpense: PropTypes.func.isRequired,
+  updateExpense: PropTypes.func.isRequired,
+  id: PropTypes.number,
+  expenses: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    value: PropTypes.string,
+    description: PropTypes.string,
+    currency: PropTypes.string,
+    method: PropTypes.string,
+    tag: PropTypes.string,
+    exchangeRates: PropTypes.shape({
+      code: PropTypes.string,
+      name: PropTypes.string,
+      ask: PropTypes.number,
+    }),
+  })),
+  callback: PropTypes.func.isRequired,
 };
 
-export default connect(null, mapDispatchToProps)(ExpenseForm);
+ExpenseForm.defaultProps = {
+  id: undefined,
+  expenses: [],
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ExpenseForm);
