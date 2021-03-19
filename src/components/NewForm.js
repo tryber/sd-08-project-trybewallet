@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import allActions from '../actions';
 
 const tagList = ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
-const methodlist = ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'];
+const m = ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'];
+const $ = 'currency';
 function NewForm() {
   const id = useSelector((state) => state.wallet.id);
   const edit = useSelector((state) => state.wallet.edit);
@@ -20,7 +21,6 @@ function NewForm() {
     setClick({ ...c, [name]: value });
   }
   function handleClick() {
-    // dispatch(currencyList());
     dispatch(receiveItemListAsync2(c, id));
   }
   return (
@@ -40,12 +40,12 @@ function NewForm() {
         type="text"
         onChange={ hg }
       />
-      <select name="currency" data-testid="currency-input" value={ c.currency } onChange={ hg }>
+      <select name={ $ } data-testid="currency-input" value={ c[$] } onChange={ hg }>
         { currencyFromApi
           .map((e, i) => <option key={ i } data-testid={ `${e}` }>{e}</option>)}
       </select>
       <select name="method" data-testid="method-input" value={ c.method } onChange={ hg }>
-        {methodlist.map((e, i) => <option key={ i } data-testid={ `${e}` }>{e}</option>) }
+        {m.map((e, i) => <option key={ i } data-testid={ `${e}` }>{e}</option>) }
       </select>
       <select name="tag" data-testid="tag-input" value={ c.tag } onChange={ hg }>
         {tagList.map((e, i) => <option key={ i } value={ e }>{ e }</option>)}
