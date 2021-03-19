@@ -8,6 +8,14 @@ const initialState = {
   total: 0,
 };
 
+function calcTotal(exp) {
+  return exp.reduce((acc, cur) => {
+    const rate = cur.exchangeRates[cur.currency];
+    acc += parseFloat((parseFloat(cur.value) * rate.ask).toFixed(2));
+    return acc;
+  }, 0);
+}
+
 function addExpense(state = {}, action = {}) {
   const expenses = state.expenses.concat([{
     id: state.expenses.length, ...action.expense,
@@ -15,11 +23,7 @@ function addExpense(state = {}, action = {}) {
   return {
     ...state,
     expenses,
-    total: expenses.reduce((acc, cur) => {
-      const rate = cur.exchangeRates[cur.currency];
-      acc += parseFloat((parseFloat(cur.value) * rate.ask).toFixed(2));
-      return acc;
-    }, 0),
+    total: calcTotal(expenses),
   };
 }
 
@@ -28,11 +32,7 @@ function deleteExpense(state = {}, action = {}) {
   return {
     ...state,
     expenses: filteredExpenses,
-    total: filteredExpenses.reduce((acc, cur) => {
-      const rate = cur.exchangeRates[cur.currency];
-      acc += parseFloat((parseFloat(cur.value) * rate.ask).toFixed(2));
-      return acc;
-    }, 0),
+    total: calcTotal(filteredExpenses),
   };
 }
 

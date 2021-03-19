@@ -56,6 +56,7 @@ class GetExpenses extends React.Component {
     const { addExpense } = this.props;
     const { expenses } = this.state;
     addExpense(expenses);
+    this.state.expenses.value = '';
   }
 
   valueInput() {
