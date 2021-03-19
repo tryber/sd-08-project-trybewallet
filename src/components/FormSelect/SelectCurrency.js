@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { requestCurrency } from '../../actions';
-// import getCurrency from '../../services/Service';
+import getCurrency from '../../services/Service';
 
 class SelectCurrency extends Component {
   constructor(props) {
@@ -18,15 +18,14 @@ class SelectCurrency extends Component {
     this.fetchCurrencies();
   }
 
-  // async fetchCurrencies() {
-  //   const { requestCurr } = this.props;
-  //   const currencies = await getCurrency();
-  //   this.setState({
-  //     currencies,
-  //   });
-  //   requestCurr(currencies);
-  //   console.log(currencies);
-  // }
+  async fetchCurrencies() {
+    const { requestCurr } = this.props;
+    const currencies = await getCurrency();
+    this.setState({
+      // currencies,
+    });
+    requestCurr(currencies);
+  }
 
   // findExpense() {
   //   const { setEditData, idToEdit, editor } = this.props;
@@ -72,7 +71,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 SelectCurrency.propTypes = {
-  // requestCurr: PropTypes.func.isRequired,
+  requestCurr: PropTypes.func.isRequired,
   handleChange: PropTypes.func.isRequired,
 };
 
