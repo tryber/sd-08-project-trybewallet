@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { useSelector } from 'react-redux';
 import FormValueInput from './FormValueInput';
 import FormDescriptionInput from './FormDescriptionInput';
 import FormCurrencyInput from './FormCurrencyInput';
@@ -21,7 +22,7 @@ export default function FormEdit({ currency }) {
     paymentMethod,
     expenseCategory,
   } = useLogic2();
-
+  const currencies = useSelector((state) => state.wallet.currencies);
   return (
     <form onSubmit={ handleSubmit }>
       <FormValueInput
@@ -35,7 +36,7 @@ export default function FormEdit({ currency }) {
       <FormCurrencyInput
         setExpanseCurrencyFuncProps={ setExpanseCurrency }
         expanseCurrencyProps={ expanseCurrency }
-        currencyProps={ currency }
+        currencyProps={ currencies }
       />
       <FormMethodInput
         setPaymentMethodFuncProps={ setPaymentMethod }

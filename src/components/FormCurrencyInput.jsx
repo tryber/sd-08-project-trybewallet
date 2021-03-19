@@ -16,14 +16,11 @@ export default function FormCurrencyInput({
         onChange={ (e) => setExpanseCurrencyFuncProps(e.target.value) }
         value={ expanseCurrencyProps }
       >
-        {currencyProps.map((item) => {
-          if (item.name === 'Dólar Turismo') return '';
-          return (
-            <option data-testid={ item.code } value={ item.code } key={ item.code }>
-              {item.code}
-            </option>
-          );
-        })}
+        {currencyProps.length && currencyProps.map((item) => (
+          <option data-testid={ item } value={ item } key={ item }>
+            {item}
+          </option>
+        ))}
       </select>
     </label>
   );
@@ -31,6 +28,7 @@ export default function FormCurrencyInput({
 
 FormCurrencyInput.propTypes = {
   currencyProps: PropTypes.shape({
+    length: PropTypes.func,
     map: PropTypes.func,
   }).isRequired,
   expanseCurrencyProps: PropTypes.string.isRequired,

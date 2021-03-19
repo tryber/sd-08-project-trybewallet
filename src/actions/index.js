@@ -39,3 +39,13 @@ export const expanseEditEnd = (payload) => ({
   type: EDIT_EXPANSE_END,
   payload,
 });
+
+export const fetchCurrencies = () => (dispatch) => {
+  fetch('https://economia.awesomeapi.com.br/json/all')
+    .then((data) => data.json())
+    .then((res) => dispatch(
+      currenciesSave(
+        Object.keys(res).filter((currency) => currency !== 'USDT'),
+      ),
+    ));
+};
