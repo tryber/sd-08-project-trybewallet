@@ -1,0 +1,38 @@
+.expenseForm {
+  background: rgba(22, 199, 52, 0);
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+}
+
+.expenseForm input, .expenseForm select, .expenseForm button {
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  margin: 5px;
+  outline: none;
+  padding: 0 5px;
+}
+
+.expenseForm button {
+  background-color: rgba(46, 42, 42, 0.24);
+  cursor: pointer;
+}
+
+.expenseForm button:hover {
+  filter: brightness (0.9);
+}
+
+.expenseForm [ name = 'description' ] {
+  flex: 1;
+}
+
+.expenseForm *:not( :last-child) {
+  margin-right: 10px;
+}
+
+@media (max-width: 900px) {
+  .expenseForm {
+    display: grid
+  }
+}
