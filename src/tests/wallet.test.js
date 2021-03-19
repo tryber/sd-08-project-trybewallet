@@ -44,7 +44,7 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
     test('Crie um campo com a despesa total gerada pela lista de gastos.', () => {
       renderWithRouterAndStore(<Wallet />, '/carteira', initial);
       const totalField = screen.getByTestId('total-field');
-  
+      console.log(totalField)
       const INITIAL_VALUE = 0;
       expect(totalField).toContainHTML(INITIAL_VALUE);
     });
@@ -172,7 +172,7 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
           exchangeRates: mockData,
         },
       ];
-  
+      
       await waitFor(() => {
         expect(valueInput.value === 0 || valueInput.value === '0' || valueInput.value === '').toBe(true);
       });
