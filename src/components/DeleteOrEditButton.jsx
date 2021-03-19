@@ -12,7 +12,7 @@ export default function DeleteOrEditButton({ indexProps }) {
         onClick={ () => dispatch(expanseEdit(indexProps)) }
         data-testid="edit-btn"
       >
-        Editar despesa
+        Editar
       </button>
       <button
         type="button"

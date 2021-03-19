@@ -29,13 +29,11 @@ export default function wallet(state = initialState, action) {
   case EDIT_EXPANSE_END:
     return {
       ...state,
+      expenses: state.expenses.map((item) => {
+        if (item.id === action.payload.id) return { ...item, ...action.payload };
+        return item;
+      }),
       isEditing: false,
-      expenses: [
-        ...state.expenses.filter(
-          (expense) => Number(expense.id) !== state.expenseId,
-        ),
-        action.payload,
-      ].sort((a, b) => a.id - b.id),
     };
   default:
     return state;
