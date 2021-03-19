@@ -4,7 +4,7 @@ import {
   GET_CURRENCIES_SUCCESS,
   GET_CURRENCIES_ERROR,
   ADD_EXPENSE,
-  // GET_EXPENSES,
+  DELETE_EXPENSE,
 } from '../actions/index';
 
 const initialWalletState = {
@@ -22,8 +22,8 @@ export default function walletReducer(state = initialWalletState, action) {
     return { ...state, error: action.payload };
   case ADD_EXPENSE:
     return { ...state, expenses: [...state.expenses, action.payload] };
-  // case GET_EXPENSES:
-  //   return { ...state };
+  case DELETE_EXPENSE:
+    return { ...state, expenses: [...action.payload] };
   default:
     return state;
   }

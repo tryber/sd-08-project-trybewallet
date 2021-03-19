@@ -32,9 +32,9 @@ class Wallet extends React.Component {
     const { expenses } = this.props;
     let total = 0;
     expenses.forEach((c) => {
-      total += Number(c.value);
+      total += (Number(c.value) * Number(c.exchangeRates[c.currency].ask));
     });
-    return total;
+    return Math.floor(total * 100) / 100;
   }
 
   renderCurrencies() {
