@@ -2,47 +2,26 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-class Gastos extends Component {
-  constructor() {
-    super();
+class Edit extends Component {
+  constructor(props) {
+    super(props);
+
+    const { expenses, idEdit } = this.props;
+    const object = expenses.find((id, index) => expenses[index].id === idEdit);
     this.state = {
-      Currencys: [],
-      currency: 'USD',
-      description: '',
-      method: '',
-      tag: '',
-      value: '',
-      id: 0,
+      currency: object.currency,
+      description: object.description,
+      method: object.method,
+      tag: object.tag,
+      value: object.value,
+      id: object.id,
+      exchangeRates: object.exchangeRates,
     };
-    this.getAPI = this.getAPI.bind(this);
+
     this.handleChange = this.handleChange.bind(this);
-    this.getCurrency = this.getCurrency.bind(this);
     this.inputCurrency = this.inputCurrency.bind(this);
     this.inputMethod = this.inputMethod.bind(this);
     this.inputCategory = this.inputCategory.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-    this.totalValue = this.totalValue.bind(this);
-  }
-
-  componentDidMount() {
-    this.getCurrency();
-  }
-
-  async getCurrency() {
-    const Data = await this.getAPI();
-    const dataKeys = Object.keys(Data);
-    const Currencys = dataKeys.filter((item) => item !== 'USDT');
-    this.setState({
-      Currencys,
-      exchangeRates: Data,
-    });
-  }
-
-  async getAPI() {
-    const endPoint = 'https://economia.awesomeapi.com.br/json/all';
-    const fetchAPI = await fetch(endPoint);
-    const Data = await fetchAPI.json();
-    return Data;
   }
 
   handleChange(event) {
@@ -53,7 +32,7 @@ class Gastos extends Component {
   }
 
   inputValues() {
-    const { value } = this.state;
+    const { value, description } = this.state;
     return (
       <div>
         <input
@@ -66,6 +45,7 @@ class Gastos extends Component {
         <textarea
           type="text"
           name="description"
+          value={ description }
           data-testid="description-input"
           onChange={ (event) => this.handleChange(event) }
         />
@@ -74,15 +54,32 @@ class Gastos extends Component {
   }
 
   inputCurrency() {
-    const { Currencys } = this.state;
+    const { currency } = this.state;
+    const options = [
+      'USD',
+      'CAD',
+      'EUR',
+      'GBP',
+      'ARS',
+      'BTC',
+      'LTC',
+      'JPY',
+      'CHF',
+      'AUD',
+      'CNY',
+      'ILS',
+      'ETH',
+      'XRP',
+    ];
     return (
       <div>
         <select
           data-testid="currency-input"
           name="currency"
+          value={ currency }
           onChange={ (event) => this.handleChange(event) }
         >
-          {Currencys.map((item) => (
+          {options.map((item) => (
             <option
               value={ item }
               key={ item }
@@ -97,6 +94,7 @@ class Gastos extends Component {
   }
 
   inputMethod() {
+    const { method } = this.props;
     const methodArray = [
       'Dinheiro', 'Cartão de crédito', 'Cartão de débito',
     ];
@@ -105,15 +103,16 @@ class Gastos extends Component {
         <select
           data-testid="method-input"
           name="method"
+          value={ method }
           onChange={ (event) => this.handleChange(event) }
         >
-          {methodArray.map((method) => (
+          {methodArray.map((item) => (
             <option
-              value={ method }
-              key={ method }
-              data-test-id={ method }
+              value={ item }
+              key={ item }
+              data-test-id={ item }
             >
-              {method}
+              {item}
             </option>))}
         </select>
       </div>
@@ -121,6 +120,7 @@ class Gastos extends Component {
   }
 
   inputCategory() {
+    const { tag } = this.state;
     const categoryArray = [
       'Alimentação',
       'Lazer',
@@ -133,64 +133,42 @@ class Gastos extends Component {
         <select
           data-testid="tag-input"
           name="tag"
+          value={ tag }
           onChange={ (event) => this.handleChange(event) }
         >
-          {categoryArray.map((tag) => (
+          {categoryArray.map((categ) => (
             <option
-              value={ tag }
-              key={ tag }
-              data-test-id={ tag }
+              value={ categ }
+              key={ categ }
+              data-test-id={ categ }
             >
-              {tag}
+              {categ}
             </option>))}
         </select>
       </div>
     );
   }
 
-  handleClick() {
-    const { AddDespesa } = this.props;
+  render() {
+    const { saveEdit } = this.props;
     const {
       currency,
       description,
       method,
       tag,
       value,
+      id,
       exchangeRates,
     } = this.state;
-    let { id } = this.state;
-    this.getCurrency();
-    const object = {
+    const objeto2 = {
       currency,
       description,
       method,
       tag,
       value,
+      id,
       exchangeRates,
-      id,
     };
-    id += 1;
-    AddDespesa(object);
-    this.setState({
-      id,
-      value: '',
-    }, this.totalValue());
-  }
-
-  totalValue() {
-    const { expenses, AddDespesaTotal } = this.props;
-    let count = 0;
-    const arrayValues = expenses.map((item) => (
-      item.value * (item.exchangeRates[item.currency].ask)
-    ));
-    for (let i = 0; i < arrayValues.length; i += 1) {
-      count += arrayValues[i];
-    }
-    AddDespesaTotal(count);
-  }
-
-  render() {
-    this.totalValue();
     return (
       <div>
         { this.inputValues() }
@@ -199,9 +177,9 @@ class Gastos extends Component {
         { this.inputCategory() }
         <button
           type="button"
-          onClick={ () => this.handleClick() }
+          onClick={ () => saveEdit(objeto2) }
         >
-          Adicionar despesa
+          Editar despesa
         </button>
       </div>);
   }
@@ -209,17 +187,18 @@ class Gastos extends Component {
 
 const mapStateToProps = (state) => ({
   expenses: state.wallet.expenses,
+  idEdit: state.wallet.idEdit,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  AddDespesa: (despesa) => dispatch({ type: 'ADD_DESPESA', despesa }),
-  AddDespesaTotal: (despesa) => dispatch({ type: 'ADD_DESPESATOTAL', despesa }),
+  saveEdit: (newObject) => dispatch({ type: 'SAVE_EDIT', newObject }),
 });
 
-Gastos.propTypes = {
+Edit.propTypes = {
   expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
-  AddDespesaTotal: PropTypes.func.isRequired,
-  AddDespesa: PropTypes.func.isRequired,
+  idEdit: PropTypes.arrayOf(PropTypes.object).isRequired,
+  saveEdit: PropTypes.arrayOf(PropTypes.object).isRequired,
+  method: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Gastos);
+export default connect(mapStateToProps, mapDispatchToProps)(Edit);
