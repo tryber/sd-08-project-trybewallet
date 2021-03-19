@@ -7,7 +7,7 @@ import {
   DELETE_EXPENSE,
   EDIT_EXPENSE_START,
   EDIT_EXPENSE_END,
-  }from '../actions';
+} from '../actions';
 
 const INITIAL_STATE_WALLET = {
   currencies: [],
@@ -18,12 +18,12 @@ export default function wallet(state = INITIAL_STATE_WALLET, action) {
   switch (action.type) {
   case REQUEST_START:
     return {
-    ...state,
+      ...state,
       isFetching: true,
     };
   case REQUEST_SUCCESS:
     return {
-    ...state,
+      ...state,
       isFetching: false,
       currencies: [...Object.keys(action.currencies)],
     };
@@ -31,29 +31,29 @@ export default function wallet(state = INITIAL_STATE_WALLET, action) {
     return { ...state, isFetching: false, error: action.error };
   case SAVE_EXPENSE:
     return {
-    ...state,
+      ...state,
       expenses: [...state.expenses, action.expenses],
     };
   case DELETE_EXPENSE:
     return {
-    ...state,
+      ...state,
       expenses: [
-    ...state.expenses.filter((expense) => expense.id !== action.expense.id),
+      ...state.expenses.filter((expense) => expense.id !== action.expense.id),
       ],
       isEditing: false,
     };
   case EDIT_EXPENSE_START:
     return {
-    ...state,
+      ...state,
       isEditing: true,
       expenseId: action.expense.id,
     };
   case EDIT_EXPENSE_END:
     return {
-    ...state,
+      ...state,
       expenses: state.expenses.map((item) => {
         if (item.id === action.expense.id) return { ...item, ...action.expense };
-    return item;
+        return item;
       }),
       isEditing: false,
     };
@@ -61,4 +61,3 @@ export default function wallet(state = INITIAL_STATE_WALLET, action) {
     return state;
   }
 }
-  

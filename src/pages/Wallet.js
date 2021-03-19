@@ -40,4 +40,3 @@ Wallet.propTypes = {
 Wallet.defaultProps = {
   isEditing: false,
 };
-
