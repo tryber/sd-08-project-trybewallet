@@ -18,6 +18,8 @@ class Wallet extends React.Component {
   render() {
     const { userEmail, currencies, isLoading } = this.props;
 
+    // if (!userEmail) return <Redirect to="/" />;
+
     const availableCurrencies = currencies
       ? currencies.map((currency) => currency.currency) : [];
 

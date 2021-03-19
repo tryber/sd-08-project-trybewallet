@@ -41,6 +41,7 @@ class Login extends React.Component {
     const { email, password } = this.state;
     const MINIMAL_PASSWORD_CHARS = 6;
 
+    // Regex got from https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
     const emailRegex = new RegExp([
       '^(([^<>()[\\]\\\\.,;:\\s@"]+(\\.[^<>()[\\]\\\\.,;:\\s@"]+)*)',
       '|(".+"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])',
