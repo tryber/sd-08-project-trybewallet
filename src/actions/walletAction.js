@@ -11,7 +11,9 @@ const currencyList = () => async (dispatch) => {
   dispatch(currencyRequest());
   // const urlAllCurrency = 'https://economia.awesomeapi.com.br/json/all';
   const currencyResponse = await (await fetch('https://economia.awesomeapi.com.br/json/all')).json();
-  dispatch(currencyRequestSucess(currencyResponse));
+  delete currencyResponse.USDT;
+  const arrayObjc = Object.keys(currencyResponse);
+  dispatch(currencyRequestSucess(arrayObjc));
 };
 
 const receiveItemList = (item) => ({
@@ -26,10 +28,22 @@ const receiveItemListAsync = (item, id) => async (dispatch) => {
   dispatch(receiveItemList(item));
 };
 
+const deleteFromList = (id, name) => ({
+  type: 'DELETE_ITEM',
+  payload: Number(id),
+  sub: Number(name),
+});
+const edit = (id) => ({
+  type: 'EDIT',
+  payload: id,
+});
+
 export default {
   currencyRequest,
   currencyRequestSucess,
   currencyList,
   receiveItemList,
   receiveItemListAsync,
+  deleteFromList,
+  edit,
 };

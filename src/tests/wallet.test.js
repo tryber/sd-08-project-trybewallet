@@ -58,7 +58,7 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
     });
   });
   
-  describe.only('4 - Desenvolva um formulário para adicionar uma despesa contendo as seguintes características:', () => {
+  describe('4 - Desenvolva um formulário para adicionar uma despesa contendo as seguintes características:', () => {
     test('Um campo para adicionar o valor da despesa', async () => {
       renderWithRouterAndStore(<Wallet />, '/carteira');
       const valueInput = await screen.findByTestId('value-input');
@@ -322,6 +322,7 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
       expect(store.getState().wallet.expenses).toStrictEqual(newExpenses);
   
       const totalField = screen.getByTestId('total-field');
+
       expect(totalField).toContainHTML('131.37');
   });
   });
