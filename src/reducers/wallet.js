@@ -4,7 +4,9 @@ const { REQUEST_START,
   FETCH_OK,
   FETCH_FAIL,
   SAVE_ENTRY,
-  DELETE_ENTRY } = myActions;
+  DELETE_ENTRY,
+  EDIT_ENTRY_START,
+  EDIT_ENTRY_END } = myActions;
 
 const INITIAL_STATE = {
   currencies: [],
@@ -38,6 +40,24 @@ export default function wallet(state = INITIAL_STATE, action) {
           (expense) => expense.id !== action.expense.id,
         ),
       ],
+      editMode: false,
+    };
+  case EDIT_ENTRY_START:
+    return {
+      ...state,
+      editMode: true,
+      expenseId: action.expense.id,
+    };
+  case EDIT_ENTRY_END:
+    return {
+      ...state,
+      expenses: state.expenses.map((item) => {
+        if (item.id === action.expense.id) {
+          return { ...item, ...action.expense };
+        }
+        return item;
+      }),
+      editMode: false,
     };
   default:
     return state;

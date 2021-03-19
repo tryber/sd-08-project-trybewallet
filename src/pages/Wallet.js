@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { fetchCurrencies as getCurrencies } from '../actions';
-import { EntriesForm, NewEntries } from '../components';
+import { EntriesForm, NewEntries, EntriesEdit } from '../components';
 
 class Wallet extends React.Component {
   constructor() {
@@ -28,7 +28,7 @@ class Wallet extends React.Component {
   }
 
   render() {
-    const { email } = this.props;
+    const { editMode, email } = this.props;
     return (
       <div>
         <header>
@@ -40,13 +40,14 @@ class Wallet extends React.Component {
             <span data-testid="header-currency-field">BRL</span>
           </div>
         </header>
-        <NewEntries />
+        { editMode ? <EntriesEdit /> : <NewEntries />}
         <EntriesForm />
       </div>
     );
   }
 }
 const mapStateToProps = (state) => ({
+  editMode: state.wallet.editMode,
   email: state.user.email,
   expenses: state.wallet.expenses,
 });
@@ -58,6 +59,7 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(mapStateToProps, mapDispatchToProps)(Wallet);
 
 Wallet.propTypes = {
+  editMode: PropTypes.bool,
   fetchCurrencies: PropTypes.func.isRequired,
   email: PropTypes.string.isRequired,
   expenses: PropTypes.arrayOf(
@@ -66,5 +68,6 @@ Wallet.propTypes = {
 };
 
 Wallet.defaultProps = {
+  editMode: false,
   expenses: [],
 };

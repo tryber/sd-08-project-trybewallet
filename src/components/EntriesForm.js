@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { deleteExpense } from '../actions';
+import { deleteExpense as eraseExpense, editExpense as modifyExpense } from '../actions';
 
 class EntriesForm extends React.Component {
   renderButton(name, expense, callback) {
@@ -11,29 +11,30 @@ class EntriesForm extends React.Component {
         type="button"
         data-testid={ `${name}-btn` }
         onClick={ () => callback(expense) }
-        className={ `${name}-btn expense-opt-btn` }
       >
-        DELETAR
+        {name === 'edit' ? 'Editar' : 'Excluir'}
       </button>
     );
   }
 
   render() {
-    const { expenses, exclude } = this.props;
+    const { expenses, deleteExpense, editExpense } = this.props;
     return (
       <table>
-        <tr>
-          <th>Moeda</th>
-          <th>Valor</th>
-          <th>Câmbio utilizado</th>
-          <th>Moeda de conversão</th>
-          <th>Valor convertido</th>
-          <th>Descrição</th>
-          <th>Tag</th>
-          <th>Método de pagamento</th>
-          <th>Editar/Excluir</th>
-        </tr>
-        <div>
+        <thead className="table-header">
+          <tr>
+            <th>Moeda</th>
+            <th>Valor</th>
+            <th>Câmbio utilizado</th>
+            <th>Moeda de conversão</th>
+            <th>Valor convertido</th>
+            <th>Descrição</th>
+            <th>Tag</th>
+            <th>Método de pagamento</th>
+            <th>Editar/Excluir</th>
+          </tr>
+        </thead>
+        <tbody className="table-body">
           {expenses.map((expense, index) => {
             const { description, tag, method, value, currency, exchangeRates } = expense;
             const { name, ask } = exchangeRates[currency];
@@ -48,12 +49,13 @@ class EntriesForm extends React.Component {
                 <td>{tag}</td>
                 <td>{method}</td>
                 <td>
-                  {this.renderButton('delete', expense, exclude)}
+                  {this.renderButton('delete', expense, deleteExpense)}
+                  {this.renderButton('edit', expense, editExpense)}
                 </td>
               </tr>
             );
           })}
-        </div>
+        </tbody>
       </table>
     );
   }
@@ -64,14 +66,16 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  exclude: (expense) => dispatch(deleteExpense(expense)),
+  deleteExpense: (expense) => dispatch(eraseExpense(expense)),
+  editExpense: (expense) => dispatch(modifyExpense(expense)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EntriesForm);
 
 EntriesForm.propTypes = {
   expenses: PropTypes.arrayOf(PropTypes.object),
-  exclude: PropTypes.func.isRequired,
+  deleteExpense: PropTypes.func.isRequired,
+  editExpense: PropTypes.func.isRequired,
 };
 
 EntriesForm.defaultProps = {

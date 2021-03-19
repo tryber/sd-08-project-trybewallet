@@ -4,6 +4,8 @@ export const FETCH_OK = 'FETCH_OK';
 export const FETCH_FAIL = 'FETCH_FAIL';
 export const SAVE_ENTRY = 'SAVE_ENTRY';
 export const DELETE_ENTRY = 'DELETE_ENTRY';
+export const EDIT_ENTRY_START = 'EDIT_ENTRY_START';
+export const EDIT_ENTRY_END = 'EDIT_ENTRY_END';
 
 export const saveEmail = (payload) => ({
   type: SAVE_EMAIL,
@@ -54,5 +56,15 @@ export const saveExpense = (expenses) => ({
 
 export const deleteExpense = (expense) => ({
   type: DELETE_ENTRY,
+  expense,
+});
+
+export const editExpense = (expense) => ({
+  type: EDIT_ENTRY_START,
+  expense,
+});
+
+export const endExpenseEdit = (expense) => ({
+  type: EDIT_ENTRY_END,
   expense,
 });
