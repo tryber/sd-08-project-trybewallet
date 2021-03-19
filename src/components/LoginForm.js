@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { actionEmail } from '../actions';
+import { saveEmailUserAction } from '../actions';
 
 class LoginForm extends Component {
   constructor(props) {
@@ -40,9 +40,9 @@ class LoginForm extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const { saveEmailStore } = this.props;
+    const { saveEmailUser } = this.props;
     const { email } = this.state;
-    saveEmailStore(email);
+    saveEmailUser(email);
     this.setState({
       redirectWallet: true,
     });
@@ -85,10 +85,13 @@ class LoginForm extends Component {
     );
   }
 }
+
 LoginForm.propTypes = {
-  saveEmailStore: PropTypes.func.isRequired,
+  saveEmailUser: PropTypes.func.isRequired,
 };
+
 const mapDispatchToProps = (dispatch) => ({
-  saveEmailStore: (email) => dispatch(actionEmail(email)),
+  saveEmailUser: (email) => dispatch(saveEmailUserAction(email)),
 });
+
 export default connect(null, mapDispatchToProps)(LoginForm);

@@ -2,16 +2,18 @@ import {
   REQUEST_CURRENCIES_VALUES,
   REQUEST_CURRENCIES_VALUES_SUCCESS,
   REQUEST_CURRENCIES_VALUES_ERROR,
-  SAVE_EXPENSE_USER,
-  DELETE_EXPENSE_USER,
-  EDIT_EXPENSE_USER,
-  UPDATE_EXPENSE_USER,
+  ADD_EXPENSE,
+  DELETE_EXPENSE,
+  EDIT_EXPENSE,
+  UPDATE_EXPENSE,
 } from '../actions';
 
 const INITIAL_WALLET_STATE = {
   currencies: [],
   expenses: [],
-  editExpense: [0, 0], // Primeiro elemento é o índice da linha que disparou a edição, o segundo se estamos em modo de edição.
+  idToEdit: 0,
+  editor: false,
+  idCounter: 0,
 };
 
 export default function wallet(state = INITIAL_WALLET_STATE, action) {
@@ -26,24 +28,37 @@ export default function wallet(state = INITIAL_WALLET_STATE, action) {
     };
   case REQUEST_CURRENCIES_VALUES_ERROR:
     return { ...state, isFetching: false, error: action.error };
-  case SAVE_EXPENSE_USER:
+  case ADD_EXPENSE: {
+    const newExpense = { id: state.idCounter, ...action.payload };
     return {
-      ...state, expenses: [...state.expenses, action.payload],
+      ...state,
+      expenses: [...state.expenses, newExpense],
+      idCounter: state.idCounter + 1,
     };
-  case DELETE_EXPENSE_USER:
+  }
+  case UPDATE_EXPENSE: {
+    return {
+      ...state,
+      expenses: state.expenses.map((expense) => {
+        if (expense.id === state.idToEdit) {
+          return { ...expense, ...action.payload };
+        }
+        return expense;
+      }),
+      editor: false,
+    };
+  }
+  case DELETE_EXPENSE:
     return {
       ...state,
       expenses: [
         ...state.expenses.filter((expense) => expense.id !== action.payload)],
     };
-  case EDIT_EXPENSE_USER: // Cuida apenas da questão se estamos em modo de edição ou não.
-    return {
-      ...state, editExpense: action.payload,
-    };
-  case UPDATE_EXPENSE_USER:
-    console.log(action.payload);
+  case EDIT_EXPENSE: // Cuida apenas da questão se estamos em modo de edição ou não.
     return {
       ...state,
+      editor: true,
+      idToEdit: action.payload,
     };
   default:
     return state;

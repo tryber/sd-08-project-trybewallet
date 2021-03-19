@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import {
-  deleteExpenseUser as deleteExpense,
-  editModeUser as editMode,
+  deleteExpenseAction,
+  editExpenseAction,
 } from '../actions';
+
+const descriptionsTable = ['Descrição', 'Tag', 'Método de pagamento',
+  'Valor', 'Moeda', 'Câmbio utilizado', 'Valor convertido', 'Moeda de conversão',
+  'Editar/Excluir'];
 
 class ExpenseTable extends Component {
   expenseDescription(
-    descriptionsTable,
     expenses,
-    deleteExpenseUserAction,
-    editModeUserAction,
+    deleteExpense,
+    editExpense,
   ) {
     // recebe a descrição da tabela, todas as despesas,  e duas callback, uma para DELETAR a linha da tabela e outra para ligar o mode edição da página
     return (
@@ -41,8 +44,8 @@ class ExpenseTable extends Component {
                 <td>{(Number(ask) * value).toFixed(2)}</td>
                 <td>Real</td>
                 <td>
-                  {this.renderButton('delete', id, deleteExpenseUserAction)}
-                  {this.renderButton('edit', id, editModeUserAction)}
+                  {this.renderButton('delete', id, deleteExpense)}
+                  {this.renderButton('edit', id, editExpense)}
                 </td>
               </tr>
             );
@@ -67,29 +70,30 @@ class ExpenseTable extends Component {
   }
 
   render() {
-    const descriptionsTable = ['Descrição', 'Tag', 'Método de pagamento',
-      'Valor', 'Moeda', 'Câmbio utilizado', 'Valor convertido', 'Moeda de conversão',
-      'Editar/Excluir']; // Tirar do render, dica: constructor
-    const { expenses, deleteExpenseUserAction, editModeUserAction } = this.props;
+    const { expenses, deleteExpense, editExpense } = this.props;
     return (
-
       <div>
-        {this.expenseDescription(descriptionsTable, expenses,
-          deleteExpenseUserAction, editModeUserAction)}
+        { expenses.length && this.expenseDescription(expenses,
+          deleteExpense, editExpense)}
       </div>
     );
   }
 }
+
+ExpenseTable.propTypes = {
+  expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
+  deleteExpense: PropTypes.func.isRequired,
+  editExpense: PropTypes.func.isRequired,
+};
+
 const mapStateToProps = (state) => ({
   expenses: state.wallet.expenses,
 });
-ExpenseTable.propTypes = {
-  expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
-  deleteExpenseUserAction: PropTypes.func.isRequired,
-  editModeUserAction: PropTypes.func.isRequired,
-};
+
 const mapDispatchToProps = (dispatch) => ({
-  deleteExpenseUserAction: (id) => dispatch(deleteExpense(id)),
-  editModeUserAction: (...args) => dispatch(editMode(...args)),
+  deleteExpense: (id) => dispatch(deleteExpenseAction(id)),
+  editExpense: (id) => dispatch(editExpenseAction(id)),
+  editMode: (id) => dispatch(editExpenseAction(id)),
 });
+
 export default connect(mapStateToProps, mapDispatchToProps)(ExpenseTable);
