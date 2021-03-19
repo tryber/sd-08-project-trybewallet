@@ -4,7 +4,7 @@ const { REQUEST_START,
   FETCH_OK,
   FETCH_FAIL,
   SAVE_ENTRY,
-  DELETE_ENTRY, } = myActions;
+  DELETE_ENTRY } = myActions;
 
 const INITIAL_STATE = {
   currencies: [],
