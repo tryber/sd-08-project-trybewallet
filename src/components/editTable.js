@@ -1,31 +1,34 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { expenceData, fetchGetQuotation } from '../actions/index';
-import Header from '../components/header';
-import Table from '../components/table';
+import { editExpence,
+  expenceData,
+  fetchGetQuotation,
+  updateExpence } from '../actions/index';
 import { getQuotation as getActualQuotation } from '../service/awesomeAPI';
-import EditTable from '../components/editTable';
 
-class Wallet extends React.Component {
-  constructor() {
-    super();
+class EditForm extends React.Component {
+  constructor(props) {
+    super(props);
+
+    const { currencyData: { expenses }, expenceToEdit } = this.props;
+    const toEdit = expenses.filter((expense) => expense.id === expenceToEdit);
+    console.log(toEdit[0]);
+
     this.state = {
-      id: -1,
-      value: '',
-      description: '',
-      currency: 'USD',
-      method: 'Dinheiro',
-      tag: 'Alimentação',
-      exchangeRates: {},
+      id: toEdit[0].id,
+      value: toEdit[0].value,
+      description: toEdit[0].description,
+      currency: toEdit[0].currency,
+      method: toEdit[0].method,
+      tag: toEdit[0].tag,
+      exchangeRates: toEdit[0].exchangeRates,
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.gererateID = this.gererateID.bind(this);
     this.zeraTudo = this.zeraTudo.bind(this);
     this.juntaTudo = this.juntaTudo.bind(this);
-    // this.expenceSum = this.expenceSum.bind(this);
-    // this.setExpences = this.setExpences.bind(this);
   }
 
   componentDidMount() {
@@ -34,7 +37,6 @@ class Wallet extends React.Component {
   }
 
   gererateID() {
-    // const { getQuotation } = this.props;
     const { id } = this.state;
     this.setState({
       id: id + 1,
@@ -44,35 +46,25 @@ class Wallet extends React.Component {
   async juntaTudo() {
     const { setExpences } = this.props;
     const rates = await getActualQuotation();
-    console.log(rates);
     this.setState({
       exchangeRates: rates,
     }, () => { setExpences(this.state); this.zeraTudo(); });
   }
 
   zeraTudo() {
-    // const { value } = this.state;
     this.setState({
       value: 0,
     });
   }
 
-  // expenceSum() {
-  //   const { currencyData } = this.props;
-  //   console.log(currencyData.expenses);
-  //   currencyData.expenses.map((cada) => console.log(cada.value));
-  // }
-
   handleChange(event) {
-    // const { currencyData } = this.props;
     this.setState({
       [event.target.name]: event.target.value,
-      // exchangeRates: currencyData.currencies,
     });
   }
 
   expenceForm() {
-    const { value } = this.state;
+    const { value, description } = this.state;
     return (
       <>
         <label htmlFor="description">
@@ -83,12 +75,14 @@ class Wallet extends React.Component {
             name="value"
             data-testid="value-input"
             id="description"
+            placeholder={ value }
           />
         </label>
         <label htmlFor="expence">
           Descrição da despesa
           <input
             onChange={ this.handleChange }
+            value={ description }
             name="description"
             data-testid="description-input"
             id="expence"
@@ -99,6 +93,7 @@ class Wallet extends React.Component {
   }
 
   currencies() {
+    const { currency } = this.state;
     const { currencyData } = this.props;
     const currencieWhithoutUSDT = currencyData.currencies
       .filter((currencie) => currencie !== 'USDT');
@@ -110,11 +105,13 @@ class Wallet extends React.Component {
           name="currency"
           id="currencie"
           data-testid="currency-input"
+          value={ currency }
         >
           { currencieWhithoutUSDT.map((currencie, index) => (
             <option
               data-testid={ currencie }
               key={ index }
+              value={ currencie }
             >
               {currencie}
             </option>))}
@@ -124,6 +121,7 @@ class Wallet extends React.Component {
   }
 
   paymentMethod() {
+    const { method } = this.state;
     return (
       <label htmlFor="paymentMethod">
         Metodo de pagamento
@@ -132,6 +130,7 @@ class Wallet extends React.Component {
           name="method"
           id="paymentMethod"
           data-testid="method-input"
+          value={ method }
         >
           <option value="Dinheiro">Dinheiro</option>
           <option value="Cartão de crédito">Cartão de crédito</option>
@@ -142,6 +141,7 @@ class Wallet extends React.Component {
   }
 
   categoryExpence() {
+    const { tag } = this.state;
     return (
       <label htmlFor="categoryExpence">
         Categoria da despesa
@@ -150,6 +150,7 @@ class Wallet extends React.Component {
           name="tag"
           id="categoryExpence"
           data-testid="tag-input"
+          value={ tag }
         >
           <option value="Alimentação">Alimentação</option>
           <option value="Lazer">Lazer</option>
@@ -162,13 +163,13 @@ class Wallet extends React.Component {
   }
 
   render() {
-    const { currencyData } = this.props;
-
-    if (currencyData.editing) return <EditTable />;
+    const { currencyData, expenceToEdit,
+      updateExpenceFunction,
+      editExpenceFunction } = this.props;
+    console.log(expenceToEdit);
 
     return (
       <>
-        <Header />
         {this.expenceForm()}
         { (currencyData.currencies) && this.currencies() }
         { this.paymentMethod()}
@@ -176,34 +177,36 @@ class Wallet extends React.Component {
         <button
           type="button"
           onClick={ () => {
-            // setExpences(this.state);
-            this.juntaTudo();
-            this.gererateID();
-            // this.zeraTudo();
+            updateExpenceFunction(this.state);
+            editExpenceFunction('');
           } }
         >
-          Adicionar despesa
+          Editar despesa
         </button>
-        <Table />
       </>
     );
   }
 }
 
 const mapStateToProps = (state) => ({
-  userData: state.user,
   currencyData: state.wallet,
+  expenceToEdit: state.wallet.idToEdit,
 });
 
 const mapDispatchToProps = (dispatch) => ({
+  editExpenceFunction: (id) => dispatch(editExpence(id)),
   getQuotation: () => dispatch(fetchGetQuotation()),
   setExpences: (ops) => dispatch(expenceData(ops)),
+  updateExpenceFunction: (expenceEdited) => dispatch(updateExpence(expenceEdited)),
 });
 
-Wallet.propTypes = {
+EditForm.propTypes = {
   getQuotation: PropTypes.func.isRequired,
+  updateExpenceFunction: PropTypes.func.isRequired,
+  editExpenceFunction: PropTypes.func.isRequired,
   setExpences: PropTypes.func.isRequired,
+  expenceToEdit: PropTypes.func.isRequired,
   currencyData: PropTypes.objectOf(PropTypes.number).isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Wallet);
+export default connect(mapStateToProps, mapDispatchToProps)(EditForm);

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { delExpence } from '../actions';
+import { delExpence, editExpence } from '../actions';
 
 class Table extends React.Component {
   convert(value, ask) {
@@ -10,7 +10,7 @@ class Table extends React.Component {
   }
 
   cell() {
-    const { expenses, delExpenceFunction } = this.props;
+    const { expenses, delExpenceFunction, editExpenceFunction } = this.props;
     return (
       expenses.map((expense, index) => (
         <tr key={ index }>
@@ -27,14 +27,20 @@ class Table extends React.Component {
           <td>Real</td>
           <td>
             <button
+              onClick={ () => editExpenceFunction(expense.id) }
+              data-testid="edit-btn"
+              type="button"
+            >
+              Edit
+            </button>
+            <button
               onClick={ () => delExpenceFunction(expense.id) }
               id={ expense.id }
               data-testid="delete-btn"
               type="button"
             >
-              Edit
+              Del
             </button>
-            <button type="button">Del</button>
           </td>
         </tr>
       ))
@@ -67,11 +73,13 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   delExpenceFunction: (id) => dispatch(delExpence(id)),
+  editExpenceFunction: (id) => dispatch(editExpence(id)),
 });
 
 Table.propTypes = {
   expenses: PropTypes.node.isRequired,
   delExpenceFunction: PropTypes.func.isRequired,
+  editExpenceFunction: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Table);

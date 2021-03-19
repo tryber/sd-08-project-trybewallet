@@ -6,6 +6,8 @@ export const REQUEST_QUOTATION = 'REQUEST_QUOTATION';
 export const QUOTATION_DATA = 'QUOTATION_DATA';
 export const EXPENCE_DATA = 'EXPENCE_DATA';
 export const DEL_EXPENCE = 'DEL_EXPENCE';
+export const EDIT_EXPENCE = 'EDIT_EXPENCE';
+export const UPDATE_EXPENCE = 'UPDATE_EXPENCE';
 
 export const userLogin = (user) => ({
   type: USER_LOGIN,
@@ -32,6 +34,16 @@ export const expenceData = (expencesData) => ({
 export const delExpence = (id) => ({
   type: DEL_EXPENCE,
   payload: { id },
+});
+
+export const editExpence = (id) => ({
+  type: EDIT_EXPENCE,
+  payload: { id },
+});
+
+export const updateExpence = (expenceEdited) => ({
+  type: UPDATE_EXPENCE,
+  payload: { expenceEdited },
 });
 
 export const fetchGetQuotation = () => async (dispatch) => {
