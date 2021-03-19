@@ -27,16 +27,16 @@ class ExpensesTable extends Component {
     const { name, ask } = nameCurrency;
     const { deleteExpenses, editExpense } = this.props;
     return (
-      <div key={ id } className="content">
-        <div role="cell">{description}</div>
-        <div role="cell">{tag}</div>
-        <div role="cell">{method}</div>
-        <div role="cell">{value}</div>
-        <div role="cell">{name}</div>
-        <div role="cell">{parseFloat(ask).toFixed(2)}</div>
-        <div role="cell">{(value * ask).toFixed(2)}</div>
-        <div role="cell">Real</div>
-        <div>
+      <tr key={ id } className="content">
+        <td>{tag}</td>
+        <td>{method}</td>
+        <td>{description}</td>
+        <td>{value}</td>
+        <td>{name}</td>
+        <td>{parseFloat(ask).toFixed(2)}</td>
+        <td>{(value * ask).toFixed(2)}</td>
+        <td>Real</td>
+        <td>
           <button
             type="button"
             data-testid="delete-btn"
@@ -52,8 +52,8 @@ class ExpensesTable extends Component {
           >
             Editar
           </button>
-        </div>
-      </div>
+        </td>
+      </tr>
     );
   }
 
