@@ -388,11 +388,11 @@ Crie uma página para gerenciar a carteira de gastos em diversas moedas, e que t
 
     * Adicione o atributo `data-testid="tag-input"`.
 
+    * Ao ser clicado, o botão deve fazer uma requisição à API para trazer o câmbio mais atualizado possível.
+
   * Um botão com o texto \'Adicionar despesa\' que salva as informações da despesa no estado global e atualiza a soma de despesas no header.
 
     * Desenvolva a funcionalidade do botão "Adicionar despesa" de modo que ao clicar no botão, as seguintes ações sejam executadas:
-
-    * Ao ser clicado, o botão deve fazer uma requisição à API para trazer o câmbio mais atualizado possível.
     
     * Os valores dos campos devem ser salvos no estado da aplicação, na chave ***expenses***, dentro de um array contendo todos gastos que serão adicionados:
 
@@ -518,7 +518,7 @@ Crie uma página para gerenciar a carteira de gastos em diversas moedas, e que t
 
 #### 5. Desenvolva uma tabela com os gastos contendo as seguintes características:
 
-  * A tabela deve possuir um cabeçalho **exatamente** com os campos Descrição, Tag, Método de pagamento, Valor, Moeda, Câmbio utilizado, Valor convertido, Moeda de conversão e Editar/Excluir
+  * A tabela deve possuir um cabeçalho **exatamente** com os campos Descrição, Tag, Método de pagamento, Valor, Moeda, Câmbio utilizado, Valor convertido e Moeda de conversão
 
   * A tabela deve ser alimentada pelo estado da aplicação, que estará disponível na chave ***expenses*** que vem do reducer `wallet`.
 
