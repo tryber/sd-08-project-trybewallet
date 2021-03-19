@@ -63,7 +63,7 @@ class Table extends Component {
 
   totalValue() {
     const { expenses } = this.props;
-    let count = 0;
+    count = 0;
     const arrayValues = expenses.map((item) => (
       item.value * (item.exchangeRates[item.currency].ask)
     ));
