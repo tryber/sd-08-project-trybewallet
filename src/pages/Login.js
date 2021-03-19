@@ -37,9 +37,9 @@ class Login extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const { saveEmail } = this.props;
+    const { changeEmail } = this.props;
     const { email } = this.state;
-    saveEmail(email);
+    changeEmail(email);
     this.setState({
       buttonValidation: true,
     });
@@ -78,7 +78,9 @@ class Login extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => bindActionCreators(actionCreator, dispatch);
+const mapDispatchToProps = (dispatch) => ({
+  changeEmail: (email) => dispatch({ type: 'CHANGE_EMAIL', email }),
+});
 
 Login.propTypes = {
   saveEmail: PropTypes.func.isRequired,
