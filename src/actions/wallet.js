@@ -6,6 +6,7 @@ export const FETCH_SAVE_CURRENCIES = {
   ADD_EXPENSE: 'ADD_EXPENSE',
   ADD_EXPENSE_WITH_CURRENCIES: 'ADD_EXPENSE_WITH_CURRENCIES',
   REMOVE_EXPENSE: 'REMOVE_EXPENSE',
+  EDIT_EXPENSE: 'EDIT_EXPENSE',
 };
 
 export const fetchSaveCurrencies = {
@@ -34,6 +35,11 @@ export const fetchSaveCurrencies = {
   },
 
   removeExpense: (id) => ({ type: FETCH_SAVE_CURRENCIES.REMOVE_EXPENSE, payload: id }),
+
+  editExpense: (id) => ({
+    type: FETCH_SAVE_CURRENCIES.EDIT_EXPENSE,
+    payload: id,
+  }),
 };
 
 // funções que serão executadas, pegar as currencies, fazer o dispatch

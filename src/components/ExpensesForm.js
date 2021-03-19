@@ -65,7 +65,7 @@ class ExpensesForm extends Component {
           type="text"
           name="description"
           value={ description }
-          data-testid="tag-input"
+          data-testid="description-input"
           placeholder="Digite a Despesa"
           onChange={ this.handleChange }
         />

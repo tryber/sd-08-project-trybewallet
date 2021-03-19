@@ -9,7 +9,7 @@ import styles from '../styles/components/ExpensesTable.module.css';
 
 class ExpensesTable extends Component {
   renderExpenseRow(expense) {
-    const { removeExpense } = this.props;
+    const { removeExpense, editExpense } = this.props;
     const { currency, description, method, tag, value, exchangeRates, id } = expense;
     const currencyData = exchangeRates[currency];
     const convertedValue = Number(value) * Number(currencyData.ask);
@@ -20,11 +20,17 @@ class ExpensesTable extends Component {
         <td>{ method }</td>
         <td>{ value }</td>
         <td>{ currencyData.name }</td>
-        <td>{ parseFloat(currencyData.ask).toFixed(2) }</td>
-        <td>{ parseFloat(convertedValue).toFixed(2) }</td>
+        <td>{ (Math.round(currencyData.ask * 100) / 100).toFixed(2) }</td>
+        <td>{ Math.round(convertedValue * 100) / 100 }</td>
         <td>Real</td>
         <td>
-          <button type="button">Editar</button>
+          <button
+            type="button"
+            data-testid="edit-btn"
+            onClick={ () => editExpense(id) }
+          >
+            Editar
+          </button>
           <button
             type="button"
             data-testid="delete-btn"
@@ -66,6 +72,7 @@ class ExpensesTable extends Component {
 
 ExpensesTable.propTypes = {
   expenses: PropTypes.arrayOf(expenseType).isRequired,
+  editExpense: PropTypes.func.isRequired,
   removeExpense: PropTypes.func.isRequired,
 };
 
