@@ -1,107 +1,87 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { Redirect } from 'react-router';
-import { userLoginAction } from '../actions';
+import { userEmail } from '../actions';
 
 class Login extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
     this.state = {
       email: '',
       password: '',
-      isValidated: true,
-      toRedirect: false,
+      redirect: false,
+      disabled: true,
     };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.validateFields = this.validateFields.bind(this);
-    this.btnClick = this.btnClick.bind(this);
   }
 
-  handleChange({ target }) {
-    const { name, value } = target;
-    this.setState(
-      (state) => ({
-        ...state,
-        [name]: value,
-      }),
-      () => this.validateFields(),
-    );
-  }
-
-  validateFields() {
-    const { email, password } = this.state;
-    const regex = new RegExp('[a-zA-Z0-9.]+@[a-zA-Z0-9]+.[a-zA-Z0-9]+$', 'gm');
-    const passwordLengthMin = 6;
-    const checkedEmail = regex.test(email);
-    const checkedPassword = password.length >= passwordLengthMin;
-    if (checkedEmail && checkedPassword) {
-      return this.setState((state) => ({
-        ...state,
-        isValidated: false,
-      }));
-    }
-    this.setState((state) => ({
-      ...state,
-      isValidated: true,
-    }));
-  }
-
-  btnClick() {
-    const { saveLogin } = this.props;
+  handleClick() {
+    const { userEml } = this.props;
     const { email } = this.state;
-    saveLogin(email);
-    this.setState((state) => ({
-      ...state,
-      toRedirect: true,
-    }));
+    this.setState({
+      redirect: true,
+    });
+    userEml(email);
+  }
+
+  handleChange({ target: { name, value } }) {
+    this.setState({
+      [name]: value,
+    },
+    () => this.validEmail());
+  }
+
+  validEmail() {
+    const { email, password } = this.state;
+    let disabled = true;
+    const emailValid = /^[\w+.]+@\w+\.\w{2,}(?:\.\w{2})?$/;
+    const minLength = 6;
+    disabled = !(emailValid.test(email) && password.length >= minLength);
+    this.setState({ disabled });
   }
 
   render() {
-    const { email, password, isValidated, toRedirect } = this.state;
+    // const { userEml } = this.props;
+    const { email, password, redirect, disabled } = this.state;
+    // console.log(this.state);
     return (
       <form>
-        <label htmlFor="email">
-          <input
-            type="text"
-            data-testid="email-input"
-            name="email"
-            value={ email }
-            onChange={ this.handleChange }
-          />
-        </label>
-        <label htmlFor="password">
-          <input
-            type="text"
-            data-testid="password-input"
-            name="password"
-            value={ password }
-            onChange={ this.handleChange }
-          />
-        </label>
+        <h2>Login</h2>
         <input
-          type="button"
-          value="Entrar"
-          disabled={ !!isValidated }
-          onClick={ this.btnClick }
+          type="email"
+          value={ email }
+          name="email"
+          onChange={ (event) => this.handleChange(event) }
+          data-testid="email-input"
         />
-        { toRedirect ? <Redirect to="/carteira" /> : '' }
+        <input
+          type="password"
+          name="password"
+          value={ password }
+          onChange={ (event) => this.handleChange(event) }
+          data-testid="password-input"
+        />
+        <button
+          className="login-btn"
+          type="button"
+          disabled={ disabled }
+          onClick={ () => this.handleClick() }
+        >
+          Entrar
+        </button>
+        {redirect ? <Redirect to="/carteira" /> : ''}
       </form>
     );
   }
 }
 
-// const mapStateToProps = (state) => ({
-
-// });
+Login.propTypes = {
+  userEml: PropTypes.func.isRequired,
+};
 
 const mapDispatchToProps = (dispatch) => ({
-  saveLogin: (email) => dispatch(userLoginAction(email)),
+  userEml: (email) => dispatch(userEmail(email)),
 });
-
-Login.propTypes = {
-  saveLogin: PropTypes.func.isRequired,
-};
 
 export default connect(null, mapDispatchToProps)(Login);
