@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { Redirect } from 'react-router-dom';
-import { actionCreator } from '../actions';
 
 class Login extends Component {
   constructor(props) {
@@ -83,7 +81,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 Login.propTypes = {
-  saveEmail: PropTypes.func.isRequired,
+  changeEmail: PropTypes.func.isRequired,
 };
 
 export default connect(null, mapDispatchToProps)(Login);
