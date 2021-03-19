@@ -1,12 +1,9 @@
-// Coloque aqui suas actions
 export const SAVE_EMAIL = 'SAVE_EMAIL';
-export const REQUEST_START = 'REQUEST_START';
-export const REQUEST_SUCCESS = 'REQUEST_SUCCESS';
-export const REQUEST_FAIL = 'REQUEST_FAIL';
-export const SAVE_EXPENSE = 'SAVE_EXPENSE';
-export const DELETE_EXPENSE = 'DELETE_EXPENSE';
-export const EDIT_EXPENSE_START = 'EDIT_EXPENSE_START';
-export const EDIT_EXPENSE_END = 'EDIT_EXPENSE_END';
+export const INIT = 'INIT';
+export const FETCH_OK = 'FETCH_OK';
+export const FETCH_FAIL = 'FETCH_FAIL';
+export const SAVE_ENTRY = 'SAVE_ENTRY';
+export const DELETE_ENTRY = 'DELETE_ENTRY';
 
 export const saveEmail = (payload) => ({
   type: SAVE_EMAIL,
@@ -23,3 +20,39 @@ export const getCurrencies = () => (
         .then((json) => (response.ok ? Promise.resolve(json) : Promise.reject(json)))
     ))
 );
+
+const requestCurrencies = () => ({
+  type: INIT,
+});
+
+const requestOk = (currencies) => ({
+  type: FETCH_OK,
+  currencies,
+});
+
+const requestFail = (error) => ({
+  type: FETCH_FAIL,
+  error,
+});
+
+export const fetchCurrencies = () => async (dispatch) => {
+  try {
+    dispatch(requestCurrencies());
+
+    const currencies = await getCurrencies();
+
+    dispatch(requestOk(currencies));
+  } catch (error) {
+    dispatch(requestFail(error));
+  }
+};
+
+export const saveExpense = (expenses) => ({
+  type: SAVE_ENTRY,
+  expenses,
+});
+
+export const deleteExpense = (expense) => ({
+  type: DELETE_ENTRY,
+  expense,
+});

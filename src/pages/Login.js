@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { saveEmail as saveEmailAction } from '../actions';
+import { saveEmail } from '../actions';
 
 class Login extends React.Component {
   constructor() {
@@ -11,29 +11,34 @@ class Login extends React.Component {
       email: '',
       password: '',
       disabled: true,
+      login: false,
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
-    this.loginValidation = this.loginValidation.bind(this);
+    this.validateLogin = this.validateLogin.bind(this);
   }
 
   handleClick() {
-    const { saveEmail } = this.props;
+    const { handleEmail } = this.props;
     const { email } = this.state;
-    const { history } = this.props;
+    this.setState({ login: true });
 
-    saveEmail(email);
-    history.push('/carteira');
+    handleEmail(email);
   }
 
   handleChange({ target }) {
-    this.setState({ [target.name]: target.value }, () => {
-      this.loginValidation();
-    });
+    this.setState(
+      {
+        [target.name]: target.value,
+      },
+      () => {
+        this.validateLogin();
+      },
+    );
   }
 
-  loginValidation() {
+  validateLogin() {
     const { email, password } = this.state;
     const EMAIL_VALIDATION = /^\w+@[a-zA-Z_]+?.[a-zA-Z]{2,3}$/; // Função retirada do plantão do Ícaro Harry
     const PASSWORD_LENGTH = 6;
@@ -44,53 +49,49 @@ class Login extends React.Component {
   }
 
   render() {
-    const { email, password, disabled } = this.state;
+    const { email, password, disabled, login } = this.state;
+    const { history } = this.props;
     return (
-      <form className="login-form">
-        <input
-          type="text"
-          name="email"
-          onChange={ this.handleChange }
-          value={ email }
-          data-testid="email-input"
-          placeholder="user@email.com"
-          className="login-input"
-        />
-        <input
-          type="password"
-          name="password"
-          value={ password }
-          data-testid="password-input"
-          onChange={ this.handleChange }
-          placeholder="******"
-          className="login-input"
-        />
-        <button
-          type="submit"
-          className="login-btn"
-          disabled={ disabled }
-          onClick={ this.handleClick }
-        >
-          Entrar
-        </button>
-      </form>
+      <div>
+        <form>
+          <input
+            type="text"
+            name="email"
+            value={ email }
+            onChange={ this.handleChange }
+            data-testid="email-input"
+            placeholder="user@email.com"
+          />
+          <input
+            type="password"
+            name="password"
+            value={ password }
+            onChange={ this.handleChange }
+            data-testid="password-input"
+            placeholder="******"
+          />
+          <button
+            type="submit"
+            disabled={ disabled }
+            onClick={ this.handleClick }
+          >
+            Entrar
+          </button>
+        </form>
+        {login ? history.push('/carteira') : ''}
+      </div>
     );
   }
 }
 
-//  const mapStateToProps = (state) => ({
-//  email: state.user.email,
-//  });
-
 const mapDispatchToProps = (dispatch) => ({
-  saveEmail: (email) => dispatch(saveEmailAction(email)),
+  handleEmail: (payload) => dispatch(saveEmail(payload)),
 });
 
 export default connect(null, mapDispatchToProps)(Login);
 
 Login.propTypes = {
-  saveEmail: PropTypes.func.isRequired,
-  // email: PropTypes.string.isRequired,
+  handleEmail: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
