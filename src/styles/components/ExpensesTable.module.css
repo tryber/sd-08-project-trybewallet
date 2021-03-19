@@ -20,6 +20,6 @@
   padding: 20px;
 }
 
-.expensesTable tbody tr:nth-child( odd ) {
+.expensesTable tbody tr :nth-child( odd ) {
   background-color:rgba(46, 42, 42, 0.24);
 }

@@ -31,8 +31,8 @@
   margin-right: 10px;
 }
 
-@media (max-width: 900px) {
+@media ( max-width : 900px ) {
   .expenseForm {
-    display: grid
+    display: grid;
   }
 }
