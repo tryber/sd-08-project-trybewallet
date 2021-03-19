@@ -7,3 +7,9 @@ export const saveEmail = (email) => ({
     email,
   },
 });
+
+// export const getCurrency = () => (dispatch) => {
+//   // fetch
+
+//   // dispatch() - escrever no state
+// };

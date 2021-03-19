@@ -4,10 +4,6 @@ import { connect } from 'react-redux';
 
 import { saveEmail as saveEmailAction } from '../actions';
 
-// Salve o email no estado da aplicação, com a chave email, assim que a pessoa usuária logar.
-
-// A rota deve ser mudada para '/carteira' após o clique no botão 'Entrar'.
-
 class LoginForm extends Component {
   constructor(props) {
     super(props);

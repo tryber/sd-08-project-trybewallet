@@ -23,56 +23,56 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
       const email = screen.queryByTestId('email-input');
       expect(email).toBeNull();
     });
-  
+
     test('O componente deve se chamar Wallet e estar localizado na pasta "src/pages"', () => {
       const { container } = renderWithRouterAndStore(<Wallet />, '/carteira', {});
       expect(container).toBeDefined();
     });
   });
-  
-  describe('3 - Crie um header para a página de carteira contendo as seguintes características:', () => {
+
+  describe.only('3 - Crie um header para a página de carteira contendo as seguintes características:', () => {
     const initial = initialStateHeader;
-  
+
     test('Um elemento que exiba o email do usuário que fez login.', () => {
       const { store } = renderWithRouterAndStore(<Wallet />, '/carteira', initial);
       const emailField = screen.getByTestId('email-field');
-  
+
       expect(emailField.innerHTML).not.toBe('');
       expect(emailField).toContainHTML(store.getState().user.email);
     });
-  
+
     test('Crie um campo com a despesa total gerada pela lista de gastos.', () => {
       renderWithRouterAndStore(<Wallet />, '/carteira', initial);
       const totalField = screen.getByTestId('total-field');
-  
+
       const INITIAL_VALUE = 0;
       expect(totalField).toContainHTML(INITIAL_VALUE);
     });
-  
+
     test('Crie um campo que mostre que qual câmbio está sendo utilizado, que será neste caso \'BRL\'', () => {
       renderWithRouterAndStore(<Wallet />, '/carteira');
       const exchangeField = screen.getByTestId('header-currency-field');
-  
+
       expect(exchangeField).toBeInTheDocument();
       expect(exchangeField).toContainHTML('BRL');
     });
   });
-  
+
   describe('4 - Desenvolva um formulário para adicionar uma despesa contendo as seguintes características:', () => {
     test('Um campo para adicionar o valor da despesa', async () => {
       renderWithRouterAndStore(<Wallet />, '/carteira');
       const valueInput = await screen.findByTestId('value-input');
-  
+
       expect(valueInput).toBeInTheDocument();
     });
-  
+
     test('Um campo para adicionar a descrição da despesa', async () => {
       renderWithRouterAndStore(<Wallet />, '/carteira');
       const descriptionInput = await screen.findByTestId('description-input');
-  
+
       expect(descriptionInput).toBeInTheDocument();
     });
-  
+
     test('Um campo para selecionar em qual moeda será registrada a despesa', async () => {
       renderWithRouterAndStore(<Wallet />, '/carteira');
       const currencyInput = await screen.findByTestId('currency-input');
@@ -91,7 +91,7 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
       const ETH = screen.getByTestId('ETH');
       const XRP = screen.getByTestId('XRP');
       const USDT = screen.queryByText(/USDT/g);
-  
+
       expect(mockedExchange).toBeCalled();
       expect(mockedExchange).toBeCalledWith('https://economia.awesomeapi.com.br/json/all');
       expect(currencyInput).toBeInTheDocument();
@@ -111,20 +111,20 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
       expect(XRP).toBeInTheDocument();
       expect(USDT).not.toBeInTheDocument();
     });
-  
+
     test('Um campo para selecionar qual método de pagamento será utilizado', async () => {
       renderWithRouterAndStore(<Wallet />, '/carteira');
       const methodInput = await screen.findByTestId('method-input');
       const moneyOption = screen.getByText(/Dinheiro/);
       const creditOption = screen.getByText(/Cartão de crédito/);
       const debitOption = screen.getByText(/Cartão de débito/);
-  
+
       expect(methodInput).toBeInTheDocument();
       expect(moneyOption).toBeInTheDocument();
       expect(creditOption).toBeInTheDocument();
       expect(debitOption).toBeInTheDocument();
     });
-  
+
     test('Um campo para selecionar uma categoria (tag) para a despesa.', async () => {
       renderWithRouterAndStore(<Wallet />, '/carteira');
       const tagInput = await screen.findByTestId('tag-input');
@@ -133,7 +133,7 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
       const workOption = screen.getByText(/Trabalho/);
       const transportOption = screen.getByText(/Transporte/);
       const healthOption = screen.getByText(/Saúde/);
-  
+
       expect(tagInput).toBeInTheDocument();
       expect(foodOption).toBeInTheDocument();
       expect(funOption).toBeInTheDocument();
@@ -141,7 +141,7 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
       expect(transportOption).toBeInTheDocument();
       expect(healthOption).toBeInTheDocument();
     });
-  
+
     test('Um botão com o texto \'Adicionar despesa\' que salva as informações da despesa no estado global e atualiza a soma de despesas no header', async () => {
       const { store } = renderWithRouterAndStore(<Wallet />, '/carteira');
       const addButton = await screen.findByText(/Adicionar despesa/i);
@@ -150,9 +150,9 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
       const methodInput = await screen.findByTestId('method-input');
       const tagInput = await screen.findByTestId('tag-input');
       const descriptionInput = await screen.findByTestId('description-input');
-  
+
       expect(addButton).toBeInTheDocument();
-  
+
       userEvent.type(valueInput, '10');
       userEvent.selectOptions(currencyInput, 'USD');
       userEvent.selectOptions(methodInput, 'Cartão de crédito');
@@ -160,7 +160,7 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
       userEvent.type(descriptionInput, 'Dez dólares');
       fireEvent.click(addButton);
       expect(mockedExchange).toBeCalledTimes(2);
-  
+
       const expectedStateExpense = [
         {
           id: 0,
@@ -172,12 +172,12 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
           exchangeRates: mockData,
         },
       ];
-  
+
       await waitFor(() => {
         expect(valueInput.value === 0 || valueInput.value === '0' || valueInput.value === '').toBe(true);
       });
       expect(store.getState().wallet.expenses).toStrictEqual(expectedStateExpense);
-  
+
       userEvent.type(valueInput, '20');
       userEvent.selectOptions(currencyInput, 'EUR');
       userEvent.selectOptions(methodInput, 'Cartão de débito');
@@ -185,7 +185,7 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
       userEvent.type(descriptionInput, 'Vinte euros');
       fireEvent.click(addButton);
       expect(mockedExchange).toBeCalledTimes(3);
-  
+
       const expectedStateExpense2 = [
         {
           id: 0,
@@ -206,20 +206,20 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
           exchangeRates: mockData,
         },
       ];
-  
+
       await waitFor(() => {
         expect(valueInput.value === 0 || valueInput.value === '0' || valueInput.value === '').toBe(true);
       });
       expect(store.getState().wallet.expenses).toStrictEqual(expectedStateExpense2);
-  
+
       const totalField = screen.getByTestId('total-field');
       expect(totalField).toContainHTML('187.12')
     });
   });
-  
+
   describe('5 - Desenvolva uma tabela com os gastos contendo as seguintes características:', () => {
     const initial = initialStateWithExpenses;
-  
+
     test('A tabela deve possuir um cabeçalho com os campos Descrição, Tag, Método de pagamento, Valor, Moeda, Câmbio utilizado, Valor convertido e Moeda de conversão', () => {
       renderWithRouterAndStore(<Wallet />, '/carteira', initial);
       const thDescricao = screen.getByText('Descrição');
@@ -231,7 +231,7 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
       const thValorConvertido = screen.getByText('Valor convertido');
       const thMoedaConversao = screen.getByText('Moeda de conversão');
       const thEditarExcluir = screen.getByText('Editar/Excluir');
-  
+
       expect(thDescricao).toBeInTheDocument();
       expect(thTag).toBeInTheDocument();
       expect(thMetodo).toBeInTheDocument();
@@ -242,7 +242,7 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
       expect(thMoedaConversao).toBeInTheDocument();
       expect(thEditarExcluir).toBeInTheDocument();
     });
-  
+
     test('A tabela deve ser alimentada pelo estado da aplicação, que estará disponível na chave expenses que vem do reducer wallet.', () => {
       renderWithRouterAndStore(<Wallet />, '/carteira', initial);
       expect(screen.getAllByRole('cell', { name: 'Dez dólares' })[0]).toBeInTheDocument();
@@ -253,7 +253,7 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
       expect(screen.getAllByRole('cell', { name: '5.58' })[0]).toBeInTheDocument();
       expect(screen.getAllByRole('cell', { name: '55.75' })[0]).toBeInTheDocument();
       expect(screen.getAllByRole('cell', { name: 'Real' })[0]).toBeInTheDocument();
-  
+
       expect(screen.getAllByRole('cell', { name: 'Vinte euros' })[0]).toBeInTheDocument();
       expect(screen.getAllByRole('cell', { name: 'Trabalho' })[0]).toBeInTheDocument();
       expect(screen.getAllByRole('cell', { name: 'Dinheiro' })[0]).toBeInTheDocument();
@@ -264,20 +264,20 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
       expect(screen.getAllByRole('cell', { name: 'Real' })[1]).toBeInTheDocument();
     });
   });
-  
+
   describe('6 - Crie um botão para deletar uma despesa da tabela contendo as seguintes características:', () => {
     const initial = initialStateWithExpenses;
-  
+
     test('O botão deve estar dentro do último item da linha da tabela e deve possuir `data-testid="delete-btn"`', () => {
       renderWithRouterAndStore(<Wallet />, '/carteira', initial);
       expect(screen.getAllByTestId('delete-btn')[0]).toBeInTheDocument();
     });
-  
+
     test('Ao ser clicado, o botão deleta a linha da tabela, alterando o estado global.', () => {
       const { store } = renderWithRouterAndStore(<Wallet />, '/carteira', initial);
       const deleteBtn = screen.getAllByTestId('delete-btn')[0];
       fireEvent.click(deleteBtn);
-  
+
       expect(screen.getByRole('cell', { name: 'Vinte euros' })).toBeInTheDocument();
       expect(screen.getByRole('cell', { name: 'Trabalho' })).toBeInTheDocument();
       expect(screen.getByRole('cell', { name: 'Dinheiro' })).toBeInTheDocument();
@@ -297,16 +297,16 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
           exchangeRates: mockData,
         },
       ];
-  
+
       expect(store.getState().wallet.expenses).toStrictEqual(newExpenses);
     });
-  
+
     test('Ao clicar no botão para remover uma despesa, o valor correspondente deve ser subtraído e a despesa total deve ser atualizada no header', () => {
       const { store } = renderWithRouterAndStore(<Wallet />, '/carteira', initial);
       const deleteBtn = screen.getAllByTestId('delete-btn')[0];
-  
+
       fireEvent.click(deleteBtn);
-  
+
       const newExpenses = [
         {
           id: 1,
@@ -318,11 +318,10 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
           exchangeRates: mockData,
         },
       ];
-  
+
       expect(store.getState().wallet.expenses).toStrictEqual(newExpenses);
-  
+
       const totalField = screen.getByTestId('total-field');
       expect(totalField).toContainHTML('131.37');
   });
   });
-  
