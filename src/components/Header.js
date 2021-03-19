@@ -21,22 +21,22 @@ class Header extends Component {
   render() {
     const { email } = this.props;
     return (
-      <header className={ styles.header}>
-        <dl className={ styles.headerInfosContainer}>
-          <div className={ styles.headerInfo } >
+      <header className={ styles.header }>
+        <dl className={ styles.headerInfosContainer }>
+          <div className={ styles.headerInfo }>
             <dt>Email</dt>
             <dd data-testid="email-field">{ email }</dd>
           </div>
-            <div className={ styles.headerInfo } >
+          <div className={ styles.headerInfo }>
             <dt>Total</dt>
             <dd data-testid="total-field">
               RS
-              { Math.round(this.getTotalAmount() * 100 / 100).toFixed(2) }
+              { parseFloat(this.getTotalAmount()).toFixed(2) }
             </dd>
           </div>
-          <div className={ styles.headerInfo } >
-          <dt>Câmbio</dt>
-          <dd data-testid="header-currency-field">BRL</dd>
+          <div className={ styles.headerInfo }>
+            <dt>Câmbio</dt>
+            <dd data-testid="header-currency-field">BRL</dd>
           </div>
         </dl>
       </header>

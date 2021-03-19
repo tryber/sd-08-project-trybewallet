@@ -1,4 +1,4 @@
-import getCurrencies from '../services'
+import getCurrencies from '../services';
 
 export const FETCH_SAVE_CURRENCIES = {
   SAVE_CURRENCIES: 'SAVE_CURRENCIES',
@@ -6,7 +6,7 @@ export const FETCH_SAVE_CURRENCIES = {
   ADD_EXPENSE: 'ADD_EXPENSE',
   ADD_EXPENSE_WITH_CURRENCIES: 'ADD_EXPENSE_WITH_CURRENCIES',
   REMOVE_EXPENSE: 'REMOVE_EXPENSE',
-}
+};
 
 export const fetchSaveCurrencies = {
   saveCurrencies: (currencies) => ({
@@ -29,13 +29,12 @@ export const fetchSaveCurrencies = {
 
   addExpenseWithCurrencies: (expense) => async (dispatch) => {
     const currentCurrencies = await getCurrencies();
-    const addExpenseWithCurrencies = { ...expense, exchangeRates: currentCurrencies};
+    const addExpenseWithCurrencies = { ...expense, exchangeRates: currentCurrencies };
     dispatch(fetchSaveCurrencies.addExpense(addExpenseWithCurrencies));
   },
 
-  removeExpense: (id) => ({type: FETCH_SAVE_CURRENCIES.REMOVE_EXPENSE, payload: id }),
+  removeExpense: (id) => ({ type: FETCH_SAVE_CURRENCIES.REMOVE_EXPENSE, payload: id }),
 };
-
 
 // funções que serão executadas, pegar as currencies, fazer o dispatch
 // nas actions, adicionar despesas e action de adicionar despesas com as

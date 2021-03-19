@@ -1,7 +1,7 @@
-import React, { Component }from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { bindActionCreators } from 'redux'
+import { bindActionCreators } from 'redux';
 
 import { fetchSaveCurrencies as WalletActions } from '../actions/wallet';
 
@@ -13,7 +13,7 @@ const INITIAL_STATE = {
   currency: 'USD',
   method: 'Dinheiro',
   tag: 'Alimentação',
-}
+};
 
 class ExpensesForm extends Component {
   constructor(props) {
@@ -36,7 +36,8 @@ class ExpensesForm extends Component {
     });
   }
 
-  handleAddExpense() {
+  handleAddExpense(event) {
+    event.preventDefault();
     const { addExpenseWithCurrencies } = this.props;
     addExpenseWithCurrencies(this.state);
     this.setState({ ...INITIAL_STATE });
@@ -44,34 +45,31 @@ class ExpensesForm extends Component {
 
   renderInputValue(value) {
     return (
-      <input
-        name="value"
-        type="number"
-        value={ value }
-        data-testid="value-input"
-        placeholder="Valor"
-        onChange={ this.handleChange }
-      />
+      <label htmlFor="value-input">
+        <input
+          name="value"
+          type="number"
+          value={ value }
+          data-testid="value-input"
+          placeholder="Valor"
+          onChange={ this.handleChange }
+        />
+      </label>
     );
   }
 
   renderDescriptionInput(description) {
-    return(
-      <input
-        name="description"
-        value={ description }
-        data-testid="tag-input"
-        onChange={ this.handleChange }
-      >
-          { this.expenseTags.map((description) => (
-            <option
-              key={ description }
-              value={ description }
-            >
-             { description }
-            </option>
-          ))}
-      </input>
+    return (
+      <label htmlFor="description-input">
+        <input
+          type="text"
+          name="description"
+          value={ description }
+          data-testid="tag-input"
+          placeholder="Digite a Despesa"
+          onChange={ this.handleChange }
+        />
+      </label>
     );
   }
 
@@ -83,16 +81,16 @@ class ExpensesForm extends Component {
         value={ currency }
         data-testid="currency-input"
         onChange={ this.handleChange }
-        >
-          { currencies.map((currencyCode) => (
-            <option
-              key={ currencyCode }
-              value={ currencyCode }
-              data-testid={ currencyCode }
-            >
-             { currencyCode }
-            </option>
-          ))}
+      >
+        { currencies.map((currencyCode) => (
+          <option
+            key={ currencyCode }
+            value={ currencyCode }
+            data-testid={ currencyCode }
+          >
+            { currencyCode }
+          </option>
+        ))}
       </select>
     );
   }
@@ -100,10 +98,10 @@ class ExpensesForm extends Component {
   renderPaymentMethod(method) {
     return (
       <select
-      name="method"
-      value={ method }
-      data-testid="method-input"
-      onChange={ this.handleChange }
+        name="method"
+        value={ method }
+        data-testid="method-input"
+        onChange={ this.handleChange }
       >
         { this.paymentMethods.map((currentMethod) => (
           <option
@@ -111,30 +109,30 @@ class ExpensesForm extends Component {
             value={ currentMethod }
             data-testid={ currentMethod }
           >
-           { currentMethod }
+            { currentMethod }
           </option>
         ))}
-    </select>
-    )
+      </select>
+    );
   }
 
   renderSelectedTag(tag) {
     return (
-        <select 
+      <select
         name="tag"
         value={ tag }
         data-testid="tag-input"
         onChange={ this.handleChange }
-        >
-          { this.expenseTags.map((currentTag) => (
-            <option
-              key={ currentTag }
-              value={ currentTag }
-            >
-             { currentTag }
-            </option>
-          ))}
-        </select>
+      >
+        { this.expenseTags.map((currentTag) => (
+          <option
+            key={ currentTag }
+            value={ currentTag }
+          >
+            { currentTag }
+          </option>
+        ))}
+      </select>
     );
   }
 
@@ -145,11 +143,11 @@ class ExpensesForm extends Component {
         { this.renderInputValue(value) }
         { this.renderDescriptionInput(description) }
         { this.renderCurrencyOptions(currency) }
-        { this.renderPaymentMethod(method) } 
+        { this.renderPaymentMethod(method) }
         { this.renderSelectedTag(tag) }
         <button
-         onClick={ this.handleAddExpense } 
-         type="submit"
+          onClick={ this.handleAddExpense }
+          type="submit"
         >
           Adicionar Despesa
         </button>
@@ -167,6 +165,6 @@ const mapDispatchToProps = (dispatch) => bindActionCreators(WalletActions, dispa
 
 const mapStateToProps = ({ wallet }) => ({
   currencies: wallet.currencies,
-})
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExpensesForm);

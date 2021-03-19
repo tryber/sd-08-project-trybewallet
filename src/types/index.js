@@ -1,6 +1,6 @@
 import { shape, string, number } from 'prop-types';
 
-const expenseType = shape ({
+const expenseType = shape({
   id: number,
   value: string,
   description: string,

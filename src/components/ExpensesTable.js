@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
-import { FETCH_SAVE_CURRENCIES as walletActions } from '../actions/wallet';
+import { fetchSaveCurrencies as WalletActions } from '../actions/wallet';
 
 import expenseType from '../types';
 import styles from '../styles/components/ExpensesTable.module.css';
@@ -10,9 +10,9 @@ import styles from '../styles/components/ExpensesTable.module.css';
 class ExpensesTable extends Component {
   renderExpenseRow(expense) {
     const { removeExpense } = this.props;
-    const { currency, description, method, tag, value, exchangeRates } = expense;
-    const currencyData = exchangeRates(currency);
-    const convertedValue = Number(value) * Number(currencyData.ask)
+    const { currency, description, method, tag, value, exchangeRates, id } = expense;
+    const currencyData = exchangeRates[currency];
+    const convertedValue = Number(value) * Number(currencyData.ask);
     return (
       <tr key={ id }>
         <td>{ description }</td>
@@ -20,12 +20,12 @@ class ExpensesTable extends Component {
         <td>{ method }</td>
         <td>{ value }</td>
         <td>{ currencyData.name }</td>
-        <td>{ (Math.round(currencyData.ask * 100) / 100).toFixed(2) }</td>
-        <td>{ (Math.round(convertedValue * 100) / 100).toFixed(2) }</td>
+        <td>{ parseFloat(currencyData.ask).toFixed(2) }</td>
+        <td>{ parseFloat(convertedValue).toFixed(2) }</td>
         <td>Real</td>
         <td>
           <button type="button">Editar</button>
-          <button 
+          <button
             type="button"
             data-testid="delete-btn"
             onClick={ () => removeExpense(id) }
@@ -34,13 +34,14 @@ class ExpensesTable extends Component {
           </button>
         </td>
       </tr>
-    )
+    );
   }
+
   render() {
     const { expenses } = this.props;
     return (
-      < div className={ styles.expensesTableContainer}>
-        <table className={styles.expensesTable}>
+      <div className={ styles.expensesTableContainer }>
+        <table className={ styles.expensesTable }>
           <thead>
             <tr>
               <th>Descrição</th>
@@ -55,10 +56,10 @@ class ExpensesTable extends Component {
             </tr>
           </thead>
           <tbody>
-            { expenses.map(expense => this.renderExpenseRow(expense))}
+            { expenses.map((expense) => this.renderExpenseRow(expense))}
           </tbody>
         </table>
-    </div>
+      </div>
     );
   }
 }
@@ -68,10 +69,10 @@ ExpensesTable.propTypes = {
   removeExpense: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => bindActionCreators(walletActions, dispatch);
+const mapDispatchToProps = (dispatch) => bindActionCreators(WalletActions, dispatch);
 
 const mapStateToProps = ({ wallet }) => ({
   expenses: wallet.expenses,
-})
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(ExpensesTable)
+export default connect(mapStateToProps, mapDispatchToProps)(ExpensesTable);

@@ -25,25 +25,25 @@ const addExpense = (state = INITIAL_STATE, action) => {
 
 const removeExpense = (state = INITIAL_STATE, action) => ({
   ...state,
-  expenses: state.expenses.filter(expense => expense.id !== action.payload),
-})
+  expenses: state.expenses.filter((expense) => expense.id !== action.payload),
+});
 
 const wallet = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case FETCH_SAVE_CURRENCIES.SAVE_CURRENCIES:
-      return (
-        saveCurrencies(state, action)
-      );
-    case FETCH_SAVE_CURRENCIES.ADD_EXPENSE:
-      return (
-        addExpense(state, action)
-      );
-    case FETCH_SAVE_CURRENCIES.REMOVE_EXPENSE:
-      return (
-        removeExpense(state, action)
-      )
-    default:
-      return state;
+  case FETCH_SAVE_CURRENCIES.SAVE_CURRENCIES:
+    return (
+      saveCurrencies(state, action)
+    );
+  case FETCH_SAVE_CURRENCIES.ADD_EXPENSE:
+    return (
+      addExpense(state, action)
+    );
+  case FETCH_SAVE_CURRENCIES.REMOVE_EXPENSE:
+    return (
+      removeExpense(state, action)
+    );
+  default:
+    return state;
   }
 };
 
