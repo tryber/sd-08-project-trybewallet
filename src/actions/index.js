@@ -50,7 +50,7 @@ export const deleteExpenseUser = (id) => (
   { type: DELETE_EXPENSE_USER, payload: id }
 );
 
-export const editExpenseUser = (...args) => (
+export const editModeUser = (...args) => ( // Action que trata se estamos ou não em modo de edição.
   { type: EDIT_EXPENSE_USER, payload: args }
 );
 

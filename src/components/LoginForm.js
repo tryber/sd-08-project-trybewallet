@@ -85,14 +85,10 @@ class LoginForm extends Component {
     );
   }
 }
-
 LoginForm.propTypes = {
   saveEmailStore: PropTypes.func.isRequired,
-
 };
-
 const mapDispatchToProps = (dispatch) => ({
   saveEmailStore: (email) => dispatch(actionEmail(email)),
 });
-
 export default connect(null, mapDispatchToProps)(LoginForm);

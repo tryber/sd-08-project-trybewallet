@@ -11,7 +11,7 @@ import {
 const INITIAL_WALLET_STATE = {
   currencies: [],
   expenses: [],
-  editExpense: [0, 0],
+  editExpense: [0, 0], // Primeiro elemento é o índice da linha que disparou a edição, o segundo se estamos em modo de edição.
 };
 
 export default function wallet(state = INITIAL_WALLET_STATE, action) {
@@ -36,12 +36,12 @@ export default function wallet(state = INITIAL_WALLET_STATE, action) {
       expenses: [
         ...state.expenses.filter((expense) => expense.id !== action.payload)],
     };
-  case EDIT_EXPENSE_USER:
+  case EDIT_EXPENSE_USER: // Cuida apenas da questão se estamos em modo de edição ou não.
     return {
       ...state, editExpense: action.payload,
     };
   case UPDATE_EXPENSE_USER:
-    console.log(action.payload); // esse aqui
+    console.log(action.payload);
     return {
       ...state,
     };
