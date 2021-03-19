@@ -1,15 +1,25 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 class Gastos extends Component {
   constructor() {
     super();
-    this.state = { Currencys: [] };
+    this.state = {
+      Currencys: [],
+      currency: 'CAD',
+      description: '',
+      method: '',
+      tag: '',
+      value: '',
+      id: 0,
+    };
     this.getAPI = this.getAPI.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.getCurrency = this.getCurrency.bind(this);
     this.inputCurrency = this.inputCurrency.bind(this);
     this.inputMethod = this.inputMethod.bind(this);
     this.inputCategory = this.inputCategory.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
@@ -55,6 +65,7 @@ class Gastos extends Component {
     const Currencys = dataKeys.filter((item) => item !== 'USDT');
     this.setState({
       Currencys,
+      exchangeRates: Data,
     });
   }
 
@@ -133,6 +144,31 @@ class Gastos extends Component {
     );
   }
 
+  handleClick() {
+    const { AddDespesa } = this.props;
+    const {
+      currency,
+      description,
+      method,
+      tag,
+      value,
+      exchangeRates,
+    } = this.state;
+    let { id } = this.state;
+    id += 1;
+    this.getCurrency();
+    const object = {
+      currency,
+      description,
+      method,
+      tag,
+      value,
+      exchangeRates,
+      id,
+    };
+    AddDespesa(object)
+  }
+
   render() {
     return (
       <div>
@@ -140,8 +176,17 @@ class Gastos extends Component {
         { this.inputCurrency() }
         { this.inputMethod() }
         { this.inputCategory() }
+        <button
+          onClick={ () => this.handleClick() }
+        >
+          Adicionar despesa
+        </button>
       </div>);
   }
 }
 
-export default Gastos;
+const mapDispatchToProps = (dispatch) => ({
+  AddDespesa: (despesa) => dispatch({ type: 'ADD_DESPESA', despesa }),
+});
+
+export default connect(null, mapDispatchToProps)(Gastos);
