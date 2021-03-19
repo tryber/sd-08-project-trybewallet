@@ -1,41 +1,146 @@
-.App {
-  text-align: center;
+body {
+  background-color: rgb(213, 243, 231);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media ( prefers-reduced-motion : no-preference ) {
-
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
+h1 {
   align-items: center;
-  background-color: #282c34;
-  color: white;
+  color: black;
+  font-size: 30px;
+}
+
+h3 {
+  align-items: center;
+  color: black;
+  font-size: 30px;
+}
+
+.form {
+  align-items: center;
+  background-color: rgb(177, 177, 177);
+  border: 3px solid black;
+  border-radius: 6px;
   display: flex;
   flex-direction: column;
-  font-size: calc(10px + 2vmin);
+  height: 350px;
   justify-content: center;
-  min-height: 100vh;
+  margin: 140px auto;
+  width: 350px;
 }
 
-.App-link {
-  color: #61dafb;
+.input-login {
+  border-radius: 10px;
+  height: 30px;
+  margin: 5px;
+  width: 70%;
 }
 
-@keyframes App-logo-spin {
+.button-login {
+  border: 2px solid black;
+  height: 25px;
+  margin-top: 20px;
+  width: 70%;
+}
 
-  from {
-    transform: rotate(0deg);
-  }
+.button-disabled {
+  background-color: rgb(14, 2, 66);
+  color: gray;
+}
 
-  to {
-    transform: rotate(360deg);
-  }
+.button-enabled {
+  background-color: rgb(106, 85, 199);
+  color: white;
+}
+
+.header {
+  align-items: center;
+  background-color: rgb(213, 243, 231);
+  display: flex;
+  flex-direction: row;
+  height: 50px;
+  justify-content: space-between;
+  padding: 0 30px;
+}
+
+.header > img {
+  height: 40px;
+  margin-left: 0;
+}
+
+.infos-header {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 300px;
+}
+
+form {
+  align-items: center;
+  background-color: gray;
+  display: flex;
+  flex-direction: row;
+  font-weight: 600;
+  height: 40px;
+  justify-content: space-between;
+  padding: 0 30px;
+}
+
+.add-expense {
+  background-color: rgb(11, 51, 231);
+  color: rgb(234, 241, 239);
+  font-weight: 600;
+  height: 30px;
+}
+
+.input-expense {
+  margin-left: 5px;
+}
+
+.description {
+  width: 200px;
+}
+
+.value {
+  width: 70px;
+}
+
+.header-table {
+  align-items: center;
+  background-color: gray;
+  border-bottom: 1px solid black;
+  border-top: 1px solid black;
+  display: flex;
+  flex-direction: row;
+  font-weight: 600;
+  height: 40px;
+  justify-content: space-between;
+  padding: 0 30px;
+}
+
+.message {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  font-size: 25px;
+  height: 450px;
+  justify-content: center;
+  margin: 0;
+}
+
+.content {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  font-weight: 600;
+  height: 40px;
+  justify-content: space-around;
+  padding: 0 30px;
+}
+
+.julius {
+  margin-top: 10px;
+}
+
+.wallet {
+  height: 40px;
 }
