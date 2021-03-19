@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import currentUser from '../actions';
+import login from '../actions/index';
 
 // solution for validation : https://www.w3resource.com/javascript/form/email-validation.php
 
@@ -86,7 +86,7 @@ class Login extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  Setuser: (email) => dispatch(currentUser(email)),
+  Setuser: (email) => dispatch(login.loginUser(email)),
 });
 
 Login.propTypes = {
