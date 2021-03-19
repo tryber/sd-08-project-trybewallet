@@ -61,7 +61,10 @@ function wallet(state = INITIAL_STATE, action) {
   switch (action.type) {
   case REQUEST_CURRENCY:
     return {
-      ...state, currencies: action.currency,
+      ...state,
+      currencies: Object
+        .keys(action.currency)
+        .filter((coin) => coin !== 'USDT'),
     };
   case FAILED_REQUEST:
     return {

@@ -52,8 +52,12 @@ export default class Form extends Component {
           name="currency"
           onChange={ setState }
         >
-          <option value="">-</option>
-          {currencies()}
+          {/* <option value="">-</option> */}
+          {currencies.map((option) => (
+            <option data-testid={ option } value={ option } key={ option }>
+              {option}
+            </option>
+          ))}
         </select>
       </div>
     );

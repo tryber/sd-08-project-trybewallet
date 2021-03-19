@@ -113,14 +113,17 @@ class Wallet extends React.Component {
   }
 
   render() {
-    const { email, total, expenses } = this.props;
+    const { email, total, expenses, currencies } = this.props;
     const { expense, newExpense } = this.state;
     const { description, value, currency, method, tag } = expense;
+    // const keysCurrencies = Object.keys(currencies).filter((coin) => coin !== 'USDT');
+    console.log(currencies);
+
     return (
       <div>
         <Header email={ email } total={ total } />
         <Form
-          currencies={ this.filterCurrenciesInitials }
+          currencies={ currencies }
           setState={ this.eventHandler }
           onSubmit={ this.handleSubmit }
           editSubmit={ this.editSubmit }

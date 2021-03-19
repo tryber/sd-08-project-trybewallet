@@ -28,9 +28,9 @@ class ExpensesTable extends Component {
     const { deleteExpenses, editExpense } = this.props;
     return (
       <tr key={ id } className="content">
+        <td>{description}</td>
         <td>{tag}</td>
         <td>{method}</td>
-        <td>{description}</td>
         <td>{value}</td>
         <td>{name}</td>
         <td>{parseFloat(ask).toFixed(2)}</td>
