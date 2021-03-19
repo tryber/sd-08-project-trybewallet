@@ -9,7 +9,7 @@ class GetExpenses extends React.Component {
     this.state = {
       getCurrencies: [],
       expenses: {
-        value: '',
+        value: 0,
         description: '',
         currency: '',
         method: '',
@@ -56,6 +56,7 @@ class GetExpenses extends React.Component {
     const { addExpense } = this.props;
     const { expenses } = this.state;
     addExpense(expenses);
+    this.setState({expenses: {value: 0 }});
   }
 
   valueInput() {
