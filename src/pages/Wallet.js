@@ -27,6 +27,16 @@ class Wallet extends React.Component {
     this.fetchCurrencies();
   }
 
+  getTotalExpenses() {
+    const { expenses } = this.props;
+    const totalExpenses = expenses.reduce((total, each) => {
+      const { value, currency, exchangeRates } = each;
+      const rate = parseFloat(exchangeRates[currency].ask);
+      return total + parseFloat(value) * rate;
+    }, 0);
+    return totalExpenses.toFixed(2);
+  }
+
   fetchCurrencies() {
     fetch('https://economia.awesomeapi.com.br/json/all')
       .then((response) => response.json())
@@ -43,10 +53,6 @@ class Wallet extends React.Component {
     this.setState(
       { [name]: value },
     );
-  }
-
-  reducer(accumulator, currentValue) {
-    return accumulator + currentValue;
   }
 
   renderCurrency() {
@@ -130,8 +136,8 @@ class Wallet extends React.Component {
   }
 
   render() {
-    const { fetching, value, fetchingTotal } = this.state;
-    const { userEmail, items, expenses } = this.props;
+    const { fetching, value } = this.state;
+    const { userEmail } = this.props;
     return (
       <div>
         TrybeWallet
@@ -139,7 +145,7 @@ class Wallet extends React.Component {
         <span data-testid="email-field">{userEmail}</span>
         <br />
         <p data-testid="total-field">
-          {fetchingTotal ? 0 : items.reduce(this.reducer, 0)}
+          {`Despesa Total: R$ ${this.getTotalExpenses()} `}
         </p>
         <p data-testid="header-currency-field">BRL</p>
         <label htmlFor="value_input">
@@ -169,7 +175,7 @@ class Wallet extends React.Component {
         {this.renderTag()}
         {this.renderAddButton()}
         <br />
-        <ExpenseTable expenses={ expenses } />
+        <ExpenseTable />
       </div>
     );
   }
@@ -178,14 +184,13 @@ class Wallet extends React.Component {
 Wallet.propTypes = {
   userEmail: PropTypes.string.isRequired,
   dispatchStateToStore: PropTypes.func.isRequired,
-  items: PropTypes.arrayOf(Number).isRequired,
-  expenses: PropTypes.arrayOf(Object).isRequired,
+  expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 const mapStateToProps = (state) => ({
   userEmail: state.user.email,
-  items: state.wallet.convertedValues,
   expenses: state.wallet.expenses,
+  calcValues: state.wallet.calcValues,
 });
 
 const mapDispatchToProps = (dispatch) => ({
