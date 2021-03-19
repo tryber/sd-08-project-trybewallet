@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Redirect } from 'react-router';
 import allActions from '../actions';
-
+// Utilizei redux com componentes funcionais,apenas usando documentacao, foi um grande aprendizado!!Mas ainda tenho muito a aprender.
 const FIVE_SIZE = 5;
+// https://react-redux.js.org/api/hooks
+
 function Login() {
   const { userActions: { setEmaill } } = allActions;
   const [emailForDispatch, setEmailForDispatch] = useState('');

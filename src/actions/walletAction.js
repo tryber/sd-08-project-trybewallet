@@ -11,7 +11,7 @@ const currencyList = () => async (dispatch) => {
   dispatch(currencyRequest());
   // const urlAllCurrency = 'https://economia.awesomeapi.com.br/json/all';
   const currencyResponse = await (await fetch('https://economia.awesomeapi.com.br/json/all')).json();
-  delete currencyResponse.USDT;
+  delete currencyResponse.USDT;// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/delete
   const arrayObjc = Object.keys(currencyResponse);
   dispatch(currencyRequestSucess(arrayObjc));
 };
