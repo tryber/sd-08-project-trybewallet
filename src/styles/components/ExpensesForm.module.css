@@ -5,7 +5,7 @@
   padding: 10px;
 }
 
-.expenseForm input, .expenseForm select, .expenseForm button {
+.expenseForm input,.expenseForm select,.expenseForm button {
   border: none;
   border-radius: 4px;
   font-size: 1rem;
@@ -27,11 +27,12 @@
   flex: 1;
 }
 
-.expenseForm *:not( :last-child) {
+.expenseForm *:not(:last-child) {
   margin-right: 10px;
 }
 
 @media ( max-width : 900px ) {
+
   .expenseForm {
     display: grid;
   }
