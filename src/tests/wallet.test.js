@@ -322,6 +322,7 @@ describe('2 - Crie uma página para sua carteira com as seguintes característic
       expect(store.getState().wallet.expenses).toStrictEqual(newExpenses);
   
       const totalField = screen.getByTestId('total-field');
+
       expect(totalField).toContainHTML('131.37');
   });
   });
