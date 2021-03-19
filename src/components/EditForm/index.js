@@ -2,23 +2,26 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { actionCurrency, actionExpense, actionSaveEdited } from '../../actions/wallet';
-import { fetchCurrencies, fetchCurrentExchange } from '../../services/api';
-import EditForm from '../EditForm';
+import { fetchCurrencies } from '../../services/api';
 
-class ExpenseForm extends Component {
+class EditForm extends Component {
   constructor(props) {
     super(props);
 
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
+
+    const { expenses, editId } = this.props;
+    const expense = expenses.filter((item) => item.id === editId);
+    const { id, currency, value, description, tag, method } = expense[0];
 
     this.state = {
-      id: 0,
-      value: '',
-      currency: 'USD',
-      method: 'Dinheiro',
-      tag: 'Alimentação',
-      description: '',
+      id,
+      value,
+      currency,
+      method,
+      tag,
+      description,
     };
   }
 
@@ -28,33 +31,32 @@ class ExpenseForm extends Component {
     saveCurrencyList(currencies);
   }
 
-  async handleSubmit(event) {
-    event.preventDefault();
-    let { id } = this.state;
-    const { value, currency, method, tag, description } = this.state;
-    const expense = { id, value, currency, method, tag, description };
-    const exchangeRates = await fetchCurrentExchange(currency);
-    const { saveExpense } = this.props;
-    const newExpense = { ...expense, exchangeRates };
-    saveExpense(newExpense);
-    id += 1;
-    this.setState({
-      id,
-      value: 0,
-      currency: 'USD',
-      method: 'Dinheiro',
-      tag: 'Alimentação',
-      description: '',
-    });
-    document.getElementById('expenseForm').reset();
-    // https://stackoverflow.com/questions/43922508/clear-and-reset-form-input-fields
-  }
-
   handleChange({ target: { name, value } }) {
     this.setState({ [name]: value });
   }
 
-  renderMethodTagDescription() {
+  handleEdit(event) {
+    event.preventDefault();
+
+    const { expenses, editId, saveEditedExpense } = this.props;
+    const editItem = expenses.filter((item) => item.id === editId);
+    const { id, description, tag, method, currency, value } = this.state;
+    const { exchangeRates } = editItem[0];
+    const editedExpense = {
+      id,
+      description,
+      tag,
+      method,
+      currency,
+      value,
+      exchangeRates,
+    };
+
+    saveEditedExpense(editedExpense);
+  }
+
+  renderMethodTagDescriptionEdit() {
+    const { description, tag, method } = this.state;
     return (
       <>
         <label htmlFor="method">
@@ -62,6 +64,7 @@ class ExpenseForm extends Component {
           <select
             name="method"
             id="method"
+            value={ method }
             data-testid="method-input"
             onChange={ this.handleChange }
           >
@@ -75,6 +78,7 @@ class ExpenseForm extends Component {
           <select
             name="tag"
             id="tag"
+            value={ tag }
             data-testid="tag-input"
             onChange={ this.handleChange }
           >
@@ -89,6 +93,7 @@ class ExpenseForm extends Component {
           Descrição:
           <input
             name="description"
+            value={ description }
             data-testid="description-input"
             onChange={ this.handleChange }
           />
@@ -97,14 +102,16 @@ class ExpenseForm extends Component {
     );
   }
 
-  renderInput() {
+  renderInputEdit() {
     const { currencies } = this.props;
+    const { currency, value } = this.state;
     return (
       <>
         <label htmlFor="value-input">
           Valor:
           <input
             name="value"
+            value={ value }
             data-testid="value-input"
             onChange={ this.handleChange }
           />
@@ -114,6 +121,7 @@ class ExpenseForm extends Component {
           <select
             name="currency"
             id="currency"
+            value={ currency }
             data-testid="currency-input"
             onChange={ this.handleChange }
           >
@@ -122,25 +130,22 @@ class ExpenseForm extends Component {
             ))}
           </select>
         </label>
-        {this.renderMethodTagDescription()}
-        <button type="submit" onClick={ this.handleSubmit }>Adicionar despesa</button>
+        {this.renderMethodTagDescriptionEdit()}
+        <button type="submit" onClick={ this.handleEdit }>Editar despesa</button>
       </>
     );
   }
 
   render() {
-    const { edit } = this.props;
     return (
-      <form id="expenseForm">
-        {(!edit)
-          ? this.renderInput()
-          : <EditForm />}
-      </form>
+      <div>
+        {this.renderInputEdit()}
+      </div>
     );
   }
 }
 
-ExpenseForm.propTypes = {
+EditForm.propTypes = {
   saveCurrencyList: PropTypes.func,
   saveExpense: PropTypes.func,
   currencies: PropTypes.arrayOf(PropTypes.string),
@@ -165,4 +170,4 @@ const mapDispatchToProps = (dispatch) => ({
   ),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ExpenseForm);
+export default connect(mapStateToProps, mapDispatchToProps)(EditForm);

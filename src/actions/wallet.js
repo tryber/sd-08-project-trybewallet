@@ -1,4 +1,10 @@
-import { SAVE_CURRENCIES, SAVE_EXPENSES, DELETE_EXPENSES } from './index';
+import {
+  SAVE_CURRENCIES,
+  SAVE_EXPENSES,
+  EDIT_EXPENSES,
+  SAVE_EDITED_EXPENSES,
+  DELETE_EXPENSES,
+} from './index';
 
 export const actionCurrency = (currencies) => ({
   type: SAVE_CURRENCIES,
@@ -17,6 +23,21 @@ export const actionExpense = (expenses) => ({
 export const actionDelete = (expenseId) => ({
   type: DELETE_EXPENSES,
   payload: {
+    expenseId,
+  },
+});
+
+export const actionEdit = (expenseId) => ({
+  type: EDIT_EXPENSES,
+  payload: {
+    expenseId,
+  },
+});
+
+export const actionSaveEdited = (expenseEdited, expenseId) => ({
+  type: SAVE_EDITED_EXPENSES,
+  payload: {
+    expenseEdited,
     expenseId,
   },
 });

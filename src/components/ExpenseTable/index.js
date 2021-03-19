@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { actionDelete } from '../../actions/wallet';
+import { actionDelete, actionEdit } from '../../actions/wallet';
 
 class ExpenseTable extends Component {
   renderHeadForm() {
@@ -23,9 +23,9 @@ class ExpenseTable extends Component {
   }
 
   render() {
-    const { expenses, deleteExpense } = this.props;
+    const { expenses, deleteExpense, editExpense } = this.props;
     return (
-      <table>
+      <table className="expensesTable">
         {this.renderHeadForm()}
         <tbody>
           {expenses.length > 0 && expenses
@@ -34,8 +34,9 @@ class ExpenseTable extends Component {
                 <td>{expense.description}</td>
                 <td>{expense.tag}</td>
                 <td>{expense.method}</td>
-                <td>{expense.value}</td>
-                <td>{expense.currency}</td>
+                <td>
+                  {expense.value}
+                </td>
                 <td>{expense.exchangeRates[expense.currency].name}</td>
                 <td>
                   {parseFloat(expense.exchangeRates[expense.currency].ask).toFixed(2)}
@@ -49,7 +50,7 @@ class ExpenseTable extends Component {
                   <button
                     type="button"
                     data-testid="edit-btn"
-                    /* onClick={ () => editExpense(expense.id) } */
+                    onClick={ () => editExpense(expense.id) }
                   >
                     Editar
                   </button>
@@ -80,6 +81,9 @@ const mapStateToProps = ({ wallet: { expenses } }) => ({
 const mapDispatchToProps = (dispatch) => ({
   deleteExpense: (expenseId) => dispatch(
     actionDelete(expenseId),
+  ),
+  editExpense: (expenseId) => dispatch(
+    actionEdit(expenseId),
   ),
 });
 
