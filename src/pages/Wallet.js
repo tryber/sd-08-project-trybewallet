@@ -10,16 +10,16 @@ class Wallet extends React.Component {
     fetchCurrencies();
   }
 
-render(){
-  const { isEditing } = this.props;
-  return (
-    <main className="wallet-main">
-      <Header />
-      { isEditing ? <EditExpenseForm /> : <NewExpenseForm />}
-      <ExpensesTable />
-    </main>
-  );
-}
+  render() {
+    const { isEditing } = this.props;
+    return (
+      <main className="wallet-main">
+        <Header />
+        { isEditing ? <EditExpenseForm /> : <NewExpenseForm />}
+        <ExpensesTable />
+      </main>
+    );
+  }
 }
 
 const mapStateToProps = (state) => ({
