@@ -3,12 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import Form from './Form';
 import FormEdit from './FormEdit';
 import useLogic from '../hooks/useLogic';
-import getCurrency from '../services/index';
 import { fetchCurrencies } from '../actions';
 
 export default function WalletForm() {
   const {
-    currency,
     setExpanseValue,
     setExpanseDescription,
     setExpanseCurrency,

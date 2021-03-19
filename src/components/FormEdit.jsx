@@ -8,7 +8,7 @@ import FormMethodInput from './FormMethodInput';
 import FormTagInput from './FormTagInput';
 import useLogic2 from '../hooks/useLogic2';
 
-export default function FormEdit({ currency }) {
+export default function FormEdit() {
   const {
     handleSubmit,
     setExpanseValue,
