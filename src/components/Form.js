@@ -6,7 +6,6 @@ import NewForm from './NewForm';
 const tagList = ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
 const methodlist = ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'];
 function Form() {
-  const f = useSelector((state) => state.wallet2.fetched);
   const id = useSelector((state) => state.wallet2.id);
   const edited = useSelector((state) => state.wallet.edited);
   const currencyFromApi = useSelector((state) => state.wallet.currencies);
@@ -41,10 +40,10 @@ function Form() {
         type="text"
         onChange={ handleC }
       />
-      { f && (<select name="currency" data-testid="currency-input" onChange={ handleC }>
+      <select name="currency" data-testid="currency-input" onChange={ handleC }>
         {currencyFromApi !== undefined && currencyFromApi
           .map((e, i) => <option key={ i } data-testid={ `${e}` }>{e}</option>) }
-     </select>)}
+      </select>
       <select name="method" data-testid="method-input" onChange={ handleC }>
         {methodlist.map((e, i) => <option key={ i } value={ e }>{ e }</option>)}
       </select>
