@@ -1,7 +1,8 @@
 import * as actions from './index';
 import fetchApi from './api';
 
-const { ADD_EXPENSE, REQUEST_CURRENCIES, RECEIVE_CURRENCIES, FAILED_REQUEST } = actions;
+const { ADD_EXPENSE, REQUEST_CURRENCIES, RECEIVE_CURRENCIES,
+  FAILED_REQUEST, START_EDIT, DELETE_EXPENSE, CLOSE_EDIT } = actions;
 
 export const requestCurrencies = () => ({
   type: REQUEST_CURRENCIES,
@@ -42,24 +43,22 @@ export const walletAddExpenseAction = (expenses) => ({
 });
 
 export const walletDeleteExpenseAction = (expense) => ({
-  type: actions.DELETE_EXPENSE,
+  type: DELETE_EXPENSE,
   payload: {
     expense,
   },
 });
-// fetchApi().then((response) => dispatch(receiveCurrencies(response)))
-//     .catch((error) => dispatch(failedRequest(error)));
 
-// export const fetchISSLocation = () => async (dispatch) => {
-//   dispatch(requestISSLocation());
+export const walletEditExpenseAction = (expenseKey) => ({
+  type: START_EDIT,
+  payload: {
+    expenseKey,
+  },
+});
 
-//   try {
-//     const issLocationResponse = await getCurrentISSLocation();
-//     dispatch(
-//       requestISSLocationSuccess(issLocationResponse),
-//     );
-//   } catch (error) {
-//     dispatch(
-//       requestISSLocationError(issLocationError),
-//     );
-//   }
+export const walletCloseEditAction = (expense) => ({
+  type: CLOSE_EDIT,
+  payload: {
+    expense,
+  },
+});

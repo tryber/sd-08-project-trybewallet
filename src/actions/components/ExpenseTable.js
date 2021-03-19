@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { walletDeleteExpenseAction as walletDeleteExpense } from '../walletActions';
+import { walletDeleteExpenseAction as walletDeleteExpense,
+  walletEditExpenseAction as walletEditExpense } from '../walletActions';
 
 class ExpenseTable extends Component {
   expenseRow() {
-    const { expenses, walletDeleteExpenseAction } = this.props;
+    const { expenses, walletDeleteExpenseAction,
+      walletEditExpenseAction } = this.props;
     return (
       expenses.map((each) => (
         <tr key={ each.id }>
@@ -26,6 +28,13 @@ class ExpenseTable extends Component {
               onClick={ () => walletDeleteExpenseAction(each.id) }
             >
               X
+            </button>
+            <button
+              type="button"
+              data-testid="edit-btn"
+              onClick={ () => walletEditExpenseAction(each.id) }
+            >
+              Edit
             </button>
           </td>
         </tr>
@@ -59,6 +68,9 @@ const mapDispatchToProps = (dispatch) => ({
   walletDeleteExpenseAction: (expense) => dispatch(
     walletDeleteExpense(expense),
   ),
+  walletEditExpenseAction: (expense) => dispatch(
+    walletEditExpense(expense),
+  ),
 });
 
 const mapStateToProps = (state) => ({
@@ -68,6 +80,7 @@ const mapStateToProps = (state) => ({
 ExpenseTable.propTypes = {
   expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
   walletDeleteExpenseAction: PropTypes.func.isRequired,
+  walletEditExpenseAction: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExpenseTable);
