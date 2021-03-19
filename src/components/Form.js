@@ -6,7 +6,7 @@ import NewForm from './NewForm';
 function Form() {
   const fetched = useSelector((state) => state.wallet2.fetched);
   const id = useSelector((state) => state.wallet2.id);
-
+  const edited = useSelector((state) => state.wallet.edited);
   const currencyFromApi = useSelector((state) => state.wallet.currencies);
 
   const [item, setItem] = useState({});
@@ -26,7 +26,8 @@ function Form() {
     dispatch(receiveItemListAsync(item, id));
     setClick('');
   }
-  // if (id) return <NewForm />;
+  if (edited) return <NewForm />;
+
   return (
     <form>
       <input data-testid="value-input" value={ click } type="text" name="value" onChange={ handleChange } />
@@ -34,7 +35,7 @@ function Form() {
       { fetched
       && <select name="currency" data-testid="currency-input" onChange={ handleChange }>
         {currencyFromApi !== undefined && currencyFromApi.map((element, index) => <option key={ index } data-testid={ `${element}` }>{element}</option>) }
-         </select>}
+      </select>}
       <select name="method" data-testid="method-input" onChange={ handleChange }>
         <option value="Dinheiro">Dinheiro</option>
         <option value="Cartão de crédito">Cartão de crédito</option>

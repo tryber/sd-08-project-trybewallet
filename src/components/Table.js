@@ -3,16 +3,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import allActions from '../actions';
 
 function Table() {
-  const { walletAction: { deleteFromList } } = allActions;
+  const { walletAction: { deleteFromList, edit, desrenderizarForm } } = allActions;
   const dispatch = useDispatch();
   const list = useSelector((state) => state.wallet.expenses);
   // const [localTotal, setTotal] = useState({});
   function clickHandle({ target: { value, name } }) {
     dispatch(deleteFromList(value, name));
   }
-  // useEffect(() => {
-  //   dispatch(actualTotal());
-  // });
+  function editHandle() {
+    dispatch(desrenderizarForm());
+    dispatch(edit(list));
+  }
   return (
     <table>
       <thead>
@@ -42,7 +43,10 @@ function Table() {
             <td>Real</td>
             <td>
               <button data-testid="delete-btn" type="button" name={ (Number(exchangeRates[currency].ask) * Number(value)) } value={ id } onClick={ clickHandle }>AAAAS</button>
-              {/* <button type="button" data-testid="edit-btn" onClick={ dispatch(edit(id)) }>EDITAR</button> */}
+            </td>
+            <td>
+              {' '}
+              <button type="button" data-testid="edit-btn" onClick={ editHandle }>EDITAR</button>
             </td>
           </tr>
         </tbody>

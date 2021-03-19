@@ -1,6 +1,23 @@
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
 // const save = '(Number(action.payload.value)) * (Number(action.payload.exchangeRates[action.payload.currency].ask)) + state.total';
-const DEFAULT_STATE = { currencies: ['BRL'], expenses: [], total: 0, apiResponse: ['BRL'], fetched: false, id: 0, latesteCurrency: '', cashList: [], edit: false };
+const DEFAULT_STATE = { currencies: ['BRL'],
+  expenses: [],
+  total: 0,
+  apiResponse: ['BRL'],
+  fetched: false,
+  id: 0,
+  latesteCurrency: '',
+  cashList: [],
+  edit: {
+    value: 0,
+    currency: '',
+    method: '',
+    tag: '',
+    description: '',
+
+  },
+  actualyEdited: false,
+  edited: false };
 const wallet = (state = DEFAULT_STATE, action) => {
   const totalll = state.expenses.reduce((a, b) => (a + b.exchangeRates[b.currency].ask * b.value), 0);
   console.log(totalll);
@@ -23,12 +40,26 @@ const wallet = (state = DEFAULT_STATE, action) => {
       total: (totalll - action.sub),
       expenses: [...state.expenses.filter((element) => action.payload !== element.id)],
     };
-  // case 'EDIT':
-  //   return {
-  //     // ...state, edit: state.expenses.filter((element) => element.id === action.payload),
-  //     ...state, edit: action.payload,
+  case 'EDIT':
+    return {
+      // ...state, edit: state.expenses.filter((element) => element.id === action.payload),
+      ...state, actualyEdited: true, edit: { ...action.payload },
 
-  //   };
+    };
+  case 'DES_FORM':
+    return {
+      // ...state, edit: state.expenses.filter((element) => element.id === action.payload),
+      ...state, edited: true,
+
+    };
+  case 'superedited':
+    return {
+      ...state,
+      expenses: [...state.expenses.map((element) => {
+        if (element.id === action.payload.id) return action.payload;
+        return element;
+      })],
+    };
   default:
     return state;
   }

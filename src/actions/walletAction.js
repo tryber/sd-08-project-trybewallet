@@ -28,6 +28,12 @@ const receiveItemListAsync = (item, id) => async (dispatch) => {
   dispatch(receiveItemList(item));
 };
 
+const receiveItemListAsync2 = (item, id) => ({
+  type: 'superedited',
+  payload: item,
+  numberr: id,
+});
+
 const deleteFromList = (id, name) => ({
   type: 'DELETE_ITEM',
   payload: Number(id),
@@ -36,6 +42,9 @@ const deleteFromList = (id, name) => ({
 const edit = (id) => ({
   type: 'EDIT',
   payload: id,
+});
+const desrenderizarForm = () => ({
+  type: 'DES_FORM',
 });
 
 export default {
@@ -46,4 +55,6 @@ export default {
   receiveItemListAsync,
   deleteFromList,
   edit,
+  desrenderizarForm,
+  receiveItemListAsync2,
 };

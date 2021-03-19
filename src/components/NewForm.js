@@ -6,45 +6,48 @@ function NewForm() {
   const fetched = useSelector((state) => state.wallet.fetched);
   const id = useSelector((state) => state.wallet.id);
   const edit = useSelector((state) => state.wallet.edit);
+  const edited = useSelector((state) => state.wallet.edited);
+  const actualyEdited = useSelector((state) => state.wallet.actualyEdited);
   const expenses = useSelector((state) => state.wallet.expenses);
   const currencyFromApi = useSelector((state) => state.wallet.currencies);
   const [item, setItem] = useState({});
   const [click, setClick] = useState('');
-  const { walletAction: { currencyList, receiveItemListAsync } } = allActions;
+  const { walletAction: { currencyList, receiveItemListAsync,receiveItemListAsync2 , desrenderizarForm } } = allActions;
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(currencyList());
+    setClick(edit['0']);
   }, []);
   function handleChange({ target: { name, value } }) {
     setItem({ ...item, [name]: value });
-    if (name === 'value') return setClick(value);
+    setClick({ ...click, [name]: value });
+    // if (name === 'value') return setClick(value);
   }
   function handleClick() {
     // dispatch(currencyList());
-    dispatch(receiveItemListAsync(item, id));
-    setClick('');
+    dispatch(receiveItemListAsync2(click, id));
   }
+  // if (edit.value === undefined) return <h1>Loading</h1>;
   return (
     <form>
-      <input data-testid="value-input" value={ expenses[id].value } type="text" name="value" onChange={ handleChange } />
-      <input data-testid="description-input" name="description" value={ expenses[id].description }  type="text" onChange={ handleChange } />
-      { fetched
-      && <select name="currency" data-testid="currency-input" value={ expenses[id].currency }  onChange={ handleChange }>
-        {currencyFromApi !== undefined && currencyFromApi.map((element, index) => <option key={ index } data-testid={ `${element}` }>{element}</option>) }
-         </select>}
-      <select name="method" data-testid="method-input" value={ expenses[id].method } onChange={ handleChange }>
+      {console.log(edit['0'])}
+      <input data-testid="value-input" value={ click.value } type="text" name="value" onChange={ handleChange } />
+      <input data-testid="description-input" name="description" value={ click.description } type="text" onChange={ handleChange } />
+       <select name="currency" data-testid="currency-input" value={ click.currency } onChange={ handleChange }>
+        {currencyFromApi.map((element, index) => <option key={ index } data-testid={ `${element}` }>{element}</option>) }
+         </select>
+      <select name="method" data-testid="method-input" value={ click.method } onChange={ handleChange }>
         <option value="Dinheiro">Dinheiro</option>
         <option value="Cartão de crédito">Cartão de crédito</option>
         <option value="Cartão de débito">Cartão de débito</option>
       </select>
-      <select name="tag" data-testid="tag-input" value={ expenses[id].tag } onChange={ handleChange }>
+      <select name="tag" data-testid="tag-input" value={ click.tag } onChange={ handleChange }>
         <option value="Alimentação">Alimentação</option>
         <option value="Lazer">Lazer</option>
         <option value="Trabalho">Trabalho</option>
         <option value="Transporte">Transporte</option>
         <option value="Saúde">Saúde</option>
       </select>
-      <button type="button" onClick={ handleClick }>Adicionar despesa</button>
+      <button type="button" onClick={ handleClick }>Editar despesa</button>
     </form>
   );
 }
