@@ -3,16 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import allActions from '../actions';
 
 function NewForm() {
-  const fetched = useSelector((state) => state.wallet.fetched);
   const id = useSelector((state) => state.wallet.id);
   const edit = useSelector((state) => state.wallet.edit);
-  const edited = useSelector((state) => state.wallet.edited);
-  const actualyEdited = useSelector((state) => state.wallet.actualyEdited);
-  const expenses = useSelector((state) => state.wallet.expenses);
   const currencyFromApi = useSelector((state) => state.wallet.currencies);
   const [item, setItem] = useState({});
   const [click, setClick] = useState('');
-  const { walletAction: { currencyList, receiveItemListAsync,receiveItemListAsync2 , desrenderizarForm } } = allActions;
+  const { walletAction: { receiveItemListAsync2 } } = allActions;
   const dispatch = useDispatch();
   useEffect(() => {
     setClick(edit['0']);
