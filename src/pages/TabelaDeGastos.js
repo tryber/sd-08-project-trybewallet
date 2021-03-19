@@ -1,7 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { deleteExpense as deleteExpenseAction } from '../actions/index';
+import {
+  deleteExpense as deleteExpenseAction,
+  readyEditing as readyEditingAction,
+} from '../actions/index';
 
 class TabelaDeGastos extends React.Component {
   constructor() {
@@ -15,6 +18,12 @@ class TabelaDeGastos extends React.Component {
     const { expenses, deleteExpense } = this.props;
     const updatedExpenses = expenses.filter((e) => e.id !== id);
     deleteExpense(updatedExpenses);
+  }
+
+  handleEdit(id) {
+    const { expenses, readyEditing } = this.props;
+    const editExpense = expenses.filter((e) => e.id === id);
+    readyEditing(editExpense);
   }
 
   renderTableData() {
@@ -42,6 +51,7 @@ class TabelaDeGastos extends React.Component {
                 <button
                   type="button"
                   data-testid="edit-btn"
+                  onClick={ () => { this.handleEdit(e.id); } }
                 >
                   Editar
                 </button>
@@ -84,6 +94,7 @@ class TabelaDeGastos extends React.Component {
 TabelaDeGastos.propTypes = {
   expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
   deleteExpense: PropTypes.func.isRequired,
+  readyEditing: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -92,6 +103,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   deleteExpense: (e) => dispatch(deleteExpenseAction(e)),
+  readyEditing: (edit) => dispatch(readyEditingAction(edit)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TabelaDeGastos);

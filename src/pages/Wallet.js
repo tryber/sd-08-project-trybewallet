@@ -18,10 +18,10 @@ class Wallet extends React.Component {
     this.renderHeader = this.renderHeader.bind(this);
   }
 
-  componentDidMount() {
-    const { fetchCurrencies } = this.props;
-    fetchCurrencies();
-  }
+  // componentDidMount() {
+  //   const { fetchCurrencies } = this.props;
+  //   fetchCurrencies();
+  // }
 
   handleChange({ target }) {
     const { name, value } = target;
@@ -80,7 +80,7 @@ class Wallet extends React.Component {
 Wallet.propTypes = {
   email: PropTypes.string.isRequired,
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
-  fetchCurrencies: PropTypes.func.isRequired,
+  // fetchCurrencies: PropTypes.func.isRequired,
   expenses: PropTypes.arrayOf(PropTypes.object),
 };
 

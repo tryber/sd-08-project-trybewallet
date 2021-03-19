@@ -5,6 +5,9 @@ export const GET_CURRENCIES_SUCCESS = 'GET_CURRENCIES__SUCCESS';
 export const GET_CURRENCIES_ERROR = 'GET_CURRENCIES__ERROR';
 export const ADD_EXPENSE = 'ADD_EXPENSE';
 export const DELETE_EXPENSE = 'DELETE_EXPENSES';
+export const START_EDIT = 'START_EDIT';
+export const SAVE_EDIT = 'SAVE_EDIT';
+export const COMPLETE_EDIT = 'COMPLETE_EDIT';
 
 export const saveLoginInfo = (email) => ({
   type: LOGIN,
@@ -47,4 +50,18 @@ export const addExpense = (expense) => ({
 export const deleteExpense = (expenses) => ({
   type: DELETE_EXPENSE,
   payload: expenses,
+});
+
+export const readyEditing = (expense) => ({
+  type: START_EDIT,
+  payload: expense,
+});
+
+export const saveEdited = (expenses) => ({
+  type: SAVE_EDIT,
+  payload: expenses,
+});
+
+export const completeEdit = () => ({
+  type: COMPLETE_EDIT,
 });

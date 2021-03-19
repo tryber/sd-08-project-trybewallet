@@ -6,17 +6,18 @@ import {
   addExpense as addExpenseAction,
 } from '../actions/index';
 
+const defaultState = {
+  value: '',
+  description: '',
+  currency: 'USD',
+  method: 'Dinheiro',
+  tag: 'Alimentação',
+};
+
 class AddExpensesComponent extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      value: '',
-      description: '',
-      currency: 'USD',
-      method: 'Dinheiro',
-      tag: 'Alimentação',
-    };
-
+    this.state = defaultState;
     this.handleChange = this.handleChange.bind(this);
     this.handleAddExpense = this.handleAddExpense.bind(this);
     this.renderCurrencies = this.renderCurrencies.bind(this);
@@ -56,13 +57,7 @@ class AddExpensesComponent extends React.Component {
       exchangeRates,
     };
     addExpense(newExpense);
-    this.setState({
-      value: '',
-      description: '',
-      currency: 'USD',
-      method: 'Dinheiro',
-      tag: 'Alimentação',
-    });
+    this.setState(defaultState);
   }
 
   renderCurrencies() {
@@ -94,6 +89,7 @@ class AddExpensesComponent extends React.Component {
         Descrição:
         <input
           data-testid="description-input"
+          id="description-input"
           name="description"
           value={ description }
           onChange={ this.handleChange }
@@ -109,6 +105,7 @@ class AddExpensesComponent extends React.Component {
         Moeda:
         <select
           data-testid="currency-input"
+          id="currency-input"
           name="currency"
           value={ currency }
           onChange={ this.handleChange }
@@ -126,6 +123,7 @@ class AddExpensesComponent extends React.Component {
         Metodo de Pagamento:
         <select
           data-testid="method-input"
+          id="method-input"
           name="method"
           value={ method }
           onChange={ this.handleChange }
@@ -147,6 +145,7 @@ class AddExpensesComponent extends React.Component {
           {' '}
           <select
             data-testid="tag-input"
+            id="tag-input"
             name="tag"
             value={ tag }
             onChange={ this.handleChange }
@@ -165,10 +164,7 @@ class AddExpensesComponent extends React.Component {
 
   renderAddExpensesButton() {
     return (
-      <button
-        type="button"
-        onClick={ this.handleAddExpense }
-      >
+      <button type="button" onClick={ this.handleAddExpense }>
         Adicionar despesa
       </button>
     );
@@ -188,11 +184,7 @@ class AddExpensesComponent extends React.Component {
   }
 
   render() {
-    return (
-      <>
-        { this.renderFormularioDespesas() }
-      </>
-    );
+    return (<>{ this.renderFormularioDespesas() }</>);
   }
 }
 

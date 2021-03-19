@@ -10,6 +10,7 @@ import {
 const initialWalletState = {
   currencies: [],
   expenses: [],
+  edit: {},
 };
 
 export default function walletReducer(state = initialWalletState, action) {
