@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 import { userLoginAction } from '../actions';
@@ -98,5 +99,9 @@ class Login extends React.Component {
 const mapDispatchToProps = (dispatch) => ({
   saveLogin: (email) => dispatch(userLoginAction(email)),
 });
+
+Login.propTypes = {
+  saveLogin: PropTypes.func.isRequired,
+};
 
 export default connect(null, mapDispatchToProps)(Login);
