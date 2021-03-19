@@ -1,9 +1,31 @@
-import React from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
-class Wallet extends React.Component {
+import Header from '../components/header';
+import ExpenseForm from '../components/expenseForm';
+import Table from '../components/table';
+import Edit from '../components/edit';
+
+class Wallet extends Component {
   render() {
-    return <div>TrybeWallet</div>;
+    const { edit } = this.props;
+    return (
+      <>
+        <Header />
+        {edit ? <Edit /> : <ExpenseForm />}
+        <Table />
+      </>
+    );
   }
 }
 
-export default Wallet;
+const mapStateToProps = (state) => ({
+  edit: state.wallet.edit,
+});
+
+Wallet.propTypes = {
+  edit: PropTypes.func.isRequired,
+};
+
+export default connect(mapStateToProps, null)(Wallet);
