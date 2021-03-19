@@ -25,3 +25,17 @@ export const expanseDelete = (payload) => ({
   type: DELETE_EXPANSE,
   payload,
 });
+
+export const EDIT_EXPANSE_START = 'EDIT_EXPANSE_START';
+
+export const expanseEdit = (payload) => ({
+  type: EDIT_EXPANSE_START,
+  payload,
+});
+
+export const EDIT_EXPANSE_END = 'EDIT_EXPANSE_END';
+
+export const expanseEditEnd = (payload) => ({
+  type: EDIT_EXPANSE_END,
+  payload,
+});

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Form from './Form';
+import FormEdit from './FormEdit';
 import useLogic from '../hooks/useLogic';
 import getCurrency from '../services/index';
 
@@ -21,6 +22,7 @@ export default function WalletForm() {
     paymentMethod,
     expenseCategory,
   } = useLogic();
+  const isEditing = useSelector((state) => state.wallet.isEditing);
   const dispatch = useDispatch();
   useEffect(() => {
     getCurrency().then((currencies) => {
@@ -28,7 +30,16 @@ export default function WalletForm() {
       setCurrency(Object.values(currencies));
     });
   }, [dispatch]);
-
+  if (isEditing) {
+    return (<FormEdit
+      setExpanseValueFunc={ setExpanseValue }
+      setExpanseDescriptionFunc={ setExpanseDescription }
+      setExpanseCurrencyFunc={ setExpanseCurrency }
+      setPaymentMethodFunc={ setPaymentMethod }
+      setExpenseCategoryFunc={ setExpenseCategory }
+      currency={ currency }
+    />);
+  }
   return (
     <Form
       handleSubmitFunc={ handleSubmit }

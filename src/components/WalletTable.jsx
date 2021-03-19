@@ -1,9 +1,8 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { expanseDelete } from '../actions';
+import { useSelector } from 'react-redux';
+import DeleteOrEditButton from './DeleteOrEditButton';
 
 export default function WalletTable() {
-  const dispatch = useDispatch();
   const store = useSelector((state) => state);
   const { wallet } = store;
   return (
@@ -37,13 +36,7 @@ export default function WalletTable() {
               <td>{tag}</td>
               <td>{method}</td>
               <td>
-                <button
-                  type="button"
-                  onClick={ () => dispatch(expanseDelete(index)) }
-                  data-testid="delete-btn"
-                >
-                  Deletar
-                </button>
+                <DeleteOrEditButton indexProps={ index } />
               </td>
             </tr>
           );
