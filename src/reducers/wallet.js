@@ -4,6 +4,8 @@ const INIT_STATE = {
   expenses: [],
   amount: 0,
   exchange: [],
+  idEditing: '',
+  editing: false,
 };
 
 const wallet = (state = INIT_STATE, action) => {
@@ -13,9 +15,29 @@ const wallet = (state = INIT_STATE, action) => {
   case 'TOTAL_AMOUNT':
     return { ...state, amount: action.amount };
   case 'DELETE_EXPENSE':
-    return { ...state,
-      expenses: [...state.expenses
-        .filter(({ id }) => id !== action.id)] };
+    return {
+      ...state,
+      expenses: [...state.expenses.filter(({ id }) => id !== action.id)],
+    };
+  case 'EDIT_EXPENSE':
+    return {
+      ...state,
+      editing: true,
+      idEditing: action.id,
+    };
+  case 'SAVE_EDIT':
+    return {
+      ...state,
+      editing: false,
+      idEditing: '',
+      expenses: state.expenses.map((data) => {
+        console.log(action.newObject);
+        if (data.id === action.newObject.id) {
+          return action.newObject;
+        }
+        return data;
+      }),
+    };
   default:
     return state;
   }

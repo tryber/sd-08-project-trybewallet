@@ -23,7 +23,7 @@ class Table extends Component {
 
   inputTable() {
     this.totalValue();
-    const { expenses, deleteExpense } = this.props;
+    const { expenses, deleteExpense, editExpense } = this.props;
     const headerArray = ['Descrição', 'Tag', 'Método de pagamento', 'Valor', 'Moeda',
       'Câmbio utilizado', 'Valor convertido', 'Moeda de conversão', 'Editar/Excluir'];
 
@@ -50,6 +50,13 @@ class Table extends Component {
               >
                 Excluir
               </button>
+              <button
+                type="button"
+                data-testid="edit-btn"
+                onClick={ () => editExpense(data.id) }
+              >
+                Editar
+              </button>
             </tr>))}
         </tbody>
       </table>
@@ -64,6 +71,7 @@ class Table extends Component {
 const mapDispatchToProps = (dispatch) => ({
   deleteExpense: (id) => dispatch({ type: 'DELETE_EXPENSE', id }),
   totalAmount: (amount) => dispatch({ type: 'TOTAL_AMOUNT', amount }),
+  editExpense: (id) => dispatch({ type: 'EDIT_EXPENSE', id }),
 });
 
 const mapStateToProps = (state) => ({
@@ -74,6 +82,7 @@ Table.propTypes = {
   expenses: PropTypes.shape.isRequired,
   deleteExpense: PropTypes.func.isRequired,
   totalAmount: PropTypes.number.isRequired,
+  editExpense: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Table);
