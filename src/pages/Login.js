@@ -1,9 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { // estado inicial do component, apenas desde, login
+    this.state = { // estado inicial do component, login
       email: '',
       password: '',
       btnEnable: true,
@@ -45,6 +46,7 @@ class Login extends React.Component {
 
   render() {
     const { email, password, btnEnable } = this.state;
+    const { changeEmail, history } = this.props;
     return (
       <form>
         <input
@@ -61,9 +63,22 @@ class Login extends React.Component {
           onChange={ this.handleChange }
           value={ password }
         />
-        <input type="button" value="Entrar" disabled={ btnEnable } />
+        <input
+          type="button"
+          value="Entrar"
+          disabled={ btnEnable }
+          onClick={ () => {
+            changeEmail(email);
+            history.push('/carteira');
+          } }
+        />
       </form>);
   }
 }
 
-export default Login;
+const mapDispatchToProps = (dispatch) => ({
+  changeEmail: (email) => dispatch({
+    type: 'CHANGE_EMAIL', email,
+  }),
+});
+export default connect(null, mapDispatchToProps)(Login);
