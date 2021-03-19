@@ -1,21 +1,17 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+
 import LoginForm from '../components/LoginForm';
+
+import styles from '../styles/pages/Login.module.css';
 
 class Login extends React.Component {
   render() {
-    const { history } = this.props;
-
     return (
-      <div>
-        <LoginForm history={ history } />
+      <div className={ styles.loginContainer }>
+        <LoginForm />
       </div>
     );
   }
 }
-
-Login.propTypes = {
-  history: PropTypes.shape({}).isRequired,
-};
 
 export default Login;

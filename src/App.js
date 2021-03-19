@@ -4,7 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 import Login from './pages/Login';
 import Wallet from './pages/Wallet';
 
-import './styles/base.css';
+import './styles/global.css';
 
 function App() {
   return (

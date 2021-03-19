@@ -1,104 +1,115 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { Creators as UserActions } from '../actions/user';
 
-import { saveEmail as saveEmailAction } from '../actions';
+import styles from '../styles/components/LoginForm.module.css';
+import walletGif from '../assets/wallet.gif';
+
+const validationRules = {
+  email: (email) => new RegExp([
+    '^[a-zA-Z0-9.!#$%&\'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?',
+    '(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$',
+  ].join('')).test(email),
+  password: (password) => {
+    const MIN_PASSWORD_LENGTH = 6;
+    return password.length >= MIN_PASSWORD_LENGTH;
+  },
+};
 
 class LoginForm extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      email: '',
-      password: '',
-      disabledEmail: true,
-      disabledPassword: true,
+      fields: {
+        email: '',
+        password: '',
+      },
+      redirect: false,
     };
 
-    this.handleChangeEmail = this.handleChangeEmail.bind(this);
-    this.handleChangePassword = this.handleChangePassword.bind(this);
-    this.onClick = this.onClick.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.checkValidity = this.checkValidity.bind(this);
   }
 
-  onClick() {
-    const { email } = this.state;
-    const { history, saveEmail } = this.props;
+  handleChange({ target: { name, value } }) {
+    this.setState(
+      ({ fields }) => ({
+        fields: {
+          ...fields,
+          [name]: value,
+        },
+      }),
+    );
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    const { saveEmail } = this.props;
+    const { fields: { email } } = this.state;
     saveEmail(email);
-    history.push('/carteira');
+    this.setState({ redirect: true });
   }
 
-  handleChangeEmail(event) {
-    const email = event.target.value;
-
-    this.setState({
-      email: event.target.value,
-      disabledEmail: !this.emailValidate(email),
-    });
-  }
-
-  handleChangePassword(event) {
-    const password = event.target.value;
-
-    this.setState({
-      password: event.target.value,
-      disabledPassword: !this.passwordValidate(password),
-    });
-  }
-
-  emailValidate(email) {
-    const re = /^\w+@[a-zA-Z_]+?.[a-zA-Z]{2,3}$/; // plantão
-    return re.test(String(email).toLowerCase());
-  }
-
-  passwordValidate(password) {
-    const minCaracters = 5;
-    return password.length > minCaracters;
+  checkValidity() {
+    const { fields } = this.state;
+    return Object.entries(fields)
+      .map(([field, value]) => (
+        validationRules[field] ? validationRules[field](value) : true))
+      .every((validation) => validation === true);
   }
 
   render() {
-    const { email, password, disabledEmail, disabledPassword } = this.state;
+    const { redirect, fields } = this.state;
+    const { email, password } = fields;
+
+    if (redirect) return <Redirect to="/carteira" />;
 
     return (
-      <form action="">
-        <input
-          type="text"
-          placeholder="Email"
-          data-testid="email-input"
-          value={ email }
-          onChange={ this.handleChangeEmail }
-        />
-        <input
-          type="password"
-          placeholder="Senha"
-          data-testid="password-input"
-          value={ password }
-          onChange={ this.handleChangePassword }
-        />
-        <button
-          type="button"
-          disabled={ disabledEmail || disabledPassword }
-          onClick={ this.onClick }
+      <div className={ styles.loginFormContainer }>
+        <img className={ styles.gif } src={ walletGif } alt="Wallet gif" />
+        <form
+          className={ styles.loginForm }
+          onSubmit={ this.handleSubmit }
         >
-          Entrar
-        </button>
-      </form>
+          <input
+            type="text"
+            name="email"
+            value={ email }
+            data-testid="email-input"
+            placeholder="Email"
+            onChange={ this.handleChange }
+          />
+
+          <input
+            type="password"
+            name="password"
+            value={ password }
+            data-testid="password-input"
+            placeholder="Senha"
+            onChange={ this.handleChange }
+          />
+
+          <button
+            type="submit"
+            disabled={ !this.checkValidity() }
+          >
+            Entrar
+          </button>
+        </form>
+      </div>
     );
   }
 }
 
-// const mapStateToProps = (state) => ({
-//   name: state.user.name,
-// });
-
-const mapDispatchToProps = (dispatch) => ({
-  saveEmail: (email) => dispatch(saveEmailAction(email)),
-});
-
 LoginForm.propTypes = {
   saveEmail: PropTypes.func.isRequired,
-  history: PropTypes.shape({
-    push: PropTypes.func,
-  }).isRequired,
 };
+
+const mapDispatchToProps = (dispatch) => bindActionCreators(UserActions, dispatch);
 
 export default connect(null, mapDispatchToProps)(LoginForm);
