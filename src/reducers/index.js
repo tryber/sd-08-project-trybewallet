@@ -1,16 +1,10 @@
-// import user from './user';
-// import wallet from './wallet';
+import { combineReducers } from 'redux';
+import user from './user';
+import wallet from './wallet';
 
-const initialState = {
-  user: {
-    email: '',
-  },
-  wallet: {
-    currencies: [],
-    expenses: [],
-  },
-};
+const rootReducer = combineReducers({
+  user,
+  wallet,
+});
 
-export default function wallet(state = initialState, action) {
-  return state;
-}
+export default rootReducer;
