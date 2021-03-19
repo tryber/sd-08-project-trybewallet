@@ -62,13 +62,14 @@ class LoginForm extends Component {
       <form action="">
         <input
           type="text"
-          name
+          placeholder="Email"
           data-testid="email-input"
           value={ email }
           onChange={ this.handleChangeEmail }
         />
         <input
           type="password"
+          placeholder="Senha"
           data-testid="password-input"
           value={ password }
           onChange={ this.handleChangePassword }
