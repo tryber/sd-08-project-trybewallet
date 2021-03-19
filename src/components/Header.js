@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 
 const TOTAL = 0;
@@ -19,7 +19,9 @@ function Header() {
   return (
     <>
       <h1 data-testid="email-field">{email}</h1>
-      {expenses.length === 0 ? <h2 data-testid="total-field">{TOTAL}</h2> : <h1 data-testid="total-field">{total}</h1> }
+      {expenses.length === 0
+        ? <h2 data-testid="total-field">{TOTAL}</h2>
+        : <h1 data-testid="total-field">{total}</h1> }
       <h3 data-testid="header-currency-field">{currencies}</h3>
     </>
   );

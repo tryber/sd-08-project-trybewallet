@@ -19,7 +19,8 @@ const DEFAULT_STATE = { currencies: ['BRL'],
   actualyEdited: false,
   edited: false };
 const wallet = (state = DEFAULT_STATE, action) => {
-  const totalll = state.expenses.reduce((a, b) => (a + b.exchangeRates[b.currency].ask * b.value), 0);
+  const totalll = state.expenses
+    .reduce((a, b) => (a + b.exchangeRates[b.currency].ask * b.value), 0);
   console.log(totalll);
   switch (action.type) {
   case 'FETCH_REQUEST_SUCESS':
@@ -30,21 +31,19 @@ const wallet = (state = DEFAULT_STATE, action) => {
     return {
       ...state,
       // total: totalll,
-      total: Number(action.payload.value) * Number(action.payload.exchangeRates[action.payload.currency].ask) + state.total,
+      total: Number(action.payload.value)
+      * Number(action.payload.exchangeRates[action.payload.currency].ask) + state.total,
       expenses: [...state.expenses, action.payload],
     };
   case 'DELETE_ITEM':
     return {
       ...state,
-      // total: (state.total - state.cashList[action.payload]),
       total: (totalll - action.sub),
       expenses: [...state.expenses.filter((element) => action.payload !== element.id)],
     };
   case 'EDIT':
     return {
-      // ...state, edit: state.expenses.filter((element) => element.id === action.payload),
       ...state, actualyEdited: true, edit: { ...action.payload },
-
     };
   case 'DES_FORM':
     return {

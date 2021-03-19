@@ -1,16 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import allActions from '../actions';
 
+const array = ['Descrição', 'Tag', 'Método de pagamento', 'Valor', 'Moeda',
+  'Câmbio utilizado', 'Valor convertido', 'Moeda de conversão', 'Editar/Excluir'];
+const E = 'EDITAR';
 function Table() {
   const { walletAction: { deleteFromList, edit, desrenderizarForm } } = allActions;
   const dispatch = useDispatch();
   const list = useSelector((state) => state.wallet.expenses);
-  // const [localTotal, setTotal] = useState({});
   function clickHandle({ target: { value, name } }) {
     dispatch(deleteFromList(value, name));
   }
-  function editHandle() {
+  function editH() {
     dispatch(desrenderizarForm());
     dispatch(edit(list));
   }
@@ -18,16 +20,7 @@ function Table() {
     <table>
       <thead>
         <tr>
-          <th>Descrição</th>
-          <th>Tag</th>
-          <th>Método de pagamento</th>
-          <th>Valor</th>
-          <th>Moeda</th>
-          <th>Câmbio utilizado</th>
-          <th>Valor convertido</th>
-          <th>Moeda de conversão</th>
-          <th>Editar/Excluir</th>
-
+          {array.map((element, index) => <th key={ index }>{element}</th>)}
         </tr>
       </thead>
       {list.map(({ value, description, currency, method, tag, id, exchangeRates }) => (
@@ -42,15 +35,21 @@ function Table() {
             <td>{(Number(exchangeRates[currency].ask) * Number(value))}</td>
             <td>Real</td>
             <td>
-              <button data-testid="delete-btn" type="button" name={ (Number(exchangeRates[currency].ask) * Number(value)) } value={ id } onClick={ clickHandle }>AAAAS</button>
+              <button
+                data-testid="delete-btn"
+                type="button"
+                name={ (Number(exchangeRates[currency].ask) * Number(value)) }
+                value={ id }
+                onClick={ clickHandle }
+              >
+                AAAAS
+              </button>
             </td>
             <td>
-              {' '}
-              <button type="button" data-testid="edit-btn" onClick={ editHandle }>EDITAR</button>
+              <button type="button" data-testid="edit-btn" onClick={ editH }>{E}</button>
             </td>
           </tr>
         </tbody>
-
       ))}
 
     </table>
