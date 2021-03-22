@@ -4,6 +4,7 @@
 }
 
 .expenseForm {
+  background-color: rgba(0, 0, 0, 0.01);
   display: flex;
   flex-wrap: wrap;
 }
@@ -12,9 +13,19 @@
   margin-right: 10px;
 }
 
-.expenseForm input , .expenseForm select , .expenseForm button {
+.expenseForm input , .expenseForm select {
+  background-color: white;
   border: none;
   border-radius: 4px;
+  font-size: 1rem;
+  outline: none;
+  padding: 10px;
+}
+
+.expenseForm button {
+  background-color: rgba(0, 255, 0);
+  border-radius: 4px;
+  color: white;
   font-size: 1rem;
   outline: none;
   padding: 10px;
