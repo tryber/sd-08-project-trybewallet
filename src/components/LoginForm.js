@@ -12,7 +12,6 @@ class LoginForm extends Component {
       password: '',
       redirectWallet: false,
     };
-
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -32,14 +31,14 @@ class LoginForm extends Component {
     return password.length >= MIN_LENGTH_PASSWORD;
   }
 
-  validatorData() {
+  validatorDataLog() {
     const { email, password } = this.state;
-    if (this.validatorEmail(email) && this.validatorPassword(password)) return false;
+    if (this.validatorEmail(email)
+     && this.validatorPassword(password)) return false;
     return true;
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
+  handleSubmit() {
     const { saveEmailUser } = this.props;
     const { email } = this.state;
     saveEmailUser(email);
@@ -73,10 +72,10 @@ class LoginForm extends Component {
             />
           </label>
           <button
-            type="submit"
+            type="button"
             value="Enviar"
             onClick={ this.handleSubmit }
-            disabled={ this.validatorData() }
+            disabled={ this.validatorDataLog() }
           >
             Entrar
           </button>

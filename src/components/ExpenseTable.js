@@ -17,19 +17,18 @@ class ExpenseTable extends Component {
     deleteExpense,
     editExpense,
   ) {
-    // recebe a descrição da tabela, todas as despesas,  e duas callback, uma para DELETAR a linha da tabela e outra para ligar o mode edição da página
     return (
       <table>
         <thead className="table-header">
           <tr>
-            {descriptionsTable.map((element, index) => ( // cria o cabeçalho da tabela
+            {descriptionsTable.map((element, index) => (
               <th key={ index }>
                 {element}
               </th>))}
           </tr>
         </thead>
         <tbody className="table-body">
-          {expenses.map((expense, index) => { // Cria cada linha para cada despesa
+          {expenses.map((expense, index) => {
             const { description, tag, method, value, currency,
               exchangeRates, id } = expense;
             const { ask, name } = exchangeRates[currency];
@@ -56,12 +55,11 @@ class ExpenseTable extends Component {
   }
 
   renderButton(name, id, callback) {
-    // Recebe qual nome vai ter o botão, o id da linha que foi clicada, e a callback que será disparada
     return (
       <button
         type="button"
         data-testid={ `${name}-btn` }
-        onClick={ () => callback(id, 1) }
+        onClick={ () => callback(id) }
         className={ `${name}-btn` }
       >
         {name}

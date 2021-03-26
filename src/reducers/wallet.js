@@ -54,7 +54,7 @@ export default function wallet(state = INITIAL_WALLET_STATE, action) {
       expenses: [
         ...state.expenses.filter((expense) => expense.id !== action.payload)],
     };
-  case EDIT_EXPENSE: // Cuida apenas da questão se estamos em modo de edição ou não.
+  case EDIT_EXPENSE:
     return {
       ...state,
       editor: true,

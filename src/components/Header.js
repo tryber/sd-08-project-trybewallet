@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 
 class Header extends Component {
   render() {
-    const { email, expenses } = this.props; // E-mail e despesas vindas do State
-    const value = expenses // Constante com todos os valores gastos
+    const { email, expenses } = this.props;
+    const value = expenses
       .reduce((acc, cur) => (acc + (Number(cur.value)
        * Number(cur.exchangeRates[cur.currency].ask))),
-      0);
+      0).toFixed(2);
     return (
       <header>
         <h1> Wallet</h1>
