@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import getCoin from '../services/getCoin';
 import { infoWalletAction } from '../actions/wallet';
+import '../styles/Formularios.css';
 
 class FormularioDespesa extends React.Component {
   constructor() {
@@ -28,17 +28,20 @@ class FormularioDespesa extends React.Component {
   despesa() {
     const { value } = this.state;
     return (
-      <label htmlFor="despesa">
+
+      <label htmlFor="despesa" className="form-label">
         Valor:
         <input
           type="number"
           data-testid="value-input"
           id="despesa"
           name="value"
+          className="form-control"
           value={ value }
           onChange={ this.handleChange }
         />
       </label>
+
     );
   }
 
@@ -48,7 +51,7 @@ class FormularioDespesa extends React.Component {
     const { currency } = this.state;
     const moedasFiltro = currencies.filter((moeda) => moeda !== 'USDT');
     return (
-      <label htmlFor="moeda">
+      <label htmlFor="moeda" className="form-label">
         Moeda:
         <select
           data-testid="currency-input"
@@ -56,7 +59,9 @@ class FormularioDespesa extends React.Component {
           name="currency"
           onChange={ this.handleChange }
           value={ currency }
+          className="form-select"
         >
+          <option>Selecione</option>
           {moedasFiltro.map((e) => (
             <option
               key={ e }
@@ -82,11 +87,10 @@ class FormularioDespesa extends React.Component {
           name="method"
           onChange={ this.handleChange }
           value={ method }
+          className="form-select"
         >
-          <option>
-            Dinheiro
-          </option
-          >
+          <option>Selecione</option>
+          <option>Dinheiro</option>
           <option>Cartão de crédito</option>
           <option>Cartão de débito</option>
 
@@ -98,7 +102,7 @@ class FormularioDespesa extends React.Component {
   tag() {
     const { tag } = this.state;
     return (
-      <label htmlFor="tag">
+      <label htmlFor="tag" className="form-label">
         Tag:
         <select
           id="tag"
@@ -106,7 +110,9 @@ class FormularioDespesa extends React.Component {
           name="tag"
           onChange={ this.handleChange }
           value={ tag }
+          className="form-select"
         >
+          <option>Selecione</option>
           <option>Alimentação</option>
           <option>Lazer</option>
           <option>Trabalho</option>
@@ -121,23 +127,24 @@ class FormularioDespesa extends React.Component {
   descricao() {
     const { description } = this.state;
     return (
-      <label htmlFor="descricao">
+
+      <label htmlFor="descricao" className="form-label">
         Descrição:
         <input
           data-testid="description-input"
+          className="form-control"
           id="descricao"
           name="description"
           value={ description }
           onChange={ this.handleChange }
         />
       </label>
+
     );
   }
 
   async handleClick() {
-    const obj = await getCoin();
     this.setState((estadoAnterior) => ({
-      exchangeRates: obj,
       id: estadoAnterior.id + 1,
     }));
     const { expense } = this.props;
@@ -154,12 +161,19 @@ class FormularioDespesa extends React.Component {
   botao() {
     const { handleClick } = this;
 
-    return <button type="button" onClick={ handleClick }>Adicionar despesa</button>;
+    return (
+      <button
+        type="button"
+        onClick={ handleClick }
+        className="btn btn-light"
+      >
+        Adicionar despesa
+      </button>);
   }
 
   render() {
     return (
-      <div>
+      <div className="container">
         <form>
           {this.despesa()}
           {this.moeda()}

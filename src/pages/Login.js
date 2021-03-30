@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import actionUser from '../actions/user';
+import styles from '../styles/Login.module.css';
 
 class Login extends React.Component {
   constructor() {
@@ -37,32 +38,50 @@ class Login extends React.Component {
     const { handleChange, verifyEmailAndPassword, handleClick } = this;
     const { email, password } = this.state;
     const { user } = this.props;
-
+    const url = 'https://travelpedia.com.br/wp-content/uploads/2019/07/economia-icon.png';
+    const alt = 'Foto de uma calculadora';
     return (
-      <form>
-        <input
-          type="email"
-          name="email"
-          data-testid="email-input"
-          value={ email }
-          onChange={ handleChange }
-        />
-        <input
-          type="password"
-          name="password"
-          value={ password }
-          data-testid="password-input"
-          onChange={ handleChange }
-        />
-        <button
-          type="button"
-          disabled={ verifyEmailAndPassword(email, password.length) }
-          onClick={ () => { user(email); handleClick(); } }
-        >
-          Entrar
-        </button>
-
-      </form>
+      <div>
+        <div className={ styles.centro }>
+          <form>
+            <div className={ styles.conteudo }>
+              <h1 className={ styles.titulo }>Trybe Wallet</h1>
+              <img
+                src={ url }
+                alt={ alt }
+              />
+              <input
+                type="email"
+                name="email"
+                id="email"
+                data-testid="email-input"
+                value={ email }
+                onChange={ handleChange }
+                className={ styles.inputLogin }
+                placeholder="Email"
+              />
+              <input
+                type="password"
+                name="password"
+                id="password"
+                value={ password }
+                data-testid="password-input"
+                onChange={ handleChange }
+                placeholder="Password"
+                className={ styles.inputLogin }
+              />
+              <button
+                type="button"
+                disabled={ verifyEmailAndPassword(email, password.length) }
+                onClick={ () => { user(email); handleClick(); } }
+                className={ styles.buttonLogin }
+              >
+                Entrar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
     );
   }
 }

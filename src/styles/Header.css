@@ -1,0 +1,26 @@
+.box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.email {
+  font-size: 25px;
+}
+
+.header {
+  background-color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 2%;
+}
+
+.titulo {
+  font-family: fantasy;
+  font-size: 50px;
+  text-align: center;
+}
+
+.total {
+  display: flex;
+  font-size: 25px;
+}
+

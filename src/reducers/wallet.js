@@ -2,7 +2,9 @@ import { RECEIVE_COIN,
   INFO_WALLET,
   DELETE_EXPENSE,
   EDIT_EXPENSE,
-  ADD_EDIT_EXPENSE } from '../actions';
+  ADD_EDIT_EXPENSE,
+  EDIT_STATUS,
+} from '../actions';
 
 const INITIAL_STATE = {
   currencies: [],
@@ -21,7 +23,7 @@ function CoinReducer(state = INITIAL_STATE, action) {
     return { ...state,
       expenses: state.expenses.filter((expense) => expense.id !== action.payload) };
   case EDIT_EXPENSE:
-    return { ...state, expenseEdit: action.payload, editStatus: true };
+    return { ...state, expenseEdit: action.payload };
 
   case ADD_EDIT_EXPENSE:
     return { ...state,
@@ -31,7 +33,10 @@ function CoinReducer(state = INITIAL_STATE, action) {
         }
         return action.payload;
       }),
-      editStatus: false,
+    };
+  case EDIT_STATUS:
+    return {
+      ...state, editStatus: action.payload,
     };
   default:
     return state;

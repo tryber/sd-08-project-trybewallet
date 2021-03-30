@@ -1,0 +1,42 @@
+.box-tabela {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.button-delete {
+  background-color: rgb(241, 85, 85);
+  border-radius: 5px;
+  margin: 0px 20px 0px 20px ;
+}
+
+.button-edit {
+  background-color: rgb(132, 238, 132);
+  margin: 0px 20px 0px 20px ;
+}
+
+.button-delete:hover {
+  background-color: rgb(241, 85, 85, 0.4);
+  border: 1px solid black; 
+}
+
+.button-edit:hover {
+  background-color: rgb(132, 238, 132, 0.4);
+  border: 1px solid black;
+}
+
+.container-tabela {
+  display: flex;
+  margin-left: auto;
+  width: 80%;
+}
+
+td {
+  text-align:center ;
+}
+
+th {
+  font-size: 16px;
+  padding: 10px;
+}

@@ -1,0 +1,67 @@
+body {
+  background-image: url(../imagens/backgroundBody.jpg) ;
+  background-size: cover;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.buttonLogin {
+  background: linear-gradient(to right, orangered, orange);
+  border-radius: 10px;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-weight: 700;
+  text-transform: uppercase;
+  width: 200px;
+  height: auto;
+}
+
+.buttonLogin:disabled {
+  background: #ccc;
+
+}
+
+.centro {
+  align-items: center;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  width: 100vw;
+}
+
+.conteudo {
+  align-items: center;
+  background: linear-gradient(purple, darkblue);
+  border-radius: 15px;
+  color: #fff;
+  left: 50%;
+  line-height: 50px;
+  padding: 30px;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 350px;
+}
+
+.inputLogin {
+  border-radius: 8px;
+  font-size: 15px;
+  height: 50px;
+  margin: 1px;
+}
+
+img {
+  margin: 30px;
+  width: 70%;
+  height: 70%;
+}
+
+.titulo {
+  color: linear-gradient(to right, orangered, orange);
+  font-family: Brush Script MT, Brush Script Std, cursive; 
+  font-size: 70px;
+}

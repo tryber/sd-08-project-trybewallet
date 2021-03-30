@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { BsTrash } from 'react-icons/bs';
+import { BiEdit } from 'react-icons/bi';
 import {
   deleteExpense as deleteExpenseAction,
-  editExpense as editExpenseAction }
+  editExpense as editExpenseAction,
+  editStatus as editStatusAction }
   from '../actions/wallet';
+import '../styles/tabela.css';
 
 class Tabela extends Component {
   constructor(props) {
@@ -14,7 +18,7 @@ class Tabela extends Component {
   }
 
   linhasTabela() {
-    const { wallet, deleteExpense, editExpense } = this.props;
+    const { wallet, deleteExpense, editExpense, editStatus } = this.props;
     const { expenses } = wallet;
     return (
       expenses.map((e) => (
@@ -32,20 +36,24 @@ class Tabela extends Component {
           </td>
           <td>Real</td>
           <td>
-            <button
+            <BsTrash
               type="button"
               data-testid="delete-btn"
               onClick={ () => deleteExpense(e.id) }
+              size="30px"
+              className="button-delete"
             >
               deletar
-            </button>
-            <button
+            </BsTrash>
+            <BiEdit
               type="button"
               data-testid="edit-btn"
-              onClick={ () => editExpense(e) }
+              onClick={ () => { editExpense(e); editStatus(true); } }
+              size="30px"
+              className="button-edit"
             >
               editar
-            </button>
+            </BiEdit>
 
           </td>
         </tr>))
@@ -54,20 +62,24 @@ class Tabela extends Component {
 
   render() {
     return (
-      <table>
-        <tr>
-          <th>Descrição</th>
-          <th>Tag</th>
-          <th>Método de pagamento</th>
-          <th>Valor</th>
-          <th>Moeda</th>
-          <th>Câmbio utilizado</th>
-          <th>Valor convertido</th>
-          <th>Moeda de conversão</th>
-          <th>Editar/Excluir</th>
-        </tr>
-        {this.linhasTabela()}
-      </table>
+      <div className="container-tabela">
+        <div className="box-tabela">
+          <table className="table table-bordered border-primary">
+            <tr className="table-active">
+              <th className="table-active">Descrição</th>
+              <th>Tag</th>
+              <th>Método de pagamento</th>
+              <th>Valor</th>
+              <th>Moeda</th>
+              <th>Câmbio utilizado</th>
+              <th>Valor convertido</th>
+              <th>Moeda de conversão</th>
+              <th>Editar/Excluir</th>
+            </tr>
+            {this.linhasTabela()}
+          </table>
+        </div>
+      </div>
     );
   }
 }
@@ -79,6 +91,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   deleteExpense: (payload) => dispatch(deleteExpenseAction(payload)),
   editExpense: (payload) => dispatch(editExpenseAction(payload)),
+  editStatus: (payload) => dispatch(editStatusAction(payload)),
 });
 
 Tabela.propTypes = {
@@ -90,6 +103,7 @@ Tabela.propTypes = {
   }),
   deleteExpense: PropTypes.func.isRequired,
   editExpense: PropTypes.func.isRequired,
+  editStatus: PropTypes.func.isRequired,
 };
 Tabela.defaultProps = {
   wallet: PropTypes.objectOf.isRequired,

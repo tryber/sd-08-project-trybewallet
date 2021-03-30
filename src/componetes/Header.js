@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import '../styles/Header.css';
 
 class Header extends React.Component {
   render() {
@@ -11,10 +12,16 @@ class Header extends React.Component {
     const contador = valueNumber.reduce((acc, curr) => acc + curr, 0);
 
     return (
-      <div>
-        <p data-testid="email-field">{user.email}</p>
-        <p data-testid="total-field">{contador.toFixed(2)}</p>
-        <p data-testid="header-currency-field">BRL</p>
+      <div className="header">
+        <h1 className="titulo">Bem-vindo a sua carteira</h1>
+        <div className="box">
+          <p data-testid="email-field" className="email">{`Email: ${user.email}`}</p>
+          <div className="total">
+            <p data-testid="total-field">{`Total: R$  ${contador.toFixed(2)} `}</p>
+            <p data-testid="header-currency-field"> BRL</p>
+          </div>
+        </div>
+
       </div>
     );
   }
@@ -26,20 +33,8 @@ const mapStateToProps = (state) => ({
 });
 
 Header.propTypes = {
-  user: PropTypes.shape({
-    email: PropTypes.string,
-  }).isRequired,
-  wallet: PropTypes.shape({
-    expenses: PropTypes.shape({
-      value: PropTypes.string,
-      map: PropTypes.func,
-    }).isRequired,
-
-  }),
-};
-
-Header.defaultProps = {
-  wallet: PropTypes.objectOf.isRequired,
+  user: PropTypes.objectOf().isRequired,
+  wallet: PropTypes.objectOf().isRequired,
 };
 
 export default connect(mapStateToProps)(Header);
