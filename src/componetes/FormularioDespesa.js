@@ -8,7 +8,7 @@ class FormularioDespesa extends React.Component {
   constructor() {
     super();
     this.state = {
-      id: -1,
+      id: 0,
       value: '0',
       currency: '',
       method: '',
