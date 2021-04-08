@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap') ;
+
+
+.alinhamento {
+  align-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 8%;
+}
+
+body {
+  background-image: url('../imagens/backgroundBody.jpg');
+  background-size: cover;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.buttonLogin {
+  align-content: center;
+  align-items: center;
+  background: linear-gradient(to right, orangered, orange);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  font-weight: 700;
+  height: 35px;
+  justify-content: center;
+  text-transform: uppercase;
+  width: 200px;
+}
+
+.buttonLogin:disabled {
+  background: #ccc;
+
+}
+
+.centro {
+  align-items: center;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  width: 100vw;
+}
+
+.conteudo {
+  align-items: center;
+  background: linear-gradient(purple, darkblue);
+  border-radius: 15px;
+  color: white;
+  height: auto;
+  left: 50%;
+  line-height: 50px;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 350px;
+}
+
+.inputLogin {
+  border-radius: 8px;
+  font-size: 15px;
+  height: 40px;
+}
+
+img {
+  height: 60%;
+  margin: 10%;
+  width: 60%;
+}
+
+.titulo {
+  font-family: EB Garamond, serif;
+  font-size: 80px;
+  margin-top: 3%;
+}
+
+::placeholder {
+  text-align: center;
+}
