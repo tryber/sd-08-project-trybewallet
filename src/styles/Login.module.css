@@ -1,6 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap') ;
-
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap') ;
+
 
 .alinhamento {
   align-content: center;
@@ -11,7 +10,7 @@
 }
 
 body {
-  background-image: url(../imagens/backgroundBody.jpg);
+  background-image: url('../imagens/backgroundBody.jpg');
   background-size: cover;
   height: 100%;
   margin: 0;
