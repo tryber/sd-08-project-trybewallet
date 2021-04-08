@@ -41,15 +41,12 @@ class Login extends React.Component {
     const url = 'https://travelpedia.com.br/wp-content/uploads/2019/07/economia-icon.png';
     const alt = 'Foto de uma calculadora';
     return (
-      <div>
-        <div className={ styles.centro }>
-          <form>
-            <div className={ styles.conteudo }>
-              <h1 className={ styles.titulo }>Trybe Wallet</h1>
-              <img
-                src={ url }
-                alt={ alt }
-              />
+      <div className={ styles.centro }>
+        <form>
+          <div className={ styles.conteudo }>
+            <h1 className={ styles.titulo }>Trybe Wallet</h1>
+            <img src={ url } alt={ alt } />
+            <div className={ styles.alinhamento }>
               <input
                 type="email"
                 name="email"
@@ -79,8 +76,8 @@ class Login extends React.Component {
                 Entrar
               </button>
             </div>
-          </form>
-        </div>
+          </div>
+        </form>
       </div>
     );
   }

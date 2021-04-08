@@ -148,6 +148,7 @@ class FormularioDespesa extends React.Component {
       id: estadoAnterior.id + 1,
     }));
     const { expense } = this.props;
+
     expense(this.state);
     this.setState((state) => ({ ...state,
       value: '0',
@@ -155,12 +156,12 @@ class FormularioDespesa extends React.Component {
       method: '',
       tag: '',
       description: '',
-      exchangeRates: {} }));
+      exchangeRates: {},
+    }));
   }
 
   botao() {
     const { handleClick } = this;
-
     return (
       <button
         type="button"

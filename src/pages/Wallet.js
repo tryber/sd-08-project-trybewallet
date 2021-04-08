@@ -6,6 +6,7 @@ import Header from '../componetes/Header';
 import { fetchCoin as fetchCoinAction } from '../actions/wallet';
 import Tabela from '../componetes/Tabela';
 import FormularioEdicao from '../componetes/FormularioEdicao';
+import Footer from '../componetes/Footer';
 
 class Wallet extends React.Component {
   async componentDidMount() {
@@ -21,6 +22,7 @@ class Wallet extends React.Component {
         <Header />
         {editStatus ? <FormularioEdicao /> : <FormularioDespesa /> }
         <Tabela />
+        <Footer />
       </div>);
   }
 }

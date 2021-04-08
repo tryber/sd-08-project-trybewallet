@@ -21,7 +21,7 @@ class Tabela extends Component {
     const { wallet, deleteExpense, editExpense, editStatus } = this.props;
     const { expenses } = wallet;
     return (
-      expenses.map((e) => (
+      expenses ? expenses.map((e) => (
         <tr key={ e.id } role="row">
           <td>{e.description}</td>
           <td>{e.tag}</td>
@@ -56,7 +56,7 @@ class Tabela extends Component {
             </BiEdit>
 
           </td>
-        </tr>))
+        </tr>)) : null
     );
   }
 

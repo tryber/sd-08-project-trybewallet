@@ -7,15 +7,21 @@ class Header extends React.Component {
   render() {
     const { user, wallet } = this.props;
     const { expenses } = wallet;
-    const valueNumber = expenses.map((e) => Number(e.value)
-    * e.exchangeRates[e.currency].ask);
+    const valueNumber = expenses ? expenses.map((e) => Number(e.value)
+    * e.exchangeRates[e.currency].ask) : null;
     const contador = valueNumber.reduce((acc, curr) => acc + curr, 0);
+    const url = 'https://cdn-0.imagensemoldes.com.br/wp-content/uploads/2020/04/Ilustra%C3%A7%C3%A3o-Dinheiro-PNG-1024x757.png';
 
     return (
       <div className="header">
-        <h1 className="titulo">Bem-vindo a sua carteira</h1>
+        <p
+          data-testid="email-field"
+          className="email"
+        >
+          {`Olá, ${user.email} bem-vindo a sua carteira!`}
+        </p>
         <div className="box">
-          <p data-testid="email-field" className="email">{`Email: ${user.email}`}</p>
+          <img src={ url } alt="Notas" className="notas" />
           <div className="total">
             <p data-testid="total-field">{`Total: R$  ${contador.toFixed(2)} `}</p>
             <p data-testid="header-currency-field"> BRL</p>

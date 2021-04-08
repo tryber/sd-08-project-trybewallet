@@ -1,5 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap') ;
+
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap') ;
+
+.alinhamento {
+  align-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 8%;
+}
+
 body {
-  background-image: url(../imagens/backgroundBody.jpg) ;
+  background-image: url(../imagens/backgroundBody.jpg);
   background-size: cover;
   height: 100%;
   margin: 0;
@@ -8,15 +20,19 @@ body {
 }
 
 .buttonLogin {
+  align-content: center;
+  align-items: center;
   background: linear-gradient(to right, orangered, orange);
-  border-radius: 10px;
   border: none;
-  color: #fff;
+  border-radius: 10px;
+  color: white;
   cursor: pointer;
+  display: flex;
   font-weight: 700;
+  height: 35px;
+  justify-content: center;
   text-transform: uppercase;
   width: 200px;
-  height: auto;
 }
 
 .buttonLogin:disabled {
@@ -36,10 +52,10 @@ body {
   align-items: center;
   background: linear-gradient(purple, darkblue);
   border-radius: 15px;
-  color: #fff;
+  color: white;
+  height: auto;
   left: 50%;
   line-height: 50px;
-  padding: 30px;
   position: absolute;
   text-align: center;
   top: 50%;
@@ -50,18 +66,21 @@ body {
 .inputLogin {
   border-radius: 8px;
   font-size: 15px;
-  height: 50px;
-  margin: 1px;
+  height: 40px;
 }
 
 img {
-  margin: 30px;
-  width: 70%;
-  height: 70%;
+  height: 60%;
+  margin: 10%;
+  width: 60%;
 }
 
 .titulo {
-  color: linear-gradient(to right, orangered, orange);
-  font-family: Brush Script MT, Brush Script Std, cursive; 
-  font-size: 70px;
+  font-family: EB Garamond, serif;
+  font-size: 80px;
+  margin-top: 3%;
+}
+
+::placeholder {
+  text-align: center;
 }

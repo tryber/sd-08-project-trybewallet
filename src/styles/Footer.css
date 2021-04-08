@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap') ;
+
+.logo {
+  height: 40px;
+  padding: 20%;
+  width: 40px;
+}
+
+.box {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+}
+
+.footer {
+  background-color: rgb(255, 255, 255, 0.3);
+  bottom: 0;
+  left: auto;
+  margin-top: 30px;
+  position: fixed;
+  width: 100%;
+}
+
+.texto-footer {
+  font-family: EB Garamond, serif;
+  font-size: 18px;
+  padding-left: 20%;
+}
