@@ -1,6 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-export default function Login() {
+function Login({ user }) {
   return (
     <form>
       <input
@@ -21,3 +22,11 @@ export default function Login() {
     </form>
   );
 }
+
+function mapStateToProps(state) {
+  return {
+    user: state.user.email,
+  };
+}
+
+export default connect(mapStateToProps)(Login);
