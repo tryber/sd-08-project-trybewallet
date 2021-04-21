@@ -1,8 +1,12 @@
 import React from 'react';
+import Header from '../components/wallet/Header';
 
 function Wallet() {
   return (
-    <div>TrybeWallet</div>
+    <div>
+      <Header />
+      <hr />
+    </div>
   );
 }
 
