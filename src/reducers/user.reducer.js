@@ -2,7 +2,7 @@
 import { USER_LOGIN } from '../common/ActionTypes';
 
 const initialState = {
-  email: 'rod.vgo@gmail.com',
+  email: '',
 };
 
 export default function user(state = initialState, action) {

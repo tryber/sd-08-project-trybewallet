@@ -30,7 +30,6 @@ function Login({ loginDispatch }) {
       ...login,
       [name]: value,
     });
-    isValid();
   }
 
   function handleClick() {
@@ -55,8 +54,8 @@ function Login({ loginDispatch }) {
 }
 
 Login.propTypes = {
-  loginDispatch: PropTypes.func.isRequired,
-};
+  loginDispatch: PropTypes.func,
+}.isRequired;
 
 const mapDispatchToProps = (dispatch) => ({
   loginDispatch: (email) => dispatch(userEmail(email)),
