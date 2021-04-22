@@ -1,32 +1,62 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { Redirect } from 'react-router';
+import handleEmail from '../../actions/handleEmail.action';
 
-function Login({ user }) {
+function Login({ emailDispatch }) {
+  const [userEmail, setUserEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [redirect, setRedirect] = useState(false);
+  const numberMagic = 5;
+
+  function handleUserEmail(evt) {
+    setUserEmail(evt.target.value);
+  }
+
+  function handlePassword(evt) {
+    setPassword(evt.target.value);
+  }
+
   return (
-    <form>
+    <form onSubmit={ (e) => { e.preventDefault(); emailDispatch(userEmail); setRedirect(true); } }>
       <input
         data-testid="email-input"
-        type="text"
+        type="email"
         placeholder="name@example.com"
+        value={ userEmail }
+        onChange={ handleUserEmail }
+        name="login-userEmail"
+        id="login-userEmail"
       />
       <input
         data-testid="password-input"
-        type="text"
+        type="password"
         placeholder="atleast 6 characters"
+        value={ password }
+        onChange={ handlePassword }
+        name="login-password"
+        id="login-password"
       />
-      <button
+      <input
         type="submit"
-      >
-        Entrar
-      </button>
+        value="Entrar"
+        disabled={
+          !/^[\w+.]+@\w+\.\w{2,}(?:\.\w{2})?$/.test(userEmail)
+          || password.length <= numberMagic
+        }
+      />
+      { redirect ? <Redirect to="/carteira" /> : '' }
     </form>
   );
 }
 
-function mapStateToProps(state) {
-  return {
-    user: state.user.email,
-  };
-}
+Login.propTypes = {
+  emailDispatch: PropTypes.func.isRequired,
+};
 
-export default connect(mapStateToProps)(Login);
+const mapDispatchToProps = (dispatch) => ({
+  emailDispatch: (email) => dispatch(handleEmail(email)),
+});
+
+export default connect(null, mapDispatchToProps)(Login);
