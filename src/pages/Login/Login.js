@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router';
+
 import handleEmail from '../../actions/handleEmail.action';
 
 function Login({ emailDispatch }) {
@@ -28,19 +29,17 @@ function Login({ emailDispatch }) {
         data-testid="email-input"
         type="email"
         placeholder="name@example.com"
+        label="Email"
         value={ userEmail }
         onChange={ handleUserEmail }
-        name="login-userEmail"
-        id="login-userEmail"
       />
       <input
         data-testid="password-input"
         type="password"
         placeholder="atleast 6 characters"
+        label="Password"
         value={ password }
         onChange={ handlePassword }
-        name="login-password"
-        id="login-password"
       />
       <input
         type="submit"
