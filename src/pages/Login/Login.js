@@ -19,7 +19,11 @@ function Login({ emailDispatch }) {
   }
 
   return (
-    <form onSubmit={ (e) => { e.preventDefault(); emailDispatch(userEmail); setRedirect(true); } }>
+    <form
+      onSubmit={ (e) => {
+        e.preventDefault(); emailDispatch(userEmail); setRedirect(true);
+      } }
+    >
       <input
         data-testid="email-input"
         type="email"
