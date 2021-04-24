@@ -4,13 +4,26 @@ import {
   REQUEST_CURRENCY,
   ADD_EXPENSE,
   DELETE_EXPENSE,
+  EDIT_EXPENSE,
+  SUBMIT_EDIT,
 } from '../common/ActionTypes';
 
+const initialValues = {
+  value: '0',
+  description: '',
+  currency: 'USD',
+  method: 'Dinheiro',
+  tag: 'Alimentação',
+  id: 0,
+};
+
 const initialState = {
+  initValues: { ...initialValues },
   currencies: [],
   isFetch: false,
   expenses: [],
-  idExp: null,
+  editExpense: {},
+  isEdit: false,
 };
 
 export default function wallet(state = initialState, action) {
@@ -36,7 +49,22 @@ export default function wallet(state = initialState, action) {
     return {
       ...state,
       expenses: [...state.expenses.filter((expense) => expense.id !== payload)],
-      // idExp: payload,
+    };
+  case EDIT_EXPENSE:
+    return {
+      ...state,
+      isEdit: true,
+      initValues: { ...payload },
+    };
+  case SUBMIT_EDIT:
+    return {
+      ...state,
+      expenses: state.expenses.map((item) => {
+        if (item.id === payload.id) return { ...item, ...payload };
+        return item;
+      }),
+      initValues: { ...initialValues },
+      isEdit: false,
     };
   default:
     return state;

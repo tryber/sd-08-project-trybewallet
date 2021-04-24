@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function Expense({ expense, deleteExpense }) {
+function Expense({ expense, deleteExp, editExp }) {
   const { value, description, currency, method, tag, exchangeRates, id } = expense;
   const BASE = 10;
   const { name, ask } = exchangeRates[currency];
   const exchange = parseFloat(ask).toFixed(2);
-  const convert = ask * parseFloat(value, BASE).toFixed(2);
+  const convert = (parseFloat(ask, BASE) * parseFloat(value, BASE)).toFixed(2);
 
   function replacer(str, change, to) {
     const string = str;
@@ -27,9 +27,18 @@ function Expense({ expense, deleteExpense }) {
         <button
           type="button"
           data-testid="delete-btn"
-          onClick={ () => deleteExpense(id) }
+          onClick={ () => deleteExp(id) }
         >
           Deletar
+        </button>
+      </td>
+      <td>
+        <button
+          type="button"
+          data-testid="edit-btn"
+          onClick={ () => editExp(expense) }
+        >
+          Editar
         </button>
       </td>
     </tr>

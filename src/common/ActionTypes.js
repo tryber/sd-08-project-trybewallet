@@ -3,3 +3,5 @@ export const REQUEST_CURRENCY = 'REQUEST_CURRENCY';
 export const IS_FETCHING = 'IS_FETCHING';
 export const ADD_EXPENSE = 'ADD_EXPENSE';
 export const DELETE_EXPENSE = 'DELETE_EXPENSE';
+export const EDIT_EXPENSE = 'EDIT_EXPENSE';
+export const SUBMIT_EDIT = 'SUBMIT_EDIT';

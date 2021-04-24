@@ -3,6 +3,8 @@ import {
   IS_FETCHING,
   ADD_EXPENSE,
   DELETE_EXPENSE,
+  EDIT_EXPENSE,
+  SUBMIT_EDIT,
 } from '../common/ActionTypes';
 import fetchApi from '../services/Api';
 
@@ -37,6 +39,20 @@ export function fetchCurrency() {
 export function deleteExpense(payload) {
   return {
     type: DELETE_EXPENSE,
+    payload,
+  };
+}
+
+export function editExpense(payload) {
+  return {
+    type: EDIT_EXPENSE,
+    payload,
+  };
+}
+
+export function submitiEdit(payload) {
+  return {
+    type: SUBMIT_EDIT,
     payload,
   };
 }
