@@ -4,15 +4,19 @@ import { connect } from 'react-redux';
 
 import Expense from './expenseTable/Expense';
 import TableHeader from './expenseTable/TableHeader';
+import { deleteExpense } from '../../actions/wallet.actions';
 
-function ExpenseTable({ expenses }) {
-  // console.log(expenses);
+function ExpenseTable({ expenses, deleteExp }) {
   return (
     <table border="solid">
-      <TableHeader />
-      {expenses.length > 0 && expenses.map((expense, i) => (
-        <Expense key={ i } expense={ expense } />
-      ))}
+      <thead>
+        <TableHeader />
+      </thead>
+      <tbody>
+        {expenses.length > 0 && expenses.map((expense, i) => (
+          <Expense key={ i } expense={ expense } deleteExpense={ deleteExp } />
+        ))}
+      </tbody>
 
     </table>
   );
@@ -20,14 +24,15 @@ function ExpenseTable({ expenses }) {
 
 ExpenseTable.propTypes = {
   expenses: PropTypes.array,
+  deleteExp: PropTypes.func,
 }.isRequired;
 
 const mapStateToProps = (state) => ({
   expenses: state.wallet.expenses,
 });
 
-// const mapDispatchToProps = {
+const mapDispatchToProps = (dispatch) => ({
+  deleteExp: (id) => dispatch(deleteExpense(id)),
+});
 
-// };
-
-export default connect(mapStateToProps, null)(ExpenseTable);
+export default connect(mapStateToProps, mapDispatchToProps)(ExpenseTable);

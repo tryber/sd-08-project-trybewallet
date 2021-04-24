@@ -3,12 +3,14 @@ import {
   IS_FETCHING,
   REQUEST_CURRENCY,
   ADD_EXPENSE,
+  DELETE_EXPENSE,
 } from '../common/ActionTypes';
 
 const initialState = {
   currencies: [],
   isFetch: false,
   expenses: [],
+  idExp: null,
 };
 
 export default function wallet(state = initialState, action) {
@@ -29,6 +31,12 @@ export default function wallet(state = initialState, action) {
     return {
       ...state,
       expenses: [...state.expenses, payload],
+    };
+  case DELETE_EXPENSE:
+    return {
+      ...state,
+      expenses: [...state.expenses.filter((expense) => expense.id !== payload)],
+      // idExp: payload,
     };
   default:
     return state;

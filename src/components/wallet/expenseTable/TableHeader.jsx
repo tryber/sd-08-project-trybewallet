@@ -14,11 +14,9 @@ function TableHeader() {
   ];
 
   return (
-    <thead>
-      <tr>
-        {header.map((item) => <th key={ item }>{item}</th>)}
-      </tr>
-    </thead>
+    <tr>
+      {header.map((item) => <th key={ item }>{item}</th>)}
+    </tr>
   );
 }
 
