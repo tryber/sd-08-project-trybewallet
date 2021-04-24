@@ -7,7 +7,6 @@ import SelectMethod from './expenseForm/SelectedMethod';
 import ChangeTag from './expenseForm/ChangeTag';
 import InputValue from './expenseForm/InputValue';
 import InputDescription from './expenseForm/InputDescription';
-import fetchApi from '../../services/Api';
 
 const initialState = {
   value: '0',
@@ -35,12 +34,12 @@ function ExpenseForm(props) {
   }, []);
 
   useEffect(() => {
-    setArrCurrencies(currencies
+    setArrCurrencies(Object.keys(currencies)
       .filter((cur) => cur !== 'USDT'));
   }, [currencies]);
 
-  async function handleClick() {
-    const exchangeRates = await fetchApi();
+  function handleClick() {
+    const exchangeRates = currencies;
     const { value, description, currency, method, tag } = expense;
     const expenses = {
       value, description, currency, method, tag, exchangeRates,
@@ -51,7 +50,9 @@ function ExpenseForm(props) {
   }
 
   function handleChange({ target: { name, value } }) {
-    setExpense({ ...expense, [name]: value });
+    setExpense({
+      ...expense,
+      [name]: value });
   }
 
   return (

@@ -1,5 +1,6 @@
 import React from 'react';
 import ExpenseForm from '../components/wallet/ExpenseForm';
+import ExpenseTable from '../components/wallet/ExpenseTable';
 import Header from '../components/wallet/Header';
 
 function Wallet() {
@@ -8,6 +9,8 @@ function Wallet() {
       <Header />
       <hr />
       <ExpenseForm />
+      <hr />
+      <ExpenseTable />
     </div>
   );
 }

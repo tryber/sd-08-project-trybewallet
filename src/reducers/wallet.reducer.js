@@ -6,7 +6,7 @@ import {
 } from '../common/ActionTypes';
 
 const initialState = {
-  currencies: [],
+  currencies: {},
   isFetch: false,
   expenses: [],
 };
@@ -17,7 +17,7 @@ export default function wallet(state = initialState, action) {
   case REQUEST_CURRENCY:
     return {
       ...state,
-      currencies: [...Object.keys(payload)],
+      currencies: { ...payload },
       isFetch: false,
     };
   case IS_FETCHING:
