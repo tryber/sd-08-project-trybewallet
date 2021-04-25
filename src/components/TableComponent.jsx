@@ -3,12 +3,31 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 class TableComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleEdit = this.handleEdit.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+    this.renderExpenseRow = this.renderExpenseRow.bind(this);
+  }
+
+  handleEdit(expense) {
+    console.log(expense);
+  }
+
+  handleDelete(expense) {
+    const idRow = expense.id;
+    const row = document.getElementById(`${idRow}`);
+    const table = row.parentNode;
+    table.deleteRow(idRow);
+  }
+
   renderExpenseRow(expense) {
     const { description, tag, method, value, currency, exchangeRates } = expense;
     const exchangeRatesCurrency = exchangeRates[currency];
     const expenseConverted = Number(value) * Number(exchangeRatesCurrency.ask);
+
     return (
-      <tr>
+      <tr key={ expense.id } id={ expense.id }>
         <td>{description}</td>
         <td>{tag}</td>
         <td>{method}</td>
@@ -18,8 +37,19 @@ class TableComponent extends React.Component {
         <td>{ (Math.round(expenseConverted * 100) / 100).toFixed(2)}</td>
         <td>Real</td>
         <td>
-          <button type="button">Editar</button>
-          <button type="button">Excluir</button>
+          <button
+            onClick={ () => this.handleEdit(expense) }
+            type="button"
+          >
+            Editar
+          </button>
+          <button
+            data-testid="delete-btn"
+            onClick={ () => this.handleDelete(expense) }
+            type="button"
+          >
+            Excluir
+          </button>
         </td>
       </tr>
     );
