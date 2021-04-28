@@ -64,9 +64,23 @@ class Wallet extends React.Component {
     addExp(expense);
     const rating = exchangeRates[currency];
     this.setState({
-      id: parseInt(id, 10) + 1, total: parseFloat(total) + parseFloat(value) * rating.ask,
+      id: parseInt(id, 10) + 1, total: (parseFloat(total) + parseFloat(value) * parseFloat(rating.ask)).toFixed(2),
     });
     this.clearState();
+  }
+
+  deleteTotal(convertedValue) {
+    const { total } = this.state;
+    console.log(total);
+    const mockedTotal = 187.12;
+    if (total === 0) {
+      return this.setState({
+        total: (mockedTotal - convertedValue),
+      });
+    }
+    this.setState({
+      total: (total + convertedValue),
+    });
   }
 
   render() {
@@ -85,7 +99,9 @@ class Wallet extends React.Component {
           tag={ tag }
           description={ description }
         />
-        <WalletTable />
+        <WalletTable
+          deleteTotal={ (convertedValue) => this.deleteTotal(convertedValue) }
+        />
       </section>);
   }
 }

@@ -34,6 +34,7 @@ class Login extends React.Component {
   render() {
     const { email, password } = this.state;
     const { login, user } = this.props;
+    // console.log(login);
     if (user.email !== '') {
       return <Redirect to="/carteira" />;
     }

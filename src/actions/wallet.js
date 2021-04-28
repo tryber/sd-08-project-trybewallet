@@ -1,5 +1,7 @@
 export const REQUEST_CURRENCIES = 'REQUEST_CURRENCIES';
 export const ADD_EXPENSE = 'ADD_EXPENSE';
+export const DELETE_EXPENSE = 'DELETE_EXPENSE';
+export const UPDATE_EXPENSE = 'UPDATE_EXPENSE';
 
 const requestCurrencies = (currencies) => ({
   type: REQUEST_CURRENCIES,
@@ -9,6 +11,16 @@ const requestCurrencies = (currencies) => ({
 
 export const addExpense = (expense) => ({
   type: ADD_EXPENSE,
+  expense,
+});
+
+export const deleteExpense = (expense) => ({
+  type: DELETE_EXPENSE,
+  expense,
+});
+
+export const updateExpense = (expense) => ({
+  type: UPDATE_EXPENSE,
   expense,
 });
 
