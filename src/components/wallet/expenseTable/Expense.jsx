@@ -31,8 +31,6 @@ function Expense({ expense, deleteExp, editExp }) {
         >
           Deletar
         </button>
-      </td>
-      <td>
         <button
           type="button"
           data-testid="edit-btn"

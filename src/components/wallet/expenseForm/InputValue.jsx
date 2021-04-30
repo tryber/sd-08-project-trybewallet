@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 function InputValue({ handleChange, value }) {
   return (
-    <label htmlFor="values">
+    <label htmlFor="value">
       Valor:
       <input
         data-testid="value-input"

@@ -2,21 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { fetchCurrency, saveNewExpense, submitiEdit } from '../../actions/wallet.actions';
-import SelectCurrency from './expenseForm/SelectCurrency';
 import SelectMethod from './expenseForm/SelectedMethod';
 import ChangeTag from './expenseForm/ChangeTag';
 import InputValue from './expenseForm/InputValue';
 import InputDescription from './expenseForm/InputDescription';
 import fetchApi from '../../services/Api';
-
-// const initialState = {
-//   value: '0',
-//   description: '',
-//   currency: 'USD',
-//   method: 'Dinheiro',
-//   tag: 'Alimentação',
-//   id: 0,
-// };
 
 const createId = (arr) => {
   if (arr.length === 0) {
@@ -28,7 +18,7 @@ const createId = (arr) => {
 // eslint-disable-next-line max-lines-per-function
 function ExpenseForm(props) {
   const {
-    fetchCurr, isEdit, saveNewExp, currencies, isFetching, exp, initialValues, subEdit,
+    fetchCurr, isEdit, saveNewExp, currencies, exp, initialValues, subEdit,
   } = props;
   const [arrCurrencies, setArrCurrencies] = useState([]);
   const [expense, setExpense] = useState({ ...initialValues });
@@ -62,16 +52,24 @@ function ExpenseForm(props) {
   const btnStr = () => (isEdit ? 'Editar despesa' : 'Adicionar despesa');
 
   return (
-    <form action="">
+    <form>
       <InputValue handleChange={ handleChange } value={ expense.value } />
       <SelectMethod handleChange={ handleChange } value={ expense.method } />
       <ChangeTag handleChange={ handleChange } value={ expense.tag } />
-      <SelectCurrency
-        currencies={ arrCurrencies }
-        isFetching={ isFetching }
-        handleChange={ handleChange }
-        value={ expense.currency }
-      />
+
+      <select
+        data-testid="currency-input"
+        value={ expense.value }
+        name="currency"
+        onChange={ handleChange }
+      >
+        {
+          arrCurrencies
+        && arrCurrencies.map((current, i) => (
+          <option key={ i } data-testid={ current }>{current}</option>
+        ))
+        }
+      </select>
       <InputDescription handleChange={ handleChange } value={ expense.description } />
       <button type="button" onClick={ handleClick }>{btnStr()}</button>
     </form>
