@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { emailChange } from '../actions';
 
@@ -11,19 +11,23 @@ class Login extends React.Component {
       email: '',
       password: '',
       disabled: true,
+      login: false,
     };
+
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.loginValidation = this.loginValidation.bind(this);
   }
 
-  handleClick(e) {
-    e.preventDefault();
+  // Atualiza estado geral do email ao clicar
+  handleClick() {
     const { handleEmail } = this.props;
     const { email } = this.state;
+    this.setState({ login: true });
     handleEmail(email);
   }
 
+  // Atualiza estado do email e senha na página de Login
   handleChange({ target }) {
     const { name, value } = target;
     this.setState({
@@ -33,6 +37,7 @@ class Login extends React.Component {
     });
   }
 
+  // Verifica se o email e senha são válidos
   loginValidation() {
     const { email, password } = this.state;
     let disabled = false;
@@ -43,41 +48,42 @@ class Login extends React.Component {
   }
 
   render() {
-    const { email, password, disabled } = this.state;
+    const { email, password, disabled, login } = this.state;
     return (
-      <form>
-        <label htmlFor="email-input">
-          Email
+      <main className="login-main">
+        <header className="login-header">
+          <h1>Trybe Wallet</h1>
+        </header>
+        <form className="login-form">
           <input
-            type="email"
-            data-testid="email-input"
-            id="email-input"
+            type="text"
             name="email"
             value={ email }
             onChange={ this.handleChange }
+            data-testid="email-input"
+            placeholder="user@email.com"
+            className="login-input"
           />
-        </label>
-        <label htmlFor="password-input">
-          Senha
           <input
             type="password"
-            data-testid="password-input"
-            id="password-input"
             name="password"
             value={ password }
             onChange={ this.handleChange }
+            data-testid="password-input"
+            placeholder="******"
+            className="login-input"
           />
-        </label>
-        <button
-          type="submit"
-          disabled={ disabled }
-          onClick={ this.handleClick }
-        >
-          <Link to="/carteira">
+          <button
+            type="submit"
+            disabled={ disabled }
+            onClick={ this.handleClick }
+            className="login-btn"
+          >
             Entrar
-          </Link>
-        </button>
-      </form>
+          </button>
+        </form>
+        {login ? <Redirect to="/carteira" /> : ''}
+      </main>
     );
   }
 }

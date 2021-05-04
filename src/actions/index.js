@@ -11,7 +11,7 @@ export const emailChange = (payload) => ({
   payload,
 });
 
-const requestCurrencies = () => ({
+const requestCurrenciesTry = () => ({
   type: REQUEST_START,
 });
 
@@ -27,8 +27,10 @@ const requestCurrenciesFail = (error) => ({
 
 export const fetchCurrencies = () => async (dispatch) => {
   try {
-    dispatch(requestCurrencies());
+    dispatch(requestCurrenciesTry());
+
     const currencies = await currenciesAPI();
+
     dispatch(requestCurrenciesSuccess(currencies));
   } catch (error) {
     dispatch(requestCurrenciesFail(error));
