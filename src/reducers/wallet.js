@@ -1,4 +1,4 @@
-import { ADD_EXPENSE, SAVE_CURRENCIES, REMOVE_EXPENSE } from '../actions';
+import { ADD_EXPENSE, SAVE_CURRENCIES } from '../actions';
 
 const INITIAL_STATE = {
   currencies: [],
@@ -22,11 +22,6 @@ const addExpense = (state = INITIAL_STATE, action) => {
   };
 };
 
-const removeExpense = (state = INITIAL_STATE, action) => ({
-  ...state,
-  expenses: state.expenses.filter((expense) => expense.id !== action.payload),
-});
-
 export default function wallet(state = INITIAL_STATE, action) {
   switch (action.type) {
   case SAVE_CURRENCIES:
@@ -36,8 +31,6 @@ export default function wallet(state = INITIAL_STATE, action) {
     };
   case ADD_EXPENSE:
     return addExpense(state, action);
-  case REMOVE_EXPENSE:
-    return removeExpense(state, action);
   default:
     return state;
   }

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import removeExpenseAction from '../actions/wallet';
 
 class ExpensesTableRow extends Component {
   render() {
@@ -37,7 +36,5 @@ ExpensesTableRow.propTypes = {
 const mapStateToProps = ({ wallet: { expenses } }) => ({
   expenses,
 });
-const mapDispatchToProps = (dispatch) => ({
-  removeExpense: (id) => dispatch(removeExpenseAction(id)) });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ExpensesTableRow);
+export default connect(mapStateToProps)(ExpensesTableRow);

@@ -24,12 +24,13 @@ class Login extends React.Component {
     const isValidEmail = regex.test(email);
     const isValidPassword = password.length >= minPasswordSize;
     if (isValidPassword && isValidEmail) {
-      return false;
+      return true;
     }
-    return true;
+    return false;
   }
 
-  handleChange({ target: { name, value } }) {
+  handleChange(event) {
+    const { name, value } = event.target;
     this.setState({
       [name]: value,
     });
@@ -70,7 +71,7 @@ class Login extends React.Component {
             onChange={ this.handleChange }
           />
         </label>
-        <button type="submit" disabled={ this.validation() }>
+        <button type="submit" disabled={ !this.validation() }>
           Entrar
         </button>
       </form>

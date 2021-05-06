@@ -15,7 +15,7 @@ const INITIAL_STATE = {
   tag: 'Alimentação',
 };
 
-class expenseForm extends Component {
+class ExpenseForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -139,7 +139,7 @@ class expenseForm extends Component {
 
   render() {
     return (
-      <form className="form-inline">
+      <form>
         { this.valueInput() }
         { this.descriptionInput() }
         { this.currencyInput() }
@@ -155,7 +155,7 @@ class expenseForm extends Component {
   }
 }
 
-expenseForm.propTypes = {
+ExpenseForm.propTypes = {
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
   addExpense: PropTypes.func.isRequired,
 };
@@ -168,4 +168,4 @@ const mapDispatchToProps = (dispatch) => ({
   addExpense: (expense) => dispatch(fetchExpense(expense)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(expenseForm);
+export default connect(mapStateToProps, mapDispatchToProps)(ExpenseForm);
