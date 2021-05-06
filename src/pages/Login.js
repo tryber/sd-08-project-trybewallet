@@ -1,9 +1,8 @@
 import React from 'react';
+import { Redirect } from 'react-router';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { Redirect } from 'react-router-dom';
-import { Creators as userActions } from '../actions';
+import addUser from '../actions/login';
 
 class Login extends React.Component {
   constructor(props) {
@@ -18,25 +17,29 @@ class Login extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  validation() {
+    const { email, password } = this.state;
+    const minPasswordSize = 6;
+    const regex = /.+@[A-z]+[.]com/;
+    const isValidEmail = regex.test(email);
+    const isValidPassword = password.length >= minPasswordSize;
+    if (isValidPassword && isValidEmail) {
+      return false;
+    }
+    return true;
+  }
+
   handleChange({ target: { name, value } }) {
     this.setState({
       [name]: value,
     });
   }
 
-  validateInputs() {
-    const { email, password } = this.state;
-    const passwordMinLength = 6;
-    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) return false;
-    if (password.length < passwordMinLength) return false;
-    return true;
-  }
-
   handleSubmit(event) {
     event.preventDefault();
-    const { saveEmail } = this.props;
+    const { addEmail } = this.props;
     const { email } = this.state;
-    saveEmail(email);
+    addEmail(email);
     this.setState({
       shouldRedirect: true,
     });
@@ -48,28 +51,26 @@ class Login extends React.Component {
     return (
       <form onSubmit={ this.handleSubmit }>
         <label htmlFor="email">
-          Email:
           <input
             type="text"
-            data-testid="email-input"
             name="email"
+            data-testid="email-input"
+            placeholder="Email"
             value={ email }
             onChange={ this.handleChange }
-            placeholder="Email"
           />
         </label>
         <label htmlFor="password">
-          Senha:
           <input
             type="password"
-            data-testid="password-input"
             name="password"
+            data-testid="password-input"
+            placeholder="Senha"
             value={ password }
             onChange={ this.handleChange }
-            placeholder="Senha"
           />
         </label>
-        <button type="submit" disabled={ !this.validateInputs() }>
+        <button type="submit" disabled={ this.validation() }>
           Entrar
         </button>
       </form>
@@ -77,10 +78,12 @@ class Login extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => bindActionCreators(userActions, dispatch);
-
 Login.propTypes = {
-  saveEmail: PropTypes.func.isRequired,
+  addEmail: PropTypes.func.isRequired,
 };
+
+const mapDispatchToProps = (dispatch) => ({
+  addEmail: (email) => dispatch(addUser(email)),
+});
 
 export default connect(null, mapDispatchToProps)(Login);

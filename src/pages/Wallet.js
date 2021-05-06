@@ -1,11 +1,10 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { bindActionCreators } from 'redux';
-import ExpenseForm from '../components/ExpenseForm';
+import { connect } from 'react-redux';
 import Header from '../components/Header';
-import { Creators as WalletActions } from '../actions/index';
-import ExpensesTable from '../components/ExpensesTable';
+import { fetchCurrencies as fetchCurrenciesAction } from '../actions/wallet';
+import ExpenseForm from '../components/ExpenseForm';
+import ExpenseTable from '../components/ExpenseTable';
 
 class Wallet extends React.Component {
   componentDidMount() {
@@ -18,7 +17,7 @@ class Wallet extends React.Component {
       <div>
         <Header />
         <ExpenseForm />
-        <ExpensesTable />
+        <ExpenseTable />
       </div>
     );
   }
@@ -28,6 +27,8 @@ Wallet.propTypes = {
   fetchCurrencies: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => bindActionCreators(WalletActions, dispatch);
+const mapDispatchToProps = (dispatch) => ({
+  fetchCurrencies: (currencies) => dispatch(fetchCurrenciesAction(currencies)),
+});
 
 export default connect(null, mapDispatchToProps)(Wallet);

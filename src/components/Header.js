@@ -17,17 +17,10 @@ class Header extends Component {
     const { email } = this.props;
     return (
       <header>
-        <dl>
-          <dt>Email</dt>
-          <dd data-testid="email-field">{ email }</dd>
-          <dt>Total</dt>
-          <dd data-testid="total-field">
-            RS
-            { this.getTotal() }
-          </dd>
-          <dt>Câmbio</dt>
-          <dd data-testid="header-currency-field">BRL</dd>
-        </dl>
+        <h1> Wallet</h1>
+        <p data-testid="email-field">{ email }</p>
+        <p data-testid="total-field">{ this.getTotal() }</p>
+        <p data-testid="header-currency-field">BRL</p>
       </header>
     );
   }
@@ -38,9 +31,9 @@ Header.propTypes = {
   expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-const mapStateToProps = ({ user, wallet }) => ({
-  email: user.email,
-  expenses: wallet.expenses,
+const mapStateToProps = (state) => ({
+  email: state.user.email,
+  expenses: state.wallet.expenses,
 });
 
 export default connect(mapStateToProps)(Header);

@@ -1,147 +1,171 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { bindActionCreators } from 'redux';
-import { Creators as WalletActions } from '../actions/index';
+import { fetchExpense } from '../actions/wallet';
 
-class ExpenseForm extends Component {
+const methodsPayment = ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'];
+
+const expenseTags = ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
+
+const INITIAL_STATE = {
+  value: '',
+  description: '',
+  method: 'Dinheiro',
+  currency: 'USD',
+  tag: 'Alimentação',
+};
+
+class expenseForm extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      value: '',
-      description: '',
-      currency: 'USD',
-      method: 'Dinheiro',
-      tag: 'Alimentação',
+      ...INITIAL_STATE,
     };
-
-    this.paymentMethods = ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'];
-    this.expenseTags = ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
-
     this.handleChange = this.handleChange.bind(this);
-    this.handleClick = this.handleClick.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange({ target: { name, value } }) {
+  handleChange(event) {
+    const { name, value } = event.target;
     this.setState({
       [name]: value,
     });
   }
 
-  handleClick() {
-    const { addExpenseWithCoins } = this.props;
-    addExpenseWithCoins(this.state);
-    this.setState({ value: '' });
+  handleSubmit() {
+    const { addExpense } = this.props;
+    addExpense(this.state);
+    this.setState({
+      ...INITIAL_STATE,
+    });
   }
 
-  renderValueInput(value) {
+  valueInput() {
+    const { value } = this.state;
     return (
-      <input
-        type="text"
-        name="value"
-        value={ value }
-        data-testid="value-input"
-        placeholder="Valor"
-        onChange={ this.handleChange }
-      />
+      <label htmlFor="value-input">
+        Valor:
+        <input
+          data-testid="value-input"
+          id="value-input"
+          type="number"
+          name="value"
+          value={ value }
+          onChange={ this.handleChange }
+        />
+      </label>
     );
   }
 
-  renderDescriptionInput(description) {
+  descriptionInput() {
+    const { description } = this.state;
     return (
-      <input
-        type="text"
-        name="description"
-        value={ description }
-        data-testid="description-input"
-        placeholder="Descrição"
-        onChange={ this.handleChange }
-      />
+      <label htmlFor="description-input">
+        Descrição:
+        <input
+          data-testid="description-input"
+          id="description-input"
+          type="text"
+          name="description"
+          value={ description }
+          onChange={ this.handleChange }
+        />
+      </label>
     );
   }
 
-  renderCurrencySelect(currency) {
+  currencyInput() {
     const { currencies } = this.props;
+    const { currency } = this.state;
     return (
-      <select
-        name="currency"
-        value={ currency }
-        data-testid="currency-input"
-        onChange={ this.handleChange }
-      >
-        { currencies.map((currencyCode) => (
-          <option
-            key={ currencyCode }
-            value={ currencyCode }
-            data-testid={ currencyCode }
-          >
-            { currencyCode }
-          </option>
-        )) }
-      </select>
+      <label htmlFor="currency-input">
+        Moeda:
+        <select
+          data-testid="currency-input"
+          id="currency-input"
+          value={ currency }
+          name="currency"
+          onChange={ this.handleChange }
+        >
+          {currencies.map((code) => (
+            <option value={ code } data-testid={ code } key={ code }>
+              { code }
+            </option>
+          ))}
+        </select>
+      </label>
     );
   }
 
-  renderMethodSelect(method) {
+  methodInput() {
+    const { method } = this.state;
     return (
-      <select
-        name="method"
-        value={ method }
-        data-testid="method-input"
-        onChange={ this.handleChange }
-      >
-        { this.paymentMethods.map((currencyMethod) => (
-          <option
-            key={ currencyMethod }
-            value={ currencyMethod }
-          >
-            { currencyMethod }
-          </option>
-        )) }
-      </select>
+      <label htmlFor="method-input">
+        Método de pagamento:
+        <select
+          data-testid="method-input"
+          id="method-input"
+          name="method"
+          value={ method }
+          onChange={ this.handleChange }
+        >
+          { methodsPayment.map((methodPayment, index) => (
+            <option key={ index } value={ methodPayment }>{ methodPayment }</option>
+          ))}
+        </select>
+      </label>
     );
   }
 
-  renderTagSelect(tag) {
+  tagsInput() {
+    const { tag } = this.state;
     return (
-      <select
-        name="tag"
-        value={ tag }
-        data-testid="tag-input"
-        onChange={ this.handleChange }
-      >
-        { this.expenseTags.map((currencyTag) => (
-          <option key={ currencyTag } value={ currencyTag }>{ currencyTag }</option>
-        )) }
-      </select>
+      <label htmlFor="tag-input">
+        Tag:
+        <select
+          data-testid="tag-input"
+          id="tag-input"
+          name="tag"
+          value={ tag }
+          onChange={ this.handleChange }
+        >
+          { expenseTags.map((expenseTag, index) => (
+            <option key={ index } value={ expenseTag }>{ expenseTag }</option>
+          ))}
+        </select>
+      </label>
     );
   }
 
   render() {
-    const { value, description, currency, method, tag } = this.state;
     return (
-      <form>
-        { this.renderValueInput(value) }
-        { this.renderDescriptionInput(description) }
-        { this.renderCurrencySelect(currency) }
-        { this.renderMethodSelect(method) }
-        { this.renderTagSelect(tag) }
-        <button onClick={ this.handleClick } type="button">Adicionar despesa</button>
-      </form>
-    );
+      <form className="form-inline">
+        { this.valueInput() }
+        { this.descriptionInput() }
+        { this.currencyInput() }
+        { this.methodInput() }
+        { this.tagsInput() }
+        <button
+          type="button"
+          onClick={ this.handleSubmit }
+        >
+          Adicionar despesa
+        </button>
+      </form>);
   }
 }
 
-ExpenseForm.propTypes = {
+expenseForm.propTypes = {
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
-  addExpenseWithCoins: PropTypes.func.isRequired,
+  addExpense: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => bindActionCreators(WalletActions, dispatch);
-
-const mapStateToProps = ({ wallet }) => ({
-  currencies: wallet.currencies,
+const mapStateToProps = (state) => ({
+  currencies: state.wallet.currencies,
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ExpenseForm);
+const mapDispatchToProps = (dispatch) => ({
+  addExpense: (expense) => dispatch(fetchExpense(expense)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(expenseForm);
