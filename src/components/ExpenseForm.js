@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fetchExpense } from '../actions/wallet';
+import { fetchExpense,
+  fetchCurrencies as fetchCurrenciesAction } from '../actions/wallet';
 
 const methodsPayment = ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'];
 
@@ -23,6 +24,11 @@ class ExpenseForm extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    const { fetchCurrencies } = this.props;
+    fetchCurrencies();
   }
 
   handleChange(event) {
@@ -156,6 +162,7 @@ class ExpenseForm extends Component {
 }
 
 ExpenseForm.propTypes = {
+  fetchCurrencies: PropTypes.func.isRequired,
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
   addExpense: PropTypes.func.isRequired,
 };
@@ -166,6 +173,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   addExpense: (expense) => dispatch(fetchExpense(expense)),
+  fetchCurrencies: (currencies) => dispatch(fetchCurrenciesAction(currencies)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExpenseForm);
