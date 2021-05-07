@@ -10,7 +10,7 @@ class ExpensesTableRow extends Component {
         {expenses.map(({ id, value, description, currency,
           method, tag, exchangeRates }) => {
           const dayCurrency = exchangeRates[currency];
-          const sumExpense = dayCurrency.ask * +value;
+          const sumExpense = dayCurrency.ask * Number(value);
           return (
             <tr key={ id }>
               <td>{description}</td>
